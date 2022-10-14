@@ -58,7 +58,7 @@ public class SendInvitePage {
 	private By dndtype = By.xpath("//input[@data-dropdownlist='user-invite']");
 	private By dndAdmin = By.xpath("//div[text()='Admin']");
 
-	private By clickAdd = By.xpath("//button[@data-automationid='add-more']");
+	private By clickAdd = By.xpath("//*[@data-automationid='add-more']");
 
 	private By previous = By.xpath("//*[text()='Previous']");
 
@@ -141,6 +141,12 @@ public class SendInvitePage {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((email)));
 		driver.findElement(email).sendKeys(ContactPhone);
 	}
+	
+	public void ClearEnterEmail() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated((email)));
+		driver.findElement(email).clear();
+	}
+
 
 	public String getEmailErrorText() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((emailerr)));

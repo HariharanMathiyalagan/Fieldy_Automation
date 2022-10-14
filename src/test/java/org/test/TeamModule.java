@@ -185,8 +185,8 @@ public class TeamModule {
 	private void maxSizeProfileField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Maximum Size Profile Field");
 		CreateContractorPage maxSizeProfile = new CreateContractorPage(this.driver);
-		maxSizeProfile.clickContractor();
-		maxSizeProfile.createContractorButtonj();
+		maxSizeProfile.clickContractors();
+//		maxSizeProfile.createContractorButtonj();
 		maxSizeProfile.maxSizeLogoValidation();
 		String errorLogo = maxSizeProfile.errorLogo();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorLogo);
@@ -2539,7 +2539,8 @@ public class TeamModule {
 	private void verfiyEmailFormat() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invalid Format Email Field in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
+		invitePage.enterFirstName("sdsddfd");
 		invitePage.enterEmail("asdf");
 		Thread.sleep(1000);
 		invitePage.clickInvite();
@@ -2564,6 +2565,7 @@ public class TeamModule {
 	private void verifyFirstName() throws IOException {
 		extentTest = extentReports.createTest("Verify the First Name is Mandatory in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
+		invitePage.clearEnterFirstName();
 		invitePage.clickInvite();
 		invitePage.clickNext();
 		String text = invitePage.firstNameError();
@@ -2588,7 +2590,8 @@ public class TeamModule {
 	private void verifyFirstNamewithBlankSpace() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the First Name with Blank Space in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
+		invitePage.enterEmail("email@gmail.com");
 		invitePage.enterFirstName("  ");
 		Thread.sleep(2000);
 		invitePage.clickInvite();
@@ -2615,8 +2618,9 @@ public class TeamModule {
 		extentTest = extentReports.createTest("Verify to Enter the Message in the Message Field in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		invitePage.clickInvite();
+		invitePage.clearEnterFirstName();
 		invitePage.enterFirstName("Firstname");
-		invitePage.enterEmail("email@gmail.com");
+//		invitePage.enterEmail("email@gmail.com");
 		// Thread.sleep(2000);
 		invitePage.dndTypes();
 		invitePage.clickNext();
@@ -2662,8 +2666,10 @@ public class TeamModule {
 		extentTest = extentReports.createTest("Verify to Check the Scuccessful Massage in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 //		 invitePage.clickSendInvite();
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
+		invitePage.clearEnterFirstName();
 		invitePage.enterFirstName("Hariharan");
+		invitePage.ClearEnterEmail();
 		String r = RandomStringUtils.randomNumeric(3);
 		invitePage.enterEmail("hariharan.m" + r + "@zaigoinfotech.com");
 		Thread.sleep(2000);

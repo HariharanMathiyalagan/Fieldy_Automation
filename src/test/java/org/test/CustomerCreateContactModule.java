@@ -40,11 +40,12 @@ public class CustomerCreateContactModule {
 	String SaveCompleteButton = "Save & Complete";
 	String OrganizationAlreadyExist = "Name Already Exists";
 	String AttachmentFormat = "Only JPG/PNG/JPEG files allowed";
-	String CreatedMessage = "Customer contact created successfully";
+	String CreatedMessage = "Customer created successfully";
 	String EmailAlreadyExisted = "Email Already Exists";
 	String Invalid = "No Result Found";
-	String UpdatedMessage = "Contact has been updated";
+	String UpdatedMessage = "Customer details updated successfully";
 	String DeleteMessage = "Customer deleted successfully";
+	String MaximumFileSize = "File is too big. Max file size: 20MB.";
 
 	private WebDriver driver = null;
 	ExtentReports extentReports;
@@ -66,7 +67,7 @@ public class CustomerCreateContactModule {
 		this.extentReports.flush();
 	}
 
-	@Test(priority = 0) // 1-Login
+	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
@@ -91,7 +92,7 @@ public class CustomerCreateContactModule {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void contactModule() throws InterruptedException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
@@ -99,7 +100,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	private void maxSizeValidationProfileField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Size of Profile Field Validation");
 		CustomerCreateContactPage maxSizeFile = new CustomerCreateContactPage(driver);
@@ -121,7 +122,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void fileFormatValidationProfileField() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify the File Format of Profile Field Validation");
 		CustomerCreateContactPage fileFormat = new CustomerCreateContactPage(driver);
@@ -143,7 +144,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	private void mandatoryValidation() throws AWTException, IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Contact Page");
 		CustomerCreateContactPage mandatoryValidation = new CustomerCreateContactPage(driver);
@@ -164,7 +165,7 @@ public class CustomerCreateContactModule {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void maxValidationFirstNameField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation First Name Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
@@ -189,7 +190,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5)
 	private void maxValidationLastNameField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Last Name Field");
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
@@ -213,7 +214,7 @@ public class CustomerCreateContactModule {
 		}
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 6)
 	private void maxValidationJobTittle() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Job Tittle Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
@@ -238,7 +239,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 7)
 	private void maxValidationEmailField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Email Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
@@ -262,7 +263,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 8)
 	private void invalidValidationEmailField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Validation InValid Email Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
@@ -285,7 +286,7 @@ public class CustomerCreateContactModule {
 		}
 	}
 
-	@Test(priority = 10)
+	@Test(priority = 9)
 	private void minValidationPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Minimum Validation Phone Number Field");
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
@@ -310,7 +311,7 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 10)
 	private void maxValidationPhoneNumberField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Phone Number Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
@@ -337,41 +338,66 @@ public class CustomerCreateContactModule {
 
 	}
 
-	@Test(priority = 12)
-	private void maxValidationPropertyNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Name Field");
+	@Test(priority = 11)
+	private void maxValidationPropertyFirstNameField() throws IOException {
+		extentTest = extentReports.createTest("Verify the Maximum Validation Property First Name Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
-		maxValidation.maxValidationPropertyNamee();
-		String errorPropertyName = maxValidation.errorPropertyName();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Property Name Field is -" + errorPropertyName);
+		maxValidation.maxValidationPropertyFirstName();
+		String errorPropertyName = maxValidation.errorPropertyFirstName();
+		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Property First Name Field is -" + errorPropertyName);
 		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Property Name Field is -" + Max256CharacterValidation);
+				"Expected Result - Maximum Validation Property First Name Field is -" + Max256CharacterValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPropertyName.equals(Max256CharacterValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			maxValidation.clearPropertyNameField();
+			maxValidation.clearPropertyFirstNameField();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("PropertyNameValidation.png");
+			File file = new File("PropertyFirstNameValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("PropertyNameValidation.png");
-			maxValidation.clearPropertyNameField();
+			extentTest.addScreenCaptureFromPath("PropertyFirstNameValidation.png");
+			maxValidation.clearPropertyFirstNameField();
+		}
+
+	}
+	
+	@Test(priority = 12)
+	private void maxValidationPropertyLastNameField() throws IOException {
+		extentTest = extentReports.createTest("Verify the Maximum Validation Property Last Name Field");
+		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
+		maxValidation.maxValidationPropertyLastName();
+		String errorPropertyName = maxValidation.errorPropertyLastName();
+		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Property Last Name Field is -" + errorPropertyName);
+		extentTest.log(Status.INFO,
+				"Expected Result - Maximum Validation Property Last Name Field is -" + Max256CharacterValidation);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPropertyName.equals(Max256CharacterValidation)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidation.clearPropertyLastNameField();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("PropertyFirstNameValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("PropertyFirstNameValidation.png");
+			maxValidation.clearPropertyLastNameField();
 		}
 
 	}
 
 	@Test(priority = 13)
-	private void maxValidationContactPersonNameeField() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contact Person Name Field");
+	private void maxValidationPropertyNameeField() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Maximum Validation Property Name Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
-		maxValidation.maxValidationContactPersonNamee();
+		maxValidation.maxValidationPropertyNamee();
 		String errorContactPerson = maxValidation.errorContactPerson();
 		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Contact Person Field is -" + errorContactPerson);
+				"Actual Result - Maximum Validation Property Name Field is -" + errorContactPerson);
 		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Contact Person Field is -" + Max512CharacterValidation);
+				"Expected Result - Maximum Validation Property Field is -" + Max256CharacterValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorContactPerson.equals(Max512CharacterValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -380,9 +406,9 @@ public class CustomerCreateContactModule {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("ContactPersonNameValidation.png");
+			File file = new File("PropertyNameValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("ContactPersonNameValidation.png");
+			extentTest.addScreenCaptureFromPath("PropertyNameValidation.png");
 			maxValidation.clearContactPersonField();
 		}
 
@@ -691,10 +717,10 @@ public class CustomerCreateContactModule {
 		maxValidation.maxValidationAttachmentFile();
 		String errorAccessHours = maxValidation.errorAttachmentFile();
 		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation Attachment Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation Attachment Field is -"
-				+ "File is too big (24.67MB). Max filesize: 20MB.");
+		extentTest.log(Status.INFO,
+				"Expected Result - Maximum Size Validation Attachment Field is -" + MaximumFileSize);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("File is too big (24.67MB). Max filesize: 20MB.")) {
+		if (errorAccessHours.equals(MaximumFileSize)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -740,7 +766,7 @@ public class CustomerCreateContactModule {
 		extentTest.log(Status.INFO,
 				"Actual Result - Maximum File Limit Validation Attachment Field is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result - Maximum File Limit Validation Attachment Field is -"
-				+ "Maximum upload limit reached");
+				+ "File count size exceeds the maximum limit of 10");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAccessHours.equals("Maximum upload limit reached")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");

@@ -92,7 +92,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	private String getText(By element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		return until;
 
@@ -137,7 +137,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Social = By.id("dropid-367");
 	By AlreadyExistsMail = By.xpath("//span[text()='Customer with Company Email already exists']");
 	By Yes = By.xpath("//button[text()='Yes']");
-	By CreateResponseMessage = By.xpath("//span[text()='Customer organization has been created']");
+	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
 	By Text = By.xpath("//td[text()='Name']");
 
 	public void modulePage() throws InterruptedException, AWTException {
@@ -361,7 +361,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void maxValidationPhoneNumberField() {
-		this.validationTab(PhoneNumber, "231213212133321");
+		this.validationTab(PhoneNumber, "23121321234567654323456133321");
 
 	}
 
@@ -479,34 +479,35 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	By MakethisProperty = By.id("addresses__is_primary__1");
-	By PropertyName = By.id("addresses__location_name__1");
-	By ContactPersonName = By.id("addresses__name__1");
-	By PropertyAddress1 = By.id("addresses__line_1__1");
-	By PropertyAddress2 = By.id("addresses__line_2__1");
-	By StreetName = By.id("addresses__line_2__1");
-	By StateName = By.id("addresses__state__1");
-	By CityName = By.id("addresses__city__1");
-	By PropertyZipcode = By.id("addresses__zipcode__1");
+	By MakethisProperty = By.id("addresses__is_primary__0");
+	By PropertyName = By.id("addresses__location_name__0");
+	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
+	By PropertyLastName = By.id("addresses__contact_person_last_name__0");
+	By ContactPersonName = By.id("addresses__name__0");
+	By PropertyAddress1 = By.id("addresses__line_1__0");
+	By PropertyAddress2 = By.id("addresses__line_2__0");
+	By StreetName = By.id("addresses__line_2__0");
+	By StateName = By.id("addresses__state__0");
+	By CityName = By.id("addresses__city__0");
+	By PropertyZipcode = By.id("addresses__zipcode__0");
 
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
 	By AddProperty = By.id("add-more-property-customer-organization");
 
-	By ErrorPropertyName = By.id("addresses__location_name__1_error");
-	By ErrorContactPersonName = By.id("addresses__name__1_error");
-	By ErrorPropertyAddress1 = By.id("addresses__line_1__1_error");
-	By ErrorPropertyAddress2 = By.id("addresses__line_2__1_error");
-	By ErrorStreetName = By.id("addresses__line_2__1_error");
-	By ErrorStateName = By.id("addresses__state__1_error");
-	By ErrorCityName = By.id("addresses__city__1_error");
-	By ErrorZipCode = By.id("addresses__zipcode__1_error");
+	By ErrorPropertyName = By.id("addresses__location_name__0_error");
+	By ErrorContactPersonName = By.id("addresses__name__0_error");
+	By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
+	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
+	By ErrorPropertyAddress1 = By.id("addresses__line_1__0_error");
+	By ErrorPropertyAddress2 = By.id("addresses__line_2__0_error");
+	By ErrorStreetName = By.id("addresses__line_2__0_error");
+	By ErrorStateName = By.id("addresses__state__0_error");
+	By ErrorCityName = By.id("addresses__city__0_error");
+	By ErrorZipCode = By.id("addresses__zipcode__0_error");
 
 	By Previous = By.xpath("//i[@class='fa fa-chevron-left font-14 pr-2']");
 
 	public void maxValidationPropertyName() {
-		this.mouseActionClick(DeleteLocation);
-		this.mouseActionClick(AddProperty);
-		this.mouseActionClick(MakethisProperty);
 		this.validationTab(PropertyName, characters256);
 
 	}
@@ -516,25 +517,40 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return text2;
 
 	}
-
+	
 	public void clearContactPropertyName() {
 		this.clearField(PropertyName);
 
 	}
 
-	public void maxValidationContactPersonName() {
-		this.validationTab(ContactPersonName, characters512);
+	public void maxValidationPropertyFirstNamee() {
+		this.validationTab(PropertyFirstName, characters256);
 
 	}
 
-	public String errorContactPersonName() {
-		String text2 = this.getText(ErrorContactPersonName);
+	public String errorPropertyFirstName() {
+		String text2 = this.getText(ErrorPropertyFirstName);
 		return text2;
 
 	}
 
-	public void clearContactPersonName() {
-		this.clearField(ContactPersonName);
+	public void clearPropertyFirstName() {
+		this.clearField(PropertyFirstName);
+
+	}
+	public void maxValidationPropertyLastNamee() {
+		this.validationTab(PropertyLastName, characters256);
+
+	}
+
+	public String errorPropertyLastName() {
+		String text2 = this.getText(ErrorPropertyLastName);
+		return text2;
+
+	}
+
+	public void clearPropertyLastName() {
+		this.clearField(PropertyLastName);
 
 	}
 
@@ -571,6 +587,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void maxValidationPropertyCityName() {
+		this.mouseActionClick(MakethisProperty);
 		this.validationTab(CityName, characters256);
 
 	}
@@ -894,8 +911,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void propertyPage() {
+		this.inputText(PropertyFirstName, "Ajith");
+		this.inputText(PropertyLastName, "Kumar");
 		this.inputText(PropertyName, "Fieldy");
-		this.inputText(ContactPersonName, "AjithKumar");
 		this.inputText(PropertyAddress1, "256/18");
 		this.inputText(PropertyAddress2, "Kumuran Nagar");
 		this.inputText(CityName, "Bangalore");
@@ -1024,10 +1042,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	By Dots = By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]");
 	By Edit = By.xpath("(//li[@data-tabformid='undefined'])[1]");
-	By Update = By.xpath("//span[text()='Organization has been updated']");
-	By DeletedMessage = By.xpath("//span[text()='Customer deleted successfully']");
+	By Update = By.xpath("//*[text()='Customer details updated successfully']");
+	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
 	By Deleted = By.xpath("(//li[@data-tabformid='undefined'])[2]");
-	By reset = By.xpath("//a[text()=' Reset Search']");
+	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('reset')\"]");
 
 	public void resetOption() {
 		this.mouseActionClick(reset);

@@ -307,7 +307,7 @@ public class OnBoardingModule {
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + messageLandingPage);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + "Provide your Industry type");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (messageLandingPage.equals("What Industry are you in?")) {
+		if (messageLandingPage.equals("Provide your Industry type")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 
 		} else {

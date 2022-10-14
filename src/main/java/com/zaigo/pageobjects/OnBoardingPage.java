@@ -178,7 +178,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void maximumValidationBussinessWebSite() throws IOException {
-		this.validationTab(BussinessWebSite, getPropertyValue("2048Characters"));
+		this.inputText(BussinessWebSite, getPropertyValue("2048Characters"));
 		this.mouseActionClick(Continue);
 
 	}
@@ -195,7 +195,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void maximumValidationFirstName() throws IOException {
-		this.validationTab(FirstName, getPropertyValue("256Characters"));
+		this.inputText(FirstName, getPropertyValue("256Characters"));
 		this.mouseActionClick(Continue);
 
 	}
@@ -212,7 +212,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void maximumValidationLastName() throws IOException {
-		this.validationTab(LastName, getPropertyValue("256Characters"));
+		this.inputText(LastName, getPropertyValue("256Characters"));
 		this.mouseActionClick(Continue);
 
 	}

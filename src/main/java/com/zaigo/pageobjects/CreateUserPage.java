@@ -131,7 +131,7 @@ public class CreateUserPage extends BaseClass {
 	By ErrorPhoneNumber = By.id("phones__number__0_error");
 	By Next = By.xpath("//span[text()='Next']");
 	By Previous = By.xpath("//span[text()='Previous']");
-	By SaveComplete = By.xpath("(//button[@type='button'])[8]");
+	By SaveComplete = By.xpath("//*[@data-automationid='save_complete']");
 	By LocationName = By.id("addresses__name__0");
 	By ErrorLocationName = By.id("addresses__name__0_error");
 	By Address1 = By.id("addresses__line_1__0");

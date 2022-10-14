@@ -124,8 +124,8 @@ public class CustomerCreateContactTestCases {
 
 	@Test(priority = 13)
 	private void maxValidationContactPersonNameeField() throws InterruptedException {
-		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
-		maxValidation.maxValidationContactPersonNamee();
+//		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
+//		maxValidation.maxValidationContactPersonNamee();
 
 	}
 

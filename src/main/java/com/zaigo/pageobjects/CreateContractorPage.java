@@ -214,6 +214,12 @@ public class CreateContractorPage extends BaseClass {
 		driver.findElement(contractor).click();
 	}
 
+	public void clickContractors() {
+		this.mouseActionClick(contractor);
+		this.mouseActionClick(createcontractorbutton);
+
+	}
+
 	public void createContractorButtonj() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((createcontractorbutton)));
 		driver.findElement(createcontractorbutton).click();

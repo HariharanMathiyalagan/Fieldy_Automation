@@ -454,25 +454,29 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
 	By Next = By.xpath("//span[text()='Next']");
-	By MakethisProperty = By.id("addresses__is_primary__1");
-	By PropertyName = By.id("addresses__location_name__1");
-	By ContactPersonName = By.id("addresses__name__1");
-	By Address1 = By.id("addresses__line_1__1");
-	By Address2 = By.id("addresses__line_2__1");
-	By StateName = By.id("addresses__state__1");
-	By CityName = By.id("addresses__city__1");
-	By Zipcode = By.id("addresses__zipcode__1");
+	By MakethisProperty = By.id("addresses__is_primary__0");
+	By PropertyName = By.id("addresses__location_name__0");
+	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
+	By PropertyLastName = By.id("addresses__contact_person_last_name__0");
+	By ContactPersonName = By.id("addresses__name__0");
+	By Address1 = By.id("addresses__line_1__0");
+	By Address2 = By.id("addresses__line_2__0");
+	By StateName = By.id("addresses__state__0");
+	By CityName = By.id("addresses__city__0");
+	By Zipcode = By.id("addresses__zipcode__0");
 
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
-	By AddProperty = By.xpath("(//button[@data-automationid='add-more']//child::i[@class='fa fa-plus'])[2]");
+	By AddProperty = By.xpath("(//*[@data-automationid='add-more']//child::i[@class='fa fa-plus'])[2]");
 
-	By ErrorPropertyName = By.id("addresses__location_name__1_error");
-	By ErrorContactPersonName = By.id("addresses__name__1_error");
-	By ErrorAddress1 = By.id("addresses__line_1__1_error");
-	By ErrorAddress2 = By.id("addresses__line_2__1_error");
-	By ErrorStateName = By.id("addresses__state__1_error");
-	By ErrorCityName = By.id("addresses__city__1_error");
-	By ErrorZipCode = By.id("addresses__zipcode__1_error");
+	By ErrorPropertyName = By.id("addresses__location_name__0_error");
+	By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
+	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
+	By ErrorContactPersonName = By.id("addresses__name__0_error");
+	By ErrorAddress1 = By.id("addresses__line_1__0_error");
+	By ErrorAddress2 = By.id("addresses__line_2__0_error");
+	By ErrorStateName = By.id("addresses__state__0_error");
+	By ErrorCityName = By.id("addresses__city__0_error");
+	By ErrorZipCode = By.id("addresses__zipcode__0_error");
 
 	By Previous = By.xpath("//i[@class='fa fa-chevron-left font-14 pr-2']");
 
@@ -1198,39 +1202,52 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 //changeName	
+	public void maxValidationPropertyFirstName() {
+		this.validationTab(PropertyFirstName, characters256);
+
+	}
+
+	public void maxValidationPropertyLastName() {
+		this.validationTab(PropertyLastName, characters256);
+
+	}
+
+	public String errorPropertyFirstName() {
+		String text2 = this.getText(ErrorPropertyFirstName);
+		return text2;
+
+	}
+
+	public String errorPropertyLastName() {
+		String text2 = this.getText(ErrorPropertyLastName);
+		return text2;
+
+	}
+
+	public void clearPropertyFirstNameField() {
+		this.clearField(PropertyFirstName);
+
+	}
+
+	public void clearPropertyLastNameField() {
+		this.clearField(PropertyLastName);
+
+	}
+
+//changeName
 	public void maxValidationPropertyNamee() {
-		this.mouseActionClick(DeleteLocation);
-		this.mouseActionClick(AddProperty);
-		this.mouseActionClick(MakethisProperty);
 		this.validationTab(PropertyName, characters256);
 
 	}
 
-	public String errorPropertyName() {
+	public String errorContactPerson() {
 		String text2 = this.getText(ErrorPropertyName);
 		return text2;
 
 	}
 
-	public void clearPropertyNameField() {
-		this.clearField(PropertyName);
-
-	}
-
-//changeName
-	public void maxValidationContactPersonNamee() {
-		this.validationTab(ContactPersonName, characters512);
-
-	}
-
-	public String errorContactPerson() {
-		String text2 = this.getText(ErrorContactPersonName);
-		return text2;
-
-	}
-
 	public void clearContactPersonField() {
-		this.clearField(ContactPersonName);
+		this.clearField(PropertyName);
 
 	}
 
@@ -1303,6 +1320,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void minValidationZipcode() {
+		this.mouseActionClick(MakethisProperty);
 		this.validationTab(Zipcode, "21");
 		this.assertName(ErrorZipCode, Min3CharacterValidation);
 
@@ -1469,8 +1487,9 @@ public class CustomerCreateContactPage extends BaseClass {
 		for (int i = 0; i < 2; i++) {
 			this.mouseActionClick(Previous);
 		}
+		this.inputText(PropertyFirstName, "Ravi");
+		this.inputText(PropertyLastName, "Kumar");
 		this.inputText(PropertyName, "Work Location");
-		this.inputText(ContactPersonName, "Ravi");
 		this.inputText(Address1, "25/825");
 		this.inputText(Address2, "Wastern Street");
 		this.inputText(StateName, "TamilNadu");
@@ -1592,7 +1611,13 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public String listDataPhoneNumber() {
-		String text2 = this.getText(InvalidList);
+		String text2 = this.getText(ListPhoneNumber);
+		return text2;
+
+	}
+
+	public String validaDataPhoneNumber() {
+		String text2 = this.getText(ListPhoneNumber);
 		return text2;
 
 	}
@@ -1623,9 +1648,9 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	By Dots = By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]");
 	By Edit = By.xpath("(//li[@data-n-linkto='customer_contact_edit'])[1]");
-	By ContactCreateMessage = By.xpath("//span[text()='Customer contact created successfully']");
-	By Update = By.xpath("//span[text()='Contact has been updated']");
-	By DeletedMessage = By.xpath("//span[text()='Customer deleted successfully']");
+	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
+	By Update = By.xpath("//*[text()='Customer details updated successfully']");
+	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
 	By Deleted = By.xpath("(//li[@data-tabformid='undefined'])[2]");
 
 	public void editContact() throws AWTException, InterruptedException {

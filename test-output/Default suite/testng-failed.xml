@@ -3,13 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.OnBoardingModule">
+      <class name="org.test.CustomerCreateOrganizationModule">
         <methods>
-          <include name="setup"/>
           <include name="exitBrowser"/>
-          <include name="maximumValidationLastName"/>
+          <include name="editContactList"/>
+          <include name="setup"/>
+          <include name="alreadyExistedEmail"/>
+          <include name="deleteContactList"/>
+          <include name="searchInvalid"/>
         </methods>
-      </class> <!-- org.test.OnBoardingModule -->
+      </class> <!-- org.test.CustomerCreateOrganizationModule -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -3,23 +3,22 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.CustomerCreateOrganizationModule">
+      <class name="org.test.TeamModule">
         <methods>
-          <include name="exitBrowser"/>
-          <include name="searchOrganizationNameListValidation"/>
-          <include name="filterListValidation"/>
-          <include name="setup"/>
-          <include name="searchPhoneNumberListValidation"/>
-        </methods>
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
-      <class name="org.test.CustomerCreateContactModule">
-        <methods>
+          <include name="verifyUserSendInvite"/>
           <include name="setup"/>
           <include name="exitBrowser"/>
-          <include name="deleteContactList"/>
-          <include name="editContactList"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateContactModule -->
+      </class> <!-- org.test.TeamModule -->
+      <class name="org.test.OnBoardingModule">
+        <methods>
+          <include name="setup"/>
+          <include name="maximumValidationBussinessWebSite"/>
+          <include name="maximumValidationFirstName"/>
+          <include name="exitBrowser"/>
+          <include name="maximumValidationLastName"/>
+        </methods>
+      </class> <!-- org.test.OnBoardingModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
