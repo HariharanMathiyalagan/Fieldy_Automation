@@ -1,5 +1,7 @@
 package com.zaigo.reactui;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -38,7 +40,7 @@ public class EditVendorTestCases {
 	
 	@Test
 	(priority=1)
-	public void verifyUserTab() 
+	public void verifyUserTab() throws IOException 
 	{
 		//Verify the User Tab
 		

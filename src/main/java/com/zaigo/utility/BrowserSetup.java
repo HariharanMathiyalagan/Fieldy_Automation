@@ -17,7 +17,7 @@ public class BrowserSetup {
 		WebDriver driver = null;
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "window-size=1920,1200");
+		options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "window-size=1280,720");
 		//"--headless"
 		driver = new ChromeDriver(options);
 		driver.manage().deleteAllCookies();

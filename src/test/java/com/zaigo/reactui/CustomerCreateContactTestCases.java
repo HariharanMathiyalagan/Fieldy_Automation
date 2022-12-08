@@ -1,6 +1,7 @@
 package com.zaigo.reactui;
 
 import java.awt.AWTException;
+import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -33,7 +34,7 @@ public class CustomerCreateContactTestCases {
 	}
 
 	@Test(priority = 0) // 1-Login
-	public void loginPage() throws InterruptedException {
+	public void loginPage() throws InterruptedException, IOException {
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.setUserCredentials("fieldy@zaiportal.com", "Zaiserve@123");
 		loginInPage.clickLoginButton();

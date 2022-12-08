@@ -1,5 +1,6 @@
 package com.zaigo.reactui;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -35,7 +36,7 @@ public class EditUserTestCases {
 	}
 
 	@Test(priority = 1) // 1-Login
-	public void loginPage() throws InterruptedException {
+	public void loginPage() throws InterruptedException, IOException {
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.setUserCredentials("fieldy@zaiportal.com", "Zaiserve@123");
 		loginInPage.clickLoginButton();

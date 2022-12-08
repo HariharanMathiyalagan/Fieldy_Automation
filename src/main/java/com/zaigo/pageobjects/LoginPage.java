@@ -10,7 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+import com.base.BaseClass;
+
+public class LoginPage extends BaseClass{
 
 	private WebDriver driver;
 	private WebDriverWait wait;
@@ -29,13 +31,13 @@ public class LoginPage {
 	private By multiaccount = By.xpath("//h4[contains(text(),'Fieldy Tenant 2')]");
 	private By Team = By.id("team-menu");
 
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver) throws IOException {
 		this.driver = driver;
 		this.wait = new WebDriverWait(this.driver, 10);
 		String APP_URL = null;
 
 		if (APP_URL == null) {
-			APP_URL = "http://tenant4.zaiportal.com/login/";
+			APP_URL = getPropertyValue("URL");
 		}
 		driver.get(APP_URL);
 	}

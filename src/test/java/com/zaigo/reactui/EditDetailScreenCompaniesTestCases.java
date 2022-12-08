@@ -1,5 +1,7 @@
 package com.zaigo.reactui;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -44,7 +46,7 @@ public class EditDetailScreenCompaniesTestCases {
 	}
 
 	@Test(priority = 0) // 1-Login
-	public void loginPage() throws InterruptedException {
+	public void loginPage() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
@@ -59,6 +61,7 @@ public class EditDetailScreenCompaniesTestCases {
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 
+			
 		}
 	}
 

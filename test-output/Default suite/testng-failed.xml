@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerCreateOrganizationModule">
+      <class name="org.test.Functional_Test">
         <methods>
-          <include name="exitBrowser"/>
-          <include name="editContactList"/>
           <include name="setup"/>
-          <include name="alreadyExistedEmail"/>
-          <include name="deleteContactList"/>
-          <include name="searchInvalid"/>
+          <include name="exitBrowser"/>
+          <include name="createNewTenant"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
+      </class> <!-- org.test.Functional_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

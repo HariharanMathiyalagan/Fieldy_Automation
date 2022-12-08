@@ -82,8 +82,8 @@ public class TeamModule {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField("fieldy@zaiportal.com");
-		loginInPage.passwordField("Zaiserve@123");
+		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
@@ -254,7 +254,7 @@ public class TeamModule {
 	public void verifyContractorNumberMinValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Minimum Validation");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
-		contractorPage.contractorName("Contractor y");
+		contractorPage.contractorName("Contractor Z");
 		contractorPage.contractorPhone("123");
 		contractorPage.clickSaveandComplete();
 		String email_error = contractorPage.contractorPhoneError();
@@ -303,7 +303,7 @@ public class TeamModule {
 		extentTest = extentReports.createTest("Verify the Contractor Company Maximum Validation");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearContractorEmail();
-		contractorPage.contractorPhone("123123123118900");
+		contractorPage.contractorPhone("12312312311890021344535564532212323432113");
 		contractorPage.clickSaveandComplete();
 		String email_error = contractorPage.contractorPhoneError();
 		extentTest.log(Status.INFO, "Actual Result of Phone Number Maximum Validation -" + email_error);

@@ -33,8 +33,8 @@ public class CustomerCreateOrganizationModule {
 
 	String ManditoryValidation = "Required Field";
 	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String Min6CharacterValidation = "Phone numbers should not be less than 6 digits";
-	String MaxValidationPhoneNumber = "Phone numbers should not be more than 12 digits";
+	String Min6CharacterValidation = "Minimum character should be 6 digits";
+	String MaxValidationPhoneNumber = "Maximum character allowed is 20 digits";
 	String ValidEmail = "Enter a valid Email";
 	String Max512CharacterValidation = "Not Allowed More than 512 characters";
 	String Min3CharacterValidation = "Atleast 3 characters required";
@@ -78,8 +78,8 @@ public class CustomerCreateOrganizationModule {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField("fieldy@zaiportal.com");
-		loginInPage.passwordField("Zaiserve@123");
+		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
@@ -694,8 +694,7 @@ public class CustomerCreateOrganizationModule {
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyFirstNamee();
 		String errorContactPerson = maxValidation.errorPropertyFirstName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation First Name Field is -" + errorContactPerson);
+		extentTest.log(Status.INFO, "Actual Result - Maximum Validation First Name Field is -" + errorContactPerson);
 		extentTest.log(Status.INFO,
 				"Expected Result - Maximum Validation First Name Field is -" + Max256CharacterValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -713,15 +712,14 @@ public class CustomerCreateOrganizationModule {
 		}
 
 	}
-	
+
 	@Test(priority = 25)
 	private void maxValidationPropertyLastNameField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Property Last Name Field");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyLastNamee();
 		String errorContactPerson = maxValidation.errorPropertyLastName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Last Name Field is -" + errorContactPerson);
+		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Last Name Field is -" + errorContactPerson);
 		extentTest.log(Status.INFO,
 				"Expected Result - Maximum Validation Last Name Field is -" + Max256CharacterValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1051,9 +1049,9 @@ public class CustomerCreateOrganizationModule {
 		String errorAccessHours = maxFileValidation.errorAttachmentFile();
 		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation Attachment Field is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation Attachment Field is -"
-				+ "File is too big (24.67MB). Max filesize: 20MB.");
+				+ "File is too big. Max file size: 20MB.");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("File is too big (24.67MB). Max filesize: 20MB.")) {
+		if (errorAccessHours.equals("File is too big. Max file size: 20MB.")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1100,7 +1098,7 @@ public class CustomerCreateOrganizationModule {
 		extentTest.log(Status.INFO, "Expected Result - Maximum File Limit Validation Attachment Field is -"
 				+ "Maximum upload limit reached");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("Maximum upload limit reached")) {
+		if (errorAccessHours.equals("File count size exceeds the maximum limit of 10")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxFileValidation.deleteFile();
 //			maxFileValidation.loopNextButton();
@@ -1183,7 +1181,7 @@ public class CustomerCreateOrganizationModule {
 		}
 
 	}
-	
+
 	@Test(priority = 45)
 	private void characterListValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Create Organization in the First Name List Field");
@@ -1320,6 +1318,7 @@ public class CustomerCreateOrganizationModule {
 		if (invalidSearch.equals("No Result Found")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			invalid.resetOption();
+
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;

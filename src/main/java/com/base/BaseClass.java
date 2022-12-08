@@ -200,7 +200,7 @@ public class BaseClass {
 
 	}
 
-	public static String getPropertyValue(String key) throws IOException {
+	public String getPropertyValue(String key) throws IOException {
 		Properties properties = new Properties();
 		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\config.properties");
 		properties.load(stream);

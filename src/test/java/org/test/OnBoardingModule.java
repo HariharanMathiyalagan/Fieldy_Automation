@@ -84,6 +84,7 @@ public class OnBoardingModule {
 	public void mandatoryFieldValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in OnBoarding Page");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		mandatory.emailText();
 		mandatory.mandatoryValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + manditoryValidations);
@@ -309,7 +310,6 @@ public class OnBoardingModule {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (messageLandingPage.equals("Provide your Industry type")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -558,6 +558,11 @@ public class OnBoardingModule {
 			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
 			mismatchPassword.clearConfirmPassword();
 		}
+
+	}
+
+	@Test(priority = 23)
+	public void createTenant() {
 
 	}
 

@@ -180,13 +180,13 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By Text = By.xpath("//td[text()='Name']");
+	By Text = By.xpath("//td[text()='Customer Name']");
 
 	public void modulePage() throws InterruptedException {
 		this.dashBoard();
 		Thread.sleep(5000);
 		this.clickCustomer();
-		this.assertName(Text, "Name");
+		this.assertName(Text, "Customer Name");
 		this.clickContact();
 		this.clickAddContact();
 
@@ -243,7 +243,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By New = By.xpath("//button[@data-modalfetch='shorter_organization_create']");
 	By Logo = By.xpath("//input[@id='logo']//following::label[@for='logo']");
 	By LeadSources = By.xpath("//input[@data-dropdownlist='lead-source']");
-	By Social = By.xpath("//div[@id='dropid-367']");
+	By Social = By.xpath("//*[text()='Social']");
 
 	private void logoFormatValidation() throws AWTException {
 		wait = new WebDriverWait(driver, 10);
@@ -1176,7 +1176,7 @@ public class CustomerCreateContactPage extends BaseClass {
 //changeName
 	public void minValidationPhone() {
 		this.validationTab(Phone, "21");
-		this.assertName(ErrorPhoneNo, Min6CharacterValidation);
+//		this.assertName(ErrorPhoneNo, Min6CharacterValidation);
 
 	}
 
@@ -1630,7 +1630,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By reset = By.xpath("//a[text()=' Reset Search']");
+	By reset = By.xpath("//*[@onclick=\"generateCustomerContactTable('','','','','reset')\"]");
 
 	public void resetOption() {
 		this.mouseActionClick(reset);

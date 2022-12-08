@@ -214,8 +214,8 @@ public class Login {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField("fieldy@zaiportal.com");
-		loginInPage.passwordField("Zaiserve@123");
+		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);

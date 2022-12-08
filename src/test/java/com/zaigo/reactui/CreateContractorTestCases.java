@@ -40,7 +40,7 @@ public class CreateContractorTestCases {
 	}
 
 	@Test(priority = 1)
-	public void verifyContractorTab() throws InterruptedException {
+	public void verifyContractorTab() throws InterruptedException, IOException {
 		// Verify User Tab
 
 		LoginPage loginInPage = new LoginPage(this.driver);

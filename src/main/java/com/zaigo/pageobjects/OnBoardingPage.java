@@ -1,5 +1,8 @@
 package com.zaigo.pageobjects;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -65,7 +68,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void assertName(By element, String text) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
@@ -117,8 +120,8 @@ public class OnBoardingPage extends BaseClass {
 	HttpURLConnection connection;
 
 	public void login() throws MalformedURLException, IOException {
-		driver.get("http://zaiportal.com/public/Onbording/meet.html");
-		connection = (HttpURLConnection) new URL("http://zaiportal.com/public/Onbording/meet.html").openConnection();
+		driver.get("http://zaiportal.com/public/Onboarding/meet.html");
+		connection = (HttpURLConnection) new URL("http://zaiportal.com/public/Onboarding/meet.html").openConnection();
 		connection.setRequestMethod("HEAD");
 		connection.connect();
 
@@ -146,6 +149,11 @@ public class OnBoardingPage extends BaseClass {
 	public String manditoryValidations() {
 		String text = this.getText(CompanyError);
 		return text;
+
+	}
+
+	public void emailText() {
+		this.inputText(Email, "asddajs@dada.das");
 
 	}
 
@@ -224,6 +232,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void maximumValidationEmail() throws IOException {
+		this.clearField(Email);
 		this.validationTab(Email, getPropertyValue("256Characters"));
 		this.mouseActionClick(Continue);
 
@@ -398,6 +407,148 @@ public class OnBoardingPage extends BaseClass {
 	public void mismatchPasswordValidation() {
 		this.inputText(ConfirmPassword, "Mhari@1997");
 		this.mouseActionClick(Continue);
+
+	}
+
+	public void createFirstPage() {
+		for (int i = 0; i < 4; i++) {
+			this.mouseActionClick(Back);
+		}
+		this.clearField(CompanyName);
+		this.inputText(CompanyName, "OnePlus");
+		this.inputText(BussinessWebSite, "www.oneplus.com");
+		this.inputText(FirstName, "BBK");
+		this.inputText(LastName, "Electronics");
+		this.inputText(Email, "oneplus@plus.com");
+		this.mouseActionClick(Continue);
+
+	}
+
+	By HomeCleaning = By.xpath("//*[@value='Home Cleaning']");
+
+	public void createSecoundPage() {
+		this.mouseActionClick(HomeCleaning);
+		this.mouseActionClick(Continue);
+
+	}
+
+	By EmployeeCount = By.xpath("//*[text()='101-500 Employees']");
+
+	public void createThirdPage() {
+		this.mouseActionClick(EmployeeCount);
+		this.mouseActionClick(Continue);
+
+	}
+
+	By Booking = By.xpath("//*[@value='Online Booking']");
+
+	public void createFouthPage() {
+		this.mouseActionClick(Booking);
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
+	}
+
+	public void createFifthPage() {
+		this.inputText(Password, "Oneplus@123");
+		this.inputText(ConfirmPassword, "Oneplus@123");
+		this.mouseActionClick(Continue);
+
+	}
+
+	By CreatingTeanant = By.xpath("//*[text()='We're just adding some finishing touches']");
+
+	public String createTenantValidation() {
+		String text = this.getText(CreatingTeanant);
+		return text;
+
+	}
+
+	String name = RandomStringUtils.randomAlphabetic(6);
+	String OwnerFirstName = RandomStringUtils.randomAlphabetic(5);
+	String OwnerLastName = RandomStringUtils.randomAlphabetic(5);
+
+	/* Create Tenant User */
+	public void firstPage() {
+
+		this.inputText(CompanyName, "One" + name);
+		this.inputText(BussinessWebSite, "www." + name + ".com");
+		this.inputText(FirstName, OwnerFirstName);
+		this.inputText(LastName, OwnerLastName);
+		this.inputText(Email, name + "@mailinator.com");
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
+
+	}
+
+	public void secoundPage() {
+		this.mouseActionClick(HomeCleaning);
+		this.mouseActionClick(Continue);
+	}
+
+	public void thirdPage() {
+		this.mouseActionClick(EmployeeCount);
+		this.mouseActionClick(Continue);
+
+	}
+
+	public void fourthPage() {
+		this.mouseActionClick(Booking);
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
+	}
+
+	By location = By.id("addresses");
+	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+
+	public void fifthPage() throws AWTException, InterruptedException {
+		this.inputText(location, "Chennai");
+		this.mouseActionClick(firstLocation);
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
+
+	}
+
+	By Dashboard = By.id("dashboard-menu");
+
+	public void sixthPage() {
+		this.inputText(Password, "Fieldy@123");
+		this.inputText(ConfirmPassword, "Fieldy@123");
+		this.mouseActionClick(Continue);
+		this.assertName(Dashboard, "Dashboard");
+
+	}
+
+	/* Edit Owner Location */
+
+	By Team = By.id("team-menu");
+	By Tittle = By.xpath("//div[text()='Zaiportal Tenant 3']");
+	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
+	By Next = By.xpath("//span[text()='Next']");
+
+	By Location = By.id("addresses__name__0");
+	By EmailField = By.id("addresses__email__0");
+	By ContactPerson = By.id("addresses__contact_person__0");
+	By PhoneNumber = By.id("addresses__phone_number__0");
+	By Building = By.id("addresses__line_1__0");
+	By Street = By.id("addresses__line_2__0");
+	By City = By.id("addresses__city__0");
+	By State = By.id("addresses__state__0");
+	By Zipcode = By.id("addresses__zipcode__0");
+	By Save_Complete = By.id("team-company-edit-submit");
+
+	String LocationName = RandomStringUtils.randomAlphabetic(10);
+	String Phone = RandomStringUtils.randomNumeric(10);
+
+	public void functionalityCompaniesEdit() {
+		this.mouseActionClick(Team);
+		this.mouseActionClick(Edit);
+		this.mouseActionClick(Next);
+		this.inputText(Location, LocationName);
+		this.inputText(EmailField, name + "@mailinator.com");
+		this.inputText(ContactPerson, OwnerFirstName + OwnerLastName);
+		this.inputText(PhoneNumber, Phone);
+		this.inputText(Street, name);
+		this.mouseActionClick(Save_Complete);
 
 	}
 

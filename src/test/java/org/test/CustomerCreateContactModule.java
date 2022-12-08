@@ -25,8 +25,8 @@ import com.zaigo.utility.BrowserSetup;
 public class CustomerCreateContactModule {
 	String ManditoryValidation = "Required Field";
 	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String Min6CharacterValidation = "Phone numbers should not be less than 6 digits";
-	String MaxValidationPhoneNumber = "Phone numbers should not be more than 12 digits";
+	String Min6CharacterValidation = "Minimum character should be 6 digits";
+	String MaxValidationPhoneNumber = "Maximum character allowed is 20 digits";
 	String ValidEmail = "Enter a valid Email";
 	String Max512CharacterValidation = "Not Allowed More than 512 characters";
 	String Min3CharacterValidation = "Atleast 3 characters required";
@@ -72,8 +72,8 @@ public class CustomerCreateContactModule {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField("fieldy@zaiportal.com");
-		loginInPage.passwordField("Zaiserve@123");
+		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);

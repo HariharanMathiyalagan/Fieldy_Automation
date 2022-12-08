@@ -1,5 +1,7 @@
 package com.zaigo.reactui;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,7 +36,7 @@ public class ContractorLocationTestCases {
 	}
 
 	@Test(priority = 1)
-	public void verifyContractorTab() throws InterruptedException {
+	public void verifyContractorTab() throws InterruptedException, IOException {
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.setUserCredentials("fieldy@zaiportal.com", "Zaiserve@123");
 		loginInPage.clickLoginButton();

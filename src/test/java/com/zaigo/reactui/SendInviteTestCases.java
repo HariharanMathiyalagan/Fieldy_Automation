@@ -1,5 +1,6 @@
 package com.zaigo.reactui;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -36,7 +37,7 @@ public class SendInviteTestCases {
 	}
 
 	@Test(priority = 1)
-	public void verifyUserTab() {
+	public void verifyUserTab() throws IOException {
 		// Verify the User Tab
 
 		LoginPage loginInPage = new LoginPage(this.driver);
