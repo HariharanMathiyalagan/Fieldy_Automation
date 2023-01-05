@@ -531,6 +531,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
+	
 	@Test(priority = 21)
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
