@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.Functional_Test">
+      <class name="org.test.OnBoardingModule">
         <methods>
           <include name="setup"/>
+          <include name="confirmPasswordFieldCondition"/>
           <include name="exitBrowser"/>
-          <include name="createNewTenant"/>
         </methods>
-      </class> <!-- org.test.Functional_Test -->
+      </class> <!-- org.test.OnBoardingModule -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

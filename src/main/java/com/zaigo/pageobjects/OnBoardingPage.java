@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -117,11 +120,17 @@ public class OnBoardingPage extends BaseClass {
 	By FirstNameError = By.id("first_name_error");
 	By lastNameError = By.id("last_name_error");
 	By EmailError = By.id("email_error");
+	By ClickTrail = By.xpath("//*[@class='top-btn']");
 	HttpURLConnection connection;
 
 	public void login() throws MalformedURLException, IOException {
-		driver.get("http://zaiportal.com/public/Onboarding/meet.html");
-		connection = (HttpURLConnection) new URL("http://zaiportal.com/public/Onboarding/meet.html").openConnection();
+		driver.get("https://getfieldy.com/");
+		this.mouseActionClick(ClickTrail);
+		Set<String> windowHandles = driver.getWindowHandles();
+		List<String> list = new ArrayList<String>(windowHandles);
+		driver.switchTo().window(list.get(1));
+		String currentUrl = driver.getCurrentUrl();
+		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
 		connection.setRequestMethod("HEAD");
 		connection.connect();
 
@@ -153,13 +162,18 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void emailText() {
+		driver.get("https://getfieldy.com/");
+		this.mouseActionClick(ClickTrail);
+		Set<String> windowHandles = driver.getWindowHandles();
+		List<String> list = new ArrayList<String>(windowHandles);
+		driver.switchTo().window(list.get(1));
 		this.inputText(Email, "asddajs@dada.das");
 
 	}
 
 	public void maximumValidationBussinessName() throws IOException {
-		this.inputText(CompanyName, getPropertyValue("256Characters"));
-		this.mouseActionClick(Continue);
+		this.validationTab(CompanyName, getPropertyValue("256Characters"));
+//		this.mouseActionClick(Continue);
 
 	}
 
@@ -180,7 +194,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void alreadyBussinessName() {
-		this.inputText(CompanyName, "slack");
+		this.inputText(CompanyName, "Trevino and Trujillo Inc");
 		this.mouseActionClick(Continue);
 
 	}
@@ -260,15 +274,15 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void alreadyExistValidation() {
-		this.validationTab(Email, "Hari@yahoo.com");
+		this.validationTab(Email, "fieldy@mailinator.com");
 
 	}
 
 	public void validEmail() {
 		String Start = RandomStringUtils.randomNumeric(3);
-		this.inputText(Email, "Hari" + Start + "@gmail.com");
+		this.validationTab(Email, "Hari" + Start + "@mailinator.com");
 		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
+//		this.mouseActionClick(Continue);
 
 	}
 
@@ -342,6 +356,35 @@ public class OnBoardingPage extends BaseClass {
 		this.mouseActionClick(Continue);
 	}
 
+	By LocationHeading = By.xpath("//*[text()='Where are you located?']");
+	By ErrorLocation = By.id("addresses_error");
+
+	public void mandatoryLocationValidation() {
+		this.assertName(LocationHeading, "Where are you located?");
+		this.mouseActionClick(Continue);
+
+	}
+
+	public String requiredFieldLocation() {
+		String text = this.getText(ErrorLocation);
+		return text;
+
+	}
+
+	public void maximumValidationLocation() throws IOException {
+		this.validationTab(location, getPropertyValue("256Characters"));
+
+	}
+
+	public void clearLocation() {
+		this.clearField(location);
+		this.inputText(location, "Chennai");
+		this.mouseActionClick(firstLocation);
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
+
+	}
+
 	public void passwordFieldMandatory() {
 		this.assertName(PasswordHeading, "Enter Your Password");
 		this.assertName(Continue, "Continue");
@@ -388,12 +431,15 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void passwordFieldCondition() {
-		this.validationTab(Password, "63247456524545745");
+		this.inputText(Password, "63247456524545745");
+		this.mouseActionClick(Continue);
 
 	}
 
 	public void confirmPasswordFieldCondition() {
-		this.validationTab(ConfirmPassword, "63247456524545745");
+		this.inputText(ConfirmPassword, "63247456524545745");
+		this.mouseActionClick(Continue);
+		this.mouseActionClick(Continue);
 
 	}
 

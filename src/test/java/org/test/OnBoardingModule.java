@@ -21,24 +21,14 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.base.BaseClass;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.utility.BrowserSetup;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class OnBoardingModule {
-
-	String MandatoryErrorMessage = "Required Field";
-	String PasswordCondition = "Password must have one lower case letter and one upper case letter and one number";
-	String MinimumValidatioPassword = "Enter minimum 8 characters";
-	String MisMatchPassword = "Confirm password should match with new password";
-	String Max2048Validation = "Not Allowed More than 2048 characters";
-	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String ValidEmail = "Enter a valid Email";
-	String BussinessNameAlready = "Business Name Already Exists";
-	String AlreadyExistedEmail = "Email Already Exists";
-	String IndustryMaxValidation = "Not Allowed More than 64 characters";
+public class OnBoardingModule extends BaseClass {
 
 	private WebDriver driver = null;
 	ExtentReports extentReports;
@@ -61,7 +51,7 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 0)
+//	@Test(priority = 0)
 	public void LaunchingOnBoarding() throws MalformedURLException, IOException {
 		extentTest = extentReports.createTest("Verify the OnBoarding URL Response Code Validation");
 		OnBoardingPage boardingPage = new OnBoardingPage(driver);
@@ -88,9 +78,9 @@ public class OnBoardingModule {
 		mandatory.mandatoryValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + manditoryValidations);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + MandatoryErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (manditoryValidations.equals(MandatoryErrorMessage)) {
+		if (manditoryValidations.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -111,9 +101,10 @@ public class OnBoardingModule {
 		alreadyBussiness.alreadyBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
 		extentTest.log(Status.INFO, "Actual Result Already Exited Data -" + errorMessageBussinessName);
-		extentTest.log(Status.INFO, "Expected Result Already Existed Data -" + BussinessNameAlready);
+		extentTest.log(Status.INFO,
+				"Expected Result Already Existed Data -" + getPropertyValue("BussinessNameAlready"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorMessageBussinessName.equals(BussinessNameAlready)) {
+		if (errorMessageBussinessName.equals(getPropertyValue("BussinessNameAlready"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			alreadyBussiness.clearCompanyName();
 		} else {
@@ -135,9 +126,10 @@ public class OnBoardingModule {
 		maxValidation.maximumValidationBussinessName();
 		String errorMessageBussinessName = maxValidation.errorMessageBussinessName();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorMessageBussinessName);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + Max256CharacterValidation);
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorMessageBussinessName.equals(Max256CharacterValidation)) {
+		if (errorMessageBussinessName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearBussinessName();
 		} else {
@@ -159,9 +151,9 @@ public class OnBoardingModule {
 		maxValidation.maximumValidationBussinessWebSite();
 		String errorWebsite = maxValidation.errorWebsite();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorWebsite);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + Max2048Validation);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorWebsite.equals(Max2048Validation)) {
+		if (errorWebsite.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearWebsite();
 		} else {
@@ -183,9 +175,10 @@ public class OnBoardingModule {
 		maxValidation.maximumValidationFirstName();
 		String errorFirstName = maxValidation.errorFirstName();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorFirstName);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + Max256CharacterValidation);
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorFirstName.equals(Max256CharacterValidation)) {
+		if (errorFirstName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFirstName();
 		} else {
@@ -207,9 +200,10 @@ public class OnBoardingModule {
 		maxValidation.maximumValidationLastName();
 		String errorLastName = maxValidation.errorLastName();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorLastName);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + Max256CharacterValidation);
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLastName.equals(Max256CharacterValidation)) {
+		if (errorLastName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearLastName();
 		} else {
@@ -232,9 +226,10 @@ public class OnBoardingModule {
 		maxValidation.maximumValidationEmail();
 		String errorEmail = maxValidation.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorEmail);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + Max256CharacterValidation);
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorEmail.equals(Max256CharacterValidation)) {
+		if (errorEmail.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearEmail();
 		} else {
@@ -257,9 +252,9 @@ public class OnBoardingModule {
 		validEmail.validationEmail();
 		String errorEmail = validEmail.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorEmail);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + ValidEmail);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorEmail.equals(ValidEmail)) {
+		if (errorEmail.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			validEmail.clearEmail();
 		} else {
@@ -281,9 +276,9 @@ public class OnBoardingModule {
 		existing.alreadyExistValidation();
 		String errorEmail = existing.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorEmail);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + AlreadyExistedEmail);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorEmail.equals(AlreadyExistedEmail)) {
+		if (errorEmail.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			existing.clearEmail();
 		} else {
@@ -361,9 +356,9 @@ public class OnBoardingModule {
 		industryValidation.maximumValidationIndustryField();
 		String errorIndustryField = industryValidation.errorIndustryField();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorIndustryField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + IndustryMaxValidation);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("IndustryMaxValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorIndustryField.equals(IndustryMaxValidation)) {
+		if (errorIndustryField.equals(getPropertyValue("IndustryMaxValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			industryValidation.clearIndustry();
 		} else {
@@ -394,17 +389,64 @@ public class OnBoardingModule {
 		radioButton.radioButtonCurrent();
 
 	}
-
 	@Test(priority = 16)
+	private void mandatoryValidationLocation() throws IOException {
+		extentTest = extentReports.createTest("Verify the Mandatory Validation in Location Field");
+		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		mandatory.mandatoryLocationValidation();
+		String errorPasswordField = mandatory.requiredFieldLocation();
+		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("LocationMandatoryValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("LocationMandatoryValidation.png");
+		}
+
+	}
+	
+	@Test(priority = 16)
+	private void maximumValidationLocation() throws IOException {
+		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
+		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		mandatory.maximumValidationLocation();
+		String errorPasswordField = mandatory.requiredFieldLocation();
+		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearLocation();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("LocationMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("LocationMaximumValidation.png");
+			mandatory.clearLocation();
+		}
+
+	}
+	
+	
+
+	@Test(priority = 17)
 	private void passwordMandatoryField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Password Field");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.passwordFieldMandatory();
 		String errorPasswordField = mandatory.errorPasswordField();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + MandatoryErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(MandatoryErrorMessage)) {
+		if (errorPasswordField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -417,16 +459,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 17)
+	@Test(priority = 18)
 	private void minValidationPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Minimum Validation in Password Field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
 		minValidation.minimumValidationPassword();
 		String errorMinPassword = minValidation.errorMinPassword();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorMinPassword);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + MinimumValidatioPassword);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MinimumValidatioPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorMinPassword.equals(MinimumValidatioPassword)) {
+		if (errorMinPassword.equals(getPropertyValue("MinimumValidatioPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			minValidation.clearPassword();
 		} else {
@@ -441,16 +483,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 18)
+	@Test(priority = 19)
 	private void minValidationConfirmPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Minimum Validation in Confirm Password Field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
 		minValidation.minimumValidationConfirmPassword();
 		String errorConfirmMessage = minValidation.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + MinimumValidatioPassword);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MinimumValidatioPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(MinimumValidatioPassword)) {
+		if (errorConfirmMessage.equals(getPropertyValue("MinimumValidatioPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			minValidation.clearConfirmPassword();
 		} else {
@@ -465,16 +507,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 19)
+	@Test(priority = 20)
 	private void passwordFieldConditions() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Password Condition Validation");
 		OnBoardingPage condition = new OnBoardingPage(driver);
 		condition.passwordFieldCondition();
 		String errorPasswordField = condition.errorPasswordField();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + PasswordCondition);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("PasswordCondition"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(PasswordCondition)) {
+		if (errorPasswordField.equals(getPropertyValue("PasswordCondition"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			condition.clearPassword();
 		} else {
@@ -489,16 +531,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 20)
+	@Test(priority = 21)
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
 		OnBoardingPage condition = new OnBoardingPage(driver);
 		condition.confirmPasswordFieldCondition();
 		String errorConfirmMessage = condition.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + PasswordCondition);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("PasswordCondition"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(PasswordCondition)) {
+		if (errorConfirmMessage.equals(getPropertyValue("PasswordCondition"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			condition.clearConfirmPassword();
 		} else {
@@ -513,16 +555,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 21)
+	@Test(priority = 22)
 	private void lowerCaseValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Lower Case Validation");
 		OnBoardingPage lowerCaseValidation = new OnBoardingPage(driver);
 		lowerCaseValidation.lowercaseValidation();
 		String errorConfirmMessage = lowerCaseValidation.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + PasswordCondition);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("PasswordCondition"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(PasswordCondition)) {
+		if (errorConfirmMessage.equals(getPropertyValue("PasswordCondition"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			lowerCaseValidation.clearConfirmPassword();
 		} else {
@@ -537,16 +579,16 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 22)
+	@Test(priority = 23)
 	private void mismatchPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Mismatch in Confirm Password Field Validation");
 		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
 		mismatchPassword.mismatchPasswordValidation();
 		String errorConfirmMessage = mismatchPassword.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + MisMatchPassword);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MisMatchPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(MisMatchPassword)) {
+		if (errorConfirmMessage.equals(getPropertyValue("MisMatchPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mismatchPassword.clearConfirmPassword();
 		} else {
@@ -561,7 +603,7 @@ public class OnBoardingModule {
 
 	}
 
-	@Test(priority = 23)
+//	@Test(priority = 23)
 	public void createTenant() {
 
 	}
