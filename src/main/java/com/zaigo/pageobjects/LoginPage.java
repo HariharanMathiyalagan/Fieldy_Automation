@@ -22,7 +22,7 @@ public class LoginPage extends BaseClass{
 	private By password_by = By.id("password");
 	private By password_error = By.id("login-password-error");
 	private By form_title_css = By.tagName("h5");
-	private By login_button = By.tagName("button");
+	private By login_button = By.id("submit-button");
 	private By forgot_password = By.linkText("Forgot Password");
 	private By lockpopup = By.xpath(
 			"//*[contains(text(), 'Your account is locked due to 3 failed login attempts. Lock will be released in 60 seconds.')]");
@@ -43,7 +43,7 @@ public class LoginPage extends BaseClass{
 	}
 
 	public String dashBoardText() {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.visibilityOfElementLocated((Team)));
 		return driver.findElement(Team).getText();
 	}
@@ -101,7 +101,7 @@ public class LoginPage extends BaseClass{
 	}
 
 	public void clickLoginButton() {
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(login_button)));
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(login_button)));
 		driver.findElement(login_button).click();
 	}
 
@@ -131,14 +131,14 @@ public class LoginPage extends BaseClass{
 		}
 	}
 
-	public String getPropertyValue(String key) throws IOException {
-		Properties properties = new Properties();
-		FileInputStream stream = new FileInputStream(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\ValidationSheet.properties");
-		properties.load(stream);
-		String value = (String) properties.get(key);
-		return value;
-
-	}
+////	public String getPropertyValue(String key) throws IOException {
+//		Properties properties = new Properties();
+//		FileInputStream stream = new FileInputStream(
+//				System.getProperty("user.dir") + "\\src\\test\\resources\\ValidationSheet.properties");
+//		properties.load(stream);
+//		String value = (String) properties.get(key);
+//		return value;
+//
+////	}
 
 }

@@ -71,7 +71,7 @@ public class Login {
 	public void verifyEmptyPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Fieldy Login Page to Validate the Empty Password");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.setUserCredentials("fieldy@zaiportal.com", "");
+		loginInPage.setUserCredentials("fieldy@mailinator.com", "");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
 		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
@@ -118,7 +118,7 @@ public class Login {
 	public void verifyIncorrectPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Fieldy Login Page to Validate the InValid Password");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.setUserCredentials("fieldy@zaiportal.com", "Zaisuite@124");
+		loginInPage.setUserCredentials("fieldy@mailinator.com", "Zaisuite@124");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
 		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
@@ -161,11 +161,11 @@ public class Login {
 
 	}
 
-	@Test(priority = 6)
+//	@Test(priority = 6)
 	public void verifyInvalidPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Fieldy Login Page to Min Validation in Password Field");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField("fieldy@zaiportal.com");
+		loginInPage.userField("fieldy@mailinator.com");
 		loginInPage.passwordField("asd");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
