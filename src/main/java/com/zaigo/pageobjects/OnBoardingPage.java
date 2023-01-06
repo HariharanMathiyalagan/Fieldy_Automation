@@ -154,6 +154,12 @@ public class OnBoardingPage extends BaseClass {
 		this.mouseActionClick(Continue);
 
 	}
+	
+	public void mandatoryEmailValidation() {
+		this.clearField(Email);
+		this.mouseActionClick(Continue);
+
+	}
 
 	public String manditoryValidations() {
 		String text = this.getText(CompanyError);

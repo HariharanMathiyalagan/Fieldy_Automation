@@ -70,9 +70,9 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
-	public void mandatoryFieldValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation in OnBoarding Page");
+	@Test(priority = 0)
+	public void mandatoryBussinessNameFieldValidation() throws IOException {
+		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Bussiness Name field.");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.emailText();
 		mandatory.mandatoryValidation();
@@ -93,6 +93,30 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
+	
+	@Test(priority = 1)
+	public void mandatoryEmailFieldValidation() throws IOException {
+		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Email field.");
+		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		mandatory.mandatoryEmailValidation();
+		String manditoryValidations = mandatory.manditoryValidations();
+		extentTest.log(Status.INFO, "Actual Result Validation Data - " + manditoryValidations);
+		extentTest.log(Status.INFO, "Expected Result Validation Data - " + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (manditoryValidations.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("OnBoarding Mandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("OnBoarding Mandatory.png");
+
+		}
+
+	}
+	
 
 	@Test(priority = 2)
 	private void alreadyBussinessNameValidation() throws IOException {
@@ -100,9 +124,9 @@ public class OnBoardingModule extends BaseClass {
 		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
 		alreadyBussiness.alreadyBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
-		extentTest.log(Status.INFO, "Actual Result Already Exited Data -" + errorMessageBussinessName);
+		extentTest.log(Status.INFO, "Actual Result Already Exited Data - " + errorMessageBussinessName);
 		extentTest.log(Status.INFO,
-				"Expected Result Already Existed Data -" + getPropertyValue("BussinessNameAlready"));
+				"Expected Result Already Existed Data - " + getPropertyValue("BussinessNameAlready"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMessageBussinessName.equals(getPropertyValue("BussinessNameAlready"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -466,7 +490,7 @@ public class OnBoardingModule extends BaseClass {
 		minValidation.minimumValidationPassword();
 		String errorMinPassword = minValidation.errorMinPassword();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorMinPassword);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MinimumValidatioPassword"));
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Min8ValidationPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMinPassword.equals(getPropertyValue("MinimumValidatioPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -490,7 +514,7 @@ public class OnBoardingModule extends BaseClass {
 		minValidation.minimumValidationConfirmPassword();
 		String errorConfirmMessage = minValidation.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MinimumValidatioPassword"));
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Min8ValidationPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorConfirmMessage.equals(getPropertyValue("MinimumValidatioPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");

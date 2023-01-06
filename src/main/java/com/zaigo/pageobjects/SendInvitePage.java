@@ -62,15 +62,15 @@ public class SendInvitePage {
 
 	private By previous = By.xpath("//*[text()='Previous']");
 
-	private By getSuccessmessage = By.xpath("(//span[@class='pl-2'])[9]");
+	private By getSuccessmessage = By.xpath("//*[text()='Invitation sent successfully to 1 user(s)']");
 
 	private By clickSaveandComplete = By.xpath("//button[@data-automationid='send-invite']");
 
-	public void clickSubmit() {
-		wait.until(ExpectedConditions.elementToBeClickable((clickSaveandComplete)));
-		driver.findElement(clickSaveandComplete).click();
+	public void clickSubmit() {		
+		this.mouseActionClick(clickSaveandComplete);
 	}
 
+	
 	public String getSuccessMessages() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((getSuccessmessage)));
 		return driver.findElement(getSuccessmessage).getText();

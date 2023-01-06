@@ -94,21 +94,21 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	By User = By.id("team-user-menu");
-	By CreateUser = By.xpath("//button[@data-formdynamic='user_create_edit']");
+	By CreateUser = By.xpath("//*[@data-formdynamic='user_create_edit']");
 	By Search = By.id("team-user-user-user-search-filter");
 	By SearchButton = By.id("team-user-user-search-button");
 	By ContractorSearch = By.id("team-user-contractor-search-main");
 	By ContractorSearchButton = By.id("team-user-contractor-search-btn");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
-	By ListFirstName = By.xpath("(//a[@class='ellipsis-100 '])[1]");
-	By ListPhoneNumber = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[5]");
-	By ListEmail = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[6]");
-	By ListContractorPhoneNumber = By.xpath(" (//td[@class='p-2 pt-1 pb-1'])[6]");
-	By ListContractorEmail = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[7]");
+	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
+	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]	");
+	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
+	By ListContractorPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
+	By ListContractorEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
 	By ThreeDots = By.xpath("(//*[@class='dot dot-hover'])[1]");
 	By Edit = By.xpath("(//li[@data-formsactions='edit'])[1]");
 	By Delete = By.xpath("(//li[@data-tabformid='undefined'])[1]");
-	By SendInvite = By.xpath("//button[@data-n-linkto='team_user_user_sendinvite']");
+	By SendInvite = By.xpath("//*[@data-formdynamic='user_send_invite']");
 	By Contractor = By.xpath("//a[@data-n-linkto='team_user_contractor']");
 	By Logo = By.xpath("//label[@for='user_image']");
 	By LogoError = By.id("user_image_error");
@@ -119,7 +119,7 @@ public class CreateUserPage extends BaseClass {
 	By ErrorLastName = By.id("last_name_error");
 	By Type = By.xpath("//input[@data-dropdownlist='user-type']");
 	By ErrorType = By.id("role_id_error");
-	By Admin = By.id("dropid-202");
+	By Admin = By.id("dropid-61");
 	By Manager = By.id("dropid-203");
 	By Operator = By.id("dropid-204");
 	By Technician = By.id("dropid-205");
@@ -129,8 +129,8 @@ public class CreateUserPage extends BaseClass {
 	By ErrorEmail = By.id("email_error");
 	By PhoneNumber = By.id("phones__number__0");
 	By ErrorPhoneNumber = By.id("phones__number__0_error");
-	By Next = By.xpath("//span[text()='Next']");
-	By Previous = By.xpath("//span[text()='Previous']");
+	By Next = By.xpath("//*[text()='Next']");
+	By Previous = By.xpath("//*[text()='Previous']");
 	By SaveComplete = By.xpath("//*[@data-automationid='save_complete']");
 	By LocationName = By.id("addresses__name__0");
 	By ErrorLocationName = By.id("addresses__name__0_error");
@@ -145,31 +145,32 @@ public class CreateUserPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By ErrorZipcode = By.id("addresses__zipcode__0_error");
 	By BussinessUnit = By.xpath("//input[@data-dropdownlist='business-unit']");
-	By General = By.id("dropid-364");
+	By General = By.id("business_unit_id-autocomplete-list");
 	By ServiceType = By.xpath("//input[@data-dropdownlist='service-type']");
-	By Repair = By.id("dropid-365");
+	By Repair = By.id("service_type_id-autocomplete-list");
 	By Organization = By.xpath("//input[@value='1']");
 	By CompanyName = By.xpath("//input[@data-dropdownlist='contractor-company']");
 	By FirstCompanyName = By
 			.xpath("(//div[@class='p-2 list-hover-bg team-contractor-company w-20-ellipsis w-100'])[1]");
 	By CompanyNameError = By.id("company_id_error");
-	By CreateContractor = By.xpath("//button[@data-tabformid='team-user-contract-create']");
+	By CreateContractor = By.xpath("//*[@data-tabformid='team-user-contract-create']");
 	By FilterByCompany = By.id("Organization-filter-reset");
 	By ListFilterCompany = By.xpath("(//input[@type='checkbox'])[1]");
 	By ListCompnayName = By.xpath("(//div[@id='SearchableDropdown'])[1]");
 	By FilterSearch = By.xpath("(//i[@class='fa fa-search'])[2]");
 	By UserCreateLabelHeading = By.xpath("//a[@data-exitpopup='team_user_user__all__role']");
 	By ContractorCreateLabelHeading = By.xpath("//a[@data-exitpopup='team_user_contractor']");
-	By SuccessfulMessage = By.xpath("(//span[@class='pl-2'])[9]");
+	By SuccessfulMessage = By.xpath("//*[text()='User created successfully']");
+	By UserUpdatedMessgae = By.xpath("//*[text()='User information updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='User have been deleted successfully']");
-	By Yes = By.xpath("//button[text()='Yes']");
+	By Yes = By.xpath("//*[text()='Yes']");
 	By HeadingFirstName = By.xpath("//td[text()='First Name']");
 	By InValid = By.xpath("//div[text()='No Result Found']");
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
-	By ListCompanyFirstName = By.xpath("(//span[@class='ellipsis-150'])[1]");
-	By CreateContractorMessage = By.xpath("//span[text()='User created successfully']");
-	By UpdateContractorMessage = By.xpath("//span[text()='User information updated successfully']");
-	By DeleteContractorMessage = By.xpath("//span[text()='User have been deleted successfully']");
+	By ListCompanyFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
+	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
+	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
 
 	public void userPageLanding() {
@@ -276,6 +277,7 @@ public class CreateUserPage extends BaseClass {
 
 	public void maxValidationJobTittle() throws IOException {
 		this.validationTab(JobTittle, getPropertyValue("256Characters"));
+		this.clearField(Email);
 
 	}
 
@@ -330,7 +332,7 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public void maxValidationPhoneNumber() {
-		this.validationTab(PhoneNumber, "2314569897845621231");
+		this.validationTab(PhoneNumber, "2314569897845621232134234243456721");
 
 	}
 
@@ -450,31 +452,31 @@ public class CreateUserPage extends BaseClass {
 
 	}
 
-	public void basicpage() throws AWTException, InterruptedException {
+	public void basicpage() throws AWTException, InterruptedException, IOException {
 		String randomNumeric = RandomStringUtils.randomNumeric(8);
 		String num = RandomStringUtils.randomNumeric(3);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("istockphoto-825383494-612x612");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("istockphoto-825383494-612x612");
 		this.clearField(FirstName);
-		this.inputText(FirstName, "Ajith");
-		this.inputText(LastName, "Kumar");
-		this.inputText(JobTittle, "Test");
+		this.inputText(FirstName, excelRead("Team User", 1, 1));
+		this.inputText(LastName, excelRead("Team User", 1, 2));
+		this.inputText(JobTittle, excelRead("Team User", 1, 3));
 		this.scrollDown();
 		this.clearField(Email);
-		this.inputText(Email, "ajith" + num + "@gmail.com");
-		this.inputText(PhoneNumber, "91" + randomNumeric);
+		this.inputText(Email, num + excelRead("Team User", 1, 4));
+		this.inputText(PhoneNumber, excelRead("Team User", 1, 5));
 		this.mouseActionClick(Next);
 
 	}
 
-	public void locationpage() {
-		this.inputText(LocationName, "Permanent Location");
-		this.inputText(Address1, "25-568");
-		this.inputText(Address2, "De Grassi Street");
-		this.inputText(State, "Ontario");
-		this.inputText(City, "Mississauga");
-		this.inputText(Zipcode, "91710");
+	public void locationpage() throws IOException {
+		this.inputText(LocationName, excelRead("Team User", 1, 6));
+		this.inputText(Address1, excelRead("Team User", 1, 7));
+		this.inputText(Address2, excelRead("Team User", 1, 8));
+		this.inputText(State, excelRead("Team User", 1, 9));
+		this.inputText(City, excelRead("Team User", 1, 10));
+		this.inputText(Zipcode, excelRead("Team User", 1, 11));
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -494,7 +496,7 @@ public class CreateUserPage extends BaseClass {
 		this.validationTab(Email, text);
 	}
 
-	public String alreadyEmail() {
+	public String alreadyEmail() throws IOException {
 		String text = this.getText(ErrorEmail);
 		this.mouseActionClick(UserCreateLabelHeading);
 		this.mouseActionClick(Yes);
@@ -541,6 +543,7 @@ public class CreateUserPage extends BaseClass {
 		return text;
 
 	}
+
 	public String listContractorPhoneNumber() {
 		String text = this.getText(ListContractorPhoneNumber);
 		return text;
@@ -560,7 +563,7 @@ public class CreateUserPage extends BaseClass {
 		return text;
 
 	}
-	
+
 	public String listContractorEmail() {
 		String text = this.getText(ListContractorEmail);
 		return text;
@@ -589,14 +592,16 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public String editUserDetails() throws InterruptedException, AWTException {
-		Thread.sleep(2000);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("pic");
+		Thread.sleep(3500);
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("pic");
+//		this.mouseAction(Next);
+//		this.mouseAction(Previous);
 		this.clearField(FirstName);
 		this.inputText(FirstName, "Krishna");
 		this.mouseActionClick(SaveComplete);
-		String text = this.getText(SuccessfulMessage);
+		String text = this.getText(UserUpdatedMessgae);
 		return text;
 	}
 
@@ -609,12 +614,13 @@ public class CreateUserPage extends BaseClass {
 
 	}
 
-	public String mandatoryValidationOrganizationField() {
+	public String mandatoryValidationOrganizationField() throws InterruptedException {
 		this.scrollDown();
 		this.mouseActionClick(Organization);
 		this.mouseActionClick(SaveComplete);
 		this.scrollDown();
 		String text = this.getText(CompanyNameError);
+		Thread.sleep(2000);
 		this.mouseActionClick(CompanyName);
 		this.mouseActionClick(FirstCompanyName);
 		return text;
@@ -622,9 +628,9 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public void basicContractorPage() throws InterruptedException, AWTException {
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("new_logo");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("new_logo");
 		this.clearField(FirstName);
 		this.inputText(FirstName, "PRV");
 		this.inputText(LastName, "Contractor");
@@ -727,9 +733,11 @@ public class CreateUserPage extends BaseClass {
 
 	public String editContractorDetails() throws InterruptedException, AWTException {
 		Thread.sleep(3500);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("1622641377484");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("1622641377484");
+//		this.mouseAction(Next);
+//		this.mouseAction(Previous);
 		this.clearField(FirstName);
 		this.inputText(FirstName, "SVS");
 		this.clearField(Email);
