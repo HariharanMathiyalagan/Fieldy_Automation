@@ -7,14 +7,25 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -209,4 +220,63 @@ public class BaseClass {
 
 	}
 
+	public static String excelRead(String sheet, int rowIndex, int cellIndex) throws IOException {// 27
+		String value = null;
+
+		File f = new File(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
+
+		FileInputStream fin = new FileInputStream(f);
+
+		Workbook w = new XSSFWorkbook(fin);
+
+		Sheet s = w.getSheet(sheet);
+
+		Row row = s.getRow(rowIndex);
+
+		Cell cell = row.getCell(cellIndex);
+
+		CellType cellType = cell.getCellType();
+
+		switch (cellType) {
+		case STRING:
+			value = cell.getStringCellValue();
+			break;
+		case NUMERIC:
+			if (DateUtil.isCellDateFormatted(cell)) {
+				Date dateCellValue = cell.getDateCellValue();
+				SimpleDateFormat sim = new SimpleDateFormat("dd-mm-yyyy");
+				value = sim.format(dateCellValue);
+			} else {
+				double numericCellValue = cell.getNumericCellValue();
+				long l = (long) numericCellValue;
+				value = String.valueOf(l);
+			}
+			break;
+		default:
+			break;
+		}
+		return value;
+		
+		
+	}
+
+	public static void excelWrite(String sheet, int row, int cell, String value) throws IOException {// 28
+		File f = new File(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
+
+		FileInputStream fin = new FileInputStream(f);
+
+		Workbook w = new XSSFWorkbook(fin);
+
+		Sheet s = w.getSheet(sheet);
+
+		Row r = s.getRow(row);
+
+		Cell c = r.getCell(cell);
+
+		c.setCellValue(value);
+		FileOutputStream fout = new FileOutputStream(f);
+		w.write(fout);
+	}
+	
+	
 }

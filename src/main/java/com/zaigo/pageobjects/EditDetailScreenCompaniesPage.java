@@ -1,7 +1,9 @@
 package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
+import java.io.IOException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,26 +20,26 @@ import com.base.BaseClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class EditDetailScreenCompaniesPage extends BaseClass{
+public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
 
 	By Dashboard = By.xpath("//div[@data-menuselector='dashboard-menu']");
 	By Team = By.id("team-menu");
-	By Tittle = By.xpath("//div[text()='Zaiportal Tenant 3']");
+	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
 	By Next = By.xpath("//span[text()='Next']");
 
-	By Location = By.id("addresses__name__2");
-	By Email = By.id("addresses__email__2");
-	By ContactPerson = By.id("addresses__contact_person__2");
-	By PhoneNumber = By.id("addresses__phone_number__2");
-	By Building = By.id("addresses__line_1__2");
-	By Street = By.id("addresses__line_2__2");
-	By City = By.id("addresses__city__2");
-	By State = By.id("addresses__state__2");
-	By Zipcode = By.id("addresses__zipcode__2");
+	By Location = By.id("addresses__name__1");
+	By Email = By.id("addresses__email__1");
+	By ContactPerson = By.id("addresses__contact_person__1");
+	By PhoneNumber = By.id("addresses__phone_number__1");
+	By Building = By.id("addresses__line_1__1");
+	By Street = By.id("addresses__line_2__1");
+	By City = By.id("addresses__city__1");
+	By State = By.id("addresses__state__1");
+	By Zipcode = By.id("addresses__zipcode__1");
 
 	By AddMoreLocation = By.id("add-more-team-company-location");
 
@@ -49,12 +51,11 @@ public class EditDetailScreenCompaniesPage extends BaseClass{
 
 	By deleteLocation = By.xpath("//*[@id=\"accordion-2\"]/div[2]/div[2]");
 
-	By dots = By.xpath("//*[@id=\"Team-Company-Card-Details-Section\"]/div[3]/div/div[1]/div/div[2]/div/div[1]");
+	By dots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[3]");
 
-	By delete = By
-			.xpath("//*[@id=\"Team-Company-Card-Details-Section\"]/div[3]/div/div[1]/div/div[2]/div/div[2]/ul/li[2]");
+	By delete = By.xpath("(//*[@class='drop-down-list']//li)[4]");
 
-	By Yes = By.xpath("//button[text()='Yes']");
+	By Yes = By.xpath("//*[text()='Yes']");
 
 	By message = By.xpath("//span[text()='Deleted Successfully']");
 
@@ -196,7 +197,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass{
 
 	private void clickYes() {
 		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Yes)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(Yes)).click();
 
 	}
 
@@ -218,25 +219,25 @@ public class EditDetailScreenCompaniesPage extends BaseClass{
 	public void editContent() throws InterruptedException {
 		this.clickEdit();
 		this.scrollDown();
-		Thread.sleep(2500);
+		Thread.sleep(3000);
 		this.clickNext();
 
 	}
 
-	public void addLocation(String locate, String email, String contact, String phoneNumber, String building,
-			String streetName, String cityName, String stateName, String zipCode) {
+	public void addLocation() throws IOException {
 		this.scrollDown();
 		this.clickAddMore();
 		this.scrollDown();
-		this.inputLocation(locate);
-		this.inputEmail(email);
-		this.inputContactPerson(contact);
-		this.inputPhoneNumber(phoneNumber);
-		this.inputBuilding(building);
-		this.inputStreet(streetName);
-		this.inputCity(cityName);
-		this.inputState(stateName);
-		this.inputZipcode(zipCode);
+		String num = RandomStringUtils.randomAlphanumeric(4);
+		this.inputLocation(excelRead("Team Details Screen", 1, 0));
+		this.inputEmail(num + excelRead("Team Details Screen", 1, 1) + "@mailinator.com");
+		this.inputContactPerson(excelRead("Team Details Screen", 1, 2));
+		this.inputPhoneNumber(excelRead("Team Details Screen", 1, 3));
+		this.inputBuilding(excelRead("Team Details Screen", 1, 4));
+		this.inputStreet(excelRead("Team Details Screen", 1, 5));
+		this.inputCity(excelRead("Team Details Screen", 1, 6));
+		this.inputState(excelRead("Team Details Screen", 1, 7));
+		this.inputZipcode(excelRead("Team Details Screen", 1, 8));
 		this.clickSaveComplete();
 		// this.responseMessage();
 		this.assertTittle();
@@ -316,12 +317,13 @@ public class EditDetailScreenCompaniesPage extends BaseClass{
 		attachmentFile("dsc00531");
 
 	}
+
 	public String errorLogo() {
 		String text2 = this.getText(LogoError);
 		return text2;
 
 	}
-	
+
 	public void formatLogoValidation() throws InterruptedException, AWTException {
 		this.assertName(EditHeading, "Edit Company");
 		this.mouseActionClick(Logo);

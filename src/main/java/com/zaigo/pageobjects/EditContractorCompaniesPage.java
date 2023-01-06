@@ -33,7 +33,8 @@ public class EditContractorCompaniesPage extends BaseClass {
 	By Name = By.id("name");
 	By SaveNext = By.xpath("//button[@data-spinloader='company_contractor_create_edit']");
 	By Assertion = By.xpath("//span[text()='Contractor have been updated successfully']");
-	By clickNext = By.xpath("//span[text()='Next']");
+	By clickNext = By.xpath("//*[text()='Next']");
+	By clickPrevious = By.xpath("//*[text()='Previous']");
 
 	public EditContractorCompaniesPage(WebDriver driver) {
 		this.driver = driver;
@@ -146,13 +147,13 @@ public class EditContractorCompaniesPage extends BaseClass {
 //
 //	}
 
-	By Delete = By.xpath("(//li[@data-tabformid='undefined'])[2]");
+	By Delete = By.xpath("(//*[@data-tabformid='undefined'])[4]");
 
 	By DeleteAssert = By.xpath("//span[text()='Contractor have been deleted successfully']");
 
-	By Yes = By.xpath("//button[text()='Yes']");
+	By Yes = By.xpath("//*[text()='Yes']");
 	By Value = By.xpath("//*[@id=\"modal-confirmation-popup\"]/div/div/div/div/h4");
-	By firstName = By.xpath("//td[text()='Company']");
+	By firstName = By.xpath("//*[text()='Company']");
 
 //	private void clickYes() {
 //		wait = new WebDriverWait(driver, 10);
@@ -197,7 +198,7 @@ public class EditContractorCompaniesPage extends BaseClass {
 
 	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 10);
-		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		WebElement until = wait.until(ExpectedConditions.elementToBeClickable(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
@@ -239,12 +240,17 @@ public class EditContractorCompaniesPage extends BaseClass {
 
 	By Logo = By.xpath("//label[@for='imageUpload']");
 	By CompanyName = By.id("name");
+	By Pre = By.xpath("//*[text()='Previous']");
+	By AddMoreLocation = By.id("add-more-team-company-contractor-location");
 
 	public void editContractorDetails() throws AWTException, InterruptedException {
 		Thread.sleep(2000);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("1622641377484");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("1622641377484");
+//		this.mouseActionClick(clickNext);
+//		this.mouseActionClick(AddMoreLocation);
+//		this.mouseActionClick(clickPrevious);
 		this.clearField(CompanyName);
 		String randomAlphabetic = RandomStringUtils.randomAlphabetic(3);
 		this.inputText(CompanyName, "Tesla" + randomAlphabetic);
