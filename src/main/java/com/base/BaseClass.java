@@ -9,17 +9,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hpsf.Date;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -39,7 +37,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.javafaker.Company;
 import com.github.javafaker.Faker;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -247,7 +244,7 @@ public class BaseClass {
 			break;
 		case NUMERIC:
 			if (DateUtil.isCellDateFormatted(cell)) {
-				Date dateCellValue = cell.getDateCellValue();
+				java.util.Date dateCellValue = cell.getDateCellValue();
 				SimpleDateFormat sim = new SimpleDateFormat("dd-mm-yyyy");
 				value = sim.format(dateCellValue);
 			} else {
@@ -328,18 +325,17 @@ public class BaseClass {
 		String Address1 = faker.address().zipCode();
 
 	}
-	
+
 	public void fakeWebsite() {
 		Faker faker = new Faker();
 		String website = faker.company().url();
 
 	}
-	
+
 	public void fakeCompanyName() {
 		Faker faker = new Faker();
 		String companyName = faker.company().name();
 
 	}
 
-	
 }

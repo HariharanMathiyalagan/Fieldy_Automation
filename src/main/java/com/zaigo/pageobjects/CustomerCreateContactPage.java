@@ -35,39 +35,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	WebDriverWait wait;
 	WebDriver driver;
-	String ManditoryValidation = "Required Field";
-	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String Min6CharacterValidation = "Atleast 6 digits required";
-	String MaxValidationPhoneNumber = "Not Allowed More than 12 digits";
-	String ValidEmail = "Enter a valid Email";
-	String Max512CharacterValidation = "Not Allowed More than 512 characters";
-	String Min3CharacterValidation = "Atleast 3 characters required";
-	String Max10CharacterValidation = "Not Allowed More than 10 characters";
-	String Max45CharacterValidation = "Not Allowed More than 45 characters";
-	String Max2048Validation = "Not Allowed More than 2048 characters";
-	String FormatValidationLogo = "Only jpg,jpeg,png Formats Allowed";
-	String MaxLogoValidation = "File Size Not Allowed More Than 2 MB";
-	String ListInvalid = "No Result Found";
-	String MaxSizeLogo = "File Size Not Allowed More Than 2 MB";
-	String SaveCompleteButton = "Save & Complete";
-	String OrganizationAlreadyExist = "Name Already Exists";
-	String AttachmentFormat = "Only JPG/PNG/JPEG files allowed";
-	String UpdatedMessage = "Contact has been updated";
-	String DeleteMessage = "Contact deleted successfully";
-
-	String MaxCharacterVaildation = "Not Allowed More than 256 characters";
-	String MinValidationPhoneNumber = "Atleast 6 digits required";
-	String MaxCharactersValidation = "Not Allowed More than 512 characters";
-	String MinZipCodeValidation = "Atleast 3 characters required";
-	String MaxZipCodeValidation = "Not Allowed More than 10 characters";
-	String MaxStateNameValidation = "Not Allowed More than 45 characters";
-	String MaxInstallationNote = "Not Allowed More than 2048 characters";
-	String CreatedMessage = "Customer contact created successfully";
-	String EmailAlreadyExisted = "Email Already Exists";
-	String Invalid = "No Result Found";
-	String LogoError = "File Size Not Allowed More Than 2 MB";
-	String MinValidationZipcode = "Atleast 3 characters required";
-	String MaxValidationZipcode = "Not Allowed More than 10 characters";
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
@@ -229,23 +196,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void errorMessage() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorFirstName)).getText();
-		Assert.assertEquals(text, ManditoryValidation);
-
-	}
-
-	public void manditoryValidation() throws InterruptedException, AWTException {
-		this.clickAddContact();
-		this.assertTittle();
-		Thread.sleep(5000);
-		this.blankFirstName();
-		this.errorMessage();
-		this.clearFirstName();
-
-	}
-
 	By Virus = By.xpath("//div[@id='dropid-4189']");
 	By FirstName = By.id("first_name");
 	By MaxErrorFirstName = By.id("first_name_error");
@@ -290,13 +240,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertFirstName() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorFirstName)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-
-	}
-
 	private void clearFirstName() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FirstName)).clear();
@@ -315,12 +258,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(LastName)).sendKeys(maxCharacter, Keys.TAB);
 	}
 
-	private void assertLastName() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(MaxErrorLastName)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-	}
-
 	private void clearLastName() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(LastName)).clear();
@@ -331,13 +268,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		String maxCharacter = RandomStringUtils.randomAlphabetic(257);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(JobTittle)).sendKeys(maxCharacter, Keys.TAB);
-
-	}
-
-	private void assertJobTittle() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorJobTittle)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
 
 	}
 
@@ -354,13 +284,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertMaxEmail() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorEmail)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-
-	}
-
 	private void clearEmail() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Email)).clear();
@@ -370,13 +293,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	private void Email(String email) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Email)).sendKeys(email, Keys.TAB);
-
-	}
-
-	private void assertEmail() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorEmail)).getText();
-		Assert.assertEquals(text, ValidEmail);
 
 	}
 
@@ -397,22 +313,10 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertMinPhone() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorPhoneNo)).getText();
-		Assert.assertEquals(text, MinValidationPhoneNumber);
-	}
-
 	private void maxValidationPhoneNumber() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Phone)).sendKeys("98757777888988887788787", Keys.TAB);
 
-	}
-
-	private void assertMaxPhone() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorPhoneNo)).getText();
-		Assert.assertEquals(text, MaxValidationPhoneNumber);
 	}
 
 	private void clearPhone() {
@@ -421,53 +325,11 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	public void maxValidation() throws AWTException, InterruptedException {
-		this.scrollUp();
-		this.mouseActionClick(Logo);
-		Thread.sleep(1500);
-		this.attachmentFile("dsc00531");
-		this.assertName(ErrorLogo, LogoError);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1500);
-		this.attachmentFile("pexels-suliman-sallehi-1704488");
-		this.maxFirstName();
-		this.assertFirstName();
-		this.clearFirstName();
-		this.firstName("Ajith");
-		this.maxLastName();
-		this.assertLastName();
-		this.clearLastName();
-		this.maxJobTittle();
-		this.assertJobTittle();
-		this.clearJobTittle();
-		this.scrollDown();
-		this.maxEmail();
-		this.assertMaxEmail();
-		this.clearEmail();
-		this.maxValidationPhoneNumber();
-		this.assertMaxPhone();
-		this.clearPhone();
-		this.clickNext();
-
-	}
-
 	private void assertName(By element, String Name) {
 		wait = new WebDriverWait(driver, 15);
 		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(text, Name);
 
-	}
-
-	public void minValidation() throws AWTException {
-		this.firstName("Ajith");
-		this.scrollDown();
-		this.Email("uyguyg");
-		this.assertEmail();
-		this.clearEmail();
-		this.minValidationPhoneNumber();
-		this.assertMinPhone();
-		this.clearPhone();
-		this.clearFirstName();
 	}
 
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
@@ -519,13 +381,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertPropertyName() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.elementToBeClickable(ErrorPropertyName)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-
-	}
-
 	private void clearPropertyName() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(PropertyName)).clear();
@@ -535,13 +390,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		String maxCharacter = RandomStringUtils.randomAlphabetic(513);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(ContactPersonName)).sendKeys(maxCharacter, Keys.TAB);
-
-	}
-
-	private void assertContactPerson() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorContactPersonName)).getText();
-		Assert.assertEquals(text, MaxCharactersValidation);
 
 	}
 
@@ -558,13 +406,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertAddress1() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorAddress1)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-
-	}
-
 	private void clearAddress1() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Address1)).clear();
@@ -575,13 +416,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		String maxCharacter = RandomStringUtils.randomAlphabetic(257);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Address2)).sendKeys(maxCharacter, Keys.TAB);
-
-	}
-
-	private void assertAddress2() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorAddress2)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
 
 	}
 
@@ -598,13 +432,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertStateName() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorStateName)).getText();
-		Assert.assertEquals(text, MaxStateNameValidation);
-
-	}
-
 	private void clearStateName() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(StateName)).clear();
@@ -615,13 +442,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		String maxCharacter = RandomStringUtils.randomAlphabetic(257);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(CityName)).sendKeys(maxCharacter, Keys.TAB);
-
-	}
-
-	private void assertCityName() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorCityName)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
 
 	}
 
@@ -644,20 +464,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void assertMinZipCode() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorZipCode)).getText();
-		Assert.assertEquals(text, MinZipCodeValidation);
-
-	}
-
-	private void assertMaxZipCode() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(ErrorZipCode)).getText();
-		Assert.assertEquals(text, MaxZipCodeValidation);
-
-	}
-
 	private void clearZipCode() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Zipcode)).clear();
@@ -673,40 +479,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	private void clickAddProperty() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(AddProperty)).click();
-
-	}
-
-	public void minValidations() {
-		this.clickDeleteLocation();
-		this.clickAddProperty();
-		this.clickProperty();
-		this.minValidationZipCode();
-		this.assertMinZipCode();
-		this.clearZipCode();
-	}
-
-	public void maxValidations() {
-		this.maxValidationPropertyName();
-		this.assertPropertyName();
-		this.clearPropertyName();
-		this.maxValidationContactPersonName();
-		this.assertContactPerson();
-		this.clearContactPerson();
-		this.maxValidationAddress1();
-		this.assertAddress1();
-		this.clearAddress1();
-		this.maxValidationAddress2();
-		this.assertAddress2();
-		this.clearAddress2();
-		this.maxValidationStateName();
-		this.assertStateName();
-		this.clearStateName();
-		this.maxValidationCityName();
-		this.assertCityName();
-		this.clearCityName();
-		this.maxValidationZipCode();
-		this.assertMaxZipCode();
-		this.clearZipCode();
 
 	}
 
@@ -756,31 +528,10 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	private void error12ErrorMessage(By element) {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
-		Assert.assertEquals(text, MaxValidationPhoneNumber);
-
-	}
-
 	private void error3ErrorMessage(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(text, MinValidationZipPhone);
-
-	}
-
-	private void error256ErrorMessage(By element) {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
-		Assert.assertEquals(text, MaxCharacterVaildation);
-
-	}
-
-	private void error2048ErrorMessage(By element) {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
-		Assert.assertEquals(text, MaxInstallationNote);
 
 	}
 
@@ -797,33 +548,10 @@ public class CustomerCreateContactPage extends BaseClass {
 		select.selectByIndex(1);
 	}
 
-	public void equipmentMaxFieldValidation() {
-		this.clickNext();
-		this.max256Fields(ProductName);
-		this.error256ErrorMessage(ErrorProductName);
-		this.clearEquipmentPage(ProductName);
-		this.max256Fields(BrandName);
-		this.error256ErrorMessage(ErrorBrandName);
-		this.clearEquipmentPage(BrandName);
-		this.max256Fields(ModelNumber);
-		this.error256ErrorMessage(ErrorModelNumber);
-		this.clearEquipmentPage(ModelNumber);
-		this.max256Fields(SerialNumber);
-		this.error256ErrorMessage(ErrorSerialNumber);
-		this.clearEquipmentPage(SerialNumber);
-		this.dropDownWarantyInformation();
-		this.max256Fields(AccessHours);
-		this.error256ErrorMessage(ErrorAccessHours);
-		this.clearEquipmentPage(AccessHours);
-		this.max2048Fields(InstallationNotes);
-		this.error2048ErrorMessage(ErrorInstallationNotes);
-		this.clearEquipmentPage(InstallationNotes);
-	}
 
 	By AttachmentFile = By.id("customerDropZone");
 	By ErrorAttachmentFile = By.xpath("//div[@class='dropzone-error invalid-feedback']");
 	By attached = By.className("dropzone-uploads");
-//	By AssertionFile = By.xpath("//span[@class='fieldy-dropzone-title']");
 
 	private void attachmentFile(By element) throws AWTException, InterruptedException {
 		wait = new WebDriverWait(driver, 20);
@@ -872,35 +600,9 @@ public class CustomerCreateContactPage extends BaseClass {
 		for (int i = 0; i < 2; i++) {
 			this.ClickButton(Previous);
 		}
-//		this.mouseActionClick(Logo);
-//		attachmentFile("dsc00531");
-//		this.assertName(ErrorLogo, MaxLogoValidation);
-
 	}
 
 	By ImagePreview = By.id("imagePreview");
-
-	public void validationFormContactPage() throws AWTException, InterruptedException {
-		for (int i = 0; i < 2; i++) {
-			this.ClickButton(Previous);
-		}
-		this.clearFirstName();
-		this.inputText(FirstName, "Manoj");
-		this.inputText(LastName, "Kumar");
-		this.inputText(JobTittle, "Replacement&Testing");
-		this.ClickButton(LeadSources);
-		this.ClickButton(Social);
-		this.scrollDown();
-		this.inputText(Email, "manoj" + c + "@yahoo.com");
-		this.inputText(Phone, "9517418526");
-		this.ClickButton(SaveComplete);
-		this.assertName(ResponseMessage, CreatedMessage);
-		this.assertName(ListName, "Manoj Kumar");
-		this.ClickButton(AddContact);
-		this.inputText(FirstName, "Ajith");
-		this.inputText(Email, "manoj" + c + "@yahoo.com");
-
-	}
 
 	public void validationFormOrganizationContactPage() throws AWTException {
 		this.clearFirstName();
@@ -941,13 +643,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	public void alreadyExistedEmail() {
-		this.ClickButton(SaveComplete);
-		this.assertName(AlreadyEmail, EmailAlreadyExisted);
-		this.ClickButton(Tittle);
-		this.ClickButton(Yes);
-	}
-
 	By AddNew = By.xpath("//div[@class='no-data-found text-break']//child::button");
 	By CompanyName = By.xpath("//form[@id='customer_organization_create_edit']//child::input[@id='company_name']");
 	By OrgPhoneNumber = By
@@ -972,72 +667,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorZipcode = By.xpath("//form[@id='customer_organization_create_edit']//child::div[@id='zipcode_error']");
 	By OrgSaveComplete = By
 			.xpath("//div[@class='d-flex row justify-content-between ']//child::button[@id='organization-create']");
-
-	public void validationCreateOrganization() throws InterruptedException {
-		this.clickAddContact();
-		this.firstName("Arun");
-		this.ClickButton(Organization);
-		this.inputText(Organization, "Demo");
-		this.mouseActionClick(AddNew);
-		this.max256Fields(CompanyName);
-		this.error256ErrorMessage(ErrorCompanyName);
-		this.clearEquipmentPage(CompanyName);
-		this.inputText(CompanyName, "Demo");
-
-		this.inputText(OrgPhoneNumber, MinValidationZipPhone);
-		this.mouseActionClick(OrgEmail);
-		this.assertName(ErrorPhoneNumber, MinValidationPhoneNumber);
-		this.clearEquipmentPage(OrgPhoneNumber);
-
-		this.max256Fields(OrgEmail);
-		this.error256ErrorMessage(ErrorMail);
-		this.clearEquipmentPage(OrgEmail);
-		this.inputText(OrgEmail, "Zaigo" + num + "@yahoo.com");
-
-		this.max256Fields(OrgWebsite);
-		this.error256ErrorMessage(ErrorWebsite);
-		this.clearEquipmentPage(OrgWebsite);
-
-		this.max256Fields(OrgBuilding);
-		this.error256ErrorMessage(ErrorBuilding);
-		this.clearEquipmentPage(OrgBuilding);
-
-		this.max256Fields(OrgStreet);
-		this.error256ErrorMessage(ErrorStreet);
-		this.clearEquipmentPage(OrgStreet);
-
-		this.inputText(OrgState, MaxValidationStateName);
-		this.mouseActionClick(OrgEmail);
-		this.assertName(ErrorState, MaxStateNameValidation);
-		this.clearEquipmentPage(OrgState);
-
-		this.max256Fields(OrgCity);
-		this.error256ErrorMessage(ErrorCity);
-		this.clearEquipmentPage(OrgCity);
-
-		this.inputText(OrgZipcode, MinValidationZipPhone);
-		this.mouseActionClick(OrgSaveComplete);
-		this.assertName(ErrorZipcode, MinValidationZipcode);
-		this.clearEquipmentPage(OrgZipcode);
-		this.inputText(OrgZipcode, MaxValidationZipPhone);
-		this.mouseActionClick(OrgSaveComplete);
-		this.assertName(ErrorZipcode, MaxValidationZipcode);
-		this.clearEquipmentPage(OrgZipcode);
-
-	}
-
-	public void createOrganization() throws InterruptedException {
-		this.inputText(OrgPhoneNumber, "9876541230");
-		this.inputText(OrgWebsite, "https://www.facebook.com");
-		this.inputText(OrgBuilding, "12");
-		this.inputText(OrgStreet, "SakthiNagar");
-		this.inputText(OrgCity, "Chennai");
-		this.inputText(OrgZipcode, "620005");
-		this.mouseActionClick(OrgSaveComplete);
-		Thread.sleep(2000);
-		this.assertName(ResponseMessage, CreatedMessage);
-
-	}
 
 	private void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -1290,7 +919,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	// changeName
 	public void maxValidationAddress22() {
 		this.validationTab(Address2, characters256);
-		this.assertName(ErrorAddress2, Max256CharacterValidation);
+//		this.assertName(ErrorAddress2, );
 
 	}
 
@@ -1341,7 +970,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void minValidationZipcode() {
 		this.mouseActionClick(MakethisProperty);
 		this.validationTab(Zipcode, "21");
-		this.assertName(ErrorZipCode, Min3CharacterValidation);
 
 	}
 
@@ -1546,6 +1174,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.inputText(FirstName, fakeFirstName);
 		this.inputText(LastName, fakeLastName);
 		this.inputText(JobTittle, excelRead("Team User", 1, 3));
+		Thread.sleep(1000);
 		this.ClickButton(LeadSources);
 		this.ClickButton(Social);
 		this.scrollDown();

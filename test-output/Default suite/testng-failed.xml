@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerCreateOrganizationModule">
+      <class name="org.test.CustomerContactJob">
         <methods>
           <include name="exitBrowser"/>
-          <include name="editContactList"/>
-          <include name="filterListValidation"/>
+          <include name="maxTagLimitValidation"/>
           <include name="setup"/>
-          <include name="deleteContactList"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
+      </class> <!-- org.test.CustomerContactJob -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
