@@ -13,8 +13,12 @@ public class Name {
 	public static void main(String[] args) {
 
 //		int n = str.length();
-		String str = "GeeksForGeeks";
-		char first = str.charAt(0);
-		System.out.println("First: " + first);
+//		String str = "GeeksForGeeks";
+//		char first = str.charAt(0);
+//		System.out.println("First: " + first);
+		Faker faker = new Faker(new Locale("en-IND"));
+		String safeEmailAddress = faker.internet().safeEmailAddress();
+		System.out.println(safeEmailAddress);
+		
 	}
 }

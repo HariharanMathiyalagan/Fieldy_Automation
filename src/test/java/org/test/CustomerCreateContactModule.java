@@ -776,9 +776,9 @@ public class CustomerCreateContactModule extends BaseClass {
 		String responseMessageCreateContact = create.responseMessageCreateContact();
 		extentTest.log(Status.INFO, "Actual Result - Created List Name -" + responseMessageCreateContact);
 		extentTest.log(Status.INFO,
-				"Expected Result - Created List Name -" + getPropertyValue("ContactCreatedMessage"));
+				"Expected Result - Created List Name -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (responseMessageCreateContact.equals(getPropertyValue("ContactCreatedMessage"))) {
+		if (responseMessageCreateContact.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.responseMessageCreateContact();
 		} else {

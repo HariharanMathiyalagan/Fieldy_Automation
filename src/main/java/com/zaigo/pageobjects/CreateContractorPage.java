@@ -28,7 +28,7 @@ public class CreateContractorPage extends BaseClass {
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
-	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakeEmail = faker.internet().safeEmailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
@@ -585,8 +585,8 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public void CreateContractor() throws InterruptedException, IOException {
-		this.ContractorField(fakeCompanyName, fakeEmail + "@mailinator.com", fakeFirstName, fakeLastName,
-				fakePhoneNumber, fakeFaxNumber, fakeWebsite);
+		this.ContractorField(fakeCompanyName, fakeEmail, fakeFirstName, fakeLastName, fakePhoneNumber, fakeFaxNumber,
+				fakeWebsite);
 
 	}
 
@@ -664,9 +664,8 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public void Location() throws InterruptedException, IOException {
-		this.LocationField(excelRead("Team Details Screen", 1, 0), fakeEmail + "@mailinator.com",
-				fakeFirstName + fakeLastName, fakePhoneNumber, fakeAddress1, fakeAddress2, fakeState, fakeCity,
-				fakeZipcode);
+		this.LocationField(excelRead("Team Details Screen", 1, 0), fakeEmail, fakeFirstName + fakeLastName,
+				fakePhoneNumber, fakeAddress1, fakeAddress2, fakeState, fakeCity, fakeZipcode);
 
 	}
 
@@ -1026,6 +1025,8 @@ public class CreateContractorPage extends BaseClass {
 		String text = this.getText(ListEmail);
 		this.mouseActionClick(AddContractor);
 		this.validationTab(txtEmail, text);
+		this.mouseActionClick(Next);
+		this.mouseActionClick(Previous);
 
 	}
 

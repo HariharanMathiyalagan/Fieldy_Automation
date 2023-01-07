@@ -51,26 +51,26 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-//	@Test(priority = 0)
-	public void LaunchingOnBoarding() throws MalformedURLException, IOException {
-		extentTest = extentReports.createTest("Verify the OnBoarding URL Response Code Validation");
-		OnBoardingPage boardingPage = new OnBoardingPage(driver);
-		boardingPage.login();
-		int responseCode = boardingPage.responseCode();
-		extentTest.log(Status.INFO, "Actual Result Validation Data -" + responseCode);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + "200");
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (responseCode == 200) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//			System.out.println(Status.PASS);
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			System.out.println(Status.PASS);
-			driver.quit();
-		}
-	}
+////	@Test(priority = 0)
+//	public void LaunchingOnBoarding() throws MalformedURLException, IOException {
+//		extentTest = extentReports.createTest("Verify the OnBoarding URL Response Code Validation");
+//		OnBoardingPage boardingPage = new OnBoardingPage(driver);
+//		boardingPage.login();
+//		int responseCode = boardingPage.responseCode();
+//		extentTest.log(Status.INFO, "Actual Result Validation Data -" + responseCode);
+//		extentTest.log(Status.INFO, "Expected Result Validation Data -" + "200");
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (responseCode == 200) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+////			System.out.println(Status.PASS);
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+////			System.out.println(Status.PASS);
+//			driver.quit();
+//		}
+//	}
 
-	@Test(priority = 0)
+	@Test(priority = 1)
 	public void mandatoryBussinessNameFieldValidation() throws IOException {
 		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Bussiness Name field.");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
@@ -94,7 +94,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 	
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void mandatoryEmailFieldValidation() throws IOException {
 		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Email field.");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
@@ -118,7 +118,7 @@ public class OnBoardingModule extends BaseClass {
 	}
 	
 
-	@Test(priority = 2)
+	@Test(priority = 3)
 	private void alreadyBussinessNameValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Already Existed Validation in Bussiness Name Field");
 		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
@@ -143,7 +143,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 4)
 	public void maximumValidationBussinessName() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Bussiness Name Field");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
@@ -168,7 +168,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 5)
 	private void maximumValidationBussinessWebSite() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Bussiness Website Field");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
@@ -192,7 +192,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 6)
 	private void maximumValidationFirstName() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in First Name Field");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
@@ -217,7 +217,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 7)
 	private void maximumValidationLastName() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Last Name Field");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
@@ -243,7 +243,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 8)
 	private void maximumValidationEmail() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Email Field");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
@@ -269,7 +269,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 9)
 	private void validateEmailFormat() throws IOException {
 		extentTest = extentReports.createTest("Verify the Valid Email Field");
 		OnBoardingPage validEmail = new OnBoardingPage(driver);
@@ -293,7 +293,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 10)
 	private void existingEmailValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Already Existed Email Field");
 		OnBoardingPage existing = new OnBoardingPage(driver);
@@ -318,7 +318,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 10)
+	@Test(priority = 11)
 	private void correctValidationEmail() throws IOException {
 		extentTest = extentReports.createTest("Verify the User is Landing on Industry Page");
 		OnBoardingPage validation = new OnBoardingPage(driver);
@@ -341,7 +341,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	private void validateRadioButtonClickable() {
 		extentTest = extentReports.createTest("Verify the Industry Radio Button is Clickable");
 		OnBoardingPage radioButton = new OnBoardingPage(driver);
@@ -349,7 +349,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 13)
 	private void industryTypeFieldPresent() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mention your industry information is Present in the Page");
 		OnBoardingPage fieldPresent = new OnBoardingPage(driver);
@@ -360,7 +360,6 @@ public class OnBoardingModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (messagePresent.equals("Mention your industry information")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -373,7 +372,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 13)
+	@Test(priority = 14)
 	private void maximumValidationIndustryField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Industry Field");
 		OnBoardingPage industryValidation = new OnBoardingPage(driver);
@@ -398,7 +397,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 14)
+	@Test(priority = 15)
 	private void sizeCompanyValidation() {
 		extentTest = extentReports.createTest("Verify Available Size of the Company is Present");
 		OnBoardingPage sizeCompany = new OnBoardingPage(driver);
@@ -406,14 +405,14 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 15)
+	@Test(priority = 16)
 	private void validationRadioButtonIntrested() throws IOException {
 		extentTest = extentReports.createTest("Verify the User can Choose Intrest");
 		OnBoardingPage radioButton = new OnBoardingPage(driver);
 		radioButton.radioButtonCurrent();
 
 	}
-	@Test(priority = 16)
+	@Test(priority = 17)
 	private void mandatoryValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Location Field");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
@@ -435,7 +434,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 	
-	@Test(priority = 16)
+	@Test(priority = 18)
 	private void maximumValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
@@ -461,7 +460,7 @@ public class OnBoardingModule extends BaseClass {
 	
 	
 
-	@Test(priority = 17)
+	@Test(priority = 19)
 	private void passwordMandatoryField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Password Field");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
@@ -483,7 +482,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 18)
+	@Test(priority = 20)
 	private void minValidationPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Minimum Validation in Password Field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
@@ -492,7 +491,7 @@ public class OnBoardingModule extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorMinPassword);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Min8ValidationPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorMinPassword.equals(getPropertyValue("MinimumValidatioPassword"))) {
+		if (errorMinPassword.equals(getPropertyValue("Min8ValidationPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			minValidation.clearPassword();
 		} else {
@@ -507,7 +506,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 19)
+	@Test(priority = 21)
 	private void minValidationConfirmPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify the Minimum Validation in Confirm Password Field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
@@ -516,7 +515,7 @@ public class OnBoardingModule extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorConfirmMessage);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Min8ValidationPassword"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(getPropertyValue("MinimumValidatioPassword"))) {
+		if (errorConfirmMessage.equals(getPropertyValue("Min8ValidationPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			minValidation.clearConfirmPassword();
 		} else {
@@ -531,7 +530,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 20)
+	@Test(priority = 22)
 	private void passwordFieldConditions() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Password Condition Validation");
 		OnBoardingPage condition = new OnBoardingPage(driver);
@@ -556,7 +555,7 @@ public class OnBoardingModule extends BaseClass {
 	}
 
 	
-	@Test(priority = 21)
+	@Test(priority = 23)
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
 		OnBoardingPage condition = new OnBoardingPage(driver);
@@ -580,7 +579,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 22)
+	@Test(priority = 24)
 	private void lowerCaseValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Lower Case Validation");
 		OnBoardingPage lowerCaseValidation = new OnBoardingPage(driver);
@@ -604,7 +603,7 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	@Test(priority = 23)
+	@Test(priority = 25)
 	private void mismatchPassword() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Mismatch in Confirm Password Field Validation");
 		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);

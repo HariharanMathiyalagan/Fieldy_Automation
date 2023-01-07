@@ -27,11 +27,11 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
-	
+
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
-	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakeEmail = faker.internet().emailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
@@ -255,7 +255,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 //		this.inputState(excelRead("Team Details Screen", 1, 7));
 //		this.inputZipcode(excelRead("Team Details Screen", 1, 8));
 		this.inputLocation(excelRead("Team Details Screen", 1, 0));
-		this.inputEmail(fakeEmail + "@mailinator.com");
+		this.inputEmail(fakeEmail);
 		this.inputContactPerson(fakeFirstName + fakeLastName);
 		this.inputPhoneNumber(fakePhoneNumber);
 		this.inputBuilding(fakeAddress1);
