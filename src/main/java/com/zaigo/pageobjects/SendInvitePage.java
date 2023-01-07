@@ -33,7 +33,7 @@ public class SendInvitePage {
 
 	// ln
 
-	private By lastname = By.xpath("//button[@data-automationid='lastName']");
+	private By lastname = By.id("send_invite__last_name__0");
 
 	// type
 
@@ -121,7 +121,7 @@ public class SendInvitePage {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((firstname)));
 		driver.findElement(firstname).sendKeys(ContactPhone);
 	}
-
+	
 	public void clearEnterFirstName() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((firstname)));
 		driver.findElement(firstname).clear();

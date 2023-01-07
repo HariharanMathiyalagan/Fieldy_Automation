@@ -2,6 +2,7 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -22,11 +23,26 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class CreateUserPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
+
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
+	String fakeTittle = faker.name().title();
 
 	public CreateUserPage(WebDriver driver) {
 		this.driver = driver;
@@ -55,7 +71,7 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public void assertName(By element, String text) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
@@ -459,24 +475,24 @@ public class CreateUserPage extends BaseClass {
 //		Thread.sleep(1000);
 //		attachmentFile("istockphoto-825383494-612x612");
 		this.clearField(FirstName);
-		this.inputText(FirstName, excelRead("Team User", 1, 1));
-		this.inputText(LastName, excelRead("Team User", 1, 2));
-		this.inputText(JobTittle, excelRead("Team User", 1, 3));
+		this.inputText(FirstName, fakeFirstName);
+		this.inputText(LastName, fakeLastName);
+		this.inputText(JobTittle, fakeTittle);
 		this.scrollDown();
 		this.clearField(Email);
-		this.inputText(Email, num + excelRead("Team User", 1, 4));
-		this.inputText(PhoneNumber, excelRead("Team User", 1, 5));
+		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.mouseActionClick(Next);
 
 	}
 
 	public void locationpage() throws IOException {
 		this.inputText(LocationName, excelRead("Team User", 1, 6));
-		this.inputText(Address1, excelRead("Team User", 1, 7));
-		this.inputText(Address2, excelRead("Team User", 1, 8));
-		this.inputText(State, excelRead("Team User", 1, 9));
-		this.inputText(City, excelRead("Team User", 1, 10));
-		this.inputText(Zipcode, excelRead("Team User", 1, 11));
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(State, fakeState);
+		this.inputText(City, fakeCity);
+		this.inputText(Zipcode, fakeZipcode);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -599,7 +615,7 @@ public class CreateUserPage extends BaseClass {
 //		this.mouseAction(Next);
 //		this.mouseAction(Previous);
 		this.clearField(FirstName);
-		this.inputText(FirstName, "Krishna");
+		this.inputText(FirstName, fakeFirstName);
 		this.mouseActionClick(SaveComplete);
 		String text = this.getText(UserUpdatedMessgae);
 		return text;
@@ -632,27 +648,27 @@ public class CreateUserPage extends BaseClass {
 //		Thread.sleep(1000);
 //		attachmentFile("new_logo");
 		this.clearField(FirstName);
-		this.inputText(FirstName, "PRV");
-		this.inputText(LastName, "Contractor");
+		this.inputText(FirstName, fakeFirstName);
+		this.inputText(LastName, fakeLastName);
 		this.mouseActionClick(BussinessUnit);
 		this.mouseActionClick(General);
 		this.mouseActionClick(ServiceType);
 		this.mouseActionClick(Repair);
 		this.clearField(Email);
 		String randomNumeric = RandomStringUtils.randomNumeric(4);
-		this.inputText(Email, "PRV" + randomNumeric + "@yahoo.com");
-		this.inputText(PhoneNumber, "956481" + randomNumeric);
+		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.mouseActionClick(Next);
 
 	}
 
-	public String locationContractorPage() {
-		this.inputText(LocationName, "PVR Location Name");
-		this.inputText(Address1, "56-897");
-		this.inputText(Address2, "Robson Street");
-		this.inputText(City, "Toronto");
-		this.inputText(State, "Ontario");
-		this.inputText(Zipcode, "91761");
+	public String locationContractorPage() throws IOException {
+		this.inputText(LocationName, excelRead("Team Details Screen", 1, 0));
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(City, fakeCity);
+		this.inputText(State, fakeState);
+		this.inputText(Zipcode, fakeZipcode);
 		this.mouseActionClick(SaveComplete);
 		String text = this.getText(CreateContractorMessage);
 		return text;
@@ -731,7 +747,7 @@ public class CreateUserPage extends BaseClass {
 
 	}
 
-	public String editContractorDetails() throws InterruptedException, AWTException {
+	public String editContractorDetails() throws InterruptedException, AWTException, IOException {
 		Thread.sleep(3500);
 //		this.mouseActionClick(Logo);
 //		Thread.sleep(1000);
@@ -739,13 +755,13 @@ public class CreateUserPage extends BaseClass {
 //		this.mouseAction(Next);
 //		this.mouseAction(Previous);
 		this.clearField(FirstName);
-		this.inputText(FirstName, "SVS");
+		this.inputText(FirstName, fakeFirstName);
 		this.clearField(Email);
 		String randomNumeric = RandomStringUtils.randomNumeric(3);
-		this.inputText(Email, "SVS" + randomNumeric + "@gmail.com");
+		this.inputText(Email, fakeEmail + "@mailinator.com");
 		this.mouseActionClick(Next);
 		this.clearField(LocationName);
-		this.inputText(LocationName, "SVS Location");
+		this.inputText(LocationName, excelRead("Team Details Screen", 1, 0));
 		this.mouseActionClick(SaveComplete);
 		String text = this.getText(UpdateContractorMessage);
 		return text;

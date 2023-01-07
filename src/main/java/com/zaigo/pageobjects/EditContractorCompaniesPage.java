@@ -2,6 +2,7 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.awt.Desktop.Action;
+import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -15,11 +16,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class EditContractorCompaniesPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
+	
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
+	
+	
 	By Email = By.id("login");
 	By Pass = By.id("password");
 	By Click = By.xpath("//button[@type='submit']");
@@ -253,7 +270,7 @@ public class EditContractorCompaniesPage extends BaseClass {
 //		this.mouseActionClick(clickPrevious);
 		this.clearField(CompanyName);
 		String randomAlphabetic = RandomStringUtils.randomAlphabetic(3);
-		this.inputText(CompanyName, "Tesla" + randomAlphabetic);
+		this.inputText(CompanyName, fakeCompanyName);
 		this.mouseActionClick(SaveNext);
 	}
 

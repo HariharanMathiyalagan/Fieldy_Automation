@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +38,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
+import com.github.javafaker.Company;
+import com.github.javafaker.Faker;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -256,8 +260,7 @@ public class BaseClass {
 			break;
 		}
 		return value;
-		
-		
+
 	}
 
 	public static void excelWrite(String sheet, int row, int cell, String value) throws IOException {// 28
@@ -277,6 +280,66 @@ public class BaseClass {
 		FileOutputStream fout = new FileOutputStream(f);
 		w.write(fout);
 	}
+
+	public void fakeFirstName() {
+		Faker faker = new Faker();
+		String firstName = faker.name().firstName();
+
+	}
+
+	public static void fakeLastName() {
+		Faker faker = new Faker();
+		String lastName = faker.name().lastName();
+
+	}
+
+	public void fakePhoneNumber() {
+		Faker faker = new Faker();
+		String phoneNumber = faker.phoneNumber().phoneNumber();
+
+	}
+
+	public void fakeAddress1() {
+		Faker faker = new Faker();
+		String Address1 = faker.address().buildingNumber();
+
+	}
+
+	public void fakeCity() {
+		Faker faker = new Faker();
+		String city = faker.address().city();
+
+	}
+
+	public void fakeState() {
+		Faker faker = new Faker();
+		String state = faker.address().state();
+
+	}
+
+	public void fakeAddress2() {
+		Faker faker = new Faker();
+		String Address1 = faker.address().streetAddress();
+
+	}
+
+	public void fakeZipcode() {
+		Faker faker = new Faker();
+		String Address1 = faker.address().zipCode();
+
+	}
 	
+	public void fakeWebsite() {
+		Faker faker = new Faker();
+		String website = faker.company().url();
+
+	}
+	
+	public void fakeCompanyName() {
+		Faker faker = new Faker();
+		String companyName = faker.company().name();
+
+	}
+
 	
 }

@@ -2,6 +2,7 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -17,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
+import com.github.javafaker.PhoneNumber;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -24,6 +27,19 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
+	
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
 
 	By Dashboard = By.xpath("//div[@data-menuselector='dashboard-menu']");
 	By Team = By.id("team-menu");
@@ -210,7 +226,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	}
 
 	public void modulePage() throws InterruptedException {
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		this.clickTeam();
 		// this.assertTittle();
 
@@ -229,15 +245,25 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		this.clickAddMore();
 		this.scrollDown();
 		String num = RandomStringUtils.randomAlphanumeric(4);
+//		this.inputLocation(excelRead("Team Details Screen", 1, 0));
+//		this.inputEmail(num + excelRead("Team Details Screen", 1, 1) + "@mailinator.com");
+//		this.inputContactPerson(excelRead("Team Details Screen", 1, 2));
+//		this.inputPhoneNumber(excelRead("Team Details Screen", 1, 3));
+//		this.inputBuilding(excelRead("Team Details Screen", 1, 4));
+//		this.inputStreet(excelRead("Team Details Screen", 1, 5));
+//		this.inputCity(excelRead("Team Details Screen", 1, 6));
+//		this.inputState(excelRead("Team Details Screen", 1, 7));
+//		this.inputZipcode(excelRead("Team Details Screen", 1, 8));
 		this.inputLocation(excelRead("Team Details Screen", 1, 0));
-		this.inputEmail(num + excelRead("Team Details Screen", 1, 1) + "@mailinator.com");
-		this.inputContactPerson(excelRead("Team Details Screen", 1, 2));
-		this.inputPhoneNumber(excelRead("Team Details Screen", 1, 3));
-		this.inputBuilding(excelRead("Team Details Screen", 1, 4));
-		this.inputStreet(excelRead("Team Details Screen", 1, 5));
-		this.inputCity(excelRead("Team Details Screen", 1, 6));
-		this.inputState(excelRead("Team Details Screen", 1, 7));
-		this.inputZipcode(excelRead("Team Details Screen", 1, 8));
+		this.inputEmail(fakeEmail + "@mailinator.com");
+		this.inputContactPerson(fakeFirstName + fakeLastName);
+		this.inputPhoneNumber(fakePhoneNumber);
+		this.inputBuilding(fakeAddress1);
+		this.inputStreet(fakeAddress2);
+		this.inputCity(fakeCity);
+		this.inputState(fakeState);
+		this.inputZipcode(fakeZipcode);
+
 		this.clickSaveComplete();
 		// this.responseMessage();
 		this.assertTittle();

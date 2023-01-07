@@ -2,9 +2,11 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.awt.Desktop.Action;
+import java.io.IOException;
 import java.sql.Savepoint;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.lang.model.element.Element;
@@ -27,6 +29,7 @@ import org.testng.asserts.Assertion;
 import org.testng.internal.BaseClassFinder;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class CustomerCreateContactPage extends BaseClass {
 
@@ -71,6 +74,21 @@ public class CustomerCreateContactPage extends BaseClass {
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
 
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
+	String fakeFaxNumber = faker.number().digits(14);
+	String fakeTittle = faker.name().title();
+
 	public CustomerCreateContactPage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -79,10 +97,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Today = By.xpath("(//div[@class='mb-2']//parent::div)[4]");
 	By Customer = By.id("customer-main");
 	By Contact = By.id("customer-contact-menu");
-	By AddContact = By.xpath("//button[@data-tabposition='1']");
+	By AddContact = By.id("scheduledrop");
 	By ErrorLogo = By.id("logo_error");
 	By FormatErrorLogo = By.xpath("//div[text()='Only jpg,jpeg,png Formats Allowed']");
-	By AlpbabetM = By.xpath("//*[@data-filteralphacon='M']");
+
 	By Yes = By.xpath("//*[text()='Yes']");
 	By ResponseMessage = By.xpath("//*[@class='created_successfully d-flex d-none']");
 	By ListName = By.xpath("(//a[@data-n-linkto='customer_contact_timeline'])[1]");
@@ -1032,10 +1050,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Status = By.id("customer-contact-status-active");
 	By Filter = By.xpath("//span[@data-timeline-open='customercontact']");
 	By Apply = By.xpath("//div[@class='col-lg-4 col-md-4 col-sm-6 col-12 pt-2']//child::button");
-	By ListPhoneNumber = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[4]");
+	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
 	By ListSocial = By.xpath("(//input[@class='mr-3'])[2]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");
-	By ListEmail = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[5]");
+	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
 
 	private void dropDownByIndex(By element, int num) {
 		wait = new WebDriverWait(driver, 10);
@@ -1092,19 +1110,21 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void mandatoryValidation() {
-		this.assertName(SaveComplete, "Save & Complete");
-		this.mouseActionClick(SaveComplete);
+		this.validationTab(FirstName, " ");
 
 	}
 
 	public String errorMandatoryValidation() {
 		String text2 = this.getText(ErrorFirstName);
+		this.inputText(FirstName, "Demo");
 		return text2;
 
 	}
 
-	public void maxValidationFirstName() {
+	public void maxValidationFirstName() throws InterruptedException {
+		Thread.sleep(2000);
 		this.validationTab(FirstName, characters256);
+		this.mouseActionClick(SaveComplete);
 
 	}
 
@@ -1116,7 +1136,6 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void clearFirstNameField() {
 		this.clearField(FirstName);
-		this.inputText(FirstName, "Demo");
 
 	}
 
@@ -1434,6 +1453,8 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void clearInstallation() {
 		this.clearField(InstallationNotes);
+		this.mouseActionClick(Previous);
+		this.mouseActionClick(Previous);
 
 	}
 
@@ -1484,17 +1505,17 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void propertyPage() {
-		for (int i = 0; i < 2; i++) {
-			this.mouseActionClick(Previous);
-		}
-		this.inputText(PropertyFirstName, "Ravi");
-		this.inputText(PropertyLastName, "Kumar");
-		this.inputText(PropertyName, "Work Location");
-		this.inputText(Address1, "25/825");
-		this.inputText(Address2, "Wastern Street");
-		this.inputText(StateName, "TamilNadu");
-		this.inputText(CityName, "Chennai");
-		this.inputText(Zipcode, "624889");
+//		for (int i = 0; i < 2; i++) {
+//			this.mouseActionClick(Previous);
+//		}
+		this.inputText(PropertyFirstName, fakeFirstName);
+		this.inputText(PropertyLastName, fakeLastName);
+		this.inputText(PropertyName, fakeCompanyName);
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(StateName, fakeState);
+		this.inputText(CityName, fakeCity);
+		this.inputText(Zipcode, fakeZipcode);
 		this.clickNext();
 
 	}
@@ -1502,15 +1523,16 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void equipmentPage() {
 		this.inputText(ProductName, "Samsung");
 		this.inputText(BrandName, "Neo QLED TVs");
-		this.inputText(ModelNumber, "7894562135478789");
+		this.inputText(ModelNumber, fakeFaxNumber);
 		this.inputText(SerialNumber, "8794562155");
 		this.inputText(DateInstalled, "08/25/2022");
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, randomAlphabetic);
-		for (int i = 0; i < 2; i++) {
-			this.mouseActionClick(Previous);
-		}
+//		for (int i = 0; i < 2; i++) {
+//			this.mouseActionClick(Previous);
+//		}
+		this.mouseActionClick(SaveComplete);
 
 	}
 
@@ -1518,19 +1540,18 @@ public class CustomerCreateContactPage extends BaseClass {
 	String b = "1";
 	String c = a + b;
 
-	public void contactPage() throws AWTException, InterruptedException {
-		this.uploadProfile();
+	public void contactPage() throws AWTException, InterruptedException, IOException {
+//		this.uploadProfile();
 		this.clearFirstName();
-		this.inputText(FirstName, "Manoj");
-		this.inputText(LastName, "Kumar");
-		this.inputText(JobTittle, "Replacement&Testing");
+		this.inputText(FirstName, fakeFirstName);
+		this.inputText(LastName, fakeLastName);
+		this.inputText(JobTittle, excelRead("Team User", 1, 3));
 		this.ClickButton(LeadSources);
 		this.ClickButton(Social);
 		this.scrollDown();
-		this.inputText(Email, "manoj" + c + "@yahoo.com");
-		String randomNumeric = RandomStringUtils.randomNumeric(8);
-		this.inputText(Phone, "95" + randomNumeric);
-		this.ClickButton(SaveComplete);
+		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Phone, fakePhoneNumber);
+		this.ClickButton(Next);
 
 	}
 
@@ -1569,7 +1590,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void alphabetsFilters() {
-		this.ClickButton(AlpbabetM);
+		String str = this.getText(ListName);
+		char first = str.charAt(0);
+		By Alpbabet = By.xpath("//*[@data-filteralphacon='" + first + "']");
+		this.ClickButton(Alpbabet);
 
 	}
 
@@ -1580,7 +1604,8 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void searchListName() {
-		this.inputText(Search, "Manoj Kumar");
+		String text2 = this.getText(ListName);
+		this.inputText(Search, text2);
 		this.mouseActionClick(SearchButton);
 
 	}
@@ -1612,6 +1637,12 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public String listDataPhoneNumber() {
 		String text2 = this.getText(ListPhoneNumber);
+		return text2;
+
+	}
+
+	public String listDataEmail() {
+		String text2 = this.getText(ListEmail);
 		return text2;
 
 	}
@@ -1656,10 +1687,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void editContact() throws AWTException, InterruptedException {
 		this.mouseActionClick(Dots);
 		this.mouseActionClick(Edit);
-		Thread.sleep(2500);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("istockphoto-825383494-612x612");
+		Thread.sleep(3000);
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("istockphoto-825383494-612x612");
 		this.clearField(FirstName);
 		this.inputText(FirstName, "Ajith");
 		this.mouseActionClick(SaveComplete);

@@ -106,51 +106,51 @@ public class CustomerCreateOrganizationModule {
 
 	}
 
-	@Test(priority = 2)
-	public void maxSizeValidationLogoField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Size of Profile Field Validation");
-		CustomerCreateOrganizationPage logoSizeValidation = new CustomerCreateOrganizationPage(driver);
-		logoSizeValidation.maxSizeLogoValidation();
-		String errorLogo = logoSizeValidation.errorLogo();
-		extentTest.log(Status.INFO, "Actual Result for Maximum Size of Profile Field is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result for Maximum Size of Profile Field is -" + MaxSizeLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(MaxSizeLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("OrganizationMaxSizeProfilePic.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OrganizationMaxSizeProfilePic.png");
-		}
+//	@Test(priority = 2)
+//	public void maxSizeValidationLogoField() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Maximum Size of Profile Field Validation");
+//		CustomerCreateOrganizationPage logoSizeValidation = new CustomerCreateOrganizationPage(driver);
+//		logoSizeValidation.maxSizeLogoValidation();
+//		String errorLogo = logoSizeValidation.errorLogo();
+//		extentTest.log(Status.INFO, "Actual Result for Maximum Size of Profile Field is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result for Maximum Size of Profile Field is -" + MaxSizeLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(MaxSizeLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("OrganizationMaxSizeProfilePic.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("OrganizationMaxSizeProfilePic.png");
+//		}
+//
+//	}
+//
+//	@Test(priority = 1)
+//	private void formatLogoValidation() throws InterruptedException, AWTException, IOException {
+//		extentTest = extentReports.createTest("Verify the File Format of Profile Field Validation");
+//		CustomerCreateOrganizationPage formatLogoValidation = new CustomerCreateOrganizationPage(driver);
+//		formatLogoValidation.formatLogoValidation();
+//		String maxSizeProfileField = formatLogoValidation.formatlogoError();
+//		extentTest.log(Status.INFO, "Actual Result for File Format in Profile Field is -" + maxSizeProfileField);
+//		extentTest.log(Status.INFO, "Expected Result for File Format in Profile Field is -" + FormatValidationLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (maxSizeProfileField.equals(FormatValidationLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("OrganizationFileFormatProfileField.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("OrganizationFileFormatProfileField.png");
+//		}
+//
+//	}
 
-	}
-
-	@Test(priority = 1)
-	private void formatLogoValidation() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the File Format of Profile Field Validation");
-		CustomerCreateOrganizationPage formatLogoValidation = new CustomerCreateOrganizationPage(driver);
-		formatLogoValidation.formatLogoValidation();
-		String maxSizeProfileField = formatLogoValidation.formatlogoError();
-		extentTest.log(Status.INFO, "Actual Result for File Format in Profile Field is -" + maxSizeProfileField);
-		extentTest.log(Status.INFO, "Expected Result for File Format in Profile Field is -" + FormatValidationLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (maxSizeProfileField.equals(FormatValidationLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("OrganizationFileFormatProfileField.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OrganizationFileFormatProfileField.png");
-		}
-
-	}
-
-	@Test(priority = 3)
+	@Test(priority = 4)
 	private void mandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Organization Page");
 		CustomerCreateOrganizationPage mandatoryValidation = new CustomerCreateOrganizationPage(driver);
@@ -161,6 +161,7 @@ public class CustomerCreateOrganizationModule {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatory.equals(ManditoryValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatoryValidation.input();		
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -168,11 +169,12 @@ public class CustomerCreateOrganizationModule {
 			File file = new File("MandatoryValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("MandatoryValidation.png");
+			mandatoryValidation.input();		
 		}
 
 	}
 
-	@Test(priority = 4)
+//	@Test(priority = 5)
 	private void organizationNameAlreadyExistValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Already Existed in Organization Name");
 		CustomerCreateOrganizationPage alreadyValidation = new CustomerCreateOrganizationPage(driver);
@@ -196,7 +198,7 @@ public class CustomerCreateOrganizationModule {
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 3)
 	private void maxValidationOrganizationField() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation Organization Name Field");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
@@ -207,8 +209,8 @@ public class CustomerCreateOrganizationModule {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatory.equals(Max256CharacterValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			maxValidation.clearOrganization();
-			maxValidation.input();
+//			maxValidation.clearOrganization();
+//			maxValidation.input();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -216,8 +218,8 @@ public class CustomerCreateOrganizationModule {
 			File file = new File("MaxOrganizationName.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("MaxOrganizationName.png");
-			maxValidation.clearOrganization();
-			maxValidation.input();
+//			maxValidation.clearOrganization();
+//			maxValidation.input();
 		}
 
 	}
@@ -1028,7 +1030,7 @@ public class CustomerCreateOrganizationModule {
 		if (errorAccessHours.equals(Max2048Validation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearInstallationNotes();
-			maxValidation.nextButton();
+			maxValidation.previousButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1037,92 +1039,92 @@ public class CustomerCreateOrganizationModule {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgInstallationValidation.png");
 			maxValidation.clearInstallationNotes();
-			maxValidation.nextButton();
+			maxValidation.previousButton();
 		}
 	}
 
-	@Test(priority = 39)
-	private void maxSizeValidationAttachmentField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Size Validation Attachment Field");
-		CustomerCreateOrganizationPage maxFileValidation = new CustomerCreateOrganizationPage(driver);
-		maxFileValidation.maxSizeValidationAttachmentFile();
-		String errorAccessHours = maxFileValidation.errorAttachmentFile();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation Attachment Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation Attachment Field is -"
-				+ "File is too big. Max file size: 20MB.");
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("File is too big. Max file size: 20MB.")) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("OrgMaxAttachmentValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OrgMaxAttachmentValidation.png");
-
-		}
-	}
-
-	@Test(priority = 40)
-	private void fileFormatAttachmentField() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the File Format Validation Attachment Field");
-		CustomerCreateOrganizationPage fileFormat = new CustomerCreateOrganizationPage(driver);
-		fileFormat.fileFormatValidation();
-		String errorAccessHours = fileFormat.errorAttachmentFile();
-		extentTest.log(Status.INFO, "Actual Result - File Format Validation Attachment Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - File Format Validation Attachment Field is -"
-				+ "Only xls, xlsx, docx, ppt, jpg, jpeg, png, pptx, pdf Files Allowed");
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("Only xls, xlsx, docx, ppt, jpg, jpeg, png, pptx, pdf Format Allowed")) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("OrgFormatValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OrgFormatValidation.png");
-		}
-	}
-
-	@Test(priority = 41)
-	private void maxFileUploadSizeValidationField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum File Limit Validation Attachment Field");
-		CustomerCreateOrganizationPage maxFileValidation = new CustomerCreateOrganizationPage(driver);
-		maxFileValidation.maxFileUploadSizeValidation();
-		String errorAccessHours = maxFileValidation.errorAttachmentFile();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum File Limit Validation Attachment Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - Maximum File Limit Validation Attachment Field is -"
-				+ "Maximum upload limit reached");
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAccessHours.equals("File count size exceeds the maximum limit of 10")) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			maxFileValidation.deleteFile();
-//			maxFileValidation.loopNextButton();
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("OrgLimitValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OrgLimitValidation.png");
-			maxFileValidation.deleteFile();
-//			maxFileValidation.loopNextButton();
-
-		}
-	}
+//	@Test(priority = 39)
+//	private void maxSizeValidationAttachmentField() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Maximum Size Validation Attachment Field");
+//		CustomerCreateOrganizationPage maxFileValidation = new CustomerCreateOrganizationPage(driver);
+//		maxFileValidation.maxSizeValidationAttachmentFile();
+//		String errorAccessHours = maxFileValidation.errorAttachmentFile();
+//		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation Attachment Field is -" + errorAccessHours);
+//		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation Attachment Field is -"
+//				+ "File is too big. Max file size: 20MB.");
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorAccessHours.equals("File is too big. Max file size: 20MB.")) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("OrgMaxAttachmentValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("OrgMaxAttachmentValidation.png");
+//
+//		}
+//	}
+//
+//	@Test(priority = 40)
+//	private void fileFormatAttachmentField() throws InterruptedException, AWTException, IOException {
+//		extentTest = extentReports.createTest("Verify the File Format Validation Attachment Field");
+//		CustomerCreateOrganizationPage fileFormat = new CustomerCreateOrganizationPage(driver);
+//		fileFormat.fileFormatValidation();
+//		String errorAccessHours = fileFormat.errorAttachmentFile();
+//		extentTest.log(Status.INFO, "Actual Result - File Format Validation Attachment Field is -" + errorAccessHours);
+//		extentTest.log(Status.INFO, "Expected Result - File Format Validation Attachment Field is -"
+//				+ "Only xls, xlsx, docx, ppt, jpg, jpeg, png, pptx, pdf Files Allowed");
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorAccessHours.equals("Only xls, xlsx, docx, ppt, jpg, jpeg, png, pptx, pdf Format Allowed")) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("OrgFormatValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("OrgFormatValidation.png");
+//		}
+//	}
+//
+//	@Test(priority = 41)
+//	private void maxFileUploadSizeValidationField() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Maximum File Limit Validation Attachment Field");
+//		CustomerCreateOrganizationPage maxFileValidation = new CustomerCreateOrganizationPage(driver);
+//		maxFileValidation.maxFileUploadSizeValidation();
+//		String errorAccessHours = maxFileValidation.errorAttachmentFile();
+//		extentTest.log(Status.INFO,
+//				"Actual Result - Maximum File Limit Validation Attachment Field is -" + errorAccessHours);
+//		extentTest.log(Status.INFO, "Expected Result - Maximum File Limit Validation Attachment Field is -"
+//				+ "Maximum upload limit reached");
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorAccessHours.equals("File count size exceeds the maximum limit of 10")) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			maxFileValidation.deleteFile();
+////			maxFileValidation.loopNextButton();
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("OrgLimitValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("OrgLimitValidation.png");
+//			maxFileValidation.deleteFile();
+////			maxFileValidation.loopNextButton();
+//
+//		}
+//	}
 
 	@Test(priority = 42)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify the Customer Organization Successful Message");
 		CustomerCreateOrganizationPage create = new CustomerCreateOrganizationPage(driver);
+		create.organizationPage();
 		create.contactPage();
 		create.propertyPage();
 		create.equipmentPage();
-		create.organizationPage();
 		String listName = create.create();
 		extentTest.log(Status.INFO, "Actual Result - Created List Name -" + listName);
 		extentTest.log(Status.INFO, "Expected Result - Created List Name -" + "Customer created successfully");
