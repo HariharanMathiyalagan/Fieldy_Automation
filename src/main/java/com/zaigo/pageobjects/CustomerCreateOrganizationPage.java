@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.concurrent.locks.Condition;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,25 +20,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class CustomerCreateOrganizationPage extends BaseClass {
-	String ManditoryValidation = "Required Field";
-	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String Min6CharacterValidation = "Atleast 6 digits required";
-	String MaxValidationPhoneNumber = "Not Allowed More than 12 digits";
-	String ValidEmail = "Enter a valid Email";
-	String Max512CharactersValidation = "Not Allowed More than 512 characters";
-	String Min3CharacterValidation = "Atleast 3 characters required";
-	String Max10CharacterValidation = "Not Allowed More than 10 characters";
-	String Max45CharacterValidation = "Not Allowed More than 45 characters";
-	String Max2048Validation = "Not Allowed More than 2048 characters";
-	String FormatValidationLogo = "Only jpg,jpeg,png Formats Allowed";
-	String MaxLogoValidation = "File Size Not Allowed More Than 2 MB";
-	String ListInvalid = "No Result Found";
-	String MaxSizeLogo = "File Size Not Allowed More Than 2 MB";
+
 	String SaveCompleteButton = "Save & Complete";
-	String OrganizationAlreadyExist = "Name Already Exists";
-	String EmailAlreadyExisted = "Email Already Exists";
+
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
+	String fakeFaxNumber = faker.number().digits(14);
+	String fakeTittle = faker.name().title();
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
@@ -108,7 +110,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	By Customer = By.id("customer-main");
 	By Organization = By.id("customer-organization-menu");
-	By AddOrganization = By.xpath("//button[@data-dropzonereset='customer-form']");
+	By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
 	By OrganizationName = By.id("company_name");
 	By OrganizationError = By.id("company_name_error");
 	By Website = By.id("website");
@@ -138,13 +140,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By AlreadyExistsMail = By.xpath("//span[text()='Customer with Company Email already exists']");
 	By Yes = By.xpath("//button[text()='Yes']");
 	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
-	By Text = By.xpath("//td[text()='Name']");
+	By Text = By.xpath("//*[text()='Customer Name']");
 
 	public void modulePage() throws InterruptedException, AWTException {
 		this.assertName(Customer, "Customer");
 		Thread.sleep(5000);
 		this.clickButton(Customer);
-		this.assertName(Text, "Name");
+		this.assertName(Text, "Customer Name");
 		this.clickButton(Organization);
 		this.clickButton(AddOrganization);
 
@@ -370,6 +372,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	public void previousButton() {
+		this.mouseActionClick(Previous);
+		this.mouseActionClick(Previous);
+		this.mouseActionClick(Previous);
+
+	}
+
 	public void loopNextButton() {
 		for (int i = 1; i < 5; i++) {
 			this.mouseActionClick(Next);
@@ -517,7 +526,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return text2;
 
 	}
-	
+
 	public void clearContactPropertyName() {
 		this.clearField(PropertyName);
 
@@ -538,6 +547,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.clearField(PropertyFirstName);
 
 	}
+
 	public void maxValidationPropertyLastNamee() {
 		this.validationTab(PropertyLastName, characters256);
 
@@ -825,26 +835,23 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public void organizationPage() throws InterruptedException, AWTException {
 		String add = RandomStringUtils.randomAlphanumeric(4);
 		String EMail = "Tony" + add + "@gmail.com";
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("human-community-five-people-symbol-illustration-web-91578287");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("human-community-five-people-symbol-illustration-web-91578287");
 		this.clearField(OrganizationName);
-		this.inputText(OrganizationName, "Tony" + add);
-		this.inputText(Website, "https://www.zaigoInfotech.com");
-		this.inputText(Address1, "12/356");
-		this.inputText(Address2, "Sakthi Nagar");
-		this.inputText(City, "Chennai");
-		this.inputText(State, "TamilNadu");
+		this.inputText(OrganizationName, fakeCompanyName);
+		this.inputText(Website, fakeWebsite);
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(City, fakeCity);
+		this.inputText(State, fakeState);
 		this.scrollDown();
-		this.inputText(ZipCode, "620001");
-		this.inputText(Email, EMail);
+		this.inputText(ZipCode, fakeZipcode);
+		this.inputText(Email, fakeEmail + "@mailinator.com");
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
-		String randomNumeric = RandomStringUtils.randomNumeric(8);
-		this.inputText(PhoneNumber, "96" + randomNumeric);
-		this.mouseActionClick(SaveComplete);
-//		this.assertName(CreateResponseMessage, "Company has been created");
-//		this.assertName(ListFirstName, "Tony" + add);
+		this.inputText(PhoneNumber, fakePhoneNumber);
+		this.mouseAction(Next);
 
 	}
 
@@ -893,16 +900,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			By ContactPhoneNumber = By.id("contacts__phone__" + i);
 			By JobTittle = By.id("contacts__job_title__" + i);
 			By AddMoreContact = By.id("add-more-contact-customer-organization");
-			String num = RandomStringUtils.randomNumeric(3);
-			String FName = RandomStringUtils.randomAlphabetic(6);
-			String LName = RandomStringUtils.randomAlphabetic(6);
-			String PNumber = RandomStringUtils.randomNumeric(10);
-			String Tittle = RandomStringUtils.randomAlphabetic(15);
-			this.inputText(FirstName, FName);
-			this.inputText(LastName, LName);
-			this.inputText(ContactEmail, FName + num + "@yahoo.com");
-			this.inputText(ContactPhoneNumber, PNumber);
-			this.inputText(JobTittle, Tittle);
+			this.inputText(FirstName, fakeFirstName);
+			this.inputText(LastName, fakeLastName);
+			this.inputText(ContactEmail, fakeEmail + "@mailinator.com");
+			this.inputText(ContactPhoneNumber, fakePhoneNumber);
+			this.inputText(JobTittle, fakeTittle);
 			this.mouseActionClick(AddMoreContact);
 			this.scrollDown();
 		}
@@ -911,14 +913,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void propertyPage() {
-		this.inputText(PropertyFirstName, "Ajith");
-		this.inputText(PropertyLastName, "Kumar");
+		this.inputText(PropertyFirstName, fakeFirstName);
+		this.inputText(PropertyLastName, fakeLastName);
 		this.inputText(PropertyName, "Fieldy");
-		this.inputText(PropertyAddress1, "256/18");
-		this.inputText(PropertyAddress2, "Kumuran Nagar");
-		this.inputText(CityName, "Bangalore");
-		this.inputText(StateName, "Karnataka");
-		this.inputText(PropertyZipcode, "630001");
+		this.inputText(PropertyAddress1, fakeAddress1);
+		this.inputText(PropertyAddress2, fakeAddress2);
+		this.inputText(CityName, fakeCity);
+		this.inputText(StateName, fakeState);
+		this.inputText(PropertyZipcode, fakeZipcode);
 		this.mouseActionClick(Next);
 
 	}
@@ -927,15 +929,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		String Note = RandomStringUtils.randomAlphabetic(500);
 		this.inputText(ProductName, "Sony");
 		this.inputText(BrandName, "Sony X10");
-		this.inputText(ModelNumber, "HUUSJ656498563121949");
-		this.inputText(SerialNumber, "87656453456787978");
+		this.inputText(ModelNumber, fakeFaxNumber);
+		this.inputText(SerialNumber, "8765645345978");
 		this.inputText(DateInstalled, "09/18/2022");
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, Note);
-		for (int i = 1; i < 4; i++) {
-			this.mouseActionClick(Previous);
-		}
+		this.mouseActionClick(SaveComplete);
 	}
 
 	By ListFirstName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[3]");
@@ -1073,18 +1073,16 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.mouseActionClick(Dots);
 		this.mouseActionClick(Edit);
 		Thread.sleep(3000);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("istockphoto-825383494-612x612");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1000);
+//		attachmentFile("istockphoto-825383494-612x612");
 		this.clearField(OrganizationName);
-		String randomAlphabetic = RandomStringUtils.randomAlphabetic(3);
-		String num = RandomStringUtils.randomNumeric(7);
-		this.inputText(OrganizationName, "Stark" + randomAlphabetic);
+		this.inputText(OrganizationName, fakeCompanyName);
 		this.scrollDown();
 		this.clearField(Email);
-		this.inputText(Email, "krishna" + randomAlphabetic + "@mail.com");
+		this.inputText(Email, fakeEmail + "@mailinator.com");
 		this.clearField(PhoneNumber);
-		this.inputText(PhoneNumber, "915" + num);
+		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.assertName(UpdateButton, "Update & Complete");
 		this.mouseActionClick(UpdateButton);
 
@@ -1115,6 +1113,5 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.assertName(Name, "Organization Name");
 
 	}
-	
-	
+
 }

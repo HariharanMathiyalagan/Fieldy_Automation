@@ -222,7 +222,7 @@ public class CustomerCreateContactTestCases {
 	}
 
 	@Test(priority = 28)
-	private void CreateContact() throws AWTException, InterruptedException {
+	private void CreateContact() throws AWTException, InterruptedException, IOException {
 		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
 		create.propertyPage();
 		create.equipmentPage();

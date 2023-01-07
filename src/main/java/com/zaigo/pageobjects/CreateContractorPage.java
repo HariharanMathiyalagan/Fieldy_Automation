@@ -2,6 +2,7 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -17,11 +18,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class CreateContractorPage extends BaseClass {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
+
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name();
+	String fakeFaxNumber = faker.number().digits(7);
 
 	private By team = By.id("team-menu");
 
@@ -568,9 +584,9 @@ public class CreateContractorPage extends BaseClass {
 		this.mouseActionClick(Yes);
 	}
 
-	public void CreateContractor(String CompanyName, String firstName, String lastName, String textEmail,
-			String phoneNo, String fax, String webSite) throws InterruptedException, IOException {
-		this.ContractorField(CompanyName, textEmail, firstName, lastName, phoneNo, fax, webSite);
+	public void CreateContractor() throws InterruptedException, IOException {
+		this.ContractorField(fakeCompanyName, fakeEmail + "@mailinator.com", fakeFirstName, fakeLastName,
+				fakePhoneNumber, fakeFaxNumber, fakeWebsite);
 
 	}
 
@@ -647,9 +663,10 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
-	public void Location(String location, String tEmail, String contact, String Number, String Flat, String Street,
-			String State, String City, String Zip) throws InterruptedException {
-		this.LocationField(location, tEmail, contact, Number, Flat, Street, State, City, Zip);
+	public void Location() throws InterruptedException, IOException {
+		this.LocationField(excelRead("Team Details Screen", 1, 0), fakeEmail + "@mailinator.com",
+				fakeFirstName + fakeLastName, fakePhoneNumber, fakeAddress1, fakeAddress2, fakeState, fakeCity,
+				fakeZipcode);
 
 	}
 
@@ -1006,10 +1023,10 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public void alreadyEamil() throws IOException {
-		this.validationTab(txtEmail, excelRead("Tenant Customer", 1, 3));
+		String text = this.getText(ListEmail);
+		this.mouseActionClick(AddContractor);
+		this.validationTab(txtEmail, text);
 
 	}
-
-	
 
 }

@@ -3,6 +3,7 @@ package org.test;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -20,6 +21,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 import com.zaigo.pageobjects.CreateContractorPage;
 import com.zaigo.pageobjects.CreateUserPage;
 import com.zaigo.pageobjects.EditContractorCompaniesPage;
@@ -30,32 +32,6 @@ import com.zaigo.pageobjects.SendInvitePage;
 import com.zaigo.utility.BrowserSetup;
 
 public class TeamModule extends BaseClass {
-
-	String ManditoryValidation = "Required Field";
-	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String Min6CharacterValidation = "Phone numbers should not be less than 6 digits";
-	String MaxValidationPhoneNumber = "Phone numbers should not be more than 12 digits";
-	String ValidEmail = "Enter a valid Email";
-	String Max512CharacterValidation = "Not Allowed More than 512 characters";
-	String Min3CharacterValidation = "Atleast 3 characters required";
-	String Max10CharacterValidation = "Not Allowed More than 10 characters";
-	String SpecialCharacterZipcode = "Allowed Special Character(s)-";
-	String Max45CharacterValidation = "Not Allowed More than 45 characters";
-	String Max2048Validation = "Not Allowed More than 2048 characters";
-	String FormatValidationLogo = "Only jpg,jpeg,png Formats Allowed";
-	String MaxLogoValidation = "File Size Not Allowed More Than 2 MB";
-	String ListInvalid = "No Result Found";
-	String MaxSizeLogo = "File Size Not Allowed More Than 2 MB";
-	String SaveCompleteButton = "Save & Complete";
-	String OrganizationAlreadyExist = "Name Already Exists";
-	String AttachmentFormat = "Only JPG/PNG/JPEG files allowed";
-	String CreatedMessage = "Customer contact created successfully";
-	String EmailAlreadyExisted = "Email Already Exists";
-	String Invalid = "No Result Found";
-	String UserUpdatedMessage = "User information updated successfully";
-	String UserDeleteMessage = "User have been deleted successfully";
-	String UserCreateMessage = "User created successfully";
-	String Heading = "Team / Create Contractor";
 
 	private WebDriver driver = null;
 	ExtentReports extentReports;
@@ -178,50 +154,50 @@ public class TeamModule extends BaseClass {
 	}
 
 //	@Test(priority = 6)
-	private void maxSizeProfileField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Maximum Size Profile Field");
-		CreateContractorPage maxSizeProfile = new CreateContractorPage(this.driver);
-		maxSizeProfile.clickContractors();
-//		maxSizeProfile.createContractorButtonj();
-		maxSizeProfile.maxSizeLogoValidation();
-		String errorLogo = maxSizeProfile.errorLogo();
-		extentTest.log(Status.INFO, "Actual Result is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result is -" + MaxSizeLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(MaxSizeLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("5.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("5.png");
-		}
-
-	}
+//	private void maxSizeProfileField() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Contractor Company Maximum Size Profile Field");
+//		CreateContractorPage maxSizeProfile = new CreateContractorPage(this.driver);
+//		maxSizeProfile.clickContractors();
+////		maxSizeProfile.createContractorButtonj();
+//		maxSizeProfile.maxSizeLogoValidation();
+//		String errorLogo = maxSizeProfile.errorLogo();
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result is -" + MaxSizeLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(MaxSizeLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("5.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("5.png");
+//		}
+//
+//	}
 
 //	@Test(priority = 7)
-	private void fileFormatvalidation() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company File Format in Profile Field");
-		CreateContractorPage maxSizeProfile = new CreateContractorPage(this.driver);
-		maxSizeProfile.formatLogoValidation();
-		String errorLogo = maxSizeProfile.fileLogoError();
-		extentTest.log(Status.INFO, "Actual Result is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result is -" + FormatValidationLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(FormatValidationLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("6.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("6.png");
-		}
-
-	}
+//	private void fileFormatvalidation() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Contractor Company File Format in Profile Field");
+//		CreateContractorPage maxSizeProfile = new CreateContractorPage(this.driver);
+//		maxSizeProfile.formatLogoValidation();
+//		String errorLogo = maxSizeProfile.fileLogoError();
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result is -" + FormatValidationLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(FormatValidationLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("6.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("6.png");
+//		}
+//
+//	}
 
 	@Test(priority = 8)
 	public void verifyContractorNameMandatory() throws InterruptedException, IOException {
@@ -710,9 +686,9 @@ public class TeamModule extends BaseClass {
 		extentTest.log(Status.INFO,
 				"Actual Result of Zipcode field special character Validation in -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result of Zipcode field special character Validation in -"
-				+ getPropertyValue("SpecialCharacterZipcode"));
+				+ getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorAddress2Message.equals(getPropertyValue("SpecialCharacterZipcode"))) {
+		if (errorAddress2Message.equals(getPropertyValue("SpecialCharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearZipCode();
 
@@ -738,9 +714,9 @@ public class TeamModule extends BaseClass {
 		extentTest.log(Status.INFO,
 				"Actual Result of Contact Person field Validation in -" + errorContactPersonMessage);
 		extentTest.log(Status.INFO, "Expected Result of Contact Person field Validation in -"
-				+ getPropertyValue(Max512CharacterValidation));
+				+ getPropertyValue("Max512CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorContactPersonMessage.equals(getPropertyValue(Max512CharacterValidation))) {
+		if (errorContactPersonMessage.equals(getPropertyValue("Max512CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxContactPerson.clearContactPersons();
 			maxContactPerson.previousButton();
@@ -782,19 +758,8 @@ public class TeamModule extends BaseClass {
 	public void createContract() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contractor Company has Successfully Created");
 		CreateContractorPage create = new CreateContractorPage(driver);
-		String alpha = RandomStringUtils.randomAlphabetic(4);
-		String numb = RandomStringUtils.randomNumeric(4);
-		String num = RandomStringUtils.randomAlphanumeric(4);
-		create.CreateContractor(
-				excelRead("Tenant Customer", 1, 0) + alpha, excelRead("Tenant Customer", 1, 1),
-				excelRead("Tenant Customer", 1, 2), num + excelRead("Tenant Customer", 1, 3),
-				excelRead("Tenant Customer", 1, 4)+numb, excelRead("Tenant Customer", 1, 5),
-				excelRead("Tenant Customer", 1, 6));
-		create.Location(excelRead("Tenant Customer", 1, 7), alpha + excelRead("Tenant Customer", 1, 8),
-				excelRead("Tenant Customer", 1, 9), excelRead("Tenant Customer", 1, 10),
-				excelRead("Tenant Customer", 1, 11), excelRead("Tenant Customer", 1, 12),
-				excelRead("Tenant Customer", 1, 13), excelRead("Tenant Customer", 1, 14),
-				excelRead("Tenant Customer", 1, 15));
+		create.CreateContractor();
+		create.Location();
 //		driver.quit();
 		String asssertCreate = create.asssertCreate();
 		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
@@ -827,7 +792,7 @@ public class TeamModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (asssertCreate.equals(getPropertyValue("ExistedCompanyContractorName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//			create.backPage();
+			create.backPage();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -835,7 +800,7 @@ public class TeamModule extends BaseClass {
 			File file = new File("27.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("27.png");
-//			create.backPage();
+			create.backPage();
 		}
 
 	}
@@ -1099,47 +1064,47 @@ public class TeamModule extends BaseClass {
 	}
 
 //	@Test(priority = 40)
-	private void maxSizeLogoField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Size Validation Profile Field");
-		CreateUserPage landing = new CreateUserPage(driver);
-		landing.maxSizeLogo();
-		String errorLogo = landing.errorLogo();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + MaxSizeLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(MaxSizeLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("38.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("38.png");
-		}
-	}
+//	private void maxSizeLogoField() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify the Maximum Size Validation Profile Field");
+//		CreateUserPage landing = new CreateUserPage(driver);
+//		landing.maxSizeLogo();
+//		String errorLogo = landing.errorLogo();
+//		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + MaxSizeLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(MaxSizeLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("38.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("38.png");
+//		}
+//	}
 
 //	@Test(priority = 41)
-	private void fileFormatValidation() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the File Format Validation Profile Field");
-		CreateUserPage landing = new CreateUserPage(driver);
-		landing.fileFormatLogo();
-		String errorLogo = landing.errorFormatLogo();
-		extentTest.log(Status.INFO, "Actual Result - File Format Validation is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result - File Format Validation is -" + FormatValidationLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(FormatValidationLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("39.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("39.png");
-		}
-
-	}
+//	private void fileFormatValidation() throws InterruptedException, AWTException, IOException {
+//		extentTest = extentReports.createTest("Verify the File Format Validation Profile Field");
+//		CreateUserPage landing = new CreateUserPage(driver);
+//		landing.fileFormatLogo();
+//		String errorLogo = landing.errorFormatLogo();
+//		extentTest.log(Status.INFO, "Actual Result - File Format Validation is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result - File Format Validation is -" + FormatValidationLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(FormatValidationLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("39.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("39.png");
+//		}
+//
+//	}
 
 	@Test(priority = 43)
 	private void mandatoryValidationFirstNameField() throws IOException {
@@ -1854,47 +1819,47 @@ public class TeamModule extends BaseClass {
 	}
 
 //	@Test(priority = 70)
-	private void contractorMaximumSizeLogoValidation() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify to Validate the Contractor Page Max Size Logo");
-		CreateUserPage landing = new CreateUserPage(driver);
-		landing.maxSizeLogo();
-		String errorLogo = landing.errorLogo();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + MaxSizeLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(MaxSizeLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("69.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("69.png");
-		}
-	}
+//	private void contractorMaximumSizeLogoValidation() throws AWTException, InterruptedException, IOException {
+//		extentTest = extentReports.createTest("Verify to Validate the Contractor Page Max Size Logo");
+//		CreateUserPage landing = new CreateUserPage(driver);
+//		landing.maxSizeLogo();
+//		String errorLogo = landing.errorLogo();
+//		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + MaxSizeLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(MaxSizeLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("69.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("69.png");
+//		}
+//	}
 
 //	@Test(priority = 71)
-	private void fileFormatValidations() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify to Validate the Contractor Page File Format Profile Field");
-		CreateUserPage landing = new CreateUserPage(driver);
-		landing.fileFormatLogo();
-		String errorLogo = landing.errorFormatLogo();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + FormatValidationLogo);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorLogo.equals(FormatValidationLogo)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("70.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("70.png");
-		}
-
-	}
+//	private void fileFormatValidations() throws InterruptedException, AWTException, IOException {
+//		extentTest = extentReports.createTest("Verify to Validate the Contractor Page File Format Profile Field");
+//		CreateUserPage landing = new CreateUserPage(driver);
+//		landing.fileFormatLogo();
+//		String errorLogo = landing.errorFormatLogo();
+//		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + errorLogo);
+//		extentTest.log(Status.INFO, "Expected Result - Maximum Size Validation is -" + FormatValidationLogo);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorLogo.equals(FormatValidationLogo)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("70.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("70.png");
+//		}
+//
+//	}
 
 	@Test(priority = 72)
 	private void mandatoryValidationContractorFirstNameField() throws IOException {
@@ -2078,9 +2043,9 @@ public class TeamModule extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result - Minimum Validation Contractor Phone Number Field is -"
 				+ mandatoryValidationFirstNameField);
 		extentTest.log(Status.INFO, "Expected Result - Minumum Validation Contractor Phone Number Field is -"
-				+ getPropertyValue("Min6CharacterValidation"));
+				+ getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min6CharacterValidation"))) {
+		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearPhoneNumber();
 		} else {
@@ -2314,8 +2279,8 @@ public class TeamModule extends BaseClass {
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
 		extentTest.log(Status.INFO,
 				"Actual Result - Maximum Validation Contractor Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Contractor Zipcode Field is -" + getPropertyValue("Max10CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Zipcode Field is -"
+				+ getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max10CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2341,7 +2306,8 @@ public class TeamModule extends BaseClass {
 		landing.basicContractorPage();
 		String locationContractorPage = landing.locationContractorPage();
 		extentTest.log(Status.INFO, "Actual Result - Contractor Form Created Message is -" + locationContractorPage);
-		extentTest.log(Status.INFO, "Expected Result - Contractor Form Created Messgae is -" + getPropertyValue("ContractorCreatedMessage"));
+		extentTest.log(Status.INFO, "Expected Result - Contractor Form Created Messgae is -"
+				+ getPropertyValue("ContractorCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (locationContractorPage.equals(getPropertyValue("ContractorCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2384,8 +2350,8 @@ public class TeamModule extends BaseClass {
 		landing.getEmaiContractorList();
 		String createUserList = landing.alreadyContractorEmail();
 		extentTest.log(Status.INFO, "Actual Result - Already Existed Validation Email Field is -" + createUserList);
-		extentTest.log(Status.INFO,
-				"Expected Result - Already Existed Validation Email Field is -" + getPropertyValue("AlreadyExistedEmail"));
+		extentTest.log(Status.INFO, "Expected Result - Already Existed Validation Email Field is -"
+				+ getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2513,7 +2479,8 @@ public class TeamModule extends BaseClass {
 		String searchPhoneNumber = landing.invalidSearchButton();
 		extentTest.log(Status.INFO,
 				"Actual Result - Invlaid Data in the Contractor Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Email Enter in the Contractor Search Field is -" + getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Expected Result - Email Enter in the Contractor Search Field is -"
+				+ getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2535,7 +2502,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.editpageLanding();
 		extentTest.log(Status.INFO, "Actual Result - Land on Edit Page Label is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Land on Edit Page Label is -" + getPropertyValue("CompanyContractorEditPage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Land on Edit Page Label is -" + getPropertyValue("CompanyContractorEditPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("CompanyContractorEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2556,7 +2524,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.editContractorDetails();
 		extentTest.log(Status.INFO, "Actual Result - Contractor Updated Message is -" + editUserDetails);
-		extentTest.log(Status.INFO, "Expected Result - Contractor Updated Message is -" + getPropertyValue("ContractorUpdatedMessage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Contractor Updated Message is -" + getPropertyValue("ContractorUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("ContractorUpdatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2577,7 +2546,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.deleteContractorDetails();
 		extentTest.log(Status.INFO, "Actual Result - Deleted Message is -" + editUserDetails);
-		extentTest.log(Status.INFO, "Expected Result - Deleted Message is -" + getPropertyValue("ContractorDeletedMessage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Deleted Message is -" + getPropertyValue("ContractorDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("ContractorDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2598,7 +2568,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.landSendInvite();
 		extentTest.log(Status.INFO, "Actual Result - Land on Send Invite Page Label is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Land on Sned Invite Page Label is -" + getPropertyValue("TeamSendInvitePage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Land on Sned Invite Page Label is -" + getPropertyValue("TeamSendInvitePage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("TeamSendInvitePage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2622,7 +2593,8 @@ public class TeamModule extends BaseClass {
 		invitePage.clickInvite();
 		String text = invitePage.getEmailErrorText();
 		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation Email Field is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation Email Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Mandatory Validation Email Field is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2647,7 +2619,8 @@ public class TeamModule extends BaseClass {
 		invitePage.clickInvite();
 		String text = invitePage.getEmailErrorText();
 		extentTest.log(Status.INFO, "Actual Result - Invalid Format Email Field is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Invalid Format Email Field is -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Invalid Format Email Field is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2671,8 +2644,8 @@ public class TeamModule extends BaseClass {
 		invitePage.clickNext();
 		String text = invitePage.firstNameError();
 		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation First Name Field is -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result - Mandatory Validation First Name Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation First Name Field is -"
+				+ getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2698,8 +2671,8 @@ public class TeamModule extends BaseClass {
 		invitePage.clickInvite();
 		String text = invitePage.firstNameError();
 		extentTest.log(Status.INFO, "Actual Result - Enter the Blank Space Validation First Name Field is -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result - Enter the Blank Space Validation First Name Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Expected Result - Enter the Blank Space Validation First Name Field is -"
+				+ getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2722,12 +2695,13 @@ public class TeamModule extends BaseClass {
 		invitePage.clearEnterFirstName();
 		invitePage.enterFirstName("Firstname");
 //		invitePage.enterEmail("email@gmail.com");
-		 Thread.sleep(3500);
+		Thread.sleep(3500);
 		invitePage.dndTypes();
 		invitePage.clickNext();
 		String text = invitePage.getMessageText();
 		extentTest.log(Status.INFO, "Actual Result - Enter Message in the Message Field is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Enter Message in the Message Field is -" + getPropertyValue("PlaceholderMessage"));
+		extentTest.log(Status.INFO,
+				"Expected Result - Enter Message in the Message Field is -" + getPropertyValue("PlaceholderMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("PlaceholderMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2766,15 +2740,15 @@ public class TeamModule extends BaseClass {
 	private void verifyUserSendInvite() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify to Check the Scuccessful Massage in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
-//		 invitePage.clickSendInvite();
-//		driver.navigate().refresh();
+		Faker faker = new Faker(new Locale("en-IND"));
+		String fakeFirstName = faker.name().firstName();
+		String fakeLastName = faker.name().lastName();
+		String fakeEmail = faker.name().firstName().toLowerCase();
 		invitePage.clearEnterFirstName();
-		invitePage.enterFirstName("Hariharan");
+		invitePage.enterFirstName(fakeFirstName);
+		invitePage.enterLastName(fakeLastName);
 		invitePage.ClearEnterEmail();
-		String r = RandomStringUtils.randomNumeric(3);
-		invitePage.enterEmail("hariharan.mathi" + r + "@mailinator.com");
-//		Thread.sleep(3000);
-//		invitePage.dndTypes();
+		invitePage.enterEmail(fakeEmail + "@mailinator.com");
 		invitePage.clickSubmit();
 		String text = invitePage.getSuccessMessages();
 		extentTest.log(Status.INFO, "Actual Result - Button Name is -" + text);
