@@ -5,109 +5,11 @@
     <classes>
       <class name="org.test.CustomerCreateOrganizationModule">
         <methods>
-          <include name="emailValidation"/>
-          <include name="maxValidationCityField"/>
-          <include name="maxValidationZipcodeField"/>
-          <include name="maxValidationPropertyNameField"/>
-          <include name="createOrganization"/>
-          <include name="maxValidationEmailField"/>
-          <include name="maxFileUploadSizeValidationField"/>
-          <include name="maxValidationOrganizationField"/>
-          <include name="maxValidationProductNameField"/>
-          <include name="maxValidationModelNumberField"/>
-          <include name="maxValidationAccessHoursField"/>
-          <include name="organizationNameAlreadyExistValidation"/>
-          <include name="minValidationZipcodeField"/>
-          <include name="mandatoryValidation"/>
-          <include name="maxValidationAddress2Field"/>
-          <include name="maxValidationPropertyZipCodeField"/>
-          <include name="maxValidationPropertyAddress1Field"/>
-          <include name="maxValidationStateField"/>
-          <include name="maxValidationPropertyFirstNameField"/>
-          <include name="minValidationPropertyZipCodeField"/>
-          <include name="searchPhoneNumberListValidation"/>
-          <include name="maxValidationSerialNumberField"/>
-          <include name="maxValidationPropertyAddress2Field"/>
-          <include name="maxValidationPhoneNumberField"/>
-          <include name="editContactList"/>
-          <include name="maxValidationPropertyStateField"/>
-          <include name="validateContactEmailField"/>
-          <include name="maxValidationContactPhoneNumberField"/>
-          <include name="minValidationPhoneNumberField"/>
-          <include name="searchEmailListValidation"/>
-          <include name="createOrganizationListFirstName"/>
-          <include name="maxValidationInstallationNotesField"/>
-          <include name="maxValidationAddress1Field"/>
-          <include name="maxSizeValidationAttachmentField"/>
           <include name="exitBrowser"/>
-          <include name="fileFormatAttachmentField"/>
-          <include name="minValidationContactPhoneNumberField"/>
-          <include name="loginPage"/>
-          <include name="formatLogoValidation"/>
-          <include name="maxValidationPropertyCityField"/>
-          <include name="maxValidationWebsiteField"/>
-          <include name="modulePage"/>
-          <include name="maxValidationContactEmailField"/>
-          <include name="maxValidationContactFirstNameField"/>
-          <include name="searchOrganizationNameListValidation"/>
-          <include name="filterListValidation"/>
-          <include name="maxValidationContactLastNameField"/>
-          <include name="alreadyExistedEmail"/>
-          <include name="maxSizeValidationLogoField"/>
-          <include name="searchInvalid"/>
-          <include name="maxValidationPropertyLastNameField"/>
-          <include name="maxValidationBrandNameField"/>
-          <include name="characterListValidation"/>
-          <include name="maxValidationJobTittleField"/>
+          <include name="createOrganizationListFirstName"/>
           <include name="setup"/>
-          <include name="deleteContactList"/>
         </methods>
       </class> <!-- org.test.CustomerCreateOrganizationModule -->
-      <class name="org.test.CustomerCreateContactModule">
-        <methods>
-          <include name="setup"/>
-          <include name="minValidationPhoneNumberField"/>
-          <include name="invalidValidationEmailField"/>
-          <include name="maxValidationAddress22Field"/>
-          <include name="deleteContactList"/>
-          <include name="alreadyExistedMail"/>
-          <include name="editContactList"/>
-          <include name="maxValidationBrandNameField"/>
-          <include name="maxValidationPropertyLastNameField"/>
-          <include name="searchInvalidListName"/>
-          <include name="maxValidationPropertyNameeField"/>
-          <include name="filterField"/>
-          <include name="searchListEmailField"/>
-          <include name="contactModule"/>
-          <include name="maxSizeValidationAttachmentFileField"/>
-          <include name="maxValidationStateField"/>
-          <include name="maxValidationPropertyFirstNameField"/>
-          <include name="fileFormatValidationAttachmentField"/>
-          <include name="mandatoryValidation"/>
-          <include name="maxValidationAddress1"/>
-          <include name="maxValidationFirstNameField"/>
-          <include name="CreateContact"/>
-          <include name="minValidationZipcodeField"/>
-          <include name="exitBrowser"/>
-          <include name="maxValidationSerialNumberField"/>
-          <include name="maxValidationAccessHoursField"/>
-          <include name="maxValidationEmailField"/>
-          <include name="searchListNameField"/>
-          <include name="maxValidationInstallationNotesField"/>
-          <include name="maxValidationJobTittle"/>
-          <include name="maxSizeValidationProfileField"/>
-          <include name="characterFilterValidation"/>
-          <include name="maxValidationLastNameField"/>
-          <include name="maxValidationPhoneNumberField"/>
-          <include name="fileFormatValidationProfileField"/>
-          <include name="maxValidationProductNameField"/>
-          <include name="maxValidationCityField"/>
-          <include name="maxValidationZipcodeField"/>
-          <include name="maxLimitAttachmentField"/>
-          <include name="searchListPhoneNumberField"/>
-          <include name="maxValdidationModelNumberField"/>
-        </methods>
-      </class> <!-- org.test.CustomerCreateContactModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -77,7 +77,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
-	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakeEmail = faker.internet().safeEmailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
@@ -1549,7 +1549,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.ClickButton(LeadSources);
 		this.ClickButton(Social);
 		this.scrollDown();
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
 		this.ClickButton(Next);
 

@@ -29,8 +29,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
-	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakeEmail = faker.internet().safeEmailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeTittle = faker.name().title();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
 	String fakeCity = faker.address().city();
@@ -39,7 +40,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
-	String fakeTittle = faker.name().title();
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
@@ -137,8 +137,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By MaxSizeLogoError = By.xpath("//div[text()='File Size Not Allowed More Than 2 MB']");
 	By Heading = By.xpath("//a[@data-goesto='organization-view']");
 	By Social = By.xpath("//*[text()='Social']");
-	By AlreadyExistsMail = By.xpath("//span[text()='Customer with Company Email already exists']");
-	By Yes = By.xpath("//button[text()='Yes']");
+	By AlreadyExistsMail = By.xpath("//*[text()='Customer with Company Email already exists']");
+	By Yes = By.xpath("//*[text()='Yes']");
 	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
 	By Text = By.xpath("//*[text()='Customer Name']");
 
@@ -153,6 +153,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void mandatoryValidation() throws InterruptedException {
+		Thread.sleep(3000);
 		this.assertName(SaveComplete, SaveCompleteButton);
 		this.mouseActionClick(SaveComplete);
 	}
@@ -205,11 +206,19 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void alreadyExistOrganizationName() {
-		this.validationTab(OrganizationName, "eee");
+		String text2 = this.getText(ListFirstName);
+		this.mouseActionClick(AddOrganization);
+		this.validationTab(OrganizationName, text2);
 	}
 
 	public void clearOrganization() {
 		this.clearField(OrganizationName);
+
+	}
+
+	public void backButton() {
+		this.mouseActionClick(Heading);
+		this.mouseActionClick(Yes);
 
 	}
 
@@ -847,11 +856,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.inputText(State, fakeState);
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
 		this.inputText(PhoneNumber, fakePhoneNumber);
-		this.mouseAction(Next);
+		this.mouseActionClick(Next);
 
 	}
 
@@ -870,9 +879,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String alreadyExistEmail() throws InterruptedException, AWTException {
 		String text = this.getText(ListEmail);
 		this.mouseActionClick(AddOrganization);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1500);
-		attachmentFile("pic");
+//		this.mouseActionClick(Logo);
+//		Thread.sleep(1500);
+//		attachmentFile("pic");
 		this.inputText(OrganizationName, "jdshjhadjs");
 		this.validationTab(Email, text);
 		this.scrollDown();
@@ -894,6 +903,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public void contactPage() {
 		for (int i = 0; i < 6; i++) {
+			Faker faker = new Faker(new Locale("en-IND"));
+			String fakeFirstName = faker.name().firstName();
+			String fakeLastName = faker.name().lastName();
+			String fakeEmail = faker.internet().safeEmailAddress();
+			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+			String fakeTittle = faker.name().title();
 			By FirstName = By.id("contacts__first_name__" + i);
 			By LastName = By.id("contacts__last_name__" + i);
 			By ContactEmail = By.id("contacts__email__" + i);
@@ -902,7 +917,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			By AddMoreContact = By.id("add-more-contact-customer-organization");
 			this.inputText(FirstName, fakeFirstName);
 			this.inputText(LastName, fakeLastName);
-			this.inputText(ContactEmail, fakeEmail + "@mailinator.com");
+			this.inputText(ContactEmail, fakeEmail);
 			this.inputText(ContactPhoneNumber, fakePhoneNumber);
 			this.inputText(JobTittle, fakeTittle);
 			this.mouseActionClick(AddMoreContact);
@@ -935,19 +950,19 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, Note);
+		this.mouseActionClick(Next);
 		this.mouseActionClick(SaveComplete);
 	}
 
-	By ListFirstName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[3]");
+	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
 	By Search = By.id("customer-organization-search-box");
-	By ListPhoneNumber = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[4]");
-	By ListEmail = By.xpath("(//td[@class='p-2 pt-1 pb-1'])[5]");
-	By CharacterName = By.xpath("//a[text()='T']");
+	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
 	By Filter = By.xpath("//span[@data-timeline-open='customerorganization']");
 	By LeadSourceCheckBox = By.xpath("(//input[@id='filter-organization-leadSource-checkbox'])[2]");
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
-	By Apply = By.xpath("//button[text()='Apply']");
+	By Apply = By.xpath("//*[@class='col-lg-4 col-md-2 col-sm-2 col-6 pt-2']//*");
 	By SearchButton = By.id("customer-organization-search-enter");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
@@ -1017,6 +1032,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void characterListValidation() {
+		String str = this.getText(ListFirstName);
+		char first = str.charAt(0);
+		By CharacterName = By.xpath("//a[text()='" + first + "']");
 		this.mouseActionClick(CharacterName);
 		String text = this.getText(ListFirstName);
 		this.assertName(ListFirstName, text);
@@ -1080,10 +1098,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.inputText(OrganizationName, fakeCompanyName);
 		this.scrollDown();
 		this.clearField(Email);
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.clearField(PhoneNumber);
 		this.inputText(PhoneNumber, fakePhoneNumber);
-		this.assertName(UpdateButton, "Update & Complete");
+		this.assertName(UpdateButton, "Update");
 		this.mouseActionClick(UpdateButton);
 
 	}

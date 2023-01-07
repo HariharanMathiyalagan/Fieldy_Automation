@@ -33,7 +33,7 @@ public class CreateUserPage extends BaseClass {
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
-	String fakeEmail = faker.name().firstName().toLowerCase();
+	String fakeEmail = faker.internet().safeEmailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
@@ -480,7 +480,7 @@ public class CreateUserPage extends BaseClass {
 		this.inputText(JobTittle, fakeTittle);
 		this.scrollDown();
 		this.clearField(Email);
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.mouseActionClick(Next);
 
@@ -656,7 +656,7 @@ public class CreateUserPage extends BaseClass {
 		this.mouseActionClick(Repair);
 		this.clearField(Email);
 		String randomNumeric = RandomStringUtils.randomNumeric(4);
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.mouseActionClick(Next);
 
@@ -758,7 +758,7 @@ public class CreateUserPage extends BaseClass {
 		this.inputText(FirstName, fakeFirstName);
 		this.clearField(Email);
 		String randomNumeric = RandomStringUtils.randomNumeric(3);
-		this.inputText(Email, fakeEmail + "@mailinator.com");
+		this.inputText(Email, fakeEmail);
 		this.mouseActionClick(Next);
 		this.clearField(LocationName);
 		this.inputText(LocationName, excelRead("Team Details Screen", 1, 0));

@@ -787,10 +787,9 @@ public class TeamModule extends BaseClass {
 		create.alreadyExistsValidation();
 		String asssertCreate = create.contractorNameError();
 		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
-		extentTest.log(Status.INFO,
-				"Expected Create Response Message is -" + getPropertyValue("ExistedCompanyContractorName"));
+		extentTest.log(Status.INFO, "Expected Create Response Message is -" + getPropertyValue("ExistedCompanyName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (asssertCreate.equals(getPropertyValue("ExistedCompanyContractorName"))) {
+		if (asssertCreate.equals(getPropertyValue("ExistedCompanyName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.backPage();
 		} else {
@@ -814,9 +813,9 @@ public class TeamModule extends BaseClass {
 		String asssertCreate = create.contractorEmailError();
 		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
 		extentTest.log(Status.INFO,
-				"Expected Create Response Message is -" + getPropertyValue("ExistedCompanyContractorName"));
+				"Expected Create Response Message is -" + getPropertyValue("ExistedCompanyName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (asssertCreate.equals(getPropertyValue("ExistedCompanyContractorName"))) {
+		if (asssertCreate.equals(getPropertyValue("ExistedCompanyName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.backPage();
 		} else {
@@ -2741,14 +2740,15 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify to Check the Scuccessful Massage in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		Faker faker = new Faker(new Locale("en-IND"));
+		String r = RandomStringUtils.randomAlphanumeric(4);
 		String fakeFirstName = faker.name().firstName();
 		String fakeLastName = faker.name().lastName();
-		String fakeEmail = faker.name().firstName().toLowerCase();
+		String fakeEmail = faker.internet().safeEmailAddress();
 		invitePage.clearEnterFirstName();
 		invitePage.enterFirstName(fakeFirstName);
 		invitePage.enterLastName(fakeLastName);
 		invitePage.ClearEnterEmail();
-		invitePage.enterEmail(fakeEmail + "@mailinator.com");
+		invitePage.enterEmail(fakeEmail);
 		invitePage.clickSubmit();
 		String text = invitePage.getSuccessMessages();
 		extentTest.log(Status.INFO, "Actual Result - Button Name is -" + text);
