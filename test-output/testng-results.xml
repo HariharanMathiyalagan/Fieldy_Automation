@@ -1,217 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="49" passed="49" failed="0" skipped="0">
+<testng-results ignored="0" total="13" passed="13" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-07T15:40:55 IST" name="Default suite" finished-at="2023-01-07T15:43:20 IST" duration-ms="144990">
+  <suite started-at="2023-01-07T22:55:40 IST" name="Default suite" finished-at="2023-01-07T22:57:02 IST" duration-ms="82013">
     <groups>
     </groups>
-    <test started-at="2023-01-07T15:40:55 IST" name="Default test" finished-at="2023-01-07T15:43:20 IST" duration-ms="144990">
-      <class name="org.test.CustomerCreateOrganizationModule">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:40:55 IST" name="setup" finished-at="2023-01-07T15:40:58 IST" duration-ms="2155" status="PASS">
+    <test started-at="2023-01-07T22:55:40 IST" name="Default test" finished-at="2023-01-07T22:57:02 IST" duration-ms="82013">
+      <class name="org.test.CustomerContactJob">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:55:40 IST" name="setup" finished-at="2023-01-07T22:55:41 IST" duration-ms="1582" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:1, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:40:58 IST" name="loginPage" finished-at="2023-01-07T15:41:42 IST" duration-ms="44609" status="PASS">
+        <test-method signature="loginPage()[pri:0, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:55:41 IST" name="loginPage" finished-at="2023-01-07T22:56:13 IST" duration-ms="31255" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginPage -->
-        <test-method signature="modulePage()[pri:2, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:42 IST" name="modulePage" finished-at="2023-01-07T15:41:49 IST" duration-ms="7211" status="PASS">
+        <test-method signature="contactModule()[pri:1, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:13 IST" name="contactModule" finished-at="2023-01-07T22:56:19 IST" duration-ms="6376" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- modulePage -->
-        <test-method signature="mandatoryValidation()[pri:3, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:49 IST" name="mandatoryValidation" finished-at="2023-01-07T15:41:53 IST" duration-ms="3813" status="PASS">
+        </test-method> <!-- contactModule -->
+        <test-method signature="CreateContact()[pri:2, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:19 IST" name="CreateContact" finished-at="2023-01-07T22:56:27 IST" duration-ms="8115" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidation -->
-        <test-method signature="maxValidationOrganizationField()[pri:4, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:53 IST" name="maxValidationOrganizationField" finished-at="2023-01-07T15:41:55 IST" duration-ms="1320" status="PASS">
+        </test-method> <!-- CreateContact -->
+        <test-method signature="labelValidation()[pri:3, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:27 IST" name="labelValidation" finished-at="2023-01-07T22:56:36 IST" duration-ms="8509" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationOrganizationField -->
-        <test-method signature="maxValidationWebsiteField()[pri:5, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:55 IST" name="maxValidationWebsiteField" finished-at="2023-01-07T15:41:56 IST" duration-ms="1225" status="PASS">
+        </test-method> <!-- labelValidation -->
+        <test-method signature="maximumValidationLocation()[pri:4, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:36 IST" name="maximumValidationLocation" finished-at="2023-01-07T22:56:42 IST" duration-ms="6790" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationWebsiteField -->
-        <test-method signature="maxValidationAddress1Field()[pri:6, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:56 IST" name="maxValidationAddress1Field" finished-at="2023-01-07T15:41:57 IST" duration-ms="1152" status="PASS">
+        </test-method> <!-- maximumValidationLocation -->
+        <test-method signature="mandatoryValidationLocation()[pri:5, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:42 IST" name="mandatoryValidationLocation" finished-at="2023-01-07T22:56:43 IST" duration-ms="893" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationAddress1Field -->
-        <test-method signature="maxValidationAddress2Field()[pri:7, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:57 IST" name="maxValidationAddress2Field" finished-at="2023-01-07T15:41:58 IST" duration-ms="1136" status="PASS">
+        </test-method> <!-- mandatoryValidationLocation -->
+        <test-method signature="maximumValidationTittle()[pri:6, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:43 IST" name="maximumValidationTittle" finished-at="2023-01-07T22:56:44 IST" duration-ms="755" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationAddress2Field -->
-        <test-method signature="maxValidationCityField()[pri:8, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:58 IST" name="maxValidationCityField" finished-at="2023-01-07T15:41:59 IST" duration-ms="1119" status="PASS">
+        </test-method> <!-- maximumValidationTittle -->
+        <test-method signature="mandatoryValidationDescription()[pri:7, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:44 IST" name="mandatoryValidationDescription" finished-at="2023-01-07T22:56:44 IST" duration-ms="135" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationCityField -->
-        <test-method signature="maxValidationStateField()[pri:9, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:41:59 IST" name="maxValidationStateField" finished-at="2023-01-07T15:42:00 IST" duration-ms="1128" status="PASS">
+        </test-method> <!-- mandatoryValidationDescription -->
+        <test-method signature="maximumValidationDescription()[pri:8, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:44 IST" name="maximumValidationDescription" finished-at="2023-01-07T22:56:48 IST" duration-ms="4152" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationStateField -->
-        <test-method signature="minValidationZipcodeField()[pri:10, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:00 IST" name="minValidationZipcodeField" finished-at="2023-01-07T15:42:01 IST" duration-ms="303" status="PASS">
+        </test-method> <!-- maximumValidationDescription -->
+        <test-method signature="maximumTagValidation()[pri:9, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:48 IST" name="maximumTagValidation" finished-at="2023-01-07T22:56:49 IST" duration-ms="744" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- minValidationZipcodeField -->
-        <test-method signature="maxValidationZipcodeField()[pri:11, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:01 IST" name="maxValidationZipcodeField" finished-at="2023-01-07T15:42:01 IST" duration-ms="272" status="PASS">
+        </test-method> <!-- maximumTagValidation -->
+        <test-method signature="duplicateTagsValidation()[pri:10, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:49 IST" name="duplicateTagsValidation" finished-at="2023-01-07T22:56:49 IST" duration-ms="458" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationZipcodeField -->
-        <test-method signature="emailValidation()[pri:12, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:01 IST" name="emailValidation" finished-at="2023-01-07T15:42:01 IST" duration-ms="321" status="PASS">
+        </test-method> <!-- duplicateTagsValidation -->
+        <test-method signature="maxTagLimitValidation()[pri:11, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:49 IST" name="maxTagLimitValidation" finished-at="2023-01-07T22:56:57 IST" duration-ms="8006" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- emailValidation -->
-        <test-method signature="maxValidationEmailField()[pri:13, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:01 IST" name="maxValidationEmailField" finished-at="2023-01-07T15:42:02 IST" duration-ms="1160" status="PASS">
+        </test-method> <!-- maxTagLimitValidation -->
+        <test-method signature="maximumValidationNotes()[pri:12, instance:org.test.CustomerContactJob@316bcf94]" started-at="2023-01-07T22:56:57 IST" name="maximumValidationNotes" finished-at="2023-01-07T22:57:02 IST" duration-ms="4194" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maxValidationEmailField -->
-        <test-method signature="minValidationPhoneNumberField()[pri:14, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:02 IST" name="minValidationPhoneNumberField" finished-at="2023-01-07T15:42:03 IST" duration-ms="304" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- minValidationPhoneNumberField -->
-        <test-method signature="maxValidationPhoneNumberField()[pri:15, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:03 IST" name="maxValidationPhoneNumberField" finished-at="2023-01-07T15:42:03 IST" duration-ms="520" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPhoneNumberField -->
-        <test-method signature="maxValidationContactFirstNameField()[pri:16, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:03 IST" name="maxValidationContactFirstNameField" finished-at="2023-01-07T15:42:04 IST" duration-ms="1129" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationContactFirstNameField -->
-        <test-method signature="maxValidationContactLastNameField()[pri:17, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:04 IST" name="maxValidationContactLastNameField" finished-at="2023-01-07T15:42:05 IST" duration-ms="1103" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationContactLastNameField -->
-        <test-method signature="maxValidationContactEmailField()[pri:18, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:05 IST" name="maxValidationContactEmailField" finished-at="2023-01-07T15:42:07 IST" duration-ms="1114" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationContactEmailField -->
-        <test-method signature="validateContactEmailField()[pri:19, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:07 IST" name="validateContactEmailField" finished-at="2023-01-07T15:42:07 IST" duration-ms="252" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateContactEmailField -->
-        <test-method signature="minValidationContactPhoneNumberField()[pri:20, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:07 IST" name="minValidationContactPhoneNumberField" finished-at="2023-01-07T15:42:07 IST" duration-ms="296" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- minValidationContactPhoneNumberField -->
-        <test-method signature="maxValidationContactPhoneNumberField()[pri:21, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:07 IST" name="maxValidationContactPhoneNumberField" finished-at="2023-01-07T15:42:08 IST" duration-ms="448" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationContactPhoneNumberField -->
-        <test-method signature="maxValidationJobTittleField()[pri:22, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:08 IST" name="maxValidationJobTittleField" finished-at="2023-01-07T15:42:09 IST" duration-ms="1065" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationJobTittleField -->
-        <test-method signature="maxValidationPropertyNameField()[pri:23, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:09 IST" name="maxValidationPropertyNameField" finished-at="2023-01-07T15:42:09 IST" duration-ms="864" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyNameField -->
-        <test-method signature="maxValidationPropertyFirstNameField()[pri:24, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:09 IST" name="maxValidationPropertyFirstNameField" finished-at="2023-01-07T15:42:10 IST" duration-ms="737" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyFirstNameField -->
-        <test-method signature="maxValidationPropertyLastNameField()[pri:25, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:10 IST" name="maxValidationPropertyLastNameField" finished-at="2023-01-07T15:42:11 IST" duration-ms="743" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyLastNameField -->
-        <test-method signature="maxValidationPropertyAddress1Field()[pri:26, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:11 IST" name="maxValidationPropertyAddress1Field" finished-at="2023-01-07T15:42:12 IST" duration-ms="795" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyAddress1Field -->
-        <test-method signature="maxValidationPropertyAddress2Field()[pri:27, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:12 IST" name="maxValidationPropertyAddress2Field" finished-at="2023-01-07T15:42:12 IST" duration-ms="697" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyAddress2Field -->
-        <test-method signature="maxValidationPropertyStateField()[pri:28, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:12 IST" name="maxValidationPropertyStateField" finished-at="2023-01-07T15:42:13 IST" duration-ms="800" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyStateField -->
-        <test-method signature="maxValidationPropertyCityField()[pri:29, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:13 IST" name="maxValidationPropertyCityField" finished-at="2023-01-07T15:42:14 IST" duration-ms="889" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyCityField -->
-        <test-method signature="minValidationPropertyZipCodeField()[pri:30, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:14 IST" name="minValidationPropertyZipCodeField" finished-at="2023-01-07T15:42:14 IST" duration-ms="200" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- minValidationPropertyZipCodeField -->
-        <test-method signature="maxValidationPropertyZipCodeField()[pri:31, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:14 IST" name="maxValidationPropertyZipCodeField" finished-at="2023-01-07T15:42:15 IST" duration-ms="357" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationPropertyZipCodeField -->
-        <test-method signature="maxValidationProductNameField()[pri:32, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:15 IST" name="maxValidationProductNameField" finished-at="2023-01-07T15:42:16 IST" duration-ms="834" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationProductNameField -->
-        <test-method signature="maxValidationBrandNameField()[pri:33, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:16 IST" name="maxValidationBrandNameField" finished-at="2023-01-07T15:42:16 IST" duration-ms="768" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationBrandNameField -->
-        <test-method signature="maxValidationModelNumberField()[pri:34, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:16 IST" name="maxValidationModelNumberField" finished-at="2023-01-07T15:42:17 IST" duration-ms="785" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationModelNumberField -->
-        <test-method signature="maxValidationSerialNumberField()[pri:35, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:17 IST" name="maxValidationSerialNumberField" finished-at="2023-01-07T15:42:18 IST" duration-ms="760" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationSerialNumberField -->
-        <test-method signature="maxValidationAccessHoursField()[pri:36, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:18 IST" name="maxValidationAccessHoursField" finished-at="2023-01-07T15:42:19 IST" duration-ms="744" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationAccessHoursField -->
-        <test-method signature="maxValidationInstallationNotesField()[pri:37, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:19 IST" name="maxValidationInstallationNotesField" finished-at="2023-01-07T15:42:24 IST" duration-ms="4885" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxValidationInstallationNotesField -->
-        <test-method signature="createOrganization()[pri:38, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:24 IST" name="createOrganization" finished-at="2023-01-07T15:42:44 IST" duration-ms="20183" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createOrganization -->
-        <test-method signature="organizationNameAlreadyExistValidation()[pri:39, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:44 IST" name="organizationNameAlreadyExistValidation" finished-at="2023-01-07T15:42:47 IST" duration-ms="3357" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- organizationNameAlreadyExistValidation -->
-        <test-method signature="alreadyExistedEmail()[pri:40, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:47 IST" name="alreadyExistedEmail" finished-at="2023-01-07T15:42:52 IST" duration-ms="5142" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- alreadyExistedEmail -->
-        <test-method signature="createOrganizationListFirstName()[pri:41, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:52 IST" name="createOrganizationListFirstName" finished-at="2023-01-07T15:42:54 IST" duration-ms="1683" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createOrganizationListFirstName -->
-        <test-method signature="characterListValidation()[pri:42, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:54 IST" name="characterListValidation" finished-at="2023-01-07T15:42:56 IST" duration-ms="1766" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- characterListValidation -->
-        <test-method signature="searchOrganizationNameListValidation()[pri:43, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:56 IST" name="searchOrganizationNameListValidation" finished-at="2023-01-07T15:42:58 IST" duration-ms="2234" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchOrganizationNameListValidation -->
-        <test-method signature="searchPhoneNumberListValidation()[pri:44, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:42:58 IST" name="searchPhoneNumberListValidation" finished-at="2023-01-07T15:43:00 IST" duration-ms="1705" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchPhoneNumberListValidation -->
-        <test-method signature="searchEmailListValidation()[pri:45, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:00 IST" name="searchEmailListValidation" finished-at="2023-01-07T15:43:01 IST" duration-ms="1609" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchEmailListValidation -->
-        <test-method signature="filterListValidation()[pri:46, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:01 IST" name="filterListValidation" finished-at="2023-01-07T15:43:04 IST" duration-ms="2449" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- filterListValidation -->
-        <test-method signature="searchInvalid()[pri:47, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:04 IST" name="searchInvalid" finished-at="2023-01-07T15:43:05 IST" duration-ms="1753" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchInvalid -->
-        <test-method signature="editContactList()[pri:48, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:05 IST" name="editContactList" finished-at="2023-01-07T15:43:16 IST" duration-ms="10865" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editContactList -->
-        <test-method signature="deleteContactList()[pri:49, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:16 IST" name="deleteContactList" finished-at="2023-01-07T15:43:20 IST" duration-ms="3365" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deleteContactList -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CustomerCreateOrganizationModule@ffaa6af]" started-at="2023-01-07T15:43:20 IST" name="exitBrowser" finished-at="2023-01-07T15:43:20 IST" duration-ms="736" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
+        </test-method> <!-- maximumValidationNotes -->
+      </class> <!-- org.test.CustomerContactJob -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
