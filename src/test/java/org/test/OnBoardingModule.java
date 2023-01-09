@@ -72,7 +72,8 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 1)
 	public void mandatoryBussinessNameFieldValidation() throws IOException {
-		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Bussiness Name field.");
+		extentTest = extentReports
+				.createTest("In the OnBoarding Page, check the Mandatory Validation in the Bussiness Name field.");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.emailText();
 		mandatory.mandatoryValidation();
@@ -84,19 +85,20 @@ public class OnBoardingModule extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			excelWrite("Onboarding", 1, 4, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
 			File file = new File("OnBoarding Mandatory.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("OnBoarding Mandatory.png");
 
 		}
 
 	}
-	
+
 	@Test(priority = 2)
 	public void mandatoryEmailFieldValidation() throws IOException {
-		extentTest = extentReports.createTest("In the OnBoarding Page, check the Mandatory Validation in the Email field.");
+		extentTest = extentReports
+				.createTest("In the OnBoarding Page, check the Mandatory Validation in the Email field.");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.mandatoryEmailValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
@@ -116,7 +118,6 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
 
 	@Test(priority = 3)
 	private void alreadyBussinessNameValidation() throws IOException {
@@ -412,6 +413,7 @@ public class OnBoardingModule extends BaseClass {
 		radioButton.radioButtonCurrent();
 
 	}
+
 	@Test(priority = 17)
 	private void mandatoryValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Location Field");
@@ -433,7 +435,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 18)
 	private void maximumValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
@@ -441,7 +443,8 @@ public class OnBoardingModule extends BaseClass {
 		mandatory.maximumValidationLocation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -457,8 +460,6 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 19)
 	private void passwordMandatoryField() throws IOException {
@@ -554,7 +555,6 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	
 	@Test(priority = 23)
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
