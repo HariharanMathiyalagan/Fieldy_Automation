@@ -12,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,10 +26,6 @@ public class JobPage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
-	String pastTime;
-	String currentDate;
-	String futureTime;
-	
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
@@ -45,16 +43,8 @@ public class JobPage extends BaseClass {
 
 	private void timePicker() {
 		LocalTime now = LocalTime.now();
-		pastTime = now.minusMinutes(30).toString();
-		futureTime = now.plusHours(2).toString();
-	}
-
-	/* DatePicker */
-	private void currentDatePicker() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, 0);
-		currentDate = sdf.format(cal.getTime());
+		String pastTime = now.minusMinutes(30).toString();
+		String futureTime = now.plusHours(2).toString();
 	}
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
@@ -162,7 +152,7 @@ public class JobPage extends BaseClass {
 	By Description = By.id("description");
 	By Tags = By.className("tag__input");
 	By Notes = By.id("notes");
-	By ScheduleJob = By.id("scheduledrop");
+	By SaveComplete = By.id("scheduledrop");
 	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
 	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
@@ -180,10 +170,29 @@ public class JobPage extends BaseClass {
 	By EndTime = By.id("schedule_to_time");
 	By Crew = By.id("crew-radio-button");
 	By Single = By.id("technician-radio-button");
+//	By Technician = 
+//	By TechnicianFirstName = 
 	By Priority = By.id("priority");
 	By General = By.className("p-2 list-hover-bg team-business-unit w-20-ellipsis w-100");
 	By Repair = By.className("p-2 list-hover-bg team-service-type w-20-ellipsis w-100");
-
+	By EalierTime = By.xpath("//*[text()='From Time should be current or future time only']");
+	By TimeMismatch = By.xpath("//*[text()='Start time should be earlier than End time']");
+	By JobCreatedMessage = By.xpath("//*[text()='Job created successfully']");
+	By JobUpdatedMessage = By.xpath("//*[text()=Job Updated successfully");
+	By JobDispatchMessage = By.xpath("//*[text()='Job dispatched successfully']");
+	By JobStartedMessgae = By.xpath("//*[text()='Job started successfully'");
+	By JobCompletedMessage = By.xpath("//*[text()='Job completed successfully']");
+	By JobCancelledMessage = By.xpath("//*[text()='Job cancelled successfully']");
+	By JobDeletedMessage = By.xpath("//*[text()='Job deleted successfully']");
+	
+//	@FindBys({
+//	@FindBy(xpath="//*[text()='Appointment from date,time and Appointment to date needed']");
+//	@FindBy(xpath="//*[text()='Appointment to date needed']")
+//	})
+	By ErrorToTime = By.xpath("//*[text()='Appointment to date needed']");
+	
+	
+	
 	/* Error field */
 	/* Start */
 	public String locationError() {
@@ -209,6 +218,23 @@ public class JobPage extends BaseClass {
 	public String tagsError() {
 		String text = this.getText(ErrorTags);
 		return text;
+	}
+
+	public String errorTimePicker() {
+		String text = this.getText(EalierTime);
+		return text;
+	}
+
+	public String errorMismatchTime() {
+		String text = this.getText(TimeMismatch);
+		return text;
+
+	}
+	
+	public String errorToTime() {
+		String text = this.getText(ErrorToTime);
+		return text;
+
 	}
 
 	/* End */
@@ -259,9 +285,75 @@ public class JobPage extends BaseClass {
 			String fakeTags = RandomStringUtils.randomAlphanumeric(4);
 			this.tagValidation(Tags, fakeTags);
 		}
+	}
+
+	public void currentPickerFromDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 0);
+		String currentDate = sdf.format(cal.getTime());
+		this.inputText(StartDate, currentDate);
+	}
+
+	public void currentPickerToDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 0);
+		String currentDate = sdf.format(cal.getTime());
+		this.inputText(EndDate, currentDate);
+	}
+
+	public void pastTime() {
+		LocalTime now = LocalTime.now();
+		String pastTime = now.minusMinutes(30).toString();
+		this.inputText(StartTime, pastTime);
 
 	}
 
+	public void startTime() {
+		LocalTime now = LocalTime.now();
+		String futureTime = now.plusHours(1).toString();
+		String pastTime = now.minusMinutes(90).toString();
+		this.inputText(StartTime, futureTime);
+		this.inputText(EndTime, pastTime);
+
+	}
+
+	public void futureStartTime() {
+		LocalTime now = LocalTime.now();
+		String futureTime = now.plusMinutes(30).toString();
+		this.inputText(StartTime, futureTime);
+
+	}
+
+	public void futureToTime() {
+		LocalTime now = LocalTime.now();
+		String futureTime = now.plusHours(2).toString();
+		this.inputText(StartTime, futureTime);
+	}
+
+	public void fromDateTimeScheduleJob() throws IOException {
+		this.mouseActionClick(BussinessUnit);
+		this.mouseActionClick(General);
+		this.mouseActionClick(ServiceType);
+		this.mouseActionClick(Repair);
+		this.dropDownByIndex(Priority, 2);
+		this.inputText(Tittle, fakeTittle);
+		this.clearField(Description);
+		this.inputText(Description, getPropertyValue("Description"));
+		this.currentPickerFromDate();
+		this.futureToTime();
+		this.inputText(Notes, getPropertyValue("Notes"));
+		this.mouseActionClick(SaveComplete);
+		
+	}
+	
+	private void unassignedJob() {
+		
+		
+
+	}
+	
 	/* End */
 	/* Clear Fields */
 	/* Start */
@@ -297,6 +389,10 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(TagRemove);
 		}
 
+	}
+
+	public void clearEndDate() {
+		this.clearField(EndDate);
 	}
 	/* End */
 

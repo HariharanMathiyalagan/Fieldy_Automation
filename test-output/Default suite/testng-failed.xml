@@ -5,9 +5,24 @@
     <classes>
       <class name="org.test.CustomerContactJob">
         <methods>
+          <include name="loginPage"/>
+          <include name="CreateContact"/>
+          <include name="maximumValidationNotes"/>
+          <include name="duplicateTagsValidation"/>
+          <include name="labelValidation"/>
+          <include name="maximumValidationDescription"/>
+          <include name="toTimeRequired"/>
+          <include name="maximumTagValidation"/>
           <include name="exitBrowser"/>
+          <include name="toTimeValidation"/>
+          <include name="mandatoryValidationLocation"/>
+          <include name="contactModule"/>
+          <include name="maximumValidationTittle"/>
           <include name="maxTagLimitValidation"/>
+          <include name="mandatoryValidationDescription"/>
+          <include name="maximumValidationLocation"/>
           <include name="setup"/>
+          <include name="pastTimeValidation"/>
         </methods>
       </class> <!-- org.test.CustomerContactJob -->
     </classes>

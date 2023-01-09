@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -260,14 +261,17 @@ public class BaseClass {
 
 	}
 
-	public static void excelWrite(String sheet, int row, int cell, String value) throws IOException {// 28
+	public static void excelWrite(String sheetRow, int row, int cell, String value) throws IOException {// 28
 		File f = new File(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
 
 		FileInputStream fin = new FileInputStream(f);
 
-		Workbook w = new XSSFWorkbook(fin);
-
-		Sheet s = w.getSheet(sheet);
+		XSSFWorkbook w = new XSSFWorkbook(fin);
+//		XSSFSheet sheetAt = w.getSheetAt(sheetRow);
+//		sheetAt.getRow(row).getCell(cell).setCellValue(value);
+//		FileOutputStream fout = new FileOutputStream(f);
+//		w.write(fout);
+		Sheet s = w.getSheet(sheetRow);
 
 		Row r = s.getRow(row);
 
@@ -276,6 +280,7 @@ public class BaseClass {
 		c.setCellValue(value);
 		FileOutputStream fout = new FileOutputStream(f);
 		w.write(fout);
+
 	}
 
 	public void fakeFirstName() {

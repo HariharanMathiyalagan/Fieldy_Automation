@@ -163,7 +163,7 @@ public class CustomerContactJob extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearLocation();
-			
+
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -172,7 +172,7 @@ public class CustomerContactJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobLocationMaximumValidation.png");
 			mandatory.clearLocation();
-		
+
 		}
 
 	}
@@ -231,8 +231,7 @@ public class CustomerContactJob extends BaseClass {
 		mandatory.maxValidationDescription();
 		String errorPasswordField = mandatory.descriptionError();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO,
-				"Expected Result Validation Data -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -272,6 +271,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 
 	}
+
 	@Test(priority = 10)
 	public void duplicateTagsValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Duplicate Validation in Tags Field");
@@ -295,7 +295,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 11)
 	public void maxTagLimitValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Limit Validation in Tags Field");
@@ -319,7 +319,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 12)
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Description Field");
@@ -327,8 +327,7 @@ public class CustomerContactJob extends BaseClass {
 		mandatory.maxValidationNotes();
 		String errorPasswordField = mandatory.notesError();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO,
-				"Expected Result Validation Data -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -345,4 +344,77 @@ public class CustomerContactJob extends BaseClass {
 
 	}
 
+	@Test(priority = 13)
+	private void pastTimeValidation() throws IOException {
+		extentTest = extentReports.createTest("Verify the past time validation in the Time picker field");
+		JobPage mandatory = new JobPage(driver);
+		mandatory.currentPickerFromDate();
+		mandatory.pastTime();
+		String errorPasswordField = mandatory.errorTimePicker();
+		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("EalietTimeError"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("EalietTimeError"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactJobPastTimeValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactJobPastTimeValidation.png");
+		}
+	}
+
+	@Test(priority = 14)
+	private void toTimeValidation() throws WebDriverException, IOException {
+		extentTest = extentReports.createTest("Check the past time as ealier time of From time validation");
+		JobPage mandatory = new JobPage(driver);
+		mandatory.currentPickerToDate();
+		mandatory.startTime();
+		String errorPasswordField = mandatory.errorMismatchTime();
+		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("MismatchTiming"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("MismatchTiming"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactJobToTimeValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactJobToTimeValidation.png");
+		}
+	}
+	
+	@Test(priority = 15)
+	private void toTimeRequired() throws WebDriverException, IOException {
+		extentTest = extentReports.createTest("Verify the To date field is required");
+		JobPage mandatory = new JobPage(driver);
+		mandatory.clearEndDate();
+		mandatory.currentPickerFromDate();
+		mandatory.futureStartTime();
+		mandatory.futureToTime();
+		String errorPasswordField = mandatory.errorToTime();
+		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("ToTimeRequired"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("ToTimeRequired"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactJobToTimeRequiredValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactJobToTimeRequiredValidation.png");
+		}
+	}
+	
+	@Test(priority = 16)
+	private void unscheduleJob() {
+	
+
+	}
 }

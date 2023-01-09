@@ -333,7 +333,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
-	By Next = By.xpath("//span[text()='Next']");
+	By Next = By.xpath("//*[text()='Next']");
 	By MakethisProperty = By.id("addresses__is_primary__0");
 	By PropertyName = By.id("addresses__location_name__0");
 	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
@@ -547,7 +547,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		Select select = new Select(until);
 		select.selectByIndex(1);
 	}
-
 
 	By AttachmentFile = By.id("customerDropZone");
 	By ErrorAttachmentFile = By.xpath("//div[@class='dropzone-error invalid-feedback']");
@@ -1173,13 +1172,13 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.clearFirstName();
 		this.inputText(FirstName, fakeFirstName);
 		this.inputText(LastName, fakeLastName);
-		this.inputText(JobTittle, excelRead("Team User", 1, 3));
-		Thread.sleep(1000);
-		this.ClickButton(LeadSources);
-		this.ClickButton(Social);
+		this.inputText(JobTittle, fakeTittle);
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
+		Thread.sleep(1500);
+		this.ClickButton(LeadSources);
+		this.ClickButton(Social);
 		this.ClickButton(Next);
 
 	}
