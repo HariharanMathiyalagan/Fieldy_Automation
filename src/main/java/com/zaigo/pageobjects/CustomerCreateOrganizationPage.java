@@ -131,7 +131,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By PhoneNumber = By.id("phones__number__0");
 	By PhoneNumberError = By.id("phones__number__0_error");
 	By SaveComplete = By.id("customerdrop");
-	By Next = By.xpath("//button[@data-automationid='next']");
+	By Next = By.xpath("//*[@data-automationid='next']");
 	By Logo = By.xpath("//label[@for='company_logo']");
 	By LogoError = By.id("company_logo_error");
 	By MaxSizeLogoError = By.xpath("//div[text()='File Size Not Allowed More Than 2 MB']");
@@ -209,6 +209,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		String text2 = this.getText(ListFirstName);
 		this.mouseActionClick(AddOrganization);
 		this.validationTab(OrganizationName, text2);
+		this.mouseActionClick(Next);
+		this.mouseActionClick(Previous);
 	}
 
 	public void clearOrganization() {
@@ -857,6 +859,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		this.inputText(Email, fakeEmail);
+		Thread.sleep(2000);
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
 		this.inputText(PhoneNumber, fakePhoneNumber);
@@ -887,18 +890,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.mouseActionClick(Next);
 		this.mouseActionClick(Previous);
-		this.scrollDown();
-		this.mouseActionClick(PhoneNumber);
 		String text2 = this.getText(EmailError);
-		this.mouseActionClick(Next);
-
-		this.mouseActionClick(Previous);
 		this.mouseActionClick(Heading);
 		this.mouseActionClick(Yes);
 //		Thread.sleep(10000);
 //		driver.navigate().refresh();
 		return text2;
-
 	}
 
 	public void contactPage() {
@@ -940,7 +937,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public void equipmentPage() {
+	public void equipmentPage() throws InterruptedException {
 		String Note = RandomStringUtils.randomAlphabetic(500);
 		this.inputText(ProductName, "Sony");
 		this.inputText(BrandName, "Sony X10");
@@ -950,7 +947,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, Note);
-		this.mouseActionClick(Next);
+		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 	}
 

@@ -179,7 +179,7 @@ public class BaseClass {
 		executor.executeScript("arguments[0].scrollIntoView(true)", ref);
 	}
 
-	public static void scrollDown(WebElement ref) {
+	public void scrollDown(WebElement ref) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(false)", ref);
 	}

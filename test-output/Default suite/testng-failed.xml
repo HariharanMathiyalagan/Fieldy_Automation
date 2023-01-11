@@ -3,28 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerContactJob">
+      <class name="org.test.CustomerOrganizationJob">
         <methods>
-          <include name="loginPage"/>
-          <include name="CreateContact"/>
-          <include name="maximumValidationNotes"/>
-          <include name="duplicateTagsValidation"/>
-          <include name="labelValidation"/>
-          <include name="maximumValidationDescription"/>
-          <include name="toTimeRequired"/>
-          <include name="maximumTagValidation"/>
           <include name="exitBrowser"/>
-          <include name="toTimeValidation"/>
-          <include name="mandatoryValidationLocation"/>
-          <include name="contactModule"/>
-          <include name="maximumValidationTittle"/>
-          <include name="maxTagLimitValidation"/>
-          <include name="mandatoryValidationDescription"/>
-          <include name="maximumValidationLocation"/>
+          <include name="searchInvalid"/>
+          <include name="searchFilterByDate"/>
           <include name="setup"/>
-          <include name="pastTimeValidation"/>
+          <include name="searchLocation"/>
+          <include name="searchJobNo"/>
         </methods>
-      </class> <!-- org.test.CustomerContactJob -->
+      </class> <!-- org.test.CustomerOrganizationJob -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

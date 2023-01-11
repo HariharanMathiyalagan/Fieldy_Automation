@@ -3,11 +3,17 @@
 <suite name="Suite">
 	<test thread-count="5" name="Test">
 		<classes>
+		
 			<class name="org.test.OnBoardingModule" />
+			
 			<class name="org.test.Login" />
+			
 			<class name="org.test.TeamModule" />
+			
 			<class name="org.test.CustomerCreateContactModule" />
+			
 			<class name="org.test.CustomerCreateOrganizationModule" />
+			
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
