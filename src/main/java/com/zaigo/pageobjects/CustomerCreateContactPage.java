@@ -1159,7 +1159,7 @@ public class CustomerCreateContactPage extends BaseClass {
 //		for (int i = 0; i < 2; i++) {
 //			this.mouseActionClick(Previous);
 //		}
-		Thread.sleep(1500);
+		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -1177,7 +1177,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		this.ClickButton(LeadSources);
 		this.ClickButton(Social);
 		this.ClickButton(Next);
@@ -1316,7 +1316,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void editContact() throws AWTException, InterruptedException {
 		this.mouseActionClick(Dots);
 		this.mouseActionClick(Edit);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 //		this.mouseActionClick(Logo);
 //		Thread.sleep(1000);
 //		attachmentFile("istockphoto-825383494-612x612");

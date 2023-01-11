@@ -52,6 +52,106 @@ public class JobPage extends BaseClass {
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
 
+	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
+	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
+	By CustomerName = By.id("customer-name");
+	By ClickJob = By.xpath("//*[@data-menuswitcher='cstmr-contact-job']");
+	By ClickOrganizationJob = By.xpath("//*[@data-menuswitcher='cstmr-organization-job']");
+	By JobLabel = By.id("//*[text()='Total Job ']");
+	By CreateJob = By.xpath("//*[@data-automationid='customer-contact-job-create']");
+	By CreateOrganizationJob = By.xpath("//*[@data-automationid='customer-organization-job-create']");
+	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
+	By CreateGlobalJob = By.id("//*[@data-automationid='job-create']");
+	By Job = By.id("job-menu");
+	By ContactName = By.id("id_customer_group");
+	By ContactNameError = By.id("id_customer_group_error");
+	By Add = By.xpath("//*[@class='add_new_btn btn btn-30 btn-bg-blue pr-2 pl-2 ']");
+	By FirstName = By.id("first_name");
+	By LastName = By.id("last_name");
+	By Email = By.id("email");
+	By Phone = By.id("phones__number__0");
+	By Address1 = By.id("addresses__line_1__0");
+	By Address2 = By.id("addresses__line_2__0");
+	By StateName = By.id("addresses__state__0");
+	By CityName = By.id("addresses__city__0");
+	By Zipcode = By.id("addresses__zipcode__0");
+	By Save = By.id("contact-create");
+	By ContactCreatedMessage = By.xpath("//*[text()='Customer created successfully']");
+
+	By Location = By.id("location");
+	By Tittle = By.id("title");
+	By Description = By.id("description");
+	By Tags = By.className("tag__input");
+	By Notes = By.id("notes");
+	By SaveComplete = By.id("scheduledrop");
+	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
+	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
+	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+
+	By ErrorLocation = By.id("location_error");
+	By ErrorTittle = By.id("title_error");
+	By ErrorDescription = By.id("description_error");
+	By ErrorTags = By.id("tags__tags__0_error");
+	By ErrorNotes = By.id("notes_error");
+	By TagRemove = By.xpath("//*[@class='tag__remove']");
+
+	By StartDate = By.id("schedule_from_date");
+	By EndDate = By.id("schedule_to_date");
+	By StartTime = By.id("schedule_from_time");
+	By EndTime = By.id("schedule_to_time");
+	By Crew = By.id("crew-radio-button");
+	By Single = By.id("technician-radio-button");
+	By Technician = By.xpath("//*[@class='floating-input form-control user-view ']");
+	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
+	By TechnicianFirstName = By
+			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[1]");
+	By TechnicianSecoundName = By
+			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[2]");
+	By Priority = By.id("priority");
+	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
+	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
+	By EalierTime = By.xpath("//*[text()='From Time should be current or future time only']");
+	By TimeMismatch = By.xpath("//*[text()='Start time should be earlier than End time']");
+	By JobCreatedMessage = By.xpath("//*[text()='Job Created Successfully']");
+	By JobUpdatedMessage = By.xpath("//*[text()='Job Updated Successfully']");
+	By JobDispatchMessage = By.xpath("//*[text()='Job dispatched successfully']");
+	By JobStartedMessgae = By.xpath("//*[text()='Job started successfully']");
+	By JobCompletedMessage = By.xpath("//*[text()='Job completed successfully']");
+	By JobCancelledMessage = By.xpath("//*[text()='Job cancelled successfully']");
+	By JobDeletedMessage = By.xpath("//*[text()='Job deleted successfully']");
+	By JobDraftedMessage = By.xpath("//*[text()='Job Drafted']");
+	By StatusJob = By.id("customer-contact-request-card-status");
+	By Edit = By.xpath("//*[@class='fa fa-pencil ']");
+	By SelectTechnician = By.xpath(
+			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
+	By Yes = By.xpath("//*[text()='Yes']");
+	By No = By.xpath("//*[text()='No']");
+	By Dispatch = By.xpath("(//*[@gloss='Dispatch'])[2]");
+	By Start = By.xpath("(//*[@gloss='Start'])[1]");
+	By Complete = By.xpath("(//*[@gloss='Completed'])[1]");
+	By Cancel = By.xpath("//*[@gloss='Cancel']");
+	By Delete = By.xpath("//*[@gloss='Delete']");
+	By Back = By.xpath("//*[@alt=' back_arrow']");
+	By Label = By.xpath("//*[@data-menuselector='job-menu']");
+	By JobNo = By.xpath("(//*[@class='id-number'])[1]");
+	By SearchBox = By.id("customer-contact-job-search");
+	By SearchOrganizationBox = By.id("customer-company-job-search");
+	By Reset = By.xpath("//*[text()=' Reset Search']");
+	By SearchLocation = By.id("customer-contact-request-card-profile-location");
+	By InvlaidSearch = By.xpath("//*[@class='title']");
+	By Filter = By.xpath("//*[@class='eiconmenu20-white-filter']");
+	By FilterFrom = By.id("customer-contact-job-filter-from-date");
+	By FilterOrganizationFrom = By.id("customer-company-job-from-date");
+	By FilterTo = By.id("customer-contact-job-filter-to-date");
+	By FilterOrganizationTo = By.id("customer-company-job-to-date");
+	By Apply = By.xpath("//*[@data-automationid='contact-apply']");
+	By JobType = By.id("job-type-filter");
+	By ErrorToTime = By.xpath("//*[text()='Appointment from date,time and Appointment to date needed']");
+	By CrewSize = By.id("crew_size");
+	By CrewTech = By.id("settings-category-user-view");
+	By SelectTech = By.xpath("(//*[@type='checkbox'])[1]");
+	By Status = By.xpath("//*[text()='Status  ']");
+
 	public JobPage(WebDriver driver) {
 		this.driver = driver;
 
@@ -126,16 +226,6 @@ public class JobPage extends BaseClass {
 
 	}
 
-	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
-	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
-	By CustomerName = By.id("customer-name");
-	By ClickJob = By.xpath("//*[@data-menuswitcher='cstmr-contact-job']");
-	By ClickOrganizationJob = By.xpath("//*[@data-menuswitcher='cstmr-organization-job']");
-	By JobLabel = By.id("//*[text()='Total Job ']");
-	By CreateJob = By.xpath("//*[@data-automationid='customer-contact-job-create']");
-	By CreateOrganizationJob = By.xpath("//*[@data-automationid='customer-organization-job-create']");
-	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
-
 	public void customerContactJobListPage() throws InterruptedException {
 		String text = this.getText(ContactListName);
 		this.mouseActionClick(ContactListName);
@@ -159,81 +249,10 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
-	By Location = By.id("location");
-	By Tittle = By.id("title");
-	By Description = By.id("description");
-	By Tags = By.className("tag__input");
-	By Notes = By.id("notes");
-	By SaveComplete = By.id("scheduledrop");
-	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
-	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
-	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
-
-	By ErrorLocation = By.id("location_error");
-	By ErrorTittle = By.id("title_error");
-	By ErrorDescription = By.id("description_error");
-	By ErrorTags = By.id("tags__tags__0_error");
-	By ErrorNotes = By.id("notes_error");
-	By TagRemove = By.xpath("//*[@class='tag__remove']");
-
-	By StartDate = By.id("schedule_from_date");
-	By EndDate = By.id("schedule_to_date");
-	By StartTime = By.id("schedule_from_time");
-	By EndTime = By.id("schedule_to_time");
-	By Crew = By.id("crew-radio-button");
-	By Single = By.id("technician-radio-button");
-	By Technician = By.xpath("//*[@class='floating-input form-control user-view ']");
-	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
-	By TechnicianFirstName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[1]");
-	By TechnicianSecoundName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[2]");
-	By Priority = By.id("priority");
-	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
-	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
-	By EalierTime = By.xpath("//*[text()='From Time should be current or future time only']");
-	By TimeMismatch = By.xpath("//*[text()='Start time should be earlier than End time']");
-	By JobCreatedMessage = By.xpath("//*[text()='Job Created Successfully']");
-	By JobUpdatedMessage = By.xpath("//*[text()='Job Updated Successfully']");
-	By JobDispatchMessage = By.xpath("//*[text()='Job dispatched successfully']");
-	By JobStartedMessgae = By.xpath("//*[text()='Job started successfully']");
-	By JobCompletedMessage = By.xpath("//*[text()='Job completed successfully']");
-	By JobCancelledMessage = By.xpath("//*[text()='Job cancelled successfully']");
-	By JobDeletedMessage = By.xpath("//*[text()='Job deleted successfully']");
-	By JobDraftedMessage = By.xpath("//*[text()='Job Drafted']");
-	By StatusJob = By.id("customer-contact-request-card-status");
-	By Edit = By.xpath("//*[@class='fa fa-pencil ']");
-	By SelectTechnician = By.xpath(
-			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
-	By Yes = By.xpath("//*[text()='Yes']");
-	By No = By.xpath("//*[text()='No']");
-	By Dispatch = By.xpath("(//*[@gloss='Dispatch'])[2]");
-	By Start = By.xpath("(//*[@gloss='Start'])[1]");
-	By Complete = By.xpath("(//*[@gloss='Completed'])[1]");
-	By Cancel = By.xpath("//*[@gloss='Cancel']");
-	By Delete = By.xpath("//*[@gloss='Delete']");
-	By Back = By.xpath("//*[@alt=' back_arrow']");
-	By JobNo = By.xpath("(//*[@class='id-number'])[1]");
-	By SearchBox = By.id("customer-contact-job-search");
-	By SearchOrganizationBox = By.id("customer-company-job-search");
-	By Reset = By.xpath("//*[@onclick='CommonCall()']");
-	By SearchLocation = By.id("customer-contact-request-card-profile-location");
-	By SearchOrganizationLocation = By.id("customer-organization-request-card-profile-location");
-	By InvlaidSearch = By.xpath("//*[@class='title']");
-	By Filter = By.xpath("//*[@class='eiconmenu20-white-filter']");
-	By FilterFrom = By.id("customer-contact-job-filter-from-date");
-	By FilterOrganizationFrom = By.id("customer-organization-job-filter-from-date");
-	By FilterTo = By.id("customer-contact-job-filter-to-date");
-	By FilterOrganizationTo = By.id("customer-organization-job-filter-to-date");
-	By Apply = By.xpath("//*[@data-automationid='contact-apply']");
-	By ApplyOrganization = By.xpath("//*[@data-automationid='organization-apply']");
-	By JobType = By.id("job-type-filter");
-
 //	@FindBys({
 //	@FindBy(xpath="//*[text()='Appointment from date,time and Appointment to date needed']");
 //	@FindBy(xpath="//*[text()='Appointment to date needed']")
 //	})
-	By ErrorToTime = By.xpath("//*[text()='Appointment from date,time and Appointment to date needed']");
 
 	/* Error field */
 	/* Start */
@@ -291,11 +310,34 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String errorContact() {
+		String text = this.getText(ContactNameError);
+		return text;
+	}
+
 	/* End */
 	/* Fields Validations */
 	/* Start */
+	public void module() {
+		this.assertName(Job, "Job");
+		this.mouseActionClick(Job);
+		this.mouseActionClick(CreateGlobalJob);
+
+	}
+
+	public void mandatoryContactField() {
+		this.assertName(Label, "Create Job");
+		this.mouseActionClick(SaveComplete);
+
+	}
+
 	public void mandatoryDescriptionField() {
 		this.validationTab(Description, " ");
+	}
+
+	public void mandatoryValidationContactName() {
+		this.mouseActionClick(SaveComplete);
+
 	}
 
 	public void maxValidationDescription() throws IOException {
@@ -318,7 +360,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void maxValidationTittle() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(5500);
 		this.validationTab(Tittle, characters256);
 	}
 
@@ -419,6 +461,7 @@ public class JobPage extends BaseClass {
 		this.inputText(Description, getPropertyValue("Description"));
 		this.inputText(Notes, getPropertyValue("Notes"));
 		this.assertName(SaveComplete, "Schedule Job");
+		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -448,10 +491,6 @@ public class JobPage extends BaseClass {
 
 	}
 
-	By CrewSize = By.id("crew_size");
-	By CrewTech = By.id("settings-category-user-view");
-	By SelectTech = By.xpath("(//*[@type='checkbox'])[1]");
-
 	public void editJob1() throws InterruptedException {
 		this.mouseActionClick(Edit);
 		Thread.sleep(15000);
@@ -465,9 +504,35 @@ public class JobPage extends BaseClass {
 
 	}
 
-	By Status = By.xpath("//*[text()='Status  ']");
-
 	public void createdJob() throws InterruptedException, IOException {
+		Thread.sleep(2000);
+		this.mouseActionClick(CreateJob);
+		Thread.sleep(2000);
+		this.picKLocation();
+		this.mouseActionClick(BussinessUnit);
+		this.mouseActionClick(General);
+		this.mouseActionClick(ServiceType);
+		this.mouseActionClick(Repair);
+		this.dropDownByIndex(Priority, 2);
+		this.inputText(Tittle, fakeTittle);
+		this.inputText(Description, getPropertyValue("Description"));
+		this.currentPickerFromDate();
+		this.currentPickerToDate();
+		this.inputText(StartTime, "10.00");
+		this.inputText(EndTime, "18.00");
+		Thread.sleep(5000);
+		this.mouseActionClick(Crew);
+		this.mouseActionClick(Single);
+		this.assertName(TechnicianLabel, "Technician");
+		this.mouseActionClick(Technician);
+		this.mouseActionClick(TechnicianSecoundName);
+		this.tagValidation(Tags, randomCharacter);
+		this.inputText(Notes, getPropertyValue("Notes"));
+		this.mouseActionClick(SaveComplete);
+
+	}
+
+	public void createdJob1() throws InterruptedException, IOException {
 		Thread.sleep(2000);
 		this.mouseActionClick(CreateOrganizationJob);
 		Thread.sleep(2000);
@@ -521,8 +586,17 @@ public class JobPage extends BaseClass {
 	By CustomerError = By.id("id_customer_group_error");
 
 	public void draftJob() throws IOException, InterruptedException {
+		this.mouseActionClick(CreateJob);
+		Thread.sleep(5000);
+		this.mouseActionClick(Back);
+		this.mouseActionClick(Yes);
+		this.assertName(JobDraftedMessage, "Job Drafted");
+
+	}
+
+	public void draftJob1() throws IOException, InterruptedException {
 		this.mouseActionClick(CreateOrganizationJob);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		this.mouseActionClick(Back);
 		this.mouseActionClick(Yes);
 		this.assertName(JobDraftedMessage, "Job Drafted");
@@ -581,9 +655,9 @@ public class JobPage extends BaseClass {
 	}
 
 	public String searchLocation1() {
-		String text = this.getText(SearchOrganizationLocation);
+		String text = this.getText(SearchLocation);
 		this.tagValidation(SearchOrganizationBox, text);
-		String text2 = this.getText(SearchOrganizationLocation);
+		String text2 = this.getText(SearchLocation);
 		return text2;
 
 	}
@@ -594,9 +668,9 @@ public class JobPage extends BaseClass {
 		return text2;
 
 	}
-	
+
 	public String invalidSearch1() {
-		this.tagValidation(SearchBox, randomCharacter);
+		this.tagValidation(SearchOrganizationBox, randomCharacter);
 		String text2 = this.getText(InvlaidSearch);
 		return text2;
 
@@ -618,38 +692,24 @@ public class JobPage extends BaseClass {
 		String currentFilterPickerToDate = this.currentFilterPickerToDate();
 		this.inputText(FilterOrganizationFrom, currentFilterPickerFromDate);
 		this.inputText(FilterOrganizationTo, currentFilterPickerToDate);
-		this.mouseActionClick(ApplyOrganization);
+		this.mouseActionClick(Apply);
 
 	}
 
 	By ScheduleFrom = By.xpath(
 			"(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
-	By ScheduleFromOrganization = By.xpath(
-			"(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-organization-request-card-booking-time'])[1]");
+
 	By ScheduleTo = By.xpath(
 			"(//*[text()='Schedule To : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
-	By ScheduleToOrganization = By.xpath(
-			"(//*[text()='Schedule To : ']//following-sibling::*[@id='customer-organization-request-card-booking-time'])[1]");
 
 	public String validateListFromDate() {
 		String text = this.getText(ScheduleFrom);
 		return text;
 
 	}
-	public String validateListFromDate1() {
-		String text = this.getText(ScheduleFromOrganization);
-		return text;
-
-	}
 
 	public String validateToDate() {
 		String text = this.getText(ScheduleTo);
-		return text;
-
-	}
-	
-	public String validateToDate1() {
-		String text = this.getText(ScheduleToOrganization);
 		return text;
 
 	}
@@ -693,6 +753,11 @@ public class JobPage extends BaseClass {
 
 	public void clearSearch() {
 		this.clearField(SearchBox);
+
+	}
+	
+	public void clearSearch1() {
+		this.clearField(SearchOrganizationBox);
 
 	}
 
