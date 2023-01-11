@@ -153,7 +153,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void mandatoryValidation() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		this.assertName(SaveComplete, SaveCompleteButton);
 		this.mouseActionClick(SaveComplete);
 	}

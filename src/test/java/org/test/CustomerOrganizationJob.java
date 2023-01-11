@@ -33,7 +33,7 @@ public class CustomerOrganizationJob extends BaseClass {
 	@BeforeClass
 	public void setup() {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationModule.html");
+		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationJob.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 	}
@@ -411,7 +411,8 @@ public class CustomerOrganizationJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = new JobPage(driver);
-		mandatory.createdJob1();
+		mandatory.customerOrganizationJob();
+		mandatory.createdJob();
 		String errorPasswordField = mandatory.createdMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("JobCreatedMessage"));

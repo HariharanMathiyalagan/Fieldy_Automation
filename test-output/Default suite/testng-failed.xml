@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerOrganizationJob">
+      <class name="org.test.GlobalJobContact">
         <methods>
           <include name="exitBrowser"/>
           <include name="searchInvalid"/>
-          <include name="searchFilterByDate"/>
           <include name="setup"/>
-          <include name="searchLocation"/>
-          <include name="searchJobNo"/>
         </methods>
-      </class> <!-- org.test.CustomerOrganizationJob -->
+      </class> <!-- org.test.GlobalJobContact -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
