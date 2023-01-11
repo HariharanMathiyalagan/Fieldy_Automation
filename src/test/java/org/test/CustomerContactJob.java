@@ -413,6 +413,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = new JobPage(driver);
+		mandatory.customerContactJob();
 		mandatory.createdJob();
 		String errorPasswordField = mandatory.createdMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);

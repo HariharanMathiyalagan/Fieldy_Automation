@@ -61,7 +61,7 @@ public class JobPage extends BaseClass {
 	By CreateJob = By.xpath("//*[@data-automationid='customer-contact-job-create']");
 	By CreateOrganizationJob = By.xpath("//*[@data-automationid='customer-organization-job-create']");
 	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
-	By CreateGlobalJob = By.id("//*[@data-automationid='job-create']");
+	By CreateGlobalJob = By.xpath("//*[@data-automationid='job-create']");
 	By Job = By.id("job-menu");
 	By ContactName = By.id("id_customer_group");
 	By ContactNameError = By.id("id_customer_group_error");
@@ -132,13 +132,14 @@ public class JobPage extends BaseClass {
 	By Cancel = By.xpath("//*[@gloss='Cancel']");
 	By Delete = By.xpath("//*[@gloss='Delete']");
 	By Back = By.xpath("//*[@alt=' back_arrow']");
-	By Label = By.xpath("//*[@data-menuselector='job-menu']");
+	By Label = By.xpath("//*[@data-draftback='jobdraft']");
 	By JobNo = By.xpath("(//*[@class='id-number'])[1]");
 	By SearchBox = By.id("customer-contact-job-search");
 	By SearchOrganizationBox = By.id("customer-company-job-search");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
 	By SearchLocation = By.id("customer-contact-request-card-profile-location");
 	By InvlaidSearch = By.xpath("//*[@class='title']");
+	By GlobalInvlaidSearch = By.xpath("//*[text()='No Result Found']");
 	By Filter = By.xpath("//*[@class='eiconmenu20-white-filter']");
 	By FilterFrom = By.id("customer-contact-job-filter-from-date");
 	By FilterOrganizationFrom = By.id("customer-company-job-from-date");
@@ -173,14 +174,14 @@ public class JobPage extends BaseClass {
 	}
 
 	private void mouseActionClick(By element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 20);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
 
 	public void assertName(By element, String text) {
-		wait = new WebDriverWait(driver, 100);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
@@ -318,16 +319,46 @@ public class JobPage extends BaseClass {
 	/* End */
 	/* Fields Validations */
 	/* Start */
-	public void module() {
-		this.assertName(Job, "Job");
+
+	By AssertDashboard = By.xpath("//*[text()=' Company Performance']");
+	By ListCustomer = By.xpath("//*[text()='Customer']");
+
+	public void module() throws InterruptedException {
+		this.assertName(AssertDashboard, "Company Performance");
 		this.mouseActionClick(Job);
+		this.assertName(ListCustomer, "Customer");
 		this.mouseActionClick(CreateGlobalJob);
 
 	}
 
-	public void mandatoryContactField() {
+	public void mandatoryContactField() throws InterruptedException {
 		this.assertName(Label, "Create Job");
+		Thread.sleep(5000);
 		this.mouseActionClick(SaveComplete);
+
+	}
+
+	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
+
+	public String responseMessageCreateContact() {
+		String text2 = this.getText(ContactCreateMessage);
+		return text2;
+
+	}
+
+	public void contactCreation() {
+		this.inputText(ContactName, fakeFirstName);
+		this.mouseActionClick(Add);
+		this.inputText(FirstName, fakeFirstName);
+		this.inputText(LastName, fakeLastName);
+		this.inputText(Email, fakeEmail);
+		this.inputText(Phone, fakePhoneNumber);
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(CityName, fakeCity);
+		this.inputText(StateName, fakeState);
+		this.inputText(Zipcode, fakeZipcode);
+		this.mouseActionClick(Save);
 
 	}
 
@@ -360,7 +391,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void maxValidationTittle() throws InterruptedException {
-		Thread.sleep(5500);
+		Thread.sleep(6000);
 		this.validationTab(Tittle, characters256);
 	}
 
@@ -472,7 +503,16 @@ public class JobPage extends BaseClass {
 
 	}
 
+	By GlobalStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
+
+	public String globalJobStatus() {
+		String text = this.getText(GlobalStatus);
+		return text;
+
+	}
+
 	By CancelledStatus = By.xpath("//*[text()='cancelled']");
+	By GlobalCancelledStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[12]");
 
 	public String cancelJobStatus() {
 		String text = this.getText(CancelledStatus);
@@ -480,8 +520,29 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String cancelGlobalJobStatus() {
+		String text = this.getText(GlobalCancelledStatus);
+		return text;
+
+	}
+
 	public void editJob() throws InterruptedException {
 		this.mouseActionClick(Edit);
+		Thread.sleep(15000);
+		this.scrollDown();
+		this.assertName(SelectTechnician, "Select Technician");
+		this.mouseActionClick(Technician);
+		this.mouseActionClick(TechnicianFirstName);
+		this.mouseActionClick(SaveComplete);
+
+	}
+
+	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
+	By GlobalEdit = By.xpath("(//*[@data-n-linkto='job_edit'])[1]");
+
+	public void globalEditJob() throws InterruptedException {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalEdit);
 		Thread.sleep(15000);
 		this.scrollDown();
 		this.assertName(SelectTechnician, "Select Technician");
@@ -505,9 +566,6 @@ public class JobPage extends BaseClass {
 	}
 
 	public void createdJob() throws InterruptedException, IOException {
-		Thread.sleep(2000);
-		this.mouseActionClick(CreateJob);
-		Thread.sleep(2000);
 		this.picKLocation();
 		this.mouseActionClick(BussinessUnit);
 		this.mouseActionClick(General);
@@ -532,38 +590,43 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public void createdJob1() throws InterruptedException, IOException {
+	public void customerOrganizationJob() throws InterruptedException {
 		Thread.sleep(2000);
 		this.mouseActionClick(CreateOrganizationJob);
 		Thread.sleep(2000);
-		this.picKLocation();
-		this.mouseActionClick(BussinessUnit);
-		this.mouseActionClick(General);
-		this.mouseActionClick(ServiceType);
-		this.mouseActionClick(Repair);
-		this.dropDownByIndex(Priority, 2);
-		this.inputText(Tittle, fakeTittle);
-		this.inputText(Description, getPropertyValue("Description"));
-		this.currentPickerFromDate();
-		this.currentPickerToDate();
-		this.inputText(StartTime, "10.00");
-		this.inputText(EndTime, "18.00");
-		Thread.sleep(5000);
-		this.mouseActionClick(Crew);
-		this.mouseActionClick(Single);
-		this.assertName(TechnicianLabel, "Technician");
-		this.mouseActionClick(Technician);
-		this.mouseActionClick(TechnicianSecoundName);
-		this.tagValidation(Tags, randomCharacter);
-		this.inputText(Notes, getPropertyValue("Notes"));
-		this.mouseActionClick(SaveComplete);
+
+	}
+
+	public void customerContactJob() throws InterruptedException {
+		Thread.sleep(2000);
+		this.mouseActionClick(CreateJob);
+		Thread.sleep(2000);
+
+	}
+
+	public void globalJob() throws InterruptedException {
+		Thread.sleep(2000);
+		this.mouseActionClick(CreateGlobalJob);
+		Thread.sleep(2000);
 
 	}
 
 	By TechnicianLabel = By.xpath("//*[text()='Technician']");
+	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
+	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
+	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
+	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
 
 	public String dispatchTiggerFunction() {
 		this.mouseActionClick(Dispatch);
+		this.mouseActionClick(Yes);
+		String text = this.getText(JobDispatchMessage);
+		return text;
+	}
+
+	public String globalDispatchTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalDispatch);
 		this.mouseActionClick(Yes);
 		String text = this.getText(JobDispatchMessage);
 		return text;
@@ -576,6 +639,14 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
+	public String globalStartTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalStart);
+		this.mouseActionClick(Yes);
+		String text = this.getText(JobStartedMessgae);
+		return text;
+	}
+
 	public String completedTiggerFunction() {
 		this.mouseActionClick(Complete);
 		this.mouseActionClick(Yes);
@@ -583,7 +654,22 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
+	public String globalCompletedTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalComplete);
+		this.mouseActionClick(Yes);
+		String text = this.getText(JobCompletedMessage);
+		return text;
+	}
+
 	By CustomerError = By.id("id_customer_group_error");
+	By GlobalSearchJobNo = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[2]");
+	By GlobalCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
+	By GlobalLocation = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
+	By GlobalDate = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By GlobalSearchBox = By.id("job-search-input-filter");
+	By GlobalFrom = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[1]");
+	By GlobalTo = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[2]");
 
 	public void draftJob() throws IOException, InterruptedException {
 		this.mouseActionClick(CreateJob);
@@ -618,6 +704,17 @@ public class JobPage extends BaseClass {
 
 	}
 
+	By ThreeDotsCancel = By.xpath("(//*[@class='fa fa-ellipsis-v'])[3]");
+
+	public String globalCancelledTigerFunction() {
+		this.mouseActionClick(ThreeDotsCancel);
+		this.mouseActionClick(GlobalCancel);
+		this.mouseActionClick(Yes);
+		String text = this.getText(JobCancelledMessage);
+		return text;
+
+	}
+
 	public String searchJobNo() {
 		String text = this.getText(JobNo);
 		this.tagValidation(SearchBox, text);
@@ -634,6 +731,22 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String searchJobNo2() {
+		String text = this.getText(GlobalSearchJobNo);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalSearchJobNo);
+		return text2;
+
+	}
+
+	public String searchCustomerName() {
+		String text = this.getText(GlobalCustomerName);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalCustomerName);
+		return text2;
+
+	}
+
 	By JobLabelNo = By.xpath("(//*[text()='Job No :'])[1]");
 
 	public void resetOption() {
@@ -643,6 +756,11 @@ public class JobPage extends BaseClass {
 
 	public void jobLabel() {
 		this.assertName(JobLabelNo, "Job No :");
+
+	}
+
+	public void jobLabe2() {
+		this.assertName(Label, "Customer");
 
 	}
 
@@ -662,6 +780,14 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String searchLocation2() {
+		String text = this.getText(GlobalLocation);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalLocation);
+		return text2;
+
+	}
+
 	public String invalidSearch() {
 		this.tagValidation(SearchBox, randomCharacter);
 		String text2 = this.getText(InvlaidSearch);
@@ -672,6 +798,13 @@ public class JobPage extends BaseClass {
 	public String invalidSearch1() {
 		this.tagValidation(SearchOrganizationBox, randomCharacter);
 		String text2 = this.getText(InvlaidSearch);
+		return text2;
+
+	}
+
+	public String invalidSearch2() {
+		this.tagValidation(GlobalSearchBox, randomCharacter);
+		String text2 = this.getText(GlobalInvlaidSearch);
 		return text2;
 
 	}
@@ -696,6 +829,17 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public void filterByDate2() throws InterruptedException {
+		this.mouseActionClick(Filter);
+		String currentFilterPickerFromDate = this.currentFilterPickerFromDate();
+		String currentFilterPickerToDate = this.currentFilterPickerToDate();
+		this.inputText(GlobalFrom, currentFilterPickerFromDate);
+		this.inputText(GlobalTo, currentFilterPickerToDate);
+		Thread.sleep(2000);
+		this.mouseActionClick(Apply);
+
+	}
+
 	By ScheduleFrom = By.xpath(
 			"(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
 
@@ -704,6 +848,12 @@ public class JobPage extends BaseClass {
 
 	public String validateListFromDate() {
 		String text = this.getText(ScheduleFrom);
+		return text;
+
+	}
+
+	public String validateScheduledDate() {
+		String text = this.getText(GlobalDate);
 		return text;
 
 	}
@@ -755,9 +905,14 @@ public class JobPage extends BaseClass {
 		this.clearField(SearchBox);
 
 	}
-	
+
 	public void clearSearch1() {
 		this.clearField(SearchOrganizationBox);
+
+	}
+	
+	public void clearSearch2() {
+		this.clearField(GlobalSearchBox);
 
 	}
 
