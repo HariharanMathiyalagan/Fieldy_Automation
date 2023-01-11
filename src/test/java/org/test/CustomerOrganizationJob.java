@@ -411,7 +411,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = new JobPage(driver);
-		mandatory.createdJob();
+		mandatory.createdJob1();
 		String errorPasswordField = mandatory.createdMessage();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("JobCreatedMessage"));
@@ -599,7 +599,7 @@ public class CustomerOrganizationJob extends BaseClass {
 	private void jobDraftStatus() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job has been draft status");
 		JobPage mandatory = new JobPage(driver);
-		mandatory.draftJob();
+		mandatory.draftJob1();
 		String errorPasswordField = mandatory.jobStatus();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("DraftStatus"));
@@ -671,7 +671,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(errorPasswordField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearSearch();
+			mandatory.clearSearch1();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -679,7 +679,7 @@ public class CustomerOrganizationJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			mandatory.clearSearch();
+			mandatory.clearSearch1();
 		}
 
 	}
@@ -688,9 +688,9 @@ public class CustomerOrganizationJob extends BaseClass {
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job List filter by date");
 		JobPage mandatory = new JobPage(driver);
-		mandatory.filterByDate();
-		String validateListFromDate = mandatory.validateListFromDate1();
-		String validateToDate = mandatory.validateToDate1();
+		mandatory.filterByDate1();
+		String validateListFromDate = mandatory.validateListFromDate();
+		String validateToDate = mandatory.validateToDate();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + validateListFromDate + "to" + validateToDate);
 		extentTest.log(Status.INFO, "Expected Result Validation Data -" + validateListFromDate + "to" + validateToDate);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
