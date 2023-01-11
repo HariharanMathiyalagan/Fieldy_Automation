@@ -269,8 +269,8 @@ public class EditContractorCompaniesPage extends BaseClass {
 //		this.mouseActionClick(AddMoreLocation);
 //		this.mouseActionClick(clickPrevious);
 		this.clearField(CompanyName);
-		String randomAlphabetic = RandomStringUtils.randomAlphabetic(3);
 		this.inputText(CompanyName, fakeCompanyName);
+		Thread.sleep(2000);
 		this.mouseActionClick(SaveNext);
 	}
 

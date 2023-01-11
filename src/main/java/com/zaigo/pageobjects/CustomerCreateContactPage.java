@@ -1147,7 +1147,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	public void equipmentPage() {
+	public void equipmentPage() throws InterruptedException {
 		this.inputText(ProductName, "Samsung");
 		this.inputText(BrandName, "Neo QLED TVs");
 		this.inputText(ModelNumber, fakeFaxNumber);
@@ -1159,6 +1159,7 @@ public class CustomerCreateContactPage extends BaseClass {
 //		for (int i = 0; i < 2; i++) {
 //			this.mouseActionClick(Previous);
 //		}
+		Thread.sleep(1500);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -1176,7 +1177,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
-		Thread.sleep(1500);
+		Thread.sleep(2000);
 		this.ClickButton(LeadSources);
 		this.ClickButton(Social);
 		this.ClickButton(Next);
