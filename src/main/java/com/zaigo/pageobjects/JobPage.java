@@ -63,19 +63,28 @@ public class JobPage extends BaseClass {
 	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
 	By CreateGlobalJob = By.xpath("//*[@data-automationid='job-create']");
 	By Job = By.id("job-menu");
-	By ContactName = By.id("id_customer_group");
+	By GlobalCustomer = By.id("id_customer_group");
 	By ContactNameError = By.id("id_customer_group_error");
 	By Add = By.xpath("//*[@class='add_new_btn btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 	By FirstName = By.id("first_name");
 	By LastName = By.id("last_name");
 	By Email = By.id("email");
+	By OrgEmail = By.xpath("(//*[@id='email'])[2]");
 	By Phone = By.id("phones__number__0");
+	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[2]");
+	By OrgAddress1 = By.id("line_1");
+	By OrgAddress2 = By.id("line_2");
+	By OrgCity = By.id("city");
+	By OrgState = By.id("state");
+	By OrgZipcode = By.id("zipcode");
 	By Address1 = By.id("addresses__line_1__0");
 	By Address2 = By.id("addresses__line_2__0");
 	By StateName = By.id("addresses__state__0");
 	By CityName = By.id("addresses__city__0");
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Save = By.id("contact-create");
+	By SaveOrg = By.id("organization-create");
+	By Website = By.xpath("(//*[@id='website'])[1]");
 	By ContactCreatedMessage = By.xpath("//*[text()='Customer created successfully']");
 
 	By Location = By.id("location");
@@ -152,10 +161,30 @@ public class JobPage extends BaseClass {
 	By CrewTech = By.id("settings-category-user-view");
 	By SelectTech = By.xpath("(//*[@type='checkbox'])[1]");
 	By Status = By.xpath("//*[text()='Status  ']");
+	By OrganizationFirstName = By.id("contacts__first_name__0");
+	By OrganizationLastName = By.id("contacts__last_name__0");
+	By OrganizationEmail = By.id("contacts__email__0");
+	By OrganizationPhoneNumber = By.id("contacts__phone__0");
+	By OrganizationJobTittle = By.id("contacts__job_title__0");
+	By OrganizationContactSave = By.id("organization-contact-create");
+	By OrgContactName = By.id("id_user_customer");
+	By OrgContactAdd = By.xpath("//*[@class='add_new_btn3 btn-30 btn btn-bg-blue pr-2 pl-2']");
+	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 
 	public JobPage(WebDriver driver) {
 		this.driver = driver;
 
+	}
+
+	public void organizationContactCreate() {
+		this.inputText(OrgContactName, fakeFirstName);
+		this.mouseActionClick(OrgContactAdd);
+		this.inputText(OrganizationFirstName, fakeFirstName);
+		this.inputText(OrganizationLastName, fakeLastName);
+		this.inputText(OrganizationEmail, fakeEmail);
+		this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
+		this.inputText(OrganizationJobTittle, fakeTittle);
+		this.mouseActionClick(OrganizationContactSave);
 	}
 
 	private void inputText(By element, String text) {
@@ -338,6 +367,18 @@ public class JobPage extends BaseClass {
 
 	}
 
+	By RadioButtonOrg = By.xpath("(//*[@class='mr-2 mb-2'])[2]");
+
+	public void mandatoryOrganizationField() throws InterruptedException {
+		this.assertName(Label, "Create Job");
+		this.mouseActionClick(RadioButtonOrg);
+		Thread.sleep(5000);
+		this.scrollDown();
+		this.mouseActionClick(SaveComplete);
+		this.scrollUp();
+
+	}
+
 	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
 
 	public String responseMessageCreateContact() {
@@ -347,7 +388,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void contactCreation() {
-		this.inputText(ContactName, fakeFirstName);
+		this.inputText(GlobalCustomer, fakeFirstName);
 		this.mouseActionClick(Add);
 		this.inputText(FirstName, fakeFirstName);
 		this.inputText(LastName, fakeLastName);
@@ -359,6 +400,25 @@ public class JobPage extends BaseClass {
 		this.inputText(StateName, fakeState);
 		this.inputText(Zipcode, fakeZipcode);
 		this.mouseActionClick(Save);
+
+	}
+
+	By OrganizationName = By.id("company_name");
+
+	public void organizationCreation() throws InterruptedException {
+		this.inputText(GlobalCustomer, fakeCompanyName);
+		this.mouseActionClick(OrgAdd);
+		this.inputText(OrganizationName, fakeCompanyName);
+		this.inputText(OrgPhoneNumber, fakePhoneNumber);
+		this.inputText(OrgEmail, fakeEmail);
+		this.inputText(Website, fakeWebsite);
+		this.inputText(OrgAddress1, fakeAddress1);
+		this.inputText(OrgAddress2, fakeAddress2);
+		this.inputText(OrgCity, fakeCity);
+		this.inputText(OrgState, fakeState);
+		this.inputText(OrgZipcode, fakeZipcode);
+		Thread.sleep(2000);
+		this.mouseActionClick(SaveOrg);
 
 	}
 
@@ -910,7 +970,7 @@ public class JobPage extends BaseClass {
 		this.clearField(SearchOrganizationBox);
 
 	}
-	
+
 	public void clearSearch2() {
 		this.clearField(GlobalSearchBox);
 

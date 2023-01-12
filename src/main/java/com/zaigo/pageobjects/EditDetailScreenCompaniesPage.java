@@ -235,7 +235,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	public void editContent() throws InterruptedException {
 		this.clickEdit();
 		this.scrollDown();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		this.clickNext();
 
 	}
