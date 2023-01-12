@@ -22,7 +22,7 @@ import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class GlobalJobContact extends BaseClass {
+public class GlobalContactJob extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -31,7 +31,7 @@ public class GlobalJobContact extends BaseClass {
 	@BeforeClass
 	public void setup() {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("CustomerContactJob.html");
+		extentHtmlReporter = new ExtentHtmlReporter("GlobalContactJob.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -592,7 +592,7 @@ public class GlobalJobContact extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 29)
 	private void searchCustomerName() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Customer Name in the Search Field");
