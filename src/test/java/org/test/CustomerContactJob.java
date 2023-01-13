@@ -240,9 +240,9 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactJobTittleMaximumValidation.png");
+			File file = new File("CustomerContactJobDescriptionMaximumValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactJobTittleMaximumValidation.png");
+			extentTest.addScreenCaptureFromPath("CustomerContactJobDescriptionMaximumValidation.png");
 			mandatory.clearDescription();
 		}
 
@@ -264,9 +264,9 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactJobTittleMaximumValidation.png");
+			File file = new File("CustomerContactJobTagMaximumValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactJobTittleMaximumValidation.png");
+			extentTest.addScreenCaptureFromPath("CustomerContactJobTagMaximumValidation.png");
 			mandatory.clearTag();
 		}
 
@@ -288,9 +288,9 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactJobTittleMaximumValidation.png");
+			File file = new File("CustomerContactJobDuplicateTagValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactJobTittleMaximumValidation.png");
+			extentTest.addScreenCaptureFromPath("CustomerContactJobDuplicateTagValidation.png");
 			mandatory.removeTags();
 		}
 
@@ -312,9 +312,9 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactJobTittleMaximumValidation.png");
+			File file = new File("CustomerContactJobTagMaximumLimitValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactJobTittleMaximumValidation.png");
+			extentTest.addScreenCaptureFromPath("CustomerContactJobTagMaximumLimitValidation.png");
 			mandatory.removeMultipleTags();
 		}
 
@@ -336,9 +336,9 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactJobTittleMaximumValidation.png");
+			File file = new File("CustomerContactJobNotesMaximumValidation.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactJobTittleMaximumValidation.png");
+			extentTest.addScreenCaptureFromPath("CustomerContactJobNotesMaximumValidation.png");
 			mandatory.clearNotes();
 		}
 

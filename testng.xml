@@ -22,6 +22,8 @@
 
 			<class name="org.test.GlobalOrganizationJob" />
 
+			<class name="org.test.CustomerContactRequest" />
+
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
