@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.GlobalOrganizationJob">
+      <class name="org.test.CustomerContactRequest">
         <methods>
-          <include name="exitBrowser"/>
           <include name="setup"/>
-          <include name="contactMandatoryValidation"/>
+          <include name="jobDraftStatus"/>
+          <include name="exitBrowser"/>
         </methods>
-      </class> <!-- org.test.GlobalOrganizationJob -->
+      </class> <!-- org.test.CustomerContactRequest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
