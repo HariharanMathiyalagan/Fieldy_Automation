@@ -1099,6 +1099,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.clearField(PhoneNumber);
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.assertName(UpdateButton, "Update");
+		Thread.sleep(3000);
 		this.mouseActionClick(UpdateButton);
 
 	}
