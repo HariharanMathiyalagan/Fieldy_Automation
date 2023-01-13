@@ -126,7 +126,7 @@ public class RequestPage extends BaseClass {
 	By ClickOrganizationRequest = By.xpath("//*[@data-detailheadermenu='cstmr-organization-request']");
 	By CreateContactRequest = By.xpath("//*[@data-automationid='customer-contact-request-create']");
 	By CreateOrganizationRequest = By.xpath("//*[@data-automationid='customer-organization-request-create']");
-	By CreateJobLabel = By.xpath("//*[@data-menuselector='request-menu']");
+	By CreateRequestLabel = By.xpath("//*[@data-menuselector='request-menu']");
 	By Location = By.id("location");
 	By Tittle = By.id("title");
 	By Description = By.id("description");
@@ -196,21 +196,20 @@ public class RequestPage extends BaseClass {
 	By OrganizationLastName = By.id("contacts__last_name__0");
 	By OrganizationEmail = By.id("contacts__email__0");
 	By OrganizationPhoneNumber = By.id("contacts__phone__0");
-	By OrganizationJobTittle = By.id("contacts__job_title__0");
+	By OrganizationRequestTittle = By.id("contacts__request_title__0");
 	By OrganizationContactSave = By.id("organization-contact-create");
 	By SelectTechnician = By.xpath(
 			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
-	By StatusJob = By.id("customer-contact-request-card-status");
+	By StatusRequest = By.id("customer-contact-request-card-status");
 	By Edit = By.xpath("//*[@class='fa fa-pencil ']");
 	By TechnicianLabel = By.xpath("//*[text()='Technician']");
 	By CancelledStatus = By.xpath("//*[text()='cancelled']");
-	By JobNo = By.xpath("(//*[@class='id-number'])[1]");
 	By ScheduleFrom = By.xpath(
 			"(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
 
 	By ScheduleTo = By.xpath(
 			"(//*[text()='Schedule To : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
-	By JobLabelNo = By.xpath("(//*[text()='Request No :'])[1]");
+	By RequestLabelNo = By.xpath("(//*[text()='Request No :'])[1]");
 	
 	public void customerContactRequestListPage() throws InterruptedException {
 		String text = this.getText(ContactListName);
@@ -222,7 +221,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String requestLandPage() {
-		String text = this.getText(CreateJobLabel);
+		String text = this.getText(CreateRequestLabel);
 		return text;
 	}
 
@@ -348,7 +347,7 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void fromDateTimeScheduleJob() throws IOException, InterruptedException {
+	public void fromDateTimeScheduleRequest() throws IOException, InterruptedException {
 		this.picKLocation();
 		this.dropDownByIndex(Priority, 2);
 		this.currentPickerFromDate();
@@ -371,13 +370,13 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public String jobStatus() {
-		String text = this.getText(StatusJob);
+	public String requestStatus() {
+		String text = this.getText(StatusRequest);
 		return text;
 
 	}
 
-	public void editJob() throws InterruptedException {
+	public void editRequest() throws InterruptedException {
 		this.mouseActionClick(Edit);
 		Thread.sleep(15000);
 		this.scrollDown();
@@ -394,7 +393,7 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void customerContactJob() throws InterruptedException {
+	public void customerContactRequest() throws InterruptedException {
 		Thread.sleep(2000);
 		this.mouseActionClick(CreateContactRequest);
 		Thread.sleep(2000);
@@ -409,7 +408,7 @@ public class RequestPage extends BaseClass {
 		this.inputText(EndDate, currentDate);
 	}
 
-	public void createdJob() throws InterruptedException, IOException {
+	public void createdRequest() throws InterruptedException, IOException {
 		this.picKLocation();
 		this.dropDownByIndex(Priority, 2);
 		this.inputText(Tittle, fakeTittle);
@@ -460,13 +459,13 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public String cancelJobStatus() {
+	public String cancelRequestStatus() {
 		String text = this.getText(CancelledStatus);
 		return text;
 
 	}
 
-	public void draftJob() throws IOException, InterruptedException {
+	public void draftRequest() throws IOException, InterruptedException {
 		this.mouseActionClick(CreateContactRequest);
 		Thread.sleep(5000);
 		this.mouseActionClick(Back);
@@ -482,10 +481,10 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
-	public String searchJobNo() {
-		String text = this.getText(JobNo);
+	public String searchRequestNo() {
+		String text = this.getText(RequestNo);
 		this.tagValidation(SearchContactBox, text);
-		String text2 = this.getText(JobNo);
+		String text2 = this.getText(RequestNo);
 		return text2;
 
 	}
@@ -546,8 +545,8 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void jobLabel() {
-		this.assertName(JobLabelNo, "Request No :");
+	public void requestLabel() {
+		this.assertName(RequestLabelNo, "Request No :");
 
 	}
 	
