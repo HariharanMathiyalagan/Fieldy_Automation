@@ -247,6 +247,18 @@ public class RequestPage extends BaseClass {
 	By GlobalSearchBox = By.id("request-search-input-filter");
 	By GlobalFrom = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[1]");
 	By GlobalTo = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[2]");
+	By RadioButtonOrg = By.xpath("(//*[@class='mr-2 mb-2'])[2]");
+	By OrgEmail = By.xpath("(//*[@id='email'])[2]");
+	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[2]");
+	By OrgAddress1 = By.id("line_1");
+	By OrgAddress2 = By.id("line_2");
+	By OrgCity = By.id("city");
+	By OrgState = By.id("state");
+	By OrgZipcode = By.id("zipcode");
+	By SaveOrg = By.id("organization-create");
+	By OrganizationName = By.id("company_name");
+	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
+	By Website = By.xpath("(//*[@id='website'])[1]");
 
 	public void customerContactRequestListPage() throws InterruptedException {
 		String text = this.getText(ContactListName);
@@ -718,6 +730,13 @@ public class RequestPage extends BaseClass {
 
 	}
 
+	public void switchOrganization() throws InterruptedException {
+		this.assertName(Label1, "Create Request");
+		this.mouseActionClick(RadioButtonOrg);
+		Thread.sleep(2500);
+
+	}
+
 	public String globalRequestStatus() {
 		String text = this.getText(GlobalStatus);
 		return text;
@@ -808,11 +827,38 @@ public class RequestPage extends BaseClass {
 		this.clearField(GlobalSearchBox);
 
 	}
-	
+
 	public String invalidSearch2() {
 		this.tagValidation(GlobalSearchBox, randomCharacter);
 		String text2 = this.getText(GlobalInvlaidSearch);
 		return text2;
+
+	}
+
+	public void mandatoryOrganizationField() throws InterruptedException {
+		this.assertName(Label1, "Create Request");
+		this.mouseActionClick(RadioButtonOrg);
+		Thread.sleep(5000);
+		this.scrollDown();
+		this.mouseActionClick(SaveComplete);
+		this.scrollUp();
+
+	}
+
+	public void organizationCreation() throws InterruptedException {
+		this.inputText(GlobalCustomer, fakeCompanyName);
+		this.mouseActionClick(OrgAdd);
+		this.inputText(OrganizationName, fakeCompanyName);
+		this.inputText(OrgPhoneNumber, fakePhoneNumber);
+		this.inputText(OrgEmail, fakeEmail);
+		this.inputText(Website, fakeWebsite);
+		this.inputText(OrgAddress1, fakeAddress1);
+		this.inputText(OrgAddress2, fakeAddress2);
+		this.inputText(OrgCity, fakeCity);
+		this.inputText(OrgState, fakeState);
+		this.inputText(OrgZipcode, fakeZipcode);
+		Thread.sleep(2000);
+		this.mouseActionClick(SaveOrg);
 
 	}
 

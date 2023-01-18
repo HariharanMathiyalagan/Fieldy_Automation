@@ -176,7 +176,7 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public void organizationContactCreate() {
+	public void organizationContactCreate() throws InterruptedException {
 		this.inputText(OrgContactName, fakeFirstName);
 		this.mouseActionClick(OrgContactAdd);
 		this.inputText(OrganizationFirstName, fakeFirstName);
@@ -184,6 +184,7 @@ public class JobPage extends BaseClass {
 		this.inputText(OrganizationEmail, fakeEmail);
 		this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
 		this.inputText(OrganizationJobTittle, fakeTittle);
+		Thread.sleep(2000);
 		this.mouseActionClick(OrganizationContactSave);
 	}
 
@@ -376,6 +377,13 @@ public class JobPage extends BaseClass {
 		this.scrollDown();
 		this.mouseActionClick(SaveComplete);
 		this.scrollUp();
+
+	}
+	
+	public void switchOrganization() throws InterruptedException {
+		this.assertName(Label, "Create Job");
+		this.mouseActionClick(RadioButtonOrg);
+		Thread.sleep(2500);
 
 	}
 
