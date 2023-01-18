@@ -154,7 +154,7 @@ public class OnBoardingPage extends BaseClass {
 		this.mouseActionClick(Continue);
 
 	}
-	
+
 	public void mandatoryEmailValidation() {
 		this.clearField(Email);
 		this.mouseActionClick(Continue);
@@ -167,12 +167,12 @@ public class OnBoardingPage extends BaseClass {
 
 	}
 
-	public void emailText() {
-		driver.get("https://getfieldy.com/");
-		this.mouseActionClick(ClickTrail);
-		Set<String> windowHandles = driver.getWindowHandles();
-		List<String> list = new ArrayList<String>(windowHandles);
-		driver.switchTo().window(list.get(1));
+	public void emailText() throws IOException {
+		driver.get(getPropertyValue("OnBoardingURL"));
+//		this.mouseActionClick(ClickTrail);
+//		Set<String> windowHandles = driver.getWindowHandles();
+//		ArrayList<String> list = new ArrayList<String>(windowHandles);
+//		driver.switchTo().window(list.get(1));
 		this.inputText(Email, "asddajs@dada.das");
 
 	}
@@ -202,6 +202,12 @@ public class OnBoardingPage extends BaseClass {
 	public void alreadyBussinessName() {
 		this.inputText(CompanyName, "Trevino and Trujillo Inc");
 		this.mouseActionClick(Continue);
+
+	}
+
+	public void specialCharacterBussinessName() {
+		this.validationTab(CompanyName, "!@#$%^&*");
+//		this.mouseActionClick(Continue);
 
 	}
 

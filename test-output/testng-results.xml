@@ -1,133 +1,263 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="28" passed="28" failed="0" skipped="0">
+<testng-results ignored="0" total="58" passed="58" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-13T13:09:50 IST" name="Default suite" finished-at="2023-01-13T13:13:15 IST" duration-ms="205540">
+  <suite started-at="2023-01-17T21:10:19 IST" name="Suite" finished-at="2023-01-17T21:16:39 IST" duration-ms="379567">
     <groups>
     </groups>
-    <test started-at="2023-01-13T13:09:50 IST" name="Default test" finished-at="2023-01-13T13:13:15 IST" duration-ms="205540">
-      <class name="org.test.CustomerContactRequest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:09:50 IST" name="setup" finished-at="2023-01-13T13:09:52 IST" duration-ms="2010" status="PASS">
+    <test started-at="2023-01-17T21:10:19 IST" name="Test" finished-at="2023-01-17T21:16:39 IST" duration-ms="379567">
+      <class name="org.test.CustomerContactJob">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:10:19 IST" name="setup" finished-at="2023-01-17T21:10:21 IST" duration-ms="2161" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:0, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:09:52 IST" name="loginPage" finished-at="2023-01-13T13:10:19 IST" duration-ms="26907" status="PASS">
+        <test-method signature="loginPage()[pri:0, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:10:21 IST" name="loginPage" finished-at="2023-01-17T21:10:55 IST" duration-ms="34260" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginPage -->
-        <test-method signature="contactModule()[pri:1, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:10:19 IST" name="contactModule" finished-at="2023-01-13T13:10:30 IST" duration-ms="11477" status="PASS">
+        <test-method signature="contactModule()[pri:1, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:10:55 IST" name="contactModule" finished-at="2023-01-17T21:11:04 IST" duration-ms="8810" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- contactModule -->
-        <test-method signature="CreateContact()[pri:2, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:10:30 IST" name="CreateContact" finished-at="2023-01-13T13:10:47 IST" duration-ms="16930" status="PASS">
+        <test-method signature="CreateContact()[pri:2, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:04 IST" name="CreateContact" finished-at="2023-01-17T21:11:20 IST" duration-ms="15417" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CreateContact -->
-        <test-method signature="labelValidation()[pri:3, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:10:47 IST" name="labelValidation" finished-at="2023-01-13T13:10:56 IST" duration-ms="8478" status="PASS">
+        <test-method signature="labelValidation()[pri:3, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:20 IST" name="labelValidation" finished-at="2023-01-17T21:11:28 IST" duration-ms="8637" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- labelValidation -->
-        <test-method signature="maximumValidationTittle()[pri:6, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:10:56 IST" name="maximumValidationTittle" finished-at="2023-01-13T13:11:03 IST" duration-ms="7389" status="PASS">
+        <test-method signature="maximumValidationTittle()[pri:6, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:28 IST" name="maximumValidationTittle" finished-at="2023-01-17T21:11:36 IST" duration-ms="7557" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- maximumValidationTittle -->
-        <test-method signature="mandatoryValidationDescription()[pri:7, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:03 IST" name="mandatoryValidationDescription" finished-at="2023-01-13T13:11:03 IST" duration-ms="231" status="PASS">
+        <test-method signature="mandatoryValidationDescription()[pri:7, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:36 IST" name="mandatoryValidationDescription" finished-at="2023-01-17T21:11:36 IST" duration-ms="235" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- mandatoryValidationDescription -->
-        <test-method signature="maximumValidationDescription()[pri:8, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:03 IST" name="maximumValidationDescription" finished-at="2023-01-13T13:11:11 IST" duration-ms="7263" status="PASS">
+        <test-method signature="maximumValidationDescription()[pri:8, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:36 IST" name="maximumValidationDescription" finished-at="2023-01-17T21:11:44 IST" duration-ms="7780" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- maximumValidationDescription -->
-        <test-method signature="maximumTagValidation()[pri:11, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:11 IST" name="maximumTagValidation" finished-at="2023-01-13T13:11:12 IST" duration-ms="1236" status="PASS">
+        <test-method signature="maximumTagValidation()[pri:11, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:44 IST" name="maximumTagValidation" finished-at="2023-01-17T21:11:45 IST" duration-ms="1284" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- maximumTagValidation -->
-        <test-method signature="duplicateTagsValidation()[pri:12, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:12 IST" name="duplicateTagsValidation" finished-at="2023-01-13T13:11:12 IST" duration-ms="544" status="PASS">
+        <test-method signature="duplicateTagsValidation()[pri:12, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:45 IST" name="duplicateTagsValidation" finished-at="2023-01-17T21:11:46 IST" duration-ms="557" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- duplicateTagsValidation -->
-        <test-method signature="maxTagLimitValidation()[pri:13, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:12 IST" name="maxTagLimitValidation" finished-at="2023-01-13T13:11:23 IST" duration-ms="10765" status="PASS">
+        <test-method signature="maxTagLimitValidation()[pri:13, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:46 IST" name="maxTagLimitValidation" finished-at="2023-01-17T21:11:57 IST" duration-ms="11107" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- maxTagLimitValidation -->
-        <test-method signature="maximumValidationNotes()[pri:14, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:23 IST" name="maximumValidationNotes" finished-at="2023-01-13T13:11:31 IST" duration-ms="7627" status="PASS">
+        <test-method signature="maximumValidationNotes()[pri:14, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:11:57 IST" name="maximumValidationNotes" finished-at="2023-01-17T21:12:05 IST" duration-ms="7929" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- maximumValidationNotes -->
-        <test-method signature="unsssignedJob()[pri:15, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:31 IST" name="unsssignedJob" finished-at="2023-01-13T13:11:45 IST" duration-ms="13975" status="PASS">
+        <test-method signature="unsssignedJob()[pri:15, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:05 IST" name="unsssignedJob" finished-at="2023-01-17T21:12:18 IST" duration-ms="13274" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- unsssignedJob -->
-        <test-method signature="jobUnassignedStatus()[pri:16, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:45 IST" name="jobUnassignedStatus" finished-at="2023-01-13T13:11:48 IST" duration-ms="3258" status="PASS">
+        <test-method signature="jobUnassignedStatus()[pri:16, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:18 IST" name="jobUnassignedStatus" finished-at="2023-01-17T21:12:20 IST" duration-ms="2178" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobUnassignedStatus -->
-        <test-method signature="createJob_FromDateandTime_ToDateandTime()[pri:18, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:11:48 IST" name="createJob_FromDateandTime_ToDateandTime" finished-at="2023-01-13T13:12:07 IST" duration-ms="19219" status="PASS">
+        <test-method signature="editJobwithFromDateFromTime()[pri:17, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:20 IST" name="editJobwithFromDateFromTime" finished-at="2023-01-17T21:12:39 IST" duration-ms="18395" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editJobwithFromDateFromTime -->
+        <test-method signature="createJob_FromDateandTime_ToDateandTime()[pri:18, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:39 IST" name="createJob_FromDateandTime_ToDateandTime" finished-at="2023-01-17T21:12:57 IST" duration-ms="18251" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createJob_FromDateandTime_ToDateandTime -->
-        <test-method signature="jobScheduleStatus()[pri:19, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:07 IST" name="jobScheduleStatus" finished-at="2023-01-13T13:12:09 IST" duration-ms="2217" status="PASS">
+        <test-method signature="jobScheduleStatus()[pri:19, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:57 IST" name="jobScheduleStatus" finished-at="2023-01-17T21:12:59 IST" duration-ms="1714" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobScheduleStatus -->
-        <test-method signature="dispatchedJob()[pri:20, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:09 IST" name="dispatchedJob" finished-at="2023-01-13T13:12:22 IST" duration-ms="12080" status="PASS">
+        <test-method signature="dispatchedJob()[pri:20, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:12:59 IST" name="dispatchedJob" finished-at="2023-01-17T21:13:02 IST" duration-ms="3641" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- dispatchedJob -->
-        <test-method signature="jobDispatchedStatus()[pri:21, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:22 IST" name="jobDispatchedStatus" finished-at="2023-01-13T13:12:25 IST" duration-ms="3226" status="PASS">
+        <test-method signature="jobDispatchedStatus()[pri:21, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:02 IST" name="jobDispatchedStatus" finished-at="2023-01-17T21:13:03 IST" duration-ms="611" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobDispatchedStatus -->
-        <test-method signature="startedJob()[pri:22, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:25 IST" name="startedJob" finished-at="2023-01-13T13:12:30 IST" duration-ms="5253" status="PASS">
+        <test-method signature="startedJob()[pri:22, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:03 IST" name="startedJob" finished-at="2023-01-17T21:13:06 IST" duration-ms="3040" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startedJob -->
-        <test-method signature="jobStartedStatus()[pri:23, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:30 IST" name="jobStartedStatus" finished-at="2023-01-13T13:12:30 IST" duration-ms="81" status="PASS">
+        <test-method signature="jobStartedStatus()[pri:23, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:06 IST" name="jobStartedStatus" finished-at="2023-01-17T21:13:07 IST" duration-ms="1151" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobStartedStatus -->
-        <test-method signature="completedJob()[pri:24, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:30 IST" name="completedJob" finished-at="2023-01-13T13:12:35 IST" duration-ms="4483" status="PASS">
+        <test-method signature="completedJob()[pri:24, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:07 IST" name="completedJob" finished-at="2023-01-17T21:13:11 IST" duration-ms="3651" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- completedJob -->
-        <test-method signature="cancelledJob()[pri:25, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:35 IST" name="cancelledJob" finished-at="2023-01-13T13:12:38 IST" duration-ms="3880" status="PASS">
+        <test-method signature="cancelledJob()[pri:25, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:11 IST" name="cancelledJob" finished-at="2023-01-17T21:13:15 IST" duration-ms="4133" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cancelledJob -->
-        <test-method signature="jobCancelledStatus()[pri:26, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:38 IST" name="jobCancelledStatus" finished-at="2023-01-13T13:12:42 IST" duration-ms="3498" status="PASS">
+        <test-method signature="jobCancelledStatus()[pri:26, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:15 IST" name="jobCancelledStatus" finished-at="2023-01-17T21:13:15 IST" duration-ms="633" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobCancelledStatus -->
-        <test-method signature="jobDraftStatus()[pri:27, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:42 IST" name="jobDraftStatus" finished-at="2023-01-13T13:12:52 IST" duration-ms="10097" status="PASS">
+        <test-method signature="jobDraftStatus()[pri:27, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:16 IST" name="jobDraftStatus" finished-at="2023-01-17T21:13:24 IST" duration-ms="8911" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jobDraftStatus -->
-        <test-method signature="deletedJob()[pri:28, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:52 IST" name="deletedJob" finished-at="2023-01-13T13:12:54 IST" duration-ms="2146" status="PASS">
+        <test-method signature="deletedJob()[pri:28, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:24 IST" name="deletedJob" finished-at="2023-01-17T21:13:26 IST" duration-ms="1564" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deletedJob -->
-        <test-method signature="searchJobNo()[pri:29, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:54 IST" name="searchJobNo" finished-at="2023-01-13T13:12:59 IST" duration-ms="4746" status="PASS">
+        <test-method signature="searchJobNo()[pri:29, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:26 IST" name="searchJobNo" finished-at="2023-01-17T21:13:31 IST" duration-ms="4656" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchJobNo -->
-        <test-method signature="searchLocation()[pri:30, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:12:59 IST" name="searchLocation" finished-at="2023-01-13T13:13:06 IST" duration-ms="6858" status="PASS">
+        <test-method signature="searchLocation()[pri:30, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:31 IST" name="searchLocation" finished-at="2023-01-17T21:13:34 IST" duration-ms="3634" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchLocation -->
-        <test-method signature="searchFilterByDate()[pri:31, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:13:06 IST" name="searchFilterByDate" finished-at="2023-01-13T13:13:12 IST" duration-ms="6303" status="PASS">
+        <test-method signature="searchFilterByDate()[pri:31, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:34 IST" name="searchFilterByDate" finished-at="2023-01-17T21:13:39 IST" duration-ms="4724" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchFilterByDate -->
-        <test-method signature="searchInvalid()[pri:32, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:13:12 IST" name="searchInvalid" finished-at="2023-01-13T13:13:15 IST" duration-ms="2440" status="PASS">
+        <test-method signature="searchInvalid()[pri:32, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:39 IST" name="searchInvalid" finished-at="2023-01-17T21:13:40 IST" duration-ms="1292" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchInvalid -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CustomerContactRequest@3c7f66c4]" started-at="2023-01-13T13:13:15 IST" name="exitBrowser" finished-at="2023-01-13T13:13:15 IST" duration-ms="818" status="PASS">
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CustomerContactJob@17497425]" started-at="2023-01-17T21:13:40 IST" name="exitBrowser" finished-at="2023-01-17T21:13:41 IST" duration-ms="700" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.CustomerContactRequest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- org.test.CustomerContactJob -->
+      <class name="org.test.CustomerOrganizationJob">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:13:41 IST" name="setup" finished-at="2023-01-17T21:13:42 IST" duration-ms="895" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginPage()[pri:1, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:13:42 IST" name="loginPage" finished-at="2023-01-17T21:14:08 IST" duration-ms="25997" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginPage -->
+        <test-method signature="modulePage()[pri:2, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:14:08 IST" name="modulePage" finished-at="2023-01-17T21:14:16 IST" duration-ms="8316" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- modulePage -->
+        <test-method signature="createOrganization()[pri:3, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:14:16 IST" name="createOrganization" finished-at="2023-01-17T21:14:39 IST" duration-ms="22959" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createOrganization -->
+        <test-method signature="labelValidation()[pri:4, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:14:39 IST" name="labelValidation" finished-at="2023-01-17T21:14:46 IST" duration-ms="6854" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- labelValidation -->
+        <test-method signature="autoCompleteOrganizationContactCreation()[pri:5, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:14:46 IST" name="autoCompleteOrganizationContactCreation" finished-at="2023-01-17T21:14:57 IST" duration-ms="10657" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- autoCompleteOrganizationContactCreation -->
+        <test-method signature="maximumValidationTittle()[pri:6, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:14:57 IST" name="maximumValidationTittle" finished-at="2023-01-17T21:15:04 IST" duration-ms="7292" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationTittle -->
+        <test-method signature="mandatoryValidationDescription()[pri:7, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:04 IST" name="mandatoryValidationDescription" finished-at="2023-01-17T21:15:04 IST" duration-ms="213" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mandatoryValidationDescription -->
+        <test-method signature="maximumValidationDescription()[pri:8, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:04 IST" name="maximumValidationDescription" finished-at="2023-01-17T21:15:09 IST" duration-ms="4810" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationDescription -->
+        <test-method signature="maximumTagValidation()[pri:11, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:09 IST" name="maximumTagValidation" finished-at="2023-01-17T21:15:10 IST" duration-ms="856" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumTagValidation -->
+        <test-method signature="duplicateTagsValidation()[pri:12, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:10 IST" name="duplicateTagsValidation" finished-at="2023-01-17T21:15:10 IST" duration-ms="498" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- duplicateTagsValidation -->
+        <test-method signature="maxTagLimitValidation()[pri:13, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:10 IST" name="maxTagLimitValidation" finished-at="2023-01-17T21:15:22 IST" duration-ms="11335" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maxTagLimitValidation -->
+        <test-method signature="maximumValidationNotes()[pri:14, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:22 IST" name="maximumValidationNotes" finished-at="2023-01-17T21:15:26 IST" duration-ms="4805" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationNotes -->
+        <test-method signature="unsssignedJob()[pri:15, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:26 IST" name="unsssignedJob" finished-at="2023-01-17T21:15:38 IST" duration-ms="11776" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- unsssignedJob -->
+        <test-method signature="jobUnassignedStatus()[pri:16, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:38 IST" name="jobUnassignedStatus" finished-at="2023-01-17T21:15:40 IST" duration-ms="1667" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobUnassignedStatus -->
+        <test-method signature="createJob_FromDateandTime_ToDateandTime()[pri:18, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:40 IST" name="createJob_FromDateandTime_ToDateandTime" finished-at="2023-01-17T21:15:57 IST" duration-ms="17338" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createJob_FromDateandTime_ToDateandTime -->
+        <test-method signature="jobScheduleStatus()[pri:19, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:57 IST" name="jobScheduleStatus" finished-at="2023-01-17T21:15:59 IST" duration-ms="2183" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobScheduleStatus -->
+        <test-method signature="dispatchedJob()[pri:20, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:15:59 IST" name="dispatchedJob" finished-at="2023-01-17T21:16:04 IST" duration-ms="4136" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dispatchedJob -->
+        <test-method signature="jobDispatchedStatus()[pri:21, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:04 IST" name="jobDispatchedStatus" finished-at="2023-01-17T21:16:04 IST" duration-ms="610" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobDispatchedStatus -->
+        <test-method signature="startedJob()[pri:22, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:04 IST" name="startedJob" finished-at="2023-01-17T21:16:08 IST" duration-ms="3644" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startedJob -->
+        <test-method signature="jobStartedStatus()[pri:23, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:08 IST" name="jobStartedStatus" finished-at="2023-01-17T21:16:08 IST" duration-ms="630" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobStartedStatus -->
+        <test-method signature="completedJob()[pri:24, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:08 IST" name="completedJob" finished-at="2023-01-17T21:16:12 IST" duration-ms="3172" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- completedJob -->
+        <test-method signature="cancelledJob()[pri:25, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:12 IST" name="cancelledJob" finished-at="2023-01-17T21:16:16 IST" duration-ms="4197" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cancelledJob -->
+        <test-method signature="jobCancelledStatus()[pri:26, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:16 IST" name="jobCancelledStatus" finished-at="2023-01-17T21:16:16 IST" duration-ms="92" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobCancelledStatus -->
+        <test-method signature="jobDraftStatus()[pri:27, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:16 IST" name="jobDraftStatus" finished-at="2023-01-17T21:16:25 IST" duration-ms="9019" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobDraftStatus -->
+        <test-method signature="deletedJob()[pri:28, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:25 IST" name="deletedJob" finished-at="2023-01-17T21:16:27 IST" duration-ms="2120" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deletedJob -->
+        <test-method signature="searchJobNo()[pri:29, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:27 IST" name="searchJobNo" finished-at="2023-01-17T21:16:30 IST" duration-ms="3042" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchJobNo -->
+        <test-method signature="searchLocation()[pri:30, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:30 IST" name="searchLocation" finished-at="2023-01-17T21:16:33 IST" duration-ms="2430" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchLocation -->
+        <test-method signature="searchFilterByDate()[pri:31, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:33 IST" name="searchFilterByDate" finished-at="2023-01-17T21:16:36 IST" duration-ms="3676" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchFilterByDate -->
+        <test-method signature="searchInvalid()[pri:32, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:36 IST" name="searchInvalid" finished-at="2023-01-17T21:16:38 IST" duration-ms="1787" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchInvalid -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CustomerOrganizationJob@729d991e]" started-at="2023-01-17T21:16:38 IST" name="exitBrowser" finished-at="2023-01-17T21:16:39 IST" duration-ms="509" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- exitBrowser -->
+      </class> <!-- org.test.CustomerOrganizationJob -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

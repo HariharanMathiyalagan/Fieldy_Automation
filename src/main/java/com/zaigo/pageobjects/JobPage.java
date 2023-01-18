@@ -387,7 +387,7 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public void contactCreation() {
+	public void contactCreation() throws InterruptedException {
 		this.inputText(GlobalCustomer, fakeFirstName);
 		this.mouseActionClick(Add);
 		this.inputText(FirstName, fakeFirstName);
@@ -399,6 +399,7 @@ public class JobPage extends BaseClass {
 		this.inputText(CityName, fakeCity);
 		this.inputText(StateName, fakeState);
 		this.inputText(Zipcode, fakeZipcode);
+		Thread.sleep(2000);
 		this.mouseActionClick(Save);
 
 	}

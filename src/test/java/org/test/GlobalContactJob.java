@@ -98,7 +98,7 @@ public class GlobalContactJob extends BaseClass {
 	}
 
 	@Test(priority = 3)
-	private void autoCompleteContactCreation() throws IOException {
+	private void autoCompleteContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		JobPage contactMandatory = new JobPage(driver);
 		contactMandatory.contactCreation();
@@ -574,7 +574,7 @@ public class GlobalContactJob extends BaseClass {
 
 	@Test(priority = 26)
 	private void jobCancelledStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
+		extentTest = extentReports.createTest("Verify the Job has been cancelled status");
 		JobPage mandatory = new JobPage(driver);
 		String errorPasswordField = mandatory.cancelGlobalJobStatus();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);

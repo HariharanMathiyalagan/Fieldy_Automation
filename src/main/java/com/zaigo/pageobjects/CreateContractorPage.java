@@ -38,6 +38,7 @@ public class CreateContractorPage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(7);
+	String fakecountry = faker.address().country();
 
 	private By team = By.id("team-menu");
 
@@ -664,8 +665,8 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public void Location() throws InterruptedException, IOException {
-		this.LocationField(excelRead("Team Details Screen", 1, 0), fakeEmail, fakeFirstName + fakeLastName,
-				fakePhoneNumber, fakeAddress1, fakeAddress2, fakeState, fakeCity, fakeZipcode);
+		this.LocationField(fakecountry, fakeEmail, fakeFirstName + fakeLastName, fakePhoneNumber, fakeAddress1,
+				fakeAddress2, fakeState, fakeCity, fakeZipcode);
 
 	}
 

@@ -178,9 +178,10 @@ public class RequestPage extends BaseClass {
 	By Delete = By.xpath("//*[@gloss='Delete']");
 	By Back = By.xpath("//*[@alt='back_arrow']");
 	By Label = By.xpath("(//*[@data-draftback='requestdraft'])[2]");
+	By Label1 = By.xpath("//*[@data-draftback='requestdraft']");
 	By RequestNo = By.xpath("(//*[@class='id-number'])[1]");
 	By SearchContactBox = By.id("customer-contact-request-search-filter");
-	By SearchOrganizationBox = By.id("customer-company-request-search-filter");
+	By SearchOrganizationBox = By.id("customer-company-search-filter");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
 	By SearchLocation = By.id("customer-contact-request-card-profile-location");
 	By InvlaidSearch = By.xpath("//*[@class='title']");
@@ -196,7 +197,7 @@ public class RequestPage extends BaseClass {
 	By OrganizationLastName = By.id("contacts__last_name__0");
 	By OrganizationEmail = By.id("contacts__email__0");
 	By OrganizationPhoneNumber = By.id("contacts__phone__0");
-	By OrganizationRequestTittle = By.id("contacts__request_title__0");
+	By OrganizationRequestTittle = By.id("contacts__job_title__0");
 	By OrganizationContactSave = By.id("organization-contact-create");
 	By SelectTechnician = By.xpath(
 			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
@@ -210,7 +211,43 @@ public class RequestPage extends BaseClass {
 	By ScheduleTo = By.xpath(
 			"(//*[text()='Schedule To : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
 	By RequestLabelNo = By.xpath("(//*[text()='Request No :'])[1]");
-	
+	By OrgContactName = By.id("id_user_customer");
+	By OrgContactAdd = By.xpath("//*[@class='add_new_btn3 btn-30 btn btn-bg-blue pr-2 pl-2']");
+	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
+	By AssertDashboard = By.xpath("//*[text()=' Company Performance']");
+	By Request = By.id("request-menu");
+	By ListCustomer = By.xpath("//*[text()='Customer']");
+	By CreateGlobalRequest = By.xpath("//*[@data-automationid='request-create']");
+	By ContactNameError = By.id("id_customer_group_error");
+	By GlobalCustomer = By.id("id_customer_group");
+	By Add = By.xpath("//*[@class='add_new_btn btn btn-30 btn-bg-blue pr-2 pl-2 ']");
+	By FirstName = By.id("first_name");
+	By LastName = By.id("last_name");
+	By Email = By.id("email");
+	By Phone = By.id("phones__number__0");
+	By Address1 = By.id("addresses__line_1__0");
+	By Address2 = By.id("addresses__line_2__0");
+	By StateName = By.id("addresses__state__0");
+	By CityName = By.id("addresses__city__0");
+	By Zipcode = By.id("addresses__zipcode__0");
+	By Save = By.id("contact-create");
+	By GlobalStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
+	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
+	By GlobalEdit = By.xpath("(//*[@data-n-linkto='main_request_edit'])[1]");
+	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
+	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
+	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
+	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
+	By ThreeDotsCancel = By.xpath("(//*[@class='fa fa-ellipsis-v'])[3]");
+	By GlobalCancelledStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[12]");
+	By GlobalSearchRequestNo = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[2]");
+	By GlobalCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
+	By GlobalLocation = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
+	By GlobalDate = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By GlobalSearchBox = By.id("request-search-input-filter");
+	By GlobalFrom = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[1]");
+	By GlobalTo = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[2]");
+
 	public void customerContactRequestListPage() throws InterruptedException {
 		String text = this.getText(ContactListName);
 		this.mouseActionClick(ContactListName);
@@ -549,10 +586,232 @@ public class RequestPage extends BaseClass {
 		this.assertName(RequestLabelNo, "Request No :");
 
 	}
-	
+
 	public String invalidSearch() {
 		this.tagValidation(SearchContactBox, randomCharacter);
 		String text2 = this.getText(InvlaidSearch);
+		return text2;
+
+	}
+
+	public void customerOrganizationRequestListPage() throws InterruptedException {
+		String text = this.getText(OrganizationListName);
+		this.mouseActionClick(OrganizationListName);
+		this.assertName(OrganizationListName, text);
+		this.mouseActionClick(ClickOrganizationRequest);
+		this.assertName(CreateOrganizationRequest, "Create Request");
+		this.mouseActionClick(CreateOrganizationRequest);
+	}
+
+	public void organizationContactCreate() {
+		this.inputText(OrgContactName, fakeFirstName);
+		this.mouseActionClick(OrgContactAdd);
+		this.inputText(OrganizationFirstName, fakeFirstName);
+		this.inputText(OrganizationLastName, fakeLastName);
+		this.inputText(OrganizationEmail, fakeEmail);
+		this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
+		this.inputText(OrganizationRequestTittle, fakeTittle);
+		this.mouseActionClick(OrganizationContactSave);
+	}
+
+	public String responseMessageCreateContact() {
+		String text2 = this.getText(ContactCreateMessage);
+		return text2;
+
+	}
+
+	public void customerOrganizationRequest() throws InterruptedException {
+		Thread.sleep(2000);
+		this.mouseActionClick(CreateOrganizationRequest);
+		Thread.sleep(2000);
+
+	}
+
+	public void draftRequest1() throws IOException, InterruptedException {
+		this.mouseActionClick(CreateOrganizationRequest);
+		Thread.sleep(5000);
+		this.mouseActionClick(Back);
+		this.mouseActionClick(Yes);
+		this.assertName(RequestDraftedMessage, "Request drafted");
+
+	}
+
+	public String searchRequestNo1() {
+		String text = this.getText(RequestNo);
+		this.tagValidation(SearchOrganizationBox, text);
+		String text2 = this.getText(RequestNo);
+		return text2;
+
+	}
+
+	public String searchLocation1() {
+		String text = this.getText(SearchLocation);
+		this.tagValidation(SearchOrganizationBox, text);
+		String text2 = this.getText(SearchLocation);
+		return text2;
+
+	}
+
+	public void filterByDate1() {
+		this.mouseActionClick(Filter);
+		String currentFilterPickerFromDate = this.currentFilterPickerFromDate();
+		String currentFilterPickerToDate = this.currentFilterPickerToDate();
+		this.inputText(FilterOrganizationFrom, currentFilterPickerFromDate);
+		this.inputText(FilterOrganizationTo, currentFilterPickerToDate);
+		this.mouseActionClick(Apply);
+
+	}
+
+	public void clearSearch1() {
+		this.clearField(SearchOrganizationBox);
+
+	}
+
+	public String invalidSearch1() {
+		this.tagValidation(SearchOrganizationBox, randomCharacter);
+		String text2 = this.getText(InvlaidSearch);
+		return text2;
+
+	}
+
+	public void module() throws InterruptedException {
+		this.assertName(AssertDashboard, "Company Performance");
+		this.mouseActionClick(Request);
+		this.assertName(ListCustomer, "Customer");
+		this.mouseActionClick(CreateGlobalRequest);
+
+	}
+
+	public void mandatoryContactField() throws InterruptedException {
+		this.assertName(Label1, "Create Request");
+		Thread.sleep(5000);
+		this.mouseActionClick(SaveComplete);
+
+	}
+
+	public String errorContact() {
+		String text = this.getText(ContactNameError);
+		return text;
+	}
+
+	public void contactCreation() throws InterruptedException {
+		this.inputText(GlobalCustomer, fakeFirstName);
+		this.mouseActionClick(Add);
+		this.inputText(FirstName, fakeFirstName);
+		this.inputText(LastName, fakeLastName);
+		this.inputText(Email, fakeEmail);
+		this.inputText(Phone, fakePhoneNumber);
+		this.inputText(Address1, fakeAddress1);
+		this.inputText(Address2, fakeAddress2);
+		this.inputText(CityName, fakeCity);
+		this.inputText(StateName, fakeState);
+		this.inputText(Zipcode, fakeZipcode);
+		Thread.sleep(2000);
+		this.mouseActionClick(Save);
+
+	}
+
+	public void globalRequest() throws InterruptedException {
+		Thread.sleep(2000);
+		this.mouseActionClick(CreateGlobalRequest);
+		Thread.sleep(2000);
+
+	}
+
+	public String globalRequestStatus() {
+		String text = this.getText(GlobalStatus);
+		return text;
+
+	}
+
+	public String globalDispatchTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalDispatch);
+		this.mouseActionClick(Yes);
+		String text = this.getText(RequestDispatchMessage);
+		return text;
+	}
+
+	public String globalStartTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalStart);
+		this.mouseActionClick(Yes);
+		String text = this.getText(RequestStartedMessgae);
+		return text;
+	}
+
+	public String globalCompletedTiggerFunction() {
+		this.mouseActionClick(ThreeDots);
+		this.mouseActionClick(GlobalComplete);
+		this.mouseActionClick(Yes);
+		String text = this.getText(RequestCompletedMessage);
+		return text;
+	}
+
+	public String globalCancelledTigerFunction() {
+		this.mouseActionClick(ThreeDotsCancel);
+		this.mouseActionClick(GlobalCancel);
+		this.mouseActionClick(Yes);
+		String text = this.getText(RequestCancelledMessage);
+		return text;
+
+	}
+
+	public String cancelGlobalRequestStatus() {
+		String text = this.getText(GlobalCancelledStatus);
+		return text;
+
+	}
+
+	public String searchCustomerName() {
+		String text = this.getText(GlobalCustomerName);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalCustomerName);
+		return text2;
+
+	}
+
+	public String searchRequestNo2() {
+		String text = this.getText(GlobalSearchRequestNo);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalSearchRequestNo);
+		return text2;
+
+	}
+
+	public String searchLocation2() {
+		String text = this.getText(GlobalLocation);
+		this.tagValidation(GlobalSearchBox, text);
+		String text2 = this.getText(GlobalLocation);
+		return text2;
+
+	}
+
+	public void filterByDate2() throws InterruptedException {
+		this.mouseActionClick(Filter);
+		String currentFilterPickerFromDate = this.currentFilterPickerFromDate();
+		String currentFilterPickerToDate = this.currentFilterPickerToDate();
+		this.inputText(GlobalFrom, currentFilterPickerFromDate);
+		this.inputText(GlobalTo, currentFilterPickerToDate);
+		Thread.sleep(2000);
+		this.mouseActionClick(Apply);
+
+	}
+
+	public String validateScheduledDate() {
+		String text = this.getText(GlobalDate);
+		return text;
+
+	}
+
+	public void clearSearch2() {
+		this.clearField(GlobalSearchBox);
+
+	}
+	
+	public String invalidSearch2() {
+		this.tagValidation(GlobalSearchBox, randomCharacter);
+		String text2 = this.getText(GlobalInvlaidSearch);
 		return text2;
 
 	}

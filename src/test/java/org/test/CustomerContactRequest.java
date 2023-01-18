@@ -580,7 +580,7 @@ public class CustomerContactRequest extends BaseClass{
 
 	@Test(priority = 26)
 	private void requestCancelledStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
+		extentTest = extentReports.createTest("Verify the Request has been Cancelled Status");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.cancelRequestStatus();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
