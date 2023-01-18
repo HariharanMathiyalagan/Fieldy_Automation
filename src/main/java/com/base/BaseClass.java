@@ -7,8 +7,10 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hpsf.Date;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -261,86 +264,136 @@ public class BaseClass {
 
 	}
 
-	public static void excelWrite(String sheetRow, int row, int cell, String value) throws IOException {// 28
+	public static void excelWrite(String sheet, int row, int cell, String value) throws IOException {// 28
 		File f = new File(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
 
 		FileInputStream fin = new FileInputStream(f);
 
 		XSSFWorkbook w = new XSSFWorkbook(fin);
-//		XSSFSheet sheetAt = w.getSheetAt(sheetRow);
-//		sheetAt.getRow(row).getCell(cell).setCellValue(value);
-//		FileOutputStream fout = new FileOutputStream(f);
-//		w.write(fout);
-		Sheet s = w.getSheet(sheetRow);
+		XSSFSheet sheetAt = w.getSheetAt(0);
+		sheetAt.getRow(row).getCell(cell).setCellValue(value);
+		System.out.println(value);
+		FileOutputStream fileOutputStream = new FileOutputStream(f);
+		w.write(fileOutputStream);
+//		w.close();
+	}
 
-		Row r = s.getRow(row);
+	public String getdata(String filenamepath, String sheetname, int rowno, int cellno) throws IOException {
 
-		Cell c = r.getCell(cell);
+		String data = null;
 
-		c.setCellValue(value);
-		FileOutputStream fout = new FileOutputStream(f);
-		w.write(fout);
+		File file = new File(filenamepath);
+
+		FileInputStream stream = new FileInputStream(file);
+
+		Workbook workbook = new XSSFWorkbook(stream);
+
+		Sheet sheet = workbook.getSheet(sheetname);
+
+		Row row = sheet.getRow(rowno);
+
+		org.apache.poi.ss.usermodel.Cell cell = row.getCell(cellno);
+
+		CellType type = cell.getCellType();
+
+		switch (type) {
+		case STRING:
+			data = cell.getStringCellValue();
+
+			break;
+		case NUMERIC:
+
+			if (DateUtil.isCellDateFormatted(cell)) {
+
+				java.util.Date date = cell.getDateCellValue();
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy");
+
+				data = dateFormat.format(date);
+			}
+
+			else {
+
+				double d = cell.getNumericCellValue();
+				BigDecimal b = BigDecimal.valueOf(d);
+				data = b.toString();
+
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+		return data;
+	}
+
+	public void updatedata(String filenamepath, String sheetname, int rowno, int cellno, String olddata, String newdata)
+			throws IOException {
+
+		File file = new File(filenamepath);
+
+		FileInputStream stream = new FileInputStream(file);
+
+		Workbook workbook = new XSSFWorkbook(stream);
+
+		Sheet sheet = workbook.getSheet(sheetname);
+
+		Row row = sheet.getRow(rowno);
+
+		org.apache.poi.ss.usermodel.Cell cell = row.getCell(cellno);
+
+		String value = cell.getStringCellValue();
+
+		if (value.equals(olddata)) {
+
+			cell.setCellValue(newdata);
+		}
+
+		FileOutputStream o = new FileOutputStream(file);
+		workbook.write(o);
 
 	}
 
-	public void fakeFirstName() {
-		Faker faker = new Faker();
-		String firstName = faker.name().firstName();
+	public void Writedata()
+			throws IOException, InvalidFormatException {
+
+		File file = new File(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
+
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheet("Onboarding");
+
+		int rowNum = sheet.getLastRowNum()+1;
+		Row row = sheet.createRow(rowNum);
+
+		Cell cell = row.createCell(0);
+		cell.setCellValue("Test Result");
+
+		FileOutputStream fos = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\Automation Test Data.xlsx");
+		workbook.write(fos);
+		fos.close();
+		workbook.close();
 
 	}
 
-	public static void fakeLastName() {
-		Faker faker = new Faker();
-		String lastName = faker.name().lastName();
+	public void createworkbook(String filenamepath, String sheetname, int rowno, int cellno, String data)
+			throws IOException {
+
+		File file = new File(filenamepath);
+
+		Workbook workbook = new XSSFWorkbook();
+
+		Sheet sheet = workbook.createSheet(sheetname);
+
+		Row row = sheet.getRow(rowno);
+
+		org.apache.poi.ss.usermodel.Cell cell = row.createCell(cellno);
+
+		cell.setCellValue(data);
+
+		FileOutputStream o = new FileOutputStream(file);
+		workbook.write(o);
 
 	}
-
-	public void fakePhoneNumber() {
-		Faker faker = new Faker();
-		String phoneNumber = faker.phoneNumber().phoneNumber();
-
-	}
-
-	public void fakeAddress1() {
-		Faker faker = new Faker();
-		String Address1 = faker.address().buildingNumber();
-
-	}
-
-	public void fakeCity() {
-		Faker faker = new Faker();
-		String city = faker.address().city();
-
-	}
-
-	public void fakeState() {
-		Faker faker = new Faker();
-		String state = faker.address().state();
-
-	}
-
-	public void fakeAddress2() {
-		Faker faker = new Faker();
-		String Address1 = faker.address().streetAddress();
-
-	}
-
-	public void fakeZipcode() {
-		Faker faker = new Faker();
-		String Address1 = faker.address().zipCode();
-
-	}
-
-	public void fakeWebsite() {
-		Faker faker = new Faker();
-		String website = faker.company().url();
-
-	}
-
-	public void fakeCompanyName() {
-		Faker faker = new Faker();
-		String companyName = faker.company().name();
-
-	}
-
 }

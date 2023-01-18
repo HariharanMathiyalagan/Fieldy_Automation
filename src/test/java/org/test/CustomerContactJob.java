@@ -579,13 +579,13 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 26)
 	private void jobCancelledStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
+		extentTest = extentReports.createTest("Verify the Job had been cancelled Status");
 		JobPage mandatory = new JobPage(driver);
 		String errorPasswordField = mandatory.cancelJobStatus();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("JobCancelledMessage"));
+		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("CancelledStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("JobCancelledMessage"))) {
+		if (errorPasswordField.equals(getPropertyValue("CancelledStatus"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");

@@ -43,6 +43,7 @@ public class CreateUserPage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeTittle = faker.name().title();
+	String fakecountry = faker.address().country();
 
 	public CreateUserPage(WebDriver driver) {
 		this.driver = driver;
@@ -135,10 +136,10 @@ public class CreateUserPage extends BaseClass {
 	By ErrorLastName = By.id("last_name_error");
 	By Type = By.xpath("//input[@data-dropdownlist='user-type']");
 	By ErrorType = By.id("role_id_error");
-	By Admin = By.id("dropid-61");
-	By Manager = By.id("dropid-203");
-	By Operator = By.id("dropid-204");
-	By Technician = By.id("dropid-205");
+	By Admin = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[1]");
+	By Manager = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[2]");
+	By Operator = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[3]");
+	By Technician = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[4]");
 	By JobTittle = By.id("job_title");
 	By ErrorJobTittle = By.id("job_title_error");
 	By Email = By.id("email");
@@ -487,7 +488,7 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public void locationpage() throws IOException {
-		this.inputText(LocationName, excelRead("Team User", 1, 6));
+		this.inputText(LocationName, fakecountry);
 		this.inputText(Address1, fakeAddress1);
 		this.inputText(Address2, fakeAddress2);
 		this.inputText(State, fakeState);
@@ -661,9 +662,8 @@ public class CreateUserPage extends BaseClass {
 		this.mouseActionClick(Next);
 
 	}
-
 	public String locationContractorPage() throws IOException {
-		this.inputText(LocationName, excelRead("Team Details Screen", 1, 0));
+		this.inputText(LocationName, fakecountry);
 		this.inputText(Address1, fakeAddress1);
 		this.inputText(Address2, fakeAddress2);
 		this.inputText(City, fakeCity);
@@ -761,7 +761,7 @@ public class CreateUserPage extends BaseClass {
 		this.inputText(Email, fakeEmail);
 		this.mouseActionClick(Next);
 		this.clearField(LocationName);
-		this.inputText(LocationName, excelRead("Team Details Screen", 1, 0));
+		this.inputText(LocationName, fakecountry);
 		this.mouseActionClick(SaveComplete);
 		String text = this.getText(UpdateContractorMessage);
 		return text;

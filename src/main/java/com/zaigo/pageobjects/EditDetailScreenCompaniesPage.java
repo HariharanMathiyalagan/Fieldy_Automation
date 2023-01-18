@@ -254,7 +254,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 //		this.inputCity(excelRead("Team Details Screen", 1, 6));
 //		this.inputState(excelRead("Team Details Screen", 1, 7));
 //		this.inputZipcode(excelRead("Team Details Screen", 1, 8));
-		this.inputLocation(excelRead("Team Details Screen", 1, 0));
+		this.inputLocation("London");
 		this.inputEmail(fakeEmail);
 		this.inputContactPerson(fakeFirstName + fakeLastName);
 		this.inputPhoneNumber(fakePhoneNumber);

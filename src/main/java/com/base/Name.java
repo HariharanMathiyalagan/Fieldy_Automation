@@ -1,36 +1,45 @@
 package com.base;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Locale;
-import java.util.Random;
+import java.util.Properties;
 
-import com.github.javafaker.Company;
-import com.github.javafaker.Country;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.github.javafaker.Faker;
-import com.github.javafaker.File;
-import com.github.javafaker.FunnyName;
-import com.github.javafaker.Number;
 
-public class Name {
+public class Name extends BaseClass {
 
-	public static void main(String[] args) {
-//	Locale default1 = Locale.getDefault();
-//	System.out.println(default1.getCountry());
-//	System.out.println(default1.getDisplayLanguage());
-//	Locale[] availableLocales = Locale.getAvailableLocales();
-//for (Locale locale : availableLocales) {
-//	System.out.println(locale);
-//		Faker faker = new Faker(new Locale("en-IND"));
-//		String characters = faker.ancient().titan();
-//		System.out.println(characters);
+	public static void main(String[] args) throws IOException {
+//String excelPath = "C:\\Users\\Zaigo PC\\eclipse-workspace\\Fieldy_Zaiportal_New\\Folder\\Test Data.xlsx";
+//		File file = new File(excelPath);
+//		FileInputStream fis = new FileInputStream(file);
+//		XSSFWorkbook workBook = new XSSFWorkbook(fis);
 //		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, 1);
-		String currentDate = sdf.format(cal.getTime());
-		System.out.println(currentDate);
-	
+//		XSSFSheet sheet = workBook.getSheet("Onboarding");
+//		sheet.getRow(1).createCell(1).setCellValue("Value");
+//		FileOutputStream fos = new FileOutputStream(new File(excelPath));
+//		workBook.write(fos);
+//		workBook.close();
+//		
+//		
+//
+//		Properties properties = new Properties();
+//		properties.setProperty("Tenant", "Test");
+//		FileOutputStream stream = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\config.properties");
+//		properties.store(stream, null);
+////		String value = (String) properties.get("Tenant");
 
+		Faker faker = new Faker(new Locale("en-IND"));
+		String country = faker.address().country();
+		System.out.println(country);
+
+		
 	}
+
 }

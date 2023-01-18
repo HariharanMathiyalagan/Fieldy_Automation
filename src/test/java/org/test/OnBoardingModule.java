@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -70,9 +71,10 @@ public class OnBoardingModule extends BaseClass {
 //		}
 //	}
 
-	@Test(priority = 1)
-	public void mandatoryBussinessNameFieldValidation() throws IOException {
-		extentTest = extentReports.createTest("Check the Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
+	@Test(priority = 0)
+	public void mandatoryBussinessNameFieldValidation() throws IOException, InvalidFormatException {
+		extentTest = extentReports.createTest(
+				"Check the Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.emailText();
 		mandatory.mandatoryValidation();
@@ -93,10 +95,11 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
-	@Test(priority = 2)
+
+	@Test(priority = 1)
 	public void mandatoryEmailFieldValidation() throws IOException {
-		extentTest = extentReports.createTest("Check the Email field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports
+				.createTest("Check the Email field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.mandatoryEmailValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
@@ -116,11 +119,11 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void alreadyBussinessNameValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify [Business Name Already Exists] Error is dispalyed when already existing Bussiness Name is provided");
+		extentTest = extentReports.createTest(
+				"Verify [Business Name Already Exists] Error is dispalyed when already existing Bussiness Name is provided");
 		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
 		alreadyBussiness.alreadyBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
@@ -138,6 +141,32 @@ public class OnBoardingModule extends BaseClass {
 			File file = new File("BussinessNameValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("BussinessNameValidation.png");
+			alreadyBussiness.clearCompanyName();
+
+		}
+	}
+	
+	@Test(priority = 3)
+	private void specialCharacterBussinessNameValidation() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Special Character validation in the Bussiness Name Field");
+		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
+		alreadyBussiness.specialCharacterBussinessName();
+		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
+		extentTest.log(Status.INFO, "Actual Result validation Data - " + errorMessageBussinessName);
+		extentTest.log(Status.INFO,
+				"Expected Result validation Data - " + getPropertyValue("BussinessNameSpecialCharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMessageBussinessName.equals(getPropertyValue("BussinessNameSpecialCharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			alreadyBussiness.clearCompanyName();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("BussinessNameSpecialValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("BussinessNameSpecialValidation.png");
 			alreadyBussiness.clearCompanyName();
 
 		}
@@ -412,6 +441,7 @@ public class OnBoardingModule extends BaseClass {
 		radioButton.radioButtonCurrent();
 
 	}
+
 	@Test(priority = 17)
 	private void mandatoryValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Location Field");
@@ -433,7 +463,7 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 18)
 	private void maximumValidationLocation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
@@ -441,7 +471,8 @@ public class OnBoardingModule extends BaseClass {
 		mandatory.maximumValidationLocation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO,
+				"Expected Result Validation Data -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -457,8 +488,6 @@ public class OnBoardingModule extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 19)
 	private void passwordMandatoryField() throws IOException {
@@ -554,7 +583,6 @@ public class OnBoardingModule extends BaseClass {
 
 	}
 
-	
 	@Test(priority = 23)
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
@@ -633,4 +661,3 @@ public class OnBoardingModule extends BaseClass {
 	}
 
 }
-

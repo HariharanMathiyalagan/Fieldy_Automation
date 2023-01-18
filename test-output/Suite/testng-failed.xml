@@ -10,6 +10,22 @@
           <include name="contactMandatoryValidation"/>
         </methods>
       </class> <!-- org.test.GlobalOrganizationJob -->
+      <class name="org.test.GlobalContactJob">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="maximumValidationNotes"/>
+          <include name="setup"/>
+          <include name="autoCompleteContactCreation"/>
+          <include name="maxTagLimitValidation"/>
+        </methods>
+      </class> <!-- org.test.GlobalContactJob -->
+      <class name="org.test.CustomerOrganizationJob">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="loginPage"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.test.CustomerOrganizationJob -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
