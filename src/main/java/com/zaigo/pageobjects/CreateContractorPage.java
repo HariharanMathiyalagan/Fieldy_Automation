@@ -180,7 +180,7 @@ public class CreateContractorPage extends BaseClass {
 	By clickNext = By.xpath("//*[@id=\"team-company-contractor\"]/div/div/div[1]/button[2]/span");
 
 	By AddContractor = By.xpath("//button[@data-formsactions='create']");
-	By TotalCount = By.xpath("total-company-contractor-count");
+	By TotalCount = By.id("total-company-contractor-count");
 	static int parseInt;
 
 	public int getCount() {
@@ -1054,6 +1054,12 @@ public class CreateContractorPage extends BaseClass {
 		this.validationTab(txtEmail, text);
 		this.mouseActionClick(Next);
 		this.mouseActionClick(Previous);
+
+	}
+
+	public String errorEmail() {
+		String text = this.getText(contractoremailerr);
+		return text;
 
 	}
 

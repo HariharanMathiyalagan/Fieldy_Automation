@@ -189,7 +189,7 @@ public class CreateUserPage extends BaseClass {
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
-	By TotalCount = By.xpath("//*[text()='total-user-contractor-count']");
+	By TotalCount = By.id("total-user-contractor-count");
 	static int parseInt;
 
 	public int getCount() {

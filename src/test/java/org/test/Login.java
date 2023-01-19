@@ -51,8 +51,8 @@ public class Login {
 		loginInPage.setUserCredentials("", "");
 		loginInPage.clickLoginButton();
 		String nameerr = driver.findElement(By.id("login")).getAttribute("validationMessage");
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO, "Expected Error Validation -" + loginInPage.getPropertyValue("EmptyEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("EmptyEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("EmptyEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -74,9 +74,8 @@ public class Login {
 		loginInPage.setUserCredentials("fieldy@mailinator.com", "");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO,
-				"Expected Error Validation -" + loginInPage.getPropertyValue("InvalidPasswordField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("InvalidPasswordField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("InvalidPasswordField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -98,8 +97,8 @@ public class Login {
 		loginInPage.setUserCredentials("fieldys@zaiportal.com", "Zaiserve@123");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessageUserName();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO, "Expected Error Validation -" + loginInPage.getPropertyValue("InvalidEmailField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("InvalidEmailField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("InvalidEmailField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -121,9 +120,8 @@ public class Login {
 		loginInPage.setUserCredentials("fieldy@mailinator.com", "Zaisuite@124");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO,
-				"Expected Error Validation -" + loginInPage.getPropertyValue("InvalidPasswordField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("InvalidPasswordField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("InvalidPasswordField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -145,8 +143,8 @@ public class Login {
 		loginInPage.setUserCredentials("admin", "Zaiserve@123");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessageUserName();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO, "Expected Error Validation -" + loginInPage.getPropertyValue("InvalidEmailField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("InvalidEmailField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("InvalidEmailField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -169,9 +167,8 @@ public class Login {
 		loginInPage.passwordField("asd");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessagePassword();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO,
-				"Expected Error Validation -" + loginInPage.getPropertyValue("MinCharacterPasswordField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("MinCharacterPasswordField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("MinCharacterPasswordField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -192,8 +189,8 @@ public class Login {
 		loginInPage.setUserCredentials("fieldy@zaiportal.co", "sxdasdsdd");
 		loginInPage.clickLoginButton();
 		String nameerr = loginInPage.getErrorMessageUserName();
-		extentTest.log(Status.INFO, "Actual Error Validation -" + nameerr);
-		extentTest.log(Status.INFO, "Expected Error Validation -" + loginInPage.getPropertyValue("InvalidEmailField"));
+		extentTest.log(Status.INFO, "Actual Result is -" + nameerr);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("InvalidEmailField"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (nameerr.equals(loginInPage.getPropertyValue("InvalidEmailField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -218,9 +215,8 @@ public class Login {
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
-		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result Validation Data -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(loginInPage.getPropertyValue("ValidationOfLandingPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
