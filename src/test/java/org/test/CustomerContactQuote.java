@@ -23,7 +23,7 @@ import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class CustomerContactQuote extends BaseClass{
+public class CustomerContactQuote extends BaseClass {
 
 	private WebDriver driver = null;
 	ExtentReports extentReports;
