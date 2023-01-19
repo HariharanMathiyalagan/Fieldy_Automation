@@ -24,6 +24,7 @@ import com.base.BaseClass;
 import com.github.javafaker.Faker;
 import com.zaigo.pageobjects.CreateContractorPage;
 import com.zaigo.pageobjects.CreateUserPage;
+import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.EditContractorCompaniesPage;
 import com.zaigo.pageobjects.EditDetailScreenCompaniesPage;
 import com.zaigo.pageobjects.EditUserPage;
@@ -775,6 +776,28 @@ public class TeamModule extends BaseClass {
 			File file = new File("27.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("27.png");
+		}
+
+	}
+	
+	@Test(priority = 29)
+	private void companiesContractorCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Companies Contractor Created Count is added in the Total Contractor Count");
+		CreateContractorPage create = new CreateContractorPage(driver);
+		int actualTotal = create.actualResult();
+		int expectedResult = create.totalCount();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualTotal == expectedResult) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CompaniesContractorCount.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CompaniesContractorCount.png");
 		}
 
 	}
@@ -2244,7 +2267,7 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 57)
+	@Test(priority = 87)
 	private void specialCharacterValidationContractorZipcode() throws IOException {
 		extentTest = extentReports.createTest("Verify the Special Character Validation Contractor Zipcode Field");
 		CreateUserPage landing = new CreateUserPage(driver);
@@ -2318,6 +2341,28 @@ public class TeamModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("88.png");
 
+		}
+
+	}
+	
+	@Test(priority = 29)
+	private void userContractorCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the User Contractor Created Count is added in the Total Contractor Count");
+		CreateUserPage create = new CreateUserPage(driver);
+		int actualTotal = create.actualResult();
+		int expectedResult = create.totalCount();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualTotal == expectedResult) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("UserContractorCount.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("UserContractorCount.png");
 		}
 
 	}

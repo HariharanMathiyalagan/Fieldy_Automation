@@ -74,7 +74,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 0)
 	public void mandatoryBussinessNameFieldValidation() throws IOException, InvalidFormatException {
 		extentTest = extentReports.createTest(
-				"Check the Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
+				"Check Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.emailText();
 		mandatory.mandatoryValidation();
@@ -174,7 +174,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 4)
 	public void maximumValidationBussinessName() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Bussiness Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Business Name Field exceed its max-256 limit");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
 		maxValidation.maximumValidationBussinessName();
 		String errorMessageBussinessName = maxValidation.errorMessageBussinessName();
@@ -199,7 +199,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 5)
 	private void maximumValidationBussinessWebSite() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Bussiness Website Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Business Website Field exceed its max-2048 limit");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
 		maxValidation.maximumValidationBussinessWebSite();
 		String errorWebsite = maxValidation.errorWebsite();
@@ -223,7 +223,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 6)
 	private void maximumValidationFirstName() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when First Name Field exceed its max-256 limit");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
 		maxValidation.maximumValidationFirstName();
 		String errorFirstName = maxValidation.errorFirstName();
@@ -248,7 +248,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 7)
 	private void maximumValidationLastName() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Last Name Field exceed its max-256 limit");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
 		maxValidation.maximumValidationLastName();
 		String errorLastName = maxValidation.errorLastName();
@@ -274,7 +274,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 8)
 	private void maximumValidationEmail() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Email Field exceed its max-256 limit");
 		OnBoardingPage maxValidation = new OnBoardingPage(driver);
 		maxValidation.maximumValidationEmail();
 		String errorEmail = maxValidation.errorEmail();
@@ -300,7 +300,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 9)
 	private void validateEmailFormat() throws IOException {
-		extentTest = extentReports.createTest("Verify the Valid Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when invalid email is entered in Email Field");
 		OnBoardingPage validEmail = new OnBoardingPage(driver);
 		validEmail.validationEmail();
 		String errorEmail = validEmail.errorEmail();
@@ -324,7 +324,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 10)
 	private void existingEmailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Already Existed Email Field");
+		extentTest = extentReports.createTest("Verify [Email Already Exists] Error is dispalyed when already existing mail ID is provided");
 		OnBoardingPage existing = new OnBoardingPage(driver);
 		existing.alreadyExistValidation();
 		String errorEmail = existing.errorEmail();
@@ -349,7 +349,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 11)
 	private void correctValidationEmail() throws IOException {
-		extentTest = extentReports.createTest("Verify the User is Landing on Industry Page");
+		extentTest = extentReports.createTest("Verify User is Landing in Industry Page after providing the Business details");
 		OnBoardingPage validation = new OnBoardingPage(driver);
 		validation.validEmail();
 		String messageLandingPage = validation.messageLandingPage();
@@ -372,7 +372,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 12)
 	private void validateRadioButtonClickable() {
-		extentTest = extentReports.createTest("Verify the Industry Radio Button is Clickable");
+		extentTest = extentReports.createTest("Verify the Industry Radio Button are Clickable");
 		OnBoardingPage radioButton = new OnBoardingPage(driver);
 		radioButton.industryRadioButton();
 
@@ -380,7 +380,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 13)
 	private void industryTypeFieldPresent() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mention your industry information is Present in the Page");
+		extentTest = extentReports.createTest("Verify Mention your industry information input field is Present in the Page");
 		OnBoardingPage fieldPresent = new OnBoardingPage(driver);
 		fieldPresent.industryTypeFieldPresent();
 		String messagePresent = fieldPresent.messagePresent();
@@ -403,7 +403,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 14)
 	private void maximumValidationIndustryField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Industry Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Industry type Field exceed its max-64 limit");
 		OnBoardingPage industryValidation = new OnBoardingPage(driver);
 		industryValidation.maximumValidationIndustryField();
 		String errorIndustryField = industryValidation.errorIndustryField();
@@ -444,7 +444,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 17)
 	private void mandatoryValidationLocation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation in Location Field");
+		extentTest = extentReports.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.mandatoryLocationValidation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
@@ -466,7 +466,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 18)
 	private void maximumValidationLocation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.maximumValidationLocation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
@@ -491,7 +491,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 19)
 	private void passwordMandatoryField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation in Password Field");
+		extentTest = extentReports.createTest("Verify Password field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);
 		mandatory.passwordFieldMandatory();
 		String errorPasswordField = mandatory.errorPasswordField();
@@ -513,7 +513,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 20)
 	private void minValidationPassword() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation in Password Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-8 limit is provided in password field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
 		minValidation.minimumValidationPassword();
 		String errorMinPassword = minValidation.errorMinPassword();
@@ -537,7 +537,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 21)
 	private void minValidationConfirmPassword() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation in Confirm Password Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-8 limit is provided in confirm password field");
 		OnBoardingPage minValidation = new OnBoardingPage(driver);
 		minValidation.minimumValidationConfirmPassword();
 		String errorConfirmMessage = minValidation.errorConfirmMessage();
@@ -561,7 +561,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 22)
 	private void passwordFieldConditions() throws IOException {
-		extentTest = extentReports.createTest("Verify to Check the Password Condition Validation");
+		extentTest = extentReports.createTest("Verify error message is displayed when Password Condition does not match in Password field");
 		OnBoardingPage condition = new OnBoardingPage(driver);
 		condition.passwordFieldCondition();
 		String errorPasswordField = condition.errorPasswordField();
@@ -585,7 +585,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 23)
 	private void confirmPasswordFieldCondition() throws IOException {
-		extentTest = extentReports.createTest("Verify to Check the Confirm Password Condition Validation");
+		extentTest = extentReports.createTest("Verify error message is displayed when Password Condition does not match in Confirm Password field");
 		OnBoardingPage condition = new OnBoardingPage(driver);
 		condition.confirmPasswordFieldCondition();
 		String errorConfirmMessage = condition.errorConfirmMessage();
@@ -633,7 +633,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 25)
 	private void mismatchPassword() throws IOException {
-		extentTest = extentReports.createTest("Verify to Check the Mismatch in Confirm Password Field Validation");
+		extentTest = extentReports.createTest("Verify Error message is displayed when confirm password does not match with the Password Field");
 		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
 		mismatchPassword.mismatchPasswordValidation();
 		String errorConfirmMessage = mismatchPassword.errorConfirmMessage();

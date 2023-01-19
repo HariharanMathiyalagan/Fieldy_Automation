@@ -189,9 +189,35 @@ public class CreateUserPage extends BaseClass {
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
+	By TotalCount = By.xpath("//*[text()='total-user-contractor-count']");
+	static int parseInt;
+
+	public int getCount() {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+
+	}
+
+	public int actualResult() {
+		int a = parseInt + 1;
+		return a;
+	}
+
+	By ContactName = By.xpath("//*[text()='First Name']");
+
+	public int totalCount() throws InterruptedException {
+		this.assertName(ContactName, "First Name");
+		String text2 = this.getText(TotalCount);
+		int parseInt = Integer.parseInt(text2);
+		return parseInt;
+	}
 
 	public void userPageLanding() {
 		this.mouseActionClick(User);
+		this.assertName(ContactName, "First Name");
+		
 		this.mouseActionClick(CreateUser);
 
 	}
@@ -203,6 +229,8 @@ public class CreateUserPage extends BaseClass {
 
 	public String landingContractorFormPage() {
 		this.mouseActionClick(Contractor);
+		this.assertName(ContactName, "First Name");
+		this.getCount();
 		this.mouseActionClick(CreateContractor);
 		String text = this.getText(ContractorCreateLabelHeading);
 		return text;
@@ -662,6 +690,7 @@ public class CreateUserPage extends BaseClass {
 		this.mouseActionClick(Next);
 
 	}
+
 	public String locationContractorPage() throws IOException {
 		this.inputText(LocationName, fakecountry);
 		this.inputText(Address1, fakeAddress1);

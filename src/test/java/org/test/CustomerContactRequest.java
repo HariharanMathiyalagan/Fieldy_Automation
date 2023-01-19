@@ -70,7 +70,7 @@ public class CustomerContactRequest extends BaseClass{
 	}
 
 	@Test(priority = 1)
-	private void contactModule() throws InterruptedException {
+	private void contactModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();

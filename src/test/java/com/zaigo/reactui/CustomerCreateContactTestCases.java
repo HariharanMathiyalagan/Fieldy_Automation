@@ -41,7 +41,7 @@ public class CustomerCreateContactTestCases {
 	}
 
 	@Test(priority = 1)
-	private void contactModule() throws InterruptedException {
+	private void contactModule() throws InterruptedException, IOException {
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();
 

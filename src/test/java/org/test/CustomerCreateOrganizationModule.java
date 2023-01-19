@@ -1079,7 +1079,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 //		}
 //	}
 
-	@Test(priority = 38)
+	@Test(priority = 37)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify the Customer Organization Successful Message");
 		CustomerCreateOrganizationPage create = new CustomerCreateOrganizationPage(driver);
@@ -1101,6 +1101,28 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			File file = new File("OrgCreateValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgCreateValidation.png");
+		}
+
+	}
+	
+	@Test(priority = 38)
+	private void customerOrganizationCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Organization Created Count is added in the Total Organization Count");
+		CustomerCreateOrganizationPage create = new CustomerCreateOrganizationPage(driver);
+		int actualTotal = create.actualResult();
+		int expectedResult = create.totalCount();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualTotal == expectedResult) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 		}
 
 	}
