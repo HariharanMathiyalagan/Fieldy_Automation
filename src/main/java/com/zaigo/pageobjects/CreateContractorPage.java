@@ -180,6 +180,30 @@ public class CreateContractorPage extends BaseClass {
 	By clickNext = By.xpath("//*[@id=\"team-company-contractor\"]/div/div/div[1]/button[2]/span");
 
 	By AddContractor = By.xpath("//button[@data-formsactions='create']");
+	By TotalCount = By.xpath("total-company-contractor-count");
+	static int parseInt;
+
+	public int getCount() {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+
+	}
+
+	public int actualResult() {
+		int a = parseInt + 1;
+		return a;
+	}
+
+	By ContactName = By.xpath("//*[text()='Company']");
+
+	public int totalCount() throws InterruptedException {
+		this.assertName(ContactName, "Company");
+		String text2 = this.getText(TotalCount);
+		int parseInt = Integer.parseInt(text2);
+		return parseInt;
+	}
 
 	public String validation() {
 		wait = new WebDriverWait(driver, 10);
@@ -238,6 +262,8 @@ public class CreateContractorPage extends BaseClass {
 
 	public void clickContractors() {
 		this.mouseActionClick(contractor);
+		this.assertName(ContactName, "Company");
+		this.getCount();
 		this.mouseActionClick(createcontractorbutton);
 
 	}

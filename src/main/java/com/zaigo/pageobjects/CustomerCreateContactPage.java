@@ -34,6 +34,7 @@ import com.github.javafaker.Faker;
 public class CustomerCreateContactPage extends BaseClass {
 
 	WebDriverWait wait;
+	WebDriverWait wait1;
 	WebDriver driver;
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
@@ -56,6 +57,9 @@ public class CustomerCreateContactPage extends BaseClass {
 	String fakeFaxNumber = faker.number().digits(14);
 	String fakeTittle = faker.name().title();
 
+//	String until = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("Total-number-customer-count")))
+//			.getText();
+
 	public CustomerCreateContactPage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -74,6 +78,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Search = By.id("customer-contact-search-value");
 	By SearchButton = By.id("customer-contact-search-button");
 	By InvalidList = By.xpath("//div[text()='No Result Found']");
+	By TotalCount = By.id("Total-number-customer-count");
 
 	private void ClickButton(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -166,13 +171,38 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	By Text = By.xpath("//td[text()='Customer Name']");
+	static int parseInt;
 
-	public void modulePage() throws InterruptedException {
+	public int getCount() {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+
+	}
+
+	public int actualResult() {
+		int a = parseInt + 1;
+		return a;
+	}
+
+	By ContactName = By.xpath("//*[text()='Contact Name']");
+
+	public int totalCount() throws InterruptedException {
+		this.assertName(ContactName, "Contact Name");
+		String text2 = this.getText(TotalCount);
+		int parseInt = Integer.parseInt(text2);
+		return parseInt;
+	}
+
+	public void modulePage() throws InterruptedException, IOException {
 		this.dashBoard();
 		Thread.sleep(5000);
 		this.clickCustomer();
 		this.assertName(Text, "Customer Name");
 		this.clickContact();
+		this.assertName(ContactName, "Contact Name");
+		this.getCount();
 		this.clickAddContact();
 
 	}

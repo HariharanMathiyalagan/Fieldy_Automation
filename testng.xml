@@ -4,7 +4,7 @@
 	<test thread-count="5" name="Test">
 		<classes>
 
-			<!--class name="org.test.OnBoardingModule" />
+			<class name="org.test.OnBoardingModule" />
 
 			<class name="org.test.Login" />
 
@@ -12,13 +12,13 @@
 
 			<class name="org.test.CustomerCreateContactModule" />
 
-			<class name="org.test.CustomerCreateOrganizationModule" /-->
+			<class name="org.test.CustomerCreateOrganizationModule" />
 
 			<class name="org.test.CustomerContactJob" />
 
 			<class name="org.test.CustomerOrganizationJob" />
 
-			<!--class name="org.test.GlobalContactJob" />
+			<class name="org.test.GlobalContactJob" />
 
 			<class name="org.test.GlobalOrganizationJob" />
 
@@ -26,7 +26,9 @@
 
 			<class name="org.test.CustomerOrganizationRequest" />
 
-			<class name="org.test.GlobalContactRequest" /-->
+			<class name="org.test.GlobalContactRequest" />
+
+			<class name="org.test.GlobalOrganizationRequest" />
 
 		</classes>
 	</test> <!-- Test -->

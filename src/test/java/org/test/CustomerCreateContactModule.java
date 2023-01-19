@@ -71,7 +71,7 @@ public class CustomerCreateContactModule extends BaseClass {
 	}
 
 	@Test(priority = 0)
-	private void contactModule() throws InterruptedException {
+	private void contactModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();
@@ -766,7 +766,7 @@ public class CustomerCreateContactModule extends BaseClass {
 //
 //	}
 
-	@Test(priority = 29)
+	@Test(priority = 28)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Customer Contact Successful Message");
 		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
@@ -789,6 +789,28 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			create.responseMessageCreateContact();
+		}
+
+	}
+
+	@Test(priority = 29)
+	private void customerContactCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Contact Created Count is added in the Total Contact Count");
+		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
+		int actualTotal = create.actualResult();
+		int expectedResult = create.totalCount();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualTotal == expectedResult) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 		}
 
 	}

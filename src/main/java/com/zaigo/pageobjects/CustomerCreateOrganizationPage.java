@@ -141,6 +141,31 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Yes = By.xpath("//*[text()='Yes']");
 	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
 	By Text = By.xpath("//*[text()='Customer Name']");
+	By TotalCount = By.xpath("Total-number-customer-count");
+
+	static int parseInt;
+
+	public int getCount() {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+
+	}
+
+	public int actualResult() {
+		int a = parseInt + 1;
+		return a;
+	}
+
+	By ContactName = By.xpath("//*[text()='Organization Name']");
+
+	public int totalCount() throws InterruptedException {
+		this.assertName(ContactName, "Contact Name");
+		String text2 = this.getText(TotalCount);
+		int parseInt = Integer.parseInt(text2);
+		return parseInt;
+	}
 
 	public void modulePage() throws InterruptedException, AWTException {
 		this.assertName(Customer, "Customer");
@@ -148,6 +173,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.clickButton(Customer);
 		this.assertName(Text, "Customer Name");
 		this.clickButton(Organization);
+		this.assertName(ContactName, "Organization Name");
+		this.getCount();
 		this.clickButton(AddOrganization);
 
 	}
