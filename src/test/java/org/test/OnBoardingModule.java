@@ -148,7 +148,7 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 3)
 	private void specialCharacterBussinessNameValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Special Character validation in the Bussiness Name Field");
+		extentTest = extentReports.createTest("Verify the Error Message is displayed when the Bussiness Name field enter the Special Characters");
 		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
 		alreadyBussiness.specialCharacterBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
