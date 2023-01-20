@@ -47,7 +47,7 @@ public class CustomerContactJob extends BaseClass {
 	@Test(priority = 0) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -70,7 +70,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 1)
 	private void contactModule() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
+		extentTest = extentReports.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();
 
@@ -78,7 +78,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 2)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Customer Contact Successful Message");
+		extentTest = extentReports.createTest("Verify a new Customer Contact is created successfully through [Create Contact]");
 		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
 		create.contactPage();
 		create.propertyPage();
@@ -105,7 +105,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 3)
 	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the User to Land on the Create Job Page");
+		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = new JobPage(driver);
 		jobPage.customerContactJobListPage();
 		String jobLandPage = jobPage.jobLandPage();
@@ -126,7 +126,7 @@ public class CustomerContactJob extends BaseClass {
 
 //	@Test(priority = 5)
 	private void mandatoryValidationLocation() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Location field in Job page");
+		extentTest = extentReports.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = new JobPage(driver);
 		mandatoryValidation.mandatoryLocationField();
 		String errorMandatoryValidation = mandatoryValidation.locationError();
@@ -149,7 +149,7 @@ public class CustomerContactJob extends BaseClass {
 
 //	@Test(priority = 4)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxValidationLocationField();
 		String errorPasswordField = mandatory.locationError();
@@ -175,7 +175,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 6)
 	private void maximumValidationTittle() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Tittle Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxValidationTittle();
 		String errorPasswordField = mandatory.tittleError();
@@ -199,7 +199,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 7)
 	private void mandatoryValidationDescription() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Description field");
+		extentTest = extentReports.createTest("Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = new JobPage(driver);
 		mandatoryValidation.mandatoryDescriptionField();
 		String errorMandatoryValidation = mandatoryValidation.descriptionError();
@@ -220,7 +220,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 8)
 	private void maximumValidationDescription() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Description Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxValidationDescription();
 		String errorPasswordField = mandatory.descriptionError();
@@ -244,7 +244,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 11)
 	public void maximumTagValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxCharacterTag();
 		String errorPasswordField = mandatory.tagsError();
@@ -268,7 +268,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 12)
 	public void duplicateTagsValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Duplicate Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when Duplicate tags are added");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.duplicateTags();
 		String errorPasswordField = mandatory.tagsError();
@@ -292,7 +292,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 13)
 	public void maxTagLimitValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Limit Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when count of tags exceeds 64");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxTagCountValidation();
 		String errorPasswordField = mandatory.tagsError();
@@ -316,7 +316,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 14)
 	private void maximumValidationNotes() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Description Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.maxValidationNotes();
 		String errorPasswordField = mandatory.notesError();
@@ -340,7 +340,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 15)
 	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Create a Unassigned Job and check the successful message");
+		extentTest = extentReports.createTest("Verify Unassigned Job is created successfully from Contact->Create Job");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.fromDateTimeScheduleJob();
 		String errorPasswordField = mandatory.createdMessage();
@@ -381,7 +381,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 17)
 	private void editJobwithFromDateFromTime() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Edit the Job, and change the status as Schdeuled");
+		extentTest = extentReports.createTest("Verfiy the unassigned Job is updated to scheduled when assigning the available technician");
 		JobPage mandatory = new JobPage(driver);
 		mandatory.editJob();
 		String errorPasswordField = mandatory.updatedMessage();
