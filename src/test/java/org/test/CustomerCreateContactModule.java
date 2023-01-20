@@ -54,9 +54,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
-		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result Validation Data -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(loginInPage.getPropertyValue("ValidationOfLandingPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -128,9 +127,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage mandatoryValidation = new CustomerCreateContactPage(driver);
 		mandatoryValidation.mandatoryValidation();
 		String errorMandatoryValidation = mandatoryValidation.errorMandatoryValidation();
-		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation is -" + errorMandatoryValidation);
-		extentTest.log(Status.INFO,
-				"Expected Result - Mandatory Validation is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -175,9 +173,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.maxValidationLastName();
 		String errorFirstName = minValidation.errorLastNameField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Last Name Field is -" + errorFirstName);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Last Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorFirstName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -199,9 +196,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationJobTittle();
 		String errorJobTittle = maxValidation.errorJobTittle();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Job Tittle Field is -" + errorJobTittle);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Job Tittle Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorJobTittle);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorJobTittle.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -224,9 +220,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationEmail();
 		String errorEmail = maxValidation.errorEmail();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Email Field is -" + errorEmail);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Last Field is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorEmail.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -249,9 +244,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.invalidEmail();
 		String errorEmail = maxValidation.errorEmail();
-		extentTest.log(Status.INFO, "Actual Result - InValidation for Email Field is -" + errorEmail);
-		extentTest.log(Status.INFO,
-				"Expected Result - InValidation for Email Field is -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorEmail.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -273,9 +267,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.minValidationPhone();
 		String errorPhoneNumber = minValidation.errorPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result - Minimum Validation Phone Number Field is -" + errorPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Phone Number Field is -" + getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPhoneNumber.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -298,9 +291,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPhone();
 		String errorPhoneNumber = maxValidation.errorPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Phone Number Field is -" + errorPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Phone Number Field is -" + getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPhoneNumber.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -325,10 +317,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyFirstName();
 		String errorPropertyName = maxValidation.errorPropertyFirstName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Property First Name Field is -" + errorPropertyName);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Property First Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPropertyName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -351,10 +341,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyLastName();
 		String errorPropertyName = maxValidation.errorPropertyLastName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Property Last Name Field is -" + errorPropertyName);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Property Last Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPropertyName.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -377,9 +365,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyNamee();
 		String errorContactPerson = maxValidation.errorContactPerson();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Property Name Field is -" + errorContactPerson);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Property Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorContactPerson.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -402,9 +389,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAddress11();
 		String errorAddress1Field = maxValidation.errorAddress1Field();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Address1 Field is -" + errorAddress1Field);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address1 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress1Field.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -427,9 +413,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAddress22();
 		String errorAddress1Field = maxValidation.errroAddress2Field();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Address2 Field is -" + errorAddress1Field);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address2 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
+		extentTest.log(Status.INFO, "Expected Result Field is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress1Field.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -451,9 +436,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationCity();
 		String errorCityField = maxValidation.errorCityField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation City Name Field is -" + errorCityField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation City Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorCityField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -476,9 +460,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationState();
 		String errorStateField = maxValidation.errorStateField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation State Name Field is -" + errorStateField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation State Name Field is -"
-				+ getPropertyValue("Max45CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorStateField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorStateField.equals(getPropertyValue("Max45CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -500,9 +483,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.minValidationZipcode();
 		String errorZipcodeField = minValidation.errorZipcodeField();
-		extentTest.log(Status.INFO, "Actual Result - Minimum Validation ZipCode Field is -" + errorZipcodeField);
-		extentTest.log(Status.INFO, "Expected Result - Minimum Validation ZipCode Field is -"
-				+ getPropertyValue("Min3CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorZipcodeField.equals(getPropertyValue("Min3CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -524,9 +506,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationZipcode();
 		String errorZipcodeField = maxValidation.errorZipcodeField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Zipcode Field is -" + errorZipcodeField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Zipcode Field is -"
-				+ getPropertyValue("Max10CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorZipcodeField.equals(getPropertyValue("Max10CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -550,9 +531,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationProductName();
 		String errorProductField = maxValidation.errorProductField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Product Name Field is -" + errorProductField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Product Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorProductField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorProductField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -574,9 +554,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationBrandName();
 		String errorBrandField = maxValidation.errorBrandField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Brand Name Field is -" + errorBrandField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Brand Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorBrandField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorBrandField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -598,9 +577,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValdidationModelNumber();
 		String errorModelField = maxValidation.errorModelField();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Model Number Field is -" + errorModelField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Model Number Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorModelField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorModelField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -622,10 +600,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationSerialNumber();
 		String errorSerialNumberField = maxValidation.errorSerialNumberField();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Serial Number Field is -" + errorSerialNumberField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Serial Number Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorSerialNumberField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -647,9 +623,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAccessHours();
 		String errorAccessHours = maxValidation.errorAccessHours();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Access Hours Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Access Hours Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAccessHours.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -671,10 +646,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationInstallationNotes();
 		String errorAccessHours = maxValidation.errorInstallation();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Installation Notes Field is -" + errorAccessHours);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Installation Notes Field is -"
-				+ getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAccessHours.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -774,9 +747,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		create.propertyPage();
 		create.equipmentPage();
 		String responseMessageCreateContact = create.responseMessageCreateContact();
-		extentTest.log(Status.INFO, "Actual Result - Created List Name -" + responseMessageCreateContact);
-		extentTest.log(Status.INFO,
-				"Expected Result - Created List Name -" + getPropertyValue("CustomerCreatedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessageCreateContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -795,7 +767,8 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 29)
 	private void customerContactCount() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Customer Contact Created Count is added in the Total Contact Count");
+		extentTest = extentReports
+				.createTest("Verify the Customer Contact Created Count is added in the Total Contact Count");
 		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
 		int actualTotal = create.actualResult();
 		int expectedResult = create.totalCount();
@@ -821,10 +794,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage alreadyExisted = new CustomerCreateContactPage(driver);
 		alreadyExisted.alreadyExistMail();
 		String responseMessageCreateContact = alreadyExisted.errorEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Already Existed Validation Email Field is -" + responseMessageCreateContact);
-		extentTest.log(Status.INFO, "Expected Result - Already Existed Validation Email Field is -"
-				+ getPropertyValue("AlreadyExistedEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessageCreateContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -847,8 +818,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage filter = new CustomerCreateContactPage(driver);
 		filter.alphabetsFilters();
 		String listFirstName = filter.listFirstName();
-		extentTest.log(Status.INFO, "Actual Result - Alphabets Filter List is -" + listFirstName);
-		extentTest.log(Status.INFO, "Expected Result - Alphabets Filter List is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -869,10 +840,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage search = new CustomerCreateContactPage(driver);
 		search.searchListName();
 		String listFirstName = search.listFirstName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Search Filter Validate Data in List Validation is -" + listFirstName);
-		extentTest.log(Status.INFO,
-				"Expected Result - Search Filter Validate Data in List Validation is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -895,10 +864,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage search = new CustomerCreateContactPage(driver);
 		String listPhoneNumber = search.listPhoneNumber();
 		String listFirstName = search.listDataPhoneNumber();
-		extentTest.log(Status.INFO,
-				"Actual Result - Search Filter Validate Phone Number Data in List Validation is -" + listFirstName);
-		extentTest.log(Status.INFO,
-				"Expected Result - Search Filter Validate Phone Number Data in List Validation is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -923,10 +890,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage search = new CustomerCreateContactPage(driver);
 		String listPhoneNumber = search.listEmail();
 		String listFirstName = search.listDataEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Search Filter Validate Email Data in List Validation is -" + listFirstName);
-		extentTest.log(Status.INFO,
-				"Expected Result - Search Filter Validate Email Data in List Validation is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -949,8 +914,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage search = new CustomerCreateContactPage(driver);
 		search.filterList();
 		String listFirstName = search.listFirstName();
-		extentTest.log(Status.INFO, "Actual Result - Filter Field List Validation is -" + listFirstName);
-		extentTest.log(Status.INFO, "Expected Result - Search Filter Filed List Validation is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -973,10 +938,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage invalid = new CustomerCreateContactPage(driver);
 		invalid.searchInvalidListName();
 		String listFirstName = invalid.errorList();
-		extentTest.log(Status.INFO,
-				"Actual Result - Search Filter Invalid Data in List Validation is -" + listFirstName);
-		extentTest.log(Status.INFO, "Expected Result - Search Filter Invalid Data in List Validation is -"
-				+ getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -999,9 +962,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage edit = new CustomerCreateContactPage(driver);
 		edit.editContact();
 		String responseMessageCreateContact = edit.updateMessage();
-		extentTest.log(Status.INFO, "Actual Result - Edit Contact Details -" + responseMessageCreateContact);
-		extentTest.log(Status.INFO,
-				"Expected Result - Edit Contact Details -" + getPropertyValue("CustomerUpdatedMesssage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessageCreateContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerUpdatedMesssage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1022,9 +984,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage edit = new CustomerCreateContactPage(driver);
 		edit.deleteContact();
 		String responseMessageCreateContact = edit.deleteMessage();
-		extentTest.log(Status.INFO, "Actual Result - Delete Response Message -" + responseMessageCreateContact);
-		extentTest.log(Status.INFO,
-				"Expected Result - Delete Response Message -" + getPropertyValue("CustomerDeletedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessageCreateContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact.equals(getPropertyValue("CustomerDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");

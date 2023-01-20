@@ -141,7 +141,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Yes = By.xpath("//*[text()='Yes']");
 	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
 	By Text = By.xpath("//*[text()='Customer Name']");
-	By TotalCount = By.xpath("Total-number-customer-count");
+	By TotalCount = By.id("Total-number-customer-count");
 
 	static int parseInt;
 
@@ -161,7 +161,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ContactName = By.xpath("//*[text()='Organization Name']");
 
 	public int totalCount() throws InterruptedException {
-		this.assertName(ContactName, "Contact Name");
+		this.assertName(ContactName, "Organization Name");
 		String text2 = this.getText(TotalCount);
 		int parseInt = Integer.parseInt(text2);
 		return parseInt;

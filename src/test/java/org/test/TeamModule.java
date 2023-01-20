@@ -64,8 +64,8 @@ public class TeamModule extends BaseClass {
 		loginInPage.passwordField(getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
-		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
-		extentTest.log(Status.INFO, "Expected Result Validation Data -" + getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("ValidationOfLandingPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -85,8 +85,8 @@ public class TeamModule extends BaseClass {
 		EditDetailScreenCompaniesPage module = new EditDetailScreenCompaniesPage(driver);
 		module.modulePage();
 		String assertTittle = module.assertTittle();
-		extentTest.log(Status.INFO, "Actual Tenant Name is -" + assertTittle);
-		extentTest.log(Status.INFO, "Expected Tenant Name is -" + getPropertyValue("TenantOrganizationName"));
+		extentTest.log(Status.INFO, "Actual Result is -" + assertTittle);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TenantOrganizationName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertTittle.equals(getPropertyValue("TenantOrganizationName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -200,16 +200,16 @@ public class TeamModule extends BaseClass {
 //
 //	}
 
-	@Test(priority = 8)
+	@Test(priority = 6)
 	public void verifyContractorNameMandatory() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Required Field");
+		extentTest = extentReports.createTest(
+				"Check Company Contractor Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clickContractors();
 		contractorPage.clickSaveandComplete();
 		String error_text = contractorPage.contractorNameError();
-		extentTest.log(Status.INFO, "Actual Contractor Name Mandatory Validation -" + error_text);
-		extentTest.log(Status.INFO,
-				"Expected Contractor Name Mandatory Validation -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + error_text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (error_text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -224,16 +224,16 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 7)
 	public void verifyContractorNumberMinValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Minimum Validation");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor form]");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.contractorName("Contractor X");
 		contractorPage.contractorPhone("123");
 		contractorPage.clickSaveandComplete();
 		String email_error = contractorPage.contractorPhoneError();
-		extentTest.log(Status.INFO, "Actual Phone Number Minimum Validation -" + email_error);
-		extentTest.log(Status.INFO, "Expected Phone Number Minimum -" + getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + email_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (email_error.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -248,16 +248,16 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 10)
+	@Test(priority = 8)
 	public void verifyContractorEmailFormat() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Email Validation");
+		extentTest = extentReports.createTest("Verify error message is displayed when [Compamy Contrctor form] invalid email is entered in Email Field");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorEmail("aibcda");
 		contractorPage.clickSaveandComplete();
 		String email_error = contractorPage.contractorEmailError();
-		extentTest.log(Status.INFO, "Actual Result of Email Validation -" + email_error);
-		extentTest.log(Status.INFO, "Expected Result of Email Validation -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + email_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (email_error.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -272,17 +272,16 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 9)
 	public void verifyContractorNumberMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Maximum Validation");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Company Contractor Phone Number Field exceed its max-20 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearContractorEmail();
 		contractorPage.contractorPhone("12312312311890021344535564532212323432113");
 		contractorPage.clickSaveandComplete();
 		String email_error = contractorPage.contractorPhoneError();
-		extentTest.log(Status.INFO, "Actual Result of Phone Number Maximum Validation -" + email_error);
-		extentTest.log(Status.INFO,
-				"Expected Result of Phone Number Maximum Validation -" + getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + email_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (email_error.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -297,16 +296,15 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 10)
 	public void verifyFaxMinValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Fax Field Minimum Validation");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Fax field of [Company Contractor form]");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorFax("77");
 		String fax_error = contractorPage.contractorFaxError();
-		extentTest.log(Status.INFO, "Actual Result of Fax Field Minimum Validation -" + fax_error);
-		extentTest.log(Status.INFO,
-				"Expected Result of Fax Field Minimum Validation -" + getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + fax_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (fax_error.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -321,17 +319,16 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 13)
+	@Test(priority = 11)
 	public void verifyFaxMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Fax Field Maximum Validation");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Company Contractor Fax Name Field exceed its max-20 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorFax("777777777777777778888888888888877777777777777777777777");
 		contractorPage.clickSaveandComplete();
 		String fax_error = contractorPage.contractorFaxError();
-		extentTest.log(Status.INFO, "Actual Result of Fax Field Maximum Validation -" + fax_error);
-		extentTest.log(Status.INFO,
-				"Expected Result of Fax Field Maximum Validation -" + getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + fax_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (fax_error.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -345,19 +342,17 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 14)
+	@Test(priority = 12)
 	public void verifyCpersonFirstNameMaxValidation() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Contractor Company Contact Person First Name Field Maximum Validation");
+				.createTest("Verify Error Message is displayed when [Contractor Comapany] First Name Field exceed its max-256 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearFax();
 		contractorPage.contractorContactPersonFirstName(getPropertyValue("256Characters"));
 		contractorPage.clickSaveandComplete();
 		String cperson_error = contractorPage.contractorContactFirstNameError();
-		extentTest.log(Status.INFO,
-				"Actual Result of Contact Person First Name field Maximum Validation in -" + cperson_error);
-		extentTest.log(Status.INFO, "Expected Result of Contact Person First Name field Maximum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + cperson_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (cperson_error.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -376,17 +371,16 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 14)
+	@Test(priority = 13)
 	public void verifyCpersonLastNameMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Contractor Company Contact Person Field Maximum Validation");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Last Name Field exceed its max-256 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearFax();
 		contractorPage.contractorContactPersonLastName(getPropertyValue("256Characters"));
 		contractorPage.clickSaveandComplete();
 		String cperson_error = contractorPage.contractorContactLastNameError();
-		extentTest.log(Status.INFO, "Actual Result of Contact Person Maximum Validation in -" + cperson_error);
-		extentTest.log(Status.INFO, "Expected Result of Contact Person Maximum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + cperson_error);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (cperson_error.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -407,15 +401,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 15)
+	@Test(priority = 14)
 	private void maxValidationLocationNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Location Name field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Name Field exceed its max-256 limit");
 		CreateContractorPage maxValidationLocationField = new CreateContractorPage(this.driver);
 		maxValidationLocationField.maxValidationLocationName();
 		String assertionMessage = maxValidationLocationField.locationErrorMessage();
-		extentTest.log(Status.INFO, "Actual Result of Location Name Maximum Validation in -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result of Location Name Maximum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -432,14 +425,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 16)
+	@Test(priority = 15)
 	private void validateEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the validate in Email field");
+		extentTest = extentReports.createTest("Verify error message is displayed when [Compamy Contrctor Location Page] invalid email is entered in Email Field");
 		CreateContractorPage validateEmail = new CreateContractorPage(this.driver);
 		validateEmail.validateEmail();
 		String emailErrorMessage = validateEmail.emailErrorMessage();
-		extentTest.log(Status.INFO, "Actual Result of Email Validate in -" + emailErrorMessage);
-		extentTest.log(Status.INFO, "Expected Result of Email Validate in -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + emailErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (emailErrorMessage.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -456,15 +449,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 17)
+	@Test(priority = 16)
 	private void maxValidationEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Email field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Email Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationEmail();
 		String emailErrorMessage = maxValidation.emailErrorMessage();
-		extentTest.log(Status.INFO, "Actual Result of Conatact Person Maximum Validation in -" + emailErrorMessage);
-		extentTest.log(Status.INFO, "Expected Result of Conatact Person Maximum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + emailErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (emailErrorMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -481,15 +473,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 18)
+	@Test(priority = 17)
 	private void minValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the minimum validation in Phone Number field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor Location Page]");
 		CreateContractorPage minValidation = new CreateContractorPage(this.driver);
 		minValidation.minValidationPhoneNumber();
 		String phoneNumberErrorMessage = minValidation.phoneNumberErrorMessage();
-		extentTest.log(Status.INFO, "Actual Result of Phone Number Minimum Validation in -" + phoneNumberErrorMessage);
-		extentTest.log(Status.INFO,
-				"Expected Result of Phone Number Minimum Validation in -" + getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + phoneNumberErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (phoneNumberErrorMessage.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -506,16 +497,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 19)
+	@Test(priority = 18)
 	private void maxValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Phone Number field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Phone Number Field exceed its max-20 limit");
 		CreateContractorPage minValidation = new CreateContractorPage(this.driver);
 		minValidation.maxValidationPhoneNumberField();
 		String phoneNumberErrorMessage = minValidation.phoneNumberErrorMessage();
-		extentTest.log(Status.INFO,
-				"Actual Result of Phone Number field Maximum Validation in -" + phoneNumberErrorMessage);
-		extentTest.log(Status.INFO,
-				"Expected Result of Phone Number field Maxumum Validation in -" + getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + phoneNumberErrorMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (phoneNumberErrorMessage.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -532,15 +521,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 20)
+	@Test(priority = 19)
 	private void maxValidationAddress1Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Address1 field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Address1 Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationAddress1();
 		String errorAddress1Message = maxValidation.errorAddress1Message();
-		extentTest.log(Status.INFO, "Actual Result of Address1 field Maximum Validation in -" + errorAddress1Message);
-		extentTest.log(Status.INFO, "Expected Result of Address1 field Maxumum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actuals Result is -" + errorAddress1Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress1Message.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -556,15 +544,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 21)
+	@Test(priority = 20)
 	private void maxValidationAddress2Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Address2 field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Address2 Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationAddress2();
 		String errorAddress2Message = maxValidation.errorAddress2Message();
-		extentTest.log(Status.INFO, "Actual Result of Address2 field Maximum Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of Address2 field Maxumum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -580,15 +567,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 22)
+	@Test(priority = 21)
 	private void maxValidationStateField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in State field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] State Name Field exceed its max-45 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationStateName();
 		String errorAddress2Message = maxValidation.errorStateNameMessage();
-		extentTest.log(Status.INFO, "Actual Result of State field Maximum Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of State field Maxumum Validation in -"
-				+ getPropertyValue("Max45CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("Max45CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -604,15 +590,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 23)
+	@Test(priority = 22)
 	private void maxValidationCityField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in City field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] City Name Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationCityName();
 		String errorAddress2Message = maxValidation.errorCityNameMessage();
-		extentTest.log(Status.INFO, "Actual Result of City field Maximum Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of City field Maxumum Validation in -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -628,15 +613,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 24)
+	@Test(priority = 23)
 	private void maxValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the maximum validation in Zipcode field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Zipcode Field exceed its max-10 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationZipCode();
 		String errorAddress2Message = maxValidation.errorZipCodeMessage();
-		extentTest.log(Status.INFO, "Actual Result of Zipcode field Maximum Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of Zipcode field Maximum Validation in -"
-				+ getPropertyValue("Max10CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("Max10CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -653,15 +637,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 25)
+	@Test(priority = 24)
 	private void minValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the minimum validation in Zipcode field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Company Contractor Location Page]");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.minValidationZipCode();
 		String errorAddress2Message = maxValidation.errorZipCodeMessage();
-		extentTest.log(Status.INFO, "Actual Result of Zipcode field Minimum Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of Zipcode field Minimum Validation in -"
-				+ getPropertyValue("Min3CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("Min3CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -678,16 +661,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 26)
+	@Test(priority = 25)
 	private void characterValidationZipcodeField() throws IOException {
 		extentTest = extentReports.createTest("Verify the special charcter validation in Zipcode field");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.specialCharacterValidationZipCode();
 		String errorAddress2Message = maxValidation.errorZipCodeMessage();
-		extentTest.log(Status.INFO,
-				"Actual Result of Zipcode field special character Validation in -" + errorAddress2Message);
-		extentTest.log(Status.INFO, "Expected Result of Zipcode field special character Validation in -"
-				+ getPropertyValue("SpecialCharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorAddress2Message.equals(getPropertyValue("SpecialCharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -706,16 +687,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 27)
+	@Test(priority = 26)
 	private void maxValidationContactPerson() throws IOException {
-		extentTest = extentReports.createTest("Verify the validate in Contact Person field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Contact Person Name Field exceed its max-256 limit");
 		CreateContractorPage maxContactPerson = new CreateContractorPage(this.driver);
 		maxContactPerson.maxValidationContactPerson();
 		String errorContactPersonMessage = maxContactPerson.errorContactPersonMessage();
-		extentTest.log(Status.INFO,
-				"Actual Result of Contact Person field Validation in -" + errorContactPersonMessage);
-		extentTest.log(Status.INFO, "Expected Result of Contact Person field Validation in -"
-				+ getPropertyValue("Max512CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPersonMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max512CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorContactPersonMessage.equals(getPropertyValue("Max512CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -733,7 +712,7 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 28)
+	@Test(priority = 27)
 	public void verifySaveButtonExist() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Contractor Company Save & Complete Button is displayed or Not");
@@ -755,7 +734,7 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 29)
+	@Test(priority = 28)
 	public void createContract() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contractor Company has Successfully Created");
 		CreateContractorPage create = new CreateContractorPage(driver);
@@ -763,9 +742,8 @@ public class TeamModule extends BaseClass {
 		create.Location();
 //		driver.quit();
 		String asssertCreate = create.asssertCreate();
-		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
-		extentTest.log(Status.INFO,
-				"Expected Create Response Message is -" + "Contractor have been created successfully");
+		extentTest.log(Status.INFO, "Actual Result is -" + asssertCreate);
+		extentTest.log(Status.INFO, "Expected Result is -" + "Contractor have been created successfully");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (asssertCreate.equals("Contractor have been created successfully")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -779,10 +757,11 @@ public class TeamModule extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 29)
 	private void companiesContractorCount() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Companies Contractor Created Count is added in the Total Contractor Count");
+		extentTest = extentReports
+				.createTest("Verify the Companies Contractor Created Count is added in the Total Contractor Count");
 		CreateContractorPage create = new CreateContractorPage(driver);
 		int actualTotal = create.actualResult();
 		int expectedResult = create.totalCount();
@@ -804,13 +783,13 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 30)
 	public void contractotCompanyNameExistedValidation() throws InterruptedException, IOException, AWTException {
-		extentTest = extentReports
-				.createTest("Verify the already exists validation in the Company Contractor Name field");
+		extentTest = extentReports.createTest(
+				"Verify [Contractor Company Name Already Exists] ContractorCompany form, Error is dispalyed when already existing Contractor Company Name is provided");
 		CreateContractorPage create = new CreateContractorPage(driver);
 		create.alreadyExistsValidation();
 		String asssertCreate = create.contractorNameError();
-		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
-		extentTest.log(Status.INFO, "Expected Create Response Message is -" + getPropertyValue("ExistedCompanyName"));
+		extentTest.log(Status.INFO, "Actual Result is -" + asssertCreate);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ExistedCompanyName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (asssertCreate.equals(getPropertyValue("ExistedCompanyName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -829,14 +808,13 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 31)
 	private void contractorAlreadyEmailValidation() throws IOException {
-		extentTest = extentReports
-				.createTest("Verify the already exists email validation in the Company Contractor Email field");
+		extentTest = extentReports.createTest(
+				"Verify [Email Already Exists] Contactor Company form, Error is dispalyed when already existing Email Name is provided");
 		CreateContractorPage create = new CreateContractorPage(driver);
 		create.alreadyEamil();
-		String asssertCreate = create.contractorEmailError();
-		extentTest.log(Status.INFO, "Actual Create Response Message is -" + asssertCreate);
-		extentTest.log(Status.INFO,
-				"Expected Create Response Message is -" + getPropertyValue("ExistedCompanyName"));
+		String asssertCreate = create.errorEmail();
+		extentTest.log(Status.INFO, "Actual Result is -" + asssertCreate);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ExistedCompanyName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (asssertCreate.equals(getPropertyValue("ExistedCompanyName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -853,13 +831,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 33)
+	@Test(priority = 32)
 	public void listValidationName() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company List Validation");
 		CreateContractorPage listValidation = new CreateContractorPage(driver);
 		String validation = listValidation.validation();
-		extentTest.log(Status.INFO, "Actual List Validation -" + validation);
-		extentTest.log(Status.INFO, "Expected List Validation -" + validation);
+		extentTest.log(Status.INFO, "Actual Result is -" + validation);
+		extentTest.log(Status.INFO, "Expected Result is -" + validation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (validation.equals(validation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -874,14 +852,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 34)
+	@Test(priority = 33)
 	private void searchCompanyNameListValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Search Company Name List Validation");
 		CreateContractorPage listValidation = new CreateContractorPage(driver);
 		String searchListCompanyNameValidation = listValidation.searchListCompanyNameValidation();
 		String listCompanyName = listValidation.listCompanyName();
-		extentTest.log(Status.INFO, "Actual List Validation -" + listCompanyName);
-		extentTest.log(Status.INFO, "Expected List Validation -" + searchListCompanyNameValidation);
+		extentTest.log(Status.INFO, "Actual Result is -" + listCompanyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchListCompanyNameValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listCompanyName.equals(searchListCompanyNameValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -898,14 +876,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 35)
+	@Test(priority = 34)
 	private void searchNameListValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Search Name List Validation");
 		CreateContractorPage listValidation = new CreateContractorPage(driver);
 		String searchListCompanyNameValidation = listValidation.searchListNameValidation();
 		String listCompanyName = listValidation.listName();
-		extentTest.log(Status.INFO, "Actual List Validation -" + listCompanyName);
-		extentTest.log(Status.INFO, "Expected List Validation -" + searchListCompanyNameValidation);
+		extentTest.log(Status.INFO, "Actual Result is -" + listCompanyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchListCompanyNameValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listCompanyName.equals(searchListCompanyNameValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -922,14 +900,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 36)
+	@Test(priority = 35)
 	private void searchEmailListValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Search Email List Validation");
 		CreateContractorPage listValidation = new CreateContractorPage(driver);
 		String searchListCompanyNameValidation = listValidation.searchEmailListValidation();
 		String listCompanyName = listValidation.listEmail();
-		extentTest.log(Status.INFO, "Actual List Validation -" + listCompanyName);
-		extentTest.log(Status.INFO, "Expected List Validation -" + searchListCompanyNameValidation);
+		extentTest.log(Status.INFO, "Actual Result is -" + listCompanyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchListCompanyNameValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listCompanyName.equals(searchListCompanyNameValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -946,14 +924,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 37)
+	@Test(priority = 36)
 	private void searchPhoneNumberListValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Search Email List Validation");
 		CreateContractorPage listValidation = new CreateContractorPage(driver);
 		String searchListCompanyNameValidation = listValidation.searchPhoneNumberListValidation();
 		String listCompanyName = listValidation.listPhoneNumber();
-		extentTest.log(Status.INFO, "Actual List Validation -" + listCompanyName);
-		extentTest.log(Status.INFO, "Expected List Validation -" + searchListCompanyNameValidation);
+		extentTest.log(Status.INFO, "Actual Result is -" + listCompanyName);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchListCompanyNameValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listCompanyName.equals(searchListCompanyNameValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -970,14 +948,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 38)
+	@Test(priority = 37)
 	public void invalidValidationData() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Invalid List Valdiation");
 		CreateContractorPage errorValidation = new CreateContractorPage(driver);
 		errorValidation.invalidData("asfvcsv");
 		String invlaidValidate = errorValidation.invlaidValidate();
-		extentTest.log(Status.INFO, "Actual Invalid List Validation -" + invlaidValidate);
-		extentTest.log(Status.INFO, "Expected Invalid List Validation -" + getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Actual Result is -" + invlaidValidate);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (invlaidValidate.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -994,14 +972,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 39)
+	@Test(priority = 38)
 	private void editContractorPage() throws IOException {
 		extentTest = extentReports.createTest("Verify the User Land on the Edit Page");
 		EditContractorCompaniesPage companiesPage = new EditContractorCompaniesPage(driver);
 		String editContractor = companiesPage.editContractor();
-		extentTest.log(Status.INFO, "Actual Invalid List Validation -" + editContractor);
-		extentTest.log(Status.INFO,
-				"Expected Invalid List Validation -" + getPropertyValue("CompanyContractorEditPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + editContractor);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CompanyContractorEditPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContractor.equals(getPropertyValue("CompanyContractorEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1016,16 +993,15 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 40)
+	@Test(priority = 39)
 	private void editContractorDetails() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the User to Edit the Contractor Details and Successfully Updated");
 		EditContractorCompaniesPage companiesPage = new EditContractorCompaniesPage(driver);
 		companiesPage.editContractorDetails();
 		String responseMessage = companiesPage.responseMessage();
-		extentTest.log(Status.INFO, "Actual Invalid List Validation -" + responseMessage);
-		extentTest.log(Status.INFO,
-				"Expected Invalid List Validation -" + getPropertyValue("CompanyContractorUpdatedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CompanyContractorUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessage.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1040,15 +1016,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 41)
+	@Test(priority = 40)
 	private void deleteContractorDetails() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the User to Delete the Contractor Details and Successfully Deleted");
 		EditContractorCompaniesPage companiesPage = new EditContractorCompaniesPage(driver);
 		String deleteFunction = companiesPage.deleteFunction();
-		extentTest.log(Status.INFO, "Actual Invalid List Validation -" + deleteFunction);
-		extentTest.log(Status.INFO,
-				"Expected Invalid List Validation -" + getPropertyValue("ComapanyContractorDeletedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + deleteFunction);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ComapanyContractorDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (deleteFunction.equals(getPropertyValue("ComapanyContractorDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1063,14 +1038,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 42)
+	@Test(priority = 41)
 	private void landingUserFormPage() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on User Create Form Page");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.userPageLanding();
 		String landingUserFormPage = landing.landingUserFormPage();
-		extentTest.log(Status.INFO, "Actual Result Create Form Page -" + landingUserFormPage);
-		extentTest.log(Status.INFO, "Expected Result Create Form Page -" + getPropertyValue("TeamCreateUserPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + landingUserFormPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamCreateUserPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (landingUserFormPage.equals(getPropertyValue("TeamCreateUserPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1128,15 +1103,14 @@ public class TeamModule extends BaseClass {
 //
 //	}
 
-	@Test(priority = 43)
+	@Test(priority = 42)
 	private void mandatoryValidationFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation First Name Field");
+		extentTest = extentReports.createTest(
+				"Check the User Creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationFirstNameField();
-		extentTest.log(Status.INFO,
-				"Actual Result - Mandatory Validation First Name Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation First Name Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1151,15 +1125,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 44)
+	@Test(priority = 43)
 	private void mandatoryValidationTypeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Type Field");
+		extentTest = extentReports.createTest(
+				"Check the User creation form page, User Type field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationTypeField();
-		extentTest.log(Status.INFO,
-				"Actual Result - Mandatory Validation Type Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Mandatory Validation Type Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1174,15 +1147,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 45)
+	@Test(priority = 44)
 	private void mandatoryValidationEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Email Field");
+		extentTest = extentReports.createTest(
+				"Check the User creation form page, Email field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationEmailField();
-		extentTest.log(Status.INFO,
-				"Actual Result - Mandatory Validation Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Mandatory Validation Email Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1197,16 +1169,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 46)
+	@Test(priority = 45)
 	private void maxValidationFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] First Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationFirstName();
 		String mandatoryValidationFirstNameField = landing.errorFirstName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation First Name Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation First Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1223,16 +1193,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 47)
+	@Test(priority = 46)
 	private void maxValidationLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Last Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLastName();
 		String mandatoryValidationFirstNameField = landing.errorLastName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Last Name Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Last Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1249,16 +1217,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 48)
+	@Test(priority = 47)
 	private void maxValidationJobTittleField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Job Tittle Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationJobTittle();
 		String mandatoryValidationFirstNameField = landing.errorJobTittle();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Job Tittle Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Job Tittle Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1275,16 +1241,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 49)
+	@Test(priority = 48)
 	private void maxValidationEmailFields() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Email Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1301,14 +1265,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 50)
+	@Test(priority = 49)
 	private void invalidEmailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Invalid Validation Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when [Team User form] invalid email is entered in Email Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.invalidEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
-		extentTest.log(Status.INFO, "Actual Result - Invalid Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Invalid Email Field is -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1327,16 +1291,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 51)
+	@Test(priority = 50)
 	private void minValidatonPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
-		extentTest.log(Status.INFO,
-				"Actual Result - Minimum Validation Phone Number Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Minumum Validation Phone Number Field is -" + getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1354,16 +1316,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 52)
+	@Test(priority = 51)
 	private void maxValidatonPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
-		extentTest.log(Status.INFO,
-				"Actual Result - Minimum Validation Phone Number Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Minumum Validation Phone Number Field is -" + getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1382,16 +1342,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 53)
+	@Test(priority = 52)
 	private void maxValidationLocationName() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Location Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Location Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLocationName();
 		String mandatoryValidationFirstNameField = landing.errorLocatioName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Location Name Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Location Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1408,16 +1366,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 54)
+	@Test(priority = 53)
 	private void maxValidationAddress1() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Location Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Address1 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress1();
 		String mandatoryValidationFirstNameField = landing.errorAddress1();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Address1 Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address1 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1434,16 +1390,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 55)
+	@Test(priority = 54)
 	private void maxValidationAddress2() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Location Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Address2 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress2();
 		String mandatoryValidationFirstNameField = landing.errorAddress2();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Address2 Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address2 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1460,16 +1414,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 56)
+	@Test(priority = 55)
 	private void maxValidationState() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] State Name Field exceed its max-45 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationState();
 		String mandatoryValidationFirstNameField = landing.errorState();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation State Name Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation State Name Field is -"
-				+ getPropertyValue("Max45CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max45CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1486,16 +1438,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 57)
+	@Test(priority = 56)
 	private void maxValidationCity() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] City Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationCity();
 		String mandatoryValidationFirstNameField = landing.errorCity();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Address2 Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address2 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1512,16 +1462,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 58)
+	@Test(priority = 57)
 	private void minValidationZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Zipcode Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO,
-				"Actual Result - Minimum Validation Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Minimum Validation Zipcode Field is -"
-				+ getPropertyValue("Min3CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min3CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1538,16 +1486,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 59)
+	@Test(priority = 58)
 	private void specialCharacterValidationZipcode() throws IOException {
 		extentTest = extentReports.createTest("Verify the Special Character Validation Zipcode Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.specialCharacterZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO,
-				"Actual Result - Special Character Validation Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Special Character Validation Zipcode Field is -"
-				+ getPropertyValue("SpecialCharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("SpecialCharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1564,16 +1510,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 60)
+	@Test(priority = 59)
 	private void maxValidationZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Zipcode Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Zipcode Field is -"
-				+ getPropertyValue("Max10CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max10CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1592,16 +1536,15 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 61)
+	@Test(priority = 60)
 	private void userCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User Form Create Successfully");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.basicpage();
 		landing.locationpage();
 		String createMessage = landing.createMessage();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Address2 Field is -" + createMessage);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Validation Address2 Field is -" + getPropertyValue("UserCreatedMessgae"));
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UserCreatedMessgae"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("UserCreatedMessgae"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1617,13 +1560,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+	@Test(priority = 61)
 	private void createdListName() throws IOException {
 		extentTest = extentReports.createTest("Verify the User Created in the List Page");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String createUserList = landing.createUserList();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Address2 Field is -" + createUserList);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Address2 Field is -" + createUserList);
+		extentTest.log(Status.INFO, "Actual Result is -" + createUserList);
+		extentTest.log(Status.INFO, "Expected Result is -" + createUserList);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(createUserList)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1639,13 +1582,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 62)
 	private void alreadyExistedMailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Already Exist Validation in User Form Page");
+		extentTest = extentReports.createTest("Verify [Email Already Exists] User form, Error is dispalyed when already existing Email is provided");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.getEmaiList();
 		String createUserList = landing.alreadyEmail();
-		extentTest.log(Status.INFO, "Actual Result - Already Existed Validation Email Field is -" + createUserList);
-		extentTest.log(Status.INFO, "Expected Result - Already Existed Validation Email Field is -"
-				+ getPropertyValue("AlreadyExistedEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + createUserList);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1665,8 +1607,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchName = landing.searchName();
 		String listFirstName = landing.listFirstName();
-		extentTest.log(Status.INFO, "Actual Result - First Name Enter in the Search Field is -" + searchName);
-		extentTest.log(Status.INFO, "Expected Result - First Name Enter in the Search Field is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchName.equals(listFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1689,8 +1631,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchPhoneNumber();
 		String listPhoneNumber = landing.listPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result - Phone Number Enter in the Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Phone Number Enter in the Search Field is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1713,8 +1655,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchEmail();
 		String listPhoneNumber = landing.listEmail();
-		extentTest.log(Status.INFO, "Actual Result - Email Enter in the Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Email Enter in the Search Field is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1736,9 +1678,8 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Invlaid data in Search Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchInvalid();
-		extentTest.log(Status.INFO, "Actual Result - Email Enter in the Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Email Enter in the Search Field is -" + getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1759,9 +1700,8 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify the User to Land on Edit Page and Validate the Label");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.editPage();
-		extentTest.log(Status.INFO, "Actual Result - Land on Edit Page Label is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Land on Edit Page Label is -" + getPropertyValue("TeamUserEditPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamUserEditPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("TeamUserEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1781,8 +1721,8 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify to Edit the User Details & Form Submission");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.editUserDetails();
-		extentTest.log(Status.INFO, "Actual Result - Updated Message is -" + editUserDetails);
-		extentTest.log(Status.INFO, "Expected Result - Updated Message is -" + getPropertyValue("UserUpdatedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + editUserDetails);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UserUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("UserUpdatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1802,8 +1742,8 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify to Delete the User Details");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.deleteUserDetails();
-		extentTest.log(Status.INFO, "Actual Result - Deleted Message is -" + editUserDetails);
-		extentTest.log(Status.INFO, "Expected Result - Deleted Message is -" + getPropertyValue("UserDeleteMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + editUserDetails);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UserDeleteMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("UserDeleteMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1823,9 +1763,8 @@ public class TeamModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify the User to Landing on Contractor Form Page");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String landingContractorFormPage = landing.landingContractorFormPage();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Size Validation is -" + landingContractorFormPage);
-		extentTest.log(Status.INFO,
-				"Expected Result - Maximum Size Validation is -" + getPropertyValue("TeamUserCreateContractorPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + landingContractorFormPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamUserCreateContractorPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (landingContractorFormPage.equals(getPropertyValue("TeamUserCreateContractorPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1885,13 +1824,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 72)
 	private void mandatoryValidationContractorFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation First Name Field");
+		extentTest = extentReports.createTest(
+				"Check the User Contractor creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationFirstNameField();
-		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation Contractor First Name Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation Contractor First Name Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1908,13 +1846,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 73)
 	private void mandatoryValidationContractorEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Contractor Email Field");
+		extentTest = extentReports.createTest(
+				"Check the User Contractor creation form page, Email field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationEmailField();
-		extentTest.log(Status.INFO,
-				"Actual Result - Mandatory Validation Contractor Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation Contractor Email Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1930,13 +1867,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 74)
 	private void mandatoryOrganizationName() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Contractor Type Organization Field");
+		extentTest = extentReports.createTest(
+				"Check the User Contractor creation form page, Company Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String mandatoryValidationFirstNameField = landing.mandatoryValidationOrganizationField();
-		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation Contractor Type Organization Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation Contractor Type Organization Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1953,14 +1889,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 75)
 	private void maxValidationContractorFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] First Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationFirstName();
 		String mandatoryValidationFirstNameField = landing.errorFirstName();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor First Name Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor First Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -1978,14 +1912,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 76)
 	private void maxValidationContractorLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Last Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLastName();
 		String mandatoryValidationFirstNameField = landing.errorLastName();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor Last Name Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Last Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2004,14 +1936,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 77)
 	private void invalidContractorEmailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Invalid Validation Contractor Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when [Team User Contrctor form] invalid email is entered in Email Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.invalidEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Invalid Contractor Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO,
-				"Expected Result - Invalid Contractor Email Field is -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2032,14 +1962,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 78)
 	private void maxValidationContractorEmailFields() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Email Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Contractor Email Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Email Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2058,14 +1986,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 79)
 	private void minValidatonContractorPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Contractor Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User Contactor form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result - Minimum Validation Contractor Phone Number Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Minumum Validation Contractor Phone Number Field is -"
-				+ getPropertyValue("Min6Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min6Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2085,14 +2011,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 80)
 	private void maxValidatonContractorPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Phone Number Field exceed its max-20 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result - Minimum Validation Contractor Phone Number Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Minumum Validation Contractor Phone Number Field is -"
-				+ getPropertyValue("Max20Validation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2113,14 +2037,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 81)
 	private void maxValidationContractorLocationName() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Location Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Location Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLocationName();
 		String mandatoryValidationFirstNameField = landing.errorLocatioName();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor Location Name Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Location Name Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2139,14 +2061,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 82)
 	private void maxValidationContractorAddress1() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Address1 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Address1 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress1();
 		String mandatoryValidationFirstNameField = landing.errorAddress1();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor Address1 Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Address1 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2165,14 +2085,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 83)
 	private void maxValidationContractorAddress2() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Address2 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Address2 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress2();
 		String mandatoryValidationFirstNameField = landing.errorAddress2();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor Address2 Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Address2 Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2191,14 +2109,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 84)
 	private void maxValidationContractorState() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] State Name Field exceed its max-45 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationState();
 		String mandatoryValidationFirstNameField = landing.errorState();
-		extentTest.log(Status.INFO, "Actual Result - Maximum Validation Contractor State Name Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor State Name Field is -"
-				+ getPropertyValue("Max45CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max45CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2217,14 +2133,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 85)
 	private void maxValidationContractorCity() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor City Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] City Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationCity();
 		String mandatoryValidationFirstNameField = landing.errorCity();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Contractor City Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor City Field is -"
-				+ getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2243,14 +2157,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 86)
 	private void minValidationContractorZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Contractor Zipcode Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User Contractor form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO,
-				"Actual Result - Minimum Validation Contractor Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Minimum Validation Contractor Zipcode Field is -"
-				+ getPropertyValue("Min3CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Min3CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2273,10 +2185,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.specialCharacterZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO, "Actual Result - Special Character Validation Contractor Zipcode Field is -"
-				+ mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Special Character Validation Contractor Zipcode Field is -"
-				+ getPropertyValue("SpecialCharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("SpecialCharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2295,14 +2205,12 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 88)
 	private void maxValidationContractorZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contractor Zipcode Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Zipcode Field exceed its max-10 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
-		extentTest.log(Status.INFO,
-				"Actual Result - Maximum Validation Contractor Zipcode Field is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result - Maximum Validation Contractor Zipcode Field is -"
-				+ getPropertyValue("Max10CharacterValidation"));
+		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max10CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2327,9 +2235,8 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.basicContractorPage();
 		String locationContractorPage = landing.locationContractorPage();
-		extentTest.log(Status.INFO, "Actual Result - Contractor Form Created Message is -" + locationContractorPage);
-		extentTest.log(Status.INFO, "Expected Result - Contractor Form Created Messgae is -"
-				+ getPropertyValue("ContractorCreatedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + locationContractorPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ContractorCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (locationContractorPage.equals(getPropertyValue("ContractorCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2344,10 +2251,11 @@ public class TeamModule extends BaseClass {
 		}
 
 	}
-	
-	@Test(priority = 29)
+
+	@Test(priority = 90)
 	private void userContractorCount() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the User Contractor Created Count is added in the Total Contractor Count");
+		extentTest = extentReports
+				.createTest("Verify the User Contractor Created Count is added in the Total Contractor Count");
 		CreateUserPage create = new CreateUserPage(driver);
 		int actualTotal = create.actualResult();
 		int expectedResult = create.totalCount();
@@ -2367,13 +2275,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 90)
+	@Test(priority = 91)
 	private void createdContractorListName() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Created in the List Page");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String createUserList = landing.createUserList();
-		extentTest.log(Status.INFO, "Actual Result - Contractor Created List Name is -" + createUserList);
-		extentTest.log(Status.INFO, "Expected Result - Contractor Created List Name is is -" + createUserList);
+		extentTest.log(Status.INFO, "Actual Result is -" + createUserList);
+		extentTest.log(Status.INFO, "Expected Result is -" + createUserList);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(createUserList)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2387,15 +2295,14 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 91)
+	@Test(priority = 92)
 	private void alreadyExistedContractorMailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Already Exist Validation in User Form Page");
+		extentTest = extentReports.createTest("erify [Email Already Exists] User Contractor form, Error is dispalyed when already existing Email is provided");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.getEmaiContractorList();
 		String createUserList = landing.alreadyContractorEmail();
-		extentTest.log(Status.INFO, "Actual Result - Already Existed Validation Email Field is -" + createUserList);
-		extentTest.log(Status.INFO, "Expected Result - Already Existed Validation Email Field is -"
-				+ getPropertyValue("AlreadyExistedEmail"));
+		extentTest.log(Status.INFO, "Actual Result is -" + createUserList);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2409,17 +2316,15 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 92)
+	@Test(priority = 93)
 	private void searchContractorNameValidation() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the Contractor First Name in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchName = landing.searchContractorFirstName();
 		String listFirstName = landing.listFirstName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Contractor First Name Enter in the Search Field is -" + searchName);
-		extentTest.log(Status.INFO,
-				"Expected Result - Contractor First Name Enter in the Search Field is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchName.equals(listFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2436,17 +2341,15 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 93)
+	@Test(priority = 94)
 	private void searchContractorPhoneNumberValidation() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the Contractor Phone Number in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchContractorPhoneNumber();
 		String listPhoneNumber = landing.listContractorPhoneNumber();
-		extentTest.log(Status.INFO,
-				"Actual Result - Contractor Phone Number Enter in the Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Contractor Phone Number Enter in the Search Field is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2463,16 +2366,14 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 94)
+	@Test(priority = 95)
 	private void searchContractorEmailValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Email in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchContractorEmail();
 		String listPhoneNumber = landing.listContractorEmail();
-		extentTest.log(Status.INFO,
-				"Actual Result - Contractor Email Enter in the Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Contractor Email Enter in the Search Field is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2489,17 +2390,15 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 95)
+	@Test(priority = 96)
 	private void filterByCompany() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the Contractor Filters Company Name in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String filterCompanySearch = landing.filterCompanySearch();
 		String listCompanyName = landing.listCompanyName();
-		extentTest.log(Status.INFO,
-				"Actual Result - Contractor Filters Company Name in the Search Field is -" + filterCompanySearch);
-		extentTest.log(Status.INFO,
-				"Expected Result - Contractor Filters Company Name in the Search Field is -" + listCompanyName);
+		extentTest.log(Status.INFO, "Actual Result is -" + filterCompanySearch);
+		extentTest.log(Status.INFO, "Expected Result is -" + listCompanyName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listCompanyName.equals(filterCompanySearch)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2516,15 +2415,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 96)
+	@Test(priority = 97)
 	private void invalidDatasValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify the Invlaid data in Contractor Search Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.invalidSearchButton();
-		extentTest.log(Status.INFO,
-				"Actual Result - Invlaid Data in the Contractor Search Field is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result - Email Enter in the Contractor Search Field is -"
-				+ getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2540,14 +2437,13 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 97)
+	@Test(priority = 98)
 	private void landingOnContractorEditForm() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on Contractor Edit Page and Validate the Label");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.editpageLanding();
-		extentTest.log(Status.INFO, "Actual Result - Land on Edit Page Label is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Land on Edit Page Label is -" + getPropertyValue("CompanyContractorEditPage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CompanyContractorEditPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("CompanyContractorEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2562,14 +2458,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 98)
+	@Test(priority = 99)
 	private void editContractorDetail() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify to Edit the Contractor Details & Form Submission");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.editContractorDetails();
-		extentTest.log(Status.INFO, "Actual Result - Contractor Updated Message is -" + editUserDetails);
-		extentTest.log(Status.INFO,
-				"Expected Result - Contractor Updated Message is -" + getPropertyValue("ContractorUpdatedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + editUserDetails);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ContractorUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("ContractorUpdatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2584,14 +2479,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 99)
+	@Test(priority = 100)
 	private void deleteContractorDetail() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify to Delete the Contractor Details");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String editUserDetails = landing.deleteContractorDetails();
-		extentTest.log(Status.INFO, "Actual Result - Deleted Message is -" + editUserDetails);
-		extentTest.log(Status.INFO,
-				"Expected Result - Deleted Message is -" + getPropertyValue("ContractorDeletedMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + editUserDetails);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ContractorDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editUserDetails.equals(getPropertyValue("ContractorDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2606,14 +2500,13 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 100)
+	@Test(priority = 101)
 	private void landOnSendInvitePage() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on Send Invite Page and Validate the Label");
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.landSendInvite();
-		extentTest.log(Status.INFO, "Actual Result - Land on Send Invite Page Label is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO,
-				"Expected Result - Land on Sned Invite Page Label is -" + getPropertyValue("TeamSendInvitePage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamSendInvitePage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (searchPhoneNumber.equals(getPropertyValue("TeamSendInvitePage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2628,17 +2521,17 @@ public class TeamModule extends BaseClass {
 
 	}
 
-	@Test(priority = 101)
+	@Test(priority = 102)
 	public void verifyEmailRequired() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Email Mandatory Field in Send Invite Page");
+		extentTest = extentReports.createTest(
+				"Check the Send Invite form page, Email field is set as Mandatory & Error Message is displayed when it is BLANK");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		// invitePage.clickSendInvite();
 //		Thread.sleep(1000);
 		invitePage.clickInvite();
 		String text = invitePage.getEmailErrorText();
-		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation Email Field is -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result - Mandatory Validation Email Field is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2654,7 +2547,7 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 103)
 	private void verfiyEmailFormat() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Invalid Format Email Field in Send Invite Page");
+		extentTest = extentReports.createTest("Verify error message is displayed when [Send Invite form] invalid email is entered in Email Field");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 //		driver.navigate().refresh();
 		invitePage.enterFirstName("sdsddfd");
@@ -2662,9 +2555,8 @@ public class TeamModule extends BaseClass {
 		Thread.sleep(1000);
 		invitePage.clickInvite();
 		String text = invitePage.getEmailErrorText();
-		extentTest.log(Status.INFO, "Actual Result - Invalid Format Email Field is -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result - Invalid Format Email Field is -" + getPropertyValue("ValidEmail"));
+		extentTest.log(Status.INFO, "Actual Result -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("ValidEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2681,15 +2573,15 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 104)
 	private void verifyFirstName() throws IOException {
-		extentTest = extentReports.createTest("Verify the First Name is Mandatory in Send Invite Page");
+		extentTest = extentReports.createTest(
+				"Check the Send Invite form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		invitePage.clearEnterFirstName();
 		invitePage.clickInvite();
 		invitePage.clickNext();
 		String text = invitePage.firstNameError();
-		extentTest.log(Status.INFO, "Actual Result - Mandatory Validation First Name Field is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Mandatory Validation First Name Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2714,9 +2606,8 @@ public class TeamModule extends BaseClass {
 		Thread.sleep(2000);
 		invitePage.clickInvite();
 		String text = invitePage.firstNameError();
-		extentTest.log(Status.INFO, "Actual Result - Enter the Blank Space Validation First Name Field is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Enter the Blank Space Validation First Name Field is -"
-				+ getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2743,9 +2634,8 @@ public class TeamModule extends BaseClass {
 		invitePage.dndTypes();
 		invitePage.clickNext();
 		String text = invitePage.getMessageText();
-		extentTest.log(Status.INFO, "Actual Result - Enter Message in the Message Field is -" + text);
-		extentTest.log(Status.INFO,
-				"Expected Result - Enter Message in the Message Field is -" + getPropertyValue("PlaceholderMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("PlaceholderMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("PlaceholderMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2765,8 +2655,8 @@ public class TeamModule extends BaseClass {
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		invitePage.clickPrevious();
 		String text = invitePage.getAddMoreText();
-		extentTest.log(Status.INFO, "Actual Result - Button Name is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Button Name is -" + getPropertyValue("AddUserButton"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AddUserButton"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("AddUserButton"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -2780,9 +2670,9 @@ public class TeamModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 109)
+	@Test(priority = 108)
 	private void verifyUserSendInvite() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify to Check the Scuccessful Massage in Send Invite Page");
+		extentTest = extentReports.createTest("Verify to Check the Suuccessful Message in Send Invite Page");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 		Faker faker = new Faker(new Locale("en-IND"));
 		String r = RandomStringUtils.randomAlphanumeric(4);
@@ -2796,8 +2686,8 @@ public class TeamModule extends BaseClass {
 		invitePage.enterEmail(fakeEmail);
 		invitePage.clickSubmit();
 		String text = invitePage.getSuccessMessages();
-		extentTest.log(Status.INFO, "Actual Result - Button Name is -" + text);
-		extentTest.log(Status.INFO, "Expected Result - Button Name is -" + getPropertyValue("SendInviteMessage"));
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SendInviteMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("SendInviteMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
