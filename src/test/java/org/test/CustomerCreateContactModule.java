@@ -123,7 +123,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 4)
 	private void mandatoryValidation() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation in Contact Page");
+		extentTest = extentReports.createTest("Check Customer Contact Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CustomerCreateContactPage mandatoryValidation = new CustomerCreateContactPage(driver);
 		mandatoryValidation.mandatoryValidation();
 		String errorMandatoryValidation = mandatoryValidation.errorMandatoryValidation();
@@ -144,7 +144,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 3)
 	private void maxValidationFirstNameField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationFirstName();
 		String errorFirstName = maxValidation.errorFirstName();
@@ -169,7 +169,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 5)
 	private void maxValidationLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.maxValidationLastName();
 		String errorFirstName = minValidation.errorLastNameField();
@@ -192,7 +192,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 6)
 	private void maxValidationJobTittle() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Job Tittle Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Job Tittle Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationJobTittle();
 		String errorJobTittle = maxValidation.errorJobTittle();
@@ -216,7 +216,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 7)
 	private void maxValidationEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Email Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationEmail();
 		String errorEmail = maxValidation.errorEmail();
@@ -240,7 +240,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 8)
 	private void invalidValidationEmailField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Validation InValid Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when Customer Contact invalid email is entered in Email Field");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.invalidEmail();
 		String errorEmail = maxValidation.errorEmail();
@@ -263,7 +263,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 9)
 	private void minValidationPhoneNumberField() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field");
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.minValidationPhone();
 		String errorPhoneNumber = minValidation.errorPhoneNumber();
@@ -287,7 +287,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 10)
 	private void maxValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Phone Number Field exceed its max-20 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPhone();
 		String errorPhoneNumber = maxValidation.errorPhoneNumber();
@@ -313,7 +313,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 11)
 	private void maxValidationPropertyFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyFirstName();
 		String errorPropertyName = maxValidation.errorPropertyFirstName();
@@ -337,7 +337,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 12)
 	private void maxValidationPropertyLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyLastName();
 		String errorPropertyName = maxValidation.errorPropertyLastName();
@@ -361,7 +361,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 13)
 	private void maxValidationPropertyNameeField() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationPropertyNamee();
 		String errorContactPerson = maxValidation.errorContactPerson();
@@ -385,7 +385,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 14)
 	private void maxValidationAddress1() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Address1 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property Address1 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAddress11();
 		String errorAddress1Field = maxValidation.errorAddress1Field();
@@ -409,7 +409,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 15)
 	private void maxValidationAddress22Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Address2 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property Address2 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAddress22();
 		String errorAddress1Field = maxValidation.errroAddress2Field();
@@ -432,7 +432,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void maxValidationCityField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation City Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property City Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationCity();
 		String errorCityField = maxValidation.errorCityField();
@@ -456,7 +456,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 17)
 	private void maxValidationStateField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property State Field exceed its max-45 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationState();
 		String errorStateField = maxValidation.errorStateField();
@@ -479,7 +479,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 18)
 	private void minValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field");
 		CustomerCreateContactPage minValidation = new CustomerCreateContactPage(driver);
 		minValidation.minValidationZipcode();
 		String errorZipcodeField = minValidation.errorZipcodeField();
@@ -502,7 +502,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 19)
 	private void maxValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationZipcode();
 		String errorZipcodeField = maxValidation.errorZipcodeField();
@@ -527,7 +527,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 20)
 	private void maxValidationProductNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Product Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Product Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationProductName();
 		String errorProductField = maxValidation.errorProductField();
@@ -550,7 +550,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 21)
 	private void maxValidationBrandNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Brand Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Brand Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationBrandName();
 		String errorBrandField = maxValidation.errorBrandField();
@@ -573,7 +573,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 22)
 	private void maxValdidationModelNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Model Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Model Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValdidationModelNumber();
 		String errorModelField = maxValidation.errorModelField();
@@ -596,7 +596,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 23)
 	private void maxValidationSerialNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Serial Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Serial Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationSerialNumber();
 		String errorSerialNumberField = maxValidation.errorSerialNumberField();
@@ -619,7 +619,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 24)
 	private void maxValidationAccessHoursField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Access Hours Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Access Hours Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationAccessHours();
 		String errorAccessHours = maxValidation.errorAccessHours();
@@ -642,7 +642,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 25)
 	private void maxValidationInstallationNotesField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Installation Notes Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Contact Installation Notes Field exceed its max-2048 limit");
 		CustomerCreateContactPage maxValidation = new CustomerCreateContactPage(driver);
 		maxValidation.maxValidationInstallationNotes();
 		String errorAccessHours = maxValidation.errorInstallation();
@@ -741,7 +741,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 28)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Customer Contact Successful Message");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Customer Contact Created");
 		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
 		create.contactPage();
 		create.propertyPage();
@@ -790,7 +790,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 30)
 	private void alreadyExistedMail() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Already Existed Validation Email Field");
+		extentTest = extentReports.createTest("Verify [Email Already Exists] Error is dispalyed when already existing mail ID is provided");
 		CustomerCreateContactPage alreadyExisted = new CustomerCreateContactPage(driver);
 		alreadyExisted.alreadyExistMail();
 		String responseMessageCreateContact = alreadyExisted.errorEmail();
@@ -958,7 +958,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 37)
 	private void editContactList() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Edit Contact Details");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Customer Contact Updated");
 		CustomerCreateContactPage edit = new CustomerCreateContactPage(driver);
 		edit.editContact();
 		String responseMessageCreateContact = edit.updateMessage();
@@ -980,7 +980,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	@Test(priority = 39)
 	private void deleteContactList() throws IOException {
-		extentTest = extentReports.createTest("Verify the Delete Contact List");
+		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the Customer Contact Deleted");
 		CustomerCreateContactPage edit = new CustomerCreateContactPage(driver);
 		edit.deleteContact();
 		String responseMessageCreateContact = edit.deleteMessage();

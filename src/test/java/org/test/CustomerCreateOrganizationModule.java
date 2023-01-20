@@ -129,7 +129,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 3)
 	private void mandatoryValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation in Organization Page");
+		extentTest = extentReports.createTest("Check Customer Organization Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CustomerCreateOrganizationPage mandatoryValidation = new CustomerCreateOrganizationPage(driver);
 		mandatoryValidation.mandatoryValidation();
 		String errorMandatory = mandatoryValidation.errorMandatory();
@@ -153,7 +153,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 4)
 	private void maxValidationOrganizationField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Organization Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationOrganization();
 		String errorMandatory = maxValidation.errorMandatory();
@@ -179,7 +179,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 5)
 	private void maxValidationWebsiteField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Website Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Website Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationWebsite();
 		String errorMandatory = maxValidation.errorWebsite();
@@ -203,7 +203,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 6)
 	private void maxValidationAddress1Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Address1 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Address1 Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage address1Validation = new CustomerCreateOrganizationPage(driver);
 		address1Validation.maxValidationAddress1Field();
 		String errorAddress1Field = address1Validation.errorAddress1Field();
@@ -227,7 +227,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 7)
 	private void maxValidationAddress2Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Address2 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Address2 Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage address2Validation = new CustomerCreateOrganizationPage(driver);
 		address2Validation.maxValidationAddress2Field();
 		String errorAddress1Field = address2Validation.errorAddress2Field();
@@ -251,7 +251,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 8)
 	private void maxValidationCityField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation City Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization City Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage cityValidation = new CustomerCreateOrganizationPage(driver);
 		cityValidation.maxValidationCityField();
 		String errorAddress1Field = cityValidation.errorCityField();
@@ -275,7 +275,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 9)
 	private void maxValidationStateField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization State Name Field exceed its max-45 limit");
 		CustomerCreateOrganizationPage stateValidation = new CustomerCreateOrganizationPage(driver);
 		stateValidation.maxValidationStateField();
 		String errorStateField = stateValidation.errorStateField();
@@ -298,7 +298,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 10)
 	private void minValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in zipcode field");
 		CustomerCreateOrganizationPage minValidation = new CustomerCreateOrganizationPage(driver);
 		minValidation.minValidationZipcodeField();
 		String errorZipcodeField = minValidation.errorZipcodeField();
@@ -322,7 +322,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 11)
 	private void maxValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Zipcode Field exceed its max-10 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationZipcodeField();
 		String errorZipcodeField = maxValidation.errorZipcodeField();
@@ -345,7 +345,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 12)
 	private void emailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Validation InValid Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when invalid email is entered in Email Field");
 		CustomerCreateOrganizationPage emailValidation = new CustomerCreateOrganizationPage(driver);
 		emailValidation.validEmailField();
 		String errorEmail = emailValidation.errorEmail();
@@ -368,7 +368,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 13)
 	private void maxValidationEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Email Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationEmailField();
 		String errorEmail = maxValidation.errorEmail();
@@ -391,7 +391,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 14)
 	private void minValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in phone number field");
 		CustomerCreateOrganizationPage minValidation = new CustomerCreateOrganizationPage(driver);
 		minValidation.minValidationPhoneNumberField();
 		String errorPhoneNumber = minValidation.errorPhoneNumber();
@@ -415,7 +415,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 15)
 	private void maxValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Phone Number Field exceed its max-20 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPhoneNumberField();
 		String errorPhoneNumber = maxValidation.errorPhoneNumber();
@@ -441,7 +441,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void maxValidationContactFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Contact First Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationFirstName();
 		String errorFirstName = maxValidation.errorFirstName();
@@ -464,7 +464,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 17)
 	private void maxValidationContactLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationLastName();
 		String errorFirstName = maxValidation.errorLastNameField();
@@ -487,7 +487,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 18)
 	private void maxValidationContactEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contact Email Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Contact Email Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationContactEmail();
 		String errorEmail = maxValidation.errorContactEmail();
@@ -510,7 +510,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 19)
 	private void validateContactEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Validation InValid Email Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when Customer Organization Contact invalid email is entered in Email Field");
 		CustomerCreateOrganizationPage validateEmail = new CustomerCreateOrganizationPage(driver);
 		validateEmail.validateContactEmail();
 		String errorEmail = validateEmail.errorContactEmail();
@@ -533,7 +533,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 20)
 	private void minValidationContactPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in phone number field");
 		CustomerCreateOrganizationPage minValidation = new CustomerCreateOrganizationPage(driver);
 		minValidation.minValidationContactPhoneNumber();
 		String errorPhoneNumber = minValidation.errorContactPhoneNumber();
@@ -556,7 +556,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 21)
 	private void maxValidationContactPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Contact Phone Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Contact Phone Number Field exceed its max-20 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationContactPhoneNumber();
 		String errorPhoneNumber = maxValidation.errorContactPhoneNumber();
@@ -581,7 +581,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 22)
 	private void maxValidationJobTittleField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Job Tittle Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Job Tittles Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationJobTittle();
 		String errorJobTittle = maxValidation.errorContactJobTittle();
@@ -607,7 +607,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 23)
 	private void maxValidationPropertyNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyName();
 		String errorPropertyName = maxValidation.errorContactPropertyName();
@@ -631,7 +631,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 24)
 	private void maxValidationPropertyFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property First Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property First Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyFirstNamee();
 		String errorContactPerson = maxValidation.errorPropertyFirstName();
@@ -655,7 +655,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 25)
 	private void maxValidationPropertyLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Last Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property Last Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyLastNamee();
 		String errorContactPerson = maxValidation.errorPropertyLastName();
@@ -679,7 +679,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 26)
 	private void maxValidationPropertyAddress1Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Address1 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property Address1 Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyAddress1();
 		String errorAddress1Field = maxValidation.errorContactPropertyAddress1();
@@ -703,7 +703,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 27)
 	private void maxValidationPropertyAddress2Field() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Property Validation Address2 Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property Address2 Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyAddress2();
 		String errorAddress1Field = maxValidation.errorContactPropertyAddress2();
@@ -726,7 +726,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 28)
 	private void maxValidationPropertyStateField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property State Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property State Name Field exceed its max-45 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyStateName();
 		String errorCityField = maxValidation.errorContactPropertyStateName();
@@ -750,7 +750,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 29)
 	private void maxValidationPropertyCityField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property City Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property City Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyCityName();
 		String errorCityField = maxValidation.errorContactPropertyCityName();
@@ -774,7 +774,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 30)
 	private void minValidationPropertyZipCodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Minimum Validation Property Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in zipcode field");
 		CustomerCreateOrganizationPage minValidation = new CustomerCreateOrganizationPage(driver);
 		minValidation.minValidationPropertyZipcode();
 		String errorZipcodeField = minValidation.errorContactPropertyZipcode();
@@ -799,7 +799,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 31)
 	private void maxValidationPropertyZipCodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Property Zip Code Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Property Zipcode Field exceed its max-10 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationPropertyZipcode();
 		String errorZipcodeField = maxValidation.errorContactPropertyZipcode();
@@ -824,7 +824,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 32)
 	private void maxValidationProductNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Product Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Product Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationProductName();
 		String errorProductField = maxValidation.errorProductName();
@@ -847,7 +847,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 33)
 	private void maxValidationBrandNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Brand Name Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Brand Name Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationBrandName();
 		String errorBrandField = maxValidation.errorBrandName();
@@ -870,7 +870,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 34)
 	private void maxValidationModelNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Model Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Model Number Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationModelNumber();
 		String errorModelField = maxValidation.errorModelNumber();
@@ -894,7 +894,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 35)
 	private void maxValidationSerialNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Serial Number Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Serial Number Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationSerialNumber();
 		String errorSerialNumberField = maxValidation.errorSerialNumber();
@@ -917,7 +917,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 36)
 	private void maxValidationAccessHoursField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Access Hours Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Access Hours Field exceed its max-256 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationAccessHours();
 		String errorAccessHours = maxValidation.errorAccessHours();
@@ -941,7 +941,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 37)
 	private void maxValidationInstallationNotesField() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation Installation Notes Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Customer Organization Installation Notes Field exceed its max-2048 limit");
 		CustomerCreateOrganizationPage maxValidation = new CustomerCreateOrganizationPage(driver);
 		maxValidation.maxValidationInstallationNotes();
 		String errorAccessHours = maxValidation.errorInstallationNotes();
@@ -1040,7 +1040,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 38)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Customer Organization Successful Message");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Customer Organization Created");
 		CustomerCreateOrganizationPage create = new CustomerCreateOrganizationPage(driver);
 		create.organizationPage();
 		create.contactPage();
@@ -1088,7 +1088,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 39)
 	private void organizationNameAlreadyExistValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Already Existed in Organization Name");
+		extentTest = extentReports.createTest("Verify [Organization Already Exists] Error is displayed when already existing Organization Name is provided");
 		CustomerCreateOrganizationPage alreadyValidation = new CustomerCreateOrganizationPage(driver);
 		alreadyValidation.alreadyExistOrganizationName();
 		String errorMandatory = alreadyValidation.errorMandatory();
@@ -1112,7 +1112,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 40)
 	private void alreadyExistedEmail() throws InterruptedException, IOException, AWTException {
-		extentTest = extentReports.createTest("Verify the Already Existed in Organization Email Field");
+		extentTest = extentReports.createTest("Verify [Email Already Exists] Error is dispalyed when already existing mail ID is provided");
 		CustomerCreateOrganizationPage alreadyEmail = new CustomerCreateOrganizationPage(driver);
 		String alreadyExistEmail = alreadyEmail.alreadyExistEmail();
 		extentTest.log(Status.INFO, "Actual Result is -" + alreadyExistEmail);
@@ -1301,7 +1301,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 48)
 	private void editContactList() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Edit Organization Details");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Customer Organization Updated");
 		CustomerCreateOrganizationPage edit = new CustomerCreateOrganizationPage(driver);
 		edit.editContact();
 		String responseMessageCreateContact = edit.updateMessage();
@@ -1323,7 +1323,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	@Test(priority = 49)
 	private void deleteContactList() throws IOException {
-		extentTest = extentReports.createTest("Verify the Delete Organization List");
+		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the Customer Organization Deleted");
 		CustomerCreateOrganizationPage edit = new CustomerCreateOrganizationPage(driver);
 		edit.deleteContact();
 		String responseMessageCreateContact = edit.deleteMessage();
