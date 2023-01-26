@@ -1,51 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="org.test.OnBoardingModule">
-        <methods>
-          <include name="confirmPasswordFieldCondition"/>
-          <include name="mandatoryValidationLocation"/>
-          <include name="lowerCaseValidation"/>
-          <include name="correctValidationEmail"/>
-          <include name="validateEmailFormat"/>
-          <include name="maximumValidationLastName"/>
-          <include name="setup"/>
-          <include name="industryTypeFieldPresent"/>
-          <include name="passwordMandatoryField"/>
-          <include name="maximumValidationBussinessWebSite"/>
-          <include name="maximumValidationBussinessName"/>
-          <include name="alreadyBussinessNameValidation"/>
-          <include name="minValidationPassword"/>
-          <include name="mandatoryEmailFieldValidation"/>
-          <include name="minValidationConfirmPassword"/>
-          <include name="maximumValidationLocation"/>
-          <include name="maximumValidationIndustryField"/>
-          <include name="sizeCompanyValidation"/>
-          <include name="existingEmailValidation"/>
-          <include name="mismatchPassword"/>
-          <include name="validateRadioButtonClickable"/>
-          <include name="maximumValidationFirstName"/>
-          <include name="validationRadioButtonIntrested"/>
-          <include name="passwordFieldConditions"/>
-          <include name="specialCharacterBussinessNameValidation"/>
-          <include name="mandatoryBussinessNameFieldValidation"/>
-          <include name="exitBrowser"/>
-          <include name="maximumValidationEmail"/>
-        </methods>
-      </class> <!-- org.test.OnBoardingModule -->
-=======
-      <class name="org.test.CustomerCreateOrganizationModule">
+      <class name="org.test.CustomerOrganizationQuote">
         <methods>
           <include name="exitBrowser"/>
-          <include name="customerOrganizationCount"/>
+          <include name="maximumValidationQuoteTittle"/>
+          <include name="maximumValidationReference"/>
+          <include name="maximumValidationInventoryItem"/>
           <include name="setup"/>
-          <include name="deleteContactList"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
->>>>>>> 7a66422de784af6083aaee5a5277fdc88a58fd9e
+      </class> <!-- org.test.CustomerOrganizationQuote -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

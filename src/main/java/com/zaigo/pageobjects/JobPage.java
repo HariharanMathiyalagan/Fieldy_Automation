@@ -41,7 +41,7 @@ public class JobPage extends BaseClass {
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
 
-	private void timePicker() {
+	public void timePicker() {
 		LocalTime now = LocalTime.now();
 		String pastTime = now.minusMinutes(30).toString();
 		String futureTime = now.plusHours(2).toString();
@@ -130,7 +130,7 @@ public class JobPage extends BaseClass {
 	By JobDeletedMessage = By.xpath("//*[text()='Job deleted successfully']");
 	By JobDraftedMessage = By.xpath("//*[text()='Job Drafted']");
 	By StatusJob = By.id("customer-contact-request-card-status");
-	By Edit = By.xpath("//*[@class='fa fa-pencil ']");
+	By Edit = By.xpath("(//*[@class='fa fa-pencil '])[1]");
 	By SelectTechnician = By.xpath(
 			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
 	By Yes = By.xpath("//*[text()='Yes']");
@@ -170,6 +170,7 @@ public class JobPage extends BaseClass {
 	By OrgContactName = By.id("id_user_customer");
 	By OrgContactAdd = By.xpath("//*[@class='add_new_btn3 btn-30 btn btn-bg-blue pr-2 pl-2']");
 	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
+	By ContactName = By.id("customer-name-input-field");
 
 	public JobPage(WebDriver driver) {
 		this.driver = driver;
@@ -196,6 +197,12 @@ public class JobPage extends BaseClass {
 	private void clearField(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
+	}
+
+	private void elementtobeClickable(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
 	}
 
 	private void clickButton(By element) {
@@ -257,13 +264,40 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public void customerContactJobListPage() throws InterruptedException {
+	public void valuePresent(By element, String value) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	}
+
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+	}
+
+	public String customerContactJobListPage() throws InterruptedException {
 		String text = this.getText(ContactListName);
 		this.mouseActionClick(ContactListName);
 		this.assertName(ContactListName, text);
 		this.mouseActionClick(ClickJob);
+		String customerName = this.customerName("DetailScreenCustomerName");
 		this.assertName(CreateJob, "Create Job");
 		this.mouseActionClick(CreateJob);
+		return customerName;
+	}
+
+	static String getName;
+
+	public String customerName(String value) {
+		if (value.equals("DetailScreenCustomerName")) {
+			getName = this.getText(CustomerName);
+			return getName;
+		} else if (value.equals("PlaceHolderName")) {
+			this.valuePresent(ContactName, getName);
+			String textAttribute = this.getTextAttribute(ContactName);
+			return textAttribute;
+		}
+		return value;
 	}
 
 	public void customerOrganizationJobListPage() throws InterruptedException {
@@ -379,7 +413,7 @@ public class JobPage extends BaseClass {
 		this.scrollUp();
 
 	}
-	
+
 	public void switchOrganization() throws InterruptedException {
 		this.assertName(Label, "Create Job");
 		this.mouseActionClick(RadioButtonOrg);
@@ -450,7 +484,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void maxValidationLocationField() throws InterruptedException, IOException {
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 		this.validationTab(Location, getPropertyValue("2048Characters"));
 	}
 
@@ -460,7 +494,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void maxValidationTittle() throws InterruptedException {
-		Thread.sleep(6000);
+//		Thread.sleep(6000);
 		this.validationTab(Tittle, characters256);
 	}
 
@@ -532,7 +566,7 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public void futureStartTime() throws InterruptedException {
+	public void futureStartTime() {
 		LocalTime now = LocalTime.now();
 		String futureTime = now.plusHours(2).toString();
 		this.inputText(StartTime, futureTime);
@@ -784,6 +818,11 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String jobNo() {
+		String text = this.getText(JobNo);
+		return text;
+	}
+
 	public String searchJobNo() {
 		String text = this.getText(JobNo);
 		this.tagValidation(SearchBox, text);
@@ -909,6 +948,44 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public void unScheduleJob() throws IOException {
+		this.picKLocation();
+		this.mouseActionClick(BussinessUnit);
+		this.mouseActionClick(General);
+		this.mouseActionClick(ServiceType);
+		this.mouseActionClick(Repair);
+		this.inputText(Description, getPropertyValue("Description"));
+		this.tagValidation(Tags, randomCharacter);
+		this.inputText(Notes, getPropertyValue("Notes"));
+		this.mouseActionClick(SaveComplete);
+
+	}
+
+	public void unassignedJob() throws InterruptedException {
+		this.mouseActionClick(Edit);
+		this.elementtobeClickable(SaveComplete);
+		this.mouseActionClick(StartDate);
+		this.currentPickerFromDate();
+		this.futureStartTime();
+//		this.mouseActionClick(Crew);
+		Thread.sleep(5000);
+		this.scrollDown();
+		this.elementtobeClickable(SaveComplete);
+		this.mouseActionClick(SaveComplete);
+
+	}
+
+	public void rescheduleJob() {
+		this.mouseActionClick(Edit);
+		this.elementtobeClickable(SaveComplete);
+		this.inputText(EndTime, "20.00");
+		this.mouseActionClick(Technician);
+		this.mouseActionClick(TechnicianFirstName);
+		this.elementtobeClickable(SaveComplete);
+		this.mouseActionClick(SaveComplete);
+
+	}
+
 	By ScheduleFrom = By.xpath(
 			"(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
 
@@ -986,5 +1063,59 @@ public class JobPage extends BaseClass {
 	}
 
 	/* End */
+
+	public String jobStatusCreation(String value) throws IOException, InterruptedException {
+		if (value.equals("Unschedule")) {
+			this.picKLocation();
+			this.mouseActionClick(BussinessUnit);
+			this.mouseActionClick(General);
+			this.mouseActionClick(ServiceType);
+			this.mouseActionClick(Repair);
+			this.inputText(Description, getPropertyValue("Description"));
+			this.tagValidation(Tags, randomCharacter);
+			this.inputText(Notes, getPropertyValue("Notes"));
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("Unassigned")) {
+			this.picKLocation();
+			this.mouseActionClick(BussinessUnit);
+			this.mouseActionClick(General);
+			this.mouseActionClick(ServiceType);
+			this.mouseActionClick(Repair);
+			this.dropDownByIndex(Priority, 2);
+			this.currentPickerFromDate();
+			this.futureStartTime();
+			this.assertName(SelectTechnician, "Select Technician");
+			this.clearField(Tags);
+			this.inputText(Tittle, fakeTittle);
+			this.clearField(Description);
+			this.inputText(Description, getPropertyValue("Description"));
+			this.inputText(Notes, getPropertyValue("Notes"));
+			this.assertName(SaveComplete, "Schedule Job");
+			Thread.sleep(2000);
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("EditUnassigned")) {
+			this.mouseActionClick(Edit);
+			this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(StartDate);
+			this.currentPickerFromDate();
+			this.futureStartTime();
+			this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("EditReschedule")) {
+			this.mouseActionClick(Edit);
+			this.elementtobeClickable(SaveComplete);
+			this.inputText(EndTime, "20.00");
+			this.mouseActionClick(Technician);
+			this.mouseActionClick(TechnicianFirstName);
+			this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("Create")) {
+			Thread.sleep(2000);
+			this.mouseActionClick(CreateJob);
+			Thread.sleep(2000);
+		}
+		return value;
+
+	}
 
 }

@@ -226,7 +226,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 7)
 	public void verifyContractorNumberMinValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor form]");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.contractorName("Contractor X");
 		contractorPage.contractorPhone("123");
@@ -250,7 +251,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 8)
 	public void verifyContractorEmailFormat() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify error message is displayed when [Compamy Contrctor form] invalid email is entered in Email Field");
+		extentTest = extentReports.createTest(
+				"Verify error message is displayed when [Compamy Contrctor form] invalid email is entered in Email Field");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorEmail("aibcda");
@@ -274,7 +276,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 9)
 	public void verifyContractorNumberMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Company Contractor Phone Number Field exceed its max-20 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Company Contractor Phone Number Field exceed its max-20 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearContractorEmail();
 		contractorPage.contractorPhone("12312312311890021344535564532212323432113");
@@ -298,7 +301,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 10)
 	public void verifyFaxMinValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Fax field of [Company Contractor form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-6 limit is provided in Fax field of [Company Contractor form]");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorFax("77");
@@ -321,7 +325,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 11)
 	public void verifyFaxMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Company Contractor Fax Name Field exceed its max-20 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Company Contractor Fax Name Field exceed its max-20 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearPhone();
 		contractorPage.contractorFax("777777777777777778888888888888877777777777777777777777");
@@ -344,8 +349,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 12)
 	public void verifyCpersonFirstNameMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when [Contractor Comapany] First Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] First Name Field exceed its max-256 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearFax();
 		contractorPage.contractorContactPersonFirstName(getPropertyValue("256Characters"));
@@ -373,7 +378,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 13)
 	public void verifyCpersonLastNameMaxValidation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Last Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Last Name Field exceed its max-256 limit");
 		CreateContractorPage contractorPage = new CreateContractorPage(this.driver);
 		contractorPage.clearFax();
 		contractorPage.contractorContactPersonLastName(getPropertyValue("256Characters"));
@@ -403,7 +409,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 14)
 	private void maxValidationLocationNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Location Name Field exceed its max-256 limit");
 		CreateContractorPage maxValidationLocationField = new CreateContractorPage(this.driver);
 		maxValidationLocationField.maxValidationLocationName();
 		String assertionMessage = maxValidationLocationField.locationErrorMessage();
@@ -427,7 +434,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 15)
 	private void validateEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify error message is displayed when [Compamy Contrctor Location Page] invalid email is entered in Email Field");
+		extentTest = extentReports.createTest(
+				"Verify error message is displayed when [Compamy Contrctor Location Page] invalid email is entered in Email Field");
 		CreateContractorPage validateEmail = new CreateContractorPage(this.driver);
 		validateEmail.validateEmail();
 		String emailErrorMessage = validateEmail.emailErrorMessage();
@@ -451,7 +459,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void maxValidationEmailField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Email Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Email Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationEmail();
 		String emailErrorMessage = maxValidation.emailErrorMessage();
@@ -475,7 +484,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 17)
 	private void minValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor Location Page]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Company Contractor Location Page]");
 		CreateContractorPage minValidation = new CreateContractorPage(this.driver);
 		minValidation.minValidationPhoneNumber();
 		String phoneNumberErrorMessage = minValidation.phoneNumberErrorMessage();
@@ -499,7 +509,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 18)
 	private void maxValidationPhoneNumberField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Phone Number Field exceed its max-20 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Location Phone Number Field exceed its max-20 limit");
 		CreateContractorPage minValidation = new CreateContractorPage(this.driver);
 		minValidation.maxValidationPhoneNumberField();
 		String phoneNumberErrorMessage = minValidation.phoneNumberErrorMessage();
@@ -523,7 +534,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 19)
 	private void maxValidationAddress1Field() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Address1 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Address1 Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationAddress1();
 		String errorAddress1Message = maxValidation.errorAddress1Message();
@@ -546,7 +558,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 20)
 	private void maxValidationAddress2Field() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Address2 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Address2 Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationAddress2();
 		String errorAddress2Message = maxValidation.errorAddress2Message();
@@ -569,7 +582,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 21)
 	private void maxValidationStateField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] State Name Field exceed its max-45 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] State Name Field exceed its max-45 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationStateName();
 		String errorAddress2Message = maxValidation.errorStateNameMessage();
@@ -592,7 +606,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 22)
 	private void maxValidationCityField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] City Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] City Name Field exceed its max-256 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationCityName();
 		String errorAddress2Message = maxValidation.errorCityNameMessage();
@@ -615,7 +630,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 23)
 	private void maxValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Zipcode Field exceed its max-10 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Zipcode Field exceed its max-10 limit");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.maxValidationZipCode();
 		String errorAddress2Message = maxValidation.errorZipCodeMessage();
@@ -639,7 +655,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 24)
 	private void minValidationZipcodeField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Company Contractor Location Page]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Company Contractor Location Page]");
 		CreateContractorPage maxValidation = new CreateContractorPage(this.driver);
 		maxValidation.minValidationZipCode();
 		String errorAddress2Message = maxValidation.errorZipCodeMessage();
@@ -689,7 +706,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 26)
 	private void maxValidationContactPerson() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Contractor Comapany] Location Contact Person Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Contractor Comapany] Location Contact Person Name Field exceed its max-256 limit");
 		CreateContractorPage maxContactPerson = new CreateContractorPage(this.driver);
 		maxContactPerson.maxValidationContactPerson();
 		String errorContactPersonMessage = maxContactPerson.errorContactPersonMessage();
@@ -1171,7 +1189,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 45)
 	private void maxValidationFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] First Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] First Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationFirstName();
 		String mandatoryValidationFirstNameField = landing.errorFirstName();
@@ -1195,7 +1214,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 46)
 	private void maxValidationLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Last Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Last Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLastName();
 		String mandatoryValidationFirstNameField = landing.errorLastName();
@@ -1219,7 +1239,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 47)
 	private void maxValidationJobTittleField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationJobTittle();
 		String mandatoryValidationFirstNameField = landing.errorJobTittle();
@@ -1243,7 +1264,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 48)
 	private void maxValidationEmailFields() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
@@ -1267,7 +1289,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 49)
 	private void invalidEmailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify error message is displayed when [Team User form] invalid email is entered in Email Field");
+		extentTest = extentReports.createTest(
+				"Verify error message is displayed when [Team User form] invalid email is entered in Email Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.invalidEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
@@ -1293,7 +1316,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 50)
 	private void minValidatonPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
@@ -1318,7 +1342,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 51)
 	private void maxValidatonPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
@@ -1344,7 +1369,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 52)
 	private void maxValidationLocationName() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Location Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Location Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLocationName();
 		String mandatoryValidationFirstNameField = landing.errorLocatioName();
@@ -1368,7 +1394,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 53)
 	private void maxValidationAddress1() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Address1 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Address1 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress1();
 		String mandatoryValidationFirstNameField = landing.errorAddress1();
@@ -1392,7 +1419,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 54)
 	private void maxValidationAddress2() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Address2 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] Address2 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress2();
 		String mandatoryValidationFirstNameField = landing.errorAddress2();
@@ -1416,7 +1444,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 55)
 	private void maxValidationState() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] State Name Field exceed its max-45 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] State Name Field exceed its max-45 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationState();
 		String mandatoryValidationFirstNameField = landing.errorState();
@@ -1440,7 +1469,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 56)
 	private void maxValidationCity() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] City Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User] City Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationCity();
 		String mandatoryValidationFirstNameField = landing.errorCity();
@@ -1464,7 +1494,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 57)
 	private void minValidationZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
@@ -1512,7 +1543,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 59)
 	private void maxValidationZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
@@ -1582,7 +1614,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 62)
 	private void alreadyExistedMailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify [Email Already Exists] User form, Error is dispalyed when already existing Email is provided");
+		extentTest = extentReports.createTest(
+				"Verify [Email Already Exists] User form, Error is dispalyed when already existing Email is provided");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.getEmaiList();
 		String createUserList = landing.alreadyEmail();
@@ -1607,10 +1640,10 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchName = landing.searchName();
 		String listFirstName = landing.listFirstName();
-		extentTest.log(Status.INFO, "Actual Result is -" + searchName);
-		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (searchName.equals(listFirstName)) {
+		if (listFirstName.equals(searchName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearUserSearchField();
 		} else {
@@ -1626,15 +1659,16 @@ public class TeamModule extends BaseClass {
 	}
 
 	@Test(priority = 63)
-	private void searchPhoneNumberValidation() throws IOException {
+	private void searchPhoneNumberValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Phone Number in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
+//		Thread.sleep(5000);
 		String searchPhoneNumber = landing.searchPhoneNumber();
 		String listPhoneNumber = landing.listPhoneNumber();
-		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (searchPhoneNumber.equals(listPhoneNumber)) {
+		if (listPhoneNumber.equals(searchPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearUserSearchField();
 		} else {
@@ -1655,10 +1689,10 @@ public class TeamModule extends BaseClass {
 		CreateUserPage landing = new CreateUserPage(driver);
 		String searchPhoneNumber = landing.searchEmail();
 		String listPhoneNumber = landing.listEmail();
-		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
-		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Actual Result is -" + listPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + searchPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (searchPhoneNumber.equals(listPhoneNumber)) {
+		if (listPhoneNumber.equals(searchPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearUserSearchField();
 		} else {
@@ -1889,7 +1923,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 75)
 	private void maxValidationContractorFirstNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] First Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] First Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationFirstName();
 		String mandatoryValidationFirstNameField = landing.errorFirstName();
@@ -1912,7 +1947,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 76)
 	private void maxValidationContractorLastNameField() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Last Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Last Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLastName();
 		String mandatoryValidationFirstNameField = landing.errorLastName();
@@ -1936,7 +1972,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 77)
 	private void invalidContractorEmailValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify error message is displayed when [Team User Contrctor form] invalid email is entered in Email Field");
+		extentTest = extentReports.createTest(
+				"Verify error message is displayed when [Team User Contrctor form] invalid email is entered in Email Field");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.invalidEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
@@ -1962,7 +1999,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 78)
 	private void maxValidationContractorEmailFields() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Email Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Email Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationEmail();
 		String mandatoryValidationFirstNameField = landing.errorEmail();
@@ -1986,7 +2024,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 79)
 	private void minValidatonContractorPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User Contactor form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User Contactor form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
@@ -2011,7 +2050,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 80)
 	private void maxValidatonContractorPhoneNumber() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Phone Number Field exceed its max-20 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Phone Number Field exceed its max-20 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationPhoneNumber();
 		String mandatoryValidationFirstNameField = landing.errorPhoneNumber();
@@ -2037,7 +2077,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 81)
 	private void maxValidationContractorLocationName() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Location Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Location Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationLocationName();
 		String mandatoryValidationFirstNameField = landing.errorLocatioName();
@@ -2061,7 +2102,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 82)
 	private void maxValidationContractorAddress1() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Address1 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Address1 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress1();
 		String mandatoryValidationFirstNameField = landing.errorAddress1();
@@ -2085,7 +2127,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 83)
 	private void maxValidationContractorAddress2() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Address2 Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Address2 Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationAddress2();
 		String mandatoryValidationFirstNameField = landing.errorAddress2();
@@ -2109,7 +2152,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 84)
 	private void maxValidationContractorState() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] State Name Field exceed its max-45 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] State Name Field exceed its max-45 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationState();
 		String mandatoryValidationFirstNameField = landing.errorState();
@@ -2133,7 +2177,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 85)
 	private void maxValidationContractorCity() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] City Name Field exceed its max-256 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] City Name Field exceed its max-256 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationCity();
 		String mandatoryValidationFirstNameField = landing.errorCity();
@@ -2157,7 +2202,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 86)
 	private void minValidationContractorZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User Contractor form]");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User Contractor form]");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.minValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
@@ -2205,7 +2251,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 88)
 	private void maxValidationContractorZipcode() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when [Team User Contractor] Zipcode Field exceed its max-10 limit");
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Team User Contractor] Zipcode Field exceed its max-10 limit");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.maxValidationZipcode();
 		String mandatoryValidationFirstNameField = landing.errorZipcode();
@@ -2297,7 +2344,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 92)
 	private void alreadyExistedContractorMailValidation() throws IOException {
-		extentTest = extentReports.createTest("erify [Email Already Exists] User Contractor form, Error is dispalyed when already existing Email is provided");
+		extentTest = extentReports.createTest(
+				"erify [Email Already Exists] User Contractor form, Error is dispalyed when already existing Email is provided");
 		CreateUserPage landing = new CreateUserPage(driver);
 		landing.getEmaiContractorList();
 		String createUserList = landing.alreadyContractorEmail();
@@ -2342,10 +2390,11 @@ public class TeamModule extends BaseClass {
 	}
 
 	@Test(priority = 94)
-	private void searchContractorPhoneNumberValidation() throws IOException {
+	private void searchContractorPhoneNumberValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Contractor Phone Number in Search Field then the List is Appear");
 		CreateUserPage landing = new CreateUserPage(driver);
+//		Thread.sleep(5000);
 		String searchPhoneNumber = landing.searchContractorPhoneNumber();
 		String listPhoneNumber = landing.listContractorPhoneNumber();
 		extentTest.log(Status.INFO, "Actual Result is -" + searchPhoneNumber);
@@ -2547,7 +2596,8 @@ public class TeamModule extends BaseClass {
 
 	@Test(priority = 103)
 	private void verfiyEmailFormat() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify error message is displayed when [Send Invite form] invalid email is entered in Email Field");
+		extentTest = extentReports.createTest(
+				"Verify error message is displayed when [Send Invite form] invalid email is entered in Email Field");
 		SendInvitePage invitePage = new SendInvitePage(this.driver);
 //		driver.navigate().refresh();
 		invitePage.enterFirstName("sdsddfd");

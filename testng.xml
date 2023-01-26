@@ -29,7 +29,15 @@
 			<class name="org.test.GlobalContactRequest" />
 
 			<class name="org.test.GlobalOrganizationRequest" />
+			
+			<class name="org.test.CustomerContactQuote" />
 
-		</classes>
+			<class name="org.test.CustomerOrganizationQuote" />
+
+			<class name="org.test.GlobalContactQuote" />
+
+			<class name="org.test.GlobalOrganizationQuote" />
+
+		</classes>	
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
