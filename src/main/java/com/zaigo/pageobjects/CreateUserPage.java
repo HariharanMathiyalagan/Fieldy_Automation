@@ -6,12 +6,16 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.poi.ss.formula.ptg.NotEqualPtg;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +28,8 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
+
+import freemarker.ext.jsp._FreeMarkerPageContext2;
 
 public class CreateUserPage extends BaseClass {
 
@@ -96,6 +102,13 @@ public class CreateUserPage extends BaseClass {
 
 	}
 
+	public String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 20);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
+
+	}
+
 	public void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -118,7 +131,7 @@ public class CreateUserPage extends BaseClass {
 	By ContractorSearchButton = By.id("team-user-contractor-search-btn");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
 	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
-	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]	");
+	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
 	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
 	By ListContractorPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
 	By ListContractorEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
@@ -182,7 +195,8 @@ public class CreateUserPage extends BaseClass {
 	By DeletedMessage = By.xpath("//*[text()='User have been deleted successfully']");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By HeadingFirstName = By.xpath("//td[text()='First Name']");
-	By InValid = By.xpath("//div[text()='No Result Found']");
+	By InValid = By.xpath("//*[text()='No Result Found']");
+
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
 	By ListCompanyFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
 	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
@@ -217,7 +231,7 @@ public class CreateUserPage extends BaseClass {
 	public void userPageLanding() {
 		this.mouseActionClick(User);
 		this.assertName(ContactName, "First Name");
-		
+
 		this.mouseActionClick(CreateUser);
 
 	}
@@ -551,9 +565,8 @@ public class CreateUserPage extends BaseClass {
 	}
 
 	public String createUserList() {
-		String text = this.getText(ListFirstName);
-		return text;
-
+		String actual = this.getText(ListFirstName);
+		return actual;
 	}
 
 	public void clearUserSearchField() {
@@ -585,6 +598,7 @@ public class CreateUserPage extends BaseClass {
 
 	public String listPhoneNumber() {
 		String text = this.getText(ListPhoneNumber);
+//		String text = this.getText(ListFirstName);
 		return text;
 
 	}
@@ -605,6 +619,7 @@ public class CreateUserPage extends BaseClass {
 
 	public String listEmail() {
 		String text = this.getText(ListEmail);
+//		String text = this.getText(ListFirstName);
 		return text;
 
 	}

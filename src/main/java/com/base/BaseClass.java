@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -98,9 +99,10 @@ public class BaseClass {
 		element.click();
 	}
 
-	public static void getText(WebElement element) {
-		element.getText();
-	}
+//	public String getText(WebElement element) {
+//		String text = element.getText();
+//		return text;
+//	}
 
 	public static void AlertAccept() {
 		Alert alert = driver.switchTo().alert();
@@ -220,27 +222,27 @@ public class BaseClass {
 	public void excelWrite(String value) throws IOException {
 		File file = new File(System.getProperty("user.dir") + "\\Folder\\config.properties");
 		FileInputStream fin = new FileInputStream(file);
-		Workbook book =  new XSSFWorkbook(fin);
+		Workbook book = new XSSFWorkbook(fin);
 		Sheet sheet = book.getSheet("sheet1");
 		Row row = sheet.getRow(1);
 		Cell cell = row.getCell(1);
 		cell.setCellValue(value);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		book.write(fileOutputStream);
-		
 
 	}
-	
-	
-	public double calculation(String quantity, String price, String discount, String tax) {
+
+	public String calculation(String quantity, String price, String discount, String tax) {
 		double quantityValue = Double.parseDouble(quantity);
 		double priceValue = Double.parseDouble(price);
 		double discountValue = Double.parseDouble(discount);
 		double taxValue = Double.parseDouble(tax);
-		double taxAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
+		double grossAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
 				+ (((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
 						* (taxValue / 100));
-		return taxAmount;
+		DecimalFormat f = new DecimalFormat("0.00");
+		String format = f.format(grossAmount);
+		return format;
 
 	}
 }

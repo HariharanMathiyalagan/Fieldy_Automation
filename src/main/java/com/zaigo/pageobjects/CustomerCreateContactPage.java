@@ -64,7 +64,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.driver = driver;
 	}
 
-	By DashBoard = By.id("customer-main");
+	By DashBoard = By.xpath("//*[text()=' Company Performance']");
 	By Today = By.xpath("(//div[@class='mb-2']//parent::div)[4]");
 	By Customer = By.id("customer-main");
 	By Contact = By.id("customer-contact-menu");
@@ -129,9 +129,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	private void dashBoard() {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(DashBoard)).getCssValue("font-family");
 		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(DashBoard)).getText();
-		Assert.assertEquals(text, "Customer");
+		Assert.assertEquals(text, "Company Performance");
 
 	}
 
@@ -170,7 +171,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By Text = By.xpath("//td[text()='Customer Name']");
+	By Text = By.xpath("//*[text()='Customer Name']");
 	static int parseInt;
 
 	public int getCount() {
@@ -197,10 +198,10 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void modulePage() throws InterruptedException, IOException {
 		this.dashBoard();
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		this.clickCustomer();
 		this.assertName(Text, "Customer Name");
-		this.clickContact();
+		this.mouseActionClick(Contact);
 		this.assertName(ContactName, "Contact Name");
 		this.getCount();
 		this.clickAddContact();

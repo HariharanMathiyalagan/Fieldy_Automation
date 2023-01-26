@@ -69,14 +69,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	private void mouseActionClick(By element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
 
 	public void assertName(By element, String text) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
@@ -108,6 +108,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Customer = By.id("customer-main");
 	By Organization = By.id("customer-organization-menu");
 	By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
@@ -168,14 +169,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void modulePage() throws InterruptedException, AWTException {
-		this.assertName(Customer, "Customer");
-		Thread.sleep(5000);
-		this.clickButton(Customer);
+		this.assertName(Dashboard, "Company Performance");
+//		Thread.sleep(5000);
+		this.mouseActionClick(Customer);
 		this.assertName(Text, "Customer Name");
-		this.clickButton(Organization);
+		this.mouseActionClick(Organization);
 		this.assertName(ContactName, "Organization Name");
 		this.getCount();
-		this.clickButton(AddOrganization);
+		this.mouseActionClick(AddOrganization);
 
 	}
 
@@ -926,7 +927,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void contactPage() {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 3; i++) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
 			String fakeLastName = faker.name().lastName();

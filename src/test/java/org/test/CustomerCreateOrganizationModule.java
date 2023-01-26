@@ -1228,7 +1228,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 	private void searchEmailListValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Email Search Filter in List Validation");
 		CustomerCreateOrganizationPage searchEmail = new CustomerCreateOrganizationPage(driver);
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		String searchEmailValidation = searchEmail.searchEmailValidation();
 		String listEmailField = searchEmail.listEmailField();
 		extentTest.log(Status.INFO, "Actual Result is -" + listEmailField);

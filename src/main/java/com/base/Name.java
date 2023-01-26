@@ -1,5 +1,6 @@
 package com.base;
 
+import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +12,8 @@ import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -26,7 +29,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name extends BaseClass {
 
-	public double calculation(String quantity, String price, String discount, String tax) {
+	public static void main(String[] args) {
 
 //		double costBeforeTax = Double.parseDouble("1000.256");
 //		double taxRate = Double.parseDouble("10");
@@ -47,31 +50,34 @@ public class Name extends BaseClass {
 //		String Price = price;
 //		String Discount = discount;
 //		String Tax = tax;
+//
+//		double quantityValue = Double.parseDouble(quantity);
+//		double priceValue = Double.parseDouble(price);
+//		double discountValue = Double.parseDouble(discount);
+//		double taxValue = Double.parseDouble(tax);
+//		double taxAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
+//				+ (((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
+//						* (taxValue / 100));
+////		double quantityAmount = quantityValue * priceValue;
+////		double discountAmount = quantityAmount - (quantityAmount * (discountValue / 100));
+////		double taxAmount = discountAmount + (discountAmount * (taxValue / 100));
+//		return taxAmount;
+//		
+//
+//	}
 
-		double quantityValue = Double.parseDouble(quantity);
-		double priceValue = Double.parseDouble(price);
-		double discountValue = Double.parseDouble(discount);
-		double taxValue = Double.parseDouble(tax);
-		double taxAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
-				+ (((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
-						* (taxValue / 100));
-//		double quantityAmount = quantityValue * priceValue;
-//		double discountAmount = quantityAmount - (quantityAmount * (discountValue / 100));
-//		double taxAmount = discountAmount + (discountAmount * (taxValue / 100));
-		return taxAmount;
-		
+//	public static void main(String[] args) {
+//		Name n = new Name();
+//		double calculation = n.calculation("1", "250.7596", "10", "10");
+//		double calculation1 = n.calculation("1", "100", "10", "10");
+//		double totalAmount = calculation+calculation1;
+//		DecimalFormat f = new DecimalFormat("0.00");
+//		String format = f.format(totalAmount);
+//		System.out.println(format);
+//		
+//	}
 
+		Font bold = Font.getFont("value");		
+	boolean bold2 = bold.isBold();
 	}
-	
-	public static void main(String[] args) {
-		Name n = new Name();
-		double calculation = n.calculation("1", "250.7596", "10", "10");
-		double calculation1 = n.calculation("1", "100", "10", "10");
-		double totalAmount = calculation+calculation1;
-		DecimalFormat f = new DecimalFormat("0.00");
-		String format = f.format(totalAmount);
-		System.out.println(format);
-		
-	}
-
 }
