@@ -75,6 +75,12 @@ public class OnBoardingPage extends BaseClass {
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
+	
+	private void elementtobeClickable(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
 
 	public String getText(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -392,6 +398,8 @@ public class OnBoardingPage extends BaseClass {
 		this.clearField(location);
 		this.inputText(location, "Chennai");
 		this.mouseActionClick(firstLocation);
+		this.elementtobeClickable(Continue);
+		this.mouseActionClick(Continue);
 		this.mouseActionClick(Continue);
 		this.mouseActionClick(Continue);
 

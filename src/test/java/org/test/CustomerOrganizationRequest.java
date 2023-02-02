@@ -46,7 +46,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	@Test(priority = 1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -69,7 +69,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 2)
 	private void modulePage() throws InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Navigate to Customer Organization Page");
+		extentTest = extentReports.createTest("Verify Customer Organization List Page is opened when clicking on Cusotmer->Organization");
 		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
 		modulePage.modulePage();
 
@@ -102,7 +102,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 4)
 	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the User to Land on the Create Request Page");
+		extentTest = extentReports.createTest("Verify Create Request page is opened from Organization-> Request -> Create Request");
 		RequestPage requestPage = new RequestPage(driver);
 		requestPage.customerOrganizationRequestListPage();
 		String requestLandPage = requestPage.requestLandPage();
@@ -146,7 +146,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 //	@Test(priority = 5)
 	private void mandatoryValidationLocation() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Location field in Request page");
+		extentTest = extentReports.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryLocationField();
 		String errorMandatoryValidation = mandatoryValidation.locationError();
@@ -169,7 +169,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 //	@Test(priority = 4)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Location Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationLocationField();
 		String errorPasswordField = mandatory.locationError();
@@ -195,7 +195,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 6)
 	private void maximumValidationTittle() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Tittle Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationTittle();
 		String errorPasswordField = mandatory.tittleError();
@@ -219,7 +219,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 7)
 	private void mandatoryValidationDescription() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Mandatory Validation Description field");
+		extentTest = extentReports.createTest("Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryDescriptionField();
 		String errorMandatoryValidation = mandatoryValidation.descriptionError();
@@ -240,7 +240,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 8)
 	private void maximumValidationDescription() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Description Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationDescription();
 		String errorPasswordField = mandatory.descriptionError();
@@ -264,7 +264,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 11)
 	public void maximumTagValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxCharacterTag();
 		String errorPasswordField = mandatory.tagsError();
@@ -288,7 +288,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 12)
 	public void duplicateTagsValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Duplicate Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when Duplicate tags are added");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.duplicateTags();
 		String errorPasswordField = mandatory.tagsError();
@@ -312,7 +312,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 13)
 	public void maxTagLimitValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Limit Validation in Tags Field");
+		extentTest = extentReports.createTest("Verify error message is displayed when count of tags exceeds 64");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxTagCountValidation();
 		String errorPasswordField = mandatory.tagsError();
@@ -336,7 +336,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 14)
 	private void maximumValidationNotes() throws IOException {
-		extentTest = extentReports.createTest("Verify the Maximum Validation in Description Field");
+		extentTest = extentReports.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationNotes();
 		String errorPasswordField = mandatory.notesError();
@@ -360,7 +360,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	@Test(priority = 15)
 	private void unsssignedRequest() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Create a Unassigned Request and check the successful message");
+		extentTest = extentReports.createTest("Verify Unassigned Request is created successfully from Customer Organization->Create Request");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.fromDateTimeScheduleRequest();
 		String errorPasswordField = mandatory.createdMessage();

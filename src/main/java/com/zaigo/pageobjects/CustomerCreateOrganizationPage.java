@@ -14,6 +14,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -100,6 +103,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	public String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
+
+	}
+
 	private void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -140,7 +150,15 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Social = By.xpath("//*[text()='Social']");
 	By AlreadyExistsMail = By.xpath("//*[text()='Customer with Company Email already exists']");
 	By Yes = By.xpath("//*[text()='Yes']");
-	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
+//	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
+	@FindAll({ @FindBy(xpath = "//*[text()='Customer created successfully']"),
+			@FindBy(xpath = "//*[text()='Customer with Company Email already exists']"),
+			@FindBy(xpath = "//*[text()='EMAIL 1: Email already exists']"),
+			@FindBy(xpath = "//*[text()='EMAIL 2: Email already exists']"),
+			@FindBy(xpath = "//*[text()='EMAIL 3: Email already exists']"),
+			@FindBy(xpath = "//*[text()='Company Already Exists']") })
+	public WebElement CreateResponseMessage;
+
 	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
 
@@ -887,6 +905,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		this.inputText(Email, fakeEmail);
+//		this.inputText(Email, "fieldy@mailinator.com");
 		Thread.sleep(2000);
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
@@ -898,6 +917,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String create() {
 		String text2 = this.getText(CreateResponseMessage);
 		return text2;
+
+	}
+
+	public void alternateFunction() {
+		this.mouseActionClick(Organization);
 
 	}
 

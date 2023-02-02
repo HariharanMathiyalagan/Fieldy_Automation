@@ -20,6 +20,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.MouseAction;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -234,6 +236,11 @@ public class CustomerCreateContactPage extends BaseClass {
 	By MaxErrorLastName = By.id("last_name_error");
 	By JobTittle = By.id("job_title");
 	By ErrorJobTittle = By.id("job_title_error");
+
+	@FindAll({ @FindBy(xpath = "//*[text()='Customer created successfully']"),
+			@FindBy(xpath = "//*[text()='The e-mail is already exit']") })
+	private WebElement CreatedMessage;
+
 	By Email = By.id("email");
 	By ErrorEmail = By.id("email_error");
 	By Phone = By.id("phones__number__0");
@@ -244,7 +251,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By LeadSources = By.xpath("//input[@data-dropdownlist='lead-source']");
 	By Social = By.xpath("//*[text()='Social']");
 
-	private void logoFormatValidation() throws AWTException {
+	public void logoFormatValidation() throws AWTException {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.elementToBeClickable(Logo));
 		Actions actions = new Actions(driver);
@@ -1190,7 +1197,7 @@ public class CustomerCreateContactPage extends BaseClass {
 //		for (int i = 0; i < 2; i++) {
 //			this.mouseActionClick(Previous);
 //		}
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -1207,6 +1214,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.inputText(JobTittle, fakeTittle);
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
+//		this.inputText(Email, "fieldy@mailinator.com");
 		this.inputText(Phone, fakePhoneNumber);
 		Thread.sleep(5000);
 		this.ClickButton(LeadSources);
@@ -1218,6 +1226,17 @@ public class CustomerCreateContactPage extends BaseClass {
 	public String responseMessageCreateContact() {
 		String text2 = this.getText(ContactCreateMessage);
 		return text2;
+
+	}
+
+	public String responseMessageCreateContact1() {
+		wait = new WebDriverWait(driver, 30);
+		return wait.until(ExpectedConditions.visibilityOf(CreatedMessage)).getText();
+	}
+
+	public void alternateFunction() {
+		this.mouseActionClick(Contact);
+		this.assertName(ContactName, "Contact Name");
 
 	}
 

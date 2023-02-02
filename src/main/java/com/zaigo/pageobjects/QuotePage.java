@@ -271,7 +271,7 @@ public class QuotePage extends BaseClass {
 			FirstName = this.getTextAttribute(OrganizationFirstName);
 			this.inputText(OrganizationLastName, fakeLastName);
 			LastName = this.getTextAttribute(OrganizationLastName);
-			this.inputText(OrganizationEmail, fakeEmail);
+//			this.inputText(OrganizationEmail, fakeEmail);
 			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
 			this.inputText(OrganizationJobTittle, fakeTittle);
 			this.mouseActionClick(OrganizationContactSave);
@@ -302,7 +302,7 @@ public class QuotePage extends BaseClass {
 			this.inputText(OrganizationName, fakeCompanyName);
 			OrgName = this.getTextAttribute(OrganizationName);
 			this.inputText(OrgPhoneNumber, fakePhoneNumber);
-			this.inputText(OrgEmail, fakeEmail);
+//			this.inputText(OrgEmail, fakeEmail);
 			this.inputText(Website, fakeWebsite);
 			this.inputText(OrgAddress1, fakeAddress1);
 			this.inputText(OrgAddress2, fakeAddress2);

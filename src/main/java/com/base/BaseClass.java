@@ -32,7 +32,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.javafaker.Faker;
 
@@ -91,8 +94,10 @@ public class BaseClass {
 		return findElement;
 	}
 
-	public static void inputText(WebElement element, String value) {
-		element.sendKeys(value);
+	public void inputText(WebElement element, String value) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(value);
+//		element.sendKeys(value);s
 	}
 
 	public static void Click(WebElement element) {
@@ -100,7 +105,8 @@ public class BaseClass {
 	}
 
 //	public String getText(WebElement element) {
-//		String text = element.getText();
+//		WebDriverWait wait = new WebDriverWait(driver, 10);
+//		String text = wait.until(ExpectedConditions.visibilityOf(element)).getText();
 //		return text;
 //	}
 
@@ -153,11 +159,12 @@ public class BaseClass {
 		driver.switchTo().window(childWindow);
 	}
 
-	public static void selectByIndex(WebElement dnd, int value) {
-		Select select = new Select(dnd);
-		select.selectByIndex(value);
+	public void selectByIndex(WebElement element, int num) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Select select = new Select(until);
+		select.selectByIndex(num);
 	}
-
 	public static void text(String txt, WebElement text) {
 		String attribute = text.getAttribute("value");
 		System.out.println(txt + attribute);

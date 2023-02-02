@@ -620,7 +620,7 @@ public class RequestPage extends BaseClass {
 		this.mouseActionClick(OrgContactAdd);
 		this.inputText(OrganizationFirstName, fakeFirstName);
 		this.inputText(OrganizationLastName, fakeLastName);
-		this.inputText(OrganizationEmail, fakeEmail);
+//		this.inputText(OrganizationEmail, fakeEmail);
 		this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
 		this.inputText(OrganizationRequestTittle, fakeTittle);
 		this.mouseActionClick(OrganizationContactSave);
@@ -850,7 +850,7 @@ public class RequestPage extends BaseClass {
 		this.mouseActionClick(OrgAdd);
 		this.inputText(OrganizationName, fakeCompanyName);
 		this.inputText(OrgPhoneNumber, fakePhoneNumber);
-		this.inputText(OrgEmail, fakeEmail);
+//		this.inputText(OrgEmail, fakeEmail);
 		this.inputText(Website, fakeWebsite);
 		this.inputText(OrgAddress1, fakeAddress1);
 		this.inputText(OrgAddress2, fakeAddress2);
