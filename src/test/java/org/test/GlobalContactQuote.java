@@ -48,7 +48,7 @@ public class GlobalContactQuote extends BaseClass {
 	@Test(priority = 1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -71,7 +71,7 @@ public class GlobalContactQuote extends BaseClass {
 
 	@Test(priority = 2)
 	public void jobModule() throws InterruptedException {
-		extentTest = extentReports.createTest("Navigate to Global Quote Page");
+		extentTest = extentReports.createTest("Verify Global Quote List Page is opened when clicking on Global Quote");
 		QuotePage module = new QuotePage(driver);
 		module.customerQuoteListPage("GlobalContactQuote");
 		module.customerQuoteListPage("ContactAPI");

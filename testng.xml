@@ -4,7 +4,7 @@
 	<test thread-count="5" name="Test">
 		<classes>
 
-			<class name="org.test.OnBoardingModule" />
+			<!--class name="org.test.OnBoardingModule" />
 
 			<class name="org.test.Login" />
 
@@ -36,7 +36,13 @@
 
 			<class name="org.test.GlobalContactQuote" />
 
-			<class name="org.test.GlobalOrganizationQuote" />
+			<class name="org.test.GlobalOrganizationQuote" /-->
+			
+			<class name="org.test.CustomerContactInvoice" />
+
+			<class name="org.test.CustomerOrganizationInvoice" />
+
+			<class name="org.test.GlobalContactInvoice" />
 
 		</classes>	
 	</test> <!-- Test -->

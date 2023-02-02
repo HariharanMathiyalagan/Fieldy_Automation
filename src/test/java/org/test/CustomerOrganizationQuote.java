@@ -48,8 +48,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = -2) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+		extentTest = extentReports
+				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -73,7 +73,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = -1)
 	private void modulePage() throws InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Navigate to Customer Organization Page");
+		extentTest = extentReports.createTest(
+				"Verify Customer Oraganization List Page is opened when clicking on Cusotmer->Organization");
 		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
 		modulePage.modulePage();
 
@@ -81,7 +82,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 0)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
-		extentTest = extentReports.createTest("Verify the Customer Organization Successful Message");
+		extentTest = extentReports
+				.createTest("Verify a new Customer Organization is created successfully through [Create Organization]");
 		CustomerCreateOrganizationPage create = new CustomerCreateOrganizationPage(driver);
 		create.organizationPage();
 		create.contactPage();
@@ -106,7 +108,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 1)
 	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the User to Land on the Create Quote Page");
+		extentTest = extentReports
+				.createTest("Verify Create Quote page is opened from Organization-> Request -> Create Quote");
 		QuotePage jobPage = new QuotePage(driver);
 		customerContactName = jobPage.customerQuoteListPage("CustomerOrganzation");
 		String jobLandPage = jobPage.quoteLandPage();
@@ -127,7 +130,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 2)
 	private void namePrepopulation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Customer is prepopulated in the Organization Name Field");
+		extentTest = extentReports.createTest(
+				"Verify the Customer Organization Name:" + customerContactName + " is prepopulated in the Organization Name Field");
 		QuotePage jobPage = new QuotePage(driver);
 		String customerName = jobPage.customerName("PlaceHolderName");
 		extentTest.log(Status.INFO, "Actual Result is -" + customerContactName);
@@ -144,7 +148,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactNamePrepopulate.png");
 		}
 	}
-	
+
 	@Test(priority = 3)
 	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
@@ -156,6 +160,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorContact.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			contactMandatory.autoCompleteCreation("VisibleName");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -163,6 +168,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 			File file = new File("AutocompleteOrganzationContactCreate.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("AutocompleteOrganzationContactCreate.png");
+			contactMandatory.autoCompleteCreation("VisibleName");
 		}
 
 	}

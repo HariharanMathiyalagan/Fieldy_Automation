@@ -32,7 +32,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 	@BeforeClass
 	public void setup() {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("GlobalContactQuote.html");
+		extentHtmlReporter = new ExtentHtmlReporter("GlobalOrganizationQuote.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -46,8 +46,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 
 	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+		extentTest = extentReports
+				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -70,7 +70,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 
 	@Test(priority = 0)
 	public void jobModule() throws InterruptedException {
-		extentTest = extentReports.createTest("Navigate to Global Quote Page");
+		extentTest = extentReports.createTest("Verify Global Quote List Page is opened when clicking on Global Quote");
 		QuotePage module = new QuotePage(driver);
 		module.customerQuoteListPage("GlobalContactQuote");
 		module.customerQuoteListPage("OrganizationAPI");
@@ -228,7 +228,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 8)
 	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");

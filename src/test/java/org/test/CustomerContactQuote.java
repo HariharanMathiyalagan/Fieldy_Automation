@@ -9,6 +9,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -51,8 +53,8 @@ public class CustomerContactQuote extends BaseClass {
 
 	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+		extentTest = extentReports
+				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -76,7 +78,8 @@ public class CustomerContactQuote extends BaseClass {
 
 	@Test(priority = 0)
 	private void contactModule() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
+		extentTest = extentReports
+				.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();
 
@@ -84,20 +87,20 @@ public class CustomerContactQuote extends BaseClass {
 
 	@Test(priority = 1)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Customer Contact Successful Message");
-		CustomerCreateContactPage create = new CustomerCreateContactPage(driver);
-		create.contactPage();
-		create.propertyPage();
-		create.equipmentPage();
-		String responseMessageCreateContact = create.responseMessageCreateContact();
-		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact);
+		extentTest = extentReports
+				.createTest("Verify a new Customer Contact is created successfully through [Create Contact]");
+		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		initElements.contactPage();
+		initElements.propertyPage();
+		initElements.equipmentPage();
+		String responseMessageCreateContact1 = initElements.responseMessageCreateContact1();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
 				"Expected Result create response messages is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (responseMessageCreateContact.equals(getPropertyValue("CustomerCreatedMessage"))) {
+		if (responseMessageCreateContact1.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			create.responseMessageCreateContact();
-
+			initElements.responseMessageCreateContact1();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -105,10 +108,13 @@ public class CustomerContactQuote extends BaseClass {
 			File file = new File("CreateValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
-			create.responseMessageCreateContact();
+			initElements.responseMessageCreateContact1();
+			initElements.alternateFunction();
+			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}
+
 
 	@Test(priority = 2)
 	private void labelValidation() throws IOException, InterruptedException {
@@ -133,7 +139,8 @@ public class CustomerContactQuote extends BaseClass {
 
 	@Test(priority = 3)
 	private void namePrepopulation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Customer is prepopulated in the Contact Name Field");
+		extentTest = extentReports.createTest("Verify the Customer Contact Name:" + customerContactName
+				+ " is prepopulated in the Contact Name Field");
 		QuotePage jobPage = new QuotePage(driver);
 		String customerName = jobPage.customerName("PlaceHolderName");
 		extentTest.log(Status.INFO, "Actual Result is -" + customerContactName);
