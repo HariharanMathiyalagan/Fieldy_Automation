@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.GlobalContactInvoice">
+      <class name="org.test.TeamSendInvite">
         <methods>
           <include name="exitBrowser"/>
-          <include name="loginPage"/>
+          <include name="userSendInvite"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- org.test.GlobalContactInvoice -->
+      </class> <!-- org.test.TeamSendInvite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

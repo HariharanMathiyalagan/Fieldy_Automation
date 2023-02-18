@@ -48,8 +48,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 0) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
+		extentTest = extentReports
+				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
@@ -72,7 +72,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 1)
 	private void contactModule() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
+		extentTest = extentReports
+				.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
 		CustomerCreateContactPage module = new CustomerCreateContactPage(driver);
 		module.modulePage();
 
@@ -86,14 +87,13 @@ public class CustomerContactRequest extends BaseClass {
 		initElements.contactPage();
 		initElements.propertyPage();
 		initElements.equipmentPage();
-		String responseMessageCreateContact1 = initElements.responseMessageCreateContact1();
+		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
 				"Expected Result create response messages is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact1.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.responseMessageCreateContact1();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -101,17 +101,16 @@ public class CustomerContactRequest extends BaseClass {
 			File file = new File("CreateValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
-			initElements.responseMessageCreateContact1();
-			initElements.alternateFunction();
+			initElements.responseMessage("AlternateFunction");
 			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}
 
-
 	@Test(priority = 3)
 	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Request -> Create Request");
+		extentTest = extentReports
+				.createTest("Verify Create Job page is opened from Contacts-> Request -> Create Request");
 		RequestPage jobPage = new RequestPage(driver);
 		jobPage.customerContactRequestListPage();
 		String jobLandPage = jobPage.requestLandPage();
@@ -132,7 +131,8 @@ public class CustomerContactRequest extends BaseClass {
 
 //	@Test(priority = 5)
 	private void mandatoryValidationLocation() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports
+				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryLocationField();
 		String errorMandatoryValidation = mandatoryValidation.locationError();
@@ -155,7 +155,8 @@ public class CustomerContactRequest extends BaseClass {
 
 //	@Test(priority = 4)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationLocationField();
 		String errorPasswordField = mandatory.locationError();
@@ -181,7 +182,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 6)
 	private void maximumValidationTittle() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationTittle();
 		String errorPasswordField = mandatory.tittleError();
@@ -205,7 +207,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 7)
 	private void mandatoryValidationDescription() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports.createTest(
+				"Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryDescriptionField();
 		String errorMandatoryValidation = mandatoryValidation.descriptionError();
@@ -226,7 +229,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 8)
 	private void maximumValidationDescription() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationDescription();
 		String errorPasswordField = mandatory.descriptionError();
@@ -250,7 +254,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 11)
 	public void maximumTagValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxCharacterTag();
 		String errorPasswordField = mandatory.tagsError();
@@ -322,7 +327,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 14)
 	private void maximumValidationNotes() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationNotes();
 		String errorPasswordField = mandatory.notesError();
@@ -346,7 +352,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 15)
 	private void unsssignedRequest() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Unassigned Request is created successfully from Customer Contact->Create Request");
+		extentTest = extentReports
+				.createTest("Verify Unassigned Request is created successfully from Customer Contact->Create Request");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.fromDateTimeScheduleRequest();
 		String errorPasswordField = mandatory.createdMessage();
@@ -387,7 +394,8 @@ public class CustomerContactRequest extends BaseClass {
 
 //	@Test(priority = 17)
 	private void editRequestwithFromDateFromTime() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verfiy the unassigned Request is updated to scheduled when assigning the available technician");
+		extentTest = extentReports.createTest(
+				"Verfiy the unassigned Request is updated to scheduled when assigning the available technician");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.editRequest();
 		String errorPasswordField = mandatory.updatedMessage();

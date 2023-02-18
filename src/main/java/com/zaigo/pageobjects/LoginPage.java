@@ -29,7 +29,7 @@ public class LoginPage extends BaseClass {
 	private By lockpopuptwo = By.xpath("//*[contains(text(),'Your account is locked. Please contact admin.')]");
 	private By dashboard = By.id("dashboard-customer-name");
 	private By multiaccount = By.xpath("//h4[contains(text(),'Fieldy Tenant 2')]");
-	private By Team = By.id("team-menu");
+	private By Dashboard = By.xpath("//*[text()=' Company Performance']");
 
 	public LoginPage(WebDriver driver) throws IOException {
 		this.driver = driver;
@@ -44,8 +44,8 @@ public class LoginPage extends BaseClass {
 
 	public String dashBoardText() {
 		wait = new WebDriverWait(driver, 50);
-		wait.until(ExpectedConditions.visibilityOfElementLocated((Team)));
-		return driver.findElement(Team).getText();
+		wait.until(ExpectedConditions.visibilityOfElementLocated((Dashboard)));
+		return driver.findElement(Dashboard).getText();
 	}
 
 	public String toastText() {

@@ -237,6 +237,7 @@ public class GlobalContactInvoice extends BaseClass{
 			File file = new File("AutocompleteContactCreate.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
+			mandatory.responseMessage("AlternateFunction");
 			mandatory.autoCompleteField("VisibleCustomerName");
 		}
 

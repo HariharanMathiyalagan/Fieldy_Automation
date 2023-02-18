@@ -25,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +37,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.github.javafaker.Faker;
 
@@ -43,6 +45,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	public static WebDriver driver;
+	WebDriverWait wait;
 
 	public static void browserConfigChrome() {
 		WebDriverManager.chromedriver().setup();
@@ -165,6 +168,7 @@ public class BaseClass {
 		Select select = new Select(until);
 		select.selectByIndex(num);
 	}
+
 	public static void text(String txt, WebElement text) {
 		String attribute = text.getAttribute("value");
 		System.out.println(txt + attribute);
@@ -225,6 +229,15 @@ public class BaseClass {
 		return value;
 
 	}
+	
+	public String getPropertyValueUpdate(String key) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
+		properties.load(stream);
+		String value = (String) properties.get(key);
+		return value;
+
+	}
 
 	public void excelWrite(String value) throws IOException {
 		File file = new File(System.getProperty("user.dir") + "\\Folder\\config.properties");
@@ -252,4 +265,5 @@ public class BaseClass {
 		return format;
 
 	}
+
 }

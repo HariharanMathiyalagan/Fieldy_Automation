@@ -1,297 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="69" passed="69" failed="0" skipped="0">
+<testng-results ignored="0" total="13" passed="13" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-02T10:14:04 IST" name="Default suite" finished-at="2023-02-02T10:16:12 IST" duration-ms="127145">
+  <suite started-at="2023-02-18T23:33:19 IST" name="Default suite" finished-at="2023-02-18T23:34:17 IST" duration-ms="57427">
     <groups>
     </groups>
-    <test started-at="2023-02-02T10:14:04 IST" name="Default test" finished-at="2023-02-02T10:16:12 IST" duration-ms="127145">
-      <class name="org.test.CustomerContactInvoice">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:04 IST" name="setup" finished-at="2023-02-02T10:14:06 IST" duration-ms="1555" status="PASS">
+    <test started-at="2023-02-18T23:33:19 IST" name="Default test" finished-at="2023-02-18T23:34:17 IST" duration-ms="57427">
+      <class name="org.test.TeamSendInvite">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:33:19 IST" name="setup" finished-at="2023-02-18T23:33:21 IST" duration-ms="2135" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:-1, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:06 IST" name="loginPage" finished-at="2023-02-02T10:14:37 IST" duration-ms="31336" status="PASS">
+        <test-method signature="verify()[pri:0, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:33:21 IST" name="verify" finished-at="2023-02-18T23:33:57 IST" duration-ms="35375" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginPage -->
-        <test-method signature="contactModule()[pri:0, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:37 IST" name="contactModule" finished-at="2023-02-02T10:14:40 IST" duration-ms="2972" status="PASS">
+        </test-method> <!-- verify -->
+        <test-method signature="TeamUserPage()[pri:1, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:33:57 IST" name="TeamUserPage" finished-at="2023-02-18T23:34:04 IST" duration-ms="6803" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- contactModule -->
-        <test-method signature="CreateContact()[pri:1, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:40 IST" name="CreateContact" finished-at="2023-02-02T10:14:52 IST" duration-ms="11433" status="PASS">
+        </test-method> <!-- TeamUserPage -->
+        <test-method signature="landingOnSendInviteForm()[pri:2, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:04 IST" name="landingOnSendInviteForm" finished-at="2023-02-18T23:34:04 IST" duration-ms="705" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- CreateContact -->
-        <test-method signature="labelValidation()[pri:2, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:52 IST" name="labelValidation" finished-at="2023-02-02T10:14:58 IST" duration-ms="6549" status="PASS">
+        </test-method> <!-- landingOnSendInviteForm -->
+        <test-method signature="mandatoryValidationFirstNameField()[pri:3, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:04 IST" name="mandatoryValidationFirstNameField" finished-at="2023-02-18T23:34:05 IST" duration-ms="279" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- labelValidation -->
-        <test-method signature="namePrepopulation()[pri:3, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:14:58 IST" name="namePrepopulation" finished-at="2023-02-02T10:15:00 IST" duration-ms="1661" status="PASS">
+        </test-method> <!-- mandatoryValidationFirstNameField -->
+        <test-method signature="mandatoryValidationTypeField()[pri:4, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:05 IST" name="mandatoryValidationTypeField" finished-at="2023-02-18T23:34:05 IST" duration-ms="80" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- namePrepopulation -->
-        <test-method signature="mandatoryValidationDeuDate()[pri:4, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:00 IST" name="mandatoryValidationDeuDate" finished-at="2023-02-02T10:15:00 IST" duration-ms="542" status="PASS">
+        </test-method> <!-- mandatoryValidationTypeField -->
+        <test-method signature="mandatoryValidationEmailField()[pri:5, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:05 IST" name="mandatoryValidationEmailField" finished-at="2023-02-18T23:34:05 IST" duration-ms="91" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationDeuDate -->
-        <test-method signature="mandatoryValidationInventoryItem()[pri:5, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:00 IST" name="mandatoryValidationInventoryItem" finished-at="2023-02-02T10:15:01 IST" duration-ms="67" status="PASS">
+        </test-method> <!-- mandatoryValidationEmailField -->
+        <test-method signature="maxValidationFirstNameField()[pri:6, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:05 IST" name="maxValidationFirstNameField" finished-at="2023-02-18T23:34:06 IST" duration-ms="816" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationInventoryItem -->
-        <test-method signature="mandatoryValidationPrice()[pri:6, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:01 IST" name="mandatoryValidationPrice" finished-at="2023-02-02T10:15:01 IST" duration-ms="56" status="PASS">
+        </test-method> <!-- maxValidationFirstNameField -->
+        <test-method signature="maxValidationLastNameField()[pri:7, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:06 IST" name="maxValidationLastNameField" finished-at="2023-02-18T23:34:06 IST" duration-ms="749" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationPrice -->
-        <test-method signature="mandatoryValidationQunatity()[pri:6, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:01 IST" name="mandatoryValidationQunatity" finished-at="2023-02-02T10:15:01 IST" duration-ms="53" status="PASS">
+        </test-method> <!-- maxValidationLastNameField -->
+        <test-method signature="maxValidationEmailFields()[pri:9, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:06 IST" name="maxValidationEmailFields" finished-at="2023-02-18T23:34:07 IST" duration-ms="758" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationQunatity -->
-        <test-method signature="mandatoryValidationDescription()[pri:7, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:01 IST" name="mandatoryValidationDescription" finished-at="2023-02-02T10:15:01 IST" duration-ms="58" status="PASS">
+        </test-method> <!-- maxValidationEmailFields -->
+        <test-method signature="invalidEmailValidation()[pri:10, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:07 IST" name="invalidEmailValidation" finished-at="2023-02-18T23:34:08 IST" duration-ms="886" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationDescription -->
-        <test-method signature="maximumValidationReference()[pri:8, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:01 IST" name="maximumValidationReference" finished-at="2023-02-02T10:15:01 IST" duration-ms="618" status="PASS">
+        </test-method> <!-- invalidEmailValidation -->
+        <test-method signature="maxValidationMessage()[pri:11, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:08 IST" name="maxValidationMessage" finished-at="2023-02-18T23:34:13 IST" duration-ms="5200" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationReference -->
-        <test-method signature="maximumValidationInvoiceTittle()[pri:9, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:01 IST" name="maximumValidationInvoiceTittle" finished-at="2023-02-02T10:15:02 IST" duration-ms="627" status="PASS">
+        </test-method> <!-- maxValidationMessage -->
+        <test-method signature="verifySaveButtonExist()[pri:12, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:13 IST" name="verifySaveButtonExist" finished-at="2023-02-18T23:34:13 IST" duration-ms="217" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationInvoiceTittle -->
-        <test-method signature="maximumValidationInventoryItem()[pri:10, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:02 IST" name="maximumValidationInventoryItem" finished-at="2023-02-02T10:15:03 IST" duration-ms="939" status="PASS">
+        </test-method> <!-- verifySaveButtonExist -->
+        <test-method signature="userSendInvite()[pri:13, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:13 IST" name="userSendInvite" finished-at="2023-02-18T23:34:16 IST" duration-ms="2624" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationInventoryItem -->
-        <test-method signature="emptyValidationQuantityField()[pri:11, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:03 IST" name="emptyValidationQuantityField" finished-at="2023-02-02T10:15:03 IST" duration-ms="190" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emptyValidationQuantityField -->
-        <test-method signature="maxQuanitityLimit()[pri:12, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:03 IST" name="maxQuanitityLimit" finished-at="2023-02-02T10:15:03 IST" duration-ms="237" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxQuanitityLimit -->
-        <test-method signature="afterDecimalPointValidationQuantityField()[pri:13, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:03 IST" name="afterDecimalPointValidationQuantityField" finished-at="2023-02-02T10:15:03 IST" duration-ms="180" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointValidationQuantityField -->
-        <test-method signature="beforeDecimalPointValidationQuantityField()[pri:14, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:03 IST" name="beforeDecimalPointValidationQuantityField" finished-at="2023-02-02T10:15:04 IST" duration-ms="261" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointValidationQuantityField -->
-        <test-method signature="emptyValidationPriceField()[pri:15, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:04 IST" name="emptyValidationPriceField" finished-at="2023-02-02T10:15:04 IST" duration-ms="199" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emptyValidationPriceField -->
-        <test-method signature="maxPriceLimit()[pri:16, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:04 IST" name="maxPriceLimit" finished-at="2023-02-02T10:15:04 IST" duration-ms="195" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxPriceLimit -->
-        <test-method signature="beforeDecimalPointPriceField()[pri:17, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:04 IST" name="beforeDecimalPointPriceField" finished-at="2023-02-02T10:15:04 IST" duration-ms="202" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointPriceField -->
-        <test-method signature="afterDecimalPointPriceField()[pri:18, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:04 IST" name="afterDecimalPointPriceField" finished-at="2023-02-02T10:15:05 IST" duration-ms="235" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointPriceField -->
-        <test-method signature="afterDecimalPointDiscountField()[pri:19, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="afterDecimalPointDiscountField" finished-at="2023-02-02T10:15:05 IST" duration-ms="197" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointDiscountField -->
-        <test-method signature="beforeDecimalPointDiscountField()[pri:20, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="beforeDecimalPointDiscountField" finished-at="2023-02-02T10:15:05 IST" duration-ms="167" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointDiscountField -->
-        <test-method signature="maxLimitDiscountField()[pri:21, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="maxLimitDiscountField" finished-at="2023-02-02T10:15:05 IST" duration-ms="163" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxLimitDiscountField -->
-        <test-method signature="afterDecimalPointTaxField()[pri:22, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="afterDecimalPointTaxField" finished-at="2023-02-02T10:15:05 IST" duration-ms="198" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointTaxField -->
-        <test-method signature="beforeDecimalPointTaxField()[pri:23, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="beforeDecimalPointTaxField" finished-at="2023-02-02T10:15:05 IST" duration-ms="158" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointTaxField -->
-        <test-method signature="maxLimitTaxField()[pri:24, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:05 IST" name="maxLimitTaxField" finished-at="2023-02-02T10:15:06 IST" duration-ms="216" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxLimitTaxField -->
-        <test-method signature="maximumValidationDescription()[pri:25, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:06 IST" name="maximumValidationDescription" finished-at="2023-02-02T10:15:07 IST" duration-ms="1730" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationDescription -->
-        <test-method signature="maximumValidationNotes()[pri:26, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:07 IST" name="maximumValidationNotes" finished-at="2023-02-02T10:15:11 IST" duration-ms="3769" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationNotes -->
-        <test-method signature="expiryFieldPastDateValidation()[pri:27, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:11 IST" name="expiryFieldPastDateValidation" finished-at="2023-02-02T10:15:14 IST" duration-ms="2484" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- expiryFieldPastDateValidation -->
-        <test-method signature="validateCalculation()[pri:28, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:14 IST" name="validateCalculation" finished-at="2023-02-02T10:15:14 IST" duration-ms="627" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateCalculation -->
-        <test-method signature="createInvoice()[pri:29, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:14 IST" name="createInvoice" finished-at="2023-02-02T10:15:20 IST" duration-ms="5515" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createInvoice -->
-        <test-method signature="invoiceCreatedCount()[pri:30, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:20 IST" name="invoiceCreatedCount" finished-at="2023-02-02T10:15:21 IST" duration-ms="1120" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- invoiceCreatedCount -->
-        <test-method signature="editLableValidation()[pri:31, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:21 IST" name="editLableValidation" finished-at="2023-02-02T10:15:29 IST" duration-ms="8153" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editLableValidation -->
-        <test-method signature="mandatoryValidationEditDueDate()[pri:32, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:29 IST" name="mandatoryValidationEditDueDate" finished-at="2023-02-02T10:15:30 IST" duration-ms="767" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationEditDueDate -->
-        <test-method signature="mandatoryValidationEditQunatity()[pri:34, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:30 IST" name="mandatoryValidationEditQunatity" finished-at="2023-02-02T10:15:30 IST" duration-ms="50" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationEditQunatity -->
-        <test-method signature="mandatoryValidationEditPrice()[pri:35, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:30 IST" name="mandatoryValidationEditPrice" finished-at="2023-02-02T10:15:30 IST" duration-ms="52" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationEditPrice -->
-        <test-method signature="mandatoryValidationEditDescription()[pri:36, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:30 IST" name="mandatoryValidationEditDescription" finished-at="2023-02-02T10:15:30 IST" duration-ms="77" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationEditDescription -->
-        <test-method signature="maximumValidationEditReference()[pri:37, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:30 IST" name="maximumValidationEditReference" finished-at="2023-02-02T10:15:31 IST" duration-ms="577" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationEditReference -->
-        <test-method signature="maximumValidationEditInvoiceTittle()[pri:38, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:31 IST" name="maximumValidationEditInvoiceTittle" finished-at="2023-02-02T10:15:31 IST" duration-ms="656" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationEditInvoiceTittle -->
-        <test-method signature="maximumValidationEditInventoryItem()[pri:39, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:31 IST" name="maximumValidationEditInventoryItem" finished-at="2023-02-02T10:15:32 IST" duration-ms="793" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationEditInventoryItem -->
-        <test-method signature="emptyValidationEditQuantityField()[pri:40, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:32 IST" name="emptyValidationEditQuantityField" finished-at="2023-02-02T10:15:32 IST" duration-ms="188" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emptyValidationEditQuantityField -->
-        <test-method signature="maxEditQuanitityLimit()[pri:41, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:32 IST" name="maxEditQuanitityLimit" finished-at="2023-02-02T10:15:33 IST" duration-ms="239" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxEditQuanitityLimit -->
-        <test-method signature="afterEditDecimalPointValidationQuantityField()[pri:42, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:33 IST" name="afterEditDecimalPointValidationQuantityField" finished-at="2023-02-02T10:15:33 IST" duration-ms="171" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterEditDecimalPointValidationQuantityField -->
-        <test-method signature="beforeEditDecimalPointValidationQuantityField()[pri:43, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:33 IST" name="beforeEditDecimalPointValidationQuantityField" finished-at="2023-02-02T10:15:33 IST" duration-ms="262" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeEditDecimalPointValidationQuantityField -->
-        <test-method signature="emptyValidationEditPriceField()[pri:44, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:33 IST" name="emptyValidationEditPriceField" finished-at="2023-02-02T10:15:33 IST" duration-ms="239" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emptyValidationEditPriceField -->
-        <test-method signature="maxEditPriceLimit()[pri:45, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:33 IST" name="maxEditPriceLimit" finished-at="2023-02-02T10:15:33 IST" duration-ms="189" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxEditPriceLimit -->
-        <test-method signature="beforeEditDecimalPointPriceField()[pri:46, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:33 IST" name="beforeEditDecimalPointPriceField" finished-at="2023-02-02T10:15:34 IST" duration-ms="199" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeEditDecimalPointPriceField -->
-        <test-method signature="afterEditDecimalPointPriceField()[pri:47, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="afterEditDecimalPointPriceField" finished-at="2023-02-02T10:15:34 IST" duration-ms="216" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterEditDecimalPointPriceField -->
-        <test-method signature="afterEditDecimalPointDiscountField()[pri:48, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="afterEditDecimalPointDiscountField" finished-at="2023-02-02T10:15:34 IST" duration-ms="183" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterEditDecimalPointDiscountField -->
-        <test-method signature="beforeEditDecimalPointDiscountField()[pri:49, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="beforeEditDecimalPointDiscountField" finished-at="2023-02-02T10:15:34 IST" duration-ms="186" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeEditDecimalPointDiscountField -->
-        <test-method signature="maxLimitEditDiscountField()[pri:50, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="maxLimitEditDiscountField" finished-at="2023-02-02T10:15:34 IST" duration-ms="146" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxLimitEditDiscountField -->
-        <test-method signature="afterDecimalEditPointTaxField()[pri:51, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="afterDecimalEditPointTaxField" finished-at="2023-02-02T10:15:34 IST" duration-ms="180" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalEditPointTaxField -->
-        <test-method signature="beforeDecimalEditPointTaxField()[pri:52, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:34 IST" name="beforeDecimalEditPointTaxField" finished-at="2023-02-02T10:15:35 IST" duration-ms="152" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalEditPointTaxField -->
-        <test-method signature="maxEditLimitTaxField()[pri:53, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:35 IST" name="maxEditLimitTaxField" finished-at="2023-02-02T10:15:35 IST" duration-ms="202" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maxEditLimitTaxField -->
-        <test-method signature="maximumEditValidationDescription()[pri:54, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:35 IST" name="maximumEditValidationDescription" finished-at="2023-02-02T10:15:37 IST" duration-ms="1708" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumEditValidationDescription -->
-        <test-method signature="maximumEditValidationNotes()[pri:55, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:37 IST" name="maximumEditValidationNotes" finished-at="2023-02-02T10:15:40 IST" duration-ms="3583" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumEditValidationNotes -->
-        <test-method signature="expiryEditFieldPastDateValidation()[pri:56, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:40 IST" name="expiryEditFieldPastDateValidation" finished-at="2023-02-02T10:15:42 IST" duration-ms="1486" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- expiryEditFieldPastDateValidation -->
-        <test-method signature="updatedInvoice()[pri:57, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:42 IST" name="updatedInvoice" finished-at="2023-02-02T10:15:47 IST" duration-ms="5552" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updatedInvoice -->
-        <test-method signature="draftInvoice()[pri:58, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:47 IST" name="draftInvoice" finished-at="2023-02-02T10:15:56 IST" duration-ms="9087" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- draftInvoice -->
-        <test-method signature="createdQuoteStatus()[pri:59, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:56 IST" name="createdQuoteStatus" finished-at="2023-02-02T10:15:56 IST" duration-ms="47" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createdQuoteStatus -->
-        <test-method signature="UpdatedInvociePartialPayment()[pri:60, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:15:56 IST" name="UpdatedInvociePartialPayment" finished-at="2023-02-02T10:16:00 IST" duration-ms="3533" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- UpdatedInvociePartialPayment -->
-        <test-method signature="partialPaidAmount()[pri:61, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:00 IST" name="partialPaidAmount" finished-at="2023-02-02T10:16:00 IST" duration-ms="459" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- partialPaidAmount -->
-        <test-method signature="UpdatedInvociePaid()[pri:62, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:00 IST" name="UpdatedInvociePaid" finished-at="2023-02-02T10:16:04 IST" duration-ms="4180" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- UpdatedInvociePaid -->
-        <test-method signature="fullyPaidAmount()[pri:62, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:04 IST" name="fullyPaidAmount" finished-at="2023-02-02T10:16:05 IST" duration-ms="79" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- fullyPaidAmount -->
-        <test-method signature="listInvoiceNo()[pri:63, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:05 IST" name="listInvoiceNo" finished-at="2023-02-02T10:16:06 IST" duration-ms="1441" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- listInvoiceNo -->
-        <test-method signature="listQuoteReference()[pri:64, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:06 IST" name="listQuoteReference" finished-at="2023-02-02T10:16:08 IST" duration-ms="2339" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- listQuoteReference -->
-        <test-method signature="filterDateInvoice()[pri:65, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:08 IST" name="filterDateInvoice" finished-at="2023-02-02T10:16:10 IST" duration-ms="1525" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- filterDateInvoice -->
-        <test-method signature="listInvalid()[pri:66, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:10 IST" name="listInvalid" finished-at="2023-02-02T10:16:11 IST" duration-ms="1160" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- listInvalid -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CustomerContactInvoice@5d0a1059]" started-at="2023-02-02T10:16:11 IST" name="exitBrowser" finished-at="2023-02-02T10:16:12 IST" duration-ms="469" status="PASS">
+        </test-method> <!-- userSendInvite -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.TeamSendInvite@485966cc]" started-at="2023-02-18T23:34:16 IST" name="exitBrowser" finished-at="2023-02-18T23:34:17 IST" duration-ms="639" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.CustomerContactInvoice -->
+      </class> <!-- org.test.TeamSendInvite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
