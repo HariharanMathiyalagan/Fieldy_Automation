@@ -4,13 +4,21 @@
 	<test thread-count="5" name="Test">
 		<classes>
 
-			<!--class name="org.test.OnBoardingModule" />
+			<!--class name="org.test.OnBoardingModule" /-->
 
 			<class name="org.test.Login" />
 
-			<class name="org.test.TeamModule" />
+			<class name="org.test.TeamCompaniesDetailScreen" />
+			
+			<class name="org.test.TeamCompanyContractor" />
+			
+			<class name="org.test.TeamUser" />
+			
+			<class name="org.test.TeamUserContractor" />
+			
+			<class name="org.test.TeamSendInvite" />
 
-			<class name="org.test.CustomerCreateContactModule" />
+			<!--class name="org.test.CustomerCreateContactModule" />
 
 			<class name="org.test.CustomerCreateOrganizationModule" />
 
@@ -36,14 +44,17 @@
 
 			<class name="org.test.GlobalContactQuote" />
 
-			<class name="org.test.GlobalOrganizationQuote" /-->
+			<class name="org.test.GlobalOrganizationQuote" />
 			
 			<class name="org.test.CustomerContactInvoice" />
 
 			<class name="org.test.CustomerOrganizationInvoice" />
-
+			
 			<class name="org.test.GlobalContactInvoice" />
+			
+			<class name="org.test.GlobalOrganizationInvoice" /-->
 
-		</classes>	
+
+		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

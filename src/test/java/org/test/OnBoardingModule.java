@@ -148,7 +148,8 @@ public class OnBoardingModule extends BaseClass {
 
 	@Test(priority = 3)
 	private void specialCharacterBussinessNameValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify the Error Message is displayed when the Bussiness Name field enter the Special Characters");
+		extentTest = extentReports.createTest(
+				"Verify the Error Message is displayed when the Bussiness Name field enter the Special Characters");
 		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
 		alreadyBussiness.specialCharacterBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
@@ -354,13 +355,14 @@ public class OnBoardingModule extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify User is Landing in Industry Page after providing the Business details");
 		OnBoardingPage validation = new OnBoardingPage(driver);
-		validation.validEmail();
+		validation.validFillData("FirstPage");
 		String messageLandingPage = validation.messageLandingPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + messageLandingPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "Provide your Industry type");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (messageLandingPage.equals("Provide your Industry type")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			validation.updateValue();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -368,7 +370,7 @@ public class OnBoardingModule extends BaseClass {
 			File file = new File("Industry.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("Industry.png");
-
+			validation.updateValue();
 		}
 
 	}
@@ -654,7 +656,9 @@ public class OnBoardingModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorConfirmMessage.equals(getPropertyValue("MisMatchPassword"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mismatchPassword.clearPassword();
 			mismatchPassword.clearConfirmPassword();
+			mismatchPassword.validFillData("Password");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -662,13 +666,75 @@ public class OnBoardingModule extends BaseClass {
 			File file = new File("MisMatchPasswordValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
+			mismatchPassword.clearPassword();
 			mismatchPassword.clearConfirmPassword();
+			mismatchPassword.validFillData("Password");
 		}
 
 	}
 
-//	@Test(priority = 23)
-	public void createTenant() {
+	@Test(priority = 26)
+	public void createTenant() throws IOException {
+		extentTest = extentReports.createTest("Creating a New Tenant, the page is redirect into the Dashboard page");
+		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		String errorConfirmMessage = mismatchPassword.dashBoardPage();
+		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorConfirmMessage.equals(getPropertyValue("ValidationOfLandingPage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("MisMatchPasswordValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
+		}
+
+	}
+
+	@Test(priority = 27)
+	public void subDomineURL() throws IOException {
+		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain URL");
+		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		String actualURL = mismatchPassword.urlGet();
+		String expectedURL = mismatchPassword.expectedURL();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualURL);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedURL);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualURL.equals(expectedURL)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("MisMatchPasswordValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
+		}
+
+	}
+
+	@Test(priority = 28)
+	public void ownerName() throws IOException {
+		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain tenant owner profile name");
+		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		String actualOwner = mismatchPassword.getOwnerName();
+		String expectedOwner = mismatchPassword.expectedOwnerName();
+		extentTest.log(Status.INFO, "Actual Result is -" + actualOwner);
+		extentTest.log(Status.INFO, "Expected Result is -" + expectedOwner);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualOwner.equals(expectedOwner)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("MisMatchPasswordValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
+		}
 
 	}
 

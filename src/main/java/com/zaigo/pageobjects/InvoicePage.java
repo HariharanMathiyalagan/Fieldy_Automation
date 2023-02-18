@@ -94,7 +94,7 @@ public class InvoicePage extends BaseClass {
 	}
 
 	private void mouseActionClick(By element) {
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
@@ -105,7 +105,7 @@ public class InvoicePage extends BaseClass {
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
-	
+
 	public void visibility(WebElement element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
@@ -286,13 +286,27 @@ public class InvoicePage extends BaseClass {
 	By OrgAdd = By.xpath("//*[@id='id_customer_group-autocomplete-list']//child::span");
 	By InvoiceSearchButton = By.id("invoice-search-enter");
 	@FindAll({ @FindBy(xpath = "//*[text()='EMAIL 1: Email already exists']"),
-			@FindBy(xpath = "//*[text()='Customer created successfully']") })
+			@FindBy(xpath = "//*[text()='Customer created successfully']"),
+			@FindBy(xpath = "//*[text()='Customer with Company Email already exists']"),
+			@FindBy(xpath = "//*[text()='Company Already Exists']"),
+			@FindBy(xpath = "//*[text()='The e-mail is already exit']") })
 	private WebElement ContactCreateMessage;
+	By OrganizationName = By.id("company_name");
+	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[3]");
+	By OrgAddress1 = By.id("line_1");
+	By OrgAddress2 = By.id("line_2");
+	By OrgCity = By.id("city");
+	By OrgState = By.id("state");
+	By OrgZipcode = By.id("zipcode");
+	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
+	By Website = By.xpath("(//*[@id='website'])[1]");
+	By SaveOrg = By.id("organization-create");
 
 	public void clearFields(String value) {
 		if (value.equals("Reference")) {
 			this.clearField(Reference);
 		} else if (value.equals("DueDate")) {
+//			this.valuePresent(DueonReceipt, "Due on receipt");
 			this.dropDownByIndex(DueonReceipt, 8);
 			this.clearField(DueDate);
 		} else if (value.equals("EditDueDate")) {
@@ -712,22 +726,20 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(Yes);
 		} else if (value.equals("CilckCreateInvoice")) {
 			this.mouseActionClick(CreateGlobalInvoice);
-		}
-//		else if (value.equals("ClickOrgRadio")) {
-//			this.mouseActionClick(RadioOrganization);
-//		} 
-		else if (value.equals("GlobalContactDraft")) {
+		} else if (value.equals("ClickOrgRadio")) {
+			this.mouseActionClick(RadioOrganization);
+		} else if (value.equals("GlobalContactDraft")) {
 			this.autoCompleteField("GlobalContact");
 			this.autoCompleteField("VisibleCustomerName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateInvoiceLabel);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("GlobalOrgDraft")) {
-//			this.autoCompleteCreation("GlobalOrganization");
-//			this.autoCompleteCreation("VisibleCustomerOrgName");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.mouseActionClick(CreateQuoteLabel);
-//			this.mouseActionClick(Yes);
+			this.autoCompleteField("GlobalOrganization");
+			this.autoCompleteField("VisibleCustomerOrgName");
+			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
+			this.mouseActionClick(CreateInvoiceLabel);
+			this.mouseActionClick(Yes);
 		} else if (value.equals("DraftEdit")) {
 //			String text = this.getText(ListReference);
 //			this.mouseActionClick(ThreeDots);
@@ -832,7 +844,9 @@ public class InvoicePage extends BaseClass {
 
 	}
 
-	public String responseMessage(String value) {
+	static String response;
+
+	public String responseMessage(String value) throws IOException {
 		if (value.equals("Create")) {
 			String text = this.getText(CreatedMesssage);
 			return text;
@@ -843,8 +857,27 @@ public class InvoicePage extends BaseClass {
 			String text = this.getText(ListUpdateMessage);
 			return text;
 		} else if (value.equals("CustomerCreateMessage")) {
-			String text = this.getText(ContactCreateMessage);
-			return text;
+			response = this.getText(ContactCreateMessage);
+//			System.out.println(response);
+			return response;
+		} else if (value.equals("AlternateFunction")) {
+			if (response.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+				this.clearField(Email);
+				this.inputText(Email, fakeEmail);
+				this.mouseActionClick(SaveContact);
+			} else if (response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+				this.clearField(OrganizationName);
+				this.inputText(OrganizationName, fakeCompanyName);
+				this.mouseActionClick(SaveOrg);
+			} else if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+				this.clearField(OrgEmail);
+				this.inputText(OrgEmail, fakeEmail);
+				this.mouseActionClick(SaveOrg);
+			} else if (response.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+				this.clearField(OrganizationEmail);
+				this.inputText(OrganizationEmail, fakeEmail);
+				this.mouseActionClick(SaveOrg);
+			}
 		}
 		return value;
 
@@ -934,6 +967,7 @@ public class InvoicePage extends BaseClass {
 
 	static String ContactFirstName;
 	static String ContactLastName;
+	static String OrgName;
 
 	public void autoCompleteField(String value) throws InterruptedException {
 		if (value.equals("OrganizationContactCreate")) {
@@ -966,7 +1000,25 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(SaveContact);
 		} else if (value.equals("VisibleCustomerName")) {
 			this.valuePresent(GlobalCustomerName, ContactFirstName + " " + ContactLastName);
+		} else if (value.equals("GlobalOrganization")) {
+			this.inputText(GlobalCustomerName, fakeCompanyName);
+			this.mouseActionClick(OrgAdd);
+			this.inputText(OrganizationName, fakeCompanyName);
+			OrgName = this.getTextAttribute(OrganizationName);
+			this.inputText(OrgPhoneNumber, fakePhoneNumber);
+			this.inputText(OrgEmail, fakeEmail);
+//			this.inputText(OrgEmail, "fieldy@mailinator.com");
+			this.inputText(Website, fakeWebsite);
+			this.inputText(OrgAddress1, fakeAddress1);
+			this.inputText(OrgAddress2, fakeAddress2);
+			this.inputText(OrgCity, fakeCity);
+			this.inputText(OrgState, fakeState);
+			this.inputText(OrgZipcode, fakeZipcode);
+			this.mouseActionClick(SaveOrg);
+		} else if (value.equals("VisibleCustomerOrgName")) {
+			this.valuePresent(GlobalCustomerName, OrgName);
 		}
 
 	}
+
 }

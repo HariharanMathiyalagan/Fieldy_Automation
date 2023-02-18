@@ -92,10 +92,10 @@ public class CustomerOrganizationInvoice extends BaseClass{
 				.createTest("Verify a new Customer Organization is created successfully through [Create Organization]");
 		CustomerCreateOrganizationPage create = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		create.organizationPage();
-		create.contactPage();
+		create.contactPage("CreateContact");
 		create.propertyPage();
 		create.equipmentPage();
-		String listName = create.create();
+		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -108,9 +108,8 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			File file = new File("OrgCreateValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgCreateValidation.png");
-			create.alternateFunction();
+			create.responseMessage("AlternateFunction");
 		}
-
 	}
 
 	@Test(priority = 1)

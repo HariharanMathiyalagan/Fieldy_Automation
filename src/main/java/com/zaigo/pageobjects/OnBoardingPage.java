@@ -3,15 +3,20 @@ package com.zaigo.pageobjects;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.poi.ss.formula.functions.Value;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,22 +27,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.base.BaseClass;
+import com.github.javafaker.Faker;
 
 public class OnBoardingPage extends BaseClass {
-
+	public static String BussinessName;
+	public static String TenantFirstName;
+	public static String TenantLastName;
+	public static String TenantEmail;
 	WebDriver driver;
 	WebDriverWait wait;
-
-	String MandatoryErrorMessage = "Required Field";
-	String PasswordCondition = "Password must have one lower case letter and one upper case letter and one number";
-	String MinimumValidatioPassword = "Enter minimum 8 characters";
-	String MisMatchPassword = "Confirm password should match with new password";
-	String Max2048Validation = "Not Allowed More than 2048 characters";
-	String Max256CharacterValidation = "Not Allowed More than 256 characters";
-	String ValidEmail = "Enter a valid Email";
-	String BussinessNameAlready = "Business Name Already Exists";
-	String AlreadyExistedEmail = "Email Already Exists";
-	String IndustryMaxValidation = "Not Allowed More than 64 characters";
+	Faker faker = new Faker(new Locale("en-IND"));
+	String fakeFirstName = faker.name().firstName();
+	String fakeLastName = faker.name().lastName();
+	String fakeEmail = faker.internet().safeEmailAddress();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakeAddress1 = faker.address().buildingNumber();
+	String fakeAddress2 = faker.address().streetName();
+	String fakeCity = faker.address().city();
+	String fakeState = faker.address().state();
+	String fakeZipcode = faker.address().zipCode();
+	String fakeWebsite = faker.company().url();
+	String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
+	String fakeFaxNumber = faker.number().digits(14);
+	String fakeTittle = faker.name().title();
 
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
@@ -58,6 +70,21 @@ public class OnBoardingPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
 	}
 
+	public void updateValue() throws IOException {
+		String CompanyName = BussinessName;
+		String FirstName = TenantFirstName;
+		String LastName = TenantLastName;
+		String Email = TenantEmail;
+		Properties properties = new Properties();
+		properties.put("BussinessName", CompanyName);
+		properties.put("FirstName", FirstName);
+		properties.put("LastName", LastName);
+		properties.put("UserName", Email);
+		FileOutputStream fo = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
+		properties.store(fo, "Update Value");
+
+	}
+
 	private void clickButton(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).click();
@@ -75,18 +102,48 @@ public class OnBoardingPage extends BaseClass {
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
 	}
-	
+
 	private void elementtobeClickable(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
 	}
 
-	public String getText(By element) {
+	private void inVisible(By element) {
 		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+	}
+
+	public String getText(By element) {
+		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		return until;
 
+	}
+
+	public String getAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+
+	}
+
+	public void visible(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 5);
+			text = wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	private void validationTab(By element, String text) {
@@ -101,6 +158,7 @@ public class OnBoardingPage extends BaseClass {
 	By LastName = By.id("last_name");
 	By Email = By.id("email");
 	By MyBussinessType = By.className("business");
+	By xpath = By.xpath("(//input[@name='industryname'])[1]");
 	By IndustryField = By.xpath("//h3[text()='Mention your industry information']");
 	By Continue = By.id("submit-btn");
 	By ChooseIndustry = By.xpath("//input[@value='Heating & Air Conditioning']");
@@ -109,24 +167,32 @@ public class OnBoardingPage extends BaseClass {
 	By NextLandingPage = By.xpath("(//div[@class='floating-form meeting']//child::h2)[2]");
 	By CompanySize = By.xpath("(//div[@class='floating-form meeting']//h2)[3]");
 	By CompanyEmployee = By.id("empdiv1");
-
 	By RadioButton = By.xpath("//input[@onclick='mustIntrestedCheckBox()']");
-
 	By IntersetedToday = By.xpath("//h2[text()='Which Solution are you most interested in today?']");
 	By PasswordHeading = By.xpath("//h2[text()='Enter Your Password']");
 	By Password = By.id("password");
 	By ConfirmPassword = By.id("password_confirmation");
-
 	By PasswordError = By.id("password_error");
 	By ConfirmPasswordError = By.id("password_confirmation_error");
 	By Back = By.id("onboarding-back-btn");
-
 	By CompanyError = By.id("company_name_error");
 	By BussinessWebsiteError = By.id("company_website_error");
 	By FirstNameError = By.id("first_name_error");
-	By lastNameError = By.id("last_name_error");
+	By LastNameError = By.id("last_name_error");
 	By EmailError = By.id("email_error");
 	By ClickTrail = By.xpath("//*[@class='top-btn']");
+	By LocationHeading = By.xpath("//*[text()='Where are you located?']");
+	By ErrorLocation = By.id("addresses_error");
+	By HomeCleaning = By.xpath("//*[@value='Home Cleaning']");
+	By EmployeeCount = By.xpath("//*[text()='101-500 Employees']");
+	By Booking = By.xpath("//*[@value='Online Booking']");
+	By location = By.id("addresses");
+	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+	By CreatingTeanant = By.xpath("//*[text()='We're just adding some finishing touches']");
+	By ButtonVisible = By.xpath("//*[@disabled='true']");
+	By DashBoard = By.xpath("//*[text()=' Company Performance']");
+	By OwnerName = By.id("dashboard-customer-name");
+
 	HttpURLConnection connection;
 
 	public void login() throws MalformedURLException, IOException {
@@ -202,7 +268,7 @@ public class OnBoardingPage extends BaseClass {
 
 	public void clearBussinessName() {
 		this.clearField(CompanyName);
-		this.inputText(CompanyName, randomCharacter);
+		this.inputText(CompanyName, fakeCompanyName);
 	}
 
 	public void alreadyBussinessName() {
@@ -258,7 +324,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public String errorLastName() {
-		String text = this.getText(lastNameError);
+		String text = this.getText(LastNameError);
 		return text;
 
 	}
@@ -293,14 +359,6 @@ public class OnBoardingPage extends BaseClass {
 
 	public void alreadyExistValidation() {
 		this.validationTab(Email, "fieldy@mailinator.com");
-
-	}
-
-	public void validEmail() {
-		String Start = RandomStringUtils.randomNumeric(3);
-		this.validationTab(Email, "Hari" + Start + "@mailinator.com");
-		this.mouseActionClick(Continue);
-//		this.mouseActionClick(Continue);
 
 	}
 
@@ -342,6 +400,8 @@ public class OnBoardingPage extends BaseClass {
 
 	public void clearIndustry() {
 		this.clearField(Industry);
+		this.mouseActionClick(MyBussinessType);
+		this.mouseActionClick(xpath);
 		this.mouseActionClick(Continue);
 
 	}
@@ -373,9 +433,6 @@ public class OnBoardingPage extends BaseClass {
 		this.assertName(Continue, "Continue");
 		this.mouseActionClick(Continue);
 	}
-
-	By LocationHeading = By.xpath("//*[text()='Where are you located?']");
-	By ErrorLocation = By.id("addresses_error");
 
 	public void mandatoryLocationValidation() {
 		this.assertName(LocationHeading, "Where are you located?");
@@ -476,146 +533,86 @@ public class OnBoardingPage extends BaseClass {
 
 	}
 
-	public void createFirstPage() {
-		for (int i = 0; i < 4; i++) {
-			this.mouseActionClick(Back);
-		}
-		this.clearField(CompanyName);
-		this.inputText(CompanyName, "OnePlus");
-		this.inputText(BussinessWebSite, "www.oneplus.com");
-		this.inputText(FirstName, "BBK");
-		this.inputText(LastName, "Electronics");
-		this.inputText(Email, "oneplus@plus.com");
-		this.mouseActionClick(Continue);
-
-	}
-
-	By HomeCleaning = By.xpath("//*[@value='Home Cleaning']");
-
-	public void createSecoundPage() {
-		this.mouseActionClick(HomeCleaning);
-		this.mouseActionClick(Continue);
-
-	}
-
-	By EmployeeCount = By.xpath("//*[text()='101-500 Employees']");
-
-	public void createThirdPage() {
-		this.mouseActionClick(EmployeeCount);
-		this.mouseActionClick(Continue);
-
-	}
-
-	By Booking = By.xpath("//*[@value='Online Booking']");
-
-	public void createFouthPage() {
-		this.mouseActionClick(Booking);
-		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
-	}
-
-	public void createFifthPage() {
-		this.inputText(Password, "Oneplus@123");
-		this.inputText(ConfirmPassword, "Oneplus@123");
-		this.mouseActionClick(Continue);
-
-	}
-
-	By CreatingTeanant = By.xpath("//*[text()='We're just adding some finishing touches']");
-
 	public String createTenantValidation() {
 		String text = this.getText(CreatingTeanant);
 		return text;
 
 	}
 
-	String name = RandomStringUtils.randomAlphabetic(6);
-	String OwnerFirstName = RandomStringUtils.randomAlphabetic(5);
-	String OwnerLastName = RandomStringUtils.randomAlphabetic(5);
+	public String dashBoardPage() {
+		String text = this.getText(DashBoard);
+		return text;
+	}
 
-	/* Create Tenant User */
-	public void firstPage() {
+	public void validFillData(String value) throws IOException {
+		if (value.equals("FirstPage")) {
+			BussinessName = this.getAttribute(CompanyName);
+			this.inputText(FirstName, fakeFirstName);
+			TenantFirstName = this.getAttribute(FirstName);
+			this.inputText(LastName, fakeLastName);
+			TenantLastName = this.getAttribute(LastName);
+			this.inputText(Email, fakeEmail);
+			TenantEmail = this.getAttribute(Email);
+			this.validationTab(BussinessWebSite, fakeWebsite);
+			if (this.conditionChecking(Continue)) {
+				this.mouseActionClick(Continue);
+			} else {
+				do {
+					if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail1"))) {
+						Faker faker = new Faker(new Locale("en-IND"));
+						this.clearField(Email);
+						String fakeEmail = faker.internet().safeEmailAddress();
+						this.validationTab(Email, fakeEmail);
+						TenantEmail = this.getAttribute(Email);
+					} else if (errorMessageBussinessName().equals(getPropertyValue("BussinessNameAlready"))) {
+						Faker faker = new Faker(new Locale("en-IND"));
+						this.clearBussinessName();
+						String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
+						this.validationTab(CompanyName, fakeCompanyName);
+						BussinessName = this.getAttribute(CompanyName);
+					} else if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail1"))
+							&& errorMessageBussinessName().equals(getPropertyValue("BussinessNameAlready"))) {
+						Faker faker = new Faker(new Locale("en-IND"));
+						this.clearBussinessName();
+						this.clearEmail();
+						String fakeEmail = faker.internet().safeEmailAddress();
+						String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
+						this.validationTab(Email, fakeEmail);
+						TenantEmail = this.getAttribute(Email);
+						this.validationTab(CompanyName, fakeCompanyName);
+						BussinessName = this.getAttribute(CompanyName);
+					}
+				} while (!this.conditionChecking(Continue));
+				this.mouseActionClick(Continue);
+			}
 
-		this.inputText(CompanyName, "One" + name);
-		this.inputText(BussinessWebSite, "www." + name + ".com");
-		this.inputText(FirstName, OwnerFirstName);
-		this.inputText(LastName, OwnerLastName);
-		this.inputText(Email, name + "@mailinator.com");
-		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
+		} else if (value.equals("Password")) {
+			this.inputText(Password, "Zaigo@25");
+			this.inputText(ConfirmPassword, "Zaigo@25");
+			this.mouseActionClick(Continue);
+		}
 
 	}
 
-	public void secoundPage() {
-		this.mouseActionClick(HomeCleaning);
-		this.mouseActionClick(Continue);
+	public String urlGet() {
+		String currentUrl = driver.getCurrentUrl();
+		return currentUrl;
 	}
 
-	public void thirdPage() {
-		this.mouseActionClick(EmployeeCount);
-		this.mouseActionClick(Continue);
-
+	public String expectedURL() throws IOException {
+		String expectedURL = "https://" + (BussinessName.toLowerCase().replaceAll("\\s", ""))
+				+ getPropertyValue("DomainURL");
+		return expectedURL;
 	}
 
-	public void fourthPage() {
-		this.mouseActionClick(Booking);
-		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
+	public String getOwnerName() {
+		String text = this.getText(OwnerName);
+		return text;
 	}
 
-	By location = By.id("addresses");
-	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
-
-	public void fifthPage() throws AWTException, InterruptedException {
-		this.inputText(location, "Chennai");
-		this.mouseActionClick(firstLocation);
-		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
+	public String expectedOwnerName() {
+		String Name = TenantFirstName + TenantLastName;
+		return Name;
 
 	}
-
-	By Dashboard = By.id("dashboard-menu");
-
-	public void sixthPage() {
-		this.inputText(Password, "Fieldy@123");
-		this.inputText(ConfirmPassword, "Fieldy@123");
-		this.mouseActionClick(Continue);
-		this.assertName(Dashboard, "Dashboard");
-
-	}
-
-	/* Edit Owner Location */
-
-	By Team = By.id("team-menu");
-	By Tittle = By.xpath("//div[text()='Zaiportal Tenant 3']");
-	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
-	By Next = By.xpath("//span[text()='Next']");
-
-	By Location = By.id("addresses__name__0");
-	By EmailField = By.id("addresses__email__0");
-	By ContactPerson = By.id("addresses__contact_person__0");
-	By PhoneNumber = By.id("addresses__phone_number__0");
-	By Building = By.id("addresses__line_1__0");
-	By Street = By.id("addresses__line_2__0");
-	By City = By.id("addresses__city__0");
-	By State = By.id("addresses__state__0");
-	By Zipcode = By.id("addresses__zipcode__0");
-	By Save_Complete = By.id("team-company-edit-submit");
-
-	String LocationName = RandomStringUtils.randomAlphabetic(10);
-	String Phone = RandomStringUtils.randomNumeric(10);
-
-	public void functionalityCompaniesEdit() {
-		this.mouseActionClick(Team);
-		this.mouseActionClick(Edit);
-		this.mouseActionClick(Next);
-		this.inputText(Location, LocationName);
-		this.inputText(EmailField, name + "@mailinator.com");
-		this.inputText(ContactPerson, OwnerFirstName + OwnerLastName);
-		this.inputText(PhoneNumber, Phone);
-		this.inputText(Street, name);
-		this.mouseActionClick(Save_Complete);
-
-	}
-
 }

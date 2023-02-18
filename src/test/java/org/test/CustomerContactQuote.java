@@ -21,10 +21,8 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
-import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
-import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class CustomerContactQuote extends BaseClass {
@@ -93,14 +91,13 @@ public class CustomerContactQuote extends BaseClass {
 		initElements.contactPage();
 		initElements.propertyPage();
 		initElements.equipmentPage();
-		String responseMessageCreateContact1 = initElements.responseMessageCreateContact1();
+		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
 				"Expected Result create response messages is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact1.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.responseMessageCreateContact1();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -108,8 +105,7 @@ public class CustomerContactQuote extends BaseClass {
 			File file = new File("CreateValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
-			initElements.responseMessageCreateContact1();
-			initElements.alternateFunction();
+			initElements.responseMessage("AlternateFunction");
 			Assert.fail(responseMessageCreateContact1);
 		}
 

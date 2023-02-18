@@ -3,7 +3,13 @@ package com.zaigo.pageobjects;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.locks.Condition;
 
@@ -56,9 +62,19 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	private void tagValidation(By element, String text) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.ENTER);
+	}
+
 	private void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+	}
+
+	public void valuePresent(By element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
 	private void clearField(By element) {
@@ -96,6 +112,16 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		select.selectByIndex(num);
 	}
 
+	public void visibility(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
+	}
+
+	public void visibility(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+	}
+
 	private String getText(By element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
@@ -115,6 +141,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).perform();
+
+	}
+
+	public void elementtobeClickable(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 
 	}
 
@@ -150,17 +182,40 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Social = By.xpath("//*[text()='Social']");
 	By AlreadyExistsMail = By.xpath("//*[text()='Customer with Company Email already exists']");
 	By Yes = By.xpath("//*[text()='Yes']");
-//	By CreateResponseMessage = By.xpath("//*[text()='Customer created successfully']");
-	@FindAll({ @FindBy(xpath = "//*[text()='Customer created successfully']"),
-			@FindBy(xpath = "//*[text()='Customer with Company Email already exists']"),
-			@FindBy(xpath = "//*[text()='EMAIL 1: Email already exists']"),
-			@FindBy(xpath = "//*[text()='EMAIL 2: Email already exists']"),
-			@FindBy(xpath = "//*[text()='EMAIL 3: Email already exists']"),
-			@FindBy(xpath = "//*[text()='Company Already Exists']") })
-	public WebElement CreateResponseMessage;
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
-	By Text = By.xpath("//*[text()='Customer Name']");
+	@FindAll({ @FindBy(xpath = "//*[text()='Customer Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement Text;
+
+	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement OrganizationLabelName;
+
+//	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
+
+	static String response;
+
+	public String responseMessage(String value) throws IOException {
+		if (value.equals("ResponseMessage")) {
+			response = this.getText(Message);
+			this.mouseActionClick(Cancel);
+			return response;
+		} else if (value.equals("AlternateFunction")) {
+			if (response == getPropertyValue("CompanyAlreadyMessage")
+					|| response == getPropertyValue("CompanyEmailAlreadyMessage")
+					|| response == getPropertyValue("ContactEmailAlreadyMessage")
+					|| response == getPropertyValue("CompanyContact2EmailMessage")
+					|| response == getPropertyValue("CompanyContact3EmailMessage")
+					|| response == getPropertyValue("CompanyEmailContact1Email")
+					|| response == getPropertyValue("CompanyEmailContact2Email")
+					|| response == getPropertyValue("CompanyEmailContact3Email")) {
+				this.mouseActionClick(Organization);
+				this.visibility(OrganizationLabelName);
+			}
+		}
+		return value;
+	}
 
 	static int parseInt;
 
@@ -177,91 +232,25 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return a;
 	}
 
-	By ContactName = By.xpath("//*[text()='Organization Name']");
+	By CustomerOrganization = By.xpath("//*[@data-goesto='user-contractor-list']");
 
 	public int totalCount() throws InterruptedException {
-		this.assertName(ContactName, "Organization Name");
+		this.visibility(OrganizationLabelName);
 		String text2 = this.getText(TotalCount);
 		int parseInt = Integer.parseInt(text2);
 		return parseInt;
 	}
 
-	public void modulePage() throws InterruptedException, AWTException {
+	public String modulePage() throws InterruptedException, AWTException {
 		this.assertName(Dashboard, "Company Performance");
-//		Thread.sleep(5000);
 		this.mouseActionClick(Customer);
-		this.assertName(Text, "Customer Name");
+		this.visibility(Text);
 		this.mouseActionClick(Organization);
-		this.assertName(ContactName, "Organization Name");
+		String text2 = this.getText(CustomerOrganization);
+		this.visibility(OrganizationLabelName);
 		this.getCount();
 		this.mouseActionClick(AddOrganization);
-
-	}
-
-	public void mandatoryValidation() throws InterruptedException {
-		Thread.sleep(5000);
-		this.assertName(SaveComplete, SaveCompleteButton);
-		this.mouseActionClick(SaveComplete);
-	}
-
-	public String errorMandatory() {
-		String text2 = this.getText(OrganizationError);
 		return text2;
-
-	}
-
-	public void text() {
-		this.inputText(OrganizationName, "Demo");
-
-	}
-
-	public void maxSizeLogoValidation() throws AWTException, InterruptedException {
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("dsc00531");
-
-	}
-
-	public String errorLogo() {
-		String text2 = this.getText(MaxSizeLogoError);
-		return text2;
-
-	}
-
-	public void formatLogoValidation() throws InterruptedException, AWTException {
-		this.assertName(Heading, "Customer / Create Organization");
-		Thread.sleep(4000);
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("sample-file.pdf");
-
-	}
-
-	public String formatlogoError() {
-		String text2 = this.getText(LogoError);
-		return text2;
-
-	}
-
-	public void logoFile() throws InterruptedException, AWTException {
-
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("1622641377484");
-
-	}
-
-	public void alreadyExistOrganizationName() {
-		String text2 = this.getText(ListFirstName);
-		this.mouseActionClick(AddOrganization);
-		this.validationTab(OrganizationName, text2);
-		this.mouseActionClick(Next);
-		this.mouseActionClick(Previous);
-	}
-
-	public void clearOrganization() {
-		this.clearField(OrganizationName);
-
 	}
 
 	public void backButton() {
@@ -270,175 +259,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public void maxValidationOrganization() {
-		this.validationTab(OrganizationName, characters256);
-
-	}
-
-	public void input() {
-		this.inputText(OrganizationName, "Organization");
-
-	}
-
-	public void maxValidationWebsite() {
-		this.validationTab(Website, characters256);
-
-	}
-
-	public String errorWebsite() {
-		String text2 = this.getText(WebsiteError);
-		return text2;
-
-	}
-
-	public void clearWebsite() {
-		this.clearField(Website);
-
-	}
-
-	public void maxValidationAddress1Field() {
-		this.validationTab(Address1, characters256);
-
-	}
-
-	public String errorAddress1Field() {
-		String text2 = this.getText(Address1Error);
-		return text2;
-
-	}
-
-	public void clearAddress1Field() {
-		this.clearField(Address1);
-
-	}
-
-	public void maxValidationAddress2Field() {
-		this.validationTab(Address2, characters256);
-
-	}
-
-	public String errorAddress2Field() {
-		String text2 = this.getText(Address2Error);
-		return text2;
-
-	}
-
-	public void clearAddress2Field() {
-		this.clearField(Address2);
-
-	}
-
-	public void maxValidationCityField() {
-		this.validationTab(City, characters256);
-
-	}
-
-	public String errorCityField() {
-		String text2 = this.getText(CityError);
-		return text2;
-
-	}
-
-	public void clearCityField() {
-		this.clearField(City);
-
-	}
-
-	public void maxValidationStateField() {
-		this.scrollDown();
-		this.validationTab(State, characters256);
-
-	}
-
-	public String errorStateField() {
-		String text2 = this.getText(StateError);
-		return text2;
-
-	}
-
-	public void clearStateField() {
-		this.clearField(State);
-
-	}
-
-	public void minValidationZipcodeField() {
-		this.validationTab(ZipCode, "12");
-
-	}
-
-	public String errorZipcodeField() {
-		String text2 = this.getText(ZipCodeError);
-		return text2;
-
-	}
-
-	public void clearZipcodeField() {
-		this.clearField(ZipCode);
-
-	}
-
-	public void maxValidationZipcodeField() {
-		this.validationTab(ZipCode, "21321312133131313");
-
-	}
-
-	public void maxValidationEmailField() {
-		this.validationTab(Email, characters256);
-
-	}
-
-	public String errorEmail() {
-		String text2 = this.getText(EmailError);
-		return text2;
-
-	}
-
-	public void clearEmailField() {
-		this.clearField(Email);
-
-	}
-
-	public void validEmailField() {
-		this.validationTab(Email, "jshdasjdh");
-
-	}
-
-	public void minValidationPhoneNumberField() {
-		this.validationTab(PhoneNumber, "22");
-
-	}
-
-	public String errorPhoneNumber() {
-		String text2 = this.getText(PhoneNumberError);
-		return text2;
-
-	}
-
-	public void clearPhoneNumber() {
-		this.clearField(PhoneNumber);
-
-	}
-
-	public void maxValidationPhoneNumberField() {
-		this.validationTab(PhoneNumber, "23121321234567654323456133321");
-
-	}
-
 	public void nextButton() {
 		this.mouseActionClick(Next);
 
 	}
 
-	public void previousButton() {
-		this.mouseActionClick(Previous);
-		this.mouseActionClick(Previous);
-		this.mouseActionClick(Previous);
-
-	}
-
-	public void loopNextButton() {
-		for (int i = 1; i < 5; i++) {
-			this.mouseActionClick(Next);
+	public void loopPreviousButton() {
+		for (int i = 1; i < 4; i++) {
+			this.mouseActionClick(Previous);
 		}
 
 	}
@@ -446,6 +274,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By FirstName = By.id("contacts__first_name__0");
 	By LastName = By.id("contacts__last_name__0");
 	By ContactEmail = By.id("contacts__email__0");
+	By ContactEmail2 = By.id("contacts__email__1");
+	By ContactEmail3 = By.id("contacts__email__2");
 	By ContactPhoneNumber = By.id("contacts__phone__0");
 	By JobTittle = By.id("contacts__job_title__0");
 	By AddMoreContact = By.id("add-more-contact-customer-organization");
@@ -454,97 +284,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ContactEmailError = By.id("contacts__email__0_error");
 	By ContactPhoneNumberError = By.id("contacts__phone__0_error");
 	By JobTittleError = By.id("contacts__job_title__0_error");
-
-	public void maxValidationFirstName() {
-		this.validationTab(FirstName, characters256);
-
-	}
-
-	public String errorFirstName() {
-		String text2 = this.getText(FirstNameError);
-		return text2;
-
-	}
-
-	public void clearFirstName() {
-		this.clearField(FirstName);
-
-	}
-
-	public void maxValidationLastName() {
-		this.validationTab(LastName, characters256);
-
-	}
-
-	public String errorLastNameField() {
-		String text2 = this.getText(LastNameError);
-		return text2;
-
-	}
-
-	public void clearLastNameField() {
-		this.clearField(LastName);
-
-	}
-
-	public void maxValidationContactEmail() {
-		this.validationTab(ContactEmail, characters256);
-
-	}
-
-	public String errorContactEmail() {
-		String text2 = this.getText(ContactEmailError);
-		return text2;
-
-	}
-
-	public void clearContactEmail() {
-		this.clearField(ContactEmail);
-
-	}
-
-	public void validateContactEmail() {
-		this.validationTab(ContactEmail, "hdsjd");
-
-	}
-
-	public void minValidationContactPhoneNumber() {
-		this.validationTab(ContactPhoneNumber, "12");
-
-	}
-
-	public String errorContactPhoneNumber() {
-		String text2 = this.getText(ContactPhoneNumberError);
-		return text2;
-
-	}
-
-	public void clearContactPhoneNumber() {
-		this.clearField(ContactPhoneNumber);
-
-	}
-
-	public void maxValidationContactPhoneNumber() {
-		this.validationTab(ContactPhoneNumber, "456455445664464564646");
-
-	}
-
-	public void maxValidationJobTittle() {
-		this.validationTab(JobTittle, characters256);
-
-	}
-
-	public String errorContactJobTittle() {
-		String text2 = this.getText(JobTittleError);
-		return text2;
-
-	}
-
-	public void clearContactJobTittle() {
-		this.clearField(JobTittle);
-
-	}
-
 	By MakethisProperty = By.id("addresses__is_primary__0");
 	By PropertyName = By.id("addresses__location_name__0");
 	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
@@ -552,9 +291,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ContactPersonName = By.id("addresses__name__0");
 	By PropertyAddress1 = By.id("addresses__line_1__0");
 	By PropertyAddress2 = By.id("addresses__line_2__0");
-	By StreetName = By.id("addresses__line_2__0");
-	By StateName = By.id("addresses__state__0");
-	By CityName = By.id("addresses__city__0");
+	By PropertyStateName = By.id("addresses__state__0");
+	By PropertyCityName = By.id("addresses__city__0");
 	By PropertyZipcode = By.id("addresses__zipcode__0");
 
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
@@ -566,146 +304,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
 	By ErrorPropertyAddress1 = By.id("addresses__line_1__0_error");
 	By ErrorPropertyAddress2 = By.id("addresses__line_2__0_error");
-	By ErrorStreetName = By.id("addresses__line_2__0_error");
-	By ErrorStateName = By.id("addresses__state__0_error");
-	By ErrorCityName = By.id("addresses__city__0_error");
-	By ErrorZipCode = By.id("addresses__zipcode__0_error");
+	By ErrorPropertyStreetName = By.id("addresses__line_2__0_error");
+	By ErrorPropertyStateName = By.id("addresses__state__0_error");
+	By ErrorPropertyCityName = By.id("addresses__city__0_error");
+	By ErrorPropertyZipCode = By.id("addresses__zipcode__0_error");
 
-	By Previous = By.xpath("//i[@class='fa fa-chevron-left font-14 pr-2']");
-
-	public void maxValidationPropertyName() {
-		this.validationTab(PropertyName, characters256);
-
-	}
-
-	public String errorContactPropertyName() {
-		String text2 = this.getText(ErrorPropertyName);
-		return text2;
-
-	}
-
-	public void clearContactPropertyName() {
-		this.clearField(PropertyName);
-
-	}
-
-	public void maxValidationPropertyFirstNamee() {
-		this.validationTab(PropertyFirstName, characters256);
-
-	}
-
-	public String errorPropertyFirstName() {
-		String text2 = this.getText(ErrorPropertyFirstName);
-		return text2;
-
-	}
-
-	public void clearPropertyFirstName() {
-		this.clearField(PropertyFirstName);
-
-	}
-
-	public void maxValidationPropertyLastNamee() {
-		this.validationTab(PropertyLastName, characters256);
-
-	}
-
-	public String errorPropertyLastName() {
-		String text2 = this.getText(ErrorPropertyLastName);
-		return text2;
-
-	}
-
-	public void clearPropertyLastName() {
-		this.clearField(PropertyLastName);
-
-	}
-
-	public void maxValidationPropertyAddress1() {
-		this.validationTab(PropertyAddress1, characters256);
-
-	}
-
-	public String errorContactPropertyAddress1() {
-		String text2 = this.getText(ErrorPropertyAddress1);
-		return text2;
-
-	}
-
-	public void clearContactPropertyAddress1() {
-		this.clearField(PropertyAddress1);
-
-	}
-
-	public void maxValidationPropertyAddress2() {
-		this.validationTab(PropertyAddress2, characters256);
-
-	}
-
-	public String errorContactPropertyAddress2() {
-		String text2 = this.getText(ErrorPropertyAddress2);
-		return text2;
-
-	}
-
-	public void clearContactPropertyAddress2() {
-		this.clearField(PropertyAddress2);
-
-	}
-
-	public void maxValidationPropertyCityName() {
-		this.mouseActionClick(MakethisProperty);
-		this.validationTab(CityName, characters256);
-
-	}
-
-	public String errorContactPropertyCityName() {
-		String text2 = this.getText(ErrorCityName);
-		return text2;
-
-	}
-
-	public void clearContactPropertyCityName() {
-		this.clearField(CityName);
-
-	}
-
-	public void maxValidationPropertyStateName() {
-		this.validationTab(StateName, characters256);
-
-	}
-
-	public String errorContactPropertyStateName() {
-		String text2 = this.getText(ErrorStateName);
-		return text2;
-
-	}
-
-	public void clearContactPropertyStateName() {
-		this.clearField(StateName);
-
-	}
-
-	public void minValidationPropertyZipcode() {
-		this.validationTab(PropertyZipcode, "23");
-
-	}
-
-	public String errorContactPropertyZipcode() {
-		String text2 = this.getText(ErrorZipCode);
-		return text2;
-
-	}
-
-	public void clearContactPropertyZipcode() {
-		this.clearField(PropertyZipcode);
-
-	}
-
-	public void maxValidationPropertyZipcode() {
-		this.validationTab(PropertyZipcode, "545465646456446454");
-
-	}
+	By Previous = By.xpath("//*[text()='Previous']");
 
 	By ProductName = By.id("equipments__product_name__0");
 	By ErrorProductName = By.id("equipments__product_name__0_error");
@@ -721,107 +325,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ErrorAccessHours = By.id("equipments__access_hours__0_error");
 	By InstallationNotes = By.id("equipments__installation_notes__0");
 	By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
-
-	public void maxValidationProductName() {
-		this.validationTab(ProductName, characters256);
-
-	}
-
-	public String errorProductName() {
-		String text2 = this.getText(ErrorProductName);
-		return text2;
-
-	}
-
-	public void clearProductName() {
-		this.clearField(ProductName);
-
-	}
-
-	public void maxValidationBrandName() {
-		this.validationTab(BrandName, characters256);
-
-	}
-
-	public String errorBrandName() {
-		String text2 = this.getText(ErrorBrandName);
-		return text2;
-
-	}
-
-	public void clearBrandName() {
-		this.clearField(BrandName);
-
-	}
-
-	public void maxValidationModelNumber() {
-		this.validationTab(ModelNumber, characters256);
-
-	}
-
-	public String errorModelNumber() {
-		String text2 = this.getText(ErrorModelNumber);
-		return text2;
-
-	}
-
-	public void clearModelNumber() {
-		this.clearField(ModelNumber);
-
-	}
-
-	public void maxValidationSerialNumber() {
-		this.validationTab(SerialNumber, characters256);
-
-	}
-
-	public String errorSerialNumber() {
-		String text2 = this.getText(ErrorSerialNumber);
-		return text2;
-
-	}
-
-	public void clearSerialNumber() {
-		this.clearField(SerialNumber);
-
-	}
-
-	public void warrantyInformation() {
-		this.dropDownByIndex(WarrantyInformation, 1);
-
-	}
-
-	public void maxValidationAccessHours() {
-		this.validationTab(AccessHours, characters256);
-
-	}
-
-	public String errorAccessHours() {
-		String text2 = this.getText(ErrorAccessHours);
-		return text2;
-
-	}
-
-	public void clearAccessHours() {
-		this.clearField(AccessHours);
-
-	}
-
-	public void maxValidationInstallationNotes() {
-		this.validationTab(InstallationNotes, characters2048);
-
-	}
-
-	public String errorInstallationNotes() {
-		String text2 = this.getText(ErrorInstallationNotes);
-		return text2;
-
-	}
-
-	public void clearInstallationNotes() {
-		this.clearField(InstallationNotes);
-
-	}
+	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
 
 	private void scrollDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -829,72 +333,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	By AttachmentFile = By.id("customerDropZone");
-	By ErrorAttachmentFile = By.xpath("//div[@class='dropzone-error invalid-feedback']");
-	By Delete = By.xpath("(//span[text()='Delete'])[10]");
-
-	public void maxSizeValidationAttachmentFile() throws AWTException, InterruptedException {
-		this.mouseActionClick(AttachmentFile);
-		Thread.sleep(1000);
-		attachmentFile("4889");
-
-	}
-
-	public String errorAttachmentFile() {
-		String text2 = this.getText(ErrorAttachmentFile);
-		return text2;
-
-	}
-
-	public void fileFormatValidation() throws InterruptedException, AWTException {
-		this.mouseActionClick(AttachmentFile);
-		Thread.sleep(1000);
-		attachmentFile("kms_portfolio_new1.html");
-
-	}
-
-	public void maxFileUploadSizeValidation() throws InterruptedException, AWTException {
-		for (int i = 1; i < 11; i++) {
-			this.mouseActionClick(AttachmentFile);
-			Thread.sleep(1000);
-			attachmentFile("sample-file.pdf");
-			this.scrollDown();
-			By AssertionFile = By.xpath("(//span[@class='fieldy-dropzone-title'])[" + i + "]");
-			wait = new WebDriverWait(driver, 10);
-			String text = wait.until(ExpectedConditions.visibilityOfElementLocated(AssertionFile)).getText();
-			Assert.assertEquals(text, "sample-file.pdf");
-
-		}
-		Thread.sleep(2000);
-		this.mouseActionClick(AttachmentFile);
-		Thread.sleep(1000);
-		attachmentFile("sample-file.pdf");
-		this.scrollDown();
-
-	}
-
-	public void deleteFile() {
-		for (int i = 1; i < 6; i++) {
-			By Delete = By.xpath("(//span[text()='Delete'])[" + i + "]");
-			this.mouseActionClick(Delete);
-		}
-		for (int i = 1; i < 4; i++) {
-			By Delete = By.xpath("(//span[text()='Delete'])[" + i + "]");
-			this.mouseActionClick(Delete);
-		}
-
-		for (int i = 1; i < 4; i++) {
-			this.mouseActionClick(Previous);
-		}
-
-	}
-
 	public void organizationPage() throws InterruptedException, AWTException {
-		String add = RandomStringUtils.randomAlphanumeric(4);
-		String EMail = "Tony" + add + "@gmail.com";
-//		this.mouseActionClick(Logo);
-//		Thread.sleep(1000);
-//		attachmentFile("human-community-five-people-symbol-illustration-web-91578287");
 		this.clearField(OrganizationName);
 		this.inputText(OrganizationName, fakeCompanyName);
 		this.inputText(Website, fakeWebsite);
@@ -905,7 +344,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		this.inputText(Email, fakeEmail);
-//		this.inputText(Email, "fieldy@mailinator.com");
 		Thread.sleep(2000);
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
@@ -914,66 +352,44 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public String create() {
-		String text2 = this.getText(CreateResponseMessage);
-		return text2;
-
-	}
-
-	public void alternateFunction() {
-		this.mouseActionClick(Organization);
-
-	}
-
-	public String listFirstName() {
-		String text2 = this.getText(ListFirstName);
-		return text2;
-
-	}
-
-	public String alreadyExistEmail() throws InterruptedException, AWTException {
-		String text = this.getText(ListEmail);
-		this.mouseActionClick(AddOrganization);
-//		this.mouseActionClick(Logo);
-//		Thread.sleep(1500);
-//		attachmentFile("pic");
-		this.inputText(OrganizationName, "jdshjhadjs");
-		this.validationTab(Email, text);
-		this.scrollDown();
-		this.mouseActionClick(Next);
-		this.mouseActionClick(Previous);
-		String text2 = this.getText(EmailError);
-		this.mouseActionClick(Heading);
-		this.mouseActionClick(Yes);
-//		Thread.sleep(10000);
-//		driver.navigate().refresh();
-		return text2;
-	}
-
-	public void contactPage() {
-		for (int i = 0; i < 3; i++) {
+	public void contactPage(String value) {
+		if (value.equals("CreateContact")) {
+			for (int i = 0; i < 3; i++) {
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeFirstName = faker.name().firstName();
+				String fakeLastName = faker.name().lastName();
+				String fakeEmail = faker.internet().safeEmailAddress();
+				String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+				String fakeTittle = faker.name().title();
+				By FirstName = By.id("contacts__first_name__" + i);
+				By LastName = By.id("contacts__last_name__" + i);
+				By ContactEmail = By.id("contacts__email__" + i);
+				By ContactPhoneNumber = By.id("contacts__phone__" + i);
+				By JobTittle = By.id("contacts__job_title__" + i);
+				By AddMoreContact = By.id("add-more-contact-customer-organization");
+				this.inputText(FirstName, fakeFirstName);
+				this.inputText(LastName, fakeLastName);
+				this.inputText(ContactEmail, fakeEmail);
+				this.inputText(ContactPhoneNumber, fakePhoneNumber);
+				this.inputText(JobTittle, fakeTittle);
+				this.mouseActionClick(AddMoreContact);
+				this.scrollDown();
+			}
+			this.mouseActionClick(Next);
+		} else if (value.equals("EditContact")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
 			String fakeLastName = faker.name().lastName();
 			String fakeEmail = faker.internet().safeEmailAddress();
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			String fakeTittle = faker.name().title();
-			By FirstName = By.id("contacts__first_name__" + i);
-			By LastName = By.id("contacts__last_name__" + i);
-			By ContactEmail = By.id("contacts__email__" + i);
-			By ContactPhoneNumber = By.id("contacts__phone__" + i);
-			By JobTittle = By.id("contacts__job_title__" + i);
-			By AddMoreContact = By.id("add-more-contact-customer-organization");
 			this.inputText(FirstName, fakeFirstName);
 			this.inputText(LastName, fakeLastName);
 			this.inputText(ContactEmail, fakeEmail);
 			this.inputText(ContactPhoneNumber, fakePhoneNumber);
 			this.inputText(JobTittle, fakeTittle);
-			this.mouseActionClick(AddMoreContact);
-			this.scrollDown();
+			this.mouseActionClick(Next);
 		}
-		this.mouseActionClick(Next);
-
 	}
 
 	public void propertyPage() {
@@ -982,8 +398,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.inputText(PropertyName, "Fieldy");
 		this.inputText(PropertyAddress1, fakeAddress1);
 		this.inputText(PropertyAddress2, fakeAddress2);
-		this.inputText(CityName, fakeCity);
-		this.inputText(StateName, fakeState);
+		this.inputText(PropertyCityName, fakeCity);
+		this.inputText(PropertyStateName, fakeState);
 		this.inputText(PropertyZipcode, fakeZipcode);
 		this.mouseActionClick(Next);
 
@@ -1014,97 +430,49 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Apply = By.xpath("//*[@class='col-lg-4 col-md-2 col-sm-2 col-6 pt-2']//*");
 	By SearchButton = By.id("customer-organization-search-enter");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
+	By ListLead = By.xpath("(//*[@title='Social'])[1]");
 
-	public String createListFirstName() {
-		String text = this.getText(ListFirstName);
-		return text;
-	}
+	static String listValue;
 
-	public String searchNameValidation() throws InterruptedException {
-		String text = this.getText(ListFirstName);
-		this.inputText(Search, text);
-		this.mouseActionClick(SearchButton);
-		return text;
-
-	}
-
-	public String searchNameListValidation() {
-		String text2 = this.getText(ListFirstName);
-		return text2;
-
-	}
-
-	public void clearSearchField() {
-		this.clearField(Search);
-
-	}
-
-	public String searchPhoneNumberValidation() {
-		String text = this.getText(ListPhoneNumber);
-		this.inputText(Search, text);
-		this.mouseActionClick(SearchButton);
-		return text;
-
-	}
-
-	public String listPhoneNumber() {
-		String text2 = this.getText(ListPhoneNumber);
-		return text2;
-
-	}
-
-	public String searchEmailValidation() {
-		String text = this.getText(ListEmail);
-		this.inputText(Search, text);
-		this.mouseActionClick(SearchButton);
-		return text;
-
-	}
-
-	public String listEmailField() {
-		String text2 = this.getText(ListEmail);
-		return text2;
-
-	}
-
-	public void searchInvalidValidation() {
-		this.inputText(Search, "bdscciuuici");
-		this.mouseActionClick(SearchButton);
-//		this.assertName(Invalid, "No Result Found");
-
-	}
-
-	public String invalidSearch() {
-		String text2 = this.getText(Invalid);
-		return text2;
-
-	}
-
-	public void characterListValidation() {
-		String str = this.getText(ListFirstName);
-		char first = str.charAt(0);
-		By CharacterName = By.xpath("//a[text()='" + first + "']");
-		this.mouseActionClick(CharacterName);
-		String text = this.getText(ListFirstName);
-		this.assertName(ListFirstName, text);
-
-	}
-
-	public String filterValidation() throws InterruptedException {
-		String text = this.getText(ListFirstName);
-		this.mouseActionClick(Filter);
-		this.mouseActionClick(ListLeadSource);
-		this.mouseActionClick(LeadSourceCheckBox);
-		this.dropDownByIndex(Status, 1);
-		this.mouseActionClick(Apply);
-		return text;
-
-	}
-
-	public String listFilterValidation() {
-		String text2 = this.getText(ListFirstName);
-		return text2;
-
+	public String listValidation(String value) {
+		if (value.equals("SearchField")) {
+			this.tagValidation(Search, listValue);
+			return listValue;
+		} else if (value.equals("OrganizationName")) {
+			listValue = this.getText(ListFirstName);
+			return listValue;
+		} else if (value.equals("PhoneNumber")) {
+			listValue = this.getText(ListPhoneNumber);
+			return listValue;
+		} else if (value.equals("Email")) {
+			listValue = this.getText(ListEmail);
+			return listValue;
+		} else if (value.equals("AlphabetFilter")) {
+			By Alpbabet = By.xpath("//*[@data-filteralphaorg='" + listValue + "']");
+			this.mouseActionClick(Alpbabet);
+			listValue = this.getText(ListFirstName);
+			return listValue;
+		} else if (value.equals("CharacterFirstName")) {
+			String str = this.getText(ListFirstName);
+			char first = str.charAt(0);
+			listValue = String.valueOf(first);
+			return listValue;
+		} else if (value.equals("Filter")) {
+			this.mouseActionClick(Filter);
+			this.mouseActionClick(ListLeadSource);
+			this.mouseActionClick(LeadSourceCheckBox);
+			this.dropDownByIndex(Status, 1);
+			this.mouseActionClick(Apply);
+		} else if (value.equals("LeadSource")) {
+			listValue = this.getText(ListLead);
+			return listValue;
+		} else if (value.equals("InvalidSearch")) {
+			this.tagValidation(Search, "fshfskjh");
+		} else if (value.equals("Invalid")) {
+			listValue = this.getText(Invalid);
+			return listValue;
+		}
+		return value;
 	}
 
 	By Dots = By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]");
@@ -1119,55 +487,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	By ClickAll = By.xpath("//a[@data-filteralphaorg='all']");
-
-	public void clickOrganization() throws InterruptedException {
-		driver.navigate().refresh();
-		this.mouseActionClick(Customer);
-		this.assertName(Text, "Name");
-		this.mouseActionClick(Organization);
-
-	}
-
-	public void all() {
-		this.mouseActionClick(ClickAll);
-
-	}
-
-	By UpdateButton = By.id("customerdrop");
-
-	public void editContact() throws AWTException, InterruptedException {
-		this.mouseActionClick(Dots);
-		this.mouseActionClick(Edit);
-		Thread.sleep(3000);
-//		this.mouseActionClick(Logo);
-//		Thread.sleep(1000);
-//		attachmentFile("istockphoto-825383494-612x612");
-		this.clearField(OrganizationName);
-		this.inputText(OrganizationName, fakeCompanyName);
-		this.scrollDown();
-		this.clearField(Email);
-		this.inputText(Email, fakeEmail);
-		this.clearField(PhoneNumber);
-		this.inputText(PhoneNumber, fakePhoneNumber);
-		this.assertName(UpdateButton, "Update");
-		Thread.sleep(3000);
-		this.mouseActionClick(UpdateButton);
-
-	}
-
-	public String updateMessage() {
-		String text2 = this.getText(Update);
-		return text2;
-
-	}
-
-	public String deleteMessage() {
-		String text2 = this.getText(DeletedMessage);
-		return text2;
-
-	}
-
 	public void deleteContact() {
 		this.mouseActionClick(Dots);
 		this.mouseActionClick(Deleted);
@@ -1179,6 +498,420 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public void Condition() {
 		this.assertName(Name, "Organization Name");
+
+	}
+
+	public String errorField(String value) {
+		if (value.equals("OrganizationName")) {
+			return this.getText(OrganizationError);
+		} else if (value.equals("Website")) {
+			return this.getText(WebsiteError);
+		} else if (value.equals("Address1")) {
+			return this.getText(Address1Error);
+		} else if (value.equals("Address2")) {
+			return this.getText(Address2Error);
+		} else if (value.equals("City")) {
+			return this.getText(CityError);
+		} else if (value.equals("State")) {
+			return this.getText(StateError);
+		} else if (value.equals("Zipcode")) {
+			return this.getText(ZipCodeError);
+		} else if (value.equals("Email")) {
+			return this.getText(EmailError);
+		} else if (value.equals("PhoneNumber")) {
+			return this.getText(PhoneNumberError);
+		} else if (value.equals("ContactFirstName")) {
+			return this.getText(FirstNameError);
+		} else if (value.equals("ContactLastName")) {
+			return this.getText(LastNameError);
+		} else if (value.equals("ContactEmail")) {
+			return this.getText(ContactEmailError);
+		} else if (value.equals("ContactPhoneNumber")) {
+			return this.getText(ContactPhoneNumberError);
+		} else if (value.equals("ContactJobTittle")) {
+			return this.getText(JobTittleError);
+		} else if (value.equals("PropertyFirstName")) {
+			return this.getText(ErrorPropertyFirstName);
+		} else if (value.equals("PropertyLastName")) {
+			return this.getText(ErrorPropertyLastName);
+		} else if (value.equals("PropertyName")) {
+			return this.getText(ErrorPropertyName);
+		} else if (value.equals("PropertyAddress1")) {
+			return this.getText(ErrorPropertyAddress1);
+		} else if (value.equals("PropertyAddress2")) {
+			return this.getText(ErrorPropertyAddress2);
+		} else if (value.equals("PropertyCity")) {
+			return this.getText(ErrorPropertyCityName);
+		} else if (value.equals("PropertyState")) {
+			return this.getText(ErrorPropertyStateName);
+		} else if (value.equals("PropertyZipcode")) {
+			return this.getText(ErrorPropertyZipCode);
+		} else if (value.equals("ProductName")) {
+			return this.getText(ErrorProductName);
+		} else if (value.equals("BrandName")) {
+			return this.getText(ErrorBrandName);
+		} else if (value.equals("ModelNumber")) {
+			return this.getText(ErrorModelNumber);
+		} else if (value.equals("SerialNumber")) {
+			return this.getText(ErrorSerialNumber);
+		} else if (value.equals("DateInstalled")) {
+			return this.getText(ErrorDateInstalled);
+		} else if (value.equals("AccessHours")) {
+			return this.getText(ErrorAccessHours);
+		} else if (value.equals("InstallationNotes")) {
+			return this.getText(ErrorInstallationNotes);
+		}
+		return value;
+
+	}
+
+	public void clearFields(String value) {
+		if (value.equals("OrganizationName")) {
+			this.clearField(OrganizationName);
+		} else if (value.equals("Website")) {
+			this.clearField(Website);
+		} else if (value.equals("Address1")) {
+			this.clearField(Address1);
+		} else if (value.equals("Address2")) {
+			this.clearField(Address2);
+		} else if (value.equals("City")) {
+			this.clearField(City);
+		} else if (value.equals("State")) {
+			this.clearField(State);
+		} else if (value.equals("Zipcode")) {
+			this.clearField(ZipCode);
+		} else if (value.equals("Email")) {
+			this.clearField(Email);
+		} else if (value.equals("PhoneNumber")) {
+			this.clearField(PhoneNumber);
+		} else if (value.equals("ContactFirstName")) {
+			this.clearField(FirstName);
+		} else if (value.equals("ContactLastName")) {
+			this.clearField(LastName);
+		} else if (value.equals("ContactEmail")) {
+			this.clearField(ContactEmail);
+		} else if (value.equals("ContactPhoneNumber")) {
+			this.clearField(ContactPhoneNumber);
+		} else if (value.equals("ContactJobTittle")) {
+			this.clearField(JobTittle);
+		} else if (value.equals("PropertyFirstName")) {
+			this.clearField(PropertyFirstName);
+		} else if (value.equals("PropertyLastName")) {
+			this.clearField(PropertyLastName);
+		} else if (value.equals("PropertyName")) {
+			this.clearField(PropertyName);
+		} else if (value.equals("PropertyAddress1")) {
+			this.clearField(PropertyAddress1);
+		} else if (value.equals("PropertyAddress2")) {
+			this.clearField(PropertyAddress2);
+		} else if (value.equals("PropertyCity")) {
+			this.clearField(PropertyCityName);
+		} else if (value.equals("PropertyState")) {
+			this.clearField(PropertyStateName);
+		} else if (value.equals("PropertyZipcode")) {
+			this.clearField(PropertyZipcode);
+		} else if (value.equals("ProductName")) {
+			this.clearField(ProductName);
+		} else if (value.equals("BrandName")) {
+			this.clearField(BrandName);
+		} else if (value.equals("ModelNumber")) {
+			this.clearField(ModelNumber);
+		} else if (value.equals("SerialNumber")) {
+			this.clearField(SerialNumber);
+		} else if (value.equals("DateInstalled")) {
+			this.clearField(DateInstalled);
+		} else if (value.equals("AccessHours")) {
+			this.clearField(AccessHours);
+		} else if (value.equals("InstallationNotes")) {
+			this.clearField(InstallationNotes);
+		} else if (value.equals("Search")) {
+			this.clearField(Search);
+		}
+
+	}
+
+	public String organizationName(String value) {
+		if (value.equals("MandatoryValidation")) {
+			for (int i = 0; i <= 10; i++) {
+				this.mouseActionClick(SaveComplete);
+				this.mouseActionClick(Next);
+				this.elementtobeClickable(SaveComplete);
+			}
+		} else if (value.equals("UniqueValidation")) {
+			String text2 = this.getText(ListFirstName);
+			this.mouseActionClick(AddOrganization);
+			this.validationTab(OrganizationName, text2);
+			return text2;
+		} else if (value.equals("MaxValidation")) {
+			this.validationTab(OrganizationName, characters256);
+		} else if (value.equals("Input")) {
+			this.inputText(OrganizationName, fakeCompanyName);
+		}
+		return value;
+	}
+
+	public void website(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Website, characters2048);
+		}
+
+	}
+
+	public void address1(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Address1, characters256);
+		}
+
+	}
+
+	public void address2(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Address2, characters256);
+		}
+	}
+
+	public void city(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(City, characters256);
+		}
+	}
+
+	public void state(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(State, characters256);
+		}
+	}
+
+	public void zipCode(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(ZipCode, "12345678909876543");
+		} else if (value.equals("MinValidation")) {
+			this.validationTab(ZipCode, "12");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(ZipCode, "!@#$");
+		}
+	}
+
+	public void email(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Email, characters256);
+		} else if (value.equals("UniqueEmail")) {
+			String text2 = this.getText(ListEmail);
+			this.mouseActionClick(AddOrganization);
+			this.validationTab(Email, text2);
+		} else if (value.equals("ValidEmail")) {
+			this.validationTab(Email, "dsfdsfdsfds");
+		}
+
+	}
+
+	public void phoneNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PhoneNumber, "23111231313123131313123131313132131");
+		} else if (value.equals("MinValidation")) {
+			this.validationTab(PhoneNumber, "2132");
+		} else if (value.equals("ValidPhoneNumber")) {
+			this.validationTab(PhoneNumber, "dsfdsfdsfds");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(PhoneNumber, "!@#$%^&*");
+		}
+
+	}
+
+	public void firstName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(FirstName, characters256);
+		}
+
+	}
+
+	public void lastName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LastName, characters256);
+		}
+
+	}
+
+	public void jobTittle(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(JobTittle, characters256);
+		}
+
+	}
+
+	public void contactEmail(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(ContactEmail, characters256);
+		} else if (value.equals("UniqueEmail")) {
+			this.validationTab(ContactEmail, "fieldy@mailinator.com");
+		} else if (value.equals("ValidEmail")) {
+			this.validationTab(ContactEmail, "dsfdsfdsfds");
+		}
+
+	}
+
+	public void contactPhoneNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(ContactPhoneNumber, "1234567890987654345678765476545676");
+		} else if (value.equals("MinValidation")) {
+			this.validationTab(ContactPhoneNumber, "123");
+		} else if (value.equals("ValidPhoneNumber")) {
+			this.validationTab(ContactPhoneNumber, "dsfdsfdsfds");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(ContactPhoneNumber, "!@#$%^&*");
+		}
+
+	}
+
+	public void propertyFirstName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyFirstName, characters256);
+		}
+
+	}
+
+	public void propertyLastName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyLastName, characters256);
+		}
+	}
+
+	public void propertyName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyName, characters256);
+		}
+	}
+
+	public void propertyAddress1(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyAddress1, characters256);
+		}
+	}
+
+	public void propertyAddress2(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyAddress2, characters256);
+		}
+	}
+
+	public void propertyCity(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyCityName, characters256);
+		}
+	}
+
+	public void propertyState(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyStateName, characters256);
+		}
+	}
+
+	public void propertyZipcode(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(PropertyZipcode, "97845623198456231985623198562");
+		} else if (value.equals("MinValidation")) {
+			this.validationTab(PropertyZipcode, "12");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(PropertyZipcode, "!@#$");
+		}
+	}
+
+	public void productName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(ProductName, characters256);
+		}
+	}
+
+	public void brandName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(BrandName, characters256);
+		}
+	}
+
+	public void modelNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(ModelNumber, characters256);
+		}
+	}
+
+	public void serialNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(SerialNumber, characters256);
+		}
+	}
+
+	public void dateInstalled(String value) {
+		if (value.equals("MaxValidation")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			String currentDate = sdf.format(cal.getTime());
+			this.validationTab(DateInstalled, currentDate);
+			this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(SaveComplete);
+		}
+	}
+
+	public void accessHours(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(AccessHours, characters256);
+		}
+	}
+
+	public void installationNotes(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(InstallationNotes, characters2048);
+		}
+	}
+
+	static String ListContactName;
+	By FormLabel = By.xpath("//*[@data-goesto='organization-view']");
+
+	public String LabelValidation(String value) throws AWTException, InterruptedException {
+		if (value.equals("Create")) {
+			String text2 = this.getText(FormLabel);
+			return text2;
+		} else if (value.equals("Edit")) {
+			ListContactName = this.getText(ListFirstName);
+			this.mouseActionClick(Dots);
+			this.mouseActionClick(Edit);
+			String text2 = this.getText(FormLabel);
+			return text2;
+		}
+		return value;
+
+	}
+
+	public void visibleName() {
+		this.valuePresent(OrganizationName, ListContactName);
+	}
+
+	public void clearAllFields(String value) {
+		if (value.equals("OrganizationPage")) {
+			List<String> asList = Arrays.asList("OrganizationName", "Website", "Address1", "Address2", "City", "State",
+					"Zipcode", "Email", "PhoneNumber");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		} else if (value.equals("ContactPage")) {
+			List<String> asList = Arrays.asList("ContactFirstName", "ContactLastName", "ContactEmail",
+					"ContactPhoneNumber", "ContactJobTittle");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		} else if (value.equals("PropertyPage")) {
+			List<String> asList = Arrays.asList("PropertyFirstName", "PropertyLastName", "PropertyName",
+					"PropertyAddress1", "PropertyAddress2", "PropertyCity", "PropertyState", "PropertyZipcode");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		} else if (value.equals("EquipmentPage")) {
+			List<String> asList = Arrays.asList("ProductName", "BrandName", "ModelNumber", "SerialNumber",
+					"DateInstalled", "AccessHours", "InstallationNotes");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		}
 
 	}
 

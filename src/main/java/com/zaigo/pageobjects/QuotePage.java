@@ -1,10 +1,8 @@
 package com.zaigo.pageobjects;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -39,7 +37,6 @@ public class QuotePage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
-
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
@@ -55,12 +52,6 @@ public class QuotePage extends BaseClass {
 
 	public QuotePage(WebDriver driver) {
 		this.driver = driver;
-
-	}
-
-	private void getCSSValue(By element) {
-		wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getCssValue("font-family");
 	}
 
 	private void inputText(By element, String text) {
@@ -130,7 +121,6 @@ public class QuotePage extends BaseClass {
 	private void scrollUp() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0, -document.body.scrollHeight);");
-
 	}
 
 	public void valuePresent(By element, String value) {
@@ -215,7 +205,6 @@ public class QuotePage extends BaseClass {
 	By Update = By.xpath("//*[text()='Update']");
 	By UpdateOrg = By.xpath("//*[@data-list-namme='customer-organization-quote']");
 	By ChooseStatus = By.xpath("//*[@class='floating-input field-input']");
-
 	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
 	By ClickOrganizationQuote = By.xpath("//*[@data-menuswitcher='cstmr-organization-quote']");
 	By CreateOrganizationQuote = By.xpath("//*[@data-automationid='customer-organization-quote-create']");
@@ -271,7 +260,7 @@ public class QuotePage extends BaseClass {
 			FirstName = this.getTextAttribute(OrganizationFirstName);
 			this.inputText(OrganizationLastName, fakeLastName);
 			LastName = this.getTextAttribute(OrganizationLastName);
-//			this.inputText(OrganizationEmail, fakeEmail);
+			this.inputText(OrganizationEmail, fakeEmail);
 			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
 			this.inputText(OrganizationJobTittle, fakeTittle);
 			this.mouseActionClick(OrganizationContactSave);
@@ -302,7 +291,7 @@ public class QuotePage extends BaseClass {
 			this.inputText(OrganizationName, fakeCompanyName);
 			OrgName = this.getTextAttribute(OrganizationName);
 			this.inputText(OrgPhoneNumber, fakePhoneNumber);
-//			this.inputText(OrgEmail, fakeEmail);
+			this.inputText(OrgEmail, fakeEmail);
 			this.inputText(Website, fakeWebsite);
 			this.inputText(OrgAddress1, fakeAddress1);
 			this.inputText(OrgAddress2, fakeAddress2);
@@ -359,7 +348,6 @@ public class QuotePage extends BaseClass {
 			}
 		}
 		return value;
-
 	}
 
 	public String quoteLandPage() {
@@ -405,7 +393,7 @@ public class QuotePage extends BaseClass {
 		} else if (value.equals("Current")) {
 			this.inputText(ExpiryDate, "01/14/2023");
 		} else if (value.equals("CurrentDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
@@ -483,7 +471,6 @@ public class QuotePage extends BaseClass {
 	}
 
 	public void maxInventoryItem() throws IOException, InterruptedException {
-//		Thread.sleep(5000);
 		this.validationTab(InventoryItem, getPropertyValue("256Characters"));
 
 	}
@@ -528,7 +515,6 @@ public class QuotePage extends BaseClass {
 		} else if (value.equals("value")) {
 			this.validationTab(Discount, DisTaxValue);
 		}
-
 	}
 
 	public void taxValidation(String value) {
@@ -555,7 +541,6 @@ public class QuotePage extends BaseClass {
 
 	public void maxNotes() {
 		this.validationTab(Notes, characters2048);
-
 	}
 
 	public void saveFunction() throws InterruptedException {
@@ -567,11 +552,9 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(InventoryItem);
 			this.mouseActionClick(InventoryFirstItem);
 		} else if (value.equals("Organization")) {
-			Thread.sleep(5000);
 			this.mouseActionClick(InventoryItem);
 			this.mouseActionClick(InventoryFirstItem);
 		}
-
 	}
 
 	public String calculationValidation() {
@@ -584,7 +567,6 @@ public class QuotePage extends BaseClass {
 	}
 
 	static String getName;
-//	private String text;
 
 	public String customerName(String value) {
 		if (value.equals("DetailScreenCustomerName")) {
@@ -694,7 +676,6 @@ public class QuotePage extends BaseClass {
 		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
 		parseInt = Integer.parseInt(text2);
 		return parseInt;
-
 	}
 
 	public int countValidation(int value) {
@@ -893,7 +874,5 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(UpdateOrg);
 			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
 		}
-
 	}
-
 }

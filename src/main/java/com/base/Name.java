@@ -11,14 +11,19 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.hc.core5.http.impl.nio.ExpandableBuffer;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -26,24 +31,45 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.github.javafaker.Company;
 import com.github.javafaker.Faker;
+import com.sun.tools.javac.code.Attribute.Array;
 import com.zaigo.pageobjects.InvoicePage;
+import com.zaigo.pageobjects.OnBoardingPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name extends BaseClass {
+	static StringBuffer append;
+	int parseInt;
+	static String value;
 
 	@Test
-	private void start() throws ParseException {
+	private void start() throws ParseException, IOException {
 		// TODO Auto-generated method stub
 
-		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
-		driver.get("");
-	
+//		WebDriverManager.chromedriver().setup();
+//		WebDriver driver = new ChromeDriver();
+//		driver.manage().window().maximize();
+//		driver.get("https://qarecircle.zaicrm.com/login");
+//		driver.findElement(By.id("phoneNumber")).sendKeys("9876543210");
+//		driver.findElement(By.id("password")).sendKeys("password");
+//		driver.findElement(By.xpath("//*[@class='btn btn-info btn-ghost-light p-2']")).click();
+//		WebDriverWait wait = new WebDriverWait(driver, 10);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-n-linkto='dashboard']")))
+//				.isDisplayed();
+//		wait.until(ExpectedConditions
+//				.visibilityOfElementLocated(By.xpath("//*[@class=\"nav-link collapsed collection-icon\"]"))).click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-n-linkto=\"add_facility_list\"]")))
+//				.click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class=\"card-title mb-0\"])[1]")))
+//				.isDisplayed();
+		// *[@data-n-linkto="add_facility_list"]
 
 //		String name = "Hari";
 
@@ -65,12 +91,187 @@ public class Name extends BaseClass {
 //		System.out.println(parse);
 //		sdf = new SimpleDateFormat("MM/dd/yyyy");
 //		System.out.println(sdf.format(parse));
-		
+
 //		Calendar cal = Calendar.getInstance();
 //		cal.add(Calendar.DAY_OF_MONTH, 3);
 //		String currentDate = sdf.format(cal.getTime());
 //		System.out.println(currentDate);
-		
+//		
+//		int a= 1;
+//		int b =2 ;
+//		int c=4;
+//		if(a==b || b==c)
+//		{
+//
+//		}
+
+//		String value = "Manju";
+//		
+//		char[] a = value.toCharArray();
+//		for (int i = 0; i < a.length; i++) {
+//			
+//		}
+
+//		String[] s = { "Hello", "Manju", "How", "are", "you" };
+//		int count =0;
+//		
+//		for
+//		if (count == 0) {
+//			System.out.println("How is Present");
+//		}else {
+//			System.out.println("How is not Present");
+//		}
+//	}
+
+//		for (int i = 0; i < s.length; i++) {
+//			int indexOf = s[i].indexOf("How", 2);
+//			if (indexOf == 2) {
+//				System.out.println("True");
+//			}else {
+//				System.out.println(false);
+//			}
+//		}
+//
+//	}
+
+//		    String[] colours = {"Red", "Green", "Yellow", "Red"};
+//		    
+//		    // Check if a value exists in the colours array
+//		    if(colours.length !== -1){
+//		        document.write("Red already exists")
+//		    } else{
+//		        document.write("Red does not exists!")
+//		    }
+//	
+//
+//		Faker faker = new Faker(new Locale("en-IND"));
+//		String fakeFirstName = faker.name().firstName();
+//		System.out.println("First Name:" + fakeFirstName);
+//		
+//		String fakeLastName = faker.name().lastName();
+//		System.out.println("Last Name:" + fakeLastName);
+//		
+//		String fakeEmail = faker.internet().safeEmailAddress();
+//		System.out.println("Email:" + fakeEmail);
+//		
+//		String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+//		System.out.println("Phone Number:"+fakePhoneNumber);
+//		
+//		String fakeTittle = faker.name().title();
+//		System.out.println("Job Tittle:"+fakeTittle);
+//		
+//		String fakeAddress1 = faker.address().buildingNumber();
+//		System.out.println("Address1:"+fakeAddress1);
+//		
+//		String fakeAddress2 = faker.address().streetName();
+//		System.out.println("Address2:"+fakeAddress2);
+//		
+//		String fakeCity = faker.address().city();
+//		System.out.println("City:"+fakeCity);
+//		
+//		String fakeState = faker.address().state();
+//		System.out.println("State:"+fakeState);
+//		
+//		String fakeZipcode = faker.address().zipCode();
+//		System.out.println("Zipcode:"+fakeZipcode);
+//		
+//		String fakeWebsite = faker.company().url();
+//		System.out.println("Website:"+fakeWebsite);
+//		
+//		String fakeCompanyName = faker.company().name();
+//		System.out.println("Company Name:"+fakeCompanyName);
+//		
+//		String fakeFaxNumber = faker.number().digits(14);
+//		System.out.println("Fax Number:"+fakeFaxNumber);
+//		
+//		String characters256 = RandomStringUtils.randomGraph(256);
+//		System.out.println(characters256);
+//		
+//		String[] s = { "Hello", "Manju", "How", "are", "you" };
+//		int count = 0;
+//		for (int i = 0; i < s.length; i++) {
+//			if (s[i].equals("How")) {
+//				count = 1;
+//				System.out.println(s[i]);
+//				break;
+//				
+//			}
+//		}
+//		if (count == 0) {
+//			System.out.println("How is Present");
+//		}else {
+//			System.out.println("How is not Present");
+//		}
+//		
+//	
+//	}
+//		System.setProperty("webdriver.chrome.driver", "D:\\Eclipse\\Automation\\Chrome Driver\\chromedriver.exe");
+//		WebDriverManager.chromedriver().setup();
+//		driver = new ChromeDriver();
+//		driver.manage().deleteAllCookies();
+//		driver.manage().window().maximize();
+//		driver.get("https://dev.paygivapp.com/register");
+//		WebDriverWait wait = new WebDriverWait(driver, 10);
+//		boolean displayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Your Contact Info']"))).isDisplayed();
+//		if (displayed) {
+//			System.out.println("True");
+//		}else {
+//			System.out.println("False");
+//		}
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).sendKeys("Naveen");
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).clear();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).sendKeys("123456");
+//		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='The first name can only consist of alphabetical and space']"))).getText();
+//		System.out.println(text);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).clear();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).sendKeys("N a v e e n");
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstname"))).clear();
+////		driver.findElement(By.xpath("//*[@class=\"mt-2\"]")).isDisplayed();
+//		driver.quit();
+//		OnBoardingPage mandatory = new OnBoardingPage(driver);
+//		System.out.println(OnBoardingPage.variable);
+
+		for (int i = 0; i < 10; i++) {
+			Faker faker = new Faker(new Locale("en-IND"));
+			String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
+			value = fakeCompanyName.replaceAll("\\s", "").toLowerCase();
+//			System.out.println(lowerCase);
+		}
+
+		String val = value;
+		Properties properties = new Properties();
+		properties.put("Email", val);
+		FileOutputStream fo = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
+		properties.store(fo, "OutPut");
+
+		System.out.println(getPropertyValueUpdate("Email"));
+//		String expectedURL = "https://" + (lowerCase.toLowerCase().replaceAll("\\s", ""))
+//				+ getPropertyValue("DomainURL");
+//
+//		System.out.println(expectedURL);
 
 	}
 }
+
+//	public static void main(String[] args) {
+//
+
+//	
+//		System.out.println(replaceAll);
+//	}
+
+//		StringBuffer buffer = new StringBuffer();
+//		String s = "Admin(10)";
+//
+//		for (int i = 0; i < s.length(); i++) {
+//
+//			if (Character.isDigit(s.charAt(i))) {
+//				append = buffer.append(s.charAt(i));
+//				parseInt = Integer.parseInt(append.toString());
+//
+//			}
+//
+//		}
+//		System.out.println("Admin(" + (parseInt + 1) + ")");
+
+//}
