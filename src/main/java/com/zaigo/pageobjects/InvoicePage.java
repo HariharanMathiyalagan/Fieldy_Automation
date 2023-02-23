@@ -337,7 +337,6 @@ public class InvoicePage extends BaseClass {
 				"Discount", "Tax", "Description", "Notes", "Price");
 		for (int i = 0; i < asList.size(); i++) {
 			this.clearFields(asList.get(i));
-//System.out.println(asList.get(i));
 		}
 	}
 

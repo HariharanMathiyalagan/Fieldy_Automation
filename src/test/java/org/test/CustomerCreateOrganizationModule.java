@@ -1413,7 +1413,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("OrganizationEditPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (editContact.equals(getPropertyValue("ContactEditPage"))) {
+		if (editContact.equals(getPropertyValue("OrganizationEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			invalid.visibleName();
 			invalid.clearAllFields("OrganizationPage");
@@ -2479,9 +2479,9 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		create.equipmentPage();
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerUpdatedMesssage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (listName.equals(getPropertyValue("CustomerCreatedMessage"))) {
+		if (listName.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");

@@ -601,7 +601,7 @@ public class OnBoardingPage extends BaseClass {
 
 	public String expectedURL() throws IOException {
 		String expectedURL = "https://" + (BussinessName.toLowerCase().replaceAll("\\s", ""))
-				+ getPropertyValue("DomainURL");
+				+ getPropertyValue("DomainURL") + "/";
 		return expectedURL;
 	}
 
@@ -611,7 +611,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public String expectedOwnerName() {
-		String Name = TenantFirstName + TenantLastName;
+		String Name = TenantFirstName + " " + TenantLastName;
 		return Name;
 
 	}

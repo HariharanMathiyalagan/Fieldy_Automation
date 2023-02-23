@@ -50,8 +50,8 @@ public class GlobalContactQuote extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
+		loginInPage.passwordField(getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -702,7 +702,7 @@ public class GlobalContactQuote extends BaseClass {
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		QuotePage mandatory = new QuotePage(driver);
 		mandatory.dateValidation("GlobalPastDate");
-		currentDate = mandatory.dateValidation("CurrentDate");
+		currentDate = mandatory.dateValidation("CurrentDateError");
 		String errorPasswordField = mandatory.errorValidation("PastDateError");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,

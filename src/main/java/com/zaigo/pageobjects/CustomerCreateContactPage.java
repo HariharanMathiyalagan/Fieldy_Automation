@@ -195,7 +195,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	public String modulePage() throws InterruptedException, IOException {
 		this.assertName(DashBoard, "Company Performance");
 		this.mouseActionClick(Customer);
-//		this.assertName(Text, "Customer Name");
 		this.Displayed(Text);
 		this.mouseActionClick(Contact);
 		this.Displayed(ContactName);
@@ -363,7 +362,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By ListLeadSources = By.xpath("(//*[@class='false'])[5]");
+	By ListLeadSources = By.xpath("(//*[@class='false'])[6]");
 
 	public String listFirstName() {
 		String text2 = this.getText(ListName);
@@ -783,7 +782,6 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, characters256);
-		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 
 	}

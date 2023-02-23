@@ -3,8 +3,13 @@ package com.zaigo.pageobjects;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,6 +17,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,20 +60,85 @@ public class JobPage extends BaseClass {
 
 	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
 	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
+
+	@FindAll({ @FindBy(xpath = "(//*[@data-n-linkto='customer_contact_timeline'])[1]"),
+			@FindBy(xpath = "(//*[@data-n-linkto='customer_organization_timeline'])[1]") })
+	WebElement CustomerListName;
+
 	By CustomerName = By.id("customer-name");
 	By ClickJob = By.xpath("//*[@data-menuswitcher='cstmr-contact-job']");
+
+	@FindAll({ @FindBy(xpath = "//*[@id='job-create']//*[@id='customer-name-input-field']"),
+			@FindBy(xpath = "//*[@class='col-lg-12 mt-3 switchcontact d-block']//*[@id='id_user_customer']"),
+			@FindBy(xpath = "//*[@class='min-hight-600  bg-white p-2']//*[@id='id_customer_group']") })
+	WebElement CustomerField;
+
+	@FindAll({ @FindBy(xpath = "//*[@data-menuswitcher='cstmr-contact-job']"),
+			@FindBy(xpath = "//*[@data-menuswitcher='cstmr-organization-job']") })
+	WebElement ClickJobButton;
+
 	By ClickOrganizationJob = By.xpath("//*[@data-menuswitcher='cstmr-organization-job']");
 	By JobLabel = By.id("//*[text()='Total Job ']");
+
+	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-organization-job-create']"),
+			@FindBy(xpath = "//*[@data-automationid='customer-contact-job-create']"),
+			@FindBy(xpath = "//*[@data-automationid='job-create']") })
+	WebElement CreateJobButton;
+
+	@FindAll({
+			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
+	WebElement AddCustomer;
+
+	@FindAll({ @FindBy(xpath = "//span[@data-timeline-open='organizationjob']"),
+			@FindBy(xpath = "//span[@data-timeline-open='contactjob']") })
+	WebElement FilterButton;
+
 	By CreateJob = By.xpath("//*[@data-automationid='customer-contact-job-create']");
 	By CreateOrganizationJob = By.xpath("//*[@data-automationid='customer-organization-job-create']");
 	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
 	By CreateGlobalJob = By.xpath("//*[@data-automationid='job-create']");
 	By Job = By.id("job-menu");
+	By JobListLabel = By.xpath("//*[@data-menuselector='job-menu']");
 	By GlobalCustomer = By.id("id_customer_group");
 	By ContactNameError = By.id("id_customer_group_error");
 	By Add = By.xpath("//*[@class='add_new_btn btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 	By FirstName = By.id("first_name");
 	By LastName = By.id("last_name");
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__first_name__0']") })
+	WebElement FirstNameField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='last_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__last_name__0']") })
+	WebElement LastNameField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='email']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__email__0']") })
+	WebElement EmailField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='phones__number__0']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__phone__0']") })
+	WebElement PhoneNumber;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_1']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_1__0']") })
+	WebElement Address1Field;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_2']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_2__0']") })
+	WebElement Address2Field;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='city']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__city__0']") })
+	WebElement CityField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='state']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__state__0']") })
+	WebElement StateField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='zipcode']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__zipcode__0']") })
+	WebElement ZipcodeField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+	WebElement SaveButton;
+
 	By Email = By.id("email");
 	By OrgEmail = By.xpath("(//*[@id='email'])[2]");
 	By Phone = By.id("phones__number__0");
@@ -84,9 +155,10 @@ public class JobPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Save = By.id("contact-create");
 	By SaveOrg = By.id("organization-create");
-	By Website = By.xpath("(//*[@id='website'])[1]");
+	By Website = By.xpath("//*[@id='customer_organization_create_edit']//*[@id='website']");
 	By ContactCreatedMessage = By.xpath("//*[text()='Customer created successfully']");
-
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By Cancel1 = By.xpath("//*[@class='js-snackbar__close bold']");
 	By Location = By.id("location");
 	By Tittle = By.id("title");
 	By Description = By.id("description");
@@ -95,8 +167,7 @@ public class JobPage extends BaseClass {
 	By SaveComplete = By.id("scheduledrop");
 	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
-	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
-
+	By firstLocation = By.xpath("//*[@class='pac-item-query']");
 	By ErrorLocation = By.id("location_error");
 	By ErrorTittle = By.id("title_error");
 	By ErrorDescription = By.id("description_error");
@@ -135,26 +206,73 @@ public class JobPage extends BaseClass {
 			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By No = By.xpath("//*[text()='No']");
+
+	@FindAll({ @FindBy(xpath = "(//*[@gloss='Dispatch'])[2]"),
+			@FindBy(xpath = "(//*[@data-tabposition='undefined'])[10]") })
+	WebElement DispatchButton;
+	@FindAll({ @FindBy(xpath = "(//*[@gloss='Start'])[1]"),
+			@FindBy(xpath = "(//*[@data-tabposition='undefined'])[13]") })
+	WebElement StartButton;
+	@FindAll({ @FindBy(xpath = "(//*[@gloss='Completed'])[1]"),
+			@FindBy(xpath = "(//*[@data-tabposition='undefined'])[16]") })
+	WebElement CompleteButton;
+	@FindAll({ @FindBy(xpath = "//*[@gloss='Cancel']"), @FindBy(xpath = "(//*[@data-tabposition='undefined'])[40]") })
+	WebElement CancelButton;
+
 	By Dispatch = By.xpath("(//*[@gloss='Dispatch'])[2]");
 	By Start = By.xpath("(//*[@gloss='Start'])[1]");
 	By Complete = By.xpath("(//*[@gloss='Completed'])[1]");
 	By Cancel = By.xpath("//*[@gloss='Cancel']");
+	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
+	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
+	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
+	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
 	By Delete = By.xpath("//*[@gloss='Delete']");
 	By Back = By.xpath("//*[@alt=' back_arrow']");
-	By Label = By.xpath("//*[@data-draftback='jobdraft']");
+	By Label = By.xpath("//*[@data-menuselector='job-menu']");
+	@FindAll({ @FindBy(xpath = "(//*[@class='id-number'])[1]"), @FindBy(xpath = "(//*[@class='false'])[2]") })
+	WebElement ListJobNo;
+	@FindAll({ @FindBy(id = "customer-contact-request-card-profile-location"),
+			@FindBy(xpath = "(//*[@class='false'])[4]") })
+	WebElement ListLocation;
+	@FindAll({
+			@FindBy(id = "(//*[text()='Schedule From  : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]"),
+			@FindBy(xpath = "(//*[@class='false'])[3]") })
+	WebElement ListFrom;
+
+	By ListTo = By.xpath(
+			"(//*[text()='Schedule To : ']//following-sibling::*[@id='customer-contact-request-card-booking-time'])[1]");
+
 	By JobNo = By.xpath("(//*[@class='id-number'])[1]");
 	By JobNo2 = By.xpath("(//*[@class='id-number'])[2]");
+
+	@FindAll({ @FindBy(id = "customer-contact-job-search"), @FindBy(id = "customer-company-job-search") })
+	WebElement SearchField;
+
 	By SearchBox = By.id("customer-contact-job-search");
 	By SearchOrganizationBox = By.id("customer-company-job-search");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
 	By SearchLocation = By.id("customer-contact-request-card-profile-location");
+
+	@FindAll({ @FindBy(xpath = "//*[text()='No Data Available']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement Invalid;
+
 	By InvlaidSearch = By.xpath("//*[@class='title']");
 	By GlobalInvlaidSearch = By.xpath("//*[text()='No Result Found']");
 	By Filter = By.xpath("//*[@class='eiconmenu20-white-filter']");
+
+	@FindAll({ @FindBy(id = "customer-contact-job-filter-from-date"), @FindBy(id = "customer-company-job-from-date"),
+			@FindBy(id = "job-main-from-date-filter") })
+	WebElement FilterFromField;
+	@FindAll({ @FindBy(id = "customer-contact-job-filter-to-date"), @FindBy(id = "customer-company-job-to-date"),
+			@FindBy(id = "job-main-to-date-filter") })
+	WebElement FilterToField;
+
 	By FilterFrom = By.id("customer-contact-job-filter-from-date");
 	By FilterOrganizationFrom = By.id("customer-company-job-from-date");
 	By FilterTo = By.id("customer-contact-job-filter-to-date");
 	By FilterOrganizationTo = By.id("customer-company-job-to-date");
+
 	By Apply = By.xpath("//*[@data-automationid='contact-apply']");
 	By JobType = By.id("job-type-filter");
 	By ErrorToTime = By.xpath("//*[text()='Appointment from date,time and Appointment to date needed']");
@@ -173,16 +291,17 @@ public class JobPage extends BaseClass {
 	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 	By ContactName = By.id("customer-name-input-field");
 	By TechnicianLabel = By.xpath("//*[text()='Technician']");
-	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
-	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
-	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
-	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
-
+	By FirstContactName = By.xpath("//*[@class='gorupdiv item']");
 	By AssertDashboard = By.xpath("//*[text()=' Company Performance']");
 	By ListCustomer = By.xpath("//*[text()='Customer']");
 	By RadioButtonOrg = By.xpath("(//*[@class='mr-2 mb-2'])[2]");
+	By RadioButton = By.xpath("(//*[@class='mr-2 mb-2'])[1]");
 	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
 	By OrganizationName = By.id("company_name");
+//	By TotalCount = By.id("total-invoice-count");
+
+	@FindAll({ @FindBy(id = "cutomer-contact-job-count"), @FindBy(id = "cutomer-company-job-count") })
+	WebElement TotalCount;
 
 	public JobPage(WebDriver driver) {
 		this.driver = driver;
@@ -194,18 +313,53 @@ public class JobPage extends BaseClass {
 
 	public void autoCompleteField(String value) throws InterruptedException {
 		if (value.equals("OrganizationContactCreate")) {
-			this.inputText(OrgContactName, fakeFirstName);
-			this.mouseActionClick(OrgContactAdd);
-			this.inputText(OrganizationFirstName, fakeFirstName);
-			ContactFirstName = this.getTextAttribute(OrganizationFirstName);
-			this.inputText(OrganizationLastName, fakeLastName);
-			ContactLastName = this.getTextAttribute(OrganizationLastName);
-			this.inputText(OrganizationEmail, fakeEmail);
-			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
+			this.inputText(CustomerField, fakeFirstName);
+			if (this.getText(By.xpath("//*[text()=' No Data Found!']")).equals("No Data Found!")) {
+				this.mouseActionClick(AddCustomer);
+			} else {
+				this.mouseActionClick(FirstContactName);
+			}
+			this.inputText(FirstNameField, fakeFirstName);
+			ContactFirstName = this.getTextAttribute(FirstNameField);
+			this.inputText(LastNameField, fakeLastName);
+			ContactLastName = this.getTextAttribute(LastNameField);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
 			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(OrganizationContactSave);
+			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			this.valuePresent(OrgContactName, ContactFirstName + " " + ContactLastName);
+			this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName);
+		} else if (value.equals("OrgVisibleName")) {
+			this.valuePresent(CustomerField, ContactFirstName);
+		} else if (value.equals("ContactCreate")) {
+			this.inputText(CustomerField, fakeFirstName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(FirstNameField, fakeFirstName);
+			ContactFirstName = this.getTextAttribute(FirstName);
+			this.inputText(LastNameField, fakeLastName);
+			ContactLastName = this.getTextAttribute(LastName);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(Address1Field, fakeAddress1);
+			this.inputText(Address2Field, fakeAddress2);
+			this.inputText(CityField, fakeCity);
+			this.inputText(StateField, fakeState);
+			this.inputText(ZipcodeField, fakeZipcode);
+			this.mouseActionClick(SaveButton);
+		} else if (value.equals("OrganizationCreate")) {
+			this.inputText(CustomerField, fakeCompanyName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(OrganizationName, fakeCompanyName);
+			ContactFirstName = this.getTextAttribute(OrganizationName);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(Website, fakeWebsite);
+			this.inputText(Address1Field, fakeAddress1);
+			this.inputText(Address2Field, fakeAddress2);
+			this.inputText(CityField, fakeCity);
+			this.inputText(StateField, fakeState);
+			this.inputText(ZipcodeField, fakeZipcode);
+			this.mouseActionClick(SaveOrg);
 		}
 
 	}
@@ -213,6 +367,11 @@ public class JobPage extends BaseClass {
 	private void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+	}
+
+	public void inputText(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
 	}
 
 	private void clearField(By element) {
@@ -231,9 +390,31 @@ public class JobPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
+	private void clickButton(WebElement element) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+	}
+
+	public void visibility(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
+	}
+
+	private int listWebElement(By element) {
+		wait = new WebDriverWait(driver, 20);
+		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).size();
+	}
+
 	private void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 20);
-		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		WebElement until = wait.until(ExpectedConditions.elementToBeClickable(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
+	private void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 20);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
@@ -242,6 +423,11 @@ public class JobPage extends BaseClass {
 		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
+	}
+
+	public void visibility(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
 	}
 
 	private void validationTab(By element, String text) {
@@ -264,6 +450,12 @@ public class JobPage extends BaseClass {
 	private String getText(By element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
+		return until;
+	}
+
+	private String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
 		return until;
 	}
 
@@ -290,18 +482,61 @@ public class JobPage extends BaseClass {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
+	public void valuePresent(WebElement element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	}
+
 	public String getTextAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
 		return until;
 	}
 
-	public String customerJobListPage(String value) {
+	public String getTextAttribute(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getAttribute("value");
+		return until;
+	}
+
+	static int parseInt;
+
+	public int getCount() throws InterruptedException {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOf(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+
+	}
+
+	@FindAll({ @FindBy(xpath = "(//*[text()='Job No :'])[1]"), @FindBy(xpath = "//*[text()='No Data Available']"),
+			@FindBy(xpath = "//*[text()='Customer']") })
+	WebElement JobList;
+
+	public int countValidation(int value) {
+		if (value == 1) {
+			int a = parseInt + 1;
+			return a;
+		} else if (value == 2) {
+			this.visibility(JobList);
+			String text2 = this.getText(TotalCount);
+			int parseInt = Integer.parseInt(text2);
+			return parseInt;
+		}
+		return value;
+	}
+
+	public String customerJobListPage(String value) throws InterruptedException {
 		if (value.equals("Contact")) {
 			String text = this.getText(ContactListName);
 			this.mouseActionClick(ContactListName);
 			this.assertName(ContactListName, text);
 			this.mouseActionClick(ClickJob);
+			this.elementtobeClickable(SearchBox);
+			this.visibility(JobList);
+			this.mouseActionClick(Filter);
+			this.visibility(Apply);
+			this.getCount();
 			String customerName = this.customerName("DetailScreenCustomerName");
 			this.assertName(CreateJob, "Create Job");
 			this.mouseActionClick(CreateJob);
@@ -311,10 +546,16 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(OrganizationListName);
 			this.assertName(OrganizationListName, text);
 			this.mouseActionClick(ClickOrganizationJob);
+			this.visibility(JobList);
+			this.getCount();
 			String customerName = this.customerName("DetailScreenCustomerName");
 			this.assertName(CreateOrganizationJob, "Create Job");
 			this.mouseActionClick(CreateOrganizationJob);
 			return customerName;
+		} else if (value.equals("EditPage")) {
+			String text = this.getText(SearchLocation);
+			this.mouseActionClick(Edit);
+			this.valuePresent(Location, text);
 		}
 		return value;
 	}
@@ -326,15 +567,22 @@ public class JobPage extends BaseClass {
 			getName = this.getText(CustomerName);
 			return getName;
 		} else if (value.equals("PlaceHolderName")) {
-			this.valuePresent(ContactName, getName);
+			this.valuePresent(CustomerField, getName);
 			String textAttribute = this.getTextAttribute(ContactName);
 			return textAttribute;
 		}
 		return value;
 	}
 
+	By CreateJobs = By.xpath("//a[@data-draftback='jobdraft']");
+
 	public String jobLandPage() {
-		String text = this.getText(CreateJobLabel);
+		String text = this.getText(Label);
+		return text;
+	}
+
+	public String jobLandPage1() {
+		String text = this.getText(CreateJobs);
 		return text;
 	}
 
@@ -391,7 +639,6 @@ public class JobPage extends BaseClass {
 	public String updatedMessage() {
 		String text = this.getText(JobUpdatedMessage);
 		return text;
-
 	}
 
 	public String errorContact() {
@@ -402,36 +649,41 @@ public class JobPage extends BaseClass {
 	/* End */
 	/* Fields Validations */
 	/* Start */
+	@FindAll({ @FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement Name;
 
-	public void module() throws InterruptedException {
+	public String module() throws InterruptedException {
 		this.assertName(AssertDashboard, "Company Performance");
 		this.mouseActionClick(Job);
-		this.assertName(ListCustomer, "Customer");
+		this.visibility(Name);
+		String text = this.getText(Label);
 		this.mouseActionClick(CreateGlobalJob);
+		return text;
 
 	}
 
 	public void mandatoryContactField() throws InterruptedException {
-		this.assertName(Label, "Create Job");
-		Thread.sleep(5000);
-		this.mouseActionClick(SaveComplete);
+		for (int i = 0; i < 3; i++) {
+			this.mouseActionClick(RadioButtonOrg);
+			this.mouseActionClick(RadioButton);
+			this.mouseActionClick(SaveComplete);
+		}
 
 	}
 
 	public void mandatoryOrganizationField() throws InterruptedException {
-		this.assertName(Label, "Create Job");
-		this.mouseActionClick(RadioButtonOrg);
-		Thread.sleep(5000);
-		this.scrollDown();
-		this.mouseActionClick(SaveComplete);
-		this.scrollUp();
+		for (int i = 0; i < 3; i++) {
+			this.mouseActionClick(RadioButtonOrg);
+			this.mouseActionClick(SaveComplete);
+			this.mouseActionClick(RadioButton);
+			this.mouseActionClick(RadioButtonOrg);
+		}
 
 	}
 
 	public void switchOrganization() throws InterruptedException {
 		this.assertName(Label, "Create Job");
 		this.mouseActionClick(RadioButtonOrg);
-		Thread.sleep(2500);
 
 	}
 
@@ -441,38 +693,48 @@ public class JobPage extends BaseClass {
 
 	}
 
+	static String firstName;
+	static String lastName;
+
 	public void contactCreation() throws InterruptedException {
 		this.inputText(GlobalCustomer, fakeFirstName);
 		this.mouseActionClick(Add);
 		this.inputText(FirstName, fakeFirstName);
+		firstName = this.getTextAttribute(FirstName);
 		this.inputText(LastName, fakeLastName);
-//		this.inputText(Email, fakeEmail);
+		lastName = this.getTextAttribute(LastName);
+		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
 		this.inputText(Address1, fakeAddress1);
 		this.inputText(Address2, fakeAddress2);
 		this.inputText(CityName, fakeCity);
 		this.inputText(StateName, fakeState);
 		this.inputText(Zipcode, fakeZipcode);
-		Thread.sleep(2000);
 		this.mouseActionClick(Save);
 
 	}
+
+	static String orgContactName;
 
 	public void organizationCreation() throws InterruptedException {
 		this.inputText(GlobalCustomer, fakeCompanyName);
 		this.mouseActionClick(OrgAdd);
 		this.inputText(OrganizationName, fakeCompanyName);
+		orgContactName = this.getTextAttribute(OrganizationName);
 		this.inputText(OrgPhoneNumber, fakePhoneNumber);
-//		this.inputText(OrgEmail, fakeEmail);
+		this.inputText(OrgEmail, fakeEmail);
 		this.inputText(Website, fakeWebsite);
 		this.inputText(OrgAddress1, fakeAddress1);
 		this.inputText(OrgAddress2, fakeAddress2);
 		this.inputText(OrgCity, fakeCity);
 		this.inputText(OrgState, fakeState);
 		this.inputText(OrgZipcode, fakeZipcode);
-		Thread.sleep(2000);
 		this.mouseActionClick(SaveOrg);
 
+	}
+
+	public void valuePresentOrg() {
+		this.valuePresent(GlobalCustomer, orgContactName);
 	}
 
 	public void mandatoryDescriptionField() {
@@ -518,6 +780,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public void maxCharacterTag() {
+		this.scrollDown();
 		this.tagValidation(Tags, characters256);
 	}
 
@@ -537,6 +800,14 @@ public class JobPage extends BaseClass {
 	}
 
 	public String currentFilterPickerFromDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		return currentDate;
+	}
+	
+	public String currentFilterPickerFromDateFormat() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -553,6 +824,13 @@ public class JobPage extends BaseClass {
 	}
 
 	public String currentFilterPickerToDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		return currentDate;
+	}
+	public String currentFilterPickerToDateFormat() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -605,8 +883,8 @@ public class JobPage extends BaseClass {
 		this.inputText(Description, getPropertyValue("Description"));
 		this.inputText(Notes, getPropertyValue("Notes"));
 		this.assertName(SaveComplete, "Schedule Job");
-		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
+		this.visibility(JobList);
 
 	}
 
@@ -655,27 +933,25 @@ public class JobPage extends BaseClass {
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='job_edit'])[1]");
 
 	public void globalEditJob() throws InterruptedException {
+		String text = this.getText(GlobalLocation);
 		this.mouseActionClick(ThreeDots);
 		this.mouseActionClick(GlobalEdit);
-		Thread.sleep(15000);
-		this.scrollDown();
-		this.assertName(SelectTechnician, "Select Technician");
-		this.mouseActionClick(Technician);
-		this.mouseActionClick(TechnicianFirstName);
-		this.mouseActionClick(SaveComplete);
+		this.valuePresent(Location, text);
 
 	}
 
-	public void editJob1() throws InterruptedException {
-		this.mouseActionClick(Edit);
-		Thread.sleep(15000);
+	public void editJob1() throws InterruptedException, IOException {
+		this.picKLocation();
+		this.inputText(Tittle, fakeTittle);
+		this.inputText(Description, getPropertyValue("Description"));
 		this.scrollDown();
-		this.assertName(SelectTechnician, "Select Technician");
-		this.mouseActionClick(Crew);
-		this.dropDownByIndex(CrewSize, 1);
-		this.mouseActionClick(CrewTech);
-		this.mouseActionClick(SelectTech);
+		this.mouseActionClick(Technician);
+		this.mouseActionClick(TechnicianFirstName);
+		this.clearField(Tags);
+		this.inputText(Notes, getPropertyValue("Notes"));
+		this.assertName(SaveComplete, "Update Job");
 		this.mouseActionClick(SaveComplete);
+		this.visibility(JobList);
 
 	}
 
@@ -688,26 +964,24 @@ public class JobPage extends BaseClass {
 		this.dropDownByIndex(Priority, 2);
 		this.inputText(Tittle, fakeTittle);
 		this.inputText(Description, getPropertyValue("Description"));
+		this.scrollDown();
 		this.currentPickerFromDate();
 		this.currentPickerToDate();
 		this.inputText(StartTime, "10.00");
 		this.inputText(EndTime, "18.00");
-		Thread.sleep(5000);
-		this.mouseActionClick(Crew);
-		this.mouseActionClick(Single);
-		this.assertName(TechnicianLabel, "Technician");
+		this.visibility(TechnicianLabel);
 		this.mouseActionClick(Technician);
 		this.mouseActionClick(TechnicianSecoundName);
 		this.tagValidation(Tags, randomCharacter);
 		this.inputText(Notes, getPropertyValue("Notes"));
 		this.mouseActionClick(SaveComplete);
+		this.visibility(JobList);
 
 	}
 
 	public void customerOrganizationJob() throws InterruptedException {
-		Thread.sleep(2000);
 		this.mouseActionClick(CreateOrganizationJob);
-		Thread.sleep(2000);
+		this.valuePresent(ContactName, getName);
 
 	}
 
@@ -719,9 +993,8 @@ public class JobPage extends BaseClass {
 	}
 
 	public void globalJob() throws InterruptedException {
-		Thread.sleep(2000);
+		this.visibility(JobList);
 		this.mouseActionClick(CreateGlobalJob);
-		Thread.sleep(2000);
 
 	}
 
@@ -771,10 +1044,10 @@ public class JobPage extends BaseClass {
 	}
 
 	By CustomerError = By.id("id_customer_group_error");
-	By GlobalSearchJobNo = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[2]");
-	By GlobalCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
-	By GlobalLocation = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
-	By GlobalDate = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By GlobalSearchJobNo = By.xpath("(//*[@class='false'])[2]");
+	By GlobalCustomerName = By.xpath("(//*[@class='false'])[1]");
+	By GlobalLocation = By.xpath("(//*[@class='false'])[4]");
+	By GlobalDate = By.xpath("(//*[@class='false'])[3]");
 	By GlobalSearchBox = By.id("job-search-input-filter");
 	By GlobalFrom = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[1]");
 	By GlobalTo = By.xpath("(//*[@data-setdatelimitmax='schedule_from_date'])[2]");
@@ -782,7 +1055,6 @@ public class JobPage extends BaseClass {
 	public void draftJob() throws IOException, InterruptedException {
 		this.customerName("DetailScreenCustomerName");
 		this.mouseActionClick(CreateJob);
-//		Thread.sleep(5000);
 		this.customerName("PlaceHolderName");
 		this.mouseActionClick(Back);
 		this.mouseActionClick(Yes);
@@ -799,11 +1071,9 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public String deletedTiggerFunction() {
+	public void deletedTiggerFunction() {
 		this.mouseActionClick(Delete);
 		this.mouseActionClick(Yes);
-		String text = this.getText(JobDeletedMessage);
-		return text;
 	}
 
 	public String cancelledTigerFunction() {
@@ -862,6 +1132,24 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public String getGlobalJobNo() {
+		String text2 = this.getText(GlobalSearchJobNo);
+		return text2;
+
+	}
+
+	public String getGlobalCustomer() {
+		String text2 = this.getText(GlobalCustomerName);
+		return text2;
+
+	}
+
+	public String getGlobalLocation() {
+		String text2 = this.getText(GlobalLocation);
+		return text2;
+
+	}
+
 	public String searchJobNo2() {
 		String text = this.getText(GlobalSearchJobNo);
 		this.tagValidation(GlobalSearchBox, text);
@@ -878,15 +1166,13 @@ public class JobPage extends BaseClass {
 
 	}
 
-	By JobLabelNo = By.xpath("(//*[text()='Job No :'])[1]");
-
 	public void resetOption() {
 		this.mouseActionClick(Reset);
 
 	}
 
 	public void jobLabel() {
-		this.assertName(JobLabelNo, "Job No :");
+		this.visibility(JobList);
 
 	}
 
@@ -977,8 +1263,8 @@ public class JobPage extends BaseClass {
 
 	public void filterByDate2() throws InterruptedException {
 		this.mouseActionClick(Filter);
-		String currentFilterPickerFromDate = this.currentFilterPickerFromDate();
-		String currentFilterPickerToDate = this.currentFilterPickerToDate();
+		String currentFilterPickerFromDate = this.currentFilterPickerFromDateFormat();
+		String currentFilterPickerToDate = this.currentFilterPickerToDateFormat();
 		this.inputText(GlobalFrom, currentFilterPickerFromDate);
 		this.inputText(GlobalTo, currentFilterPickerToDate);
 		Thread.sleep(2000);
@@ -1075,24 +1361,22 @@ public class JobPage extends BaseClass {
 			this.inputText(Description, getPropertyValue("Description"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.assertName(SaveComplete, "Schedule Job");
-//			Thread.sleep(2000);
 			this.mouseActionClick(SaveComplete);
-		} else if (value.equals("EditUnassigned")) {
+		} else if (value.equals("Edit")) {
 			String text = this.getText(SearchLocation);
 			this.mouseActionClick(Edit);
 			this.valuePresent(Location, text);
+		} else if (value.equals("UpdateData")) {
+			this.validationTab(Location, fakeState);
+			this.picKLocation();
+			this.inputText(Tittle, fakeTittle);
+			this.inputText(Description, getPropertyValue("Description"));
 			this.scrollDown();
-			this.assertName(SelectTechnician, "Select Technician");
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianFirstName);
-			this.mouseActionClick(SaveComplete);
-		} else if (value.equals("EditReschedule")) {
-			this.mouseActionClick(Edit);
-			this.elementtobeClickable(SaveComplete);
-			this.inputText(EndTime, "20.00");
-			this.mouseActionClick(Technician);
-			this.mouseActionClick(TechnicianFirstName);
-			this.elementtobeClickable(SaveComplete);
+			this.validationTab(Tags, randomCharacter);
+			this.inputText(Notes, getPropertyValue("Notes"));
+			this.clearField(Tags);
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Create")) {
 			Thread.sleep(2000);
@@ -1129,6 +1413,9 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("Invalid")) {
 			String text = this.getText(InvlaidSearch);
 			return text;
+		} else if (value.equals("Button")) {
+			String text = this.getText(SaveComplete);
+			return text;
 		}
 		return value;
 	}
@@ -1161,57 +1448,87 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("TagRemove")) {
 			this.mouseActionClick(TagRemove);
 		} else if (value.equals("RemoveMultipleTag")) {
-			for (int i = 1; i < 32; i++) {
-				By TagRemove = By.xpath("(//*[@class='tag__remove'])[" + i + "]");
+			int listWebElement = this.listWebElement(TagRemove);
+			for (int i = 0; i < listWebElement - 1; i++) {
 				this.mouseActionClick(TagRemove);
 			}
 		}
 		return value;
 	}
 
-	public String responseMessage(String value) {
-		if (value.equals("Created")) {
-			String text = this.getText(JobCreatedMessage);
-			return text;
-		} else if (value.equals("Updated")) {
-			String text = this.getText(JobUpdatedMessage);
-			return text;
-		} else if (value.equals("Dispatched")) {
-			String text = this.getText(JobDispatchMessage);
-			return text;
-		} else if (value.equals("Started")) {
-			String text = this.getText(JobStartedMessgae);
-			return text;
-		} else if (value.equals("Completed")) {
-			String text = this.getText(JobCompletedMessage);
-			return text;
-		} else if (value.equals("Cancelled")) {
-			String text = this.getText(JobCancelledMessage);
-			return text;
-		} else if (value.equals("Deleted")) {
-			String text = this.getText(JobDeletedMessage);
-			return text;
+	public void tiggerFunction(String value) {
+		if (value.equals("Dispatch")) {
+			this.mouseActionClick(DispatchButton);
+		} else if (value.equals("Start")) {
+			this.mouseActionClick(StartButton);
+		} else if (value.equals("Complete")) {
+			this.mouseActionClick(CompleteButton);
+		} else if (value.equals("Cancel")) {
+			this.mouseActionClick(CancelButton);
+		} else if (value.equals("Delete")) {
+			this.mouseActionClick(Delete);
+		}
+		this.mouseActionClick(Yes);
+	}
+
+	static String responseMessage;
+
+	public String message(String value) throws IOException {
+		if (value.equals("Message")) {
+			responseMessage = this.getText(Message);
+			this.mouseActionClick(Cancel1);
+			return responseMessage;
+		} else if (value.equals("AlternateFunction")) {
+			if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+				this.clearField(Email);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(Email, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+				this.clearField(OrganizationName);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeCompanyName = faker.company().name();
+				this.inputText(OrganizationName, fakeCompanyName);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+				this.clearField(OrgEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrgEmail, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+					&& responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+				this.clearField(OrganizationName);
+				this.clearField(OrgEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeCompanyName = faker.company().name();
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrganizationName, fakeCompanyName);
+				this.inputText(OrgEmail, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+				this.clearField(OrganizationEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrganizationEmail, fakeEmail);
+			}
 		}
 		return value;
 	}
 
-	public void tiggerFunction(String value) {
-		if (value.equals("Dispatch")) {
-			this.mouseActionClick(Dispatch);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("Start")) {
-			this.mouseActionClick(Start);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("Complete")) {
-			this.mouseActionClick(Complete);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("Cancel")) {
-			this.mouseActionClick(Cancel);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("Delete")) {
-			this.mouseActionClick(Delete);
-			this.mouseActionClick(Yes);
+	public void clearAllFields(String value) {
+		if (value.equals("Page")) {
+			List<String> asList = Arrays.asList("Location", "Description", "Tittle", "Notes");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearValidation(asList.get(i));
+			}
 		}
+	}
+
+	public void valuePresent() {
+		String value = firstName + " " + lastName;
+		this.valuePresent(GlobalCustomer, value);
 
 	}
 
