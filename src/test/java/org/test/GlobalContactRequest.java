@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,6 +19,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
@@ -48,8 +50,8 @@ public class GlobalContactRequest extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
+		loginInPage.passwordField(getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -70,7 +72,7 @@ public class GlobalContactRequest extends BaseClass {
 	@Test(priority = 1)
 	public void requestModule() throws InterruptedException {
 		extentTest = extentReports.createTest("Verify Global Request List Page is opened when clicking on Global Request");
-		RequestPage module = new RequestPage(driver);
+		RequestPage module = PageFactory.initElements(driver, RequestPage.class);
 		module.module();
 	}
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,6 +19,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
@@ -51,7 +53,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
@@ -75,7 +77,9 @@ public class CustomerOrganizationQuote extends BaseClass {
 	private void modulePage() throws InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verify Customer Oraganization List Page is opened when clicking on Cusotmer->Organization");
-		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
+//		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
+		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+
 		modulePage.modulePage();
 
 	}
@@ -781,7 +785,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		QuotePage mandatory = new QuotePage(driver);
 		mandatory.dateValidation("PastDate");
-		currentDate = mandatory.dateValidation("CurrentDate");
+		currentDate = mandatory.dateValidation("CurrentDateError");
 		String errorPasswordField = mandatory.errorValidation("PastDateError");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,

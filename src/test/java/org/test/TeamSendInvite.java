@@ -293,9 +293,9 @@ public class TeamSendInvite extends BaseClass{
 		landing.message("MaxValidation");
 		String mandatoryValidationFirstNameField = landing.errorField("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max256CharacterValidation"))) {
+		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearField("Message");
 			landing.validFillData("Message");

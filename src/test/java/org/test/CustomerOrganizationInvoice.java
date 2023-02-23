@@ -57,7 +57,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
 		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();

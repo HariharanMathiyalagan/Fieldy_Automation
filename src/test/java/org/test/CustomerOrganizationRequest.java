@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -48,8 +49,8 @@ public class CustomerOrganizationRequest extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValue("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
+		loginInPage.passwordField(getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -70,7 +71,8 @@ public class CustomerOrganizationRequest extends BaseClass {
 	@Test(priority = 2)
 	private void modulePage() throws InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify Customer Organization List Page is opened when clicking on Cusotmer->Organization");
-		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
+//		CustomerCreateOrganizationPage modulePage = new CustomerCreateOrganizationPage(driver);
+		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		modulePage.modulePage();
 
 	}

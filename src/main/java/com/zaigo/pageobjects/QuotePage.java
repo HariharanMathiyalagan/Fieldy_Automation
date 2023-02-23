@@ -247,6 +247,8 @@ public class QuotePage extends BaseClass {
 	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
 	By Website = By.xpath("(//*[@id='website'])[1]");
 	By SaveOrg = By.id("organization-create");
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By Cancel1 = By.xpath("//*[@class='js-snackbar__close bold']");
 
 	static String FirstName;
 	static String LastName;
@@ -398,6 +400,12 @@ public class QuotePage extends BaseClass {
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
 			return currentDate;
+		}else if (value.equals("CurrentDateError")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DAY_OF_MONTH, 0);
+			currentDate = sdf.format(cal.getTime());
+			return currentDate;
 		} else if (value.equals("PastDate")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			Calendar cal = Calendar.getInstance();
@@ -451,9 +459,10 @@ public class QuotePage extends BaseClass {
 			String text = this.getText(ErrorNotes);
 			return text;
 		} else if (value.equals("PastDateError")) {
-			By ErrorPastDate = By
-					.xpath("//*[text()='The doc expiry date must be a date after or equal to " + currentDate + ".']");
-			String text = this.getText(ErrorPastDate);
+//			By ErrorPastDate = By
+//					.xpath("//*[text()='The doc expiry date must be a date after or equal to " + currentDate + ".']");
+			String text = this.getText(Message);
+			this.mouseActionClick(Cancel1);
 			return text;
 		} else if (value.equals("ErrorContact")) {
 			String text = this.getText(ErrorCustomerName);

@@ -3,7 +3,9 @@ package com.zaigo.pageobjects;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,6 +16,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -66,6 +70,11 @@ public class RequestPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
+	private int listWebElement(By element) {
+		wait = new WebDriverWait(driver, 20);
+		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).size();
+	}
+
 	private void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 20);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -79,6 +88,18 @@ public class RequestPage extends BaseClass {
 		Assert.assertEquals(until, text);
 	}
 
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+	}
+
+	public String getTextAttribute(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getAttribute("value");
+		return until;
+	}
+
 	private void validationTab(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
@@ -87,6 +108,11 @@ public class RequestPage extends BaseClass {
 	private void tagValidation(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.ENTER);
+	}
+
+	private void tagValidation(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text, Keys.ENTER);
 	}
 
 	private void dropDownByIndex(By element, int num) {
@@ -102,6 +128,12 @@ public class RequestPage extends BaseClass {
 		return until;
 	}
 
+	private String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
+	}
+
 	private void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -114,10 +146,25 @@ public class RequestPage extends BaseClass {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 	}
 
+	public void valuePresent(By element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	}
+
+	public void valuePresent(WebElement element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	}
+
 	private void scrollUp() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0, -document.body.scrollHeight);");
 
+	}
+
+	public void visibility(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
 	}
 
 	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
@@ -142,7 +189,8 @@ public class RequestPage extends BaseClass {
 	By ErrorTags = By.id("tags__tags__0_error");
 	By ErrorNotes = By.id("notes_error");
 	By TagRemove = By.xpath("//*[@class='tag__remove']");
-
+	By RequestNo = By.xpath("(//*[@class='id-number'])[1]");
+	By RequestNo2 = By.xpath("(//*[@class='id-number'])[2]");
 	By StartDate = By.id("schedule_from_date");
 	By EndDate = By.id("schedule_to_date");
 	By StartTime = By.id("schedule_from_time");
@@ -179,7 +227,6 @@ public class RequestPage extends BaseClass {
 	By Back = By.xpath("//*[@alt='back_arrow']");
 	By Label = By.xpath("(//*[@data-draftback='requestdraft'])[2]");
 	By Label1 = By.xpath("//*[@data-draftback='requestdraft']");
-	By RequestNo = By.xpath("(//*[@class='id-number'])[1]");
 	By SearchContactBox = By.id("customer-contact-request-search-filter");
 	By SearchOrganizationBox = By.id("customer-company-search-filter");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
@@ -259,14 +306,70 @@ public class RequestPage extends BaseClass {
 	By OrganizationName = By.id("company_name");
 	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 	By Website = By.xpath("(//*[@id='website'])[1]");
+	@FindAll({ @FindBy(id = "customer-contact-request-count"), @FindBy(id = "customer-company-list-count") })
+	WebElement TotalCount;
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-company-search-filter']"),
+			@FindBy(xpath = "//*[@id='job-search-input-filter']"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-search-filter']") })
+	WebElement Search;
 
-	public void customerContactRequestListPage() throws InterruptedException {
-		String text = this.getText(ContactListName);
+	By CustomerName = By.id("customer-name");
+	@FindAll({ @FindBy(xpath = "//*[@id='request-create']//*[@id='customer-name-input-field']"),
+			@FindBy(xpath = "//*[@class='col-lg-12 mt-3 switchcontact d-block']//*[@id='id_user_customer']"),
+			@FindBy(xpath = "//*[@class='min-hight-600  bg-white p-2']//*[@id='id_customer_group']") })
+	WebElement CustomerField;
+
+	static int parseInt;
+
+	public int getCount() throws InterruptedException {
+		wait = new WebDriverWait(driver, 10);
+		String text2 = wait.until(ExpectedConditions.visibilityOf(TotalCount)).getText();
+		parseInt = Integer.parseInt(text2);
+		return parseInt;
+	}
+
+	@FindAll({ @FindBy(xpath = "(//*[text()='Request No :'])[1]"), @FindBy(xpath = "//*[text()='No Data Available']"),
+			@FindBy(xpath = "//*[text()='Customer']") })
+	WebElement JobList;
+
+	public int countValidation(int value) {
+		if (value == 1) {
+			int a = parseInt + 1;
+			return a;
+		} else if (value == 2) {
+			this.visibility(JobList);
+			String text2 = this.getText(TotalCount);
+			int parseInt = Integer.parseInt(text2);
+			return parseInt;
+		}
+		return value;
+	}
+
+	public String customerContactRequestListPage() throws InterruptedException {
+		String getName = this.getText(ContactListName);
 		this.mouseActionClick(ContactListName);
-		this.assertName(ContactListName, text);
+		this.assertName(ContactListName, getName);
 		this.mouseActionClick(ClickContactRequest);
+		String customerName2 = this.customerName("DetailScreenCustomerName");
 		this.assertName(CreateContactRequest, "Create Request");
+		this.visibility(JobList);
+		this.getCount();
 		this.mouseActionClick(CreateContactRequest);
+		return customerName2;
+	}
+
+	static String getName;
+
+	public String customerName(String value) {
+		if (value.equals("DetailScreenCustomerName")) {
+			getName = this.getText(CustomerName);
+			return getName;
+		} else if (value.equals("PlaceHolderName")) {
+			this.valuePresent(CustomerField, getName);
+			String textAttribute = this.getTextAttribute(CustomerField);
+			return textAttribute;
+		}
+		return value;
 	}
 
 	public String requestLandPage() {
@@ -299,7 +402,6 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void maxValidationTittle() throws InterruptedException {
-		Thread.sleep(6000);
 		this.validationTab(Tittle, characters256);
 	}
 
@@ -396,7 +498,7 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void fromDateTimeScheduleRequest() throws IOException, InterruptedException {
+	public String fromDateTimeScheduleRequest() throws IOException, InterruptedException {
 		this.picKLocation();
 		this.dropDownByIndex(Priority, 2);
 		this.currentPickerFromDate();
@@ -407,10 +509,24 @@ public class RequestPage extends BaseClass {
 		this.clearField(Description);
 		this.inputText(Description, getPropertyValue("Description"));
 		this.inputText(Notes, getPropertyValue("Notes"));
-		this.assertName(SaveComplete, "Schedule Request");
-		Thread.sleep(2000);
+		String text = this.getText(SaveComplete);
 		this.mouseActionClick(SaveComplete);
+		return text;
 
+	}
+
+	public String editRequests() throws IOException {
+		this.picKLocation();
+		this.clearField(Tags);
+		this.inputText(Tittle, fakeTittle);
+		this.clearField(Description);
+		this.inputText(Description, getPropertyValue("Description"));
+		this.inputText(Notes, getPropertyValue("Notes"));
+		this.mouseActionClick(Technician);
+		this.mouseActionClick(TechnicianFirstName);
+		String text = this.getText(SaveComplete);
+		this.mouseActionClick(SaveComplete);
+		return text;
 	}
 
 	public String createdMessage() {
@@ -515,8 +631,9 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void draftRequest() throws IOException, InterruptedException {
+		String text = this.getText(CustomerName);
 		this.mouseActionClick(CreateContactRequest);
-		Thread.sleep(5000);
+		this.valuePresent(CustomerField, text);
 		this.mouseActionClick(Back);
 		this.mouseActionClick(Yes);
 		this.assertName(RequestDraftedMessage, "Request drafted");
@@ -564,8 +681,24 @@ public class RequestPage extends BaseClass {
 		return currentDate;
 	}
 
+	public String currentFilterPickerFromDateFormat() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		return currentDate;
+	}
+
 	public String currentFilterPickerToDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		return currentDate;
+	}
+
+	public String currentFilterPickerToDateFormat() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String currentDate = sdf.format(cal.getTime());
@@ -862,4 +995,81 @@ public class RequestPage extends BaseClass {
 
 	}
 
+	public String clearValidation(String value) {
+		if (value.equals("Location")) {
+			this.clearField(Location);
+		} else if (value.equals("Description")) {
+			this.clearField(Description);
+		} else if (value.equals("Tittle")) {
+			this.clearField(Tittle);
+		} else if (value.equals("Tag")) {
+			this.clearField(Tags);
+		} else if (value.equals("Notes")) {
+			this.clearField(Notes);
+		} else if (value.equals("OrganizationSearch")) {
+			this.clearField(SearchOrganizationBox);
+		} else if (value.equals("GlobalSearch")) {
+			this.clearField(GlobalSearchBox);
+		} else if (value.equals("StartDate")) {
+			this.clearField(StartDate);
+		} else if (value.equals("EndDate")) {
+			this.clearField(EndDate);
+		} else if (value.equals("StartTime")) {
+			this.clearField(StartTime);
+		} else if (value.equals("EndTime")) {
+			this.clearField(EndTime);
+		} else if (value.equals("TagRemove")) {
+			this.mouseActionClick(TagRemove);
+		} else if (value.equals("RemoveMultipleTag")) {
+			int listWebElement = this.listWebElement(TagRemove);
+			for (int i = 0; i < listWebElement - 1; i++) {
+				this.mouseActionClick(TagRemove);
+			}
+		}
+		return value;
+	}
+
+	static String ListData;
+
+	public String listData(String value) {
+		if (value.equals("SearchData")) {
+			this.tagValidation(Search, ListData);
+		} else if (value.equals("CustomerRequestNo1")) {
+			ListData = this.getText(RequestNo);
+			return ListData;
+		} else if (value.equals("CustomerLocation")) {
+			ListData = this.getText(SearchLocation);
+			return ListData;
+		} else if (value.equals("CustomerRequestNo2")) {
+			ListData = this.getText(RequestNo2);
+			return ListData;
+		}
+		return value;
+	}
+
+	public void requestStatusCreation() {
+		String text = this.getText(SearchLocation);
+		this.mouseActionClick(Edit);
+		this.valuePresent(Location, text);
+
+	}
+
+	public void clearAllFields(String value) {
+		if (value.equals("Page")) {
+			List<String> asList = Arrays.asList("Location", "Description", "Tittle", "Notes");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearValidation(asList.get(i));
+			}
+		}
+	}
+
+	public String dateFrom() {
+		String currentFilterPickerFromDate = this.currentFilterPickerFromDateFormat();
+		return currentFilterPickerFromDate;
+	}
+
+	public String dateTo() {
+		String currentFilterPickerToDate = this.currentFilterPickerToDateFormat();
+		return currentFilterPickerToDate;
+	}
 }

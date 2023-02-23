@@ -231,20 +231,29 @@ public class Name extends BaseClass {
 //		OnBoardingPage mandatory = new OnBoardingPage(driver);
 //		System.out.println(OnBoardingPage.variable);
 
-		for (int i = 0; i < 10; i++) {
-			Faker faker = new Faker(new Locale("en-IND"));
-			String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
-			value = fakeCompanyName.replaceAll("\\s", "").toLowerCase();
-//			System.out.println(lowerCase);
+//		for (int i = 0; i < 10; i++) {
+//			Faker faker = new Faker(new Locale("en-IND"));
+//			String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
+//			value = fakeCompanyName.replaceAll("\\s", "").toLowerCase();
+////			System.out.println(lowerCase);
+//		}
+//
+//		String val = value;
+//		Properties properties = new Properties();
+//		properties.put("Email", val);
+//		FileOutputStream fo = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
+//		properties.store(fo, "OutPut");
+//
+//		System.out.println(getPropertyValueUpdate("Email"));
+		
+		String input = "Jan-14-2023 | 10:00";
+		for (int i = 0; i < input.length(); i++) {
+			
 		}
-
-		String val = value;
-		Properties properties = new Properties();
-		properties.put("Email", val);
-		FileOutputStream fo = new FileOutputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
-		properties.store(fo, "OutPut");
-
-		System.out.println(getPropertyValueUpdate("Email"));
+		
+		String output = input.substring(0, input.indexOf(" |"));
+		System.out.println(output);
+		
 //		String expectedURL = "https://" + (lowerCase.toLowerCase().replaceAll("\\s", ""))
 //				+ getPropertyValue("DomainURL");
 //

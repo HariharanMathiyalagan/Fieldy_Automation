@@ -185,7 +185,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
-	@FindAll({ @FindBy(xpath = "//*[text()='Customer Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "(//*[@data-goesto='contact-timeline'])[1]"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement Text;
 
 	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
