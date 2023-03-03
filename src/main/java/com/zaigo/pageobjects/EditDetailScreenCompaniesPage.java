@@ -21,6 +21,7 @@ import com.base.BaseClass;
 import com.github.javafaker.Faker;
 import com.github.javafaker.PhoneNumber;
 
+import bsh.This;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class EditDetailScreenCompaniesPage extends BaseClass {
@@ -51,6 +52,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	By Dashboard = By.xpath("//div[@data-menuselector='dashboard-menu']");
 	By Team = By.id("team-menu");
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
+	By Tittle1 = By.xpath("//*[@id='team-company-details-company-name']//div[2]");
 	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
 	By Next = By.xpath("//span[text()='Next']");
 	By CompanyWebsite = By.id("company_website");
@@ -272,17 +274,14 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	}
 
 	public void valuePresent(By element, String value) {
-		wait = new WebDriverWait(driver, 50);
+		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
 	public String editContent() throws InterruptedException {
-		String text = this.getText(Tittle);
+		String text = this.getText(Tittle1);
 		this.clickEdit();
-		this.scrollDown();
-//		Thread.sleep(5000);
-		driver.navigate().refresh();
-		this.valuePresent(CompanyName, text);
+		this.valuePresent(CompanyWebsite, text);
 		this.elementtobeClickable(Next);
 		String text2 = this.getText(Label);
 		return text2;
@@ -360,6 +359,13 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		return until;
 
 	}
+	
+	private String getAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+
+	}
 
 	private void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -419,7 +425,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 			this.clearField(LastName);
 		} else if (value.equals("CompanyWebsite")) {
 			this.clearField(CompanyWebsite);
-		}else if (value.equals("Description")) {
+		} else if (value.equals("Description")) {
 			this.clearField(Description);
 		}
 	}
@@ -435,9 +441,8 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(LastName, characters256);
 		}
-
 	}
-
+	
 	public void companyWebsite(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(CompanyWebsite, characters2048);
@@ -560,7 +565,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		if (value.equals("BasicPage")) {
 			this.inputText(CompanyWebsite, fakeWebsite);
 			this.inputText(FirstName, fakeFirstName);
-			this.inputText(LastName, fakeFirstName);
+			this.inputText(LastName, fakeLastName);
 			this.clickNext();
 		} else if (value.equals("LocationPage")) {
 			this.scrollDown();

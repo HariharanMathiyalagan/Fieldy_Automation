@@ -102,6 +102,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
+	
+	public void invisible(By element) {
+		wait = new WebDriverWait(driver, 100);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	
+	}
 
 	public void assertName(By element, String text) {
 		wait = new WebDriverWait(driver, 50);
@@ -161,12 +167,11 @@ public class CustomerCreateContactPage extends BaseClass {
 		return until;
 	}
 
-
-	@FindAll({ @FindBy(xpath = "//*[text()='Contact Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
-	WebElement ContactName;
-	@FindAll({ @FindBy(xpath = "//*[text()='Customer Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
-	WebElement Text;
+	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Customer Name')]"), @FindBy(xpath = "//*[contains(text(),'No Result Found')]"),
+			@FindBy(xpath = "//*[contains(text(),'Contact Name')]") })
+	WebElement CustomerList;
 	static int parseInt;
+
 
 	public int getCount() {
 		wait = new WebDriverWait(driver, 10);
@@ -181,7 +186,7 @@ public class CustomerCreateContactPage extends BaseClass {
 			int actual = parseInt + 1;
 			return actual;
 		} else if (value == 2) {
-			this.Displayed(ContactName);
+			this.Displayed(CustomerList);
 			String text2 = this.getText(TotalCount);
 			int expected = Integer.parseInt(text2);
 			return expected;
@@ -191,13 +196,16 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	By CustomerContact = By.xpath("//*[@class='page-header-left back-btn']");
+	By CustomerFilter = By.xpath("//*[@gloss='Filter']");
 
 	public String modulePage() throws InterruptedException, IOException {
 		this.assertName(DashBoard, "Company Performance");
 		this.mouseActionClick(Customer);
-		this.Displayed(Text);
+		this.elementtobeClickable(SearchButton);
+		this.visibility(CustomerList);
 		this.mouseActionClick(Contact);
-		this.Displayed(ContactName);
+		this.elementtobeClickable(SearchButton);
+		this.visibility(CustomerList);
 		String text2 = this.getText(CustomerContact);
 		this.getCount();
 		this.mouseActionClick(AddContact);
@@ -285,7 +293,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void visibility(WebElement element) {
 		wait = new WebDriverWait(driver, 50);
-		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+		wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 	}
 
 	public void visibility(By element) {
@@ -726,12 +734,12 @@ public class CustomerCreateContactPage extends BaseClass {
 	public String responseMessage(String value) throws IOException {
 		if (value.equals("CustomerCreate")) {
 			responseMessage = this.getText(Message);
-			this.mouseActionClick(Cancel);
+			this.invisible(Message);
 			return responseMessage;
 		} else if (value.equals("AlternateFunction")) {
 			if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
 				this.mouseActionClick(Contact);
-				this.visibility(ContactName);
+				this.visibility(CustomerList);
 			}
 
 		}

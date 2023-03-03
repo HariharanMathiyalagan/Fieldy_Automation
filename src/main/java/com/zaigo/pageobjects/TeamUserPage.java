@@ -121,6 +121,12 @@ public class TeamUserPage extends BaseClass {
 
 	}
 
+	public void invisible(By element) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+	}
+
 	public void elementClickable(By element) {
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -641,7 +647,7 @@ public class TeamUserPage extends BaseClass {
 	public String responseMessage(String value) throws IOException {
 		if (value.equals("Message")) {
 			listData = this.getText(Message);
-			this.mouseActionClick(Cancel);
+			this.invisible(Message);
 			return listData;
 		} else if (value.equals("AlternateFunction")) {
 			if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))

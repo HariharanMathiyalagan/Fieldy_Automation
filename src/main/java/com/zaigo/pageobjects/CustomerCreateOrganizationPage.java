@@ -94,6 +94,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+	}
+
 	public void assertName(By element, String text) {
 		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
@@ -149,6 +155,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
 	}
+	
+	public void elementtobeClickable(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
 
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Customer = By.id("customer-main");
@@ -185,11 +197,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
-	@FindAll({ @FindBy(xpath = "(//*[@data-goesto='contact-timeline'])[1]"), @FindBy(xpath = "//*[text()='No Result Found']") })
-	WebElement Text;
-
-	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
-	WebElement OrganizationLabelName;
+	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[text()='Customer Name']") })
+	WebElement CustomerList;
 
 //	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
@@ -199,19 +209,19 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String responseMessage(String value) throws IOException {
 		if (value.equals("ResponseMessage")) {
 			response = this.getText(Message);
-			this.mouseActionClick(Cancel);
+			this.invisible(Message);
 			return response;
 		} else if (value.equals("AlternateFunction")) {
-			if (response == getPropertyValue("CompanyAlreadyMessage")
-					|| response == getPropertyValue("CompanyEmailAlreadyMessage")
-					|| response == getPropertyValue("ContactEmailAlreadyMessage")
-					|| response == getPropertyValue("CompanyContact2EmailMessage")
-					|| response == getPropertyValue("CompanyContact3EmailMessage")
-					|| response == getPropertyValue("CompanyEmailContact1Email")
-					|| response == getPropertyValue("CompanyEmailContact2Email")
-					|| response == getPropertyValue("CompanyEmailContact3Email")) {
+			if (response.equals(getPropertyValue("CompanyAlreadyMessage"))
+					|| response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+					|| response.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+					|| response.equals(getPropertyValue("CompanyContact2EmailMessage"))
+					|| response.equals(getPropertyValue("CompanyContact3EmailMessage"))
+					|| response.equals(getPropertyValue("CompanyEmailContact1Email"))
+					|| response.equals(getPropertyValue("CompanyEmailContact2Email"))
+					|| response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
 				this.mouseActionClick(Organization);
-				this.visibility(OrganizationLabelName);
+				this.visibility(CustomerList);
 			}
 		}
 		return value;
@@ -235,19 +245,20 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By CustomerOrganization = By.xpath("//*[@data-goesto='user-contractor-list']");
 
 	public int totalCount() throws InterruptedException {
-		this.visibility(OrganizationLabelName);
+		this.visibility(CustomerList);
 		String text2 = this.getText(TotalCount);
 		int parseInt = Integer.parseInt(text2);
 		return parseInt;
 	}
 
 	public String modulePage() throws InterruptedException, AWTException {
-		this.assertName(Dashboard, "Company Performance");
 		this.mouseActionClick(Customer);
-		this.visibility(Text);
+		this.elementtobeClickable(SearchButton);
+		this.visibility(CustomerList);
 		this.mouseActionClick(Organization);
+		this.elementtobeClickable(SearchButton);
 		String text2 = this.getText(CustomerOrganization);
-		this.visibility(OrganizationLabelName);
+		this.visibility(CustomerList);
 		this.getCount();
 		this.mouseActionClick(AddOrganization);
 		return text2;
@@ -344,7 +355,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		this.inputText(Email, fakeEmail);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		this.mouseActionClick(LeadSource);
 		this.mouseActionClick(Social);
 		this.inputText(PhoneNumber, fakePhoneNumber);
@@ -428,7 +439,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
 	By Apply = By.xpath("//*[@class='col-lg-4 col-md-2 col-sm-2 col-6 pt-2']//*");
-	By SearchButton = By.id("customer-organization-search-enter");
+	@FindAll({ @FindBy(id = "customer-organization-search-enter"), @FindBy(id = "customer-contact-search-button") })
+
+	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 	By ListLead = By.xpath("(//*[@title='Social'])[1]");
 

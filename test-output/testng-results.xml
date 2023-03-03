@@ -1,137 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="29" passed="29" failed="0" skipped="0">
+<testng-results ignored="0" total="20" passed="20" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-23T19:32:14 IST" name="Suite" finished-at="2023-02-23T19:32:59 IST" duration-ms="44798">
+  <suite started-at="2023-03-03T19:04:55 IST" name="Default suite" finished-at="2023-03-03T19:06:58 IST" duration-ms="123118">
     <groups>
     </groups>
-    <test started-at="2023-02-23T19:32:14 IST" name="Test" finished-at="2023-02-23T19:32:59 IST" duration-ms="44798">
-      <class name="org.test.OnBoardingModule">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:14 IST" name="setup" finished-at="2023-02-23T19:32:16 IST" duration-ms="2066" status="PASS">
+    <test started-at="2023-03-03T19:04:55 IST" name="Default test" finished-at="2023-03-03T19:06:58 IST" duration-ms="123118">
+      <class name="org.test.LeadSource">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:04:55 IST" name="setup" finished-at="2023-03-03T19:04:57 IST" duration-ms="2026" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="mandatoryBussinessNameFieldValidation()[pri:0, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:16 IST" name="mandatoryBussinessNameFieldValidation" finished-at="2023-02-23T19:32:23 IST" duration-ms="6734" status="PASS">
+        <test-method signature="loginPage()[pri:0, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:04:57 IST" name="loginPage" finished-at="2023-03-03T19:05:29 IST" duration-ms="31651" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryBussinessNameFieldValidation -->
-        <test-method signature="mandatoryEmailFieldValidation()[pri:1, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:23 IST" name="mandatoryEmailFieldValidation" finished-at="2023-02-23T19:32:24 IST" duration-ms="911" status="PASS">
+        </test-method> <!-- loginPage -->
+        <test-method signature="settingModule()[pri:1, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:29 IST" name="settingModule" finished-at="2023-03-03T19:05:31 IST" duration-ms="1716" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryEmailFieldValidation -->
-        <test-method signature="alreadyBussinessNameValidation()[pri:2, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:24 IST" name="alreadyBussinessNameValidation" finished-at="2023-02-23T19:32:25 IST" duration-ms="904" status="PASS">
+        </test-method> <!-- settingModule -->
+        <test-method signature="leadSourceLabel()[pri:2, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:31 IST" name="leadSourceLabel" finished-at="2023-03-03T19:05:31 IST" duration-ms="125" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- alreadyBussinessNameValidation -->
-        <test-method signature="specialCharacterBussinessNameValidation()[pri:3, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:25 IST" name="specialCharacterBussinessNameValidation" finished-at="2023-02-23T19:32:25 IST" duration-ms="166" status="PASS">
+        </test-method> <!-- leadSourceLabel -->
+        <test-method signature="createFormLabel()[pri:3, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:31 IST" name="createFormLabel" finished-at="2023-03-03T19:05:33 IST" duration-ms="1878" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- specialCharacterBussinessNameValidation -->
-        <test-method signature="maximumValidationBussinessName()[pri:4, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:25 IST" name="maximumValidationBussinessName" finished-at="2023-02-23T19:32:25 IST" duration-ms="484" status="PASS">
+        </test-method> <!-- createFormLabel -->
+        <test-method signature="maximumValidationLeadSource()[pri:4, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:33 IST" name="maximumValidationLeadSource" finished-at="2023-03-03T19:05:36 IST" duration-ms="3419" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationBussinessName -->
-        <test-method signature="maximumValidationBussinessWebSite()[pri:5, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:25 IST" name="maximumValidationBussinessWebSite" finished-at="2023-02-23T19:32:28 IST" duration-ms="2390" status="PASS">
+        </test-method> <!-- maximumValidationLeadSource -->
+        <test-method signature="mandatoryValidation()[pri:5, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:36 IST" name="mandatoryValidation" finished-at="2023-03-03T19:05:36 IST" duration-ms="288" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationBussinessWebSite -->
-        <test-method signature="maximumValidationFirstName()[pri:6, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:28 IST" name="maximumValidationFirstName" finished-at="2023-02-23T19:32:28 IST" duration-ms="558" status="PASS">
+        </test-method> <!-- mandatoryValidation -->
+        <test-method signature="verifySaveButtonExist()[pri:6, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:36 IST" name="verifySaveButtonExist" finished-at="2023-03-03T19:05:37 IST" duration-ms="339" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationFirstName -->
-        <test-method signature="maximumValidationLastName()[pri:7, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:28 IST" name="maximumValidationLastName" finished-at="2023-02-23T19:32:29 IST" duration-ms="584" status="PASS">
+        </test-method> <!-- verifySaveButtonExist -->
+        <test-method signature="leadSourceCreate()[pri:7, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:37 IST" name="leadSourceCreate" finished-at="2023-03-03T19:05:45 IST" duration-ms="8153" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationLastName -->
-        <test-method signature="maximumValidationEmail()[pri:8, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:29 IST" name="maximumValidationEmail" finished-at="2023-02-23T19:32:30 IST" duration-ms="612" status="PASS">
+        </test-method> <!-- leadSourceCreate -->
+        <test-method signature="leadSourceCreateList()[pri:8, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:45 IST" name="leadSourceCreateList" finished-at="2023-03-03T19:05:45 IST" duration-ms="45" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationEmail -->
-        <test-method signature="validateEmailFormat()[pri:9, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:30 IST" name="validateEmailFormat" finished-at="2023-02-23T19:32:30 IST" duration-ms="873" status="PASS">
+        </test-method> <!-- leadSourceCreateList -->
+        <test-method signature="activeStatus()[pri:9, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:45 IST" name="activeStatus" finished-at="2023-03-03T19:05:45 IST" duration-ms="47" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateEmailFormat -->
-        <test-method signature="existingEmailValidation()[pri:10, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:30 IST" name="existingEmailValidation" finished-at="2023-02-23T19:32:32 IST" duration-ms="1419" status="PASS">
+        </test-method> <!-- activeStatus -->
+        <test-method signature="editFormLabel()[pri:10, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:45 IST" name="editFormLabel" finished-at="2023-03-03T19:05:46 IST" duration-ms="1367" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- existingEmailValidation -->
-        <test-method signature="correctValidationEmail()[pri:11, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:32 IST" name="correctValidationEmail" finished-at="2023-02-23T19:32:33 IST" duration-ms="1178" status="PASS">
+        </test-method> <!-- editFormLabel -->
+        <test-method signature="editmaximumValidationLeadSource()[pri:11, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:46 IST" name="editmaximumValidationLeadSource" finished-at="2023-03-03T19:05:50 IST" duration-ms="3614" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- correctValidationEmail -->
-        <test-method signature="validateRadioButtonClickable()[pri:12, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:33 IST" name="validateRadioButtonClickable" finished-at="2023-02-23T19:32:36 IST" duration-ms="3174" status="PASS">
+        </test-method> <!-- editmaximumValidationLeadSource -->
+        <test-method signature="editmandatoryValidation()[pri:12, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:50 IST" name="editmandatoryValidation" finished-at="2023-03-03T19:05:50 IST" duration-ms="177" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateRadioButtonClickable -->
-        <test-method signature="industryTypeFieldPresent()[pri:13, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:36 IST" name="industryTypeFieldPresent" finished-at="2023-02-23T19:32:36 IST" duration-ms="230" status="PASS">
+        </test-method> <!-- editmandatoryValidation -->
+        <test-method signature="verifyUpdateButtonExist()[pri:13, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:50 IST" name="verifyUpdateButtonExist" finished-at="2023-03-03T19:05:51 IST" duration-ms="463" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- industryTypeFieldPresent -->
-        <test-method signature="maximumValidationIndustryField()[pri:14, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:36 IST" name="maximumValidationIndustryField" finished-at="2023-02-23T19:32:37 IST" duration-ms="861" status="PASS">
+        </test-method> <!-- verifyUpdateButtonExist -->
+        <test-method signature="leadSourceUpdate()[pri:14, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:51 IST" name="leadSourceUpdate" finished-at="2023-03-03T19:05:58 IST" duration-ms="7650" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationIndustryField -->
-        <test-method signature="sizeCompanyValidation()[pri:15, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:37 IST" name="sizeCompanyValidation" finished-at="2023-02-23T19:32:38 IST" duration-ms="862" status="PASS">
+        </test-method> <!-- leadSourceUpdate -->
+        <test-method signature="alreadyExists()[pri:15, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:05:58 IST" name="alreadyExists" finished-at="2023-03-03T19:06:00 IST" duration-ms="1566" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- sizeCompanyValidation -->
-        <test-method signature="validationRadioButtonIntrested()[pri:16, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:38 IST" name="validationRadioButtonIntrested" finished-at="2023-02-23T19:32:39 IST" duration-ms="1162" status="PASS">
+        </test-method> <!-- alreadyExists -->
+        <test-method signature="deleteBusinessUnit()[pri:16, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:06:00 IST" name="deleteBusinessUnit" finished-at="2023-03-03T19:06:17 IST" duration-ms="17284" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validationRadioButtonIntrested -->
-        <test-method signature="mandatoryValidationLocation()[pri:17, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:39 IST" name="mandatoryValidationLocation" finished-at="2023-02-23T19:32:40 IST" duration-ms="770" status="PASS">
+        </test-method> <!-- deleteBusinessUnit -->
+        <test-method signature="reflectCreateContactPage()[pri:17, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:06:17 IST" name="reflectCreateContactPage" finished-at="2023-03-03T19:06:38 IST" duration-ms="20775" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationLocation -->
-        <test-method signature="maximumValidationLocation()[pri:18, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:40 IST" name="maximumValidationLocation" finished-at="2023-02-23T19:32:42 IST" duration-ms="1701" status="PASS">
+        </test-method> <!-- reflectCreateContactPage -->
+        <test-method signature="inactiveLeadSource()[pri:18, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:06:38 IST" name="inactiveLeadSource" finished-at="2023-03-03T19:06:53 IST" duration-ms="14819" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- maximumValidationLocation -->
-        <test-method signature="passwordMandatoryField()[pri:19, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:42 IST" name="passwordMandatoryField" finished-at="2023-02-23T19:32:42 IST" duration-ms="269" status="PASS">
+        </test-method> <!-- inactiveLeadSource -->
+        <test-method signature="deleteLeadSource()[pri:19, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:06:53 IST" name="deleteLeadSource" finished-at="2023-03-03T19:06:58 IST" duration-ms="5244" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- passwordMandatoryField -->
-        <test-method signature="minValidationPassword()[pri:20, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:42 IST" name="minValidationPassword" finished-at="2023-02-23T19:32:42 IST" duration-ms="176" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- minValidationPassword -->
-        <test-method signature="minValidationConfirmPassword()[pri:21, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:42 IST" name="minValidationConfirmPassword" finished-at="2023-02-23T19:32:42 IST" duration-ms="175" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- minValidationConfirmPassword -->
-        <test-method signature="passwordFieldConditions()[pri:22, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:42 IST" name="passwordFieldConditions" finished-at="2023-02-23T19:32:43 IST" duration-ms="299" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- passwordFieldConditions -->
-        <test-method signature="confirmPasswordFieldCondition()[pri:23, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:43 IST" name="confirmPasswordFieldCondition" finished-at="2023-02-23T19:32:43 IST" duration-ms="469" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- confirmPasswordFieldCondition -->
-        <test-method signature="lowerCaseValidation()[pri:24, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:43 IST" name="lowerCaseValidation" finished-at="2023-02-23T19:32:44 IST" duration-ms="370" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- lowerCaseValidation -->
-        <test-method signature="mismatchPassword()[pri:25, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:44 IST" name="mismatchPassword" finished-at="2023-02-23T19:32:44 IST" duration-ms="634" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mismatchPassword -->
-        <test-method signature="createTenant()[pri:26, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:44 IST" name="createTenant" finished-at="2023-02-23T19:32:58 IST" duration-ms="14095" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createTenant -->
-        <test-method signature="subDomineURL()[pri:27, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:58 IST" name="subDomineURL" finished-at="2023-02-23T19:32:58 IST" duration-ms="26" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- subDomineURL -->
-        <test-method signature="ownerName()[pri:28, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:58 IST" name="ownerName" finished-at="2023-02-23T19:32:58 IST" duration-ms="54" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- ownerName -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.OnBoardingModule@6e0f5f7f]" started-at="2023-02-23T19:32:58 IST" name="exitBrowser" finished-at="2023-02-23T19:32:59 IST" duration-ms="518" status="PASS">
+        </test-method> <!-- deleteLeadSource -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.LeadSource@54bff557]" started-at="2023-03-03T19:06:58 IST" name="exitBrowser" finished-at="2023-03-03T19:06:58 IST" duration-ms="424" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.OnBoardingModule -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+      </class> <!-- org.test.LeadSource -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

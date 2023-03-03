@@ -145,6 +145,13 @@ public class Name extends BaseClass {
 //	
 //
 //		Faker faker = new Faker(new Locale("en-IND"));
+//		String creditCardExpiry = faker.app().name();
+//		System.out.println(creditCardExpiry);
+		
+		String input = "jerry";
+		String output = input.substring(0, 1).toUpperCase() + input.substring(1);
+System.out.println(output);
+		
 //		String fakeFirstName = faker.name().firstName();
 //		System.out.println("First Name:" + fakeFirstName);
 //		
@@ -245,14 +252,14 @@ public class Name extends BaseClass {
 //		properties.store(fo, "OutPut");
 //
 //		System.out.println(getPropertyValueUpdate("Email"));
-		
-		String input = "Jan-14-2023 | 10:00";
-		for (int i = 0; i < input.length(); i++) {
-			
-		}
-		
-		String output = input.substring(0, input.indexOf(" |"));
-		System.out.println(output);
+//		
+//		String input = "Jan-14-2023 | 10:00";
+//		for (int i = 0; i < input.length(); i++) {
+//			
+//		}
+//		
+//		String output = input.substring(0, input.indexOf(" |"));
+//		System.out.println(output);
 		
 //		String expectedURL = "https://" + (lowerCase.toLowerCase().replaceAll("\\s", ""))
 //				+ getPropertyValue("DomainURL");

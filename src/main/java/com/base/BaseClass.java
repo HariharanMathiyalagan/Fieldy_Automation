@@ -96,13 +96,6 @@ public class BaseClass {
 		WebElement findElement = driver.findElement(By.xpath(Xpath));
 		return findElement;
 	}
-
-	public void inputText(WebElement element, String value) {
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(value);
-//		element.sendKeys(value);s
-	}
-
 	public static void Click(WebElement element) {
 		element.click();
 	}
@@ -265,5 +258,7 @@ public class BaseClass {
 		return format;
 
 	}
+	
+	
 
 }

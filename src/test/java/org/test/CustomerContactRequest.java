@@ -125,7 +125,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 3)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify Create Job page is opened from Contacts-> Request -> Create Request");
+				.createTest("Verify Create Request page is opened from Contacts-> Request -> Create Request");
 		RequestPage jobPage = PageFactory.initElements(driver, RequestPage.class);
 		customerContactRequestListPage = jobPage.customerContactRequestListPage();
 		String jobLandPage = jobPage.requestLandPage();
@@ -387,7 +387,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 15)
 	private void createButton() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
-				"Verify the Customer Create Request page Schedule Job Button is displayed in the Create form page");
+				"Verify the Customer Create Request page Schedule Request Button is displayed in the Create form page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.fromDateTimeScheduleRequest();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -430,13 +430,13 @@ public class CustomerContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 17)
-	private void jobCreatedCount() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Customer Contact Job Count is added in the Total Job Count");
+	private void requestCreatedCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Contact Request Count is added in the Total Request Count");
 		RequestPage create = PageFactory.initElements(driver, RequestPage.class);
 		int actualTotal = create.countValidation(1);
 		int expectedResult = create.countValidation(2);
-		extentTest.log(Status.INFO, "Actual Result - Total Job Count is:" + actualTotal);
-		extentTest.log(Status.INFO, "Expected Result - Total Job Count is:" + expectedResult);
+		extentTest.log(Status.INFO, "Actual Result - Total Request Count is:" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result - Total Request Count is:" + expectedResult);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actualTotal == expectedResult) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -454,7 +454,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 18)
 	private void requestUnassignedStatus() throws WebDriverException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job No:(" + customerContactRequestListPage + ") is in the Unassigned Status");
+				.createTest("Verify the Location No:(" + customerContactRequestListPage + ") is in the Unassigned Status");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.requestStatus();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -718,7 +718,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 29)
 	private void updateButton() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
-				"Verify the Customer Create Request page Update Job Button is displayed in the Create form page");
+				"Verify the Customer Create Request page Update Request Button is displayed in the Create form page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.editRequests();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -808,7 +808,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 33)
 	private void requestDispatchedStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job No:(" + customerContactRequestListPage + ") is in the Dispatch Status");
+				.createTest("Verify the Request No:(" + customerContactRequestListPage + ") is in the Dispatch Status");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.requestStatus();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -851,7 +851,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 35)
 	private void requestStartedStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job No:(" + customerContactRequestListPage + ") is in the Active Status");
+				.createTest("Verify the Request No:(" + customerContactRequestListPage + ") is in the Active Status");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.requestStatus();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -894,7 +894,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 37)
 	private void jobCompleteStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job No:(" + customerContactRequestListPage + ") is in the Completed Status");
+				.createTest("Verify the Request No:(" + customerContactRequestListPage + ") is in the Completed Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.requestStatus();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -937,7 +937,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 39)
 	private void requestCancelledStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job No:(" + customerContactRequestListPage + ") is in the Cancelled Status");
+				.createTest("Verify the Request No:(" + customerContactRequestListPage + ") is in the Cancelled Status");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.cancelRequestStatus();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1003,8 +1003,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 42)
 	private void searchRequestNo() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Enter the Job No:(" + customerContactRequestListPage
-				+ ") in the Search field & Job list retrived successfully");
+		extentTest = extentReports.createTest("Enter the Request No:(" + customerContactRequestListPage
+				+ ") in the Search field & Request list retrived successfully");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.searchRequestNo();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1032,8 +1032,8 @@ public class CustomerContactRequest extends BaseClass {
 
 	@Test(priority = 43)
 	private void searchLocation() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Enter the Job Location:(" + customerContactRequestListPage
-				+ ") in the Search field & Job list retrived successfully");
+		extentTest = extentReports.createTest("Enter the Request Location:(" + customerContactRequestListPage
+				+ ") in the Search field & Request list retrived successfully");
 		RequestPage mandatory = new RequestPage(driver);
 		String errorPasswordField = mandatory.searchLocation();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1061,7 +1061,7 @@ public class CustomerContactRequest extends BaseClass {
 	@Test(priority = 44)
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest("Verify the Job List filter by From date:" + dateFrom + " & To date:" + dateTo);
+				.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.filterByDate();
 		String validateListFromDate = mandatory.validateListFromDate();

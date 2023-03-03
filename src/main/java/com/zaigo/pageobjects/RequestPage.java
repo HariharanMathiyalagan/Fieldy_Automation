@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +61,11 @@ public class RequestPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
+	private void inputText(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+	}
+
 	private void clearField(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
@@ -78,6 +84,13 @@ public class RequestPage extends BaseClass {
 	private void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 20);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
+	private void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 20);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
@@ -315,9 +328,49 @@ public class RequestPage extends BaseClass {
 
 	By CustomerName = By.id("customer-name");
 	@FindAll({ @FindBy(xpath = "//*[@id='request-create']//*[@id='customer-name-input-field']"),
-			@FindBy(xpath = "//*[@class='col-lg-12 mt-3 switchcontact d-block']//*[@id='id_user_customer']"),
 			@FindBy(xpath = "//*[@class='min-hight-600  bg-white p-2']//*[@id='id_customer_group']") })
 	WebElement CustomerField;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='id_user_customer']") })
+	WebElement SubCustomerField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__first_name__0']") })
+	WebElement FirstNameField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='last_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__last_name__0']") })
+	WebElement LastNameField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='email']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__email__0']") })
+	WebElement EmailField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='phones__number__0']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__phone__0']") })
+	WebElement PhoneNumber;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_1']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_1__0']") })
+	WebElement Address1Field;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_2']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_2__0']") })
+	WebElement Address2Field;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='city']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__city__0']") })
+	WebElement CityField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='state']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__state__0']") })
+	WebElement StateField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='zipcode']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__zipcode__0']") })
+	WebElement ZipcodeField;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+	WebElement SaveButton;
+
+	@FindAll({
+			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
+	WebElement AddCustomer;
 
 	static int parseInt;
 
@@ -393,7 +446,6 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void maxValidationLocationField() throws InterruptedException, IOException {
-		Thread.sleep(2000);
 		this.validationTab(Location, getPropertyValue("2048Characters"));
 	}
 
@@ -559,9 +611,10 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void customerContactRequest() throws InterruptedException {
-		Thread.sleep(2000);
+		this.visibility(JobList);
 		this.mouseActionClick(CreateContactRequest);
-		Thread.sleep(2000);
+		this.customerName("DetailScreenCustomerName");
+		this.customerName("PlaceHolderName");
 
 	}
 
@@ -582,10 +635,7 @@ public class RequestPage extends BaseClass {
 		this.currentPickerToDate();
 		this.inputText(StartTime, "10.00");
 		this.inputText(EndTime, "18.00");
-		Thread.sleep(5000);
 		this.scrollDown();
-		this.mouseActionClick(Crew);
-		this.mouseActionClick(Single);
 		this.assertName(TechnicianLabel, "Technician");
 		this.mouseActionClick(Technician);
 		this.mouseActionClick(TechnicianSecoundName);
@@ -739,24 +789,56 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void customerOrganizationRequestListPage() throws InterruptedException {
+	public String customerOrganizationRequestListPage() throws InterruptedException {
 		String text = this.getText(OrganizationListName);
 		this.mouseActionClick(OrganizationListName);
 		this.assertName(OrganizationListName, text);
 		this.mouseActionClick(ClickOrganizationRequest);
+		String customerName2 = this.customerName("DetailScreenCustomerName");
 		this.assertName(CreateOrganizationRequest, "Create Request");
+		this.visibility(JobList);
+		this.getCount();
 		this.mouseActionClick(CreateOrganizationRequest);
+		return customerName2;
 	}
 
-	public void organizationContactCreate() {
-		this.inputText(OrgContactName, fakeFirstName);
-		this.mouseActionClick(OrgContactAdd);
-		this.inputText(OrganizationFirstName, fakeFirstName);
-		this.inputText(OrganizationLastName, fakeLastName);
-//		this.inputText(OrganizationEmail, fakeEmail);
-		this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
-		this.inputText(OrganizationRequestTittle, fakeTittle);
-		this.mouseActionClick(OrganizationContactSave);
+	static String ContactFirstName;
+	static String ContactLastName;
+
+	public void autoComplete(String value) {
+		if (value.equals("OrganizationContactCreate")) {
+			this.inputText(SubCustomerField, fakeFirstName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(FirstNameField, fakeFirstName);
+			ContactFirstName = this.getTextAttribute(FirstNameField);
+			this.inputText(LastNameField, fakeLastName);
+			ContactLastName = this.getTextAttribute(LastNameField);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(OrganizationRequestTittle, fakeTittle);
+			this.mouseActionClick(SaveButton);
+		} else if (value.equals("GlobalContactCreate")) {
+			this.inputText(CustomerField, fakeFirstName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(FirstNameField, fakeFirstName);
+			this.inputText(LastNameField, fakeLastName);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(Address1Field, fakeAddress1);
+			this.inputText(Address2Field, fakeAddress2);
+			this.inputText(CityField, fakeCity);
+			this.inputText(StateField, fakeState);
+			this.inputText(ZipcodeField, fakeZipcode);
+			this.mouseActionClick(SaveButton);
+		} else if (value.equals("GlobalOrganizationCreate")) {
+
+		} else if (value.equals("VisibleName")) {
+			this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName);
+		} else if (value.equals("OrgVisibleName")) {
+			this.valuePresent(CustomerField, ContactFirstName);
+		} else if (value.equals("ContactVisibleName")) {
+			this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName);
+		}
 	}
 
 	public String responseMessageCreateContact() {
@@ -766,15 +848,17 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void customerOrganizationRequest() throws InterruptedException {
-		Thread.sleep(2000);
+		this.visibility(JobList);
+		this.customerName("DetailScreenCustomerName");
 		this.mouseActionClick(CreateOrganizationRequest);
-		Thread.sleep(2000);
+		this.customerName("PlaceHolderName");
 
 	}
 
 	public void draftRequest1() throws IOException, InterruptedException {
+		this.customerName("DetailScreenCustomerName");
 		this.mouseActionClick(CreateOrganizationRequest);
-		Thread.sleep(5000);
+		this.customerName("PlaceHolderName");
 		this.mouseActionClick(Back);
 		this.mouseActionClick(Yes);
 		this.assertName(RequestDraftedMessage, "Request drafted");
@@ -819,18 +903,29 @@ public class RequestPage extends BaseClass {
 
 	}
 
-	public void module() throws InterruptedException {
+	@FindAll({ @FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement Name;
+
+	public String module() throws InterruptedException {
 		this.assertName(AssertDashboard, "Company Performance");
 		this.mouseActionClick(Request);
-		this.assertName(ListCustomer, "Customer");
+		this.visibility(Name);
+		String text = this.getText(Label);
 		this.mouseActionClick(CreateGlobalRequest);
+		return text;
+
+	}
+
+	public String labelValidation() {
+		String text = this.getText(Label1);
+		return text;
 
 	}
 
 	public void mandatoryContactField() throws InterruptedException {
-		this.assertName(Label1, "Create Request");
-		Thread.sleep(5000);
-		this.mouseActionClick(SaveComplete);
+		for (int i = 0; i < 5; i++) {
+			this.mouseActionClick(SaveComplete);
+		}
 
 	}
 
@@ -1072,4 +1167,53 @@ public class RequestPage extends BaseClass {
 		String currentFilterPickerToDate = this.currentFilterPickerToDateFormat();
 		return currentFilterPickerToDate;
 	}
+
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By Cancel1 = By.xpath("//*[@class='js-snackbar__close bold']");
+	static String responseMessage;
+
+	public String message(String value) throws IOException {
+		if (value.equals("Message")) {
+			responseMessage = this.getText(Message);
+			this.mouseActionClick(Cancel1);
+			return responseMessage;
+		} else if (value.equals("AlternateFunction")) {
+			if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+				this.clearField(Email);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(Email, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+				this.clearField(OrganizationName);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeCompanyName = faker.company().name();
+				this.inputText(OrganizationName, fakeCompanyName);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+				this.clearField(OrgEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrgEmail, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+					&& responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+				this.clearField(OrganizationName);
+				this.clearField(OrgEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeCompanyName = faker.company().name();
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrganizationName, fakeCompanyName);
+				this.inputText(OrgEmail, fakeEmail);
+				this.mouseActionClick(Save);
+			} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+				this.clearField(OrganizationEmail);
+				Faker faker = new Faker(new Locale("en-IND"));
+				String fakeEmail = faker.internet().safeEmailAddress();
+				this.inputText(OrganizationEmail, fakeEmail);
+			}
+		}
+		return value;
+	}
+
 }

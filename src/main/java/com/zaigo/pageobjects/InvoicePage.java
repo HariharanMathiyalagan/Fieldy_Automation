@@ -141,6 +141,12 @@ public class InvoicePage extends BaseClass {
 		return until;
 	}
 
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+	}
+
 	private String getText(WebElement element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
@@ -458,7 +464,7 @@ public class InvoicePage extends BaseClass {
 		} else if (value.equals("GlobalContactInvoice")) {
 			this.assertName(Dashboard, "Company Performance");
 			this.mouseActionClick(Invoice);
-			this.assertName(InvoiceLable, "Invoice No");
+			this.visibility(StartInvalid);
 			this.mouseActionClick(CreateGlobalInvoice);
 			this.clearFields("Quantity");
 			this.clearFields("Price");
@@ -513,7 +519,7 @@ public class InvoicePage extends BaseClass {
 			int a = parseInt + 1;
 			return a;
 		} else if (value == 2) {
-			this.assertName(InvoiceLable, "Invoice No");
+			this.visibility(StartInvalid);
 			String text2 = this.getText(TotalCount);
 			int parseInt = Integer.parseInt(text2);
 			return parseInt;
@@ -848,16 +854,19 @@ public class InvoicePage extends BaseClass {
 	public String responseMessage(String value) throws IOException {
 		if (value.equals("Create")) {
 			String text = this.getText(CreatedMesssage);
+			this.invisible(CreatedMesssage);
 			return text;
 		} else if (value.equals("Update")) {
 			String text = this.getText(UpdatedMessage);
+			this.invisible(CreatedMesssage);
 			return text;
 		} else if (value.equals("ListUpdate")) {
 			String text = this.getText(ListUpdateMessage);
+			this.invisible(CreatedMesssage);
 			return text;
 		} else if (value.equals("CustomerCreateMessage")) {
 			response = this.getText(ContactCreateMessage);
-//			System.out.println(response);
+			this.invisible(CreatedMesssage);
 			return response;
 		} else if (value.equals("AlternateFunction")) {
 			if (response.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
@@ -1006,7 +1015,6 @@ public class InvoicePage extends BaseClass {
 			OrgName = this.getTextAttribute(OrganizationName);
 			this.inputText(OrgPhoneNumber, fakePhoneNumber);
 			this.inputText(OrgEmail, fakeEmail);
-//			this.inputText(OrgEmail, "fieldy@mailinator.com");
 			this.inputText(Website, fakeWebsite);
 			this.inputText(OrgAddress1, fakeAddress1);
 			this.inputText(OrgAddress2, fakeAddress2);
