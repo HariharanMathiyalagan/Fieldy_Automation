@@ -3,6 +3,7 @@ package org.test;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -21,6 +22,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
+import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
 import com.zaigo.utility.BrowserSetup;
@@ -76,10 +78,22 @@ public class CustomerContactQuote extends BaseClass {
 
 	@Test(priority = 0)
 	private void contactModule() throws InterruptedException, IOException {
-		extentTest = extentReports
-				.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
-		CustomerCreateContactPage module = PageFactory.initElements(driver, CustomerCreateContactPage.class);
-		module.modulePage();
+		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
+		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String editContact = initElements.modulePage();
+		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerContactList"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (editContact.equals(getPropertyValue("CustomerContactList"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("ContactList.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("ContactList.png");
+		}
 
 	}
 
@@ -106,17 +120,15 @@ public class CustomerContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}
 
-
 	@Test(priority = 2)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Request Page");
-		QuotePage jobPage = new QuotePage(driver);
-		customerContactName = jobPage.customerQuoteListPage("CustomerContact");
+		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
+		customerContactName = jobPage.customerQuoteListPage("Customer");
 		String jobLandPage = jobPage.quoteLandPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageQuoteLabel"));
@@ -137,7 +149,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void namePrepopulation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Customer Contact Name:" + customerContactName
 				+ " is prepopulated in the Contact Name Field");
-		QuotePage jobPage = new QuotePage(driver);
+		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
 		String customerName = jobPage.customerName("PlaceHolderName");
 		extentTest.log(Status.INFO, "Actual Result is -" + customerContactName);
 		extentTest.log(Status.INFO, "Expected Result is -" + customerName);
@@ -158,7 +170,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void mandatoryValidationExpiryDate() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Expiry Date field is set as Mandatory & Error Message is displayed when it is BLANK");
-		QuotePage mandatoryValidation = new QuotePage(driver);
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		mandatoryValidation.clearFields("Quantity");
 		mandatoryValidation.clearFields("Price");
 		mandatoryValidation.saveFunction();
@@ -182,7 +194,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void mandatoryValidationInventoryItem() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Inventory Item field is set as Mandatory & Error Message is displayed when it is BLANK");
-		QuotePage mandatoryValidation = new QuotePage(driver);
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorInventoryItem");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -203,7 +215,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void mandatoryValidationQunatity() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Quantity field is set as Mandatory & Error Message is displayed when it is BLANK");
-		QuotePage mandatoryValidation = new QuotePage(driver);
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorQuantity");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -224,7 +236,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void mandatoryValidationPrice() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Price field is set as Mandatory & Error Message is displayed when it is BLANK");
-		QuotePage mandatoryValidation = new QuotePage(driver);
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorPrice");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -245,7 +257,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void mandatoryValidationDescription() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Price field is set as Mandatory & Error Message is displayed when it is BLANK");
-		QuotePage mandatoryValidation = new QuotePage(driver);
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorDescription");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -266,10 +278,10 @@ public class CustomerContactQuote extends BaseClass {
 	private void maximumValidationReference() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Reference Field exceed its max-256 limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.pickFirstItem("Contact");
 		mandatory.validationQuantity("Value");
-		mandatory.maxValidationReference();
+		mandatory.referenceField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max16CharacterValidation"));
@@ -293,8 +305,8 @@ public class CustomerContactQuote extends BaseClass {
 	private void maximumValidationQuoteTittle() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quote Tittle Field exceed its max-256 limit");
-		QuotePage mandatory = new QuotePage(driver);
-		mandatory.maxValidationQuoteTittle();
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.tittleField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuoteTittle");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
@@ -318,8 +330,8 @@ public class CustomerContactQuote extends BaseClass {
 	private void maximumValidationInventoryItem() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Inventory Item Field exceed its max-256 limit");
-		QuotePage mandatory = new QuotePage(driver);
-		mandatory.maxInventoryItem();
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.inventoryItemField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorInventoryItem");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
@@ -343,7 +355,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void emptyValidationQuantityField() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field is enter the negative value");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.clearFields("Quantity");
 		mandatory.validationQuantity("EmptyValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
@@ -369,7 +381,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void maxQuanitityLimit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.validationQuantity("MaxQuantity");
 		mandatory.priceValidation("value");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
@@ -395,7 +407,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void afterDecimalPointValidationQuantityField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Quantity Field exceed its max-2 after decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.validationQuantity("AfterDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -420,7 +432,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void beforeDecimalPointValidationQuantityField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Quantity Field exceed its max-12 before decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.validationQuantity("BeforeDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -447,7 +459,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void emptyValidationPriceField() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Price Field is enter the negative value");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.clearFields("Price");
 		mandatory.priceValidation("EmptyValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
@@ -473,7 +485,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void maxPriceLimit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Price Field exceed its max-6 Limts");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.priceValidation("MaxPrice");
 		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -498,7 +510,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void beforeDecimalPointPriceField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Quantity Field exceed its max-6 before decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.priceValidation("BeforeDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -523,7 +535,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void afterDecimalPointPriceField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Quantity Field exceed its max-2 after decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.priceValidation("AfterDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -551,7 +563,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void afterDecimalPointDiscountField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Discout Field exceed its max-2 after decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.discountValidation("AfterDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -576,7 +588,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void beforeDecimalPointDiscountField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Discount Field exceed its max-3 before decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.discountValidation("BeforeDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -601,7 +613,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void maxLimitDiscountField() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Discount Field exceed its max-100 Limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.discountValidation("MaxDiscount");
 		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -627,7 +639,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void afterDecimalPointTaxField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Tax Field exceed its max-2 after decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.taxValidation("AfterDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorTax");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -652,7 +664,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void beforeDecimalPointTaxField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Tax Field exceed its max-3 before decimal point limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.taxValidation("BeforeDecimalPoint");
 		String errorPasswordField = mandatory.errorValidation("ErrorTax");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -677,7 +689,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void maxLimitTaxField() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Tax Field exceed its max-100 Limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.taxValidation("MaxTax");
 		String errorPasswordField = mandatory.errorValidation("ErrorTax");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -705,7 +717,7 @@ public class CustomerContactQuote extends BaseClass {
 	private void maximumValidationDescription() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Description field exceed its max-256 limit");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.descriptionValidation("MaxCharacter");
 		String errorPasswordField = mandatory.errorValidation("ErrorDescription");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -734,8 +746,8 @@ public class CustomerContactQuote extends BaseClass {
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Note field exceed its max-2048 limit");
-		QuotePage mandatory = new QuotePage(driver);
-		mandatory.maxNotes();
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.notesField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorNotes");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
@@ -756,10 +768,10 @@ public class CustomerContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 27)
-	private void expiryFieldPastDateValidation() throws IOException, InterruptedException {
+	private void expiryFieldPastDateValidation() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
 		String errorPasswordField = mandatory.errorValidation("PastDateError");
@@ -785,7 +797,7 @@ public class CustomerContactQuote extends BaseClass {
 	@Test(priority = 28)
 	private void validateCalculation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify to check the Line item calculation");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		String amount = mandatory.inventoryItemValidation("Calculation");
 		String inventoryItemValidation = mandatory.inventoryItemValidation("ExpectedAmount");
 		extentTest.log(Status.INFO, "Actual Result is -" + amount);
@@ -806,12 +818,12 @@ public class CustomerContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 29)
-	private void createQuote() throws IOException, InterruptedException {
+	private void createQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Quote is created successfully from Customer Contact->Create Quote");
-		QuotePage mandatory = new QuotePage(driver);
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.CRUDValidation("Create");
-		String errorPasswordField = mandatory.responseMessage("Create");
+		String errorPasswordField = mandatory.message("message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -827,11 +839,11 @@ public class CustomerContactQuote extends BaseClass {
 		}
 	}
 
-	@Test(priority = 29)
+	@Test(priority = 30)
 	private void quoteCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Contact Quote Count is added in the Total Quote Count");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		int actualTotal = create.countValidation(1);
 		int expectedResult = create.countValidation(2);
 		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
@@ -850,18 +862,19 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 
-	@Test(priority = 29)
-	private void quoteEdit() throws IOException, InterruptedException {
+	@Test(priority = 31)
+	private void quoteEdit() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
-				.createTest("Verify Quote is updated successfully from Customer Contact->Update Quote");
-		QuotePage create = new QuotePage(driver);
+				.createTest("Verify the User to Land on the Edit Quote Page");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("Edit");
-		String responseMessage = create.responseMessage("Update");
+		String responseMessage = create.quoteLandPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UpdatedMessage"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageQuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (responseMessage.equals(getPropertyValue("UpdatedMessage"))) {
+		if (responseMessage.equals(getPropertyValue("EditPageQuoteLabel"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.clearAllFields();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -869,15 +882,689 @@ public class CustomerContactQuote extends BaseClass {
 			File file = new File("QupteCountValidate.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("QupteCountValidate.png");
+			create.clearAllFields();
+		}
+
+	}
+	
+	@Test(priority = 32)
+	private void editmandatoryValidationExpiryDate() throws AWTException, IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Expiry Date field is set as Mandatory & Error Message is displayed when it is BLANK");
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
+		mandatoryValidation.clearFields("Quantity");
+		mandatoryValidation.clearFields("Price");
+		mandatoryValidation.saveFunction();
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorExpiryDate");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteExpiryDateMandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteExpiryDateMandatory.png");
+		}
+	}
+
+//	@Test(priority = 33)
+	private void editmandatoryValidationInventoryItem() throws AWTException, IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Inventory Item field is set as Mandatory & Error Message is displayed when it is BLANK");
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorInventoryItem");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteInventoryItemMandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteInventoryItemMandatory.png");
+		}
+	}
+
+	@Test(priority = 34)
+	private void editmandatoryValidationQunatity() throws AWTException, IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Quantity field is set as Mandatory & Error Message is displayed when it is BLANK");
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorQuantity");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteQuantityMandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteQuantityMandatory.png");
+		}
+	}
+
+	@Test(priority = 35)
+	private void editmandatoryValidationPrice() throws AWTException, IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Price field is set as Mandatory & Error Message is displayed when it is BLANK");
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorPrice");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuotePriceMandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuotePriceMandatory.png");
+		}
+	}
+
+	@Test(priority = 36)
+	private void editmandatoryValidationDescription() throws AWTException, IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Price field is set as Mandatory & Error Message is displayed when it is BLANK");
+		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorDescription");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactDescriptionMandatory.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
+		}
+	}
+
+	@Test(priority = 37)
+	private void editmaximumValidationReference() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Reference Field exceed its max-256 limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.pickFirstItem("Contact");
+		mandatory.validationQuantity("Value");
+		mandatory.referenceField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorReference");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max16CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max16CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Reference");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteReferenceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteReferenceMaximumValidation.png");
+			mandatory.clearFields("Reference");
 		}
 
 	}
 
-	@Test(priority = 30)
+	@Test(priority = 38)
+	private void editmaximumValidationQuoteTittle() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Quote Tittle Field exceed its max-256 limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.tittleField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorQuoteTittle");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("QuoteTittle");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteTittleMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteTittleMaximumValidation.png");
+			mandatory.clearFields("QuoteTittle");
+		}
+
+	}
+
+	@Test(priority = 39)
+	private void editmaximumValidationInventoryItem() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Inventory Item Field exceed its max-256 limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.inventoryItemField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorInventoryItem");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Inventory");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteInventoryMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteInventoryMaximumValidation.png");
+			mandatory.clearFields("Inventory");
+		}
+
+	}
+
+	@Test(priority = 40)
+	private void editemptyValidationQuantityField() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Quantity Field is enter the negative value");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.clearFields("Quantity");
+		mandatory.validationQuantity("EmptyValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EmptyField"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("EmptyField"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Quantity");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteQuantityEmptyValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteQuantityEmptyValidation.png");
+			mandatory.clearFields("Quantity");
+		}
+
+	}
+
+	@Test(priority = 41)
+	private void editmaxQuanitityLimit() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.validationQuantity("MaxQuantity");
+		mandatory.priceValidation("value");
+		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max12CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max12CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Quantity");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteQuantityMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteQuantityMaximumValidation.png");
+			mandatory.clearFields("Quantity");
+		}
+
+	}
+
+	@Test(priority = 42)
+	private void editafterDecimalPointValidationQuantityField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Quantity Field exceed its max-2 after decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.validationQuantity("AfterDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Quantity");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteQuantityDeciamlPointValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteQuantityDeciamlPointValidation.png");
+			mandatory.clearFields("Quantity");
+		}
+
+	}
+
+	@Test(priority = 43)
+	private void editbeforeDecimalPointValidationQuantityField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Quantity Field exceed its max-12 before decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.validationQuantity("BeforeDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("QuantityBeforeDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("QuantityBeforeDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Quantity");
+			mandatory.validationQuantity("Value");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteQuantityBeforeDeciamlPointValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteQuantityBeforeDeciamlPointValidation.png");
+			mandatory.clearFields("Quantity");
+			mandatory.validationQuantity("Value");
+		}
+
+	}
+
+	@Test(priority = 44)
+	private void editemptyValidationPriceField() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Price Field is enter the negative value");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.clearFields("Price");
+		mandatory.priceValidation("EmptyValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("PriceEmptyField"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("PriceEmptyField"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Price");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuotePriceNegativeValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuotePriceNegativeValidation.png");
+			mandatory.clearFields("Price");
+		}
+
+	}
+
+	@Test(priority = 45)
+	private void editmaxPriceLimit() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Price Field exceed its max-6 Limts");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.priceValidation("MaxPrice");
+		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max6CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max6CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Price");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuotePriceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuotePriceMaximumValidation.png");
+			mandatory.clearFields("Price");
+		}
+
+	}
+
+	@Test(priority = 46)
+	private void editbeforeDecimalPointPriceField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Quantity Field exceed its max-6 before decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.priceValidation("BeforeDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BeforeDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("BeforeDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Price");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteBeforePriceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteBeforePriceMaximumValidation.png");
+			mandatory.clearFields("Price");
+		}
+
+	}
+
+	@Test(priority = 47)
+	private void editafterDecimalPointPriceField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Quantity Field exceed its max-2 after decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.priceValidation("AfterDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorPrice");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Price");
+			mandatory.priceValidation("value");
+
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteAfterPriceDecimalPointsValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAfterPriceDecimalPointsValidation.png");
+			mandatory.clearFields("Price");
+			mandatory.priceValidation("value");
+		}
+
+	}
+
+	@Test(priority = 48)
+	private void editafterDecimalPointDiscountField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Discout Field exceed its max-2 after decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.discountValidation("AfterDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Discount");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteAfterDecimalPointValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAfterDecimalPointValidation.png");
+			mandatory.clearFields("Discount");
+		}
+
+	}
+
+	@Test(priority = 49)
+	private void editbeforeDecimalPointDiscountField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Discount Field exceed its max-3 before decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.discountValidation("BeforeDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DisTaxBeforeDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("DisTaxBeforeDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Discount");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteBeforeDiscountDecimalValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteBeforeDiscountDecimalValidation.png");
+			mandatory.clearFields("Discount");
+		}
+
+	}
+
+	@Test(priority = 50)
+	private void editmaxLimitDiscountField() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Discount Field exceed its max-100 Limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.discountValidation("MaxDiscount");
+		String errorPasswordField = mandatory.errorValidation("ErrorDiscount");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DiscountLimit"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("DiscountLimit"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Discount");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteDiscoutnMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDiscoutnMaximumValidation.png");
+			mandatory.clearFields("Discount");
+			mandatory.discountValidation("value");
+		}
+
+	}
+
+	@Test(priority = 51)
+	private void editafterDecimalPointTaxField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Tax Field exceed its max-2 after decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.taxValidation("AfterDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Tax");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
+			mandatory.clearFields("Tax");
+		}
+
+	}
+
+	@Test(priority = 52)
+	private void editbeforeDecimalPointTaxField() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when Tax Field exceed its max-3 before decimal point limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.taxValidation("BeforeDecimalPoint");
+		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DisTaxBeforeDecimalPoint"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("DisTaxBeforeDecimalPoint"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Tax");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteBeforeTaxDecimalValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteBeforeTaxDecimalValidation.png");
+			mandatory.clearFields("Tax");
+		}
+
+	}
+
+	@Test(priority = 53)
+	private void editmaxLimitTaxField() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Tax Field exceed its max-100 Limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.taxValidation("MaxTax");
+		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TaxLimit"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("TaxLimit"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Tax");
+			mandatory.taxValidation("value");
+
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteTaxMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteTaxMaximumValidation.png");
+			mandatory.clearFields("Tax");
+			mandatory.taxValidation("value");
+		}
+
+	}
+
+	@Test(priority = 54)
+	private void editmaximumValidationDescription() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Description field exceed its max-256 limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.descriptionValidation("MaxCharacter");
+		String errorPasswordField = mandatory.errorValidation("ErrorDescription");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Description");
+			mandatory.descriptionValidation("value");
+			mandatory.pickFirstItem("Contact");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteDescriptionMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDescriptionMaximumValidation.png");
+			mandatory.clearFields("Description");
+			mandatory.descriptionValidation("value");
+			mandatory.pickFirstItem("Contact");
+		}
+
+	}
+
+	@Test(priority = 55)
+	private void editmaximumValidationNotes() throws IOException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Note field exceed its max-2048 limit");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.notesField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("ErrorNotes");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Notes");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteNotesMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteNotesMaximumValidation.png");
+			mandatory.clearFields("Notes");
+		}
+
+	}
+
+	@Test(priority = 56)
+	private void editexpiryFieldPastDateValidation() throws IOException, InterruptedException, ParseException {
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.dateValidation("PastDate");
+		currentDate = mandatory.dateValidation("CurrentDateError");
+		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO,
+				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals("The doc expiry date must be a date after or equal to " + currentDate + ".")) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Expiry");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuotePastDateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuotePastDateValidation.png");
+			mandatory.clearFields("Expiry");
+		}
+
+	}
+
+	@Test(priority = 57)
+	private void editvalidateCalculation() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify to check the Line item calculation");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		String amount = mandatory.inventoryItemValidation("Calculation");
+		String inventoryItemValidation = mandatory.inventoryItemValidation("ExpectedAmount");
+		extentTest.log(Status.INFO, "Actual Result is -" + amount);
+		extentTest.log(Status.INFO, "Expected Result is -" + inventoryItemValidation);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (amount.equals(inventoryItemValidation)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearFields("Expiry");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteAmountValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAmountValidation.png");
+			mandatory.clearFields("Expiry");
+		}
+	}
+	
+	@Test(priority = 58)
+	private void updateQuote() throws IOException, InterruptedException, ParseException {
+		extentTest = extentReports
+				.createTest("Verify Quote is updated successfully from Customer Contact->Edit Quote");
+		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.CRUDValidation("Create");
+		String errorPasswordField = mandatory.message("message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UpdatedMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("UpdatedMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteCreation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+		}
+	}
+
+	@Test(priority = 59)
 	private void createdQuoteStatus() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify to Created Quote Status is Open, It's is displayed in the Quote List Page");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		String responseMessage = create.listTextValidation("ListStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Open"));
@@ -895,10 +1582,10 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 
-	@Test(priority = 31)
-	private void draftQuote() throws IOException, InterruptedException {
+	@Test(priority = 60)
+	private void draftQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Quote has been draft status");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("Draft");
 		String responseMessage = create.listTextValidation("ListStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -917,10 +1604,10 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 
-	@Test(priority = 32)
-	private void convertQuote() throws IOException, InterruptedException {
+	@Test(priority = 61)
+	private void convertQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Quote has been Convert status");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("DraftEdit");
 		String responseMessage = create.listTextValidation("ListStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -941,10 +1628,10 @@ public class CustomerContactQuote extends BaseClass {
 
 	static String QuoteListData;
 
-	@Test(priority = 33)
-	private void declinedStatus() throws IOException, InterruptedException {
+	@Test(priority = 62)
+	private void declinedStatus() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Quote has been Declined status");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("CreateDeclined");
 		String responseMessage = create.listTextValidation("ListStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -952,6 +1639,7 @@ public class CustomerContactQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessage.equals(getPropertyValue("Declined"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.visible();
 			QuoteListData = create.listTextValidation("QuoteNo");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -960,18 +1648,18 @@ public class CustomerContactQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteDeclinedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDeclinedStatus.png");
+			create.visible();
 			QuoteListData = create.listTextValidation("QuoteNo");
 		}
 
 	}
 
-	@Test(priority = 34)
+	@Test(priority = 63)
 	private void listQuoteNo() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Enter the Quote No:" + QuoteListData + "in the Search field & Quote list retrived successfully");
-		QuotePage create = new QuotePage(driver);
-		create.listTextValidation("QuoteNo");
-		create.listTextValidation("SearchQuoteNo");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("QuoteNo");
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
@@ -993,13 +1681,12 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 
-	@Test(priority = 34)
+	@Test(priority = 64)
 	private void listQuoteTittle() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Enter the Quote Tittle:" + QuoteListData + " in the Search field & Quote list retrived successfully");
-		QuotePage create = new QuotePage(driver);
-		create.listTextValidation("Tittle");
-		create.listTextValidation("SearchQuoteTittle");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("Tittle");
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
@@ -1021,13 +1708,12 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 
-	@Test(priority = 35)
-	private void listQuoteReference() throws IOException, InterruptedException {
+	@Test(priority = 65)
+	private void listQuoteReference() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Enter the Quote Reference:" + QuoteListData
 				+ " in the Search field & Quote list retrived successfully");
-		QuotePage create = new QuotePage(driver);
-		create.listTextValidation("Reference");
-		create.listTextValidation("SearchQuoteReference");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("Reference");
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
@@ -1035,6 +1721,7 @@ public class CustomerContactQuote extends BaseClass {
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.clearFields("Search");
+			QuoteListData = create.dateValidation("ListCreateDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1043,15 +1730,38 @@ public class CustomerContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteReferenceValidation.png");
 			create.clearFields("Search");
+			QuoteListData = create.dateValidation("ListCreateDate");
+		}
+
+	}
+	
+	@Test(priority = 66)
+	private void filterDateInvoice() throws IOException, InterruptedException, ParseException {
+		extentTest = extentReports.createTest("Verify the Invoice Due Date List filter by Due From Date:" + QuoteListData);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.dateValidation("Convertion");
+		String dateValidation = create.dateValidation("ListCreateDate");
+		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
+		extentTest.log(Status.INFO, "Expected Result is -" + dateValidation);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (QuoteListData.equals(dateValidation)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactInvoiceListDueDateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceListDueDateValidation.png");
 		}
 
 	}
 
-	@Test(priority = 36)
+	@Test(priority = 67)
 	private void listInvalid() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
-		QuotePage create = new QuotePage(driver);
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.listTextValidation("Invalid");
 		String actual = create.listTextValidation("InvalidList");
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);

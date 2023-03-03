@@ -11,24 +11,24 @@
 			<class name="org.test.TeamCompaniesDetailScreen" />
 			
 			<class name="org.test.TeamCompanyContractor" />
-			
+
 			<class name="org.test.TeamUser" />
-			
+
 			<class name="org.test.TeamUserContractor" />
 			
 			<class name="org.test.TeamSendInvite" />
 
-			<!--class name="org.test.CustomerCreateContactModule" />
+			<class name="org.test.CustomerCreateContactModule" />
 
-			<class name="org.test.CustomerCreateOrganizationModule" /-->
+			<class name="org.test.CustomerCreateOrganizationModule" />
 
-			<!--class name="org.test.CustomerContactJob" />
+			<class name="org.test.CustomerContactJob" />
 
-			<class name="org.test.CustomerOrganizationJob" /-->
+			<class name="org.test.CustomerOrganizationJob" />
 
-			<!--class name="org.test.GlobalContactJob" /-->
+			<class name="org.test.GlobalContactJob" />
 
-			<!--class name="org.test.GlobalOrganizationJob" />
+			<class name="org.test.GlobalOrganizationJob" />
 
 			<class name="org.test.CustomerContactRequest" />
 
@@ -37,7 +37,7 @@
 			<class name="org.test.GlobalContactRequest" />
 
 			<class name="org.test.GlobalOrganizationRequest" />
-			
+
 			<class name="org.test.CustomerContactQuote" />
 
 			<class name="org.test.CustomerOrganizationQuote" />
@@ -45,14 +45,20 @@
 			<class name="org.test.GlobalContactQuote" />
 
 			<class name="org.test.GlobalOrganizationQuote" />
-			
+
 			<class name="org.test.CustomerContactInvoice" />
 
 			<class name="org.test.CustomerOrganizationInvoice" />
 			
 			<class name="org.test.GlobalContactInvoice" />
 			
-			<class name="org.test.GlobalOrganizationInvoice" /-->
+			<class name="org.test.GlobalOrganizationInvoice" />
+
+			<class name="org.test.BusinessUnit" />
+
+			<class name="org.test.LeadSource" />
+
+			<class name="org.test.ServiceType" />
 
 
 		</classes>

@@ -1,9 +1,15 @@
 package com.zaigo.pageobjects;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.xml.xpath.XPath;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -12,6 +18,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -59,20 +67,58 @@ public class QuotePage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
+	private void inputText(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+	}
+
 	private void clearField(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
 	}
 
+	private void clearField(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(element)).clear();
+	}
+
+	public void invisible(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+
+	}
+
+	public void visibility(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
+	}
+
+	public void visibility(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+	}
+
 	private void clickButton(By element) {
 		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).click();
 
 	}
 
 	private void mouseActionClick(By element) {
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 50);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
+	private void elementClickable(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+
+	private void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 20);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
@@ -106,6 +152,12 @@ public class QuotePage extends BaseClass {
 		return until;
 	}
 
+	private String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
+	}
+
 	private void mouseAction(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -128,18 +180,44 @@ public class QuotePage extends BaseClass {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
+	public void valuePresent(WebElement element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	}
+
 	public String getTextAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
 		return until;
 	}
 
-	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
-	By ClickContactQuote = By.xpath("//*[@data-detailheadermenu='cstmr-contact-quote']");
-	By CreateContactQuote = By.xpath("//*[@data-automationid='customer-contact-quote-create']");
-	By CreateQuoteLabel = By.xpath("(//*[@data-draftback='quotedraft'])[1]");
+	public String getTextAttribute(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getAttribute("value");
+		return until;
+	}
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']//tr[2]//td[2]//span"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[2]//span") })
+	WebElement CustomerListName;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-details-hide']//ul//li[4]"),
+			@FindBy(xpath = "//*[@id='customer-nav-menu-company']//ul//li[4]") })
+	WebElement ClickTabQuote;
+
+	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-organization-quote-create']"),
+			@FindBy(xpath = "//*[@data-automationid='customer-contact-quote-create']"),
+			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[3]//button") })
+	WebElement CreateButton;
+
+	@FindAll({ @FindBy(xpath = "//a[@data-draftback='quotedraft']"),
+			@FindBy(xpath = "//a[@data-exitpopup='customer_contact_quote__all__status']"),
+			@FindBy(xpath = "//a[@data-exitpopup='customer_organization_quote__all__status']"),
+			@FindBy(xpath = "//*[@data-menuselector='quotes-menu']"),
+			@FindBy(xpath = "//*[@id='quote-contact-edit']//header//div//div//div//a") })
+	WebElement CreateQuoteLabel;
+
 	By CustomerName = By.id("customer-name");
-	By ContactName = By.id("customer-name-input-field");
 	By Reference = By.id("reference_no");
 	By ExpiryDate = By.id("expiry_date");
 	By QuoteStatus = By.id("quote_status");
@@ -161,9 +239,7 @@ public class QuotePage extends BaseClass {
 	By Notes = By.id("notes");
 	By Preview = By.xpath("//*[@data-automationid=\"quote-perview\"]");
 	By Save = By.id("quotedrop");
-	By Send = By.xpath(
-			"//*[@class='d-flex justify-content-end bd-highlight mt-2 modal-footer-fixed']//child::*[@class='btn btn-bg-blue font-14 w-100 pr-2 pl-2']");
-	By GlobalSend = By.xpath("//*[@class='dropzoneform btn btn-bg-blue font-14 w-100 pr-2 pl-2']");
+	By Send = By.xpath("//*[contains(text(),'Send')]");
 	By ErrorReference = By.id("reference_no_error");
 	By ErrorExpiryDate = By.id("expiry_date_error");
 	By ErrorQuoteTittle = By.id("doc_title_error");
@@ -175,164 +251,207 @@ public class QuotePage extends BaseClass {
 	By ErrorTax = By.id("items__tax__0_error");
 	By ErrorDescription = By.id("items__description__0_error");
 	By ErrorNotes = By.id("notes_error");
-	By QuoteCreatedMessage = By.xpath("//*[text()='Quote created successfully']");
-	By QuoteUpdatedMessage = By.xpath("//*[text()='Quote updated successfully']");
 	By Yes = By.xpath("//*[text()='Yes']");
-	By ListQuoteNo = By.xpath("(//*[@class='p-2 pt-3 pb-3'])[1]");
-	By ListTittle = By.xpath("(//*[@class='p-2 pt-3 pb-3'])[2]");
-	By ListReference = By.xpath("(//*[@class='p-2 pt-3 pb-3'])[3]");
-	By GlobalListReference = By.xpath("(//*[@class='p-2 pt-1 pb-1 '])[1]");
-	By GlobalListQuoteNo = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[1]");
-	By GlobalListTittle = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[2]");
-	By GlobalListCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[3]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
+	WebElement ListQuoteNo;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[2]") })
+	WebElement ListTittle;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[3]") })
+	WebElement ListReference;
+
+	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]");
 	By TotalCount = By.id("total-quote-count");
 	By InventoryFirstItem = By.xpath("(//*[@class='p-2 list-hover-bg quote-inventory-unit w-20-ellipsis w-100'])[1]");
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
-	By ResponseMessage = By.xpath("//*[@class='js-snackbar__message']");
-	By CreatedMesssage = By.xpath("//*[text()='Quote created successfully']");
-	By UpdatedMessage = By.xpath("//*[text()='Quote updated successfully']");
-	By ListUpdateMessage = By.xpath("//*[text()='Quote status updated successfully']");
-	By Invalid = By.xpath("//*[text()='No Result Found']");
+//	By Invalid = By.xpath("//*[text()='No Result Found']");
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No.']") })
+	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
-	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
-	By Edit = By.xpath("(//*[@data-n-linkto='customer_contact_quote_edit'])[1]");
-	By GlobalEdit = By.xpath("(//*[@data-n-linkto='quote_edit'])[1]");
-	By EditOrg = By.xpath("(//*[@data-n-linkto='customer_organization_quote_edit'])[1]");
-	By ListQuoteStatus = By.xpath("(//*[@class='p-2 pt-3 pb-3'])[8]");
-	By GlobalListQuoteStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[8]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]") })
+	WebElement ThreeDots;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//ul//li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//ul//li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//ul//li[2]") })
+	WebElement Edit;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[8]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[8]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[9]") })
+	WebElement ListQuoteStatus;
+
 	By Search = By.id("quote-search-filter");
+	By SearchButton = By.id("quote-enter-search");
 	By Update = By.xpath("//*[text()='Update']");
 	By UpdateOrg = By.xpath("//*[@data-list-namme='customer-organization-quote']");
 	By ChooseStatus = By.xpath("//*[@class='floating-input field-input']");
-	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
-	By ClickOrganizationQuote = By.xpath("//*[@data-menuswitcher='cstmr-organization-quote']");
-	By CreateOrganizationQuote = By.xpath("//*[@data-automationid='customer-organization-quote-create']");
-	By OrgContactName = By.id("id_customer");
-	By OrgContactAdd = By.xpath("//*[@class='add_new_btn3 btn-30 btn btn-bg-blue pr-2 pl-2']");
-	By OrganizationFirstName = By.id("contacts__first_name__0");
-	By OrganizationLastName = By.id("contacts__last_name__0");
-	By OrganizationEmail = By.id("contacts__email__0");
-	By OrganizationPhoneNumber = By.id("contacts__phone__0");
-	By OrganizationJobTittle = By.id("contacts__job_title__0");
-	By OrganizationContactSave = By.id("organization-contact-create");
-	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
 	By Quote = By.id("quote-menu");
-	By CreateGlobalQuote = By.xpath("//*[@data-formsactions='create']");
-	By GlobalCustomerName = By.id("id_customer_group");
 	By RadioOrganization = By.id("organization");
 	By RadioContact = By.id("contact");
 	By ErrorCustomerName = By.id("id_customer_group_error");
-	By ContactFirstName = By.id("first_name");
-	By ContactLastName = By.id("last_name");
-	By Email = By.id("email");
-	By Phone = By.id("phones__number__0");
-	By Address1 = By.id("addresses__line_1__0");
-	By Address2 = By.id("addresses__line_2__0");
-	By StateName = By.id("addresses__state__0");
-	By CityName = By.id("addresses__city__0");
-	By Zipcode = By.id("addresses__zipcode__0");
-	By SaveContact = By.id("contact-create");
-	By Add = By.xpath("//*[@class='add_new_btn btn-30 btn btn-bg-blue pr-2 pl-2 ']");
-	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn-30 btn btn-bg-blue pr-2 pl-2']");
-	By QutePreview = By.xpath("//*[text()='Quote Preview']");
-	By Close = By.xpath("//*[@data-automationid='contact-cancel']");
 	By OrganizationName = By.id("company_name");
-	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[3]");
-	By OrgAddress1 = By.id("line_1");
-	By OrgAddress2 = By.id("line_2");
-	By OrgCity = By.id("city");
-	By OrgState = By.id("state");
-	By OrgZipcode = By.id("zipcode");
-	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
 	By Website = By.xpath("(//*[@id='website'])[1]");
-	By SaveOrg = By.id("organization-create");
+	By OrganizationJobTittle = By.id("contacts__job_title__0");
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel1 = By.xpath("//*[@class='js-snackbar__close bold']");
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__first_name__0']") })
+	WebElement FirstNameField;
 
-	static String FirstName;
-	static String LastName;
-	static String OrgName;
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='last_name']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__last_name__0']") })
+	WebElement LastNameField;
 
-	public void autoCompleteCreation(String value) {
-		if (value.equals("CustomerOrganizationContact")) {
-			this.inputText(OrgContactName, fakeFirstName);
-			this.mouseActionClick(OrgContactAdd);
-			this.inputText(OrganizationFirstName, fakeFirstName);
-			FirstName = this.getTextAttribute(OrganizationFirstName);
-			this.inputText(OrganizationLastName, fakeLastName);
-			LastName = this.getTextAttribute(OrganizationLastName);
-			this.inputText(OrganizationEmail, fakeEmail);
-			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='email']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__email__0']") })
+	WebElement EmailField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='phones__number__0']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__phone__0']") })
+	WebElement PhoneNumber;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_1']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_1__0']") })
+	WebElement Address1Field;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='line_2']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__line_2__0']") })
+	WebElement Address2Field;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='city']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__city__0']") })
+	WebElement CityField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='state']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__state__0']") })
+	WebElement StateField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='zipcode']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='addresses__zipcode__0']") })
+	WebElement ZipcodeField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+	WebElement SaveButton;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='quote-contact-create']//*[@id='customer-name-input-field']"),
+			@FindBy(xpath = "//*[@id='quote-contact-create']//*[@id='id_customer_group']") })
+	WebElement CustomerField;
+
+	@FindAll({ @FindBy(xpath = "//*[@class='col-lg-12 switchcontact d-block']//*[@id='id_customer']") })
+	WebElement SubCustomerField;
+
+	@FindAll({
+			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
+			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
+	WebElement AddCustomer;
+	By SubCustomerListField = By.xpath("//*[@id='contactdropdownlist3']//child::div[1]//div[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='contactdropdownlist2']//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='contactdropdownlist']//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[text()=' No Data Found!']") })
+	WebElement CustomerListField;
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-quote-list']//div[1]//div[4]//button[1]//div"),
+			@FindBy(xpath = "//*[@id='qoute-show-details-timeline']//div[1]//div[4]//button[1]//div"),
+			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[2]//button[1]//div") })
+	WebElement Filter;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']//tr[2]//td[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']//tr[2]//td[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]") })
+	WebElement ListDate;
+
+	By CreateFrom = By.id("quote-from-date-filter");
+	By CreateTo = By.id("quote-to-date-filter");
+
+	static String ContactFirstName;
+	static String ContactLastName;
+
+	public void autoCompleteField(String value) throws InterruptedException {
+		if (value.equals("OrganizationContactCreate")) {
+			this.inputText(SubCustomerField, fakeFirstName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(FirstNameField, fakeFirstName);
+			ContactFirstName = this.getTextAttribute(FirstNameField);
+			this.inputText(LastNameField, fakeLastName);
+			ContactLastName = this.getTextAttribute(LastNameField);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
 			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(OrganizationContactSave);
+			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			this.valuePresent(OrgContactName, FirstName + " " + LastName);
-		} else if (value.equals("VisibleCustomerName")) {
-			this.valuePresent(GlobalCustomerName, FirstName + " " + LastName);
-		} else if (value.equals("VisibleCustomerOrgName")) {
-			this.valuePresent(GlobalCustomerName, OrgName);
-		} else if (value.equals("GlobalContact")) {
-			this.inputText(GlobalCustomerName, fakeFirstName);
-			this.mouseActionClick(Add);
-			this.inputText(ContactFirstName, fakeFirstName);
-			FirstName = this.getTextAttribute(ContactFirstName);
-			this.inputText(ContactLastName, fakeLastName);
-			LastName = this.getTextAttribute(ContactLastName);
-			this.inputText(Email, fakeEmail);
-			this.inputText(Phone, fakePhoneNumber);
-			this.inputText(Address1, fakeAddress1);
-			this.inputText(Address2, fakeAddress2);
-			this.inputText(CityName, fakeCity);
-			this.inputText(StateName, fakeState);
-			this.inputText(Zipcode, fakeZipcode);
-			this.mouseActionClick(SaveContact);
-		} else if (value.equals("GlobalOrganization")) {
-			this.inputText(GlobalCustomerName, fakeCompanyName);
-			this.mouseActionClick(OrgAdd);
+			this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName);
+		} else if (value.equals("GlobalContactVisibleName")) {
+			this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName);
+		} else if (value.equals("OrgVisibleName")) {
+			this.valuePresent(CustomerField, ContactFirstName);
+		} else if (value.equals("ContactCreate")) {
+			this.inputText(CustomerField, fakeFirstName);
+			this.mouseActionClick(AddCustomer);
+			this.inputText(FirstNameField, fakeFirstName);
+			ContactFirstName = this.getTextAttribute(FirstNameField);
+			this.inputText(LastNameField, fakeLastName);
+			ContactLastName = this.getTextAttribute(LastNameField);
+			this.inputText(EmailField, fakeEmail);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(Address1Field, fakeAddress1);
+			this.inputText(Address2Field, fakeAddress2);
+			this.inputText(CityField, fakeCity);
+			this.inputText(StateField, fakeState);
+			this.inputText(ZipcodeField, fakeZipcode);
+			this.mouseActionClick(SaveButton);
+		} else if (value.equals("OrganizationCreate")) {
+			this.inputText(CustomerField, fakeCompanyName);
+			this.mouseActionClick(AddCustomer);
 			this.inputText(OrganizationName, fakeCompanyName);
-			OrgName = this.getTextAttribute(OrganizationName);
-			this.inputText(OrgPhoneNumber, fakePhoneNumber);
-			this.inputText(OrgEmail, fakeEmail);
+			ContactFirstName = this.getTextAttribute(OrganizationName);
+			this.inputText(PhoneNumber, fakePhoneNumber);
+			this.inputText(EmailField, fakeEmail);
 			this.inputText(Website, fakeWebsite);
-			this.inputText(OrgAddress1, fakeAddress1);
-			this.inputText(OrgAddress2, fakeAddress2);
-			this.inputText(OrgCity, fakeCity);
-			this.inputText(OrgState, fakeState);
-			this.inputText(OrgZipcode, fakeZipcode);
-			this.mouseActionClick(SaveOrg);
+			this.inputText(Address1Field, fakeAddress1);
+			this.inputText(Address2Field, fakeAddress2);
+			this.inputText(CityField, fakeCity);
+			this.inputText(StateField, fakeState);
+			this.inputText(ZipcodeField, fakeZipcode);
+			this.mouseActionClick(SaveButton);
 		}
-
 	}
 
+	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='Contact Name']") })
+	WebElement ListLabelName;
+
 	public String customerQuoteListPage(String value) throws InterruptedException {
-		if (value.equals("CustomerContact")) {
-			String text = this.getText(ContactListName);
-			this.mouseActionClick(ContactListName);
-			this.assertName(ContactListName, text);
-			this.mouseActionClick(ClickContactQuote);
+		if (value.equals("Customer")) {
+			this.visibility(ListLabelName);
+			String text = this.getText(CustomerListName);
+			this.mouseActionClick(CustomerListName);
+			this.assertName(CustomerName, text);
+			this.mouseActionClick(ClickTabQuote);
 			String contactName = this.customerName("DetailScreenCustomerName");
 			this.getCount();
-			this.assertName(CreateContactQuote, "Create Quote");
-			this.mouseActionClick(CreateContactQuote);
+			this.visibility(CreateButton);
+			this.mouseActionClick(CreateButton);
 			return contactName;
-		} else if (value.equals("CustomerOrganzation")) {
-			String text = this.getText(OrganizationListName);
-			this.mouseActionClick(OrganizationListName);
-			this.assertName(OrganizationListName, text);
-			this.mouseActionClick(ClickOrganizationQuote);
-			String organizationName = this.customerName("DetailScreenCustomerName");
-			this.getCount();
-			this.assertName(CreateOrganizationQuote, "Create Quote");
-			this.mouseActionClick(CreateOrganizationQuote);
-			return organizationName;
-		} else if (value.equals("GlobalContactQuote")) {
-			this.assertName(Dashboard, "Company Performance");
+		} else if (value.equals("GlobalQuote")) {
 			this.mouseActionClick(Quote);
-			this.assertName(QuoteLable, "Quotes No.");
-			this.mouseActionClick(CreateGlobalQuote);
+			this.visibility(Invalid);
+			String quoteLandPage = this.quoteLandPage();
+			this.mouseActionClick(CreateButton);
 			this.clearFields("Quantity");
 			this.clearFields("Price");
+			return quoteLandPage;
 		} else if (value.equals("ContactAPI")) {
 			for (int i = 0; i < 3; i++) {
 				this.mouseActionClick(RadioOrganization);
@@ -385,7 +504,7 @@ public class QuotePage extends BaseClass {
 
 	static String currentDate;
 
-	public String dateValidation(String value) throws InterruptedException {
+	public String dateValidation(String value) throws InterruptedException, ParseException {
 		if (value.equals("FutureDate")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			Calendar cal = Calendar.getInstance();
@@ -400,8 +519,8 @@ public class QuotePage extends BaseClass {
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
 			return currentDate;
-		}else if (value.equals("CurrentDateError")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		} else if (value.equals("CurrentDateError")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
@@ -412,17 +531,33 @@ public class QuotePage extends BaseClass {
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
 			this.inputText(ExpiryDate, pastDate);
-			this.mouseActionClick(Send);
+			this.mouseActionClick(Save);
 		} else if (value.equals("GlobalPastDate")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
 			this.inputText(ExpiryDate, pastDate);
-			this.mouseActionClick(GlobalSend);
+			this.mouseActionClick(Send);
+		} else if (value.equals("Convertion")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyyy");
+			Date parse = sdf.parse(text);
+			sdf = new SimpleDateFormat("MM/dd/yyyy");
+			String format = sdf.format(parse);
+			this.mouseActionClick(Filter);
+			this.inputText(CreateFrom, format);
+			this.inputText(CreateTo, format);
+			this.mouseActionClick(Apply);
+		} else if (value.equals("ListCreateDate")) {
+			text = this.getText(ListDate);
+			return text;
 		}
 		return value;
 	}
+
+	By Apply = By.xpath("//*[contains(text(),'Apply')]");
+
+	static String text;
 
 	public String errorValidation(String value) {
 		if (value.equals("ErrorReference")) {
@@ -459,8 +594,6 @@ public class QuotePage extends BaseClass {
 			String text = this.getText(ErrorNotes);
 			return text;
 		} else if (value.equals("PastDateError")) {
-//			By ErrorPastDate = By
-//					.xpath("//*[text()='The doc expiry date must be a date after or equal to " + currentDate + ".']");
 			String text = this.getText(Message);
 			this.mouseActionClick(Cancel1);
 			return text;
@@ -471,16 +604,23 @@ public class QuotePage extends BaseClass {
 		return value;
 	}
 
-	public void maxValidationReference() {
-		this.validationTab(Reference, characters16);
+	public void referenceField(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Reference, characters16);
+		}
 	}
 
-	public void maxValidationQuoteTittle() {
-		this.validationTab(QuoteTittle, characters256);
+	public void tittleField(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(QuoteTittle, characters256);
+		}
+
 	}
 
-	public void maxInventoryItem() throws IOException, InterruptedException {
-		this.validationTab(InventoryItem, getPropertyValue("256Characters"));
+	public void inventoryItemField(String value) throws IOException, InterruptedException {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(InventoryItem, getPropertyValue("256Characters"));
+		}
 
 	}
 
@@ -492,7 +632,7 @@ public class QuotePage extends BaseClass {
 		} else if (value.equals("AfterDecimalPoint")) {
 			this.validationTab(Quantity, "4564.5445664");
 		} else if (value.equals("Value")) {
-			this.inputText(Quantity, QuantityValue);
+			this.inputText(Quantity, "10");
 		} else if (value.equals("BeforeDecimalPoint")) {
 			this.validationTab(Quantity, "231231231231231231231.00000000");
 		}
@@ -548,8 +688,11 @@ public class QuotePage extends BaseClass {
 		}
 	}
 
-	public void maxNotes() {
-		this.validationTab(Notes, characters2048);
+	public void notesField(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(Notes, characters2048);
+		}
+
 	}
 
 	public void saveFunction() throws InterruptedException {
@@ -582,8 +725,8 @@ public class QuotePage extends BaseClass {
 			getName = this.getText(CustomerName);
 			return getName;
 		} else if (value.equals("PlaceHolderName")) {
-			this.valuePresent(ContactName, getName);
-			String textAttribute = this.getTextAttribute(ContactName);
+			this.valuePresent(CustomerField, getName);
+			String textAttribute = this.getTextAttribute(CustomerField);
 			return textAttribute;
 		}
 		return value;
@@ -609,65 +752,83 @@ public class QuotePage extends BaseClass {
 		return value;
 	}
 
-	public String responseMessage(String value) {
-		if (value.equals("Create")) {
-			String text = this.getText(CreatedMesssage);
-			return text;
-		} else if (value.equals("Update")) {
-			String text = this.getText(UpdatedMessage);
-			return text;
-		} else if (value.equals("ListUpdate")) {
-			String text = this.getText(ListUpdateMessage);
-			return text;
-		} else if (value.equals("CreateContact")) {
-			String text = this.getText(ContactCreateMessage);
-			return text;
+	static String responseMessage;
+	static String messageCheck;
+
+	public String message(String value) throws IOException {
+		Boolean conditionCheck = true;
+		if (value.equals("message")) {
+			responseMessage = this.getText(Message);
+			this.invisible(Message);
+			return responseMessage;
+		} else if (value.equals("AlternateFunction")) {
+			do {
+				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+					this.clearField(EmailField);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(EmailField, fakeEmail);
+					this.mouseActionClick(SaveButton);
+					messageCheck = this.getText(Message);
+				} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+					this.clearField(OrganizationName);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeCompanyName = faker.company().name();
+					this.inputText(OrganizationName, fakeCompanyName);
+					this.mouseActionClick(SaveButton);
+					messageCheck = this.getText(Message);
+				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+					this.clearField(EmailField);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(EmailField, fakeEmail);
+					this.mouseActionClick(SaveButton);
+					messageCheck = this.getText(Message);
+				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+						&& responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+					this.clearField(OrganizationName);
+					this.clearField(EmailField);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeCompanyName = faker.company().name();
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(OrganizationName, fakeCompanyName);
+					this.inputText(EmailField, fakeEmail);
+					this.mouseActionClick(SaveButton);
+				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+					this.clearField(EmailField);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(EmailField, fakeEmail);
+					messageCheck = this.getText(Message);
+				}
+				if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					conditionCheck = false;
+				}
+			} while (conditionCheck);
 		}
 		return value;
-
 	}
 
-	static String SearchQuoteNo;
-	static String SearchQuoteTittle;
-	static String SearchQuoteReference;
-	static String SearchQuoteCustomer;
+	static String searchData;
 
 	public String listTextValidation(String value) {
 		if (value.equals("ListStatus")) {
 			String text = this.getText(ListQuoteStatus);
 			return text;
-		} else if (value.equals("GlobalListStatus")) {
-			String text = this.getText(GlobalListQuoteStatus);
-			return text;
 		} else if (value.equals("QuoteNo")) {
-			SearchQuoteNo = this.getText(ListQuoteNo);
-			return SearchQuoteNo;
+			searchData = this.getText(ListQuoteNo);
+			return searchData;
 		} else if (value.equals("Tittle")) {
-			SearchQuoteTittle = this.getText(ListTittle);
-			return SearchQuoteTittle;
+			searchData = this.getText(ListTittle);
+			return searchData;
 		} else if (value.equals("Reference")) {
-			SearchQuoteReference = this.getText(ListReference);
-			return SearchQuoteReference;
-		} else if (value.equals("GlobalQuoteNo")) {
-			SearchQuoteNo = this.getText(GlobalListQuoteNo);
-			return SearchQuoteNo;
-		} else if (value.equals("GlobalTittle")) {
-			SearchQuoteTittle = this.getText(GlobalListTittle);
-			return SearchQuoteTittle;
-		} else if (value.equals("GlobalReference")) {
-			SearchQuoteReference = this.getText(GlobalListReference);
-			return SearchQuoteReference;
+			searchData = this.getText(ListReference);
+			return searchData;
 		} else if (value.equals("GlobalCustomerName")) {
-			SearchQuoteCustomer = this.getText(GlobalListCustomerName);
-			return SearchQuoteCustomer;
-		} else if (value.equals("SearchQuoteNo")) {
-			this.tagValidation(Search, SearchQuoteNo);
-		} else if (value.equals("SearchQuoteTittle")) {
-			this.tagValidation(Search, SearchQuoteTittle);
-		} else if (value.equals("SearchQuoteReference")) {
-			this.tagValidation(Search, SearchQuoteReference);
-		} else if (value.equals("SearchCustomerName")) {
-			this.tagValidation(Search, SearchQuoteCustomer);
+			searchData = this.getText(GlobalListCustomerName);
+			return searchData;
+		} else if (value.equals("SearchData")) {
+			this.tagValidation(Search, searchData);
 		} else if (value.equals("Invalid")) {
 			this.tagValidation(Search, "sdfsfsdfsfs");
 		} else if (value.equals("InvalidList")) {
@@ -680,7 +841,7 @@ public class QuotePage extends BaseClass {
 	static int parseInt;
 
 	public int getCount() {
-		this.assertName(Invalid, "No Result Found");
+		this.visibility(Invalid);
 		wait = new WebDriverWait(driver, 10);
 		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
 		parseInt = Integer.parseInt(text2);
@@ -700,7 +861,7 @@ public class QuotePage extends BaseClass {
 		return value;
 	}
 
-	public void CRUDValidation(String value) throws InterruptedException, IOException {
+	public void CRUDValidation(String value) throws InterruptedException, IOException, ParseException {
 		if (value.equals("Create")) {
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
@@ -714,55 +875,33 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.valuePresent(Reference, text);
-			this.dropDownByIndex(QuoteStatus, 1);
-			this.clearField(Reference);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(Save);
-		} else if (value.equals("GlobalEdit")) {
-			String text = this.getText(GlobalListReference);
-			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(GlobalEdit);
-			this.valuePresent(Reference, text);
-			this.dropDownByIndex(QuoteStatus, 1);
-			this.clearField(Reference);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(Save);
-		} else if (value.equals("EditOrg")) {
-			String text = this.getText(ListReference);
-			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(EditOrg);
-			this.valuePresent(Reference, text);
-			this.dropDownByIndex(QuoteStatus, 1);
-			this.clearField(Reference);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(Save);
 		} else if (value.equals("DraftOrg")) {
 			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateOrganizationQuote);
-			this.valuePresent(ContactName, text);
+			this.mouseActionClick(CreateButton);
+			this.valuePresent(CustomerField, text);
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("Draft")) {
 			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateContactQuote);
-			this.valuePresent(ContactName, text);
+			this.mouseActionClick(CreateButton);
+			this.valuePresent(CustomerField, text);
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("CilckCreateQuote")) {
-			this.mouseActionClick(CreateGlobalQuote);
+			this.mouseActionClick(CreateButton);
 		} else if (value.equals("ClickOrgRadio")) {
 			this.mouseActionClick(RadioOrganization);
 		} else if (value.equals("GlobalContactDraft")) {
-			this.autoCompleteCreation("GlobalContact");
-			this.autoCompleteCreation("VisibleCustomerName");
+			this.autoCompleteField("ContactCreate");
+			this.autoCompleteField("GlobalContactVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("GlobalOrgDraft")) {
-			this.autoCompleteCreation("GlobalOrganization");
-			this.autoCompleteCreation("VisibleCustomerOrgName");
+			this.autoCompleteField("OrganizationCreate");
+			this.autoCompleteField("OrgVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
@@ -780,14 +919,14 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
-			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
+			this.message("message");
 			this.mouseActionClick(ListQuoteStatus);
 			this.mouseActionClick(Update);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
 		} else if (value.equals("GlobalDraftEdit")) {
-			String text = this.getText(GlobalListReference);
+			String text = this.getText(ListReference);
 			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(GlobalEdit);
+			this.mouseActionClick(Edit);
 			this.valuePresent(Reference, text);
 			this.clearFields("Reference");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
@@ -798,14 +937,14 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
-			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
-			this.mouseActionClick(GlobalListQuoteStatus);
+			this.message("message");
+			this.mouseActionClick(ListQuoteStatus);
 			this.mouseActionClick(Update);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
 		} else if (value.equals("DraftEditOrg")) {
 			String text = this.getText(ListReference);
 			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(EditOrg);
+			this.mouseActionClick(Edit);
 			this.valuePresent(Reference, text);
 			this.clearFields("Reference");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
@@ -816,13 +955,13 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
-			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
+			this.message("message");
 			this.mouseActionClick(ListQuoteStatus);
 			this.mouseActionClick(UpdateOrg);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
 		} else if (value.equals("GlobalCreateDeclined")) {
-			this.autoCompleteCreation("GlobalContact");
-			this.autoCompleteCreation("VisibleCustomerName");
+			this.autoCompleteField("ContactCreate");
+			this.autoCompleteField("GlobalContactVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
 			this.inputText(QuoteTittle, fakeTittle);
@@ -831,13 +970,14 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
-			this.mouseActionClick(GlobalListQuoteStatus);
+			this.mouseActionClick(ListQuoteStatus);
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
+			this.invisible(Message);
 		} else if (value.equals("GlobalCreateOrgDeclined")) {
-			this.autoCompleteCreation("GlobalOrganization");
-			this.autoCompleteCreation("VisibleCustomerOrgName");
+			this.autoCompleteField("OrganizationCreate");
+			this.autoCompleteField("OrgVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
 			this.inputText(QuoteTittle, fakeTittle);
@@ -846,14 +986,15 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
-			this.mouseActionClick(GlobalListQuoteStatus);
+			this.mouseActionClick(ListQuoteStatus);
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
+			this.invisible(Message);
 		} else if (value.equals("CreateDeclined")) {
 			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateContactQuote);
-			this.valuePresent(ContactName, text);
+			this.mouseActionClick(CreateButton);
+			this.valuePresent(CustomerField, text);
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
 			this.inputText(QuoteTittle, fakeTittle);
@@ -865,11 +1006,12 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ListQuoteStatus);
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
+			this.invisible(Message);
 		} else if (value.equals("CreateDeclinedOrg")) {
 			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateOrganizationQuote);
-			this.valuePresent(ContactName, text);
+			this.mouseActionClick(CreateButton);
+			this.valuePresent(CustomerField, text);
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
 			this.inputText(QuoteTittle, fakeTittle);
@@ -881,7 +1023,27 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ListQuoteStatus);
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(UpdateOrg);
-			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
+			this.message("message");
+			this.invisible(Message);
 		}
+	}
+
+	public void clearAllFields() {
+		List<String> asList = Arrays.asList("Reference", "QuoteTittle", "Expiry", "Inventory", "Quantity", "Discount",
+				"Tax", "Description", "Notes", "Price");
+		for (int i = 0; i < asList.size(); i++) {
+			this.clearFields(asList.get(i));
+		}
+	}
+
+	public void inventoryItem() {
+		this.mouseActionClick(InventoryItem);
+		this.mouseActionClick(InventoryFirstItem);
+
+	}
+
+	public void visible() {
+		this.elementClickable(SearchButton);
+
 	}
 }

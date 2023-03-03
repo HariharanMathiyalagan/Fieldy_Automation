@@ -124,7 +124,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = new RequestPage(driver);
 		Thread.sleep(6000);
-		contactMandatory.organizationContactCreate();
+		contactMandatory.autoComplete("OrganizationContactCreate");
 		String errorContact = contactMandatory.responseMessageCreateContact();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));

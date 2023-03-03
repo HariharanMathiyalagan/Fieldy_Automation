@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerContactRequest">
+      <class name="org.test.LeadSource">
         <methods>
-          <include name="setup"/>
-          <include name="namePrepopulation"/>
           <include name="exitBrowser"/>
+          <include name="deleteLeadSource"/>
+          <include name="inactiveLeadSource"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- org.test.CustomerContactRequest -->
+      </class> <!-- org.test.LeadSource -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -45,7 +45,7 @@ public class GlobalContactRequest extends BaseClass {
 		this.extentReports.flush();
 	}
 
-	@Test(priority = 0) // 1-Login
+	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
@@ -69,12 +69,48 @@ public class GlobalContactRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
-	public void requestModule() throws InterruptedException {
-		extentTest = extentReports.createTest("Verify Global Request List Page is opened when clicking on Global Request");
+	@Test(priority = 0)
+	public void requestModule() throws InterruptedException, WebDriverException, IOException {
+		extentTest = extentReports
+				.createTest("Verify Global Request List Page is opened when clicking on Global Request");
 		RequestPage module = PageFactory.initElements(driver, RequestPage.class);
-		module.module();
+		String editContact = module.module();
+		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestListPage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (editContact.equals(getPropertyValue("RequestListPage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("ContactList.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("ContactList.png");
+		}
 	}
+	
+	@Test(priority = 1)
+	private void labelValidation() throws IOException, InterruptedException {
+		extentTest = extentReports
+				.createTest("Verify Create Request page is opened from Organization-> Request -> Create Request");
+		RequestPage requestPage = PageFactory.initElements(driver, RequestPage.class);
+		String requestLandPage = requestPage.labelValidation();
+		extentTest.log(Status.INFO, "Actual Result is -" + requestLandPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageRequestLabel"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (requestLandPage.equals(getPropertyValue("CreatePageRequestLabel"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateOrganizationRequestLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateOrganizationRequestLabel.png");
+		}
+	}
+
 
 	@Test(priority = 2)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
@@ -102,13 +138,14 @@ public class GlobalContactRequest extends BaseClass {
 	private void autoCompleteContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = new RequestPage(driver);
-		contactMandatory.contactCreation();
+		contactMandatory.autoComplete("GlobalContactCreate");
 		String errorContact = contactMandatory.responseMessageCreateContact();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorContact.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			contactMandatory.autoComplete("ContactVisibleName");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -116,13 +153,15 @@ public class GlobalContactRequest extends BaseClass {
 			File file = new File("AutocompleteContactCreate.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
+			contactMandatory.autoComplete("ContactVisibleName");  
 		}
 
 	}
 
-//	@Test(priority = 5)
+	@Test(priority = 5)
 	private void mandatoryValidationLocation() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports
+				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryLocationField();
 		String errorMandatoryValidation = mandatoryValidation.locationError();
@@ -131,7 +170,6 @@ public class GlobalContactRequest extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatoryValidation.picKLocation();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -139,13 +177,13 @@ public class GlobalContactRequest extends BaseClass {
 			File file = new File("CustomerContactRequestMandatoryLocationValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactRequestMandatoryLocationValidation.png");
-			mandatoryValidation.picKLocation();
 		}
 	}
 
-//	@Test(priority = 4)
+	@Test(priority = 4)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationLocationField();
 		String errorPasswordField = mandatory.locationError();
@@ -155,7 +193,6 @@ public class GlobalContactRequest extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearLocation();
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -164,14 +201,14 @@ public class GlobalContactRequest extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactRequestLocationMaximumValidation.png");
 			mandatory.clearLocation();
-
 		}
 
 	}
 
 	@Test(priority = 6)
 	private void maximumValidationTittle() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationTittle();
 		String errorPasswordField = mandatory.tittleError();
@@ -195,7 +232,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 7)
 	private void mandatoryValidationDescription() throws AWTException, IOException {
-		extentTest = extentReports.createTest("Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports.createTest(
+				"Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		RequestPage mandatoryValidation = new RequestPage(driver);
 		mandatoryValidation.mandatoryDescriptionField();
 		String errorMandatoryValidation = mandatoryValidation.descriptionError();
@@ -216,7 +254,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 8)
 	private void maximumValidationDescription() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationDescription();
 		String errorPasswordField = mandatory.descriptionError();
@@ -238,9 +277,10 @@ public class GlobalContactRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 9)
 	public void maximumTagValidation() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxCharacterTag();
 		String errorPasswordField = mandatory.tagsError();
@@ -262,7 +302,7 @@ public class GlobalContactRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 10)
 	public void duplicateTagsValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when Duplicate tags are added");
 		RequestPage mandatory = new RequestPage(driver);
@@ -286,7 +326,7 @@ public class GlobalContactRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 13)
+	@Test(priority = 11)
 	public void maxTagLimitValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when count of tags exceeds 64");
 		RequestPage mandatory = new RequestPage(driver);
@@ -312,7 +352,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 14)
 	private void maximumValidationNotes() throws IOException {
-		extentTest = extentReports.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.maxValidationNotes();
 		String errorPasswordField = mandatory.notesError();
@@ -336,7 +377,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 15)
 	private void unsssignedRequest() throws WebDriverException, IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify Unassigned Request is created successfully from Global Request Contact->Create Request");
+		extentTest = extentReports.createTest(
+				"Verify Unassigned Request is created successfully from Global Request Contact->Create Request");
 		RequestPage mandatory = new RequestPage(driver);
 		mandatory.fromDateTimeScheduleRequest();
 		String errorPasswordField = mandatory.createdMessage();
@@ -629,7 +671,6 @@ public class GlobalContactRequest extends BaseClass {
 		if ((validateListFromDate).equals(validateListFromDate)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearSearch2();
-//			mandatory.jobLabel();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -638,7 +679,6 @@ public class GlobalContactRequest extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("GlobalContactRequestsearchLocation.png");
 			mandatory.clearSearch2();
-//			mandatory.jobLabe2();
 		}
 
 	}

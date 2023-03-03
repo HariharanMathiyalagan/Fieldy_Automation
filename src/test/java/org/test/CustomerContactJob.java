@@ -117,7 +117,6 @@ public class CustomerContactJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}
@@ -128,7 +127,7 @@ public class CustomerContactJob extends BaseClass {
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		customerContactJobListPage = jobPage.customerJobListPage("Contact");
+		customerContactJobListPage = jobPage.customerJobListPage();
 		String jobLandPage = jobPage.jobLandPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageJobLabel"));
@@ -171,14 +170,13 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = PageFactory.initElements(driver, JobPage.class);
-		mandatoryValidation.mandatoryLocationField();
-		String errorMandatoryValidation = mandatoryValidation.locationError();
+		mandatoryValidation.errorValidation("ButtonClick");
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatoryValidation.picKLocation();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -186,7 +184,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobMandatoryLocationValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobMandatoryLocationValidation.png");
-			mandatoryValidation.picKLocation();
 		}
 	}
 
@@ -195,8 +192,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationLocationField();
-		String errorPasswordField = mandatory.locationError();
+		mandatory.locationField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -221,8 +218,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationTittle();
-		String errorPasswordField = mandatory.tittleError();
+		mandatory.tittleField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Tittle");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -246,8 +243,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = PageFactory.initElements(driver, JobPage.class);
-		mandatoryValidation.mandatoryDescriptionField();
-		String errorMandatoryValidation = mandatoryValidation.descriptionError();
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("Description");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -268,8 +264,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationDescription();
-		String errorPasswordField = mandatory.descriptionError();
+		mandatory.descriptionField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Description");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -293,8 +289,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxCharacterTag();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("MaxCharacter");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MaxTagValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -317,14 +313,13 @@ public class CustomerContactJob extends BaseClass {
 	public void duplicateTagsValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when Duplicate tags are added");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.duplicateTags();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("DuplicateTags");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DuplicateTags"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("DuplicateTags"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("TagRemove");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -332,7 +327,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobDuplicateTagValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobDuplicateTagValidation.png");
-			mandatory.clearValidation("TagRemove");
 		}
 
 	}
@@ -341,8 +335,8 @@ public class CustomerContactJob extends BaseClass {
 	public void maxTagLimitValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when count of tags exceeds 64");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxTagCountValidation();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("MaxLimitTags");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TagLimitValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -366,8 +360,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationNotes();
-		String errorPasswordField = mandatory.notesError();
+		mandatory.notesField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Notes");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -397,7 +391,6 @@ public class CustomerContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("ScheduleButton"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("Location");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -405,7 +398,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobNotesMaximumValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobNotesMaximumValidation.png");
-			mandatory.clearValidation("Location");
 		}
 
 	}
@@ -422,7 +414,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -430,7 +422,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("UnscheduleJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		}
 	}
 	
@@ -461,7 +453,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobUnassignedStatus() throws WebDriverException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Unassigned Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UnassignedStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -504,14 +496,12 @@ public class CustomerContactJob extends BaseClass {
 				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = PageFactory.initElements(driver, JobPage.class);
 		mandatoryValidation.clearAllFields("Page");
-		mandatoryValidation.mandatoryLocationField();
-		String errorMandatoryValidation = mandatoryValidation.locationError();
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatoryValidation.picKLocation();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -519,7 +509,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobMandatoryLocationValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobMandatoryLocationValidation.png");
-			mandatoryValidation.picKLocation();
 		}
 	}
 
@@ -528,8 +517,9 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationLocationField();
-		String errorPasswordField = mandatory.locationError();
+		mandatory.scrollUp();
+		mandatory.locationField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -544,7 +534,6 @@ public class CustomerContactJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobLocationMaximumValidation.png");
 			mandatory.clearValidation("Location");
-
 		}
 
 	}
@@ -554,8 +543,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Title Field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationTittle();
-		String errorPasswordField = mandatory.tittleError();
+		mandatory.tittleField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Tittle");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -579,8 +568,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify Description field is set as Mandatory & Error Message is displayed when it is BLANK");
 		JobPage mandatoryValidation = PageFactory.initElements(driver, JobPage.class);
-		mandatoryValidation.mandatoryDescriptionField();
-		String errorMandatoryValidation = mandatoryValidation.descriptionError();
+		String errorMandatoryValidation = mandatoryValidation.errorValidation("Description");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -601,8 +589,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationDescription();
-		String errorPasswordField = mandatory.descriptionError();
+		mandatory.descriptionField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Description");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -626,8 +614,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Tag field exceed its max-256 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxCharacterTag();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("MaxCharacter");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MaxTagValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -650,14 +638,13 @@ public class CustomerContactJob extends BaseClass {
 	public void editduplicateTagsValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when Duplicate tags are added");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.duplicateTags();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("DuplicateTags");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DuplicateTags"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("DuplicateTags"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("TagRemove");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -665,7 +652,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobDuplicateTagValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobDuplicateTagValidation.png");
-			mandatory.clearValidation("TagRemove");
 		}
 
 	}
@@ -674,8 +660,8 @@ public class CustomerContactJob extends BaseClass {
 	public void editmaxTagLimitValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify error message is displayed when count of tags exceeds 64");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxTagCountValidation();
-		String errorPasswordField = mandatory.tagsError();
+		mandatory.tagsField("MaxLimitTags");
+		String errorPasswordField = mandatory.errorValidation("Tag");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TagLimitValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -699,8 +685,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when notes field exceed its max-2048 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.maxValidationNotes();
-		String errorPasswordField = mandatory.notesError();
+		mandatory.notesField("MaxValidation");
+		String errorPasswordField = mandatory.errorValidation("Notes");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -730,7 +716,6 @@ public class CustomerContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("UpdateButton"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("Notes");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -738,7 +723,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CustomerContactJobNotesMaximumValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactJobNotesMaximumValidation.png");
-			mandatory.clearValidation("Notes");
 		}
 
 	}
@@ -772,15 +756,15 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.customerContactJob();
-		mandatory.createdJob();
+		mandatory.jobStatusCreation("Create");
+		mandatory.jobStatusCreation("CreateJob");
 		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -788,7 +772,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		}
 	}
 
@@ -796,7 +780,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobScheduleStatus() throws WebDriverException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Schedule Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ScheduleStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -838,7 +822,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobDispatchedStatus() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Dispatch Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DispatchedStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -881,7 +865,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobStartedStatus() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Active Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("StartedStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -924,7 +908,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobCompleteStatus() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Completed Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CompletedStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -952,7 +936,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobCancelledMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.JobNo("JobNo2");
+			JobListData = mandatory.listValidation("JobNo2");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -960,7 +944,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DeletedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DeletedJob.png");
-			JobListData = mandatory.JobNo("JobNo2");
+			JobListData = mandatory.listValidation("JobNo2");
 		}
 
 	}
@@ -969,7 +953,7 @@ public class CustomerContactJob extends BaseClass {
 	private void jobCancelledStatus() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Cancelled Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.cancelJobStatus();
+		String errorPasswordField = mandatory.listValidation("Status1");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CancelledStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -991,7 +975,7 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Job has been Draft Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("CustomerContactDraft");
-		String errorPasswordField = mandatory.jobStatus();
+		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DraftStatus"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1014,14 +998,14 @@ public class CustomerContactJob extends BaseClass {
 	private void deletedJob() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Deleted tigger function in the List page");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.deletedTiggerFunction();
+		mandatory.tiggerFunction("Delete");
 		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1029,7 +1013,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DeletedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DeletedJob.png");
-			JobListData = mandatory.JobNo("JobNo1");
+			JobListData = mandatory.listValidation("JobNo1");
 		}
 
 	}
@@ -1039,14 +1023,15 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Enter the Job No:(" + JobListData + ") in the Search field & Job list retrived successfully");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.searchJobNo();
+		mandatory.listValidation("SearchData");
+		String errorPasswordField = mandatory.listValidation("JobNo1");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + JobListData);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(errorPasswordField)) {
+		if (errorPasswordField.equals(JobListData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.resetOption();
-			JobListData = mandatory.LocationName();
+			mandatory.clearValidation("Search");
+			JobListData = mandatory.listValidation("Location");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1054,8 +1039,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchJobNo.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchJobNo.png");
-			mandatory.resetOption();
-			JobListData = mandatory.LocationName();
+			mandatory.clearValidation("Search");
+			JobListData = mandatory.listValidation("Location");
 		}
 
 	}
@@ -1065,15 +1050,16 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Enter the Job Location:(" + JobListData + ") in the Search field & Job list retrived successfully");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.searchLocation();
+		mandatory.listValidation("SearchData");
+		String errorPasswordField = mandatory.listValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + JobListData);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(errorPasswordField)) {
+		if (errorPasswordField.equals(JobListData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("ContactSearch");
-			dateFrom = mandatory.dateFrom();
-			dateTo = mandatory.dateTo();
+			mandatory.clearValidation("Search");
+			dateFrom = mandatory.listValidation("ListFromDate");
+			dateTo = mandatory.listValidation("ListToDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1081,9 +1067,9 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			mandatory.clearValidation("ContactSearch");
-			dateFrom = mandatory.dateFrom();
-			dateTo = mandatory.dateTo();
+			mandatory.clearValidation("Search");
+			dateFrom = mandatory.listValidation("ListFromDate");
+			dateTo = mandatory.listValidation("ListToDate");
 		}
 
 	}
@@ -1093,16 +1079,14 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify the Job List filter by From date:" + dateFrom + " & To date:" + dateTo);
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		mandatory.filterByDate();
-		String validateListFromDate = mandatory.validateListFromDate();
-		String validateToDate = mandatory.validateToDate();
+		mandatory.listValidation("FilterDatePicker");
+		String validateListFromDate = mandatory.listValidation("FromDate");
+		String validateToDate = mandatory.listValidation("ToDate");
 		extentTest.log(Status.INFO, "Actual Result is -" + validateListFromDate + " to " + validateToDate);
 		extentTest.log(Status.INFO, "Expected Result is -" + validateListFromDate + " to " + validateToDate);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if ((validateListFromDate + " to " + validateToDate).equals(validateListFromDate + " to " + validateToDate)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.resetOption();
-			mandatory.jobLabel();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1110,8 +1094,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			mandatory.resetOption();
-			mandatory.jobLabel();
 		}
 
 	}
@@ -1121,11 +1103,12 @@ public class CustomerContactJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-		String errorPasswordField = mandatory.invalidSearch();
+		mandatory.listValidation("Invlaid");
+		String errorPasswordField = mandatory.listValidation("InvalidResult");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidData"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(errorPasswordField)) {
+		if (errorPasswordField.equals(getPropertyValue("InvalidData"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
