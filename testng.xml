@@ -65,6 +65,7 @@
 			<class name="org.test.ServiceModule"/>
 
 
+
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
