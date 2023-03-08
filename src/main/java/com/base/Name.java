@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,12 +18,16 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.OptionalDouble;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.math3.random.RandomDataGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.hc.core5.http.impl.nio.ExpandableBuffer;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -38,6 +43,7 @@ import org.testng.annotations.Test;
 
 import com.github.javafaker.Company;
 import com.github.javafaker.Faker;
+import com.github.javafaker.service.RandomService;
 import com.sun.tools.javac.code.Attribute.Array;
 import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.OnBoardingPage;
@@ -103,6 +109,12 @@ public class Name extends BaseClass {
 //		if(a==b || b==c)
 //		{
 //
+		boolean jim = false;
+		
+		
+		
+		
+
 //		}
 
 //		String value = "Manju";
@@ -147,11 +159,40 @@ public class Name extends BaseClass {
 //		Faker faker = new Faker(new Locale("en-IND"));
 //		String creditCardExpiry = faker.app().name();
 //		System.out.println(creditCardExpiry);
-		
-		String input = "jerry";
-		String output = input.substring(0, 1).toUpperCase() + input.substring(1);
-System.out.println(output);
-		
+
+//		String input = "jerry";
+//		String output = input.substring(0, 1).toUpperCase() + input.substring(1);
+//System.out.println(output);
+
+//		RandomDataGenerator dataGenerator = new RandomDataGenerator();
+//		RandomGenerator randomGenerator = dataGenerator.getRandomGenerator();
+//		System.out.println(randomGenerator);
+
+//		Random random = new Random();
+//		RandomService randomService = new RandomService();
+//		String hex = randomService.hex(5);
+//		System.out.println(hex);
+
+//		int leftLimit = 97; // letter 'a'
+//	    int rightLimit = 122; // letter 'z'
+//	    int targetStringLength = 10;
+//	    Random random = new Random();
+//	    StringBuilder buffer = new StringBuilder(targetStringLength);
+//	    for (int i = 0; i < targetStringLength; i++) {
+//	        int randomLimitedInt = leftLimit + (int) 
+//	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+//	        buffer.append((char) randomLimitedInt);
+//	    }
+//	    String generatedString = buffer.toString();
+//
+//	    System.out.println(generatedString);
+		for (int i = 0; i < 1000; i++) {
+			Faker faker = new Faker(new Locale("en-IND"));
+			String url = faker.phoneNumber().phoneNumber();
+			System.out.println(url);
+
+		}
+
 //		String fakeFirstName = faker.name().firstName();
 //		System.out.println("First Name:" + fakeFirstName);
 //		
@@ -260,7 +301,7 @@ System.out.println(output);
 //		
 //		String output = input.substring(0, input.indexOf(" |"));
 //		System.out.println(output);
-		
+
 //		String expectedURL = "https://" + (lowerCase.toLowerCase().replaceAll("\\s", ""))
 //				+ getPropertyValue("DomainURL");
 //

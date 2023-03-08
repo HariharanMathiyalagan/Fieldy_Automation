@@ -70,7 +70,7 @@ public class BusinessDaysPage extends BaseClass {
 	}
 
 	private void mouseActionClick(By element) {
-		wait = new WebDriverWait(driver, 100);
+		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
@@ -265,7 +265,8 @@ public class BusinessDaysPage extends BaseClass {
 	By Organization = By.id("customer-organization-menu");
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='contact-creation']"), @FindBy(id = "scheduledrop"),
-			@FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button[1]") })
+			@FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div/div[2]/div[1]/div/div[3]/div[4]/button") })
 	WebElement CreateButton;
 
 	By SaveButton = By.id("customerdrop");
@@ -275,7 +276,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[text()='Contact Name']"), @FindBy(xpath = "//*[text()='Customer Name']"),
 			@FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[text()='Customer']") })
+			@FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='First Name']") })
 	WebElement CheckPage;
 
 	By Next = By.xpath("//*[text()='Next']");
@@ -293,11 +294,10 @@ public class BusinessDaysPage extends BaseClass {
 	WebElement Edit;
 
 //	By  = By.xpath("//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]");
-	
-	@FindAll({
-		@FindBy(xpath = "//*[@id='job_create_edit']/div[1]/div[4]/div[2]/input[1]"),
-		@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]")
-	})
+
+	@FindAll({ @FindBy(xpath = "//*[@id='job_create_edit']/div[1]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[3]/div[4]/div[2]/input[1]") })
 	WebElement BusinessDaysFields;
 
 	By Job = By.id("job-menu");
@@ -305,6 +305,14 @@ public class BusinessDaysPage extends BaseClass {
 	By RadioButtonContact = By.xpath("//*[@id='contact-organization-job']/div[1]/input");
 
 	By RadioButtonOrganization = By.xpath("//*[@id='contact-organization-job']/div[2]/input");
+
+	By Tittle = By.xpath("//*[@id='team-company-details-company-name']/div[1]");
+
+	By Team = By.id("team-menu");
+
+	By User = By.id("team-user-menu");
+
+	By Contractor = By.xpath("//*[@id='team__user__contianer']/div[2]/nav/div/ul/li[2]/a");
 
 	public String modulePage() {
 		this.mouseActionClick(settings_menu);
@@ -507,9 +515,9 @@ public class BusinessDaysPage extends BaseClass {
 			this.message("Message");
 			return textAttribute;
 		} else if (value.equals("CreatedBusinessUnit")) {
-			this.mouseActionClick(CreateButton);
+			this.mouseActionClick(create_button);
 			this.inputText(bussiness_name, BusinessName);
-			textAttribute = this.getTextAttribute(leadsource_name);
+			textAttribute = this.getTextAttribute(bussiness_name);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
 			return textAttribute;
@@ -522,7 +530,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.validationTab(bussiness_name, characters2048);
 			this.clearField("BusinessUnit");
 			this.validationTab(bussiness_name, textAttribute);
-			this.dropDownByIndex(business_unit_status, 1);
+			this.dropDownByIndex(bussiness_status, 1);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
 			return textAttribute;
@@ -531,6 +539,34 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(settings_business);
 			textAttribute = this.getText(list_bussiness_unit_name);
 			this.mouseActionClick(delete_btn);
+			this.mouseActionClick(Yes);
+			this.message("Message");
+			return textAttribute;
+		} else if (value.equals("CreatedServiceType")) {
+			this.mouseActionClick(service_create_btn);
+			this.inputText(service_name, BusinessName);
+			textAttribute = this.getTextAttribute(service_name);
+			this.mouseActionClick(service_save_btn);
+			this.message("Message");
+			return textAttribute;
+		} else if (value.equals("EditServiceType")) {
+			this.mouseActionClick(settings_menu);
+			this.mouseActionClick(settings_business);
+			textAttribute = this.getText(list_service_type_name);
+			this.mouseActionClick(service_edit_btn);
+			this.valuePresent(service_name, textAttribute);
+			this.validationTab(service_name, characters2048);
+			this.clearField("BusinessUnit");
+			this.validationTab(service_name, textAttribute);
+			this.dropDownByIndex(service_status, 1);
+			this.mouseActionClick(service_save_btn);
+			this.message("Message");
+			return textAttribute;
+		} else if (value.equals("DeleteServiceType")) {
+			this.mouseActionClick(settings_menu);
+			this.mouseActionClick(settings_business);
+			textAttribute = this.getText(list_service_type_name);
+			this.mouseActionClick(service_delete_btn);
 			this.mouseActionClick(Yes);
 			this.message("Message");
 			return textAttribute;
@@ -550,28 +586,50 @@ public class BusinessDaysPage extends BaseClass {
 		this.mouseActionClick(Contact);
 	}
 
-	public String leadSourceCustomer(String value) {
+	public void userClick() {
+		this.mouseActionClick(User);
 		this.visibility(CheckPage);
-		this.mouseActionClick(Contact);
-		this.visibility(CheckPage);
-		this.mouseActionClick(CreateButton);
-		for (int i = 0; i < 7; i++) {
-			this.mouseActionClick(SaveButton);
-			this.mouseActionClick(Next);
+	}
+
+	public void teamClick() {
+		this.mouseActionClick(Team);
+		this.visibility(Tittle);
+	}
+
+	public String bussinessDays(String value) {
+		if (value.equals("LeadSource")) {
+			this.visibility(CheckPage);
+			this.mouseActionClick(Contact);
+			this.visibility(CheckPage);
+			this.mouseActionClick(CreateButton);
+			for (int i = 0; i < 7; i++) {
+				this.mouseActionClick(SaveButton);
+				this.mouseActionClick(Next);
+			}
+		} else if (value.equals("BussinessUnit")) {
+			this.mouseActionClick(Job);
+			this.visibility(CheckPage);
+			this.mouseActionClick(CreateButton);
+			for (int i = 0; i < 5; i++) {
+				this.mouseActionClick(RadioButtonOrganization);
+				this.mouseActionClick(RadioButtonContact);
+			}
+		} else if (value.equals("ServiceType")) {
+			this.mouseActionClick(Contractor);
+			this.visibility(CheckPage);
+			this.mouseActionClick(CreateButton);
 		}
 		this.mouseActionClick(BusinessDaysFields);
 		this.inputText(BusinessDaysFields, textAttribute);
-		if (value.equals("CustomerContactCreate")) {
-			By LeadSourceName = By.xpath("//*[text()='" + textAttribute + "']");
-			String text = this.getText(LeadSourceName);
-			return text;
-		} else if (value.equals("InactiveCustomerContactCreate")) {
-			By LeadSourceName = By.xpath("//*[text()='No Data Found For " + textAttribute + "']");
-			String text = this.getText(LeadSourceName);
-			return text;
-		}
-		return value;
+		String text = this.getText(DropDownList);
+		return text;
 	}
+
+	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[contains(text(),'No Data Found')]"),
+			@FindBy(xpath = "//*[@id='id_business_unit-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[@id='service_type_id-autocomplete-list']//div[1]") })
+	WebElement DropDownList;
 
 	public void bussinessUnitCheck(String value) {
 		this.mouseActionClick(Job);

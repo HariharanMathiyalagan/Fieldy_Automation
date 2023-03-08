@@ -447,7 +447,7 @@ public class LeadSource extends BaseClass {
 				+ " & it's reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.customerClick();
-		String createMessage = landing.leadSourceCustomer("CustomerContactCreate");
+		String createMessage = landing.bussinessDays("LeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -471,7 +471,7 @@ public class LeadSource extends BaseClass {
 				+ " & it's not reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.contactClick();
-		String createMessage = landing.leadSourceCustomer("InactiveCustomerContactCreate");
+		String createMessage = landing.bussinessDays("LeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -495,7 +495,7 @@ public class LeadSource extends BaseClass {
 				+ " & it's not reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.contactClick();
-		String createMessage = landing.leadSourceCustomer("InactiveCustomerContactCreate");
+		String createMessage = landing.bussinessDays("LeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
