@@ -20,10 +20,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.BusinessDaysPage;
-import com.zaigo.pageobjects.CustomerCreateContactPage;
-import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.LoginPage;
-import com.zaigo.pageobjects.TeamUserPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class BusinessUnit extends BaseClass {
@@ -293,7 +290,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	private void editmandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Business Unit Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -305,6 +302,8 @@ public class BusinessUnit extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.clearField("BussinessUnit");
+			ListField = initElements.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -312,10 +311,12 @@ public class BusinessUnit extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
+			initElements.clearField("BussinessUnit");
+			ListField = initElements.businessUnitField("ValidData");
 		}
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 11)
 	private void editmaximumValidationBussinessUnit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Unit Name Field exceed its max-256 limit");
@@ -328,7 +329,6 @@ public class BusinessUnit extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("BussinessUnit");
-			ListField = mandatory.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -411,13 +411,13 @@ public class BusinessUnit extends BaseClass {
 			ListField = landing.createBusinessDays("CreatedBusinessUnit");
 		}
 	}
+
 	@Test(priority = 17)
 	private void reflectCreateContactPage() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the newly created Business Unit Name is:" + ListField
 				+ " & it's reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		landing.customerClick();
-		String createMessage = landing.checkField("CustomerContactCreate");
+		String createMessage = landing.bussinessDays("BussinessUnit");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -440,8 +440,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Inactive Business Unit Name is:" + ListField
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		landing.contactClick();
-		String createMessage = landing.checkField("InactiveCustomerContactCreate");
+		String createMessage = landing.bussinessDays("BussinessUnit");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -464,8 +463,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Delete Business Unit Name is:" + ListField
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		landing.contactClick();
-		String createMessage = landing.checkField("InactiveCustomerContactCreate");
+		String createMessage = landing.bussinessDays("BussinessUnit");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

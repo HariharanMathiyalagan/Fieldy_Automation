@@ -3,14 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.LeadSource">
+      <class name="org.test.ServiceModule">
         <methods>
           <include name="exitBrowser"/>
-          <include name="deleteLeadSource"/>
-          <include name="inactiveLeadSource"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
           <include name="setup"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
         </methods>
-      </class> <!-- org.test.LeadSource -->
+      </class> <!-- org.test.ServiceModule -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

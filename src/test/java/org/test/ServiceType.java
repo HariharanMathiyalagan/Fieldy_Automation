@@ -431,6 +431,79 @@ public class ServiceType extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("ServiceTypeDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			ListField = landing.createBusinessDays("CreatedServiceType");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("58.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("58.png");
+			ListField = landing.createBusinessDays("CreatedServiceType");
+		}
+	}
+	
+	@Test(priority = 17)
+	private void reflectCreateContactPage() throws IOException, AWTException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the newly created Business Unit Name is:" + ListField
+				+ " & it's reflect the Lead Source field in the Customer Contact Page");
+		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
+		landing.teamClick();
+		landing.userClick();
+		String createMessage = landing.bussinessDays("ServiceType");
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (createMessage.equals(ListField)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			ListField = landing.createBusinessDays("EditServiceType");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("58.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("58.png");
+			ListField = landing.createBusinessDays("EditServiceType");
+		}
+	}
+
+	@Test(priority = 18)
+	private void inactiveLeadSource() throws IOException, AWTException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Inactive Business Unit Name is:" + ListField
+				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
+		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
+		landing.userClick();
+		String createMessage = landing.bussinessDays("ServiceType");
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (createMessage.equals("No Data Found For " + ListField)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			ListField = landing.createBusinessDays("DeleteServiceType");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("58.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("58.png");
+			ListField = landing.createBusinessDays("DeleteServiceType");
+		}
+	}
+
+	@Test(priority = 19)
+	private void deleteLeadSource() throws IOException, AWTException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Delete Business Unit Name is:" + ListField
+				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
+		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
+		landing.userClick();
+		String createMessage = landing.bussinessDays("ServiceType");
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (createMessage.equals("No Data Found For " + ListField)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
