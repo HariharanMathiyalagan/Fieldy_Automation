@@ -33,7 +33,7 @@ public class CustomerCreateContactModule extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("CustomerContactModule.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -1067,6 +1067,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		if (listFirstName.equals(listData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			search.clearFields("Search");
+			listData = search.listValidation("LeadSource");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1075,20 +1076,21 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("SearchEmailValidation.png");
 			search.clearFields("Search");
+			listData = search.listValidation("LeadSource");
 		}
 
 	}
 
 	@Test(priority = 37)
 	private void filterField() throws IOException {
-		extentTest = extentReports.createTest("Verify the list are corresponding to the Filter choosed");
+		extentTest = extentReports.createTest("Verify to Pick the Filter field & select Lead Source is:" + listData);
 		CustomerCreateContactPage search = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		search.listValidation("FilterList");
 		String listFirstName = search.listValidation("LeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("LeadSources"));
+		extentTest.log(Status.INFO, "Expected Result is -" + listData);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (listFirstName.equals(getPropertyValue("LeadSources"))) {
+		if (listFirstName.equals(listData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			search.clearFields("Search");
 		} else {
@@ -1858,7 +1860,7 @@ public class CustomerCreateContactModule extends BaseClass {
 	}
 
 	@Test(priority = 68)
-	private void deleteContactList() throws IOException {
+	private void deleteContactList() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify deleted successful message is displayed, when the Customer Contact Deleted");
 		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);

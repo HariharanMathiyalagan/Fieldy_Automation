@@ -31,7 +31,7 @@ public class BusinessUnit extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("BusinessUnit.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -131,7 +131,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void mandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Business Unit Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -144,7 +144,6 @@ public class BusinessUnit extends BaseClass {
 		if (editContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			initElements.clearField("BussinessUnit");
-			ListField = initElements.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -153,11 +152,11 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 			initElements.clearField("BussinessUnit");
-			ListField = initElements.businessUnitField("ValidData");
+			
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 5)
 	private void maximumValidationBussinessUnit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Unit Name Field exceed its max-256 limit");
@@ -170,6 +169,7 @@ public class BusinessUnit extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("BussinessUnit");
+			ListField = mandatory.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -178,6 +178,7 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("BussinessUnit");
+			ListField = mandatory.businessUnitField("ValidData");
 		}
 
 	}
@@ -279,7 +280,9 @@ public class BusinessUnit extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("EditBusinessPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.clearField("BussinessUnit");
+			for (int i = 0; i < 5; i++) {
+				initElements.clearField("BussinessUnit");
+			}
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -287,10 +290,13 @@ public class BusinessUnit extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
+			for (int i = 0; i < 5; i++) {
+				initElements.clearField("BussinessUnit");
+			}
 		}
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 11)
 	private void editmandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Business Unit Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -303,7 +309,6 @@ public class BusinessUnit extends BaseClass {
 		if (editContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			initElements.clearField("BussinessUnit");
-			ListField = initElements.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -312,11 +317,10 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 			initElements.clearField("BussinessUnit");
-			ListField = initElements.businessUnitField("ValidData");
 		}
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	private void editmaximumValidationBussinessUnit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Unit Name Field exceed its max-256 limit");
@@ -329,6 +333,7 @@ public class BusinessUnit extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("BussinessUnit");
+			ListField = mandatory.businessUnitField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;

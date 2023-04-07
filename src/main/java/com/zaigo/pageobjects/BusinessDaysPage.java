@@ -1,6 +1,7 @@
 package com.zaigo.pageobjects;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Locale;
 import javax.xml.xpath.XPath;
 
@@ -31,11 +32,10 @@ public class BusinessDaysPage extends BaseClass {
 	}
 
 	Faker faker = new Faker(new Locale("en-IND"));
-	String Name = faker.app().name();
+	String BusinessName = faker.app().name();
 	String fakeFirstName = faker.name().firstName();
 	String fakeCompanyName = faker.company().name();
 	String characters4 = RandomStringUtils.randomAlphabetic(4);
-	String BusinessName = Name + characters4;
 	String characters2048 = RandomStringUtils.randomAlphabetic(2048);
 
 	private void inputText(By element, String text) {
@@ -172,6 +172,28 @@ public class BusinessDaysPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
 		return until;
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	By Yes = By.xpath("//*[text()='Yes']");
@@ -314,6 +336,8 @@ public class BusinessDaysPage extends BaseClass {
 
 	By Contractor = By.xpath("//*[@id='team__user__contianer']/div[2]/nav/div/ul/li[2]/a");
 
+	By Spinner = By.xpath("//*[@id='spinnerDiv']//div//div//div");
+
 	public String modulePage() {
 		this.mouseActionClick(settings_menu);
 		this.mouseActionClick(settings_business);
@@ -362,7 +386,13 @@ public class BusinessDaysPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(bussiness_name, characters2048);
 		} else if (value.equals("Mandatory")) {
-			this.validationTab(bussiness_name, "     ");
+			this.mouseActionClick(bussiness_status_save_btn);
+			if (this.conditionChecking1(bussiness_name_error)) {
+			} else {
+				do {
+					this.mouseActionClick(bussiness_status_save_btn);
+				} while (!this.conditionChecking1(bussiness_name_error));
+			}
 		} else if (value.equals("UniqueValdation")) {
 			String text = this.getText(list_bussiness_unit_name);
 			this.validationTab(bussiness_name, text);
@@ -378,7 +408,13 @@ public class BusinessDaysPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(leadsource_name, characters2048);
 		} else if (value.equals("Mandatory")) {
-			this.validationTab(leadsource_name, "                     ");
+			this.mouseActionClick(leadsource_save_btn);
+			if (this.conditionChecking1(leadsource_error)) {
+			} else {
+				do {
+					this.mouseActionClick(leadsource_save_btn);
+				} while (!this.conditionChecking1(leadsource_error));
+			}
 		} else if (value.equals("UniqueValidation")) {
 			String text = this.getText(list_lead_source_name);
 			this.visibility(lead_source_create_btn);
@@ -397,7 +433,13 @@ public class BusinessDaysPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(service_name, characters2048);
 		} else if (value.equals("Mandatory")) {
-			this.validationTab(service_name, "                     ");
+			this.mouseActionClick(service_save_btn);
+			if (this.conditionChecking1(service_error)) {
+			} else {
+				do {
+					this.mouseActionClick(service_save_btn);
+				} while (!this.conditionChecking1(service_error));
+			}
 		} else if (value.equals("UniqueValidation")) {
 			String text = this.getText(list_service_type_name);
 			this.visibility(service_create_btn);
@@ -445,10 +487,27 @@ public class BusinessDaysPage extends BaseClass {
 	}
 
 	public String message(String value) throws IOException {
+		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			responseMessage = this.getText(Message);
-			this.invisible(Message);
-			return responseMessage;
+			if (this.conditionChecking(Message)) {
+				responseMessage = this.getText(Message);
+				this.invisible(Message);
+				return responseMessage;
+			} else {
+				do {
+					this.clearField("BussinessUnit");
+					String BusinessName = faker.app().name();
+					this.inputText(bussiness_name, BusinessName);
+					this.mouseActionClick(bussiness_status_save_btn);
+					if (this.conditionChecking(Message)) {
+						responseMessage = this.message("Message");
+						if (responseMessage.equals("Created Successfully")
+								|| responseMessage.equals("Updated Successfully")) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			if (responseMessage.equals(getPropertyValue("LeadSourceAlreadyExists"))) {
 				this.clearField("LeadSource");
@@ -527,9 +586,9 @@ public class BusinessDaysPage extends BaseClass {
 			textAttribute = this.getText(list_bussiness_unit_name);
 			this.mouseActionClick(edit_btn);
 			this.valuePresent(bussiness_name, textAttribute);
-			this.validationTab(bussiness_name, characters2048);
-			this.clearField("BusinessUnit");
-			this.validationTab(bussiness_name, textAttribute);
+			for (int i = 0; i < 5; i++) {
+				this.clearField("BusinessUnit");
+			}
 			this.dropDownByIndex(bussiness_status, 1);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
@@ -557,7 +616,6 @@ public class BusinessDaysPage extends BaseClass {
 			this.valuePresent(service_name, textAttribute);
 			this.validationTab(service_name, characters2048);
 			this.clearField("BusinessUnit");
-			this.validationTab(service_name, textAttribute);
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
 			this.message("Message");

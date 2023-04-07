@@ -31,7 +31,7 @@ public class PrefixSettings extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("PrefixSetting.html");
 		extentReports.attachReporter(extentHtmlReporter);

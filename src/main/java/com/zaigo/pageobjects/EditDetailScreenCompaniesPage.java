@@ -11,7 +11,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.internal.MouseAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -94,9 +93,10 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	By deleteLocation = By.xpath("//*[@id=\"accordion-2\"]/div[2]/div[2]");
 
-	By dots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[3]");
+	By dots = By.xpath("//*[@id='Team-Company-Card-Details-Section']/div[2]/div/div[1]/div/div[2]/div/div[1]//i");
 
-	By delete = By.xpath("(//*[@class='drop-down-list']//li)[4]");
+	By delete = By.xpath(
+			"//*[@id='Team-Company-Card-Details-Section']/div[2]/div/div[1]/div/div[2]/div/div[2]/ul/li[2]//a//i");
 
 	By Yes = By.xpath("//*[text()='Yes']");
 
@@ -104,7 +104,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	By CompanyName = By.id("company_name");
 
-	By Label = By.xpath("//*[@class='page-header-left back-btn']");
+	By Label = By.xpath("//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/a");
 
 	By ResponseMessage = By.xpath("//*[@class='js-snackbar__message']");
 
@@ -112,6 +112,17 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	public EditDetailScreenCompaniesPage(WebDriver driver) {
 		this.driver = driver;
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	private void scrollDown() {
@@ -153,6 +164,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	}
 
 	public void clickAddMore() {
+		this.scrollDown();
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(AddMoreLocation)).click();
 
@@ -242,14 +254,16 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	private void clickDelete() {
 		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(delete)).click();
-
+		WebElement until = wait.until(ExpectedConditions.elementToBeClickable(delete));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
 	}
 
 	private void clickYes() {
 		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(Yes)).click();
-
+		WebElement until = wait.until(ExpectedConditions.elementToBeClickable(Yes));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
 	}
 
 	public String deleteMessage() {
@@ -335,6 +349,11 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+
 	public void assertName(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
@@ -359,7 +378,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		return until;
 
 	}
-	
+
 	private String getAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
@@ -442,7 +461,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 			this.validationTab(LastName, characters256);
 		}
 	}
-	
+
 	public void companyWebsite(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(CompanyWebsite, characters2048);
@@ -476,7 +495,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(PhoneNumber, "2143567897654325675432425987654");
 		} else if (value.equals("MinValidation")) {
-			this.validationTab(PhoneNumber, "23456");
+			this.validationTab(PhoneNumber, "234");
 		} else if (value.equals("Invalid")) {
 			this.valuePresent(PhoneNumber, "dsjfhsfh");
 		} else if (value.equals("SpecialCharacter")) {
@@ -590,14 +609,29 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	static String toasterMessage;
 
-	public String responseMessages(String value) throws IOException {
+	public String responseMessages(String value) throws IOException, InterruptedException {
+		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			toasterMessage = this.getText(ResponseMessage);
-			this.mouseActionClick(Cancel);
-			return toasterMessage;
+			if (this.conditionChecking(ResponseMessage)) {
+				toasterMessage = this.getText(ResponseMessage);
+				this.invisible(Cancel);
+				return toasterMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(Save_Complete);
+					if (this.conditionChecking(ResponseMessage)) {
+						toasterMessage = this.getText(ResponseMessage);
+						this.invisible(ResponseMessage);
+						if (toasterMessage.equals(getPropertyValue("UpdatedTenantMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
-			if (toasterMessage == getPropertyValue("CompanyEmailAlreadyExist")) {
-
+			if (toasterMessage == getPropertyValue("BussinessNameAlready")) {
+				this.mouseActionClick(Team);
 			}
 		}
 		return value;

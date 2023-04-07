@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +35,7 @@ public class OnBoardingModule extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("OnBoarding.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -72,7 +70,7 @@ public class OnBoardingModule extends BaseClass {
 //	}
 
 	@Test(priority = 0)
-	public void mandatoryBussinessNameFieldValidation() throws IOException, InvalidFormatException {
+	public void mandatoryBussinessNameFieldValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Check Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		OnBoardingPage mandatory = new OnBoardingPage(driver);

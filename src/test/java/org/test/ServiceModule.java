@@ -32,9 +32,9 @@ public class ServiceModule extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("InventoryProduct.html");
+		extentHtmlReporter = new ExtentHtmlReporter("InventoryService.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -116,7 +116,7 @@ public class ServiceModule extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify Service Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
-		initElements.clickEvent("SaveButton");
+		initElements.inventoryName("Mandatory");
 		String editContact = initElements.errorFields("InventoryName");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -369,7 +369,7 @@ public class ServiceModule extends BaseClass {
 	@Test(priority = 15)
 	private void beforeDecimalPointTaxPercentageField() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when Tax Percentage Field exceed its max-6 before decimal point limit");
+				"Verify Error Message is displayed when Tax Percentage Field exceed its max-3 before decimal point limit");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.taxPercentage("BeforeDecimal");
 		String errorPasswordField = mandatory.errorFields("TaxPercentage");

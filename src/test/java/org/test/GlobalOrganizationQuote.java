@@ -32,7 +32,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 	static String currentDate;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("GlobalOrganizationQuote.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -70,11 +70,11 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 	}
 
-	@Test(priority = -2)
-	public void jobModule() throws InterruptedException, IOException {
+	@Test(priority = -1)
+	public void quoteModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify Global Quote List Page is opened when clicking on Global Quote");
 		QuotePage module = PageFactory.initElements(driver, QuotePage.class);
-		String editContact = module.customerQuoteListPage("GlobalQuote");
+		String editContact = module.labelValidation("Global");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("QuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -90,12 +90,12 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
-	@Test(priority = -1)
+
+	@Test(priority = 0)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Request Page");
 		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
-		String jobLandPage = jobPage.quoteLandPage();
+		String jobLandPage = jobPage.labelValidation("CreateLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageQuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -115,7 +115,9 @@ public class GlobalOrganizationQuote extends BaseClass {
 	private void organizationMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Contact Field");
 		QuotePage contactMandatory = PageFactory.initElements(driver, QuotePage.class);
-		contactMandatory.customerQuoteListPage("OrganizationAPI");
+		contactMandatory.clearFields("Quantity");
+		contactMandatory.clearFields("Price");
+		contactMandatory.saveFunction("OrganizationMandatory");
 //		String errorContact = contactMandatory.errorValidation("ErrorContact");
 		extentTest.log(Status.INFO, "Actual Result is -" + "null");
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -259,6 +261,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 			File file = new File("AutocompleteContactCreate.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
+			contactMandatory.message("AlternateFunction");
 			contactMandatory.autoCompleteField("OrgVisibleName");
 		}
 
@@ -787,7 +790,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("GlobalPastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.message("message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -851,20 +854,40 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
+	
+	@Test(priority = 29)
+	private void quoteCount() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Quote Created Count is added in the Quote All Count");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		String actualTotal = create.actualResult("User");
+		String expectedResult = create.totalCount("User");
+		extentTest.log(Status.INFO, "Actual Result is - Total Quote Count:" + actualTotal);
+		extentTest.log(Status.INFO, "Expected Result is - Total Quote Count:" + expectedResult);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actualTotal.equals(expectedResult)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CompaniesContractorCount.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CompaniesContractorCount.png");
+		}
+	}
 
 	@Test(priority = 30)
 	private void quoteEdit() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the user is land on the Quote edit form page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		create.CRUDValidation("Edit");
-		String responseMessage = create.quoteLandPage();
+		String responseMessage = create.labelValidation("GlobalEdit");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageQuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessage.equals(getPropertyValue("EditPageQuoteLabel"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.clearAllFields();
-			create.saveFunction();
+			create.saveFunction("Mandatory");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -873,7 +896,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("QupteCountValidate.png");
 			create.clearAllFields();
-			create.saveFunction();
+			create.saveFunction("Mandatory");
 		}
 
 	}
@@ -1484,7 +1507,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("GlobalPastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.message("message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -1660,8 +1683,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			QuoteListData = create.listTextValidation("QuoteNo");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("QuoteNo");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1669,8 +1692,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListQuoteNoValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteNoValidation.png");
-			QuoteListData = create.listTextValidation("QuoteNo");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("QuoteNo");
 		}
 
 	}
@@ -1687,8 +1710,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			QuoteListData = create.listTextValidation("Tittle");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1696,8 +1719,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListQuoteNoValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteNoValidation.png");
-			QuoteListData = create.listTextValidation("Tittle");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
 		}
 
 	}
@@ -1714,8 +1737,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			QuoteListData = create.listTextValidation("Reference");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1723,8 +1746,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListQuoteTittleValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteTittleValidation.png");
-			QuoteListData = create.listTextValidation("Reference");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
 		}
 
 	}

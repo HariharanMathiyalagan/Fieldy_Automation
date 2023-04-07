@@ -94,6 +94,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	private void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
 	private void invisible(By element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
@@ -155,7 +162,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
 	}
-	
+
 	public void elementtobeClickable(WebElement element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -191,7 +198,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By MaxSizeLogoError = By.xpath("//div[text()='File Size Not Allowed More Than 2 MB']");
 	By Heading = By.xpath("//a[@data-goesto='organization-view']");
-	By Social = By.xpath("//*[text()='Social']");
+//	By Social = By.xpath("//*[text()='Social']");
+	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
+	WebElement Social;
 	By AlreadyExistsMail = By.xpath("//*[text()='Customer with Company Email already exists']");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
@@ -204,13 +214,50 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 //	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	static String response;
 
-	public String responseMessage(String value) throws IOException {
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean check = true;
 		if (value.equals("ResponseMessage")) {
-			response = this.getText(Message);
-			this.invisible(Message);
-			return response;
+			if (this.conditionChecking(Message)) {
+				response = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveComplete);
+					if (this.conditionChecking(Message)) {
+						response = this.getText(Message);
+						this.invisible(Message);
+						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| response.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+							check = false;
+						}
+					}
+				} while (check);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			if (response.equals(getPropertyValue("CompanyAlreadyMessage"))
 					|| response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
@@ -224,7 +271,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				this.visibility(CustomerList);
 			}
 		}
-		return value;
+		return response;
 	}
 
 	static int parseInt;
@@ -256,8 +303,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.elementtobeClickable(SearchButton);
 		this.visibility(CustomerList);
 		this.mouseActionClick(Organization);
-		this.elementtobeClickable(SearchButton);
 		String text2 = this.getText(CustomerOrganization);
+		this.elementtobeClickable(SearchButton);
 		this.visibility(CustomerList);
 		this.getCount();
 		this.mouseActionClick(AddOrganization);
@@ -355,9 +402,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		this.inputText(Email, fakeEmail);
-		Thread.sleep(3000);
 		this.mouseActionClick(LeadSource);
-		this.mouseActionClick(Social);
+		if (this.getText(Social).equals("No Data Found")) {
+			Thread.sleep(5000);
+			this.mouseActionClick(LeadSource);
+			this.mouseActionClick(Social);
+		} else {
+			this.mouseActionClick(Social);
+		}
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		this.mouseActionClick(Next);
 
@@ -426,7 +478,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.dropDownByIndex(WarrantyInformation, 1);
 		this.inputText(AccessHours, "8hrs");
 		this.inputText(InstallationNotes, Note);
-		Thread.sleep(2000);
 		this.mouseActionClick(SaveComplete);
 	}
 
@@ -435,7 +486,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
 	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
 	By Filter = By.xpath("//span[@data-timeline-open='customerorganization']");
-	By LeadSourceCheckBox = By.xpath("(//input[@id='filter-organization-leadSource-checkbox'])[2]");
+	By LeadSourceCheckBox = By.xpath("(//input[@id='filter-organization-leadSource-checkbox'])[1]");
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
 	By Apply = By.xpath("//*[@class='col-lg-4 col-md-2 col-sm-2 col-6 pt-2']//*");
@@ -443,7 +494,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");
-	By ListLead = By.xpath("(//*[@title='Social'])[1]");
+	By ListLead = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[7]//span");
 
 	static String listValue;
 
@@ -645,10 +696,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public String organizationName(String value) {
 		if (value.equals("MandatoryValidation")) {
-			for (int i = 0; i <= 10; i++) {
-				this.mouseActionClick(SaveComplete);
-				this.mouseActionClick(Next);
-				this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(SaveComplete);
+			if (conditionChecking1(OrganizationError)) {
+			} else {
+				do {
+					this.mouseActionClick(SaveComplete);
+				} while (!this.conditionChecking1(OrganizationError));
 			}
 		} else if (value.equals("UniqueValidation")) {
 			String text2 = this.getText(ListFirstName);

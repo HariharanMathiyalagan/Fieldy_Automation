@@ -23,6 +23,7 @@ import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
+import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class CustomerContactJob extends BaseClass {
@@ -35,7 +36,7 @@ public class CustomerContactJob extends BaseClass {
 	static String dateTo;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("CustomerContactJob.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -49,7 +50,7 @@ public class CustomerContactJob extends BaseClass {
 		this.extentReports.flush();
 	}
 
-	@Test(priority = 0) // 1-Login
+	@Test(priority = -2) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
@@ -73,7 +74,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = -1)
 	private void contactModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
@@ -94,7 +95,7 @@ public class CustomerContactJob extends BaseClass {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 0)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify a new Customer Contact is created successfully through [Create Contact]");
@@ -123,12 +124,33 @@ public class CustomerContactJob extends BaseClass {
 
 	static String customerContactJobListPage;
 
-	@Test(priority = 3)
+	@Test(priority = 1)
+	private void listabelValidation() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the User is Land on the Customer / Contact / Job page");
+		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
+		String jobLandPage = jobPage.labelValidation("Customer");
+		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ContactJobListPage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (jobLandPage.equals(getPropertyValue("ContactJobListPage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			customerContactJobListPage = jobPage.customerName("DetailScreenCustomerName");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateRequestLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateRequestLabel.png");
+			customerContactJobListPage = jobPage.customerName("DetailScreenCustomerName");
+		}
+	}
+
+	@Test(priority = 2)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		customerContactJobListPage = jobPage.customerJobListPage();
-		String jobLandPage = jobPage.jobLandPage();
+		String jobLandPage = jobPage.labelValidation("CreateLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageJobLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -165,7 +187,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void mandatoryValidationLocation() throws AWTException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -187,7 +209,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 5)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
@@ -379,7 +401,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 15)
 	private void createButton() throws IOException {
 		extentTest = extentReports.createTest(
@@ -425,11 +447,10 @@ public class CustomerContactJob extends BaseClass {
 			JobListData = mandatory.listValidation("JobNo1");
 		}
 	}
-	
+
 	@Test(priority = 18)
 	private void jobCreatedCount() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify the Customer Contact Job Count is added in the Total Job Count");
+		extentTest = extentReports.createTest("Verify the Customer Contact Job Count is added in the Total Job Count");
 		JobPage create = PageFactory.initElements(driver, JobPage.class);
 		int actualTotal = create.countValidation(1);
 		int expectedResult = create.countValidation(2);
@@ -835,6 +856,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DispatchStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DispatchStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -878,6 +901,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -921,6 +946,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -966,6 +993,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -988,6 +1017,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -1039,7 +1070,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchJobNo.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchJobNo.png");
-			mandatory.clearValidation("Search");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("Location");
 		}
 
@@ -1067,7 +1099,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			mandatory.clearValidation("Search");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			dateFrom = mandatory.listValidation("ListFromDate");
 			dateTo = mandatory.listValidation("ListToDate");
 		}
@@ -1118,156 +1151,5 @@ public class CustomerContactJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchInvalid.png");
 		}
-
 	}
-
-//	@Test(priority = 33)
-//	public void unassignedtoUnscheduled() throws IOException, InterruptedException {
-//		extentTest = extentReports.createTest("Verify to create a unScheduled job, and check the Status & Job No");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.customerContactJob();
-//		mandatory.jobStatusCreation("Unschedule");
-//		jobNo = mandatory.jobNo();
-//		String createdJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is currently in the " + createdJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is currently in the "
-//				+ getPropertyValue("UnscheduleStatus") + " status.");
-//		if (("The " + jobNo + " is currently in the " + createdJobStatus + " status.")
-//				.equals("The " + jobNo + " is currently in the " + getPropertyValue("UnscheduleStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Status of Unassigned Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Status of Unassigned Job No.png");
-//		}
-//
-//	}
-//
-//	@Test(priority = 34)
-//	public void updatedUnassignedJob() throws InterruptedException, IOException {
-//		extentTest = extentReports.createTest("Verify the " + jobNo + " change the status as Unassigned");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.unassignedJob();
-//		String updatedJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is updated into " + updatedJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is updated into "
-//				+ getPropertyValue("UnassignedStatus") + " status.");
-//		if (("The " + jobNo + " is updated into " + updatedJobStatus + " status.")
-//				.equals("The " + jobNo + " is updated into " + getPropertyValue("UnassignedStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Updated Status of Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Updated Status of Job No.png");
-//		}
-//
-//	}
-//
-//	@Test(priority = 35)
-//	private void createScheduledJob() throws WebDriverException, IOException, InterruptedException {
-//		extentTest = extentReports.createTest("Verify to create a Schedule job, and check the Status & Job No");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.customerContactJob();
-//		mandatory.createdJob();
-//		jobNo = mandatory.jobNo();
-//		String createdJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is currently in the " + createdJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is currently in the "
-//				+ getPropertyValue("ScheduleStatus") + " status.");
-//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-//		if (("The " + jobNo + " is currently in the " + createdJobStatus + " status.")
-//				.equals("The " + jobNo + " is currently in the " + getPropertyValue("ScheduleStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Status of Scheduled Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Status of Scheduled Job No.png");
-//		}
-//	}
-//
-//	@Test(priority = 36)
-//	public void updatedReschedule() throws IOException {
-//		extentTest = extentReports.createTest("Verify the " + jobNo + " change the status as Rescheduled");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.rescheduleJob();
-//		String updatedJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is updated into " + updatedJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is updated into "
-//				+ getPropertyValue("RescheduleStatus") + " status.");
-//		if (("The " + jobNo + " is updated into " + updatedJobStatus + " status.")
-//				.equals("The " + jobNo + " is updated into " + getPropertyValue("RescheduleStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Updated Reschedule Status of Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Updated Reschedule Status of Job No.png");
-//		}
-//
-//	}
-//
-//	@Test(priority = 37)
-//	public void rescheduleJobtoDispatch() throws IOException {
-//		extentTest = extentReports.createTest("Verify the " + jobNo + " change the status Rescheduled to Dispatch");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.dispatchTiggerFunction();
-//		String updatedJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is updated into " + updatedJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is updated into "
-//				+ getPropertyValue("DispatchStatus") + " status.");
-//		if (("The " + jobNo + " is updated into " + updatedJobStatus + " status.")
-//				.equals("The " + jobNo + " is updated into " + getPropertyValue("DispatchStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Updated Dispatch Status of Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Updated Dispatch Status of Job No.png");
-//		}
-//
-//	}
-//
-//	@Test(priority = 38)
-//	public void dispatchtoCancelled() throws IOException {
-//		extentTest = extentReports.createTest("Verify the " + jobNo + " change the status Dispatch to Cancelled");
-//		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
-//		mandatory.cancelledTigerFunction();
-//		String updatedJobStatus = mandatory.jobStatus();
-//		extentTest.log(Status.INFO,
-//				"Actual Result is -" + "The " + jobNo + " is updated into " + updatedJobStatus + " status.");
-//		extentTest.log(Status.INFO, "Expected Result is -" + "The " + jobNo + " is updated into "
-//				+ getPropertyValue("DispatchStatus") + " status.");
-//		if (("The " + jobNo + " is updated into " + updatedJobStatus + " status.")
-//				.equals("The " + jobNo + " is updated into " + getPropertyValue("CancelledStatus") + " status.")) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("Updated Dispatch Status of Job No.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("Updated Dispatch Status of Job No.png");
-//		}
-//	}
-//	
-//	@Test(priority = 37)
-
 }

@@ -1,108 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="90" passed="82" failed="0" skipped="8">
+<testng-results ignored="0" total="14" passed="5" failed="9" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-08T19:44:28 IST" name="Suite" finished-at="2023-03-08T19:50:09 IST" duration-ms="341525">
+  <suite started-at="2023-04-06T22:03:51 IST" name="Default suite" finished-at="2023-04-06T22:09:08 IST" duration-ms="316804">
     <groups>
     </groups>
-    <test started-at="2023-03-08T19:44:28 IST" name="Test" finished-at="2023-03-08T19:50:09 IST" duration-ms="341525">
-      <class name="org.test.ServiceModule">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:47:21 IST" name="setup" finished-at="2023-03-08T19:47:21 IST" duration-ms="885" status="PASS">
+    <test started-at="2023-04-06T22:03:51 IST" name="Default test" finished-at="2023-04-06T22:09:08 IST" duration-ms="316804">
+      <class name="org.test.AvailabilityTechnicians">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:03:51 IST" name="setup" finished-at="2023-04-06T22:03:53 IST" duration-ms="2209" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:0, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:47:21 IST" name="loginPage" finished-at="2023-03-08T19:47:54 IST" duration-ms="32465" status="PASS">
+        <test-method signature="loginPage()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:03:53 IST" name="loginPage" finished-at="2023-04-06T22:04:25 IST" duration-ms="31962" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginPage -->
-        <test-method signature="settingModule()[pri:1, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:47:54 IST" name="settingModule" finished-at="2023-03-08T19:47:58 IST" duration-ms="4076" status="PASS">
+        <test-method signature="userCreate()[pri:1, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:04:25 IST" name="userCreate" finished-at="2023-04-06T22:04:55 IST" duration-ms="30385" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- settingModule -->
-        <test-method signature="createFormLabel()[pri:2, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:47:58 IST" name="createFormLabel" finished-at="2023-03-08T19:48:00 IST" duration-ms="1579" status="PASS">
+        </test-method> <!-- userCreate -->
+        <test-method signature="contactModule()[pri:2, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:04:55 IST" name="contactModule" finished-at="2023-04-06T22:05:01 IST" duration-ms="5511" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createFormLabel -->
-        <test-method signature="mandatoryValidationServiceName()[pri:3, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:00 IST" name="mandatoryValidationServiceName" finished-at="2023-03-08T19:48:00 IST" duration-ms="281" status="PASS">
+        </test-method> <!-- contactModule -->
+        <test-method signature="CreateContact()[pri:3, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:01 IST" name="CreateContact" finished-at="2023-04-06T22:05:14 IST" duration-ms="12815" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationServiceName -->
-        <test-method signature="mandatoryValidationDescription()[pri:4, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:00 IST" name="mandatoryValidationDescription" finished-at="2023-03-08T19:48:00 IST" duration-ms="97" status="PASS">
+        </test-method> <!-- CreateContact -->
+        <test-method signature="listabelValidation()[pri:4, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:14 IST" name="listabelValidation" finished-at="2023-04-06T22:05:25 IST" duration-ms="11069" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mandatoryValidationDescription -->
-        <test-method signature="mandatoryValidationPrice()[pri:5, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:00 IST" name="mandatoryValidationPrice" finished-at="2023-03-08T19:48:00 IST" duration-ms="84" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationPrice -->
-        <test-method signature="mandatoryValidationTaxName()[pri:6, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:00 IST" name="mandatoryValidationTaxName" finished-at="2023-03-08T19:48:01 IST" duration-ms="1059" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationTaxName -->
-        <test-method signature="mandatoryValidationTaxPercentage()[pri:7, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:01 IST" name="mandatoryValidationTaxPercentage" finished-at="2023-03-08T19:48:01 IST" duration-ms="76" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationTaxPercentage -->
-        <test-method signature="maximumValidationServiceName()[pri:8, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:01 IST" name="maximumValidationServiceName" finished-at="2023-03-08T19:48:06 IST" duration-ms="4710" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationServiceName -->
-        <test-method signature="maximumValidationDescription()[pri:10, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:06 IST" name="maximumValidationDescription" finished-at="2023-03-08T19:48:10 IST" duration-ms="3645" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationDescription -->
-        <test-method signature="maximumValidationPrice()[pri:11, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:10 IST" name="maximumValidationPrice" finished-at="2023-03-08T19:48:10 IST" duration-ms="182" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationPrice -->
-        <test-method signature="beforeDecimalPointPriceField()[pri:12, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:10 IST" name="beforeDecimalPointPriceField" finished-at="2023-03-08T19:48:10 IST" duration-ms="160" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointPriceField -->
-        <test-method signature="afterDecimalPointPriceField()[pri:13, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:10 IST" name="afterDecimalPointPriceField" finished-at="2023-03-08T19:48:10 IST" duration-ms="148" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointPriceField -->
-        <test-method signature="beforeDecimalPointTaxPercentageField()[pri:15, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:10 IST" name="beforeDecimalPointTaxPercentageField" finished-at="2023-03-08T19:48:10 IST" duration-ms="390" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointTaxPercentageField -->
-        <test-method signature="afterDecimalPointTaxPercentageField()[pri:16, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:10 IST" name="afterDecimalPointTaxPercentageField" finished-at="2023-03-08T19:48:11 IST" duration-ms="425" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointTaxPercentageField -->
-        <test-method signature="createButton()[pri:17, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:11 IST" name="createButton" finished-at="2023-03-08T19:48:11 IST" duration-ms="236" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createButton -->
-        <test-method signature="createProduct()[pri:18, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:11 IST" name="createProduct" finished-at="2023-03-08T19:48:28 IST" duration-ms="16642" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createProduct -->
-        <test-method signature="editFormLabel()[pri:19, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:28 IST" name="editFormLabel" finished-at="2023-03-08T19:48:32 IST" duration-ms="4206" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editFormLabel -->
-        <test-method signature="editmandatoryValidationServiceName()[pri:20, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmandatoryValidationServiceName" finished-at="2023-03-08T19:48:32 IST" duration-ms="265" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationServiceName -->
-        <test-method signature="editmandatoryValidationDescription()[pri:21, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmandatoryValidationDescription" finished-at="2023-03-08T19:48:32 IST" duration-ms="88" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationDescription -->
-        <test-method signature="editmandatoryValidationPrice()[pri:22, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmandatoryValidationPrice" finished-at="2023-03-08T19:48:32 IST" duration-ms="85" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationPrice -->
-        <test-method signature="editmandatoryValidationTaxName()[pri:23, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmandatoryValidationTaxName" finished-at="2023-03-08T19:48:32 IST" duration-ms="1" status="SKIP">
-          <exception class="org.testng.SkipException">
+        </test-method> <!-- listabelValidation -->
+        <test-method signature="createdJob90min()[pri:5, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:25 IST" name="createdJob90min" finished-at="2023-04-06T22:05:52 IST" duration-ms="26647" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
+              <![CDATA[Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})' (tried for 20 second(s) with 500 milliseconds interval)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ServiceModule.editmandatoryValidationTaxName(ServiceModule.java:559)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})' (tried for 20 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:392)
+at com.zaigo.pageobjects.JobPage.picKLocation(JobPage.java:611)
+at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:813)
+at org.test.AvailabilityTechnicians.createdJob90min(AvailabilityTechnicians.java:182)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.support.pagefactory.ByAll.findElement(ByAll.java:58)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy13.isDisplayed(Unknown Source)
+at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:314)
+at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:43)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:300)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:297)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 32 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createdJob90min -->
+        <test-method signature="technicianAvailability1()[pri:6, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:52 IST" name="technicianAvailability1" finished-at="2023-04-06T22:06:22 IST" duration-ms="30382" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
+at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
+at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
+at org.test.AvailabilityTechnicians.technicianAvailability1(AvailabilityTechnicians.java:206)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+  (Session info: chrome=111.0.5563.147)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+*** Element info: {Using=id, value=customer-name}
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
+at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 32 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- technicianAvailability1 -->
+        <test-method signature="technicianAvailability2()[pri:7, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:06:22 IST" name="technicianAvailability2" finished-at="2023-04-06T22:06:43 IST" duration-ms="21170" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
+at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
+at org.test.AvailabilityTechnicians.technicianAvailability2(AvailabilityTechnicians.java:230)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -133,18 +220,32 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- editmandatoryValidationTaxName -->
-        <test-method signature="editmandatoryValidationTaxPercentage()[pri:24, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmandatoryValidationTaxPercentage" finished-at="2023-03-08T19:48:32 IST" duration-ms="1" status="SKIP">
-          <exception class="org.testng.SkipException">
+        </test-method> <!-- technicianAvailability2 -->
+        <test-method signature="technicianAvailability3()[pri:8, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:06:43 IST" name="technicianAvailability3" finished-at="2023-04-06T22:07:04 IST" duration-ms="20790" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ServiceModule.editmandatoryValidationTaxPercentage(ServiceModule.java:586)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
+at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
+at org.test.AvailabilityTechnicians.technicianAvailability3(AvailabilityTechnicians.java:251)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -175,38 +276,32 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- editmandatoryValidationTaxPercentage -->
-        <test-method signature="editmaximumValidationProductName()[pri:25, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:32 IST" name="editmaximumValidationProductName" finished-at="2023-03-08T19:48:37 IST" duration-ms="4945" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationProductName -->
-        <test-method signature="editmaximumValidationDescription()[pri:26, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:37 IST" name="editmaximumValidationDescription" finished-at="2023-03-08T19:48:41 IST" duration-ms="4113" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationDescription -->
-        <test-method signature="editmaximumValidationPrice()[pri:27, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:41 IST" name="editmaximumValidationPrice" finished-at="2023-03-08T19:48:42 IST" duration-ms="176" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationPrice -->
-        <test-method signature="editbeforeDecimalPointPriceField()[pri:28, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="editbeforeDecimalPointPriceField" finished-at="2023-03-08T19:48:42 IST" duration-ms="157" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointPriceField -->
-        <test-method signature="editafterDecimalPointPriceField()[pri:29, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="editafterDecimalPointPriceField" finished-at="2023-03-08T19:48:42 IST" duration-ms="157" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editafterDecimalPointPriceField -->
-        <test-method signature="editbeforeDecimalPointTaxPercentageField()[pri:31, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="editbeforeDecimalPointTaxPercentageField" finished-at="2023-03-08T19:48:42 IST" duration-ms="0" status="SKIP">
-          <exception class="org.testng.SkipException">
+        </test-method> <!-- technicianAvailability3 -->
+        <test-method signature="technicianAvailability4()[pri:9, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:04 IST" name="technicianAvailability4" finished-at="2023-04-06T22:07:24 IST" duration-ms="20524" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ServiceModule.editbeforeDecimalPointTaxPercentageField(ServiceModule.java:763)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
+at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
+at org.test.AvailabilityTechnicians.technicianAvailability4(AvailabilityTechnicians.java:272)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -237,22 +332,32 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointTaxPercentageField -->
-        <test-method signature="updateButton()[pri:33, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="updateButton" finished-at="2023-03-08T19:48:42 IST" duration-ms="155" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateButton -->
-        <test-method signature="editafterDecimalPointTaxPercentageField()[pri:32, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="editafterDecimalPointTaxPercentageField" finished-at="2023-03-08T19:48:42 IST" duration-ms="0" status="SKIP">
-          <exception class="org.testng.SkipException">
+        </test-method> <!-- technicianAvailability4 -->
+        <test-method signature="technicianAvailability5()[pri:10, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:24 IST" name="technicianAvailability5" finished-at="2023-04-06T22:07:45 IST" duration-ms="20729" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ServiceModule.editafterDecimalPointTaxPercentageField(ServiceModule.java:792)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
+at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
+at org.test.AvailabilityTechnicians.technicianAvailability5(AvailabilityTechnicians.java:293)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -283,413 +388,219 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- editafterDecimalPointTaxPercentageField -->
-        <test-method signature="updateProduct()[pri:34, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:42 IST" name="updateProduct" finished-at="2023-03-08T19:48:50 IST" duration-ms="8345" status="PASS">
+        </test-method> <!-- technicianAvailability5 -->
+        <test-method signature="technicianAvailability6()[pri:11, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:45 IST" name="technicianAvailability6" finished-at="2023-04-06T22:08:06 IST" duration-ms="20937" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
+at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
+at org.test.AvailabilityTechnicians.technicianAvailability6(AvailabilityTechnicians.java:314)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- updateProduct -->
-        <test-method signature="searchServiceName()[pri:36, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:50 IST" name="searchServiceName" finished-at="2023-03-08T19:48:54 IST" duration-ms="3676" status="PASS">
+        </test-method> <!-- technicianAvailability6 -->
+        <test-method signature="createdJobTwoDays()[pri:12, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:08:06 IST" name="createdJobTwoDays" finished-at="2023-04-06T22:08:36 IST" duration-ms="30355" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
+at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
+at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
+at org.test.AvailabilityTechnicians.createdJobTwoDays(AvailabilityTechnicians.java:339)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+  (Session info: chrome=111.0.5563.147)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+*** Element info: {Using=id, value=customer-name}
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
+at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 32 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchServiceName -->
-        <test-method signature="searchInvalid()[pri:37, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:54 IST" name="searchInvalid" finished-at="2023-03-08T19:48:56 IST" duration-ms="1517" status="PASS">
+        </test-method> <!-- createdJobTwoDays -->
+        <test-method signature="technianAvailabilityMidDate()[pri:13, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:08:36 IST" name="technianAvailabilityMidDate" finished-at="2023-04-06T22:09:07 IST" duration-ms="30477" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
+at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
+at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
+at org.test.AvailabilityTechnicians.technianAvailabilityMidDate(AvailabilityTechnicians.java:366)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+  (Session info: chrome=111.0.5563.147)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+*** Element info: {Using=id, value=customer-name}
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
+at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 32 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchInvalid -->
-        <test-method signature="deletedService()[pri:38, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:48:56 IST" name="deletedService" finished-at="2023-03-08T19:49:13 IST" duration-ms="17587" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deletedService -->
-        <test-method signature="reflectQuotePage()[pri:39, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:49:13 IST" name="reflectQuotePage" finished-at="2023-03-08T19:49:37 IST" duration-ms="24163" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- reflectQuotePage -->
-        <test-method signature="inactiveProduct()[pri:40, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:49:37 IST" name="inactiveProduct" finished-at="2023-03-08T19:50:00 IST" duration-ms="22968" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- inactiveProduct -->
-        <test-method signature="deleteProduct()[pri:41, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:50:00 IST" name="deleteProduct" finished-at="2023-03-08T19:50:09 IST" duration-ms="8297" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deleteProduct -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.ServiceModule@434a63ab]" started-at="2023-03-08T19:50:09 IST" name="exitBrowser" finished-at="2023-03-08T19:50:09 IST" duration-ms="384" status="PASS">
+        </test-method> <!-- technianAvailabilityMidDate -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:09:07 IST" name="exitBrowser" finished-at="2023-04-06T22:09:08 IST" duration-ms="780" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.ProductModule">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:44:28 IST" name="setup" finished-at="2023-03-08T19:44:30 IST" duration-ms="2273" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:0, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:44:30 IST" name="loginPage" finished-at="2023-03-08T19:45:02 IST" duration-ms="31672" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginPage -->
-        <test-method signature="settingModule()[pri:1, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:02 IST" name="settingModule" finished-at="2023-03-08T19:45:04 IST" duration-ms="2129" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- settingModule -->
-        <test-method signature="createFormLabel()[pri:2, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:04 IST" name="createFormLabel" finished-at="2023-03-08T19:45:05 IST" duration-ms="1741" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createFormLabel -->
-        <test-method signature="mandatoryValidationProductName()[pri:3, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:05 IST" name="mandatoryValidationProductName" finished-at="2023-03-08T19:45:06 IST" duration-ms="338" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationProductName -->
-        <test-method signature="mandatoryValidationDescription()[pri:4, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:06 IST" name="mandatoryValidationDescription" finished-at="2023-03-08T19:45:06 IST" duration-ms="109" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationDescription -->
-        <test-method signature="mandatoryValidationPrice()[pri:5, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:06 IST" name="mandatoryValidationPrice" finished-at="2023-03-08T19:45:06 IST" duration-ms="97" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationPrice -->
-        <test-method signature="mandatoryValidationTaxName()[pri:6, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:06 IST" name="mandatoryValidationTaxName" finished-at="2023-03-08T19:45:07 IST" duration-ms="1029" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationTaxName -->
-        <test-method signature="mandatoryValidationTaxPercentage()[pri:7, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:07 IST" name="mandatoryValidationTaxPercentage" finished-at="2023-03-08T19:45:07 IST" duration-ms="85" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mandatoryValidationTaxPercentage -->
-        <test-method signature="maximumValidationProductName()[pri:8, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:07 IST" name="maximumValidationProductName" finished-at="2023-03-08T19:45:12 IST" duration-ms="5004" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationProductName -->
-        <test-method signature="maximumValidationSKU()[pri:9, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:12 IST" name="maximumValidationSKU" finished-at="2023-03-08T19:45:13 IST" duration-ms="946" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationSKU -->
-        <test-method signature="maximumValidationDescription()[pri:10, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:13 IST" name="maximumValidationDescription" finished-at="2023-03-08T19:45:16 IST" duration-ms="3327" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationDescription -->
-        <test-method signature="maximumValidationPrice()[pri:11, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:16 IST" name="maximumValidationPrice" finished-at="2023-03-08T19:45:17 IST" duration-ms="196" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationPrice -->
-        <test-method signature="beforeDecimalPointPriceField()[pri:12, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:17 IST" name="beforeDecimalPointPriceField" finished-at="2023-03-08T19:45:17 IST" duration-ms="188" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointPriceField -->
-        <test-method signature="afterDecimalPointPriceField()[pri:13, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:17 IST" name="afterDecimalPointPriceField" finished-at="2023-03-08T19:45:17 IST" duration-ms="157" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointPriceField -->
-        <test-method signature="beforeDecimalPointTaxPercentageField()[pri:15, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:17 IST" name="beforeDecimalPointTaxPercentageField" finished-at="2023-03-08T19:45:17 IST" duration-ms="340" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointTaxPercentageField -->
-        <test-method signature="afterDecimalPointTaxPercentageField()[pri:16, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:17 IST" name="afterDecimalPointTaxPercentageField" finished-at="2023-03-08T19:45:18 IST" duration-ms="390" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointTaxPercentageField -->
-        <test-method signature="maximumValidationQuantityHand()[pri:17, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:18 IST" name="maximumValidationQuantityHand" finished-at="2023-03-08T19:45:18 IST" duration-ms="228" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationQuantityHand -->
-        <test-method signature="beforeDecimalPointQuantityHandField()[pri:18, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:18 IST" name="beforeDecimalPointQuantityHandField" finished-at="2023-03-08T19:45:18 IST" duration-ms="210" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointQuantityHandField -->
-        <test-method signature="afterDecimalPointQuantityHandField()[pri:19, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:18 IST" name="afterDecimalPointQuantityHandField" finished-at="2023-03-08T19:45:18 IST" duration-ms="175" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointQuantityHandField -->
-        <test-method signature="maximumValidationLowStockThresold()[pri:20, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:18 IST" name="maximumValidationLowStockThresold" finished-at="2023-03-08T19:45:18 IST" duration-ms="204" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- maximumValidationLowStockThresold -->
-        <test-method signature="beforeDecimalPointLowStockThresoldField()[pri:21, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:18 IST" name="beforeDecimalPointLowStockThresoldField" finished-at="2023-03-08T19:45:19 IST" duration-ms="197" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeDecimalPointLowStockThresoldField -->
-        <test-method signature="afterDecimalPointLowStockThresoldField()[pri:22, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:19 IST" name="afterDecimalPointLowStockThresoldField" finished-at="2023-03-08T19:45:19 IST" duration-ms="269" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterDecimalPointLowStockThresoldField -->
-        <test-method signature="createButton()[pri:23, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:19 IST" name="createButton" finished-at="2023-03-08T19:45:19 IST" duration-ms="357" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createButton -->
-        <test-method signature="createProduct()[pri:24, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:19 IST" name="createProduct" finished-at="2023-03-08T19:45:45 IST" duration-ms="25521" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createProduct -->
-        <test-method signature="editFormLabel()[pri:25, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:45 IST" name="editFormLabel" finished-at="2023-03-08T19:45:50 IST" duration-ms="5106" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editFormLabel -->
-        <test-method signature="editmandatoryValidationProductName()[pri:26, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmandatoryValidationProductName" finished-at="2023-03-08T19:45:50 IST" duration-ms="317" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationProductName -->
-        <test-method signature="editmandatoryValidationDescription()[pri:27, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmandatoryValidationDescription" finished-at="2023-03-08T19:45:50 IST" duration-ms="103" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationDescription -->
-        <test-method signature="editmandatoryValidationPrice()[pri:28, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmandatoryValidationPrice" finished-at="2023-03-08T19:45:50 IST" duration-ms="92" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationPrice -->
-        <test-method signature="editmandatoryValidationTaxName()[pri:29, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmandatoryValidationTaxName" finished-at="2023-03-08T19:45:50 IST" duration-ms="1" status="SKIP">
-          <exception class="org.testng.SkipException">
-            <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ProductModule.editmandatoryValidationTaxName(ProductModule.java:733)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationTaxName -->
-        <test-method signature="editmandatoryValidationTaxPercentage()[pri:30, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmandatoryValidationTaxPercentage" finished-at="2023-03-08T19:45:50 IST" duration-ms="1" status="SKIP">
-          <exception class="org.testng.SkipException">
-            <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ProductModule.editmandatoryValidationTaxPercentage(ProductModule.java:760)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmandatoryValidationTaxPercentage -->
-        <test-method signature="editmaximumValidationProductName()[pri:31, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:50 IST" name="editmaximumValidationProductName" finished-at="2023-03-08T19:45:55 IST" duration-ms="4968" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationProductName -->
-        <test-method signature="editmaximumValidationSKU()[pri:32, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:55 IST" name="editmaximumValidationSKU" finished-at="2023-03-08T19:45:56 IST" duration-ms="784" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationSKU -->
-        <test-method signature="editmaximumValidationDescription()[pri:33, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:45:56 IST" name="editmaximumValidationDescription" finished-at="2023-03-08T19:46:00 IST" duration-ms="4179" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationDescription -->
-        <test-method signature="editmaximumValidationPrice()[pri:34, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:00 IST" name="editmaximumValidationPrice" finished-at="2023-03-08T19:46:01 IST" duration-ms="212" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationPrice -->
-        <test-method signature="editbeforeDecimalPointPriceField()[pri:35, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editbeforeDecimalPointPriceField" finished-at="2023-03-08T19:46:01 IST" duration-ms="164" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointPriceField -->
-        <test-method signature="editafterDecimalPointPriceField()[pri:36, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editafterDecimalPointPriceField" finished-at="2023-03-08T19:46:01 IST" duration-ms="154" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editafterDecimalPointPriceField -->
-        <test-method signature="editbeforeDecimalPointTaxPercentageField()[pri:38, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editbeforeDecimalPointTaxPercentageField" finished-at="2023-03-08T19:46:01 IST" duration-ms="0" status="SKIP">
-          <exception class="org.testng.SkipException">
-            <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ProductModule.editbeforeDecimalPointTaxPercentageField(ProductModule.java:961)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointTaxPercentageField -->
-        <test-method signature="editafterDecimalPointTaxPercentageField()[pri:39, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editafterDecimalPointTaxPercentageField" finished-at="2023-03-08T19:46:01 IST" duration-ms="0" status="SKIP">
-          <exception class="org.testng.SkipException">
-            <message>
-              <![CDATA[Skipping / Ignoring - Script not Ready for Execution ]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.SkipException: Skipping / Ignoring - Script not Ready for Execution 
-at org.test.ProductModule.editafterDecimalPointTaxPercentageField(ProductModule.java:990)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editafterDecimalPointTaxPercentageField -->
-        <test-method signature="editmaximumValidationQuantityHand()[pri:40, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editmaximumValidationQuantityHand" finished-at="2023-03-08T19:46:01 IST" duration-ms="205" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationQuantityHand -->
-        <test-method signature="editbeforeDecimalPointQuantityHandField()[pri:41, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editbeforeDecimalPointQuantityHandField" finished-at="2023-03-08T19:46:01 IST" duration-ms="193" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointQuantityHandField -->
-        <test-method signature="editafterDecimalPointQuantityHandField()[pri:42, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:01 IST" name="editafterDecimalPointQuantityHandField" finished-at="2023-03-08T19:46:02 IST" duration-ms="169" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editafterDecimalPointQuantityHandField -->
-        <test-method signature="editmaximumValidationLowStockThresold()[pri:43, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:02 IST" name="editmaximumValidationLowStockThresold" finished-at="2023-03-08T19:46:02 IST" duration-ms="198" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editmaximumValidationLowStockThresold -->
-        <test-method signature="editbeforeDecimalPointLowStockThresoldField()[pri:44, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:02 IST" name="editbeforeDecimalPointLowStockThresoldField" finished-at="2023-03-08T19:46:02 IST" duration-ms="183" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editbeforeDecimalPointLowStockThresoldField -->
-        <test-method signature="editafterDecimalPointLowStockThresoldField()[pri:45, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:02 IST" name="editafterDecimalPointLowStockThresoldField" finished-at="2023-03-08T19:46:02 IST" duration-ms="154" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editafterDecimalPointLowStockThresoldField -->
-        <test-method signature="updateButton()[pri:46, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:02 IST" name="updateButton" finished-at="2023-03-08T19:46:02 IST" duration-ms="282" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateButton -->
-        <test-method signature="updateProduct()[pri:47, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:02 IST" name="updateProduct" finished-at="2023-03-08T19:46:11 IST" duration-ms="8592" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateProduct -->
-        <test-method signature="searchProductName()[pri:48, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:11 IST" name="searchProductName" finished-at="2023-03-08T19:46:13 IST" duration-ms="2046" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchProductName -->
-        <test-method signature="searchInvalid()[pri:49, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:13 IST" name="searchInvalid" finished-at="2023-03-08T19:46:14 IST" duration-ms="1505" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- searchInvalid -->
-        <test-method signature="deletedProduct()[pri:50, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:14 IST" name="deletedProduct" finished-at="2023-03-08T19:46:32 IST" duration-ms="17153" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deletedProduct -->
-        <test-method signature="reflectQuotePage()[pri:51, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:32 IST" name="reflectQuotePage" finished-at="2023-03-08T19:46:55 IST" duration-ms="23625" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- reflectQuotePage -->
-        <test-method signature="inactiveProduct()[pri:52, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:46:55 IST" name="inactiveProduct" finished-at="2023-03-08T19:47:12 IST" duration-ms="17087" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- inactiveProduct -->
-        <test-method signature="deleteProduct()[pri:53, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:47:12 IST" name="deleteProduct" finished-at="2023-03-08T19:47:20 IST" duration-ms="7520" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deleteProduct -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.ProductModule@485966cc]" started-at="2023-03-08T19:47:20 IST" name="exitBrowser" finished-at="2023-03-08T19:47:21 IST" duration-ms="714" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.ProductModule -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+      </class> <!-- org.test.AvailabilityTechnicians -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

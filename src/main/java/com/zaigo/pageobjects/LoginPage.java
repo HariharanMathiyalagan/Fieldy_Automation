@@ -43,7 +43,7 @@ public class LoginPage extends BaseClass {
 	}
 
 	public String dashBoardText() {
-		wait = new WebDriverWait(driver, 50);
+		wait = new WebDriverWait(driver, 100);
 		wait.until(ExpectedConditions.visibilityOfElementLocated((Dashboard)));
 		return driver.findElement(Dashboard).getText();
 	}

@@ -60,28 +60,38 @@ public class JobPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']//tr[2]//td[2]//a"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[2]//a"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//a") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//a"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement CustomerNameList;
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[3]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[2]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListJobNumber1;
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[2]"),
 			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[24]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[24]") })
+			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[24]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListJobNumber2;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[4]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[4]//span"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
-			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]") })
+			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListLocationName;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='tags-ele-0']/div"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']/tbody/tr[2]/td[5]/span") })
+	WebElement ListTechnician;
 	@FindAll({
 			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][1]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[3]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListFromDate;
 	@FindAll({
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][2]"),
-			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][2]") })
+			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][2]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListToDate;
 	@FindAll({ @FindBy(xpath = "//*[@id='customer-organization-nav-menu']//li[3]"),
 			@FindBy(xpath = "//*[@id='customer-contact-nav-menu']//li[3]") })
@@ -118,6 +128,7 @@ public class JobPage extends BaseClass {
 	By CreateJobLabel = By.xpath("//*[@data-menuselector='job-menu']");
 	By CreateGlobalJob = By.xpath("//*[@data-automationid='job-create']");
 	By Job = By.id("job-menu");
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By JobListLabel = By.xpath("//*[@data-menuselector='job-menu']");
 	By GlobalCustomer = By.id("id_customer_group");
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
@@ -199,7 +210,8 @@ public class JobPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[4]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[6]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[6]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement StatusJob;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[25]"),
@@ -253,6 +265,10 @@ public class JobPage extends BaseClass {
 
 	@FindAll({ @FindBy(id = "cutomer-contact-job-count"), @FindBy(id = "cutomer-company-job-count") })
 	WebElement TotalCount;
+
+	@FindAll({ @FindBy(xpath = "//*[contains(text(),'No Data Found')]"),
+			@FindBy(xpath = "//*[@id='technician_ids-autocomplete-list']//div[1]") })
+	WebElement TechnicianName;
 
 	public JobPage(WebDriver driver) {
 		this.driver = driver;
@@ -333,6 +349,12 @@ public class JobPage extends BaseClass {
 	}
 
 	private void elementtobeClickable(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
+
+	private void elementtobeClickable(WebElement element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
@@ -473,8 +495,14 @@ public class JobPage extends BaseClass {
 	}
 
 	@FindAll({ @FindBy(xpath = "(//*[text()='Job No :'])[1]"), @FindBy(xpath = "//*[text()='No Data Available']"),
-			@FindBy(xpath = "//*[text()='Customer']") })
+			@FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement JobList;
+
+	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/a"),
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
+			@FindBy(xpath = "//*[@id='job-create']/header/div/div/div/a") })
+	WebElement ListPage;
 
 	public int countValidation(int value) {
 		if (value == 1) {
@@ -489,21 +517,32 @@ public class JobPage extends BaseClass {
 		return value;
 	}
 
-	public String customerJobListPage() throws InterruptedException {
-		String text = this.getText(CustomerNameList);
-		this.clickButton(CustomerNameList);
-		this.visibility(CustomerName);
-		this.mouseActionClick(ClickTabJob);
-		this.visibility(JobList);
-		this.mouseActionClick(Filter);
-		this.visibility(Apply);
-		this.mouseActionClick(Apply);
-		this.visibility(JobList);
-		this.getCount();
-		String customerName = this.customerName("DetailScreenCustomerName");
-		this.visibility(CreateButton);
-		this.mouseActionClick(CreateButton);
-		return customerName;
+	public String labelValidation(String value) throws InterruptedException {
+		if (value.equals("Customer")) {
+			this.mouseActionClick(CustomerNameList);
+			this.visibility(CustomerName);
+			this.mouseActionClick(ClickTabJob);
+			this.visibility(JobList);
+			this.mouseActionClick(Filter);
+			this.visibility(Apply);
+			this.mouseActionClick(Apply);
+			this.visibility(JobList);
+			this.getCount();
+		} else if (value.equals("Global")) {
+			this.mouseActionClick(Job);
+			this.visibility(JobList);
+		} else if (value.equals("CreateLabel")) {
+			this.mouseActionClick(CreateButton);
+			this.visibility(SaveComplete);
+		} else if (value.equals("EditLabel") || value.equals("GlobalEdit")) {
+			String text = this.getText(ListLocationName);
+			if (value.equals("GlobalEdit")) {
+				this.mouseActionClick(ThreeDots);
+			}
+			this.mouseActionClick(EditButton);
+			this.valuePresent(Location, text);
+		}
+		return this.getText(ListPage);
 	}
 
 	static String getName;
@@ -526,6 +565,8 @@ public class JobPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Name;
 
+	By Reset = By.xpath("//*[text()=' Reset Search']");
+
 	public String module() throws InterruptedException {
 		this.mouseActionClick(Job);
 		this.visibility(Name);
@@ -536,28 +577,29 @@ public class JobPage extends BaseClass {
 	}
 
 	public void mandatoryContactField() throws InterruptedException {
-		for (int i = 0; i < 3; i++) {
-			this.mouseActionClick(RadioButtonOrg);
-			this.mouseActionClick(RadioButton);
-			this.mouseActionClick(SaveComplete);
+		this.mouseActionClick(SaveComplete);
+		if (this.conditionChecking1(ErrorLocation)) {
+		} else {
+			do {
+				this.mouseActionClick(SaveComplete);
+			} while (!this.conditionChecking1(ErrorLocation));
 		}
-
 	}
 
 	public void mandatoryOrganizationField() throws InterruptedException {
-		for (int i = 0; i < 3; i++) {
-			this.mouseActionClick(RadioButtonOrg);
-			this.mouseActionClick(SaveComplete);
-			this.mouseActionClick(RadioButton);
-			this.mouseActionClick(RadioButtonOrg);
+		this.mouseActionClick(RadioButtonOrg);
+		this.mouseActionClick(SaveComplete);
+		if (this.conditionChecking1(ErrorLocation)) {
+		} else {
+			do {
+				this.mouseActionClick(SaveComplete);
+			} while (!this.conditionChecking1(ErrorLocation));
 		}
-
 	}
 
 	public void switchOrganization() throws InterruptedException {
 		this.assertName(Label, "Create Job");
 		this.mouseActionClick(RadioButtonOrg);
-
 	}
 
 	static String firstName;
@@ -589,6 +631,14 @@ public class JobPage extends BaseClass {
 		this.inputText(StartDate, currentDate);
 	}
 
+	public void currentPickerFromDate1() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		this.inputText(StartDate, currentDate);
+	}
+
 	public String currentFilterPickerFromDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
 		Calendar cal = Calendar.getInstance();
@@ -613,10 +663,35 @@ public class JobPage extends BaseClass {
 		this.inputText(EndDate, currentDate);
 	}
 
+	static SimpleDateFormat sdf;
+
+	public String twoDaysPickerToDate(String value) {
+		if (value.equals("ReturnValue")) {
+			sdf = new SimpleDateFormat("MMM-dd-yyy");
+		} else if (value.equals("Format")) {
+			sdf = new SimpleDateFormat("MM/dd/yyy");
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 3);
+		String currentDate = sdf.format(cal.getTime());
+		if (value.equals("InputText")) {
+			this.inputText(EndDate, currentDate);
+		}
+		return currentDate;
+	}
+
 	public String currentFilterPickerToDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
+		String currentDate = sdf.format(cal.getTime());
+		return currentDate;
+	}
+
+	public String currentFilterPickerToDate1() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 2);
 		String currentDate = sdf.format(cal.getTime());
 		return currentDate;
 	}
@@ -685,6 +760,7 @@ public class JobPage extends BaseClass {
 	}
 
 	public String jobStatusCreation(String value) throws IOException, InterruptedException {
+		driver.manage().deleteAllCookies();
 		if (value.equals("Unassigned")) {
 			this.mouseActionClick(BussinessUnit);
 			this.mouseActionClick(General);
@@ -733,7 +809,7 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(Back);
 			this.mouseActionClick(Yes);
 			this.message("Message");
-		} else if (value.equals("CreateJob")) {
+		} else if (value.equals("CreateJob") || value.equals("FromTime") || value.equals("TwoDaysWork")) {
 			this.picKLocation();
 			this.mouseActionClick(BussinessUnit);
 			this.mouseActionClick(General);
@@ -744,9 +820,17 @@ public class JobPage extends BaseClass {
 			this.inputText(Description, getPropertyValue("Description"));
 			this.scrollDown();
 			this.currentPickerFromDate();
-			this.currentPickerToDate();
-			this.inputText(StartTime, "10.00");
-			this.inputText(EndTime, "18.00");
+			this.dropDownByIndex(StartTime, 41);
+			if (value.equals("CreateJob")) {
+				this.currentPickerToDate();
+				this.inputText(EndTime, "18.00");
+			} else if (value.equals("TwoDaysWork")) {
+				this.invisible(Spinner);
+				this.twoDaysPickerToDate("Format");
+				this.twoDaysPickerToDate("InputText");
+				this.dropDownByIndex(EndTime, 45);
+				this.invisible(Spinner);
+			}
 			this.visibility(TechnicianLabel);
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianSecoundName);
@@ -754,6 +838,13 @@ public class JobPage extends BaseClass {
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(SaveComplete);
 			this.visibility(JobList);
+		} else if (value.equals("BackNav")) {
+			this.scrollUp();
+			this.mouseActionClick(ListPage);
+			this.mouseActionClick(No);
+			this.mouseActionClick(JobList);
+			this.tiggerFunction("Cancel");
+			this.message("Message");
 		}
 		return value;
 
@@ -780,6 +871,12 @@ public class JobPage extends BaseClass {
 			return text;
 		} else if (value.equals("ButtonClick")) {
 			this.mouseActionClick(SaveComplete);
+			if (this.conditionChecking1(ErrorLocation)) {
+			} else {
+				do {
+					this.mouseActionClick(SaveComplete);
+				} while (!this.conditionChecking1(ErrorLocation));
+			}
 		} else if (value.equals("CustomerName")) {
 			String text = this.getText(CustomerError);
 			return text;
@@ -815,6 +912,7 @@ public class JobPage extends BaseClass {
 			}
 		} else if (value.equals("Search")) {
 			this.clearField(SearchField);
+			this.clearField(SearchField);
 		}
 		return value;
 	}
@@ -843,57 +941,94 @@ public class JobPage extends BaseClass {
 
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 1);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	static String responseMessage;
 	static String messageCheck;
 
-	public String message(String value) throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			responseMessage = this.getText(Message);
-			this.invisible(Message);
-			return responseMessage;
+			if (this.conditionChecking(Message)) {
+				responseMessage = this.getText(Message);
+				this.invisible(Message);
+				return responseMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveButton);
+					if (this.conditionChecking(Message)) {
+						responseMessage = this.getText(Message);
+						this.invisible(Message);
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			do {
 				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
 					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 					this.clearField(OrganizationName);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
+					firstName = this.getTextAttribute(OrganizationName);
 					this.mouseActionClick(SaveButton);
 					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
 					messageCheck = this.getText(Message);
-				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
-						&& responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
-					this.clearField(OrganizationName);
-					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
-					String fakeCompanyName = faker.company().name();
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(OrganizationName, fakeCompanyName);
-					this.inputText(EmailField, fakeEmail);
-					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
+					this.mouseActionClick(SaveButton);
 					messageCheck = this.getText(Message);
 				}
-				if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
-					conditionCheck = false;
+				if (this.conditionChecking(Message)) {
+					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveButton);
+						if (this.conditionChecking(Message)) {
+							messageCheck = this.getText(Message);
+							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
 				}
 			} while (conditionCheck);
 		}
@@ -961,11 +1096,17 @@ public class JobPage extends BaseClass {
 		}
 	}
 
+	@FindAll({ @FindBy(id = "job-search-enter"), @FindBy(id = "customer-contact-job-search-enter"),
+			@FindBy(id = "customer-company-job-search-enter") })
+	WebElement SearchButton;
 	static String listData;
 
 	public String listValidation(String value) {
+		driver.manage().deleteAllCookies();
 		if (value.equals("SearchData")) {
-			this.tagValidation(SearchField, listData);
+			this.elementtobeClickable(SearchButton);
+			this.inputText(SearchField, listData);
+			this.mouseActionClick(SearchButton);
 		} else if (value.equals("JobNo1")) {
 			listData = this.getText(ListJobNumber1);
 			return listData;
@@ -1002,8 +1143,34 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("InvalidResult")) {
 			String text = this.getText(Invalid);
 			return text;
+		} else if (value.equals("Technician")) {
+			listData = this.getText(ListTechnician);
+			return listData;
 		}
 		return value;
+	}
+
+	public String checkTechnician(String value) throws InterruptedException {
+		if (value.equals("9.45A.M")) {
+			this.dropDownByIndex(StartTime, 40);
+		} else if (value.equals("10.30A.M")) {
+			this.dropDownByIndex(StartTime, 43);
+		} else if (value.equals("11.00A.M")) {
+			this.dropDownByIndex(StartTime, 45);
+		} else if (value.equals("8.15A.M")) {
+			this.dropDownByIndex(StartTime, 34);
+		} else if (value.equals("10.00A.M")) {
+			this.dropDownByIndex(StartTime, 41);
+		} else if (value.equals("11.45A.M")) {
+			this.dropDownByIndex(StartTime, 48);
+		}
+		driver.manage().deleteAllCookies();
+		this.invisible(Spinner);
+		this.mouseActionClick(Technician);
+		this.visibility(TechnicianName);
+		this.inputText(Technician, listData);
+		String text = this.getText(TechnicianName);
+		return text;
 	}
 
 }

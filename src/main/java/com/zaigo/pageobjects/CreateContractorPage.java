@@ -216,7 +216,6 @@ public class CreateContractorPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Company']") })
 	private WebElement ContactName;
 
-
 	public int totalCount() throws InterruptedException {
 		this.visibility(ContactName);
 		String text2 = this.getText(TotalCount);
@@ -232,6 +231,11 @@ public class CreateContractorPage extends BaseClass {
 	public CreateContractorPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(this.driver, 20);
+	}
+
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
 	}
 
 	By LocationName = By.id("addresses__name__0");
@@ -262,6 +266,12 @@ public class CreateContractorPage extends BaseClass {
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+	}
+	
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
 	}
 
 	public void clearField(By element) {
@@ -340,10 +350,18 @@ public class CreateContractorPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
 	By EditHeading = By.xpath("//a[@data-exitpopup='team_companies_company']");
-	By ListCompanyName = By.xpath("(//a[@data-detailheadermenu=\"tmusr-user-profile\"])[1]");
-	By ListName = By.xpath("(//*[@data-n-linkto='team_companies_contractor_profile'])[5]");
-	By ListEmail = By.xpath("(//a[@class='false'])[1]");
-	By ListPhoneNumber = By.xpath("(//td[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[2]/span/a"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListCompanyName;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]/span/a"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListName;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]/a"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListEmail;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]/a"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListPhoneNumber;
 	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
 	By resert = By.xpath("//a[text()=' Reset Search']");
 
@@ -432,6 +450,12 @@ public class CreateContractorPage extends BaseClass {
 			this.mouseActionClick(Previous);
 		} else if (value.equals("SaveButton")) {
 			this.mouseActionClick(saveform);
+			if (this.conditionChecking(ErrorCompanyName)) {
+			} else {
+				do {
+					this.mouseActionClick(saveform);
+				} while (!this.conditionChecking(ErrorCompanyName));
+			}
 		} else if (value.equals("Navigate")) {
 			this.mouseActionClick(Team);
 			this.visibilitys(Tittle);
@@ -458,6 +482,8 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("SubmissionButton")) {
 			String text = this.getText(saveform);
 			return text;
+		}else if (value.equals("ClickButton")) {
+			this.mouseActionClick(saveform);
 		}
 		return value;
 	}
@@ -629,27 +655,52 @@ public class CreateContractorPage extends BaseClass {
 			this.inputText(LocationCity, fakeCity);
 			this.inputText(LocationState, fakeState);
 			this.inputText(LocationZipcode, fakeZipcode);
-			this.clickEvent("SaveButton");
+			this.clickEvent("ClickButton");
 		}
 
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 	static String response;
 
-	public String responseMessage(String value) throws IOException {
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			response = this.getText(Message);
-			this.mouseActionClick(Cancel);
-			return response;
+			if (this.conditionChecking(Message)) {
+				response = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(saveform);
+					if (this.conditionChecking(Message)) {
+						this.responseMessage("Message");
+						if (response.equals(getPropertyValue("CompanyContractorCreatedMessage"))
+								|| response.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			if (response.equals(getPropertyValue("AlreadyExistedEmail"))
 					|| response.equals(getPropertyValue("CompanyNameExists"))) {
 				this.clickEvent("BackButton");
 			}
 		}
-		return value;
+		return response;
 	}
 
 	public String listValidation(String value) {

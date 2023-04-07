@@ -31,7 +31,7 @@ public class LeadSource extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("LeadSource.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -131,7 +131,7 @@ public class LeadSource extends BaseClass {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void mandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Lead Source Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -144,7 +144,6 @@ public class LeadSource extends BaseClass {
 		if (editContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			initElements.clearField("LeadSource");
-			ListField = initElements.leadSourceField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -153,7 +152,6 @@ public class LeadSource extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 			initElements.clearField("LeadSource");
-			ListField = initElements.leadSourceField("ValidData");
 		}
 	}
 
@@ -170,6 +168,7 @@ public class LeadSource extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("LeadSource");
+			ListField = mandatory.leadSourceField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -178,6 +177,7 @@ public class LeadSource extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("LeadSource");
+			ListField = mandatory.leadSourceField("ValidData");
 		}
 
 	}
@@ -279,7 +279,9 @@ public class LeadSource extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("EditLeadSourcePage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.clearField("LeadSource");
+			for (int i = 0; i < 5; i++) {
+				initElements.clearField("LeadSource");
+			}
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -287,11 +289,13 @@ public class LeadSource extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
-			initElements.clearField("LeadSource");
+			for (int i = 0; i < 5; i++) {
+				initElements.clearField("LeadSource");
+			}
 		}
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 11)
 	private void editmandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Lead Source Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -315,7 +319,7 @@ public class LeadSource extends BaseClass {
 		}
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	private void editmaximumValidationLeadSource() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Lead Source Name Field exceed its max-256 limit");
@@ -328,6 +332,7 @@ public class LeadSource extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("LeadSource");
+			ListField = mandatory.leadSourceField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -336,6 +341,7 @@ public class LeadSource extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("LeadSource");
+			ListField = mandatory.leadSourceField("ValidData");
 		}
 
 	}

@@ -8,8 +8,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.poi.ss.formula.ptg.NotEqualPtg;
-import org.apache.xmlbeans.impl.xb.xsdschema.ListDocument.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -67,6 +65,17 @@ public class TeamUserPage extends BaseClass {
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+	}
+	
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	public void clearField(By element) {
@@ -644,11 +653,25 @@ public class TeamUserPage extends BaseClass {
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
-	public String responseMessage(String value) throws IOException {
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean check = false;
 		if (value.equals("Message")) {
-			listData = this.getText(Message);
-			this.invisible(Message);
-			return listData;
+			if (this.conditionChecking(Message)) {
+				listData = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveComplete);
+					if (this.conditionChecking(Message)) {
+						listData = this.responseMessage("Message");
+						if (listData.equals(getPropertyValue("UserCreatedMessgae"))
+								|| listData.equals(getPropertyValue("UserUpdatedMessage"))) {
+							check = true;
+						}
+					}
+				} while (check);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))
 					&& (label.equals(getPropertyValue("TeamCreateUserPage"))
@@ -663,7 +686,7 @@ public class TeamUserPage extends BaseClass {
 				this.visibility(PageLand);
 			}
 		}
-		return value;
+		return listData;
 	}
 
 	public void clearAllFields(String value) {
@@ -691,40 +714,55 @@ public class TeamUserPage extends BaseClass {
 
 	static String response;
 	static String listLabel;
+	static String techCount;
 
-	public String dataConditionCheck(String value) throws IOException {
+	public String dataConditionCheck(String value) throws IOException, InterruptedException {
 		if (value.equals("Condition")) {
 			response = this.getText(PageLand);
 			listLabel = this.getText(ListLabel);
 			return response;
-		} else if (value.equals("AlternateFunction")) {
-			if (response.equals("First Name") && listLabel.equals(getPropertyValue("TeamListLabel"))
-					|| response.equals("First Name") && listLabel.equals(getPropertyValue("TeamContractorListLabel"))) {
-				this.visibility(PageLand);
-			} else if (response.equals("No Result Found") && listLabel.equals(getPropertyValue("TeamListLabel"))) {
-				for (int i = 0; i < 5; i++) {
-					this.mouseActionClick(CreateUser);
-					this.validateFillData("Basic");
-					this.clickEvent("Next");
-					this.validateFillData("Location");
-					this.clickEvent("SaveUpdate");
-					this.responseMessage("Message");
-					this.visibility(PageLand);
+		} else if (value.equals("UserCreate") || value.equals("UserContractorCreate")) {
+			if (value.equals("UserCreate")) {
+				this.getCount(3);
+				int userCount = 5 - parseInt;
+				if (userCount <= 5) {
+					for (int i = 0; i < userCount; i++) {
+						this.mouseActionClick(CreateUser);
+						this.validateFillData("Basic");
+						this.clickEvent("Next");
+						this.validateFillData("Location");
+						this.clickEvent("SaveUpdate");
+						this.responseMessage("Message");
+						this.visibility(PageLand);
+					}
+				} else if (value.equals("UserContractorCreate")) {
+					int userContractorCount = 5 - parseInt;
+					for (int i = 0; i < userContractorCount; i++) {
+						this.mouseActionClick(CreateContractor);
+						this.validateFillData("BasicContractor");
+						this.clickEvent("Next");
+						this.validateFillData("Location");
+						this.clickEvent("SaveUpdate");
+						this.responseMessage("Message");
+						this.visibility(PageLand);
+					}
 				}
-			} else if (response.equals("No Result Found")
-					&& listLabel.equals(getPropertyValue("TeamContractorListLabel"))) {
-				for (int i = 0; i < 5; i++) {
-					this.mouseActionClick(CreateContractor);
-					this.validateFillData("BasicContractor");
-					this.clickEvent("Next");
-					this.validateFillData("Location");
-					this.clickEvent("SaveUpdate");
-					this.responseMessage("Message");
-					this.visibility(PageLand);
-				}
-
 			}
 		}
+		return response;
+
+	}
+
+	public String createUser() throws InterruptedException, IOException {
+		for (int i = 0; i < 3; i++) {
+			this.mouseActionClick(CreateUser);
+			this.validateFillData("Basic");
+			this.clickEvent("Next");
+			this.validateFillData("Location");
+			this.clickEvent("SaveUpdate");
+			this.visibility(PageLand);
+		}
+		response = this.responseMessage("Message");
 		return response;
 
 	}

@@ -31,7 +31,7 @@ public class TeamUser extends BaseClass {
 	static String listValidation;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("TeamUser.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -359,7 +359,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 13)
-	private void maxValidatonPhoneNumber() throws IOException {
+	private void maxValidatonPhoneNumber() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -562,7 +562,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 21)
-	private void maxValidationZipcode() throws IOException {
+	private void maxValidationZipcode() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -684,7 +684,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 31)
-	private void searchNameValidation() throws IOException {
+	private void searchNameValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Enter the User Name:" + listValidation + "in the Search field & User Name list retrived successfully");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -704,6 +704,7 @@ public class TeamUser extends BaseClass {
 			File file = new File("61.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("61.png");
+			Thread.sleep(20000);
 			landing.clearField("Search");
 			listValidation = landing.listValidation("PhoneNumber");
 		}
@@ -731,6 +732,7 @@ public class TeamUser extends BaseClass {
 			File file = new File("62.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("62.png");
+			Thread.sleep(20000);
 			landing.clearField("Search");
 			listValidation = landing.listValidation("Email");
 		}
@@ -738,7 +740,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 33)
-	private void searchEmailValidation() throws IOException {
+	private void searchEmailValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Enter the User Email:" + listValidation
 				+ "in the Search field & User Email list retrived successfully");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -757,13 +759,14 @@ public class TeamUser extends BaseClass {
 			File file = new File("63.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("63.png");
+			Thread.sleep(20000);
 			landing.clearField("Search");
 		}
 
 	}
 
 	@Test(priority = 34)
-	private void invalidDataValidation() throws IOException {
+	private void invalidDataValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -782,6 +785,7 @@ public class TeamUser extends BaseClass {
 			File file = new File("64.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("64.png");
+			Thread.sleep(20000);
 			landing.clickEvent("Reset");
 		}
 	}
@@ -1033,7 +1037,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 46)
-	private void editmaxValidatonPhoneNumber() throws IOException {
+	private void editmaxValidatonPhoneNumber() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1238,7 +1242,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 54)
-	private void editmaxValidationZipcode() throws IOException {
+	private void editmaxValidationZipcode() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1322,7 +1326,7 @@ public class TeamUser extends BaseClass {
 		if (responseMessage.equals(getPropertyValue("UserDeleteMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("AlternateFunction");
+			landing.dataConditionCheck("UserCreate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1331,7 +1335,7 @@ public class TeamUser extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("67.png");
 			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("AlternateFunction");
+			landing.dataConditionCheck("UserCreate");
 		}
 
 	}

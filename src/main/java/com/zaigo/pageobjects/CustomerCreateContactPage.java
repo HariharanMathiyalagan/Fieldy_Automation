@@ -102,11 +102,18 @@ public class CustomerCreateContactPage extends BaseClass {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
-	
+
+	public void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 100);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
 	public void invisible(By element) {
 		wait = new WebDriverWait(driver, 100);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
-	
+
 	}
 
 	public void assertName(By element, String text) {
@@ -167,11 +174,11 @@ public class CustomerCreateContactPage extends BaseClass {
 		return until;
 	}
 
-	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Customer Name')]"), @FindBy(xpath = "//*[contains(text(),'No Result Found')]"),
+	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Customer Name')]"),
+			@FindBy(xpath = "//*[contains(text(),'No Result Found')]"),
 			@FindBy(xpath = "//*[contains(text(),'Contact Name')]") })
 	WebElement CustomerList;
 	static int parseInt;
-
 
 	public int getCount() {
 		wait = new WebDriverWait(driver, 10);
@@ -195,18 +202,17 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By CustomerContact = By.xpath("//*[@class='page-header-left back-btn']");
+	By CustomerContact = By.xpath("//*[contains(text(),'Customer / Contact')]");
 	By CustomerFilter = By.xpath("//*[@gloss='Filter']");
 
 	public String modulePage() throws InterruptedException, IOException {
-		this.assertName(DashBoard, "Company Performance");
 		this.mouseActionClick(Customer);
 		this.elementtobeClickable(SearchButton);
 		this.visibility(CustomerList);
 		this.mouseActionClick(Contact);
+		String text2 = this.getText(CustomerContact);
 		this.elementtobeClickable(SearchButton);
 		this.visibility(CustomerList);
-		String text2 = this.getText(CustomerContact);
 		this.getCount();
 		this.mouseActionClick(AddContact);
 		return text2;
@@ -233,7 +239,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	By New = By.xpath("//button[@data-modalfetch='shorter_organization_create']");
 	By Logo = By.xpath("//input[@id='logo']//following::label[@for='logo']");
 	By LeadSources = By.xpath("//input[@data-dropdownlist='lead-source']");
-	By Social = By.xpath("//*[text()='Social']");
+//	By Social = By.xpath("//*[text()='Social']");
+	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
+	WebElement Social;
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
 	By Next = By.xpath("//*[@data-automationid='next']");
 	By MakethisProperty = By.id("addresses__is_primary__0");
@@ -286,7 +295,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Filter = By.xpath("//span[@data-timeline-open='customercontact']");
 	By Apply = By.xpath("//div[@class='col-lg-4 col-md-4 col-sm-6 col-12 pt-2']//child::button");
 	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
-	By ListSocial = By.xpath("(//input[@class='mr-3'])[2]");
+	By ListSocial = By.xpath("(//input[@class='mr-3'])[1]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");
 	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
@@ -294,6 +303,28 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void visibility(WebElement element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	public void visibility(By element) {
@@ -576,17 +607,18 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	public void firstNameValidation(String value) {
+	public void firstNameValidation(String value) throws IOException {
 		if (value.equals("MandatoryValidation")) {
-			for (int i = 0; i <= 5; i++) {
-				this.mouseActionClick(SaveComplete);
-				this.mouseActionClick(Next);
-				this.elementtobeClickable(SaveComplete);
+			this.mouseActionClick(SaveComplete);
+			if (this.conditionChecking1(ErrorFirstName)) {
+			} else {
+				do {
+					this.mouseActionClick(SaveComplete);
+				} while (!this.conditionChecking1(ErrorFirstName));
 			}
 		} else if (value.equals("MaxValidation")) {
 			this.validationTab(FirstName, characters256);
 		}
-
 	}
 
 	public void lastNameValidation(String value) {
@@ -731,17 +763,32 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	static String responseMessage;
 
-	public String responseMessage(String value) throws IOException {
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean check = true;
 		if (value.equals("CustomerCreate")) {
-			responseMessage = this.getText(Message);
-			this.invisible(Message);
-			return responseMessage;
+			if (this.conditionChecking(Message)) {
+				responseMessage = this.getText(Message);
+				this.invisible(Message);
+				return responseMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveComplete);
+					if (this.conditionChecking(Message)) {
+						responseMessage = this.getText(Message);
+						this.invisible(Message);
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+							check = false;
+						}
+					}
+				} while (check);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
 				this.mouseActionClick(Contact);
 				this.visibility(CustomerList);
 			}
-
 		}
 		return value;
 
@@ -802,9 +849,14 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
 		this.inputText(Phone, fakePhoneNumber);
-		Thread.sleep(5000);
 		this.mouseActionClick(LeadSources);
-		this.mouseActionClick(Social);
+		if (this.getText(Social).equals("No Data Found")) {
+			Thread.sleep(5000);
+			this.mouseActionClick(LeadSources);
+			this.mouseActionClick(Social);
+		} else {
+			this.mouseActionClick(Social);
+		}
 		this.mouseActionClick(Next);
 
 	}

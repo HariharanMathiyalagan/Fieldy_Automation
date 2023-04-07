@@ -31,7 +31,7 @@ public class ServiceType extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("ServiceType.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -131,7 +131,7 @@ public class ServiceType extends BaseClass {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void mandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Lead Source Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -144,7 +144,6 @@ public class ServiceType extends BaseClass {
 		if (editContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			initElements.clearField("ServiceType");
-			ListField = initElements.serviceTypeField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -153,11 +152,10 @@ public class ServiceType extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 			initElements.clearField("ServiceType");
-			ListField = initElements.serviceTypeField("ValidData");
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 5)
 	private void maximumValidationServiceType() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Service Type Name Field exceed its max-256 limit");
@@ -170,6 +168,7 @@ public class ServiceType extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("ServiceType");
+			ListField = mandatory.serviceTypeField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -178,6 +177,7 @@ public class ServiceType extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("ServiceType");
+			ListField = mandatory.serviceTypeField("ValidData");
 		}
 
 	}
@@ -230,8 +230,8 @@ public class ServiceType extends BaseClass {
 
 	@Test(priority = 8)
 	private void serviceTypeCreateList() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest(
-				"Verify a newly created Service Type Name:" + ListField + " is displayed in the Service Type List page");
+		extentTest = extentReports.createTest("Verify a newly created Service Type Name:" + ListField
+				+ " is displayed in the Service Type List page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.listValdidation("ServiceType");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);
@@ -279,8 +279,10 @@ public class ServiceType extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("EditServiceTypePage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.clearField("ServiceType");
-			initElements.clearField("ServiceType");
+			for (int i = 0; i < 5; i++) {
+				initElements.serviceTypeField("ValidData");
+				initElements.clearField("ServiceType");
+			}
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -288,8 +290,10 @@ public class ServiceType extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
-			initElements.clearField("ServiceType");
-			initElements.clearField("ServiceType");
+			for (int i = 0; i < 5; i++) {
+				initElements.serviceTypeField("ValidData");
+				initElements.clearField("ServiceType");
+			}
 		}
 	}
 
@@ -442,11 +446,11 @@ public class ServiceType extends BaseClass {
 			ListField = landing.createBusinessDays("CreatedServiceType");
 		}
 	}
-	
+
 	@Test(priority = 17)
 	private void reflectCreateContactPage() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the newly created Business Unit Name is:" + ListField
-				+ " & it's reflect the Lead Source field in the Customer Contact Page");
+		extentTest = extentReports.createTest("Verify the newly created Service Type Name is:" + ListField
+				+ " & it's reflect the Service Type field in the Create Job Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.teamClick();
 		landing.userClick();
@@ -470,8 +474,8 @@ public class ServiceType extends BaseClass {
 
 	@Test(priority = 18)
 	private void inactiveLeadSource() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Inactive Business Unit Name is:" + ListField
-				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
+		extentTest = extentReports.createTest("Verify the Inactive Service Type Name is:" + ListField
+				+ " & it's not reflect the Service Type field in the Create Job Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.userClick();
 		String createMessage = landing.bussinessDays("ServiceType");

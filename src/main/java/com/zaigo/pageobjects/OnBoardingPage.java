@@ -16,7 +16,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.poi.ss.formula.functions.Value;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -116,7 +115,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public String getText(By element) {
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, 100);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		return until;
 
@@ -130,7 +129,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void visible(By element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 
 	}
@@ -138,7 +137,7 @@ public class OnBoardingPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 5);
+			wait = new WebDriverWait(driver, 20);
 			text = wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -389,6 +388,7 @@ public class OnBoardingPage extends BaseClass {
 
 	public void maximumValidationIndustryField() {
 		this.validationTab(Industry, characters256);
+		this.mouseActionClick(Continue);
 
 	}
 

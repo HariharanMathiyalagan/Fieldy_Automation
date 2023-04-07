@@ -31,7 +31,7 @@ public class Login {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("Login.html");
 		extentReports.attachReporter(extentHtmlReporter);

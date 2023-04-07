@@ -32,7 +32,7 @@ public class TeamSendInvite extends BaseClass{
 	static String listValidation;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("TeamUserSendInvite.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -323,7 +323,7 @@ public class TeamSendInvite extends BaseClass{
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text_button.equals(getPropertyValue("SendInviteButton"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Results are Equal");
-			contractorPage.clickEvent("SendInvite");
+			contractorPage.clickEvent("ClickButton");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Results are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -331,7 +331,7 @@ public class TeamSendInvite extends BaseClass{
 			File file = new File("26.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("26.png");
-			contractorPage.clickEvent("SendInvite");
+			contractorPage.clickEvent("ClickButton");
 		}
 
 	}

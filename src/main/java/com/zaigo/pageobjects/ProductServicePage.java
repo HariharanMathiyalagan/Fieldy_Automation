@@ -91,6 +91,28 @@ public class ProductServicePage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	private void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -414,6 +436,14 @@ public class ProductServicePage extends BaseClass {
 			String text = this.getText(ListInventoryName);
 			this.mouseActionClick(CreateButton);
 			this.validationTab(InventoryName, text);
+		} else if (value.equals("Mandatory")) {
+			this.mouseActionClick(SaveComplete);
+			if (this.conditionChecking1(ErrorInventoryName)) {
+			} else {
+				do {
+					this.mouseActionClick(SaveComplete);
+				} while (!this.conditionChecking1(ErrorInventoryName));
+			}
 		}
 	}
 
@@ -443,7 +473,7 @@ public class ProductServicePage extends BaseClass {
 
 	public void taxPercentage(String value) {
 		if (value.equals("MaxValidation")) {
-			this.inputText(TaxPercentage, "122");
+			this.inputText(TaxPercentage, "1221212112");
 		} else if (value.equals("AfterDecimal")) {
 			this.inputText(TaxPercentage, "12.121");
 		} else if (value.equals("BeforeDecimal")) {
@@ -614,6 +644,7 @@ public class ProductServicePage extends BaseClass {
 			this.inputText(Price, PriceValue);
 		} else if (value.equals("Edit")) {
 			this.visibility(ListPage);
+			listData = this.getText(ListInventoryName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.valuePresent(InventoryName, listData);
@@ -621,7 +652,9 @@ public class ProductServicePage extends BaseClass {
 		}
 		this.mouseActionClick(SaveComplete);
 		String message2 = this.message("Message");
-		if (!message2.equals(getPropertyValue("InventoryCreatedMessage"))) {
+		if (message2.equals(getPropertyValue("InventoryCreatedMessage"))
+				|| message2.equals(getPropertyValue("InventoryUpdatedMessage"))) {
+		} else {
 			this.message("AlternateFunction");
 		}
 		return listData;

@@ -21,7 +21,7 @@ public class SearchDeleteVendorTestCases {
 	private LoginPage loginInPage = null;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		this.driver = BrowserSetup.startBrowser();
 	}
 
