@@ -30,7 +30,7 @@ public class TeamUserContractor extends BaseClass {
 	static String listValidation;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("TeamUserContractor.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -331,7 +331,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 12)
-	private void maxValidatonContractorPhoneNumber() throws IOException {
+	private void maxValidatonContractorPhoneNumber() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Contractor Contractor] Phone Number Field exceed its max-20 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -535,7 +535,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 21)
-	private void maxValidationZipcode() throws IOException {
+	private void maxValidationZipcode() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Contractor] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -658,7 +658,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 31)
-	private void searchNameValidation() throws IOException {
+	private void searchNameValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Enter the User Contractor Name:" + listValidation
 				+ "in the Search field & User Contractor Name list retrived successfully");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -678,6 +678,7 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("61.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("61.png");
+			Thread.sleep(20000);
 			landing.clearField("ContractorSearch");
 			listValidation = landing.listValidation("ContractorPhoneNumber");
 		}
@@ -705,6 +706,7 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("62.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("62.png");
+			Thread.sleep(20000);
 			landing.clearField("ContractorSearch");
 			listValidation = landing.listValidation("ContractorListEmail");
 		}
@@ -712,7 +714,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 33)
-	private void searchEmailValidation() throws IOException {
+	private void searchEmailValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Enter the User Contractor Email:" + listValidation
 				+ "in the Search field & User Contractor Email list retrived successfully");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -731,13 +733,14 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("63.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("63.png");
+			Thread.sleep(20000);
 			listValidation = landing.listValidation("ContractorListCompany");
 		}
 
 	}
 
 	@Test(priority = 34)
-	private void filterByCompany() throws IOException {
+	private void filterByCompany() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Select the Contractor Company:" + listValidation
 				+ "in the Company Filter & User Contractor Company list retrived successfully");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -755,13 +758,14 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("94.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("94.png");
+			Thread.sleep(20000);
 			landing.clearField("ContractorSearch");
 		}
 
 	}
 
 	@Test(priority = 35)
-	private void invalidDataValidation() throws IOException {
+	private void invalidDataValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -780,6 +784,7 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("64.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("64.png");
+			Thread.sleep(20000);
 			landing.clickEvent("Reset");
 		}
 	}
@@ -1003,7 +1008,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 46)
-	private void editmaxValidatonContractorPhoneNumber() throws IOException {
+	private void editmaxValidatonContractorPhoneNumber() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Contractor Contractor] Phone Number Field exceed its max-20 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1207,7 +1212,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 54)
-	private void editmaxValidationZipcode() throws IOException {
+	private void editmaxValidationZipcode() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Contractor] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1291,7 +1296,7 @@ public class TeamUserContractor extends BaseClass {
 		if (responseMessage.equals(getPropertyValue("ContractorDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("AlternateFunction");
+			landing.dataConditionCheck("UserContractorCreate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1300,7 +1305,7 @@ public class TeamUserContractor extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("67.png");
 			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("AlternateFunction");
+			landing.dataConditionCheck("UserContractorCreate");
 		}
 
 	}

@@ -31,7 +31,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationModule.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -2496,7 +2496,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 	}
 
 	@Test(priority = 98)
-	private void deleteContactList() throws IOException {
+	private void deleteContactList() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify deleted successful message is displayed, when the Customer Organization Deleted");
 		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);

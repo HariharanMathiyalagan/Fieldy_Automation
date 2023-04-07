@@ -32,7 +32,7 @@ public class CustomerOrganizationJob extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationJob.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -45,7 +45,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		this.extentReports.flush();
 	}
 
-	@Test(priority = -1) // 1-Login
+	@Test(priority = -2) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
@@ -69,7 +69,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 0)
+	@Test(priority = -1)
 	private void contactModule() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateOrganizationPage initElements = PageFactory.initElements(driver,
@@ -91,7 +91,7 @@ public class CustomerOrganizationJob extends BaseClass {
 
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports
 				.createTest("Verify a new Customer Organization is created successfully through [Create Organization]");
@@ -120,13 +120,33 @@ public class CustomerOrganizationJob extends BaseClass {
 
 	static String customerOrganizationJobListPage;
 
+	@Test(priority = 1)
+	private void listabelValidation() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the User is Land on the Customer / Organization / Job page");
+		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
+		String jobLandPage = jobPage.labelValidation("Customer");
+		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("OrganizationJobListPage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (jobLandPage.equals(getPropertyValue("OrganizationJobListPage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			customerOrganizationJobListPage = jobPage.customerName("DetailScreenCustomerName");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateRequestLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateRequestLabel.png");
+			customerOrganizationJobListPage = jobPage.customerName("DetailScreenCustomerName");
+		}
+	}
+
 	@Test(priority = 2)
 	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify Create Job page is opened from Organization-> Jobs -> Create Job");
+		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		customerOrganizationJobListPage = jobPage.customerJobListPage();
-		String jobLandPage = jobPage.jobLandPage();
+		String jobLandPage = jobPage.labelValidation("CreateLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageJobLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -497,8 +517,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Create Job page is opened from Organization-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		jobPage.jobStatusCreation("Edit");
-		String jobLandPage = jobPage.jobLandPage();
+		String jobLandPage = jobPage.labelValidation("EditLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageJobLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -955,7 +974,7 @@ public class CustomerOrganizationJob extends BaseClass {
 	}
 
 	@Test(priority = 38)
-	private void cancelledJob() throws IOException {
+	private void cancelledJob() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.tiggerFunction("Cancel");

@@ -19,10 +19,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CreateContractorPage;
-import com.zaigo.pageobjects.EditContractorCompaniesPage;
-import com.zaigo.pageobjects.EditDetailScreenCompaniesPage;
 import com.zaigo.pageobjects.LoginPage;
-import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class TeamCompanyContractor extends BaseClass {
@@ -32,7 +29,7 @@ public class TeamCompanyContractor extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("TeamCompanyContractor.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -746,7 +743,7 @@ public class TeamCompanyContractor extends BaseClass {
 	}
 
 	@Test(priority = 33)
-	private void searchCompanyNameListValidation() throws IOException {
+	private void searchCompanyNameListValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Enter the Company Name:" + listValidation
 				+ "in the Search field & Company Contractor list retrived successfully");
 		CreateContractorPage listValidations = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -766,6 +763,7 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("29.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("29.png");
+			Thread.sleep(20000);
 			listValidations.clearFields("Search");
 			listValidation = listValidations.listValidation("ListName");
 		}
@@ -773,7 +771,7 @@ public class TeamCompanyContractor extends BaseClass {
 	}
 
 	@Test(priority = 34)
-	private void searchNameListValidation() throws IOException {
+	private void searchNameListValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Enter the Name:" + listValidation + "in the Search field & Name List reterived seccessfully");
 		CreateContractorPage listValidations = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -793,6 +791,7 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("30.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("30.png");
+			Thread.sleep(20000);
 			listValidations.clearFields("Search");
 			listValidation = listValidations.listValidation("ListEmail");
 		}
@@ -800,7 +799,7 @@ public class TeamCompanyContractor extends BaseClass {
 	}
 
 	@Test(priority = 35)
-	private void searchEmailListValidation() throws IOException {
+	private void searchEmailListValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Enter the Email:" + listValidation + "in the Search field & Email List reterived seccessfully");
 		CreateContractorPage listValidations = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -820,6 +819,7 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("31.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("31.png");
+			Thread.sleep(20000);
 			listValidations.clearFields("Search");
 			listValidation = listValidations.listValidation("ListPhoneNumber");
 		}
@@ -827,7 +827,7 @@ public class TeamCompanyContractor extends BaseClass {
 	}
 
 	@Test(priority = 36)
-	private void searchPhoneNumberListValidation() throws IOException {
+	private void searchPhoneNumberListValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Enter the Phone Number:" + listValidation
 				+ "in the Search field & Phone Number List reterived seccessfully");
 		CreateContractorPage listValidations = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -846,13 +846,14 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("32.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("32.png");
+			Thread.sleep(20000);
 			listValidations.clearFields("Search");
 		}
 
 	}
 
 	@Test(priority = 37)
-	public void invalidValidationData() throws IOException {
+	public void invalidValidationData() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		CreateContractorPage errorValidation = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -871,6 +872,7 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("33.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("33.png");
+			Thread.sleep(20000);
 			errorValidation.clickEvent("Reset");
 		}
 
@@ -1390,7 +1392,6 @@ public class TeamCompanyContractor extends BaseClass {
 		if (errorAddress2Message.equals(getPropertyValue("SpecialCharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("LocationZipcode");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;

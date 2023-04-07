@@ -35,7 +35,7 @@ public class ProductModule extends BaseClass {
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("InventoryProduct.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -119,7 +119,7 @@ public class ProductModule extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Verify Product Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
-		initElements.clickEvent("SaveButton");
+		initElements.inventoryName("Mandatory");
 		String editContact = initElements.errorFields("InventoryName");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -368,7 +368,7 @@ public class ProductModule extends BaseClass {
 
 	}
 
-//	@Test(priority = 14)
+	@Test(priority = 14)
 	private void maximumValidationTax() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Tax Field exceed its max-3 limit");

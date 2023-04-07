@@ -30,7 +30,7 @@ public class GlobalContactJob extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("GlobalContactJob.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -72,7 +72,7 @@ public class GlobalContactJob extends BaseClass {
 	public void jobModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify Global Job List Page is opened when clicking on Global Job");
 		JobPage module = PageFactory.initElements(driver, JobPage.class);
-		String editContact = module.module();
+		String editContact = module.labelValidation("Global");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobListPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -92,7 +92,7 @@ public class GlobalContactJob extends BaseClass {
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		String jobLandPage = jobPage.jobLandPage();
+		String jobLandPage = jobPage.labelValidation("CreateLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageJobLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -445,8 +445,7 @@ public class GlobalContactJob extends BaseClass {
 	private void labelEditValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
-		jobPage.jobStatusCreation("GlobalEdit");
-		String jobLandPage = jobPage.jobLandPage();
+		String jobLandPage = jobPage.labelValidation("GlobalEdit");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageJobLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -757,7 +756,7 @@ public class GlobalContactJob extends BaseClass {
 	}
 
 	@Test(priority = 31)
-	private void jobScheduleStatus() throws WebDriverException, IOException {
+	private void jobScheduleStatus() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Job No:(" + JobListData + ") is in the Schedule Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		String errorPasswordField = mandatory.listValidation("Status");
@@ -773,6 +772,8 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("ScheduledStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ScheduledStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 	}
 
@@ -816,6 +817,8 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("DispatchStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DispatchStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -860,6 +863,8 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
@@ -904,12 +909,14 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 		}
 
 	}
 
 	@Test(priority = 38)
-	private void cancelledJob() throws IOException {
+	private void cancelledJob() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalTiggerFunction("Secound");
@@ -951,6 +958,8 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("CustomerName");
 		}
 
@@ -968,8 +977,8 @@ public class GlobalContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(errorPasswordField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.listValidation("JobNo1");
 			mandatory.clearValidation("Search");
+			JobListData = mandatory.listValidation("JobNo1");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -977,8 +986,9 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("SearchCustomerName.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("SearchCustomerName.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("JobNo1");
-			mandatory.clearValidation("Search");
 		}
 
 	}
@@ -995,8 +1005,8 @@ public class GlobalContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(errorPasswordField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.listValidation("Location");
 			mandatory.clearValidation("Search");
+			JobListData = mandatory.listValidation("Location");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1004,8 +1014,9 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("searchJobNo.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchJobNo.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("Location");
-			mandatory.clearValidation("Search");
 		}
 
 	}
@@ -1022,8 +1033,8 @@ public class GlobalContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(errorPasswordField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			dateFrom = mandatory.dateFrom();
 			mandatory.clearValidation("Search");
+			dateFrom = mandatory.dateFrom();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1031,8 +1042,9 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
+			Thread.sleep(20000);
+			driver.navigate().refresh();
 			dateFrom = mandatory.dateFrom();
-			mandatory.clearValidation("Search");
 		}
 
 	}

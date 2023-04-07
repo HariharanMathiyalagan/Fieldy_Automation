@@ -36,7 +36,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 	static String currentDate;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationQuote.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -125,12 +125,32 @@ public class CustomerOrganizationQuote extends BaseClass {
 	}
 
 	@Test(priority = 1)
-	private void labelValidation() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify Create Quote page is opened from Organization-> Request -> Create Quote");
+	private void listabelValidation() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the User is Land on the Customer / Contact / Quote page");
 		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
-		customerContactName = jobPage.customerQuoteListPage("Customer");
-		String jobLandPage = jobPage.quoteLandPage();
+		String jobLandPage = jobPage.labelValidation("Customer");
+		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("OrganizationQuoteListPage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (jobLandPage.equals(getPropertyValue("OrganizationQuoteListPage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			customerContactName = jobPage.customerName("DetailScreenCustomerName");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateRequestLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateRequestLabel.png");
+			customerContactName = jobPage.customerName("DetailScreenCustomerName");
+		}
+	}
+
+	@Test(priority = 2)
+	private void labelValidation() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify Create Job page is opened from Contact-> Quote -> Create Job");
+		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
+		String jobLandPage = jobPage.labelValidation("CreateLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + jobLandPage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreatePageQuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -140,9 +160,9 @@ public class CustomerOrganizationQuote extends BaseClass {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CreateQuoteLabel.png");
+			File file = new File("CreateJobLabel.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CreateQuoteLabel.png");
+			extentTest.addScreenCaptureFromPath("CreateJobLabel.png");
 		}
 	}
 
@@ -198,7 +218,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		mandatoryValidation.clearFields("Quantity");
 		mandatoryValidation.clearFields("Price");
-		mandatoryValidation.saveFunction();
+		mandatoryValidation.saveFunction("Mandatory");
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorExpiryDate");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -799,7 +819,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.message("message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -892,8 +912,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify the User is land on the Quote Edit page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		create.CRUDValidation("Edit");
-		String responseMessage = create.quoteLandPage();
+		String responseMessage = create.labelValidation("EditLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageQuoteLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -919,7 +938,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
 		mandatoryValidation.clearFields("Quantity");
 		mandatoryValidation.clearFields("Price");
-		mandatoryValidation.saveFunction();
+		mandatoryValidation.saveFunction("Mandatory");
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorExpiryDate");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -1520,7 +1539,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.message("message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -1669,8 +1688,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			QuoteListData = create.listTextValidation("Tittle");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1678,8 +1697,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListQuoteNoValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteNoValidation.png");
-			QuoteListData = create.listTextValidation("Tittle");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
 		}
 
 	}
@@ -1696,8 +1715,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			QuoteListData = create.listTextValidation("Reference");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1705,8 +1724,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListQuoteTittleValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteTittleValidation.png");
-			QuoteListData = create.listTextValidation("Reference");
 			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
 		}
 
 	}

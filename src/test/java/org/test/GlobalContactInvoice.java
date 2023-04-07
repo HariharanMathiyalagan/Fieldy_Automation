@@ -36,7 +36,7 @@ public class GlobalContactInvoice extends BaseClass{
 	static String ListField;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("GlobalContactInvoice.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -81,7 +81,6 @@ public class GlobalContactInvoice extends BaseClass{
 				.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
 		InvoicePage initElements = PageFactory.initElements(driver, InvoicePage.class);
 		initElements.labelValidation("GlobalContactInvoice");
-		initElements.labelValidation("ContactAPI");
 
 	}
 	
@@ -93,7 +92,7 @@ public class GlobalContactInvoice extends BaseClass{
 		initElements.clearFields("DueDate");
 		initElements.clearFields("Quantity");
 		initElements.clearFields("Price");
-		initElements.saveFunction();
+		initElements.saveFunction("Mandatory");
 //		String errorContact = initElements.errorValidation("ErrorContact");
 		extentTest.log(Status.INFO, "Actual Result is -" + "null");
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -223,7 +222,7 @@ public class GlobalContactInvoice extends BaseClass{
 		mandatory.validationQuantity("Value");
 		mandatory.priceValidation("value");
 		mandatory.autoCompleteField("GlobalContact");
-		String errorContact = mandatory.responseMessage("CustomerCreateMessage");
+		String errorContact = mandatory.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -741,7 +740,7 @@ public class GlobalContactInvoice extends BaseClass{
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -790,7 +789,7 @@ public class GlobalContactInvoice extends BaseClass{
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.CRUDValidation("Create");
-		String errorPasswordField = mandatory.responseMessage("Create");
+		String errorPasswordField = mandatory.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -833,7 +832,7 @@ public class GlobalContactInvoice extends BaseClass{
 				"Verify Expiry Date field is set as Mandatory & Error Message is displayed when it is BLANK");
 		InvoicePage mandatoryValidation = PageFactory.initElements(driver, InvoicePage.class);
 		mandatoryValidation.clearAllFields();
-		mandatoryValidation.saveFunction();
+		mandatoryValidation.saveFunction("ClickButton");
 		String errorMandatoryValidation = mandatoryValidation.errorValidation("ErrorDueDate");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
@@ -1434,7 +1433,7 @@ public class GlobalContactInvoice extends BaseClass{
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
-		String errorPasswordField = mandatory.errorValidation("PastDateError");
+		String errorPasswordField = mandatory.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -1461,8 +1460,8 @@ public class GlobalContactInvoice extends BaseClass{
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.CRUDValidation("Edit");
 		mandatory.inventoryItemValidation("Calculation");
-		mandatory.saveFunction();
-		String errorPasswordField = mandatory.responseMessage("Update");
+		mandatory.saveFunction("ClickButton");
+		String errorPasswordField = mandatory.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

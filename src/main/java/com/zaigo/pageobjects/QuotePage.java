@@ -197,6 +197,28 @@ public class QuotePage extends BaseClass {
 		return until;
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 1);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']//tr[2]//td[2]//span"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[2]//span") })
 	WebElement CustomerListName;
@@ -216,6 +238,11 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@data-menuselector='quotes-menu']"),
 			@FindBy(xpath = "//*[@id='quote-contact-edit']//header//div//div//div//a") })
 	WebElement CreateQuoteLabel;
+
+	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
+			@FindBy(xpath = "//*[@id='quote-create']/header/div/div/div/a") })
+	WebElement ListPage;
 
 	By CustomerName = By.id("customer-name");
 	By Reference = By.id("reference_no");
@@ -252,6 +279,7 @@ public class QuotePage extends BaseClass {
 	By ErrorDescription = By.id("items__description__0_error");
 	By ErrorNotes = By.id("notes_error");
 	By Yes = By.xpath("//*[text()='Yes']");
+	By StatusList = By.xpath("//*[contains(text(),'The doc expiry date must be a date after or equal')]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
@@ -268,7 +296,9 @@ public class QuotePage extends BaseClass {
 	WebElement ListReference;
 
 	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]");
-	By TotalCount = By.id("total-quote-count");
+//	By TotalCount = By.id("total-quote-count");
+	@FindAll({ @FindBy(id = "total-quote-count"), @FindBy(id = "quote-nav-count-all") })
+	WebElement TotalCount;
 	By InventoryFirstItem = By.xpath("(//*[@class='p-2 list-hover-bg quote-inventory-unit w-20-ellipsis w-100'])[1]");
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
@@ -376,6 +406,42 @@ public class QuotePage extends BaseClass {
 	By CreateFrom = By.id("quote-from-date-filter");
 	By CreateTo = By.id("quote-to-date-filter");
 
+	public int getCount(int value) {
+		if (value == 1) {
+			wait = new WebDriverWait(driver, 10);
+			String text2 = wait.until(ExpectedConditions.visibilityOf(TotalCount)).getText();
+			StringBuffer buffer = new StringBuffer();
+			StringBuffer append = null;
+			for (int i = 0; i < text2.length(); i++) {
+				if (Character.isDigit(text2.charAt(i))) {
+					append = buffer.append(text2.charAt(i));
+					parseInt = Integer.parseInt(append.toString());
+				}
+			}
+			return parseInt;
+		}
+		return value;
+	}
+
+	public String actualResult(String value) {
+		if (value.equals("User")) {
+			int a = parseInt + 1;
+			String s = String.valueOf(a);
+			String valueOf = "All ( " + s + " )";
+			return valueOf;
+		}
+		return value;
+	}
+
+	public String totalCount(String value) throws InterruptedException {
+		if (value.equals("User")) {
+			this.visibility(Invalid);
+			String text2 = this.getText(TotalCount);
+			return text2;
+		}
+		return value;
+	}
+
 	static String ContactFirstName;
 	static String ContactLastName;
 
@@ -432,43 +498,29 @@ public class QuotePage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='Contact Name']") })
 	WebElement ListLabelName;
 
-	public String customerQuoteListPage(String value) throws InterruptedException {
+	public String labelValidation(String value) throws InterruptedException {
 		if (value.equals("Customer")) {
-			this.visibility(ListLabelName);
-			String text = this.getText(CustomerListName);
 			this.mouseActionClick(CustomerListName);
-			this.assertName(CustomerName, text);
+			this.visibility(CustomerName);
 			this.mouseActionClick(ClickTabQuote);
-			String contactName = this.customerName("DetailScreenCustomerName");
-			this.getCount();
-			this.visibility(CreateButton);
-			this.mouseActionClick(CreateButton);
-			return contactName;
-		} else if (value.equals("GlobalQuote")) {
-			this.mouseActionClick(Quote);
 			this.visibility(Invalid);
-			String quoteLandPage = this.quoteLandPage();
+			this.getCount();
+		} else if (value.equals("Global")) {
+			this.mouseActionClick(Quote);
+			this.mouseActionClick(Filter);
+			this.visibility(Apply);
+			this.visibility(Invalid);
+			this.getCount(1);
+		} else if (value.equals("CreateLabel")) {
 			this.mouseActionClick(CreateButton);
-			this.clearFields("Quantity");
-			this.clearFields("Price");
-			return quoteLandPage;
-		} else if (value.equals("ContactAPI")) {
-			for (int i = 0; i < 3; i++) {
-				this.mouseActionClick(RadioOrganization);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioContact);
-				this.mouseActionClick(Save);
-			}
-		} else if (value.equals("OrganizationAPI")) {
-			for (int i = 0; i < 3; i++) {
-				this.mouseActionClick(RadioOrganization);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioContact);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioOrganization);
-			}
+			this.visibility(Send);
+		} else if (value.equals("EditLabel") || value.equals("GlobalEdit")) {
+			String text = this.getText(ListReference);
+			this.mouseActionClick(ThreeDots);
+			this.mouseActionClick(Edit);
+			this.valuePresent(Reference, text);
 		}
-		return value;
+		return this.getText(ListPage);
 	}
 
 	public String quoteLandPage() {
@@ -498,6 +550,7 @@ public class QuotePage extends BaseClass {
 		} else if (value.equals("Notes")) {
 			this.clearField(Notes);
 		} else if (value.equals("Search")) {
+			this.clearField(Search);
 			this.clearField(Search);
 		}
 	}
@@ -692,11 +745,23 @@ public class QuotePage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(Notes, characters2048);
 		}
-
 	}
 
-	public void saveFunction() throws InterruptedException {
-		this.mouseActionClick(Save);
+	public void saveFunction(String value) throws InterruptedException {
+		if (value.equals("Mandatory") || value.equals("OrganizationMandatory")) {
+			if (value.equals("OrganizationMandatory")) {
+				this.mouseActionClick(RadioOrganization);
+			}
+			this.mouseActionClick(Save);
+			if (this.conditionChecking1(ErrorExpiryDate)) {
+			} else {
+				do {
+					this.mouseActionClick(Save);
+				} while (!this.conditionChecking1(ErrorExpiryDate));
+			}
+		} else if (value.equals("ClickButton")) {
+			this.mouseActionClick(Save);
+		}
 	}
 
 	public void pickFirstItem(String value) throws InterruptedException {
@@ -755,54 +820,65 @@ public class QuotePage extends BaseClass {
 	static String responseMessage;
 	static String messageCheck;
 
-	public String message(String value) throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("message")) {
-			responseMessage = this.getText(Message);
-			this.invisible(Message);
-			return responseMessage;
+			if (this.conditionChecking(Message)) {
+				responseMessage = this.getText(Message);
+				this.invisible(Message);
+				return responseMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveButton);
+					if (this.conditionChecking(Message)) {
+						responseMessage = this.getText(Message);
+						this.invisible(Message);
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			do {
 				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 					this.clearField(OrganizationName);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(EmailField, fakeEmail);
-					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
-				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
-						&& responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
-					this.clearField(OrganizationName);
-					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
-					String fakeCompanyName = faker.company().name();
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(OrganizationName, fakeCompanyName);
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
 					this.clearField(EmailField);
-					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
-					messageCheck = this.getText(Message);
+					this.mouseActionClick(SaveButton);
 				}
-				if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
-					conditionCheck = false;
+				if (this.conditionChecking(Message)) {
+					messageCheck = this.getText(Message);
+					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveButton);
+						if (this.conditionChecking(Message)) {
+							messageCheck = this.getText(Message);
+							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
 				}
 			} while (conditionCheck);
 		}
@@ -812,6 +888,7 @@ public class QuotePage extends BaseClass {
 	static String searchData;
 
 	public String listTextValidation(String value) {
+		driver.manage().deleteAllCookies();
 		if (value.equals("ListStatus")) {
 			String text = this.getText(ListQuoteStatus);
 			return text;
@@ -828,9 +905,11 @@ public class QuotePage extends BaseClass {
 			searchData = this.getText(GlobalListCustomerName);
 			return searchData;
 		} else if (value.equals("SearchData")) {
+			this.elementClickable(SearchButton);
 			this.tagValidation(Search, searchData);
 		} else if (value.equals("Invalid")) {
-			this.tagValidation(Search, "sdfsfsdfsfs");
+			this.inputText(Search, "rewwrewrwrwrwrew");
+			this.mouseActionClick(SearchButton);
 		} else if (value.equals("InvalidList")) {
 			String text = this.getText(Invalid);
 			return text;
@@ -843,7 +922,7 @@ public class QuotePage extends BaseClass {
 	public int getCount() {
 		this.visibility(Invalid);
 		wait = new WebDriverWait(driver, 10);
-		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
+		String text2 = wait.until(ExpectedConditions.visibilityOf(TotalCount)).getText();
 		parseInt = Integer.parseInt(text2);
 		return parseInt;
 	}
@@ -895,12 +974,20 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(RadioOrganization);
 		} else if (value.equals("GlobalContactDraft")) {
 			this.autoCompleteField("ContactCreate");
+			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+			} else {
+				this.message("AlternateFunction");
+			}
 			this.autoCompleteField("GlobalContactVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("GlobalOrgDraft")) {
 			this.autoCompleteField("OrganizationCreate");
+			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+			} else {
+				this.message("AlternateFunction");
+			}
 			this.autoCompleteField("OrgVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
@@ -959,8 +1046,13 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ListQuoteStatus);
 			this.mouseActionClick(UpdateOrg);
 			this.message("message");
+			this.invisible(StatusList);
 		} else if (value.equals("GlobalCreateDeclined")) {
 			this.autoCompleteField("ContactCreate");
+			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+			} else {
+				this.message("AlternateFunction");
+			}
 			this.autoCompleteField("GlobalContactVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
@@ -974,9 +1066,13 @@ public class QuotePage extends BaseClass {
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
 			this.message("message");
-			this.invisible(Message);
+			this.invisible(StatusList);
 		} else if (value.equals("GlobalCreateOrgDeclined")) {
 			this.autoCompleteField("OrganizationCreate");
+			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+			} else {
+				this.message("AlternateFunction");
+			}
 			this.autoCompleteField("OrgVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
@@ -990,7 +1086,7 @@ public class QuotePage extends BaseClass {
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
 			this.message("message");
-			this.invisible(Message);
+			this.invisible(StatusList);
 		} else if (value.equals("CreateDeclined")) {
 			String text = this.getText(CustomerName);
 			this.mouseActionClick(CreateButton);
@@ -1007,7 +1103,7 @@ public class QuotePage extends BaseClass {
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
 			this.message("message");
-			this.invisible(Message);
+			this.invisible(StatusList);
 		} else if (value.equals("CreateDeclinedOrg")) {
 			String text = this.getText(CustomerName);
 			this.mouseActionClick(CreateButton);
@@ -1024,7 +1120,7 @@ public class QuotePage extends BaseClass {
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(UpdateOrg);
 			this.message("message");
-			this.invisible(Message);
+			this.invisible(StatusList);
 		}
 	}
 
@@ -1044,6 +1140,12 @@ public class QuotePage extends BaseClass {
 
 	public void visible() {
 		this.elementClickable(SearchButton);
+	}
+
+	By Reset = By.xpath("//*[contains(text(),'Reset Search')]");
+
+	public void clickEvent() {
+		this.clearField(Search);
 
 	}
 }

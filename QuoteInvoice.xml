@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test thread-count="5" name="Test">
+		<classes>
+			<class name="org.test.CustomerContactQuote" />
+
+			<class name="org.test.CustomerOrganizationQuote" />
+
+			<class name="org.test.GlobalContactQuote" />
+
+			<class name="org.test.GlobalOrganizationQuote" />
+
+			<class name="org.test.CustomerContactInvoice" />
+
+			<class name="org.test.CustomerOrganizationInvoice" />
+
+			<class name="org.test.GlobalContactInvoice" />
+
+			<class name="org.test.GlobalOrganizationInvoice" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

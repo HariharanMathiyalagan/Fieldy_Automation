@@ -33,7 +33,7 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 	ExtentTest extentTest;
 
 	@BeforeClass
-	public void setup() {
+	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("TeamCompaniesDetailScreen.html");
 		extentReports.attachReporter(extentHtmlReporter);
@@ -564,7 +564,7 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 	}
 
 	@Test(priority = 20)
-	private void responseMessage() throws IOException {
+	private void responseMessage() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Compnay Details Updated");
 		EditDetailScreenCompaniesPage add = new EditDetailScreenCompaniesPage(driver);
 		String responseMessage = add.responseMessages("Message");
@@ -584,7 +584,7 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 	}
 
 	@Test(priority = 21)
-	private void deleteLocation() throws IOException {
+	private void deleteLocation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the Company Location Deleted");
 		EditDetailScreenCompaniesPage delete = new EditDetailScreenCompaniesPage(driver);
 		delete.deleteLocation();

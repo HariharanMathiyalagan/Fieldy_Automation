@@ -88,6 +88,28 @@ public class InvoicePage extends BaseClass {
 
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+	
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	private void clickButton(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
@@ -96,6 +118,13 @@ public class InvoicePage extends BaseClass {
 	private void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
+	private void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 100);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
@@ -109,6 +138,11 @@ public class InvoicePage extends BaseClass {
 	public void visibility(WebElement element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+	}
+
+	public void visibility(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
 	}
 
 	private void validationTab(By element, String text) {
@@ -191,9 +225,6 @@ public class InvoicePage extends BaseClass {
 	By CreateContactInvoice = By.xpath("//*[@data-automationid='customer-contact-invoice-create']");
 	By CustomerName = By.id("customer-name");
 	By ContactName = By.id("customer-name-input-field");
-	By CreatedMesssage = By.xpath("//*[text()='Invoice created successfully']");
-	By UpdatedMessage = By.xpath("//*[text()='Invoice updated successfully']");
-	By ListUpdateMessage = By.xpath("//*[text()='Invoice payment updated successfully']");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
 	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Invoice No']") })
@@ -203,6 +234,7 @@ public class InvoicePage extends BaseClass {
 	By CreateInvoiceLabel = By.xpath("(//*[@data-draftback='invoicedraft'])[1]");
 	By EditInvoiceLabel = By.xpath("//*[@data-dropzonereset='invocie']");
 	By Reference = By.id("reference_no");
+	By due_on_receipt = By.xpath("//select[@id='invoice-due-by-filter']//option[1]");
 	By DueonReceipt = By.id("invoice-due-by-filter");
 	By DueDate = By.id("doc_expiry_date");
 	By InvoiceTittle = By.id("invoice_title");
@@ -272,7 +304,6 @@ public class InvoicePage extends BaseClass {
 	By OrganizationEmail = By.id("contacts__email__0");
 	By OrganizationPhoneNumber = By.id("contacts__phone__0");
 	By OrganizationJobTittle = By.id("contacts__job_title__0");
-	By OrganizationContactSave = By.id("organization-contact-create");
 	By Invoice = By.id("invoice-menu");
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By RadioOrganization = By.id("organization");
@@ -287,16 +318,9 @@ public class InvoicePage extends BaseClass {
 	By StateName = By.id("addresses__state__0");
 	By CityName = By.id("addresses__city__0");
 	By Zipcode = By.id("addresses__zipcode__0");
-	By SaveContact = By.id("contact-create");
 	By Add = By.xpath("//*[@id='id_customer_group-autocomplete-list1']//child::span");
 	By OrgAdd = By.xpath("//*[@id='id_customer_group-autocomplete-list']//child::span");
 	By InvoiceSearchButton = By.id("invoice-search-enter");
-	@FindAll({ @FindBy(xpath = "//*[text()='EMAIL 1: Email already exists']"),
-			@FindBy(xpath = "//*[text()='Customer created successfully']"),
-			@FindBy(xpath = "//*[text()='Customer with Company Email already exists']"),
-			@FindBy(xpath = "//*[text()='Company Already Exists']"),
-			@FindBy(xpath = "//*[text()='The e-mail is already exit']") })
-	private WebElement ContactCreateMessage;
 	By OrganizationName = By.id("company_name");
 	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[3]");
 	By OrgAddress1 = By.id("line_1");
@@ -306,13 +330,17 @@ public class InvoicePage extends BaseClass {
 	By OrgZipcode = By.id("zipcode");
 	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
 	By Website = By.xpath("(//*[@id='website'])[1]");
-	By SaveOrg = By.id("organization-create");
+
+	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+	WebElement SaveButton;
 
 	public void clearFields(String value) {
 		if (value.equals("Reference")) {
 			this.clearField(Reference);
 		} else if (value.equals("DueDate")) {
-//			this.valuePresent(DueonReceipt, "Due on receipt");
+			this.visibility(due_on_receipt);
 			this.dropDownByIndex(DueonReceipt, 8);
 			this.clearField(DueDate);
 		} else if (value.equals("EditDueDate")) {
@@ -431,8 +459,19 @@ public class InvoicePage extends BaseClass {
 		return value;
 	}
 
-	public void saveFunction() throws InterruptedException {
-		this.mouseActionClick(Save);
+	public void saveFunction(String value) throws InterruptedException {
+		if (value.equals("Mandatory")) {
+			this.mouseActionClick(Save);
+			if (this.conditionChecking1(ErrorDueDate)) {
+			} else {
+				do {
+					this.mouseActionClick(Save);
+				} while (!this.conditionChecking1(ErrorDueDate));
+			}
+		} else if (value.equals("ClickButton")) {
+			this.mouseActionClick(Save);
+		}
+
 	}
 
 	public void resetFunction() {
@@ -469,20 +508,15 @@ public class InvoicePage extends BaseClass {
 			this.clearFields("Quantity");
 			this.clearFields("Price");
 		} else if (value.equals("ContactAPI")) {
-			for (int i = 0; i < 3; i++) {
-				this.mouseActionClick(RadioOrganization);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioContact);
-				this.mouseActionClick(Save);
+			this.mouseActionClick(Save);
+			if (this.conditionChecking1(ErrorDueDate)) {
+			} else {
+				do {
+					this.mouseActionClick(Save);
+				} while (!this.conditionChecking1(ErrorDueDate));
 			}
 		} else if (value.equals("OrganizationAPI")) {
-			for (int i = 0; i < 3; i++) {
-				this.mouseActionClick(RadioOrganization);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioContact);
-				this.mouseActionClick(Save);
-				this.mouseActionClick(RadioOrganization);
-			}
+			this.mouseActionClick(RadioOrganization);
 		}
 		return value;
 
@@ -505,7 +539,6 @@ public class InvoicePage extends BaseClass {
 	static int parseInt;
 
 	public int getCount() {
-//		this.assertName(Invalid, "No Result Found");
 		this.visibility(StartInvalid);
 		wait = new WebDriverWait(driver, 10);
 		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated(TotalCount)).getText();
@@ -849,43 +882,68 @@ public class InvoicePage extends BaseClass {
 
 	}
 
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	static String response;
+	static String alternateMessage;
 
-	public String responseMessage(String value) throws IOException {
-		if (value.equals("Create")) {
-			String text = this.getText(CreatedMesssage);
-			this.invisible(CreatedMesssage);
-			return text;
-		} else if (value.equals("Update")) {
-			String text = this.getText(UpdatedMessage);
-			this.invisible(CreatedMesssage);
-			return text;
-		} else if (value.equals("ListUpdate")) {
-			String text = this.getText(ListUpdateMessage);
-			this.invisible(CreatedMesssage);
-			return text;
-		} else if (value.equals("CustomerCreateMessage")) {
-			response = this.getText(ContactCreateMessage);
-			this.invisible(CreatedMesssage);
-			return response;
-		} else if (value.equals("AlternateFunction")) {
-			if (response.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
-				this.clearField(Email);
-				this.inputText(Email, fakeEmail);
-				this.mouseActionClick(SaveContact);
-			} else if (response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
-				this.clearField(OrganizationName);
-				this.inputText(OrganizationName, fakeCompanyName);
-				this.mouseActionClick(SaveOrg);
-			} else if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
-				this.clearField(OrgEmail);
-				this.inputText(OrgEmail, fakeEmail);
-				this.mouseActionClick(SaveOrg);
-			} else if (response.equals(getPropertyValue("CompanyContactEmailMessage"))) {
-				this.clearField(OrganizationEmail);
-				this.inputText(OrganizationEmail, fakeEmail);
-				this.mouseActionClick(SaveOrg);
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean conditionCheck = true;
+		if (value.equals("Message")) {
+			if (this.conditionChecking(Message)) {
+				response = this.getText(Message);
+				this.invisible(Message);
+				return response;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveButton);
+					if (this.conditionChecking(Message)) {
+						response = this.getText(Message);
+						this.invisible(Message);
+						if (response.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
 			}
+		} else if (value.equals("AlternateFunction")) {
+			do {
+				if (response.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+					this.clearField(Email);
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(Email, fakeEmail);
+					this.mouseActionClick(SaveButton);
+				} else if (response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+					this.clearField(OrganizationName);
+					this.inputText(OrganizationName, fakeCompanyName);
+					this.mouseActionClick(SaveButton);
+				} else if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+					this.clearField(OrgEmail);
+					this.inputText(OrgEmail, fakeEmail);
+					this.mouseActionClick(SaveButton);
+				} else if (response.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+					this.clearField(OrganizationEmail);
+					this.inputText(OrganizationEmail, fakeEmail);
+					this.mouseActionClick(SaveButton);
+				}
+				if (this.conditionChecking(Message)) {
+					alternateMessage = this.getText(Message);
+					if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveButton);
+						if (this.conditionChecking(Message)) {
+							alternateMessage = this.getText(Message);
+							if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
+				}
+			} while (conditionCheck);
 		}
 		return value;
 
@@ -894,7 +952,7 @@ public class InvoicePage extends BaseClass {
 	static String SearchData;
 	public static double PartialPay;
 
-	public String listTextValidation(String value) throws IOException {
+	public String listTextValidation(String value) throws IOException, InterruptedException {
 		if (value.equals("ListPartialStatus")) {
 			String text = this.getText(ListPartialStatus);
 			return text;
@@ -954,7 +1012,7 @@ public class InvoicePage extends BaseClass {
 		} else if (value.equals("PayAmount")) {
 			this.inputText(AmountPaid, SearchData);
 			this.mouseActionClick(Update);
-			this.responseMessage("ListUpdate");
+			this.responseMessage("Message");
 		}
 		return value;
 	}
@@ -988,7 +1046,7 @@ public class InvoicePage extends BaseClass {
 			this.inputText(OrganizationEmail, fakeEmail);
 			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
 			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(OrganizationContactSave);
+			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
 			this.valuePresent(OrgContactName, ContactFirstName + " " + ContactLastName);
 		} else if (value.equals("GlobalContact")) {
@@ -1005,7 +1063,7 @@ public class InvoicePage extends BaseClass {
 			this.inputText(CityName, fakeCity);
 			this.inputText(StateName, fakeState);
 			this.inputText(Zipcode, fakeZipcode);
-			this.mouseActionClick(SaveContact);
+			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleCustomerName")) {
 			this.valuePresent(GlobalCustomerName, ContactFirstName + " " + ContactLastName);
 		} else if (value.equals("GlobalOrganization")) {
@@ -1021,7 +1079,7 @@ public class InvoicePage extends BaseClass {
 			this.inputText(OrgCity, fakeCity);
 			this.inputText(OrgState, fakeState);
 			this.inputText(OrgZipcode, fakeZipcode);
-			this.mouseActionClick(SaveOrg);
+			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleCustomerOrgName")) {
 			this.valuePresent(GlobalCustomerName, OrgName);
 		}

@@ -17,11 +17,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -223,25 +218,21 @@ public class BaseClass {
 
 	}
 	
+	public static String getBrowserValue(String key) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\config.properties");
+		properties.load(stream);
+		String value = (String) properties.get(key);
+		return value;
+
+	}
+	
 	public String getPropertyValueUpdate(String key) throws IOException {
 		Properties properties = new Properties();
 		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
 		properties.load(stream);
 		String value = (String) properties.get(key);
 		return value;
-
-	}
-
-	public void excelWrite(String value) throws IOException {
-		File file = new File(System.getProperty("user.dir") + "\\Folder\\config.properties");
-		FileInputStream fin = new FileInputStream(file);
-		Workbook book = new XSSFWorkbook(fin);
-		Sheet sheet = book.getSheet("sheet1");
-		Row row = sheet.getRow(1);
-		Cell cell = row.getCell(1);
-		cell.setCellValue(value);
-		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		book.write(fileOutputStream);
 
 	}
 
@@ -258,7 +249,5 @@ public class BaseClass {
 		return format;
 
 	}
-	
-	
 
 }

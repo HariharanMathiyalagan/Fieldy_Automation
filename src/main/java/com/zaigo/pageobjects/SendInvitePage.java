@@ -109,7 +109,6 @@ public class SendInvitePage extends BaseClass {
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 	By User = By.id("team-user-menu");
 
-	
 	public SendInvitePage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(this.driver, 10);
@@ -128,6 +127,11 @@ public class SendInvitePage extends BaseClass {
 	public void clickButton(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+	}
+
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
 	}
 
 	public void mouseActionClick(By element) {
@@ -180,6 +184,17 @@ public class SendInvitePage extends BaseClass {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).perform();
 
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	private void scrollDown() {
@@ -251,16 +266,42 @@ public class SendInvitePage extends BaseClass {
 
 	static String message;
 
-	public void responseMessage(String value) {
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			message = this.getText(Message);
-			this.mouseActionClick(Cancel);
+			if (this.conditionChecking(Message)) {
+				message = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					this.mouseActionClick(previous);
+					this.clearField("Email");
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(email, fakeEmail);
+					this.mouseActionClick(next);
+					this.mouseActionClick(sendbtn);
+					if (this.conditionChecking(Message)) {
+						this.responseMessage("Message");
+						if (message.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		}
+		return message;
 	}
 
 	public String clickEvent(String value) {
 		if (value.equals("SendInvite")) {
 			this.mouseActionClick(sendbtn);
+			if (this.conditionChecking(firstnameerr)) {
+
+			} else {
+				do {
+					this.mouseActionClick(sendbtn);
+				} while (!this.conditionChecking(firstnameerr));
+			}
 		} else if (value.equals("Next")) {
 			this.mouseActionClick(next);
 		} else if (value.equals("Navigate")) {
@@ -272,6 +313,8 @@ public class SendInvitePage extends BaseClass {
 		} else if (value.equals("ButtonPresent")) {
 			String text = this.getText(sendbtn);
 			return text;
+		} else if (value.equals("ClickButton")) {
+			this.mouseActionClick(sendbtn);
 		}
 		return value;
 	}
