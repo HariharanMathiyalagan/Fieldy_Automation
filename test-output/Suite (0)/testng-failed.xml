@@ -3,43 +3,15 @@
 <suite name="Failed suite [Suite (0)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.GlobalContactRequest">
+      <class name="org.test.DispatchModule">
         <methods>
-          <include name="editmandatoryValidationDescription"/>
-          <include name="updatedRequest"/>
-          <include name="editmandatoryValidationLocation"/>
-          <include name="searchFilterByDate"/>
-          <include name="searchCustomerName"/>
-          <include name="searchInvalid"/>
-          <include name="labelEditValidation"/>
-          <include name="completedRequest"/>
-          <include name="requestCancelledStatus"/>
-          <include name="startedRequest"/>
-          <include name="searchRequestNo"/>
-          <include name="searchLocation"/>
-          <include name="dispatchedRequest"/>
-          <include name="requestDispatchedStatus"/>
-          <include name="requestStartedStatus"/>
-          <include name="requestScheduleStatus"/>
-          <include name="setup"/>
-          <include name="requestUnassignedStatus"/>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
-          <include name="cancelledRequest"/>
-          <include name="unsssignedRequest"/>
+          <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
-          <include name="requestCompleteStatus"/>
-          <include name="autoCompleteContactCreation"/>
-        </methods>
-      </class> <!-- org.test.GlobalContactRequest -->
-      <class name="org.test.GlobalOrganizationRequest">
-        <methods>
-          <include name="searchLocation"/>
-          <include name="exitBrowser"/>
-          <include name="searchRequestNo"/>
-          <include name="searchFilterByDate"/>
+          <include name="autoCompleteContactCreationRequest"/>
           <include name="setup"/>
+          <include name="deleteAfterCatch"/>
         </methods>
-      </class> <!-- org.test.GlobalOrganizationRequest -->
+      </class> <!-- org.test.DispatchModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (0)] -->

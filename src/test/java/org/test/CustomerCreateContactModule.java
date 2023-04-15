@@ -14,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -45,6 +46,16 @@ public class CustomerCreateContactModule extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+	
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+	
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -2) // 1-Login
@@ -752,12 +763,12 @@ public class CustomerCreateContactModule extends BaseClass {
 	}
 
 	@Test(priority = 27)
-	private void dateValidation() throws IOException {
+	private void dateValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Date Installed Field enter the Future Date");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.dateInstalledValidation("MaxValidation");
-		String errorSerialNumberField = maxValidation.errorField("DateInstalled");
+		String errorSerialNumberField = maxValidation.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1118,7 +1129,6 @@ public class CustomerCreateContactModule extends BaseClass {
 		if (listFirstName.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			invalid.resetOption();
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1758,12 +1768,12 @@ public class CustomerCreateContactModule extends BaseClass {
 	}
 
 	@Test(priority = 64)
-	private void editDateValidation() throws IOException {
+	private void editDateValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Date Installed Field enter the Future Date");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.dateInstalledValidation("MaxValidation");
-		String errorSerialNumberField = maxValidation.errorField("DateInstalled");
+		String errorSerialNumberField = maxValidation.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

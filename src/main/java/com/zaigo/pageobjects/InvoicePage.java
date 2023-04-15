@@ -72,6 +72,11 @@ public class InvoicePage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
+	private void inputText(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+	}
+
 	private void clearField(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
@@ -98,7 +103,7 @@ public class InvoicePage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -111,6 +116,11 @@ public class InvoicePage extends BaseClass {
 	}
 
 	private void clickButton(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+	}
+
+	private void clickButton(WebElement element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
@@ -148,6 +158,11 @@ public class InvoicePage extends BaseClass {
 	private void validationTab(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
+	}
+
+	private void validationTab(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text, Keys.TAB);
 	}
 
 	private void tagValidation(By element, String text) {
@@ -216,13 +231,14 @@ public class InvoicePage extends BaseClass {
 		return until;
 	}
 
-	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
-	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
-	By ClickOrganizationInvoice = By.xpath("//*[@data-menuswitcher='cstmr-organization-invoice']");
-	By CreateOrganizationInvoice = By.xpath("//*[@data-automationid='customer-organization-invoice-create']");
-	By ClickContactInvoice = By.xpath("//*[@data-detailheadermenu='cstmr-contact-invoice']");
+	By ContactListName = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
+	By OrganizationListName = By
+			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
+	By ClickOrganizationInvoice = By.xpath("//*[@id='customer-organization-nav-menu']/div/ul/li[6]/a");
+	By CreateOrganizationInvoice = By.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
+	By ClickContactInvoice = By.xpath("//*[@id='customer-contact-nav-menu']/div/ul/li[6]/a");
 	By CreateGlobalInvoice = By.xpath("//*[@data-automationid='invoice_create']");
-	By CreateContactInvoice = By.xpath("//*[@data-automationid='customer-contact-invoice-create']");
+	By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
 	By CustomerName = By.id("customer-name");
 	By ContactName = By.id("customer-name-input-field");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
@@ -238,8 +254,7 @@ public class InvoicePage extends BaseClass {
 	By DueonReceipt = By.id("invoice-due-by-filter");
 	By DueDate = By.id("doc_expiry_date");
 	By InvoiceTittle = By.id("invoice_title");
-	By InventoryItem = By.xpath(
-			"//*[@class=\" wt-30 mandatory autosearch_with_createable_main custom-dropdown\"]//child::*[@class=\"form-control pl-2 pr-2 user-view\"]");
+	By InventoryItem = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
 	By Quantity = By.id("items__quantity__0");
 	By Price = By.id("items__price__0");
 	By Discount = By.id("items__discount__0");
@@ -270,15 +285,34 @@ public class InvoicePage extends BaseClass {
 	By ErrorDescription = By.id("items__description__0_error");
 	By ErrorNotes = By.id("notes_error");
 	By Search = By.id("invoice-search-filter");
-	By InventoryFirstItem = By.xpath("(//*[@class='p-2 list-hover-bg invoice-inventory-unit w-20-ellipsis w-100'])[1]");
+	@FindAll({ @FindBy(id = "invoice-search-enter"), @FindBy(id = "invoice-search-filter-enter") })
+	WebElement SearchButton;
+	@FindAll({ @FindBy(xpath = "//*[text()='No Data Found']"),
+			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]") })
+	WebElement InventoryFirstItem;
 	By ListInvoiceNo = By.xpath("(//*[@class='ellipsis-100'])[3]");
-	By GlobalListCustomerName = By.xpath("(//*[@class='ellipsis-100'])[3]");
-	By ListInvoiceNo1 = By.xpath("(//*[@class='ellipsis-100'])[1]");
-	By ListReference1 = By.xpath("(//*[@class='ellipsis-100'])[2]");
+	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[3]/span");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span/a") })
+	WebElement ListInvoiceNo1;
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span/a"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span/a") })
+	WebElement ListReference1;
 	By ListCustomerName = By.xpath("(//*[@class='ellipsis-100'])[8]");
 	By ListReference = By.xpath("(//*[@class='ellipsis-100'])[4]");
-	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
-	By ContactEdit = By.xpath("(//*[@data-formsactions='edit'])[1]");
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[12]/div/div[1]") })
+	WebElement ThreeDots;
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[12]/div/div[2]/ul/li[2]") })
+	WebElement ContactEdit;
 	By ListAwaitingStatus = By.xpath("//*[text()='Awaiting Payment']");
 	By ListPartialStatus = By.xpath("//*[text()='Partial Payment']");
 	By ListDraftStatus = By.xpath("(//*[text()='Draft'])[1]");
@@ -435,9 +469,15 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(InventoryItem);
 			this.mouseActionClick(InventoryFirstItem);
 		} else if (value.equals("Organization")) {
-//			Thread.sleep(5000);
 			this.mouseActionClick(InventoryItem);
-			this.mouseActionClick(InventoryFirstItem);
+			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
+				Thread.sleep(5000);
+				this.mouseActionClick(InventoryItem);
+				this.mouseActionClick(InventoryFirstItem);
+			} else {
+				this.mouseActionClick(InventoryFirstItem);
+			}
+
 		} else if (value.equals("ClickInventory")) {
 			this.mouseActionClick(InventoryItem);
 		}
@@ -501,7 +541,6 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(CreateOrganizationInvoice);
 			return organizationName;
 		} else if (value.equals("GlobalContactInvoice")) {
-			this.assertName(Dashboard, "Company Performance");
 			this.mouseActionClick(Invoice);
 			this.visibility(StartInvalid);
 			this.mouseActionClick(CreateGlobalInvoice);
@@ -981,14 +1020,14 @@ public class InvoicePage extends BaseClass {
 			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("GlobalCustomerName")) {
-//			this.assertName(InvoiceLable, "Invoice No");
 			this.elementtobeClickable(InvoiceSearchButton);
 			SearchData = this.getText(ListCustomerName);
 			return SearchData;
 		} else if (value.equals("SearchGlobalCustomerName")) {
 			return this.getText(GlobalListCustomerName);
 		} else if (value.equals("SearchData")) {
-			this.tagValidation(Search, SearchData);
+			this.inputText(Search, SearchData);
+			this.mouseActionClick(SearchButton);
 		} else if (value.equals("CustomerSearchData")) {
 			this.inputText(Search, SearchData);
 			this.mouseActionClick(InvoiceSearchButton);

@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -44,6 +46,16 @@ public class GlobalOrganizationQuote extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -3) // 1-Login
@@ -290,7 +302,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 8)
 	private void maximumValidationReference() throws IOException, InterruptedException {
 		extentTest = extentReports
@@ -854,7 +866,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
-	
+
 	@Test(priority = 29)
 	private void quoteCount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Quote Created Count is added in the Quote All Count");
@@ -900,7 +912,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 31)
 	private void editmandatoryValidationExpiryDate() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
@@ -1007,7 +1019,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 			mandatoryValidation.validationQuantity("Value");
 		}
 	}
-	
+
 	@Test(priority = 35)
 	private void editmaximumValidationReference() throws IOException, InterruptedException {
 		extentTest = extentReports
@@ -1571,7 +1583,6 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
-
 
 	@Test(priority = 57)
 	private void createdQuoteStatus() throws IOException, InterruptedException {

@@ -224,12 +224,23 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
 			wait = new WebDriverWait(driver, 2);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -319,6 +330,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public void nextButton() {
 		this.mouseActionClick(Next);
+		if (!this.conditionChecking1(Visible)) {
+			this.mouseActionClick(Next);
+		}
 
 	}
 
@@ -329,6 +343,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	@FindAll({
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='contacts__first_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']") })
+	WebElement Visible;
 	By FirstName = By.id("contacts__first_name__0");
 	By LastName = By.id("contacts__last_name__0");
 	By ContactEmail = By.id("contacts__email__0");
@@ -411,7 +430,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			this.mouseActionClick(Social);
 		}
 		this.inputText(PhoneNumber, fakePhoneNumber);
-		this.mouseActionClick(Next);
+		this.nextButton();
 
 	}
 
@@ -438,7 +457,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				this.mouseActionClick(AddMoreContact);
 				this.scrollDown();
 			}
-			this.mouseActionClick(Next);
+			this.nextButton();
 		} else if (value.equals("EditContact")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
@@ -451,7 +470,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			this.inputText(ContactEmail, fakeEmail);
 			this.inputText(ContactPhoneNumber, fakePhoneNumber);
 			this.inputText(JobTittle, fakeTittle);
-			this.mouseActionClick(Next);
+			this.nextButton();
 		}
 	}
 
@@ -464,7 +483,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.inputText(PropertyCityName, fakeCity);
 		this.inputText(PropertyStateName, fakeState);
 		this.inputText(PropertyZipcode, fakeZipcode);
-		this.mouseActionClick(Next);
+		this.nextButton();
 
 	}
 
@@ -481,17 +500,16 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.mouseActionClick(SaveComplete);
 	}
 
-	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
+	By ListFirstName = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
 	By Search = By.id("customer-organization-search-box");
-	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
-	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
-	By Filter = By.xpath("//span[@data-timeline-open='customerorganization']");
-	By LeadSourceCheckBox = By.xpath("(//input[@id='filter-organization-leadSource-checkbox'])[1]");
+	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[4]/a");
+	By ListEmail = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[5]/a");
+	By Filter = By.xpath("//*[@id='customer-organization-timeline']/div/div[1]/div[4]/button/div");
+	By LeadSourceCheckBox = By.xpath("//*[@id='customer-organization-lead-source-div']//div[1]//div[1]//input[1]");
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
-	By Apply = By.xpath("//*[@class='col-lg-4 col-md-2 col-sm-2 col-6 pt-2']//*");
+	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[3]/button");
 	@FindAll({ @FindBy(id = "customer-organization-search-enter"), @FindBy(id = "customer-contact-search-button") })
-
 	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 	By ListLead = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[7]//span");
@@ -539,11 +557,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return value;
 	}
 
-	By Dots = By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]");
-	By Edit = By.xpath("(//li[@data-tabformid='undefined'])[1]");
+	By Dots = By.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[1]");
+	By Edit = By
+			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
-	By Deleted = By.xpath("(//li[@data-tabformid='undefined'])[2]");
+	By Deleted = By
+			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[2]");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('','','','','reset')\"]");
 
 	public void resetOption() {
@@ -589,7 +609,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		} else if (value.equals("ContactLastName")) {
 			return this.getText(LastNameError);
 		} else if (value.equals("ContactEmail")) {
-			return this.getText(ContactEmailError);
+			if (this.conditionChecking1(ContactEmailError)) {
+				return this.getText(ContactEmailError);
+			} else {
+				this.mouseActionClick(SaveComplete);
+				return this.getText(ContactEmailError);
+			}
 		} else if (value.equals("ContactPhoneNumber")) {
 			return this.getText(ContactPhoneNumberError);
 		} else if (value.equals("ContactJobTittle")) {

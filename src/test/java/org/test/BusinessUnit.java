@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -45,7 +47,17 @@ public class BusinessUnit extends BaseClass {
 		this.extentReports.flush();
 	}
 
-	@Test(priority = 0) // 1-Login
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
@@ -70,7 +82,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void settingModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Navigate to Business Settings page");
 		BusinessDaysPage initElements = PageFactory.initElements(driver, BusinessDaysPage.class);
@@ -90,7 +102,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	private void businessUnitLabel() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Business Unit Label is displayed in the Business Settings page");
@@ -111,7 +123,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Business Unit Page");
 		BusinessDaysPage initElements = PageFactory.initElements(driver, BusinessDaysPage.class);
@@ -131,7 +143,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	private void mandatoryValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Business Unit Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -152,11 +164,11 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 			initElements.clearField("BussinessUnit");
-			
+
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void maximumValidationBussinessUnit() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Unit Name Field exceed its max-256 limit");
@@ -183,7 +195,7 @@ public class BusinessUnit extends BaseClass {
 
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5)
 	public void verifySaveButtonExist() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Create Business Unit Save & Complete Button is displayed in the Create form page");
@@ -207,7 +219,7 @@ public class BusinessUnit extends BaseClass {
 
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 6)
 	private void businessCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify a new business unit is created successfully through [Business Settings]");
@@ -229,7 +241,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 7)
 	private void businessCreateList() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a newly created Business Unit Name:" + ListField
 				+ "is displayed in the Business Unit List page");
@@ -250,7 +262,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 8)
 	private void activeStatus() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a newly created Business Unit is in the Active Status");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
@@ -270,6 +282,31 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
+	@Test(priority = 9)
+	public void alreadyExists() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify [Business Unit Exists] Business Unit form, Error is dispalyed when already existing Business Unit is provided");
+		BusinessDaysPage contractorPage = PageFactory.initElements(driver, BusinessDaysPage.class);
+		contractorPage.businessUnitField("UniqueValidation");
+		String text_button = contractorPage.errorField("BusinessUnit");
+		extentTest.log(Status.INFO, "Actual Result is -" + text_button);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BusinessUnitAlreadyExists"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (text_button.equals(getPropertyValue("BusinessUnitAlreadyExists"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Results are Equal");
+			contractorPage.buttonValidation("CancelButton");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Results are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("26.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("26.png");
+			contractorPage.buttonValidation("CancelButton");
+		}
+
+	}
+
 	@Test(priority = 10)
 	private void editFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Edit Business Unit Page");
@@ -280,9 +317,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("EditBusinessPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			for (int i = 0; i < 5; i++) {
-				initElements.clearField("BussinessUnit");
-			}
+			initElements.clearField("BussinessUnit");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -290,9 +325,7 @@ public class BusinessUnit extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
-			for (int i = 0; i < 5; i++) {
-				initElements.clearField("BussinessUnit");
-			}
+			initElements.clearField("BussinessUnit");
 		}
 	}
 

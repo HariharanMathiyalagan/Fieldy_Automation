@@ -10,6 +10,8 @@
 			<class name="org.test.GlobalContactJob" />
 
 			<class name="org.test.GlobalOrganizationJob" />
+			
+			<class name="org.test.AvailabilityTechnicians" />
 
 			<class name="org.test.CustomerContactRequest" />
 
@@ -19,7 +21,7 @@
 
 			<class name="org.test.GlobalOrganizationRequest" />
 			
-			<class name="org.test.AvailabilityTechnicians" />
+			
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

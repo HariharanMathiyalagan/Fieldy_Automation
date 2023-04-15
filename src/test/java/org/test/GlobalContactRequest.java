@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -42,6 +44,16 @@ public class GlobalContactRequest extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -1) // 1-Login
@@ -181,14 +193,14 @@ public class GlobalContactRequest extends BaseClass {
 	@Test(priority = 5)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-2048 limit");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.location("MaxValidation");
 		String errorPasswordField = mandatory.errorField("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Location");
 		} else {
@@ -488,14 +500,14 @@ public class GlobalContactRequest extends BaseClass {
 	@Test(priority = 18)
 	private void editmaximumValidationLocation() throws IOException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-2048 limit");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.location("MaxValidation");
 		String errorPasswordField = mandatory.errorField("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Location");
 		} else {
@@ -839,7 +851,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 33)
 	private void requestStartedStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Active Status");
+		extentTest = extentReports
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Active Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -883,8 +896,7 @@ public class GlobalContactRequest extends BaseClass {
 	@Test(priority = 35)
 	private void requestCompleteStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest(
-						"Verify the Request No:(" + CustomerListPage + ") is in the Completed Status");
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Completed Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -928,8 +940,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 37)
 	private void requestCancelledStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Request No:(" + CustomerListPage + ") is in the Cancelled Status");
+		extentTest = extentReports
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Cancelled Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("CancelStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1038,7 +1050,8 @@ public class GlobalContactRequest extends BaseClass {
 
 	@Test(priority = 41)
 	private void searchFilterByDate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
+		extentTest = extentReports
+				.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.filterByDate();
 		String validateListFromDate = mandatory.validateListFromDate();

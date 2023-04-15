@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -44,6 +46,16 @@ public class TaxModule extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+	
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+	
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = 0) // 1-Login
@@ -167,6 +179,7 @@ public class TaxModule extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max190CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("TaxName");
+			mandatory.clearField("TaxPercentage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -175,6 +188,7 @@ public class TaxModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("TaxName");
+			mandatory.clearField("TaxPercentage");
 		}
 
 	}
@@ -192,6 +206,7 @@ public class TaxModule extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("MaxTaxPercentage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("TaxPercentage");
+			mandatory.texPercentageField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -200,6 +215,7 @@ public class TaxModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("TaxPercentage");
+			mandatory.texPercentageField("ValidData");
 		}
 	}
 
@@ -347,6 +363,7 @@ public class TaxModule extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("Max190CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("TaxName");
+			mandatory.clearField("TaxPercentage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -355,6 +372,7 @@ public class TaxModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("TaxName");
+			mandatory.clearField("TaxPercentage");
 		}
 
 	}
@@ -372,6 +390,7 @@ public class TaxModule extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("MaxTaxPercentage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearField("TaxPercentage");
+			mandatory.texPercentageField("ValidData");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -380,6 +399,7 @@ public class TaxModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearField("TaxPercentage");
+			mandatory.texPercentageField("ValidData");
 		}
 	}
 

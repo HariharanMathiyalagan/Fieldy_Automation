@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -26,7 +28,7 @@ import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
 import com.zaigo.utility.BrowserSetup;
 
-public class GlobalContactInvoice extends BaseClass{
+public class GlobalContactInvoice extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -48,6 +50,16 @@ public class GlobalContactInvoice extends BaseClass{
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -1) // 1-Login
@@ -83,7 +95,6 @@ public class GlobalContactInvoice extends BaseClass{
 		initElements.labelValidation("GlobalContactInvoice");
 
 	}
-	
 
 	@Test(priority = 1)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
@@ -214,7 +225,7 @@ public class GlobalContactInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
 	}
-	
+
 	@Test(priority = 7)
 	private void autoCompleteContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
@@ -782,7 +793,7 @@ public class GlobalContactInvoice extends BaseClass{
 			mandatory.clearFields("Expiry");
 		}
 	}
-	
+
 	@Test(priority = 29)
 	private void createInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
@@ -804,7 +815,7 @@ public class GlobalContactInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
-	
+
 	@Test(priority = 31)
 	private void editLableValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Edit Invoice Page");
@@ -1476,7 +1487,7 @@ public class GlobalContactInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceUpdated.png");
 		}
 	}
-	
+
 	@Test(priority = 58)
 	private void draftInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice has been draft status");
@@ -1619,13 +1630,12 @@ public class GlobalContactInvoice extends BaseClass{
 		}
 
 	}
-	
+
 	@Test(priority = 63)
 	private void listCustomerName() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest(
-				"Enter the Invoice Customer Name:" + ListField + "in the Search field & Invoice list retrived successfully");
+		extentTest = extentReports.createTest("Enter the Invoice Customer Name:" + ListField
+				+ "in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-//		Thread.sleep(5000);
 		create.listTextValidation("GlobalCustomerName");
 		create.listTextValidation("CustomerSearchData");
 		String expected = create.listTextValidation("SearchGlobalCustomerName");
@@ -1679,8 +1689,8 @@ public class GlobalContactInvoice extends BaseClass{
 
 	@Test(priority = 65)
 	private void listQuoteReference() throws IOException, InterruptedException, ParseException {
-		extentTest = extentReports.createTest(
-				"Enter the Invoice Reference:" + ListField + " in the Search field & Invoice list retrived successfully");
+		extentTest = extentReports.createTest("Enter the Invoice Reference:" + ListField
+				+ " in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("SearchReference");
 		create.listTextValidation("SearchData");

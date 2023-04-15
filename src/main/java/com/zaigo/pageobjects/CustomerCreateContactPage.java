@@ -64,7 +64,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By CreateContactLabel = By.xpath("//*[@data-goesto='contractor-view']");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By ResponseMessage = By.xpath("//*[@class='created_successfully d-flex d-none']");
-	By ListName = By.xpath("(//a[@data-n-linkto='customer_contact_timeline'])[1]");
+	By ListName = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[1]/span/a");
 	By Search = By.id("customer-contact-search-value");
 	By SearchButton = By.id("customer-contact-search-button");
 	By InvalidList = By.xpath("//div[text()='No Result Found']");
@@ -238,13 +238,15 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Organization = By.xpath("//input[@placeholder='Choose Organization Name']");
 	By New = By.xpath("//button[@data-modalfetch='shorter_organization_create']");
 	By Logo = By.xpath("//input[@id='logo']//following::label[@for='logo']");
-	By LeadSources = By.xpath("//input[@data-dropdownlist='lead-source']");
-//	By Social = By.xpath("//*[text()='Social']");
+	@FindAll({ @FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[3]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]") })
+	WebElement LeadSources;
+
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Social;
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
-	By Next = By.xpath("//*[@data-automationid='next']");
+	By Next = By.xpath("//*[contains(text(),'Next')]");
 	By MakethisProperty = By.id("addresses__is_primary__0");
 	By PropertyName = By.id("addresses__location_name__0");
 	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
@@ -285,19 +287,19 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorAccessHours = By.id("equipments__access_hours__0_error");
 	By InstallationNotes = By.id("equipments__installation_notes__0");
 	By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
-	By Dots = By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]");
-	By Edit = By.xpath("(//li[@data-n-linkto='customer_contact_edit'])[1]");
-	By Deleted = By.xpath("(//li[@data-tabformid='undefined'])[2]");
+	By Dots = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[1]");
+	By Edit = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[1]");
+	By Deleted = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
 	By EditLabel = By.xpath("//*[@data-exitpopup='customer_contact']");
 	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerContactTable('','','','','reset')\"]");
 	By Status = By.id("customer-contact-status-active");
-	By Filter = By.xpath("//span[@data-timeline-open='customercontact']");
-	By Apply = By.xpath("//div[@class='col-lg-4 col-md-4 col-sm-6 col-12 pt-2']//child::button");
-	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
-	By ListSocial = By.xpath("(//input[@class='mr-3'])[1]");
+	By Filter = By.xpath("//*[@id='customer-contact-timeline']/div[1]/div[4]/button/div");
+	By Apply = By.xpath("//*[@id='customer-contact-timeline']/div[2]/div/div/div/div[3]/button");
+	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[3]/a");
+	By ListSocial = By.xpath("//*[@id='customer-lead-source-div']/div[1]/div[1]/div[1]/input[1]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");
-	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
+	By ListEmail = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[4]/a");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
 	public void visibility(WebElement element) {
@@ -315,12 +317,23 @@ public class CustomerCreateContactPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
 			wait = new WebDriverWait(driver, 2);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -401,7 +414,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By ListLeadSources = By.xpath("(//*[@class='false'])[6]");
+	By ListLeadSources = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[6]/span");
 
 	public String listFirstName() {
 		String text2 = this.getText(ListName);
@@ -824,7 +837,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.inputText(StateName, fakeState);
 		this.inputText(CityName, fakeCity);
 		this.inputText(Zipcode, fakeZipcode);
-		this.mouseActionClick(Next);
+		this.nextButton();
 
 	}
 
@@ -857,12 +870,20 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else {
 			this.mouseActionClick(Social);
 		}
-		this.mouseActionClick(Next);
+		this.nextButton();
 
 	}
 
+	@FindAll({
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']") })
+	WebElement Visible;
+
 	public void nextButton() {
 		this.mouseActionClick(Next);
+		if (!this.conditionChecking1(Visible)) {
+			this.mouseActionClick(Next);
+		}
 
 	}
 

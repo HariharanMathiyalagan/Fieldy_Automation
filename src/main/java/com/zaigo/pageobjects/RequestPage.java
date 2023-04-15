@@ -275,8 +275,7 @@ public class RequestPage extends BaseClass {
 	By OrganizationPhoneNumber = By.id("contacts__phone__0");
 	By OrganizationRequestTittle = By.id("contacts__job_title__0");
 	By OrganizationContactSave = By.id("organization-contact-create");
-	By SelectTechnician = By.xpath(
-			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
+	By SelectTechnician = By.xpath("//*[@id=\"assign-technician\"]/div[1]/div[1]");
 	By StatusRequest = By.id("customer-contact-request-card-status");
 	By TechnicianLabel = By.xpath("//*[text()='Technician']");
 	By CancelledStatus = By.xpath("//*[text()='cancelled']");
@@ -307,13 +306,13 @@ public class RequestPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Save = By.id("contact-create");
 	By GlobalStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
-	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
+	By ThreeDots = By.xpath("//*[@id=\"fieldy-main-request-all-list_aserpttbl\"]/tbody/tr[2]/td[7]/div/div[1]");
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='main_request_edit'])[1]");
 	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
 	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
 	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
 	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
-	By ThreeDotsCancel = By.xpath("(//*[@class='fa fa-ellipsis-v'])[3]");
+	By ThreeDotsCancel = By.xpath("//*[@id=\"fieldy-main-request-all-list_aserpttbl\"]/tbody/tr[3]/td[7]/div/div[1]/i");
 	By GlobalCancelledStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[12]");
 	By GlobalSearchRequestNo = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[2]");
 	By GlobalCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
@@ -686,7 +685,7 @@ public class RequestPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -885,6 +884,7 @@ public class RequestPage extends BaseClass {
 		} else if (value.equals("Updated")) {
 			this.clearField(Tags);
 			this.clearField(Description);
+			this.scrollDown();
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianFirstName);
 		} else if (value.equals("Schedule") || value.equals("GlobalSchedule")) {
@@ -905,6 +905,7 @@ public class RequestPage extends BaseClass {
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianSecoundName);
 		}
+		this.scrollUp();
 		this.picKLocation();
 		this.inputText(Tittle, fakeTittle);
 		this.inputText(Description, getPropertyValue("Description"));

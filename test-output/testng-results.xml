@@ -1,49 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="14" passed="5" failed="9" skipped="0">
+<testng-results ignored="0" total="20" passed="16" failed="4" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-06T22:03:51 IST" name="Default suite" finished-at="2023-04-06T22:09:08 IST" duration-ms="316804">
+  <suite started-at="2023-04-15T19:49:01 IST" name="Default suite" finished-at="2023-04-15T19:52:24 IST" duration-ms="202591">
     <groups>
     </groups>
-    <test started-at="2023-04-06T22:03:51 IST" name="Default test" finished-at="2023-04-06T22:09:08 IST" duration-ms="316804">
-      <class name="org.test.AvailabilityTechnicians">
-        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:03:51 IST" name="setup" finished-at="2023-04-06T22:03:53 IST" duration-ms="2209" status="PASS">
+    <test started-at="2023-04-15T19:49:01 IST" name="Default test" finished-at="2023-04-15T19:52:24 IST" duration-ms="202591">
+      <class name="org.test.LeadSource">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:01 IST" name="setup" finished-at="2023-04-15T19:49:03 IST" duration-ms="1750" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginPage()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:03:53 IST" name="loginPage" finished-at="2023-04-06T22:04:25 IST" duration-ms="31962" status="PASS">
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:03 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:03 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="loginPage()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:03 IST" name="loginPage" finished-at="2023-04-15T19:49:30 IST" duration-ms="26870" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginPage -->
-        <test-method signature="userCreate()[pri:1, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:04:25 IST" name="userCreate" finished-at="2023-04-06T22:04:55 IST" duration-ms="30385" status="PASS">
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:30 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:30 IST" duration-ms="13" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- userCreate -->
-        <test-method signature="contactModule()[pri:2, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:04:55 IST" name="contactModule" finished-at="2023-04-06T22:05:01 IST" duration-ms="5511" status="PASS">
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:30 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:30 IST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- contactModule -->
-        <test-method signature="CreateContact()[pri:3, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:01 IST" name="CreateContact" finished-at="2023-04-06T22:05:14 IST" duration-ms="12815" status="PASS">
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="settingModule()[pri:1, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:30 IST" name="settingModule" finished-at="2023-04-15T19:49:33 IST" duration-ms="3297" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- CreateContact -->
-        <test-method signature="listabelValidation()[pri:4, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:14 IST" name="listabelValidation" finished-at="2023-04-06T22:05:25 IST" duration-ms="11069" status="PASS">
+        </test-method> <!-- settingModule -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:33 IST" duration-ms="16" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- listabelValidation -->
-        <test-method signature="createdJob90min()[pri:5, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:25 IST" name="createdJob90min" finished-at="2023-04-06T22:05:52 IST" duration-ms="26647" status="FAIL">
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:33 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="leadSourceLabel()[pri:2, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="leadSourceLabel" finished-at="2023-04-15T19:49:33 IST" duration-ms="125" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- leadSourceLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:33 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:33 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createFormLabel()[pri:3, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:33 IST" name="createFormLabel" finished-at="2023-04-15T19:49:35 IST" duration-ms="1523" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:35 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:35 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="mandatoryValidation()[pri:4, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="mandatoryValidation" finished-at="2023-04-15T19:49:35 IST" duration-ms="348" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mandatoryValidation -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:35 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:35 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="maximumValidationLeadSource()[pri:4, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:35 IST" name="maximumValidationLeadSource" finished-at="2023-04-15T19:49:39 IST" duration-ms="4058" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationLeadSource -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:39 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:39 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:39 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:39 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="verifySaveButtonExist()[pri:6, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:39 IST" name="verifySaveButtonExist" finished-at="2023-04-15T19:49:40 IST" duration-ms="360" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySaveButtonExist -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:40 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:40 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:40 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:40 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="leadSourceCreate()[pri:7, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:40 IST" name="leadSourceCreate" finished-at="2023-04-15T19:49:48 IST" duration-ms="8705" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- leadSourceCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="leadSourceCreateList()[pri:8, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="leadSourceCreateList" finished-at="2023-04-15T19:49:48 IST" duration-ms="43" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- leadSourceCreateList -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="activeStatus()[pri:9, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="activeStatus" finished-at="2023-04-15T19:49:48 IST" duration-ms="51" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- activeStatus -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:48 IST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editFormLabel()[pri:10, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:48 IST" name="editFormLabel" finished-at="2023-04-15T19:49:50 IST" duration-ms="1900" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:50 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:49:50 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:50 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:49:50 IST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmandatoryValidation()[pri:11, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:49:50 IST" name="editmandatoryValidation" finished-at="2023-04-15T19:50:03 IST" duration-ms="12722" status="FAIL">
           <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})' (tried for 20 second(s) with 500 milliseconds interval)]]>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //button[@id='category_submit_btn'] (tried for 10 second(s) with 500 milliseconds interval)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})' (tried for 20 second(s) with 500 milliseconds interval)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //button[@id='category_submit_btn'] (tried for 10 second(s) with 500 milliseconds interval)
 at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:392)
-at com.zaigo.pageobjects.JobPage.picKLocation(JobPage.java:611)
-at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:813)
-at org.test.AvailabilityTechnicians.createdJob90min(AvailabilityTechnicians.java:182)
+at com.zaigo.pageobjects.BusinessDaysPage.mouseActionClick(BusinessDaysPage.java:74)
+at com.zaigo.pageobjects.BusinessDaysPage.leadSourceField(BusinessDaysPage.java:417)
+at org.test.LeadSource.editmandatoryValidation(LeadSource.java:311)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -72,79 +187,16 @@ at org.testng.TestNG.run(TestNG.java:1031)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.all({By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1],By.xpath: //*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]})
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: driver.version: RemoteWebDriver
-at org.openqa.selenium.support.pagefactory.ByAll.findElement(ByAll.java:58)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
-at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy13.isDisplayed(Unknown Source)
-at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:314)
-at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:43)
-at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:300)
-at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:297)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
-... 32 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createdJob90min -->
-        <test-method signature="technicianAvailability1()[pri:6, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:05:52 IST" name="technicianAvailability1" finished-at="2023-04-06T22:06:22 IST" duration-ms="30382" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
-at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
-at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
-at org.test.AvailabilityTechnicians.technicianAvailability1(AvailabilityTechnicians.java:206)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[@id='category_submit_btn']"}
   (Session info: chrome=111.0.5563.147)
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
 System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-*** Element info: {Using=id, value=customer-name}
-at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59585}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6243d34f93ed757c55f55a2249fe3176
+*** Element info: {Using=xpath, value=//button[@id='category_submit_btn']}
+at jdk.internal.reflect.GeneratedConstructorAccessor14.newInstance(Unknown Source)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
 at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
@@ -155,41 +207,39 @@ at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.ja
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
-at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
-... 32 more
+... 31 more
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- technicianAvailability1 -->
-        <test-method signature="technicianAvailability2()[pri:7, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:06:22 IST" name="technicianAvailability2" finished-at="2023-04-06T22:06:43 IST" duration-ms="21170" status="FAIL">
+        </test-method> <!-- editmandatoryValidation -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:03 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:50:03 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:03 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:50:03 IST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmaximumValidationLeadSource()[pri:12, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:03 IST" name="editmaximumValidationLeadSource" finished-at="2023-04-15T19:50:13 IST" duration-ms="10329" status="FAIL">
           <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //input[@id='name'] (tried for 10 second(s) with 500 milliseconds interval)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //input[@id='name'] (tried for 10 second(s) with 500 milliseconds interval)
 at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
-at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
-at org.test.AvailabilityTechnicians.technicianAvailability2(AvailabilityTechnicians.java:230)
+at com.zaigo.pageobjects.BusinessDaysPage.validationTab(BusinessDaysPage.java:104)
+at com.zaigo.pageobjects.BusinessDaysPage.leadSourceField(BusinessDaysPage.java:411)
+at org.test.LeadSource.editmaximumValidationLeadSource(LeadSource.java:335)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -218,287 +268,16 @@ at org.testng.TestNG.run(TestNG.java:1031)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- technicianAvailability2 -->
-        <test-method signature="technicianAvailability3()[pri:8, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:06:43 IST" name="technicianAvailability3" finished-at="2023-04-06T22:07:04 IST" duration-ms="20790" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
-at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
-at org.test.AvailabilityTechnicians.technicianAvailability3(AvailabilityTechnicians.java:251)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- technicianAvailability3 -->
-        <test-method signature="technicianAvailability4()[pri:9, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:04 IST" name="technicianAvailability4" finished-at="2023-04-06T22:07:24 IST" duration-ms="20524" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
-at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
-at org.test.AvailabilityTechnicians.technicianAvailability4(AvailabilityTechnicians.java:272)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- technicianAvailability4 -->
-        <test-method signature="technicianAvailability5()[pri:10, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:24 IST" name="technicianAvailability5" finished-at="2023-04-06T22:07:45 IST" duration-ms="20729" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
-at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
-at org.test.AvailabilityTechnicians.technicianAvailability5(AvailabilityTechnicians.java:293)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- technicianAvailability5 -->
-        <test-method signature="technicianAvailability6()[pri:11, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:07:45 IST" name="technicianAvailability6" finished-at="2023-04-06T22:08:06 IST" duration-ms="20937" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[@class='floating-input form-control user-view '] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
-System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.mouseActionClick(JobPage.java:385)
-at com.zaigo.pageobjects.JobPage.checkTechnician(JobPage.java:1169)
-at org.test.AvailabilityTechnicians.technicianAvailability6(AvailabilityTechnicians.java:314)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- technicianAvailability6 -->
-        <test-method signature="createdJobTwoDays()[pri:12, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:08:06 IST" name="createdJobTwoDays" finished-at="2023-04-06T22:08:36 IST" duration-ms="30355" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
-at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
-at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
-at org.test.AvailabilityTechnicians.createdJobTwoDays(AvailabilityTechnicians.java:339)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@id='name']"}
   (Session info: chrome=111.0.5563.147)
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
 System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-*** Element info: {Using=id, value=customer-name}
-at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59585}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6243d34f93ed757c55f55a2249fe3176
+*** Element info: {Using=xpath, value=//input[@id='name']}
+at jdk.internal.reflect.GeneratedConstructorAccessor14.newInstance(Unknown Source)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
 at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
@@ -509,32 +288,39 @@ at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.ja
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
-at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
-... 32 more
+... 31 more
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createdJobTwoDays -->
-        <test-method signature="technianAvailabilityMidDate()[pri:13, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:08:36 IST" name="technianAvailabilityMidDate" finished-at="2023-04-06T22:09:07 IST" duration-ms="30477" status="FAIL">
+        </test-method> <!-- editmaximumValidationLeadSource -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:13 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:50:13 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:13 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:50:13 IST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="verifyUpdateButtonExist()[pri:13, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:13 IST" name="verifyUpdateButtonExist" finished-at="2023-04-15T19:50:44 IST" duration-ms="30398" status="FAIL">
           <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)]]>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //button[@id='category_submit_btn'] (tried for 30 second(s) with 500 milliseconds interval)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: customer-name (tried for 30 second(s) with 500 milliseconds interval)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //button[@id='category_submit_btn'] (tried for 30 second(s) with 500 milliseconds interval)
 at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
-at com.zaigo.pageobjects.JobPage.getText(JobPage.java:432)
-at com.zaigo.pageobjects.JobPage.customerName(JobPage.java:552)
-at com.zaigo.pageobjects.JobPage.jobStatusCreation(JobPage.java:802)
-at org.test.AvailabilityTechnicians.technianAvailabilityMidDate(AvailabilityTechnicians.java:366)
+at com.zaigo.pageobjects.BusinessDaysPage.getText(BusinessDaysPage.java:128)
+at com.zaigo.pageobjects.BusinessDaysPage.buttonValidation(BusinessDaysPage.java:484)
+at org.test.LeadSource.verifyUpdateButtonExist(LeadSource.java:362)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -563,16 +349,16 @@ at org.testng.TestNG.run(TestNG.java:1031)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#customer\-name"}
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[@id='category_submit_btn']"}
   (Session info: chrome=111.0.5563.147)
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
 System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60993}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1e037e9f14cfd0cd0bbe8663f94a4f3f
-*** Element info: {Using=id, value=customer-name}
-at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59585}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6243d34f93ed757c55f55a2249fe3176
+*** Element info: {Using=xpath, value=//button[@id='category_submit_btn']}
+at jdk.internal.reflect.GeneratedConstructorAccessor14.newInstance(Unknown Source)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
 at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
@@ -583,8 +369,90 @@ at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.ja
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:372)
-at org.openqa.selenium.By$ById.findElement(By.java:188)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 31 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUpdateButtonExist -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:44 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:50:44 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:44 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:50:44 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="leadSourceUpdate()[pri:14, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:50:44 IST" name="leadSourceUpdate" finished-at="2023-04-15T19:51:14 IST" duration-ms="30353" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //input[@id='name'] (tried for 10 second(s) with 500 milliseconds interval)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //input[@id='name'] (tried for 10 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.BusinessDaysPage.clearField(BusinessDaysPage.java:53)
+at com.zaigo.pageobjects.BusinessDaysPage.clearField(BusinessDaysPage.java:473)
+at com.zaigo.pageobjects.BusinessDaysPage.message(BusinessDaysPage.java:502)
+at org.test.LeadSource.leadSourceUpdate(LeadSource.java:415)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@id='name']"}
+  (Session info: chrome=111.0.5563.147)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59585}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6243d34f93ed757c55f55a2249fe3176
+*** Element info: {Using=xpath, value=//input[@id='name']}
+at jdk.internal.reflect.GeneratedConstructorAccessor14.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
 at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
@@ -595,12 +463,76 @@ at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
           </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- technianAvailabilityMidDate -->
-        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.AvailabilityTechnicians@5a56cdac]" started-at="2023-04-06T22:09:07 IST" name="exitBrowser" finished-at="2023-04-06T22:09:08 IST" duration-ms="780" status="PASS">
+        </test-method> <!-- leadSourceUpdate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:14 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:51:14 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:14 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:51:14 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="alreadyExists()[pri:15, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:14 IST" name="alreadyExists" finished-at="2023-04-15T19:51:17 IST" duration-ms="2809" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- alreadyExists -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:17 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:51:17 IST" duration-ms="100" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:17 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:51:17 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="deleteBusinessUnit()[pri:16, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:17 IST" name="deleteBusinessUnit" finished-at="2023-04-15T19:51:36 IST" duration-ms="18932" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBusinessUnit -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:36 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:51:36 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:36 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:51:36 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="reflectCreateContactPage()[pri:17, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:36 IST" name="reflectCreateContactPage" finished-at="2023-04-15T19:51:55 IST" duration-ms="18785" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reflectCreateContactPage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:55 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:51:55 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:55 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:51:55 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="inactiveLeadSource()[pri:18, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:51:55 IST" name="inactiveLeadSource" finished-at="2023-04-15T19:52:14 IST" duration-ms="19544" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- inactiveLeadSource -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:52:14 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:52:14 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:52:14 IST" name="deleteBeforeCatch" finished-at="2023-04-15T19:52:14 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="deleteLeadSource()[pri:19, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:52:14 IST" name="deleteLeadSource" finished-at="2023-04-15T19:52:23 IST" duration-ms="8816" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLeadSource -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:52:23 IST" name="deleteAfterCatch" finished-at="2023-04-15T19:52:23 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.LeadSource@194bcebf]" started-at="2023-04-15T19:52:23 IST" name="exitBrowser" finished-at="2023-04-15T19:52:24 IST" duration-ms="407" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
-      </class> <!-- org.test.AvailabilityTechnicians -->
+      </class> <!-- org.test.LeadSource -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

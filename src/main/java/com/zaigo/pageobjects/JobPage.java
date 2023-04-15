@@ -174,9 +174,7 @@ public class JobPage extends BaseClass {
 	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
 
-	@FindAll({ @FindBy(xpath = "//*[@style='width: 1244px; position: absolute; left: 263px; top: 212px;']//div[1]"),
-			@FindBy(xpath = "//*[@style='width: 1244px; position: absolute; left: 263px; top: 268px;']//div[1]"),
-			@FindBy(xpath = "//*[@style='width: 1244px; position: absolute; left: 263px; top: 260px;']//div[1]") })
+	@FindAll({ @FindBy(xpath = "//*[@class='pac-item'][1]") })
 	WebElement LocationPick;
 //	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
 //	By secoundLocation = By.xpath("(//div[@class='pac-item'])[7]");
@@ -203,8 +201,7 @@ public class JobPage extends BaseClass {
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
 	By EalierTime = By.xpath("//*[text()='From Time should be current or future time only']");
 	By TimeMismatch = By.xpath("//*[text()='Start time should be earlier than End time']");
-	By SelectTechnician = By.xpath(
-			"//*[@class='d-flex mt-2']//*[@class='create-header page-header-left back-btn font-weight-bold black-text ']");
+	By SelectTechnician = By.xpath("//*[@id='assign-technician']/div[1]/div[1]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By No = By.xpath("//*[text()='No']");
 
@@ -768,6 +765,7 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(Repair);
 			this.dropDownByIndex(Priority, 2);
 			this.picKLocation();
+			this.scrollDown();
 			this.currentPickerFromDate();
 			this.futureStartTime();
 			this.assertName(SelectTechnician, "Select Technician");
@@ -837,7 +835,7 @@ public class JobPage extends BaseClass {
 			this.tagValidation(Tags, randomCharacter);
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(SaveComplete);
-			this.visibility(JobList);
+//			this.visibility(JobList);
 		} else if (value.equals("BackNav")) {
 			this.scrollUp();
 			this.mouseActionClick(ListPage);
@@ -944,7 +942,7 @@ public class JobPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 30);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;

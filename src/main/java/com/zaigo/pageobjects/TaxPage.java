@@ -206,9 +206,12 @@ public class TaxPage extends BaseClass {
 	By ListTaxName = By.xpath("//*[@id='tax-list']/div[1]/div/div/div[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div/div[1]/div/div/div/button"),
-			@FindBy(xpath = "//*[contains(text(),'Save')]"), @FindBy(xpath = "//*[contains(text(),'Update')]"),
+			@FindBy(xpath = "//*[@id='product-create']//*[contains(text(),'Save')]"),
+			@FindBy(xpath = "//*[@id='product-create']//*[contains(text(),'Update')]"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']/div[2]/div[3]/button") })
 	WebElement Button;
+
+	By ProductLabel = By.xpath("//*[@id='product-create']/header/div/div/div/a");
 
 	By TaxName = By.id("tax-name");
 
@@ -222,7 +225,10 @@ public class TaxPage extends BaseClass {
 
 	By ProductService = By.xpath("//*[text()=' Product / Service']");
 
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Name']") })
+	@FindAll({
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
+			@FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
 	WebElement ListPage;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='tax-autocomplete-list']/div[1]"),
@@ -251,7 +257,7 @@ public class TaxPage extends BaseClass {
 			this.inputText(TaxName, fakeTaxName);
 		} else if (value.equals("TaxPercentage")) {
 			this.clearField(TaxPercentage);
-			this.inputText(TaxPercentage, fakeTaxPercentage);
+//			this.inputText(TaxPercentage, fakeTaxPercentage);
 		}
 	}
 
@@ -275,7 +281,7 @@ public class TaxPage extends BaseClass {
 			return ResponseMessage;
 		} else if (value.equals("AlternateMessage")) {
 			do {
-				if (ResponseMessage.equals("MaxTaxPercentage")) {
+				if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
 					String TaxValue = RandomStringUtils.randomNumeric(2);
 					this.clearField(TaxPercentage);
 					this.inputText(TaxPercentage, TaxValue);
@@ -312,11 +318,13 @@ public class TaxPage extends BaseClass {
 
 	public String texPercentageField(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(TaxPercentage, characters16);
+			this.validationTab(TaxPercentage, "0");
 			this.inputText(TaxName, fakeTaxName);
 			String textAttribute = this.getTextAttribute(TaxName);
 			this.mouseActionClick(Button);
 			return textAttribute;
+		} else if (value.equals("ValidData")) {
+			this.inputText(TaxPercentage, fakeTaxPercentage);
 		}
 		return value;
 	}
@@ -388,6 +396,7 @@ public class TaxPage extends BaseClass {
 		this.visibility(ListPage);
 		this.mouseActionClick(Button);
 		this.scrollDown();
+		this.visibility(ProductLabel);
 		for (int i = 0; i < 10; i++) {
 			this.mouseActionClick(Button);
 		}

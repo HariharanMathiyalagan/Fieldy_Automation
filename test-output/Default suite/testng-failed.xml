@@ -3,21 +3,18 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.AvailabilityTechnicians">
+      <class name="org.test.LeadSource">
         <methods>
+          <include name="editmaximumValidationLeadSource"/>
+          <include name="editmandatoryValidation"/>
           <include name="exitBrowser"/>
+          <include name="leadSourceUpdate"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="verifyUpdateButtonExist"/>
+          <include name="deleteAfterCatch"/>
           <include name="setup"/>
-          <include name="technicianAvailability1"/>
-          <include name="createdJob90min"/>
-          <include name="createdJobTwoDays"/>
-          <include name="technicianAvailability5"/>
-          <include name="technicianAvailability2"/>
-          <include name="technicianAvailability4"/>
-          <include name="technianAvailabilityMidDate"/>
-          <include name="technicianAvailability6"/>
-          <include name="technicianAvailability3"/>
         </methods>
-      </class> <!-- org.test.AvailabilityTechnicians -->
+      </class> <!-- org.test.LeadSource -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

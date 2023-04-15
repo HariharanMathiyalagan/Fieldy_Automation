@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -47,6 +49,16 @@ public class DispatchModule extends BaseClass {
 		this.extentReports.flush();
 	}
 
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
 	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
@@ -70,32 +82,32 @@ public class DispatchModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("LoginFunctionality.png");
 		}
 	}
-	
-//	@Test(priority = 0)
-//	private void userCreate() throws IOException, AWTException, InterruptedException {
-//		extentTest = extentReports.createTest("Verify a new User is created successfully through [Team User]");
-//		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
-//		landing.clickEvent("Navigate");
-//		landing.labelValidation("ListLabel");
-//		landing.labelValidation("FormLabel");
-//		String createMessage = landing.createUser();
-//		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
-//		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UserCreatedMessgae"));
-//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-//		if (createMessage.equals(getPropertyValue("UserCreatedMessgae"))) {
-//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//		} else {
-//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-//			TakesScreenshot screenshot = (TakesScreenshot) driver;
-//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-//			File file = new File("58.png");
-//			FileHandler.copy(screenshotAs, file);
-//			extentTest.addScreenCaptureFromPath("58.png");
-//			landing.responseMessage("AlternateFunction");
-//
-//		}
-//
-//	}
+
+	@Test(priority = 0)
+	private void userCreate() throws IOException, AWTException, InterruptedException {
+		extentTest = extentReports.createTest("Verify a new User is created successfully through [Team User]");
+		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
+		landing.clickEvent("Navigate");
+		landing.labelValidation("ListLabel");
+		landing.labelValidation("FormLabel");
+		String createMessage = landing.createUser();
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UserCreatedMessgae"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (createMessage.equals(getPropertyValue("UserCreatedMessgae"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("58.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("58.png");
+			landing.responseMessage("AlternateFunction");
+
+		}
+
+	}
 
 	@Test(priority = 1)
 	public void requestModule() throws InterruptedException, WebDriverException, IOException {

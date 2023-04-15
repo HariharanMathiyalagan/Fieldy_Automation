@@ -57,7 +57,9 @@ public class DispatchPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
-	By DragFrom = By.xpath("//*[@id='external-events-listing']/div[1]/div");
+	By Unassigned = By.xpath("//*[@id='external-events-listing']//div[1]//div[1]//div[1]//div[2]//div[1]");
+
+	By DragFrom = By.xpath("//*[@id='external-events-listing']/div[1]/div[1]/div[1]/div[1]");
 
 	By DragTo = By.xpath("//*[@id='calendar']/div[2]/div/table/tbody/tr/td[3]/div/div/div/div[1]/table/tbody/tr/td[1]");
 
@@ -82,26 +84,33 @@ public class DispatchPage extends BaseClass {
 	By Yes = By.xpath("//*[text()='Yes']");
 
 	By CalendarData = By.xpath("//*[@id='calendar']//*[contains(text(),'" + customerName + "')]");
-	
+
 	By Job = By.id("job-menu");
+
+	By Invalid = By.xpath("//*[@id='external-events-listing']/div/div");
 
 	static String customerName;
 
 	public String modulePage() {
 		customerName = this.getText(ListPage);
 		this.mouseActionClick(Dispatch);
-		this.visibility(DragFrom);
+		this.visibility(Invalid);
 		String text = this.getText(Label);
 		return text;
 	}
 
-	public void assignAppoinment(String value) {
-		if (value.equals("Assign")||value.equals("Assigned")) {
+	public void assignAppoinment(String value) throws InterruptedException {
+		if (value.equals("Assign") || value.equals("Assigned")) {
 			if (value.equals("Assign")) {
 				this.mouseActionClick(Next);
 			}
-			this.visibility(DragFrom);
-			this.dragandDrop(DragFrom, DragTo);
+			if (this.getText(Unassigned).equals("Unassigned")) {
+				this.dragandDrop(DragFrom, DragTo);
+			} else {
+				Thread.sleep(5000);
+				this.dragandDrop(DragFrom, DragTo);
+			}
+
 		}
 	}
 

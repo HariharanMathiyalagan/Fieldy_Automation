@@ -12,7 +12,9 @@ import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -47,6 +49,16 @@ public class ProductModule extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = 0) // 1-Login
@@ -1315,10 +1327,10 @@ public class ProductModule extends BaseClass {
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
 		String createMessage = landing.reflectedFunction();
-		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage + " Will be added");
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (createMessage.equals(ListField + " Will be added")) {
+		if ((createMessage + " Will be added").equals(ListField + " Will be added")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clickEvent("Product");
 			ListField = landing.deleteProduct();
