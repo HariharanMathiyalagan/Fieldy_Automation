@@ -101,7 +101,7 @@ public class ProductServicePage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -248,7 +248,10 @@ public class ProductServicePage extends BaseClass {
 
 	By Apply = By.xpath("//*[contains(text(),'Apply')]");
 
-	@FindAll({ @FindBy(xpath = "//*[text()='Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
+			@FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
 	WebElement ListPage;
 	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No.']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement QuoteListPage;
@@ -340,7 +343,8 @@ public class ProductServicePage extends BaseClass {
 
 	By InventoryField = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
 	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Will be added')]"),
-			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]") })
+			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement InventoryFirstName;
 
 	By Inactive = By.xpath("//*[@value='inactive']");
@@ -670,7 +674,7 @@ public class ProductServicePage extends BaseClass {
 		return text;
 	}
 
-	public String reflectedFunction() {
+	public String reflectedFunction() throws InterruptedException {
 		this.mouseActionClick(Quote);
 		this.visibility(QuoteListPage);
 		this.mouseActionClick(CreateButton);
@@ -680,7 +684,13 @@ public class ProductServicePage extends BaseClass {
 			this.mouseActionClick(Save);
 		}
 		this.mouseActionClick(InventoryField);
-		this.visibility(InventoryFirstName);
+		if (this.getText(InventoryFirstName).equals("No Data Found")) {
+			Thread.sleep(10000);
+			this.mouseActionClick(InventoryField);
+			this.visibility(InventoryFirstName);
+		} else {
+			this.visibility(InventoryFirstName);
+		}
 		this.inputText(InventoryField, listData);
 		String text = this.getText(InventoryFirstName);
 		return text;

@@ -66,7 +66,7 @@ public class TeamUserPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
-	
+
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
@@ -251,7 +251,7 @@ public class TeamUserPage extends BaseClass {
 	By Yes = By.xpath("//*[text()='Yes']");
 	By HeadingFirstName = By.xpath("//td[text()='First Name']");
 	By InValid = By.xpath("//*[text()='No Result Found']");
-
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
 	By ListCompanyFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
 	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
@@ -537,6 +537,7 @@ public class TeamUserPage extends BaseClass {
 			String text = this.getText(ListFirstName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
+			this.invisible(Spinner);
 			this.visibility(Label);
 			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
@@ -565,7 +566,8 @@ public class TeamUserPage extends BaseClass {
 
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
-			this.tagValidation(Search, listData);
+			this.inputText(Search, listData);
+			this.mouseActionClick(SearchButton);
 		} else if (value.equals("FirstName")) {
 			listData = this.getText(ListFirstName);
 			return listData;
@@ -654,7 +656,7 @@ public class TeamUserPage extends BaseClass {
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
 	public String responseMessage(String value) throws IOException, InterruptedException {
-		Boolean check = false;
+		Boolean check = true;
 		if (value.equals("Message")) {
 			if (this.conditionChecking(Message)) {
 				listData = this.getText(Message);
@@ -667,7 +669,7 @@ public class TeamUserPage extends BaseClass {
 						listData = this.responseMessage("Message");
 						if (listData.equals(getPropertyValue("UserCreatedMessgae"))
 								|| listData.equals(getPropertyValue("UserUpdatedMessage"))) {
-							check = true;
+							check = false;
 						}
 					}
 				} while (check);
@@ -760,11 +762,10 @@ public class TeamUserPage extends BaseClass {
 			this.clickEvent("Next");
 			this.validateFillData("Location");
 			this.clickEvent("SaveUpdate");
-			this.visibility(PageLand);
+			this.responseMessage("Message");
 		}
-		response = this.responseMessage("Message");
-		return response;
-
+//		return this.responseMessage("Message");
+		return listData;
 	}
 
 }

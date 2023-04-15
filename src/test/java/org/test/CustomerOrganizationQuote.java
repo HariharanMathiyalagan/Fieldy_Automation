@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -47,6 +49,16 @@ public class CustomerOrganizationQuote extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -2) // 1-Login
@@ -100,8 +112,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports
 				.createTest("Verify a new Customer Organization is created successfully through [Create Organization]");
-		CustomerCreateOrganizationPage create = PageFactory.initElements(driver,
-				CustomerCreateOrganizationPage.class);
+		CustomerCreateOrganizationPage create = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
@@ -168,8 +179,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 2)
 	private void namePrepopulation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest(
-				"Verify the Customer Organization Name:" + customerContactName + " is prepopulated in the Organization Name Field");
+		extentTest = extentReports.createTest("Verify the Customer Organization Name:" + customerContactName
+				+ " is prepopulated in the Organization Name Field");
 		QuotePage jobPage = PageFactory.initElements(driver, QuotePage.class);
 		String customerName = jobPage.customerName("PlaceHolderName");
 		extentTest.log(Status.INFO, "Actual Result is -" + customerContactName);
@@ -909,8 +920,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 31)
 	private void quoteEdit() throws IOException, InterruptedException, ParseException {
-		extentTest = extentReports
-				.createTest("Verify the User is land on the Quote Edit page");
+		extentTest = extentReports.createTest("Verify the User is land on the Quote Edit page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		String responseMessage = create.labelValidation("EditLabel");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -930,7 +940,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 32)
 	private void editmandatoryValidationExpiryDate() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
@@ -1558,8 +1568,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
-	
+
 	@Test(priority = 57)
 	private void updateQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
@@ -1584,8 +1593,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	@Test(priority = 58)
 	private void createdQuoteStatus() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify to Created & Updated Quote Status is Open, It's is displayed in the Quote List Page");
+		extentTest = extentReports.createTest(
+				"Verify to Created & Updated Quote Status is Open, It's is displayed in the Quote List Page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		String responseMessage = create.listTextValidation("ListStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -1756,10 +1765,11 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 65)
 	private void filterDateInvoice() throws IOException, InterruptedException, ParseException {
-		extentTest = extentReports.createTest("Verify the Invoice Due Date List filter by Due From Date:" + QuoteListData);
+		extentTest = extentReports
+				.createTest("Verify the Quote Created Date List filter by Created Date:" + QuoteListData);
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.dateValidation("Convertion");
 		String dateValidation = create.dateValidation("ListCreateDate");

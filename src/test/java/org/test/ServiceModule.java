@@ -12,7 +12,9 @@ import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -44,6 +46,16 @@ public class ServiceModule extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = 0) // 1-Login
@@ -814,6 +826,7 @@ public class ServiceModule extends BaseClass {
 		}
 
 	}
+
 	@Test(priority = 33)
 	private void updateButton() throws IOException, AWTException {
 		extentTest = extentReports
@@ -844,8 +857,8 @@ public class ServiceModule extends BaseClass {
 		mandatory.validData("FillFieldService");
 		if (listValidation.equals("Yes")) {
 			mandatory.validData("ServiceTaxable");
-		}else {
-			
+		} else {
+
 		}
 		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -938,7 +951,7 @@ public class ServiceModule extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 39)
 	private void reflectQuotePage() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the newly created Service Name is:" + ListField
@@ -970,10 +983,10 @@ public class ServiceModule extends BaseClass {
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
 		String createMessage = landing.reflectedFunction();
-		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage + " Will be added");
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (createMessage.equals(ListField + " Will be added")) {
+		if ((createMessage + " Will be added").equals(ListField + " Will be added")) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clickEvent("Service");
 			ListField = landing.deleteProduct();

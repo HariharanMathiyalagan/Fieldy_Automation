@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -46,6 +48,16 @@ public class GlobalContactQuote extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -2) // 1-Login
@@ -293,7 +305,7 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 9)
 	private void maximumValidationReference() throws IOException, InterruptedException {
 		extentTest = extentReports
@@ -813,8 +825,7 @@ public class GlobalContactQuote extends BaseClass {
 
 	@Test(priority = 29)
 	private void createQuote() throws IOException, InterruptedException, ParseException {
-		extentTest = extentReports
-				.createTest("Verify Quote is created successfully from Global Contact->Create Quote");
+		extentTest = extentReports.createTest("Verify Quote is created successfully from Global Contact->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.CRUDValidation("Create");
 		String errorPasswordField = mandatory.message("message");
@@ -832,7 +843,7 @@ public class GlobalContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
-	
+
 	@Test(priority = 29)
 	private void quoteCount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Quote Created Count is added in the Quote All Count");
@@ -985,7 +996,7 @@ public class GlobalContactQuote extends BaseClass {
 			mandatoryValidation.validationQuantity("Value");
 		}
 	}
-	
+
 	@Test(priority = 35)
 	private void editmaximumValidationReference() throws IOException, InterruptedException {
 		extentTest = extentReports
@@ -1530,8 +1541,7 @@ public class GlobalContactQuote extends BaseClass {
 
 	@Test(priority = 56)
 	private void updateQuote() throws IOException, InterruptedException, ParseException {
-		extentTest = extentReports
-				.createTest("Verify Quote is updated successfully from Global Contact->Edit Quote");
+		extentTest = extentReports.createTest("Verify Quote is updated successfully from Global Contact->Edit Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.CRUDValidation("Create");
 		String errorPasswordField = mandatory.message("message");

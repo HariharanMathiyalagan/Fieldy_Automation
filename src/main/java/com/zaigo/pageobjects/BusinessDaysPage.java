@@ -184,7 +184,7 @@ public class BusinessDaysPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -317,7 +317,7 @@ public class BusinessDaysPage extends BaseClass {
 
 //	By  = By.xpath("//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]");
 
-	@FindAll({ @FindBy(xpath = "//*[@id='job_create_edit']/div[1]/div[4]/div[2]/input[1]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='job_create_edit']/div/div[1]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[3]/div[4]/div[2]/input[1]") })
 	WebElement BusinessDaysFields;
@@ -393,8 +393,10 @@ public class BusinessDaysPage extends BaseClass {
 					this.mouseActionClick(bussiness_status_save_btn);
 				} while (!this.conditionChecking1(bussiness_name_error));
 			}
-		} else if (value.equals("UniqueValdation")) {
+		} else if (value.equals("UniqueValidation")) {
 			String text = this.getText(list_bussiness_unit_name);
+			this.mouseActionClick(create_button);
+			this.mouseActionClick(create_button);
 			this.validationTab(bussiness_name, text);
 		} else if (value.equals("ValidData")) {
 			this.inputText(bussiness_name, BusinessName);
@@ -466,12 +468,14 @@ public class BusinessDaysPage extends BaseClass {
 	}
 
 	public void clearField(String value) {
-		if (value.equals("BussinessUnit")) {
-			this.clearField(bussiness_name);
-		} else if (value.equals("LeadSource")) {
-			this.clearField(leadsource_name);
-		} else if (value.equals("ServiceType")) {
-			this.clearField(service_name);
+		for (int i = 0; i < 20; i++) {
+			if (value.equals("BussinessUnit")) {
+				this.clearField(bussiness_name);
+			} else if (value.equals("LeadSource")) {
+				this.clearField(leadsource_name);
+			} else if (value.equals("ServiceType")) {
+				this.clearField(service_name);
+			}
 		}
 	}
 
@@ -559,7 +563,9 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(leadsource_edit_btn);
 			this.valuePresent(leadsource_name, textAttribute);
 			this.validationTab(leadsource_name, characters2048);
-			this.clearField("LeadSource");
+			for (int i = 0; i < 5; i++) {
+				this.clearField("LeadSource");
+			}
 			this.validationTab(leadsource_name, textAttribute);
 			this.dropDownByIndex(leadsource_status, 1);
 			this.mouseActionClick(leadsource_save_btn);
@@ -615,7 +621,10 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(service_edit_btn);
 			this.valuePresent(service_name, textAttribute);
 			this.validationTab(service_name, characters2048);
-			this.clearField("BusinessUnit");
+			for (int i = 0; i < 5; i++) {
+				this.clearField("ServiceType");
+			}
+			this.valuePresent(service_name, textAttribute);
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
 			this.message("Message");

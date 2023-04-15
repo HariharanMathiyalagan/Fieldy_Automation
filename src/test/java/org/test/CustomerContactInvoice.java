@@ -13,7 +13,9 @@ import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -22,9 +24,9 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
+import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
-import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.utility.BrowserSetup;
 
 public class CustomerContactInvoice extends BaseClass {
@@ -50,6 +52,16 @@ public class CustomerContactInvoice extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+	
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+	
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -1) // 1-Login

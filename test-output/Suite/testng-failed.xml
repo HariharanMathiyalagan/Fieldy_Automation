@@ -3,16 +3,25 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.AvailabilityTechnicians">
+      <class name="org.test.CustomerOrganizationRequest">
         <methods>
+          <include name="startedRequest"/>
+          <include name="searchRequestNo"/>
+          <include name="searchLocation"/>
+          <include name="dispatchedRequest"/>
+          <include name="requestDraftStatus"/>
+          <include name="searchFilterByDate"/>
+          <include name="searchInvalid"/>
+          <include name="cancelledRequest"/>
           <include name="exitBrowser"/>
-          <include name="listabelValidation"/>
+          <include name="deletedRequest"/>
+          <include name="requestCompleteStatus"/>
+          <include name="completedRequest"/>
+          <include name="requestCancelledStatus"/>
+          <include name="requestStartedStatus"/>
           <include name="setup"/>
-          <include name="CreateContact"/>
-          <include name="createdJob90min"/>
-          <include name="userCreate"/>
         </methods>
-      </class> <!-- org.test.AvailabilityTechnicians -->
+      </class> <!-- org.test.CustomerOrganizationRequest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

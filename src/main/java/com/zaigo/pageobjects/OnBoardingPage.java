@@ -137,7 +137,7 @@ public class OnBoardingPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 5);
 			text = wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
 		} catch (Exception e) {
 			return text;

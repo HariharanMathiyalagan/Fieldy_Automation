@@ -2,6 +2,7 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -151,9 +152,9 @@ public class CreateContractorPage extends BaseClass {
 
 	By clickclosebutton = By.xpath("//button[@data-automationid='c']");
 
-	By ThreeDots = By.xpath("(//*[@class='fa fa-ellipsis-v'])[2]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[1]");
 
-	By Edit = By.xpath("(//li[@data-tabformid='undefined'])[1]");
+	By Edit = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
 
 	By NameValidation = By.xpath("(//a[@data-goesto='user-profile-view'])[1]");
 
@@ -164,6 +165,8 @@ public class CreateContractorPage extends BaseClass {
 	By Invalid = By.xpath("//div[text()='No Result Found']");
 
 	By Search = By.id("team-user-contract-search");
+	
+	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
 
 	By ContractorCount = By.id("total-company-contractor-count");
 
@@ -267,7 +270,7 @@ public class CreateContractorPage extends BaseClass {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
-	
+
 	public String getTextAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
@@ -469,11 +472,12 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("Reset")) {
 			this.mouseActionClick(resert);
 		} else if (value.equals("Edit")) {
-			String text = this.getText(ListEmail);
+			String text = this.getText(ListCompanyName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
+			this.valuePresent(CompanyName, text);
 			driver.navigate().refresh();
-			this.valuePresent(contractoremail, text);
+			this.valuePresent(CompanyName, text);
 			this.elementtobeClickable(saveform);
 		} else if (value.equals("Delete")) {
 			this.mouseActionClick(ThreeDots);
@@ -482,7 +486,7 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("SubmissionButton")) {
 			String text = this.getText(saveform);
 			return text;
-		}else if (value.equals("ClickButton")) {
+		} else if (value.equals("ClickButton")) {
 			this.mouseActionClick(saveform);
 		}
 		return value;
@@ -503,6 +507,7 @@ public class CreateContractorPage extends BaseClass {
 			this.validationTab(CompanyName, text);
 		} else if (value.equals("ValidData")) {
 			this.inputText(CompanyName, fakeCompanyName);
+			ContractorName = this.getTextAttribute(CompanyName);
 		}
 
 	}
@@ -636,25 +641,120 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
+	static String ContractorName;
+	static String ContractorFirstName;
+	static String ContractorLastName;
+	static String ContractorEmail;
+	static String ContractorPhoneNumber;
+	static String ContractorWebSite;
+	static String ContractorFaxNumber;
+	static String ContractorLocationName;
+	static String ContractorLocationEmail;
+	static String ContractorLocationContactPerson;
+	static String ContractorLocationPhoneNumber;
+	static String ContractorLocationAddress1;
+	static String ContractorLocationAddress2;
+	static String ContractorLocationCity;
+	static String ContractorLocationState;
+	static String ContractorLocationZipcode;
+
+	public String prepopulation(int value) {
+		String data[] = { ContractorName, ContractorFirstName, ContractorLastName, ContractorEmail,
+				ContractorPhoneNumber, ContractorWebSite, ContractorFaxNumber, ContractorLocationName,
+				ContractorLocationEmail, ContractorLocationContactPerson, ContractorLocationPhoneNumber,
+				ContractorLocationAddress1, ContractorLocationAddress2, ContractorLocationCity, ContractorLocationState,
+				ContractorLocationZipcode };
+		return data[value];
+
+	}
+
+	public String prepopulationFields(String value) {
+		if (value.equals("CompanyName")) {
+			String data = this.getTextAttribute(CompanyName);
+			return data;
+		} else if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(contractorcpersonfirstname);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(contractorcpersonlastname);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(contractoremail);
+			return data;
+		} else if (value.equals("Fax")) {
+			String data = this.getTextAttribute(contractorfax);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(contractorphone);
+			return data;
+		} else if (value.equals("Website")) {
+			String data = this.getTextAttribute(contractorsite);
+			return data;
+		} else if (value.equals("LocationName")) {
+			String data = this.getTextAttribute(LocationName);
+			return data;
+		} else if (value.equals("LocationEmail")) {
+			String data = this.getTextAttribute(LocationEmail);
+			return data;
+		} else if (value.equals("LocationContactPerson")) {
+			String data = this.getTextAttribute(LocationContactPerson);
+			return data;
+		} else if (value.equals("LocationPhoneNumber")) {
+			String data = this.getTextAttribute(LocationPhoneNumber);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(LocationAddress1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(LocationAddress2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(LocationCity);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(LocationState);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(LocationZipcode);
+			return data;
+		}
+		return value;
+	}
+
 	public void validData(String value) throws IOException {
 		if (value.equals("BasicPage")) {
 			this.inputText(contractorcpersonfirstname, fakeFirstName);
+			ContractorFirstName = this.getTextAttribute(contractorcpersonfirstname);
 			this.inputText(contractorcpersonlastname, fakeLastName);
+			ContractorLastName = this.getTextAttribute(contractorcpersonlastname);
 			this.inputText(contractoremail, fakeEmail);
+			ContractorEmail = this.getTextAttribute(contractoremail);
 			this.inputText(contractorphone, fakePhoneNumber);
+			ContractorPhoneNumber = this.getTextAttribute(contractorphone);
 			this.inputText(contractorfax, fakeFaxNumber);
+			ContractorFaxNumber = this.getTextAttribute(contractorfax);
 			this.inputText(contractorsite, fakeWebsite);
+			ContractorWebSite = this.getTextAttribute(contractorsite);
 			this.clickEvent("Next");
 		} else if (value.equals("LocationPage")) {
 			this.inputText(LocationName, fakecountry);
+			ContractorLocationName = this.getTextAttribute(LocationName);
 			this.inputText(LocationEmail, fakeEmail);
+			ContractorLocationEmail = this.getTextAttribute(LocationEmail);
 			this.inputText(LocationContactPerson, fakeContactPersonName);
+			ContractorLocationContactPerson = this.getTextAttribute(LocationContactPerson);
 			this.inputText(LocationPhoneNumber, fakePhoneNumber);
+			ContractorLocationPhoneNumber = this.getTextAttribute(LocationPhoneNumber);
 			this.inputText(LocationAddress1, fakeAddress1);
+			ContractorLocationAddress1 = this.getTextAttribute(LocationAddress1);
 			this.inputText(LocationAddress2, fakeAddress2);
+			ContractorLocationAddress2 = this.getTextAttribute(LocationAddress2);
 			this.inputText(LocationCity, fakeCity);
+			ContractorLocationCity = this.getTextAttribute(LocationCity);
 			this.inputText(LocationState, fakeState);
+			ContractorLocationState = this.getTextAttribute(LocationState);
 			this.inputText(LocationZipcode, fakeZipcode);
+			ContractorLocationZipcode = this.getTextAttribute(LocationZipcode);
 			this.clickEvent("ClickButton");
 		}
 
@@ -705,7 +805,8 @@ public class CreateContractorPage extends BaseClass {
 
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
-			this.tagValidation(Search, response);
+			this.inputText(Search, response);
+			this.mouseActionClick(SearchButton);
 		} else if (value.equals("ListCompanyName")) {
 			response = this.getText(ListCompanyName);
 			return response;

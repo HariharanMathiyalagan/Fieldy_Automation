@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -42,6 +44,16 @@ public class GlobalOrganizationRequest extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
+	}
+	
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+	
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test(priority = -2) // 1-Login
@@ -206,14 +218,14 @@ public class GlobalOrganizationRequest extends BaseClass {
 	@Test(priority = 5)
 	private void maximumValidationLocation() throws IOException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-2048 limit");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.location("MaxValidation");
 		String errorPasswordField = mandatory.errorField("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Location");
 		} else {
@@ -513,14 +525,14 @@ public class GlobalOrganizationRequest extends BaseClass {
 	@Test(priority = 18)
 	private void editmaximumValidationLocation() throws IOException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
+				.createTest("Verify Error Message is displayed when Location Field exceed its max-2048 limit");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.location("MaxValidation");
 		String errorPasswordField = mandatory.errorField("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Location");
 		} else {

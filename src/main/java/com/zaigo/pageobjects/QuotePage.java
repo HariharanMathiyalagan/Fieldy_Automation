@@ -207,7 +207,7 @@ public class QuotePage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -299,14 +299,17 @@ public class QuotePage extends BaseClass {
 //	By TotalCount = By.id("total-quote-count");
 	@FindAll({ @FindBy(id = "total-quote-count"), @FindBy(id = "quote-nav-count-all") })
 	WebElement TotalCount;
-	By InventoryFirstItem = By.xpath("(//*[@class='p-2 list-hover-bg quote-inventory-unit w-20-ellipsis w-100'])[1]");
+
+	@FindAll({ @FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
+	WebElement InventoryFirstItem;
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
 	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No.']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]//div//div[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]") })
 	WebElement ThreeDots;
@@ -599,7 +602,7 @@ public class QuotePage extends BaseClass {
 			String format = sdf.format(parse);
 			this.mouseActionClick(Filter);
 			this.inputText(CreateFrom, format);
-			this.inputText(CreateTo, format);
+//			this.inputText(CreateTo, format);
 			this.mouseActionClick(Apply);
 		} else if (value.equals("ListCreateDate")) {
 			text = this.getText(ListDate);
@@ -765,12 +768,15 @@ public class QuotePage extends BaseClass {
 	}
 
 	public void pickFirstItem(String value) throws InterruptedException {
-		if (value.equals("Contact")) {
+		if (value.equals("Contact") || value.equals("Organization")) {
 			this.mouseActionClick(InventoryItem);
-			this.mouseActionClick(InventoryFirstItem);
-		} else if (value.equals("Organization")) {
-			this.mouseActionClick(InventoryItem);
-			this.mouseActionClick(InventoryFirstItem);
+			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
+				Thread.sleep(5000);
+				this.mouseActionClick(InventoryItem);
+				this.mouseActionClick(InventoryFirstItem);
+			} else {
+				this.mouseActionClick(InventoryFirstItem);
+			}
 		}
 	}
 
@@ -954,45 +960,38 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.valuePresent(Reference, text);
-		} else if (value.equals("DraftOrg")) {
-			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateButton);
-			this.valuePresent(CustomerField, text);
+		} else if (value.equals("DraftOrg") || value.equals("Draft") || value.equals("GlobalContactDraft")
+				|| value.equals("GlobalOrgDraft")) {
+			if (value.equals("DraftOrg") || value.equals("Draft")) {
+				String text = this.getText(CustomerName);
+				this.mouseActionClick(CreateButton);
+				this.valuePresent(CustomerField, text);
+			} else if (value.equals("GlobalContactDraft") || value.equals("GlobalOrgDraft")) {
+				if (value.equals("GlobalContactDraft")) {
+					this.autoCompleteField("ContactCreate");
+					if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+					} else {
+						this.message("AlternateFunction");
+					}
+					this.autoCompleteField("GlobalContactVisibleName");
+				} else if (value.equals("GlobalOrgDraft")) {
+					this.autoCompleteField("OrganizationCreate");
+					if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+					} else {
+						this.message("AlternateFunction");
+					}
+					this.autoCompleteField("OrgVisibleName");
+				}
+			}
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateQuoteLabel);
 			this.mouseActionClick(Yes);
-		} else if (value.equals("Draft")) {
-			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateButton);
-			this.valuePresent(CustomerField, text);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(CreateQuoteLabel);
-			this.mouseActionClick(Yes);
+			this.message("message");
 		} else if (value.equals("CilckCreateQuote")) {
 			this.mouseActionClick(CreateButton);
 		} else if (value.equals("ClickOrgRadio")) {
 			this.mouseActionClick(RadioOrganization);
-		} else if (value.equals("GlobalContactDraft")) {
-			this.autoCompleteField("ContactCreate");
-			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-			} else {
-				this.message("AlternateFunction");
-			}
-			this.autoCompleteField("GlobalContactVisibleName");
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(CreateQuoteLabel);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("GlobalOrgDraft")) {
-			this.autoCompleteField("OrganizationCreate");
-			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-			} else {
-				this.message("AlternateFunction");
-			}
-			this.autoCompleteField("OrgVisibleName");
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.mouseActionClick(CreateQuoteLabel);
-			this.mouseActionClick(Yes);
-		} else if (value.equals("DraftEdit")) {
+		} else if (value.equals("DraftEdit") || value.equals("GlobalDraftEdit") || value.equals("DraftEditOrg")) {
 			String text = this.getText(ListReference);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
@@ -1010,50 +1009,27 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(ListQuoteStatus);
 			this.mouseActionClick(Update);
 			this.message("message");
-		} else if (value.equals("GlobalDraftEdit")) {
-			String text = this.getText(ListReference);
-			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(Edit);
-			this.valuePresent(Reference, text);
-			this.clearFields("Reference");
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.dateValidation("FutureDate");
-			this.inputText(QuoteTittle, fakeTittle);
-			this.pickFirstItem("Contact");
-			this.clearFields("Description");
-			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.mouseActionClick(Save);
-			this.message("message");
-			this.mouseActionClick(ListQuoteStatus);
-			this.mouseActionClick(Update);
-			this.message("message");
-		} else if (value.equals("DraftEditOrg")) {
-			String text = this.getText(ListReference);
-			this.mouseActionClick(ThreeDots);
-			this.mouseActionClick(Edit);
-			this.valuePresent(Reference, text);
-			this.clearFields("Reference");
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.dateValidation("FutureDate");
-			this.inputText(QuoteTittle, fakeTittle);
-			this.pickFirstItem("Contact");
-			this.clearFields("Description");
-			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.mouseActionClick(Save);
-			this.message("message");
-			this.mouseActionClick(ListQuoteStatus);
-			this.mouseActionClick(UpdateOrg);
-			this.message("message");
-			this.invisible(StatusList);
-		} else if (value.equals("GlobalCreateDeclined")) {
-			this.autoCompleteField("ContactCreate");
-			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-			} else {
-				this.message("AlternateFunction");
+		} else if (value.equals("GlobalCreateDeclined") || value.equals("GlobalCreateOrgDeclined")
+				|| value.equals("CreateDeclined") || value.equals("CreateDeclinedOrg")) {
+			if (value.equals("GlobalCreateDeclined")) {
+				this.autoCompleteField("ContactCreate");
+				if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+				} else {
+					this.message("AlternateFunction");
+				}
+				this.autoCompleteField("GlobalContactVisibleName");
+			} else if (value.equals("GlobalCreateOrgDeclined")) {
+				this.autoCompleteField("OrganizationCreate");
+				if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
+				} else {
+					this.message("AlternateFunction");
+				}
+				this.autoCompleteField("OrgVisibleName");
+			} else if (value.equals("CreateDeclined") || value.equals("CreateDeclinedOrg")) {
+				String text = this.getText(CustomerName);
+				this.mouseActionClick(CreateButton);
+				this.valuePresent(CustomerField, text);
 			}
-			this.autoCompleteField("GlobalContactVisibleName");
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
 			this.inputText(QuoteTittle, fakeTittle);
@@ -1062,63 +1038,10 @@ public class QuotePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Save);
+			this.message("message");
 			this.mouseActionClick(ListQuoteStatus);
 			this.dropDownByIndex(ChooseStatus, 1);
 			this.mouseActionClick(Update);
-			this.message("message");
-			this.invisible(StatusList);
-		} else if (value.equals("GlobalCreateOrgDeclined")) {
-			this.autoCompleteField("OrganizationCreate");
-			if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-			} else {
-				this.message("AlternateFunction");
-			}
-			this.autoCompleteField("OrgVisibleName");
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.dateValidation("FutureDate");
-			this.inputText(QuoteTittle, fakeTittle);
-			this.pickFirstItem("Contact");
-			this.clearFields("Description");
-			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.mouseActionClick(Save);
-			this.mouseActionClick(ListQuoteStatus);
-			this.dropDownByIndex(ChooseStatus, 1);
-			this.mouseActionClick(Update);
-			this.message("message");
-			this.invisible(StatusList);
-		} else if (value.equals("CreateDeclined")) {
-			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateButton);
-			this.valuePresent(CustomerField, text);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.dateValidation("FutureDate");
-			this.inputText(QuoteTittle, fakeTittle);
-			this.pickFirstItem("Contact");
-			this.clearFields("Description");
-			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.mouseActionClick(Save);
-			this.mouseActionClick(ListQuoteStatus);
-			this.dropDownByIndex(ChooseStatus, 1);
-			this.mouseActionClick(Update);
-			this.message("message");
-			this.invisible(StatusList);
-		} else if (value.equals("CreateDeclinedOrg")) {
-			String text = this.getText(CustomerName);
-			this.mouseActionClick(CreateButton);
-			this.valuePresent(CustomerField, text);
-			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-			this.dateValidation("FutureDate");
-			this.inputText(QuoteTittle, fakeTittle);
-			this.pickFirstItem("Contact");
-			this.clearFields("Description");
-			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.mouseActionClick(Save);
-			this.mouseActionClick(ListQuoteStatus);
-			this.dropDownByIndex(ChooseStatus, 1);
-			this.mouseActionClick(UpdateOrg);
 			this.message("message");
 			this.invisible(StatusList);
 		}

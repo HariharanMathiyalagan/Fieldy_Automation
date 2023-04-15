@@ -208,7 +208,7 @@ public class CategoryPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	public Boolean conditionChecking1(By element) {
 		Boolean text = false;
 		try {
@@ -275,7 +275,10 @@ public class CategoryPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement CategoryListName;
 
-	@FindAll({ @FindBy(xpath = "//*[text()='Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-category-list']//table//tbody//tr[1]//td[1]"),
+			@FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
 	WebElement ListPage;
 
 	By Reset = By.xpath("//*[contains(text(),'Reset Search')]");
