@@ -624,7 +624,7 @@ public class BusinessDaysPage extends BaseClass {
 			for (int i = 0; i < 5; i++) {
 				this.clearField("ServiceType");
 			}
-			this.valuePresent(service_name, textAttribute);
+			this.inputText(service_name, textAttribute);
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
 			this.message("Message");
