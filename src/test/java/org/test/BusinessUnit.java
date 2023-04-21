@@ -285,7 +285,7 @@ public class BusinessUnit extends BaseClass {
 	@Test(priority = 9)
 	public void alreadyExists() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify [Business Unit Exists] Business Unit form, Error is dispalyed when already existing Business Unit is provided");
+				"Verify [Business Unit Name Exists] Business Unit form, Error is dispalyed when already existing Business Unit is provided");
 		BusinessDaysPage contractorPage = PageFactory.initElements(driver, BusinessDaysPage.class);
 		contractorPage.businessUnitField("UniqueValidation");
 		String text_button = contractorPage.errorField("BusinessUnit");
@@ -407,7 +407,7 @@ public class BusinessUnit extends BaseClass {
 	@Test(priority = 14)
 	private void businessUpdate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify a new business unit is created successfully through [Business Settings]");
+				.createTest("Verify a new business unit is updated successfully through [Business Settings]");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
@@ -429,7 +429,7 @@ public class BusinessUnit extends BaseClass {
 	@Test(priority = 15)
 	private void deleteBusinessUnit() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify a new business unit is created successfully through [Business Settings]");
+				.createTest("Verify a new business unit is deleted successfully through [Business Settings]");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.listValdidation("BusinessUnitDelete");
 		String createMessage = landing.message("Message");
@@ -498,7 +498,7 @@ public class BusinessUnit extends BaseClass {
 
 	@Test(priority = 19)
 	private void deleteLeadSource() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Delete Business Unit Name is:" + ListField
+		extentTest = extentReports.createTest("Verify the Deleted Business Unit Name is:" + ListField
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.bussinessDays("BussinessUnit");

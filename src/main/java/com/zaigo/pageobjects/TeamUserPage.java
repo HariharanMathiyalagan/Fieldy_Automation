@@ -95,6 +95,13 @@ public class TeamUserPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	public void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
 	private void tagValidation(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.ENTER);
@@ -185,14 +192,24 @@ public class TeamUserPage extends BaseClass {
 	By ContractorSearch = By.id("team-user-contractor-search-main");
 	By ContractorSearchButton = By.id("team-user-contractor-search-btn");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
-	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
-	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
-	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
-	By ListContractorPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
-	By ListContractorEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
-	By ThreeDots = By.xpath("(//*[@class='dot dot-hover'])[1]");
-	By Edit = By.xpath("(//li[@data-formsactions='edit'])[1]");
-	By Delete = By.xpath("(//li[@data-tabformid='undefined'])[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[3]") })
+	WebElement ListFirstName;
+	By ListPhoneNumber = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[6]");
+	By ListEmail = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[7]");
+	By ListContractorPhoneNumber = By
+			.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[7]");
+	By ListContractorEmail = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[8]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i") })
+	WebElement ThreeDots;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
+	WebElement Edit;
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]") })
+	WebElement Delete;
 	By SendInvite = By.xpath("//*[@data-formdynamic='user_send_invite']");
 	By Contractor = By.xpath("//a[@data-n-linkto='team_user_contractor']");
 	By Logo = By.xpath("//label[@for='user_image']");
@@ -253,7 +270,8 @@ public class TeamUserPage extends BaseClass {
 	By InValid = By.xpath("//*[text()='No Result Found']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
-	By ListCompanyFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By ListCompanyFirstName = By
+			.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[5]");
 	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
@@ -537,8 +555,8 @@ public class TeamUserPage extends BaseClass {
 			String text = this.getText(ListFirstName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
-			this.invisible(Spinner);
 			this.visibility(Label);
+			this.invisible(Spinner);
 			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);
@@ -547,6 +565,7 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.visibility(ContractorLabel);
+			this.invisible(Spinner);
 			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);

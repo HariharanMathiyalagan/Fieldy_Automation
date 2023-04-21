@@ -290,43 +290,58 @@ public class InvoicePage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[text()='No Data Found']"),
 			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]") })
 	WebElement InventoryFirstItem;
-	By ListInvoiceNo = By.xpath("(//*[@class='ellipsis-100'])[3]");
-	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[3]/span");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/span/a") })
+//	By ListInvoiceNo = By.xpath("(//*[@class='ellipsis-100'])[3]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[2]") })
 	WebElement ListInvoiceNo1;
-	@FindAll({
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span/a"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[2]/span/a") })
+	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[4]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[2]") })
+	WebElement ListInvoiceNo;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[3]") })
 	WebElement ListReference1;
-	By ListCustomerName = By.xpath("(//*[@class='ellipsis-100'])[8]");
-	By ListReference = By.xpath("(//*[@class='ellipsis-100'])[4]");
+	By ListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[4]");
+//	By ListReference = By.xpath("(//*[@class='ellipsis-100'])[4]");
 	@FindAll({
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[12]/div/div[1]") })
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]") })
 	WebElement ThreeDots;
 	@FindAll({
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[2]/ul/li[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[11]/div/div[2]/ul/li[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[12]/div/div[2]/ul/li[2]") })
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement ContactEdit;
 	By ListAwaitingStatus = By.xpath("//*[text()='Awaiting Payment']");
 	By ListPartialStatus = By.xpath("//*[text()='Partial Payment']");
 	By ListDraftStatus = By.xpath("(//*[text()='Draft'])[1]");
 	By ListPaidStatus = By.xpath("(//*[text()='Paid'])[1]");
 	By PayButton = By.xpath("//*[@data-automationid='invoice_addpayment_popup']");
-	By TotalValue = By.xpath("(//span[@class='undefined'])[4]");
-	By PaidAmount = By.xpath("(//span[@class='undefined'])[5]");
-	By DueAmount = By.xpath("(//span[@class='undefined'])[6]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[7]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[7]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[8]") })
+	WebElement TotalValue;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[8]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[8]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[9]") })
+	WebElement PaidAmount;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[10]") })
+	WebElement DueAmount;
 	By AmountPaid = By.id("amount_paid");
 	By GlobalListInvoiceStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[8]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By Update = By.xpath("//*[text()='Update']");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
-	By ListDueDate = By.xpath("(//*[@class='false'])[2]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[5]") })
+	WebElement ListDueDate;
 	By GlobalListDueDate = By.xpath("(//*[@class='ellipsis-100'])[4]");
 	By Apply = By.xpath("//*[@data-searchbutton='invoice_filter']");
 	By DueFrom = By.id("invoice-from-date-filter");
@@ -694,7 +709,7 @@ public class InvoicePage extends BaseClass {
 		} else if (value.equals("Current")) {
 			this.inputText(DueDate, "01/14/2023");
 		} else if (value.equals("CurrentDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
@@ -769,24 +784,6 @@ public class InvoicePage extends BaseClass {
 			this.clearFields("Description");
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Notes, getPropertyValue("Notes"));
-		} else if (value.equals("GlobalEdit")) {
-//			String text = this.getText(GlobalListReference);
-//			this.mouseActionClick(ThreeDots);
-//			this.mouseActionClick(GlobalEdit);
-//			this.valuePresent(Reference, text);
-//			this.dropDownByIndex(QuoteStatus, 1);
-//			this.clearField(Reference);
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.mouseActionClick(Save);
-		} else if (value.equals("EditOrg")) {
-//			String text = this.getText(ListReference);
-//			this.mouseActionClick(ThreeDots);
-//			this.mouseActionClick(EditOrg);
-//			this.valuePresent(Reference, text);
-//			this.dropDownByIndex(QuoteStatus, 1);
-//			this.clearField(Reference);
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.mouseActionClick(Save);
 		} else if (value.equals("DraftOrg")) {
 			String text = this.getText(CustomerName);
 			this.mouseActionClick(CreateOrganizationInvoice);
@@ -817,111 +814,12 @@ public class InvoicePage extends BaseClass {
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.mouseActionClick(CreateInvoiceLabel);
 			this.mouseActionClick(Yes);
-		} else if (value.equals("DraftEdit")) {
-//			String text = this.getText(ListReference);
-//			this.mouseActionClick(ThreeDots);
-//			this.mouseActionClick(Edit);
-//			this.valuePresent(Reference, text);
-//			this.clearFields("Reference");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(QuoteTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
-//			this.mouseActionClick(ListQuoteStatus);
-//			this.mouseActionClick(Update);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
-		} else if (value.equals("GlobalDraftEdit")) {
-//			String text = this.getText(GlobalListReference);
-//			this.mouseActionClick(ThreeDots);
-//			this.mouseActionClick(GlobalEdit);
-//			this.valuePresent(Reference, text);
-//			this.clearFields("Reference");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(QuoteTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
-//			this.mouseActionClick(GlobalListQuoteStatus);
-//			this.mouseActionClick(Update);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
-		} else if (value.equals("DraftEditOrg")) {
-//			String text = this.getText(ListReference);
-//			this.mouseActionClick(ThreeDots);
-//			this.mouseActionClick(EditOrg);
-//			this.valuePresent(Reference, text);
-//			this.clearFields("Reference");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(QuoteTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.assertName(UpdatedMessage, getPropertyValue("UpdatedMessage"));
-//			this.mouseActionClick(ListQuoteStatus);
-//			this.mouseActionClick(UpdateOrg);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
-		} else if (value.equals("GlobalCreateDeclined")) {
-//			this.autoCompleteCreation("GlobalContact");
-//			this.autoCompleteCreation("VisibleCustomerName");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(QuoteTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.mouseActionClick(GlobalListQuoteStatus);
-//			this.dropDownByIndex(ChooseStatus, 1);
-//			this.mouseActionClick(Update);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
-		} else if (value.equals("GlobalCreateOrgDeclined")) {
-//			this.autoCompleteCreation("GlobalOrganization");
-//			this.autoCompleteCreation("VisibleCustomerOrgName");
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(QuoteTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.mouseActionClick(GlobalListQuoteStatus);
-//			this.dropDownByIndex(ChooseStatus, 1);
-//			this.mouseActionClick(Update);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
-		} else if (value.equals("CreateDeclined")) {
-//			String text = this.getText(CustomerName);
-//			this.mouseActionClick(CreateContactQuote);
-//			this.valuePresent(ContactName, text);
-//			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
-//			this.dateValidation("FutureDate");
-//			this.inputText(InvoiceTittle, fakeTittle);
-//			this.pickFirstItem("Contact");
-//			this.clearFields("Description");
-//			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-//			this.inputText(Notes, getPropertyValue("Notes"));
-//			this.mouseActionClick(Save);
-//			this.mouseActionClick(ListQuoteStatus);
-//			this.dropDownByIndex(ChooseStatus, 1);
-//			this.mouseActionClick(Update);
-//			this.assertName(ListUpdateMessage, getPropertyValue("QuoteStatusUpdateMessage"));
 		}
 
 	}
 
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By PaidMessage = By.xpath("//*[text()='Invoice payment updated successfully']");
 	static String response;
 	static String alternateMessage;
 
@@ -1011,7 +909,7 @@ public class InvoicePage extends BaseClass {
 			SearchData = this.getText(ListInvoiceNo);
 			return SearchData;
 		} else if (value.equals("Reference")) {
-			SearchData = this.getText(ListReference);
+			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("SearchInvoiceNo")) {
 			SearchData = this.getText(ListInvoiceNo1);
@@ -1052,6 +950,7 @@ public class InvoicePage extends BaseClass {
 			this.inputText(AmountPaid, SearchData);
 			this.mouseActionClick(Update);
 			this.responseMessage("Message");
+			this.invisible(PaidMessage);
 		}
 		return value;
 	}

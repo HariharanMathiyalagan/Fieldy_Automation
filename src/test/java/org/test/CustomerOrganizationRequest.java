@@ -465,7 +465,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("requestCreatedMessage"))) {
+		if (errorPasswordField.equals(getPropertyValue("RequestCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			customerOrganizationRequestListPage = mandatory.listValidation("RequestNo");
 		} else {

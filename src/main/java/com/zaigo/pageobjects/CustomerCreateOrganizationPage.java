@@ -557,13 +557,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return value;
 	}
 
-	By Dots = By.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[1]");
+	By Dots = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
 	By Edit = By
-			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[1]");
+			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
 	By Deleted = By
-			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[2]");
+			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('','','','','reset')\"]");
 
 	public void resetOption() {

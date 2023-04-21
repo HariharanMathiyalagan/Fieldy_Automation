@@ -784,8 +784,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("ScheduledStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ScheduledStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 	}
 
@@ -829,8 +827,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("DispatchStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DispatchStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -875,8 +871,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -921,8 +915,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -970,8 +962,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("CustomerName");
 		}
 

@@ -152,9 +152,10 @@ public class CreateContractorPage extends BaseClass {
 
 	By clickclosebutton = By.xpath("//button[@data-automationid='c']");
 
-	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[1]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
 
-	By Edit = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
+	By Edit = By
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 
 	By NameValidation = By.xpath("(//a[@data-goesto='user-profile-view'])[1]");
 
@@ -165,7 +166,7 @@ public class CreateContractorPage extends BaseClass {
 	By Invalid = By.xpath("//div[text()='No Result Found']");
 
 	By Search = By.id("team-user-contract-search");
-	
+
 	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
 
 	By ContractorCount = By.id("total-company-contractor-count");
@@ -180,7 +181,8 @@ public class CreateContractorPage extends BaseClass {
 	By SaveNxt = By.xpath("//button[@data-spinloader='company_contractor_create_edit']");
 	By Assertion = By.xpath("//span[text()='Contractor have been updated successfully']");
 
-	By Delete = By.xpath("(//*[@data-tabformid='undefined'])[4]");
+	By Delete = By
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By DeleteAssert = By.xpath("//span[text()='Contractor have been deleted successfully']");
 
@@ -353,16 +355,16 @@ public class CreateContractorPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
 	By EditHeading = By.xpath("//a[@data-exitpopup='team_companies_company']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[2]/span/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListCompanyName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]/span/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListEmail;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[6]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListPhoneNumber;
 	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
@@ -415,7 +417,12 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("LastName")) {
 			return this.getText(contractorcpersonerrlastname);
 		} else if (value.equals("Email")) {
-			return this.getText(contractoremailerr);
+			if (this.conditionChecking(contractoremailerr)) {
+				return this.getText(contractoremailerr);
+			} else {
+				this.mouseActionClick(saveform);
+				return this.getText(contractoremailerr);
+			}
 		} else if (value.equals("PhoneNumber")) {
 			return this.getText(contractorphoneerr);
 		} else if (value.equals("Fax")) {

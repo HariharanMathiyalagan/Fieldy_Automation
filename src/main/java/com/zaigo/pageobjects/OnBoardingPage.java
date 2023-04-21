@@ -587,8 +587,8 @@ public class OnBoardingPage extends BaseClass {
 			}
 
 		} else if (value.equals("Password")) {
-			this.inputText(Password, "Zaigo@25");
-			this.inputText(ConfirmPassword, "Zaigo@25");
+			this.inputText(Password, getPropertyValue("Password"));
+			this.inputText(ConfirmPassword, getPropertyValue("Password"));
 			this.mouseActionClick(Continue);
 		}
 
@@ -615,4 +615,18 @@ public class OnBoardingPage extends BaseClass {
 		return Name;
 
 	}
+
+	public void fillData() throws IOException {
+		driver.get(getPropertyValue("OnBoardingURL"));
+		this.inputText(CompanyName, fakeCompanyName);
+		this.validFillData("FirstPage");
+		this.mouseActionClick(xpath);
+		this.mouseActionClick(Continue);
+		this.sizeCompany();
+		this.radioButtonCurrent();
+		this.clearLocation();
+		this.validFillData("Password");
+
+	}
+
 }

@@ -60,32 +60,32 @@ public class JobPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']//tr[2]//td[2]//a"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[2]//a"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//a"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[2]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement CustomerNameList;
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[3]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[3]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListJobNumber1;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[2]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[3]"),
 			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[24]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[24]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListJobNumber2;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[4]//span"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[5]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
 			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListLocationName;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='tags-ele-0']/div"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']/tbody/tr[2]/td[5]/span") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']/tbody/tr[2]/td[6]") })
 	WebElement ListTechnician;
 	@FindAll({
 			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][1]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[4]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListFromDate;
 	@FindAll({
@@ -193,9 +193,9 @@ public class JobPage extends BaseClass {
 	By Technician = By.xpath("//*[@class='floating-input form-control user-view ']");
 	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
 	By TechnicianFirstName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[1]");
+			.xpath("//*[@id='technician_ids-autocomplete-list']//div[1]");
 	By TechnicianSecoundName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[2]");
+			.xpath("//*[@id='technician_ids-autocomplete-list']//div[2]");
 	By Priority = By.id("priority");
 	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
@@ -207,26 +207,26 @@ public class JobPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[4]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[6]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement StatusJob;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[25]"),
 			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[25]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[6]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[7]") })
 	WebElement StatusJob1;
 
 	@FindAll({ @FindBy(xpath = "(//*[@gloss='Dispatch'])[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]//ul//li[4]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//ul//li[4]") })
 	WebElement DispatchButton;
 	@FindAll({ @FindBy(xpath = "(//*[@gloss='Start'])[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]//ul//li[5]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//ul//li[5]") })
 	WebElement StartButton;
 	@FindAll({ @FindBy(xpath = "(//*[@gloss='Completed'])[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]//ul//li[6]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//ul//li[6]") })
 	WebElement CompleteButton;
 	@FindAll({ @FindBy(xpath = "//*[@gloss='Cancel']"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[7]//ul//li[7]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[1]//ul//li[7]") })
 	WebElement CancelButton;
 	By Delete = By.xpath("//*[@gloss='Delete']");
 	By Back = By.xpath("//*[@alt=' back_arrow']");
@@ -730,10 +730,10 @@ public class JobPage extends BaseClass {
 		this.inputText(EndTime, futureTime);
 	}
 
-	By ThreeDots = By.xpath("//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]");
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='job_edit'])[1]");
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[7]//ul//li[2]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[1]//ul//li[2]"),
 			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div/div[1]/div/div/div/div[3]/div[2]/a"),
 			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div[1]/div/div/div/div[3]/div[2]/a") })
 	WebElement EditButton;
@@ -744,7 +744,7 @@ public class JobPage extends BaseClass {
 	}
 
 	By CustomerError = By.id("id_customer_group_error");
-	By ThreeDotsCancel = By.xpath("//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[7]");
+	By ThreeDotsCancel = By.xpath("//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[3]//td[1]");
 
 	public String dateFrom() {
 		String currentFilterPickerFromDate = this.currentFilterPickerFromDate();

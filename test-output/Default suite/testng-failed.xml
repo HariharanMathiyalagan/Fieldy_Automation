@@ -3,18 +3,18 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.LeadSource">
+      <class name="org.test.ProductModule">
         <methods>
-          <include name="editmaximumValidationLeadSource"/>
-          <include name="editmandatoryValidation"/>
-          <include name="exitBrowser"/>
-          <include name="leadSourceUpdate"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="verifyUpdateButtonExist"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
         </methods>
-      </class> <!-- org.test.LeadSource -->
+      </class> <!-- org.test.ProductModule -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

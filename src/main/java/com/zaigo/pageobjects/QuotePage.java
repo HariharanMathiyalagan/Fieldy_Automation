@@ -280,22 +280,22 @@ public class QuotePage extends BaseClass {
 	By ErrorNotes = By.id("notes_error");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By StatusList = By.xpath("//*[contains(text(),'The doc expiry date must be a date after or equal')]");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
-	WebElement ListQuoteNo;
-
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[2]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[2]") })
-	WebElement ListTittle;
+	WebElement ListQuoteNo;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[3]") })
+	WebElement ListTittle;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]") })
 	WebElement ListReference;
 
-	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]");
+	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]");
 //	By TotalCount = By.id("total-quote-count");
 	@FindAll({ @FindBy(id = "total-quote-count"), @FindBy(id = "quote-nav-count-all") })
 	WebElement TotalCount;
@@ -306,12 +306,12 @@ public class QuotePage extends BaseClass {
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No.']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]//div//div[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]//div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
 	WebElement ThreeDots;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//ul//li[2]"),
@@ -319,9 +319,9 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//ul//li[2]") })
 	WebElement Edit;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[8]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[8]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[9]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]") })
 	WebElement ListQuoteStatus;
 
 	By Search = By.id("quote-search-filter");
@@ -401,9 +401,9 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[2]//button[1]//div") })
 	WebElement Filter;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']//tr[2]//td[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']//tr[2]//td[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']//tr[2]//td[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']//tr[2]//td[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[6]") })
 	WebElement ListDate;
 
 	By CreateFrom = By.id("quote-from-date-filter");
@@ -938,7 +938,6 @@ public class QuotePage extends BaseClass {
 			int a = parseInt + 1;
 			return a;
 		} else if (value == 2) {
-			this.assertName(QuoteLable, "Quotes No.");
 			String text2 = this.getText(TotalCount);
 			int parseInt = Integer.parseInt(text2);
 			return parseInt;

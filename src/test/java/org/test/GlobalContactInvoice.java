@@ -1636,7 +1636,6 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest("Enter the Invoice Customer Name:" + ListField
 				+ "in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("GlobalCustomerName");
 		create.listTextValidation("CustomerSearchData");
 		String expected = create.listTextValidation("SearchGlobalCustomerName");
 		extentTest.log(Status.INFO, "Actual Result is -" + expected);
