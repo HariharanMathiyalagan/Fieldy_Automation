@@ -53,12 +53,12 @@ public class CustomerContactInvoice extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -1581,7 +1581,6 @@ public class CustomerContactInvoice extends BaseClass {
 
 	}
 
-//	static String ListData;
 	static double ListData;
 
 	@Test(priority = 60)
@@ -1684,7 +1683,6 @@ public class CustomerContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Enter the Invoice No:" + ListField + " in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("InvoiceNo");
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("SearchInvoiceNo");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);
@@ -1693,7 +1691,7 @@ public class CustomerContactInvoice extends BaseClass {
 		if (ListField.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = create.listTextValidation("SearchReference");
-			create.resetFunction();
+			create.clearFields("Search");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1702,7 +1700,7 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvoiceNoValidation.png");
 			ListField = create.listTextValidation("SearchReference");
-			create.resetFunction();
+			create.clearFields("Search");
 		}
 
 	}
@@ -1712,7 +1710,6 @@ public class CustomerContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Enter the Quote Reference:" + ListField + " in the Search field & Quote list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("Reference");
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("SearchReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);

@@ -1706,7 +1706,6 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		extentTest = extentReports.createTest(
 				"Enter the Invoice No:" + ListField + " in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("InvoiceNo");
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("SearchInvoiceNo");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);
@@ -1715,7 +1714,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		if (ListField.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = create.listTextValidation("SearchReference");
-			create.resetFunction();
+			create.clearFields("Search");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1724,7 +1723,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvoiceNoValidation.png");
 			ListField = create.listTextValidation("SearchReference");
-			create.resetFunction();
+			create.clearFields("Search");
 		}
 
 	}

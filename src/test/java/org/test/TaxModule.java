@@ -244,7 +244,7 @@ public class TaxModule extends BaseClass {
 
 	@Test(priority = 8)
 	private void createTax() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Tax is created successfully from Create Tax");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Tax Created");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");
@@ -426,7 +426,7 @@ public class TaxModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void updatedTax() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Tax is updated successfully from Edit Tax");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Tax Updated");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");

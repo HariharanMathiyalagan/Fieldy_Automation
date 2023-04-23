@@ -1,4 +1,4 @@
-package org.test;
+package org.enhancement;
 
 import java.awt.AWTException;
 import java.io.File;
@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -23,8 +25,7 @@ import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class BulkImportOrganization extends BaseClass{
-	static String JobListData;
+public class CustomerOrganizationModule extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -33,7 +34,7 @@ public class BulkImportOrganization extends BaseClass{
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("CustomerOrganizationJob.html");
+		extentHtmlReporter = new ExtentHtmlReporter("Create Customer Organization Module.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 	}
@@ -44,17 +45,27 @@ public class BulkImportOrganization extends BaseClass{
 		this.extentReports.flush();
 	}
 
-	@Test(priority = -1) // 1-Login
+	@BeforeMethod
+	public void deleteBeforeCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@AfterMethod
+	public void deleteAfterCatch() {
+		driver.manage().deleteAllCookies();
+	}
+
+	@Test(priority = 0) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
-		extentTest = extentReports
-				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
+		extentTest = extentReports.createTest(
+				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password"));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
-		extentTest.log(Status.INFO, "Expected  Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(loginInPage.getPropertyValue("ValidationOfLandingPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -68,12 +79,12 @@ public class BulkImportOrganization extends BaseClass{
 		}
 	}
 
-	@Test(priority = 0)
-	private void contactModule() throws InterruptedException, IOException, AWTException {
-		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
-		CustomerCreateOrganizationPage initElements = PageFactory.initElements(driver,
+	@Test(priority = 1)
+	private void modulePage() throws InterruptedException, AWTException, IOException {
+		extentTest = extentReports.createTest("Navigate to Customer Organization Page");
+		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
-		String editContact = initElements.modulePage();
+		String editContact = modulePage.modulePage();
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerOrganizationList"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -83,17 +94,38 @@ public class BulkImportOrganization extends BaseClass{
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("ContactList.png");
+			File file = new File("ListName.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("ContactList.png");
+			extentTest.addScreenCaptureFromPath("ListName.png");
 		}
 
 	}
 
-	@Test(priority = 1,invocationCount = 50)
+	@Test(priority = 2)
+	private void createLabel() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the User to Land on the Create Customer Organization Page");
+		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		String editContact = edit.LabelValidation("Create");
+		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("OrganizationCreatePage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (editContact.equals(getPropertyValue("OrganizationCreatePage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("Create.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("Create.png");
+		}
+
+	}
+
+	@Test(priority = 3)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports
-				.createTest("Verify a new Customer Organization is created successfully through [Create Organization]");
+				.createTest("Verify created successful message is displayed, when the Customer Organization Created");
 		CustomerCreateOrganizationPage create = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		create.organizationPage();
 		create.contactPage("CreateContact");
@@ -116,5 +148,4 @@ public class BulkImportOrganization extends BaseClass{
 		}
 
 	}
-
 }

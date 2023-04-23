@@ -220,7 +220,7 @@ public class CategoryModule extends BaseClass {
 
 	@Test(priority = 7)
 	private void createCategoryProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Category Product is created successfully from Create Category");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Category Created");
 		CategoryPage mandatory = PageFactory.initElements(driver, CategoryPage.class);
 		listData = mandatory.validData("Product");
 		String errorPasswordField = mandatory.message();
@@ -428,7 +428,7 @@ public class CategoryModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void UpdateCategoryProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Category Product is updated successfully from Edit Category");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Category Updated");
 		CategoryPage mandatory = PageFactory.initElements(driver, CategoryPage.class);
 		listData = mandatory.validData("Product");
 		String errorPasswordField = mandatory.message();
@@ -450,7 +450,7 @@ public class CategoryModule extends BaseClass {
 	@Test(priority = 17)
 	private void deleteProduct() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
-				.createTest("Verify deleted successful message is displayed, when the Category Deleted");
+				.createTest("Verify deleted successfully message is displayed, when the Category Deleted");
 		CategoryPage landing = PageFactory.initElements(driver, CategoryPage.class);
 		landing.listValidation("Delete");
 		String createMessage = landing.message();

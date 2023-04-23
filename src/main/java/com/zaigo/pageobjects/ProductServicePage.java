@@ -253,28 +253,28 @@ public class ProductServicePage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Result Found']"),
 			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
 	WebElement ListPage;
-	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No.']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement QuoteListPage;
 
-	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[1]//span");
+	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[2]");
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[4]//span"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[3]//span") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[5]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]") })
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]") })
 	WebElement ThreeDots;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]//li[1]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]//li[1]") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]") })
 	WebElement Edit;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]//li[2]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]//li[2]") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]") })
 	WebElement Delete;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='modal-confirmation-popup']//*[text()='Yes']"),
