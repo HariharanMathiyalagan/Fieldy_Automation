@@ -3,18 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.ProductModule">
+      <class name="org.enhancement.GlobalContactJob">
         <methods>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
-          <include name="deleteAfterCatch"/>
           <include name="setup"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
           <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="createJob_FromDateandTime_ToDateandTime"/>
         </methods>
-      </class> <!-- org.test.ProductModule -->
+      </class> <!-- org.enhancement.GlobalContactJob -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

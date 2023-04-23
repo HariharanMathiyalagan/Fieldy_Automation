@@ -351,7 +351,7 @@ public class TeamSendInvite extends BaseClass{
 	@Test(priority = 13)
 	private void userSendInvite() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a new User is invite send successfully through [Team User Send Invite]");
-		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
+		SendInvitePage landing = PageFactory.initElements(driver, SendInvitePage.class);
 		String createMessage = landing.responseMessage("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SendInviteMessage"));

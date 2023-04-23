@@ -180,9 +180,10 @@ public class QuotePage extends BaseClass {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
-	public void valuePresent(WebElement element, String value) {
+	public Boolean valuePresent(WebElement element, String value) {
 		wait = new WebDriverWait(driver, 50);
-		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+		Boolean text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+		return text;
 	}
 
 	public String getTextAttribute(By element) {
@@ -249,8 +250,7 @@ public class QuotePage extends BaseClass {
 	By ExpiryDate = By.id("expiry_date");
 	By QuoteStatus = By.id("quote_status");
 	By QuoteTittle = By.id("doc_title");
-	By InventoryItem = By.xpath(
-			"//*[@class=\" wt-30 mandatory autosearch_with_createable_main custom-dropdown\"]//child::*[@class=\"form-control pl-2 pr-2 user-view\"]");
+	By InventoryItem = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
 	By Quantity = By.id("items__quantity__0");
 	By Price = By.id("items__price__0");
 	By Discount = By.id("items__discount__0");
@@ -303,13 +303,15 @@ public class QuotePage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement InventoryFirstItem;
+	By InventoryName = By.xpath("//*[@id='items__item_name__0-autocomplete-list']//div[1]");
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
 	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i"),
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]//div[1]//div[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
 	WebElement ThreeDots;
@@ -385,16 +387,18 @@ public class QuotePage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@class='col-lg-12 switchcontact d-block']//*[@id='id_customer']") })
 	WebElement SubCustomerField;
-
+	By PopupOpen = By.xpath("//*[contains(@class,'fadeIn')]//child::h5");
 	@FindAll({
 			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
 	WebElement AddCustomer;
 	By SubCustomerListField = By.xpath("//*[@id='contactdropdownlist3']//child::div[1]//div[1]");
-	@FindAll({ @FindBy(xpath = "//*[@id='contactdropdownlist2']//child::div[1]//div[1]"),
-			@FindBy(xpath = "//*[@id='contactdropdownlist']//child::div[1]//div[1]"),
-			@FindBy(xpath = "//*[text()=' No Data Found!']") })
+	@FindAll({
+			@FindBy(xpath = "//*[@id='contactdropdownlist' and contains(@style,'display:block;')]//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='contactdropdownlist2' and contains(@style,'display:block;')]//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[text()=' No Data Found!']"),
+			@FindBy(xpath = "//*[@id='contactdropdownlist3' and contains(@style,'display:block;')]//child::div[1]//div[1]") })
 	WebElement CustomerListField;
 	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-quote-list']//div[1]//div[4]//button[1]//div"),
 			@FindBy(xpath = "//*[@id='qoute-show-details-timeline']//div[1]//div[4]//button[1]//div"),
@@ -448,10 +452,19 @@ public class QuotePage extends BaseClass {
 	static String ContactFirstName;
 	static String ContactLastName;
 
-	public void autoCompleteField(String value) throws InterruptedException {
+	public void autoCompleteField(String value) throws InterruptedException, IOException {
+		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(FirstNameField, fakeFirstName);
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
@@ -461,14 +474,61 @@ public class QuotePage extends BaseClass {
 			this.inputText(OrganizationJobTittle, fakeTittle);
 			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName);
+			if (!this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+				this.inputText(SubCustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("OrganizationContactCreate");
+						this.message("Message");
+						if (this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("GlobalContactVisibleName")) {
-			this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName);
+			if (!this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+				this.inputText(CustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("ContactCreate");
+						this.message("Message");
+						if (this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("OrgVisibleName")) {
-			this.valuePresent(CustomerField, ContactFirstName);
+			if (!this.valuePresent(CustomerField, ContactFirstName)) {
+				this.inputText(CustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("OrganizationCreate");
+						this.message("Message");
+						if (this.valuePresent(CustomerField, ContactFirstName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("ContactCreate")) {
 			this.inputText(CustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(FirstNameField, fakeFirstName);
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
@@ -484,6 +544,14 @@ public class QuotePage extends BaseClass {
 		} else if (value.equals("OrganizationCreate")) {
 			this.inputText(CustomerField, fakeCompanyName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(OrganizationName, fakeCompanyName);
 			ContactFirstName = this.getTextAttribute(OrganizationName);
 			this.inputText(PhoneNumber, fakePhoneNumber);
@@ -764,15 +832,23 @@ public class QuotePage extends BaseClass {
 			}
 		} else if (value.equals("ClickButton")) {
 			this.mouseActionClick(Save);
+		} else if (value.equals("Organization")) {
+			this.mouseActionClick(RadioOrganization);
 		}
 	}
 
 	public void pickFirstItem(String value) throws InterruptedException {
+		Boolean condition = true;
 		if (value.equals("Contact") || value.equals("Organization")) {
 			this.mouseActionClick(InventoryItem);
 			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
-				Thread.sleep(5000);
-				this.mouseActionClick(InventoryItem);
+				do {
+					Thread.sleep(5000);
+					this.mouseActionClick(InventoryItem);
+					if (this.conditionChecking(InventoryName)) {
+						condition = false;
+					}
+				} while (condition);
 				this.mouseActionClick(InventoryFirstItem);
 			} else {
 				this.mouseActionClick(InventoryFirstItem);
@@ -946,9 +1022,12 @@ public class QuotePage extends BaseClass {
 	}
 
 	public void CRUDValidation(String value) throws InterruptedException, IOException, ParseException {
-		if (value.equals("Create")) {
+		if (value.equals("Create") || value.equals("CreateValue")) {
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
 			this.dateValidation("FutureDate");
+			if (value.equals("CreateValue")) {
+				this.pickFirstItem("Contact");
+			}
 			this.inputText(QuoteTittle, fakeTittle);
 			this.clearFields("Description");
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));

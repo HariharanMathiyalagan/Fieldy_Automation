@@ -33,7 +33,7 @@ public class TeamUser extends BaseClass {
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("Create OnBoarding.html");
+		extentHtmlReporter = new ExtentHtmlReporter("Create Team User.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -139,6 +139,8 @@ public class TeamUser extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("UserCreatedMessgae"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			landing.dataConditionCheck("Condition");
+			landing.dataConditionCheck("UserCreate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -147,6 +149,8 @@ public class TeamUser extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.responseMessage("AlternateFunction");
+			landing.dataConditionCheck("Condition");
+			landing.dataConditionCheck("UserCreate");
 
 		}
 

@@ -270,6 +270,11 @@ public class TaxPage extends BaseClass {
 		return value;
 	}
 
+	public void validRecord() {
+		this.inputText(TaxName, fakeTaxName);
+		this.inputText(TaxPercentage, fakeTaxPercentage);
+	}
+
 	static String ResponseMessage;
 	static String AlternateResponseMessage;
 

@@ -880,9 +880,15 @@ public class CustomerCreateContactPage extends BaseClass {
 	WebElement Visible;
 
 	public void nextButton() {
+		Boolean condition = true;
 		this.mouseActionClick(Next);
 		if (!this.conditionChecking1(Visible)) {
-			this.mouseActionClick(Next);
+			do {
+				this.mouseActionClick(Next);
+				if (this.conditionChecking1(Visible)) {
+					condition = false;
+				}
+			} while (condition);
 		}
 
 	}

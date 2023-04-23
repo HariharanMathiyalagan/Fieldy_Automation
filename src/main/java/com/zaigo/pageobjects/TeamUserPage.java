@@ -197,8 +197,7 @@ public class TeamUserPage extends BaseClass {
 	WebElement ListFirstName;
 	By ListPhoneNumber = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[6]");
 	By ListEmail = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[7]");
-	By ListContractorPhoneNumber = By
-			.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[7]");
+	By ListContractorPhoneNumber = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[7]");
 	By ListContractorEmail = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[8]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div"),
 			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i") })
@@ -270,16 +269,14 @@ public class TeamUserPage extends BaseClass {
 	By InValid = By.xpath("//*[text()='No Result Found']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
-	By ListCompanyFirstName = By
-			.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[5]");
+	By ListCompanyFirstName = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[5]");
 	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
 	By TotalCount = By.id("All-Count");
 	By ContractorCount = By.id("total-user-contractor-count");
-	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*text()='Company']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement PageLand;
 	static int parseInt;
 
@@ -744,7 +741,7 @@ public class TeamUserPage extends BaseClass {
 			return response;
 		} else if (value.equals("UserCreate") || value.equals("UserContractorCreate")) {
 			if (value.equals("UserCreate")) {
-				this.getCount(3);
+				this.getCount(1);
 				int userCount = 5 - parseInt;
 				if (userCount <= 5) {
 					for (int i = 0; i < userCount; i++) {
@@ -756,8 +753,11 @@ public class TeamUserPage extends BaseClass {
 						this.responseMessage("Message");
 						this.visibility(PageLand);
 					}
-				} else if (value.equals("UserContractorCreate")) {
-					int userContractorCount = 5 - parseInt;
+				}
+			} else if (value.equals("UserContractorCreate")) {
+				this.getCount(2);
+				int userContractorCount = 10 - parseInt;
+				if (userContractorCount <= 10) {
 					for (int i = 0; i < userContractorCount; i++) {
 						this.mouseActionClick(CreateContractor);
 						this.validateFillData("BasicContractor");

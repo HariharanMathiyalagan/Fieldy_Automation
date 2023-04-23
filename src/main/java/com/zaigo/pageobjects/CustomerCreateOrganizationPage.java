@@ -329,9 +329,15 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void nextButton() {
+		Boolean condition = true;
 		this.mouseActionClick(Next);
 		if (!this.conditionChecking1(Visible)) {
-			this.mouseActionClick(Next);
+			do {
+				this.mouseActionClick(Next);
+				if (this.conditionChecking1(Visible)) {
+					condition = false;
+				}
+			} while (condition);
 		}
 
 	}
@@ -558,8 +564,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	By Dots = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
-	By Edit = By
-			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
+	By Edit = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
 	By Deleted = By

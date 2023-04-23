@@ -181,9 +181,10 @@ public class RequestPage extends BaseClass {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
-	public void valuePresent(WebElement element, String value) {
+	public Boolean valuePresent(WebElement element, String value) {
 		wait = new WebDriverWait(driver, 50);
-		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+		Boolean text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+		return text;
 	}
 
 	private void scrollUp() {
@@ -235,9 +236,9 @@ public class RequestPage extends BaseClass {
 	By Technician = By.xpath("//*[@class='floating-input form-control user-view ']");
 	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
 	By TechnicianFirstName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[1]");
+			.xpath("//*[@id='technician_ids-autocomplete-list']/div[1]");
 	By TechnicianSecoundName = By
-			.xpath("(//*[@class='p-2 list-hover-bg request-technician-list w-20-ellipsis w-100'])[2]");
+			.xpath("//*[@id='technician_ids-autocomplete-list']/div[2]");
 	By Priority = By.id("priority");
 	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
@@ -334,6 +335,7 @@ public class RequestPage extends BaseClass {
 	By OrganizationName = By.id("company_name");
 	By OrgAdd = By.xpath("//*[@class='add_new_btn2 btn btn-30 btn-bg-blue pr-2 pl-2 ']");
 	By Website = By.xpath("(//*[@id='website'])[1]");
+	By PopupOpen = By.xpath("//*[contains(@class,'fadeIn')]//child::h5");
 	@FindAll({ @FindBy(id = "customer-contact-request-count"), @FindBy(id = "customer-company-list-count") })
 	WebElement TotalCount;
 
@@ -344,7 +346,12 @@ public class RequestPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='id_user_customer']") })
 	WebElement SubCustomerField;
-
+	@FindAll({
+			@FindBy(xpath = "//*[@id='contactdropdownlist' and contains(@style,'display:block;')]//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='contactdropdownlist2' and contains(@style,'display:block;')]//child::div[1]//div[1]"),
+			@FindBy(xpath = "//*[text()=' No Data Found!']"),
+			@FindBy(xpath = "//*[@id='contactdropdownlist3' and contains(@style,'display:block;')]//child::div[1]//div[1]") })
+	WebElement CustomerListField;
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contacts__first_name__0']") })
 	WebElement FirstNameField;
@@ -586,10 +593,19 @@ public class RequestPage extends BaseClass {
 	static String ContactFirstName;
 	static String ContactLastName;
 
-	public void autoCompleteField(String value) throws InterruptedException {
+	public void autoCompleteField(String value) throws InterruptedException, IOException {
+		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(FirstNameField, fakeFirstName);
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
@@ -599,14 +615,61 @@ public class RequestPage extends BaseClass {
 			this.inputText(JobTittle, fakeTittle);
 			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName);
+			if (!this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+				this.inputText(SubCustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("OrganizationContactCreate");
+						this.message("Message");
+						if (this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("GlobalContactVisibleName")) {
-			this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName);
+			if (!this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+				this.inputText(CustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("ContactCreate");
+						this.message("Message");
+						if (this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("OrgVisibleName")) {
-			this.valuePresent(CustomerField, ContactFirstName);
+			if (!this.valuePresent(CustomerField, ContactFirstName)) {
+				this.inputText(CustomerField, ContactFirstName);
+				if (this.getText(CustomerListField).equals("No Data Found!")) {
+					do {
+						this.autoCompleteField("OrganizationCreate");
+						this.message("Message");
+						if (this.valuePresent(CustomerField, ContactFirstName)) {
+							condition = false;
+						}
+					} while (condition);
+				} else {
+					this.mouseActionClick(CustomerListField);
+				}
+			}
 		} else if (value.equals("ContactCreate")) {
 			this.inputText(CustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(FirstNameField, fakeFirstName);
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
@@ -622,6 +685,14 @@ public class RequestPage extends BaseClass {
 		} else if (value.equals("OrganizationCreate")) {
 			this.inputText(CustomerField, fakeCompanyName);
 			this.mouseActionClick(AddCustomer);
+			if (!this.conditionChecking(PopupOpen)) {
+				do {
+					this.mouseActionClick(AddCustomer);
+					if (this.conditionChecking(PopupOpen)) {
+						condition = false;
+					}
+				} while (condition);
+			}
 			this.inputText(OrganizationName, fakeCompanyName);
 			ContactFirstName = this.getTextAttribute(OrganizationName);
 			this.inputText(PhoneNumber, fakePhoneNumber);
@@ -887,11 +958,13 @@ public class RequestPage extends BaseClass {
 			this.scrollDown();
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianFirstName);
-		} else if (value.equals("Schedule") || value.equals("GlobalSchedule")) {
+		} else if (value.equals("Schedule") || value.equals("GlobalSchedule") || value.equals("CreateSchedule")) {
 			if (value.equals("Schedule")) {
 				this.visibility(JobList);
 				this.customerName("DetailScreenCustomerName");
 				this.mouseActionClick(CreateButton);
+				this.customerName("PlaceHolderName");
+			} else if (value.equals("CreateSchedule")) {
 				this.customerName("PlaceHolderName");
 			}
 			this.dropDownByIndex(Priority, 2);

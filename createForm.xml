@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test thread-count="5" name="Test">
+		<classes>
+			<class name="org.enhancement.Onboarding" />
+
+			<class name="org.enhancement.TeamCompanyContractor" />
+
+			<class name="org.enhancement.TeamUser" />
+
+			<class name="org.enhancement.TeamUserContractor" />
+
+			<class name="org.enhancement.TeamSendInvite" />
+
+			<class name="org.enhancement.CustomerContactModule" />
+
+			<class name="org.enhancement.CustomerOrganizationModule" />
+			
+			<class name="org.enhancement.CustomerContactJob" />
+
+			<class name="org.enhancement.CustomerOrganizationJob" />
+
+			<class name="org.enhancement.GlobalContactJob" />
+
+			<class name="org.enhancement.GlobalOrganizationJob" />
+
+			<class name="org.enhancement.CustomerContactRequest" />
+
+			<class name="org.enhancement.CustomerOrganizationRequest" />
+
+			<class name="org.enhancement.GlobalContactRequest" />
+
+			<class name="org.enhancement.GlobalOrganizationRequest" />
+			
+			<class name="org.enhancement.CustomerContactQuote" />
+
+			<class name="org.enhancement.CustomerOrganizationQuote" />
+
+			<class name="org.enhancement.GlobalContactQuote" />
+
+			<class name="org.enhancement.GlobalOrganizationQuote" />
+
+			<class name="org.enhancement.CustomerContactInvoice" />
+
+			<class name="org.enhancement.CustomerOrganizationInvoice" />
+
+			<class name="org.enhancement.GlobalContactInvoice" />
+
+			<class name="org.enhancement.GlobalOrganizationInvoice" />
+			
+			<class name="org.enhancement.BusinessUnit" />
+
+			<class name="org.enhancement.LeadSource" />
+
+			<class name="org.enhancement.ServiceType" />
+
+			<class name="org.enhancement.ProductModule" />
+
+			<class name="org.enhancement.ServiceModule" />
+
+			<class name="org.enhancement.TaxModule" />
+
+			<class name="org.enhancement.CategoryModule" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

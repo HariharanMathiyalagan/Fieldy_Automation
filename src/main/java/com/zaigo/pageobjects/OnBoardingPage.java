@@ -620,6 +620,7 @@ public class OnBoardingPage extends BaseClass {
 		driver.get(getPropertyValue("OnBoardingURL"));
 		this.inputText(CompanyName, fakeCompanyName);
 		this.validFillData("FirstPage");
+		this.updateValue();
 		this.mouseActionClick(xpath);
 		this.mouseActionClick(Continue);
 		this.sizeCompany();

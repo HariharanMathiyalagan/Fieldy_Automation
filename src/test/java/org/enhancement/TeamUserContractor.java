@@ -24,7 +24,7 @@ import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.TeamUserPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class TeamUserContractor extends BaseClass{
+public class TeamUserContractor extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -34,7 +34,7 @@ public class TeamUserContractor extends BaseClass{
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("TeamUserContractor.html");
+		extentHtmlReporter = new ExtentHtmlReporter("Create Team User Contractor.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -125,7 +125,7 @@ public class TeamUserContractor extends BaseClass{
 		}
 
 	}
-	
+
 	@Test(priority = 3)
 	private void userCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a new User is created successfully through [Team User]");
@@ -140,6 +140,8 @@ public class TeamUserContractor extends BaseClass{
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("ContractorCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			landing.dataConditionCheck("Condition");
+			landing.dataConditionCheck("UserContractorCreate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -148,6 +150,8 @@ public class TeamUserContractor extends BaseClass{
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.responseMessage("AlternateFunction");
+//			landing.dataConditionCheck("Condition");
+			landing.dataConditionCheck("UserContractorCreate");
 
 		}
 

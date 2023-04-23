@@ -33,7 +33,7 @@ public class TeamCompanyContractor extends BaseClass {
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("Create OnBoarding.html");
+		extentHtmlReporter = new ExtentHtmlReporter("Create Team Company Contractor.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
