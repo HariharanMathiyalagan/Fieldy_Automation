@@ -235,10 +235,8 @@ public class RequestPage extends BaseClass {
 	By Single = By.id("technician-radio-button");
 	By Technician = By.xpath("//*[@class='floating-input form-control user-view ']");
 	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
-	By TechnicianFirstName = By
-			.xpath("//*[@id='technician_ids-autocomplete-list']/div[1]");
-	By TechnicianSecoundName = By
-			.xpath("//*[@id='technician_ids-autocomplete-list']/div[2]");
+	By TechnicianFirstName = By.xpath("//*[@id='technician_ids-autocomplete-list']/div[1]");
+	By TechnicianSecoundName = By.xpath("//*[@id='technician_ids-autocomplete-list']/div[2]");
 	By Priority = By.id("priority");
 	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
@@ -615,13 +613,13 @@ public class RequestPage extends BaseClass {
 			this.inputText(JobTittle, fakeTittle);
 			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			if (!this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+			if (!this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(SubCustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("OrganizationContactCreate");
 						this.message("Message");
-						if (this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+						if (this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -630,13 +628,13 @@ public class RequestPage extends BaseClass {
 				}
 			}
 		} else if (value.equals("GlobalContactVisibleName")) {
-			if (!this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+			if (!this.valuePresentCondition(CustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(CustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("ContactCreate");
 						this.message("Message");
-						if (this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+						if (this.valuePresentCondition(CustomerField, ContactFirstName + " " + ContactLastName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -645,13 +643,13 @@ public class RequestPage extends BaseClass {
 				}
 			}
 		} else if (value.equals("OrgVisibleName")) {
-			if (!this.valuePresent(CustomerField, ContactFirstName)) {
+			if (!this.valuePresentCondition(CustomerField, ContactFirstName)) {
 				this.inputText(CustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("OrganizationCreate");
 						this.message("Message");
-						if (this.valuePresent(CustomerField, ContactFirstName)) {
+						if (this.valuePresentCondition(CustomerField, ContactFirstName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -751,6 +749,28 @@ public class RequestPage extends BaseClass {
 		try {
 			wait = new WebDriverWait(driver, 20);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean valuePresentCondition(By element, String value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean valuePresentCondition(WebElement element, String value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 30);
+			text = wait.until(ExpectedConditions.textToBePresentInElement(element, value));
 		} catch (Exception e) {
 			return text;
 		}

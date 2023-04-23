@@ -298,13 +298,13 @@ public class JobPage extends BaseClass {
 			this.inputText(OrganizationJobTittle, fakeTittle);
 			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
-			if (!this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+			if (!this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(SubCustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("OrganizationContactCreate");
 						this.message("Message");
-						if (this.valuePresent(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
+						if (this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -313,13 +313,13 @@ public class JobPage extends BaseClass {
 				}
 			}
 		} else if (value.equals("GlobalContactVisibleName")) {
-			if (!this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+			if (!this.valuePresentCondition(CustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(CustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("ContactCreate");
 						this.message("Message");
-						if (this.valuePresent(CustomerField, ContactFirstName + " " + ContactLastName)) {
+						if (this.valuePresentCondition(CustomerField, ContactFirstName + " " + ContactLastName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -328,13 +328,13 @@ public class JobPage extends BaseClass {
 				}
 			}
 		} else if (value.equals("OrgVisibleName")) {
-			if (!this.valuePresent(CustomerField, ContactFirstName)) {
+			if (!this.valuePresentCondition(CustomerField, ContactFirstName)) {
 				this.inputText(CustomerField, ContactFirstName);
 				if (this.getText(CustomerListField).equals("No Data Found!")) {
 					do {
 						this.autoCompleteField("OrganizationCreate");
 						this.message("Message");
-						if (this.valuePresent(CustomerField, ContactFirstName)) {
+						if (this.valuePresentCondition(CustomerField, ContactFirstName)) {
 							condition = false;
 						}
 					} while (condition);
@@ -388,6 +388,17 @@ public class JobPage extends BaseClass {
 			this.inputText(ZipcodeField, fakeZipcode);
 			this.mouseActionClick(SaveButton);
 		}
+	}
+
+	public Boolean valuePresentCondition(WebElement element, String value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 30);
+			text = wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	private void inputText(By element, String text) {
