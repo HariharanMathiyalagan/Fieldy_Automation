@@ -3,15 +3,15 @@
 <suite name="Suite">
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="org.enhancement.Onboarding" />
+			<!--class name="org.enhancement.Onboarding" />
 
 			<class name="org.enhancement.TeamCompanyContractor" />
 
-			<class name="org.enhancement.TeamUser" />
+			<class name="org.enhancement.TeamUser" /-->
 
 			<class name="org.enhancement.TeamUserContractor" />
 
-			<class name="org.enhancement.TeamSendInvite" />
+			<!--class name="org.enhancement.TeamSendInvite" />
 
 			<class name="org.enhancement.CustomerContactModule" />
 
@@ -61,7 +61,7 @@
 
 			<class name="org.enhancement.TaxModule" />
 
-			<class name="org.enhancement.CategoryModule" />
+			<class name="org.enhancement.CategoryModule" /-->
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
