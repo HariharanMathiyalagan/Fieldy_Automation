@@ -769,8 +769,8 @@ public class RequestPage extends BaseClass {
 	public Boolean valuePresentCondition(WebElement element, String value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 30);
-			text = wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 		} catch (Exception e) {
 			return text;
 		}
@@ -805,7 +805,8 @@ public class RequestPage extends BaseClass {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveButton);
 					if (this.conditionChecking(Message)) {
-						responseMessage = this.message("Message");
+						responseMessage = this.getText(Message);
+						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 							conditionCheck = false;
 						}
@@ -837,6 +838,7 @@ public class RequestPage extends BaseClass {
 				}
 				if (this.conditionChecking(Message)) {
 					alternateResponseMessage = this.getText(Message);
+					this.invisible(Message);
 					if (alternateResponseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 						conditionCheck = false;
 					}
@@ -846,6 +848,7 @@ public class RequestPage extends BaseClass {
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
 							alternateResponseMessage = this.getText(Message);
+							this.invisible(Message);
 							if (alternateResponseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 								conditionCheck = false;
 							}
@@ -1126,4 +1129,9 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
+	public void createFunction() throws IOException, InterruptedException {
+		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+			this.message("AlternateFunction");
+		}
+	}
 }

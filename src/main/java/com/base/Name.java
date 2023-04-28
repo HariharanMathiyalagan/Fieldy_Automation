@@ -51,42 +51,12 @@ import com.zaigo.pageobjects.OnBoardingPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Name extends BaseClass {
-	static StringBuffer append;
-	int parseInt;
-	static String value1;
-
-//	private String method(int value) {
-//		String data[] = { "value1", "value2", "value3", "value4" };
-//		return data[value];
-//
-//	}
-
+public class Name {
 	public static void main(String[] args) {
-//		for (int i = 0; i < 10000; i++) {
-//			Faker faker = new Faker(new Locale("en-IND"));
-//			String fakeFirstName = faker.name().firstName();
-//			String fakeLastName = faker.name().lastName();
-//			String fakeEmail = faker.internet().safeEmailAddress();
-//			String fakeContactPersonName = faker.name().fullName();
-//			String fakeAddress1 = faker.address().buildingNumber();
-//			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
-//			String fakeAddress2 = faker.address().streetName();
-//			String fakeCity = faker.address().city();
-//			String fakeState = faker.address().state();
-//			String fakeZipcode = faker.address().zipCode();
-//			String characters256 = RandomStringUtils.randomAlphabetic(6);
-//			String fakeCompanyName = faker.company().name();
-//			System.out.println(fakePhoneNumber);
-//		}
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 0);
-		String format = sdf.format(cal.getTime());
-//		Name name = new Name();
-//		System.out.println(name.method(0));
-		System.out.println(format);
-
+		String currentDate = sdf.format(cal.getTime());
+		System.out.println(currentDate);
 	}
 }

@@ -393,8 +393,8 @@ public class JobPage extends BaseClass {
 	public Boolean valuePresentCondition(WebElement element, String value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 30);
-			text = wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 		} catch (Exception e) {
 			return text;
 		}
@@ -1067,28 +1067,26 @@ public class JobPage extends BaseClass {
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 					this.clearField(OrganizationName);
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
 					firstName = this.getTextAttribute(OrganizationName);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
 					this.clearField(EmailField);
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
-					messageCheck = this.getText(Message);
 				}
 				if (this.conditionChecking(Message)) {
+					messageCheck = this.getText(Message);
+					this.invisible(Message);
 					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
 						conditionCheck = false;
 					}
@@ -1098,6 +1096,7 @@ public class JobPage extends BaseClass {
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
 							messageCheck = this.getText(Message);
+							this.invisible(Message);
 							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
 								conditionCheck = false;
 							}
@@ -1247,4 +1246,9 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
+	public void createFunction() throws IOException, InterruptedException {
+		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+			this.message("AlternateFunction");
+		}
+	}
 }

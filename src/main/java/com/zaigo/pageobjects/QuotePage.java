@@ -223,8 +223,8 @@ public class QuotePage extends BaseClass {
 	public Boolean valuePresentCondition(WebElement element, String value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 30);
-			text = wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 		} catch (Exception e) {
 			return text;
 		}
@@ -293,20 +293,27 @@ public class QuotePage extends BaseClass {
 	By StatusList = By.xpath("//*[contains(text(),'The doc expiry date must be a date after or equal')]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[2]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[2]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListQuoteNo;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[3]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListTittle;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[4]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[4]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListReference;
 
-	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]");
+//	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]");
+
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[5]") })
+	WebElement GlobalListCustomerName;
 //	By TotalCount = By.id("total-quote-count");
 	@FindAll({ @FindBy(id = "total-quote-count"), @FindBy(id = "quote-nav-count-all") })
 	WebElement TotalCount;
@@ -334,7 +341,8 @@ public class QuotePage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//td[9]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListQuoteStatus;
 
 	By Search = By.id("quote-search-filter");
@@ -958,6 +966,7 @@ public class QuotePage extends BaseClass {
 				}
 				if (this.conditionChecking(Message)) {
 					messageCheck = this.getText(Message);
+					this.invisible(Message);
 					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
 						conditionCheck = false;
 					}
@@ -967,6 +976,7 @@ public class QuotePage extends BaseClass {
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
 							messageCheck = this.getText(Message);
+							this.invisible(Message);
 							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
 								conditionCheck = false;
 							}
@@ -1159,5 +1169,11 @@ public class QuotePage extends BaseClass {
 	public void clickEvent() {
 		this.clearField(Search);
 
+	}
+
+	public void createFunction() throws IOException, InterruptedException {
+		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+			this.message("AlternateFunction");
+		}
 	}
 }

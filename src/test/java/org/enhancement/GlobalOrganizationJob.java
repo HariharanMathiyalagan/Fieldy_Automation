@@ -119,7 +119,7 @@ public class GlobalOrganizationJob extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CreateJobLabel.png");
 		}
 	}
-	
+
 	@Test(priority = 29)
 	private void createJob_FromDateandTime_ToDateandTime()
 			throws WebDriverException, IOException, InterruptedException {
@@ -129,6 +129,8 @@ public class GlobalOrganizationJob extends BaseClass {
 		driver.navigate().refresh();
 		mandatory.switchOrganization();
 		mandatory.autoCompleteField("OrganizationCreate");
+		mandatory.message("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("OrgVisibleName");
 		mandatory.jobStatusCreation("CreateJob");
 		String errorPasswordField = mandatory.message("Message");

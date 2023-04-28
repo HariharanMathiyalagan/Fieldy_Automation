@@ -24,6 +24,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.pageobjects.LoginPage;
+import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class CustomerCreateContactModule extends BaseClass {
@@ -47,12 +48,12 @@ public class CustomerCreateContactModule extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -1151,7 +1152,6 @@ public class CustomerCreateContactModule extends BaseClass {
 		if (editContact.equals(getPropertyValue("ContactEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			edit.visibleName();
-			edit.clearAllFields("ContactPage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1160,12 +1160,503 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("Edit.png");
 			edit.visibleName();
-			edit.clearAllFields("ContactPage");
 		}
 
 	}
 
 	@Test(priority = 40)
+	public void firstNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the First Name:" + CustomerCreateContactPage.firstName
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("FirstName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.firstName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.firstName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+	}
+
+	@Test(priority = 41)
+	public void lastNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Last Name:" + CustomerCreateContactPage.lastName
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.lastName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.lastName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 42)
+	public void leadSourcePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Lead Source Name:" + CustomerCreateContactPage.leadSources
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LeadSources");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.leadSources);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.leadSources)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 43)
+	public void emailPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Email:" + CustomerCreateContactPage.email
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("Email");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.email);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.email)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 44)
+	public void jobTittlePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Job Tittle:" + CustomerCreateContactPage.jobTittle
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("JobTittle");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.jobTittle);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.jobTittle)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 45)
+	public void phoneNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Phone Number:" + CustomerCreateContactPage.phoneNumber
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("PhoneNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.phoneNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.phoneNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.nextButton();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.nextButton();
+		}
+	}
+
+	@Test(priority = 46)
+	public void propertyFirstNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Property First Name:" + CustomerCreateContactPage.propertyFirstName
+						+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("PropertyFirstName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.firstName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.firstName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+	}
+
+	@Test(priority = 47)
+	public void propertyLastNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Property Last Name:" + CustomerCreateContactPage.propertyLastName
+						+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("PropertyLastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.lastName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.lastName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 48)
+	public void propertyNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Name:" + CustomerCreateContactPage.propertyName
+				+ " is prepopulated in the customer contact form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("PropertyName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.propertyName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.propertyName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 49)
+	public void locationAddress1Prepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Location Address1:"
+				+ CustomerCreateContactPage.address1 + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationAddress1");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.address1);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.address1)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 50)
+	public void locationAddress2Prepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Location Address2:"
+				+ CustomerCreateContactPage.address2 + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationAddress2");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.address2);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.address2)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 51)
+	public void locationCityPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Location City:" + CustomerCreateContactPage.cityName
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationCity");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.cityName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.cityName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 52)
+	public void locationStatePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Location State:"
+				+ CustomerCreateContactPage.stateName + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationState");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.stateName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.stateName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 53)
+	public void locationZipcodePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Property Location Zipcode:"
+				+ CustomerCreateContactPage.zipcode + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationZipcode");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.zipcode);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.zipcode)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.nextButton();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.nextButton();
+		}
+
+	}
+
+	@Test(priority = 54)
+	public void productNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Product Name:"
+				+ CustomerCreateContactPage.productName + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("ProductName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.productName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.productName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+	}
+
+	@Test(priority = 55)
+	public void brandNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Brand Name:" + CustomerCreateContactPage.brandName
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("BrandName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.brandName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.brandName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 56)
+	public void modelNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Model Number:"
+				+ CustomerCreateContactPage.modelNumber + " is prepopulated in the customer contact form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("ModelNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.modelNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.modelNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 57)
+	public void serialNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Serial Number:"
+				+ CustomerCreateContactPage.serialNumber + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("SerialNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.serialNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.serialNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 58)
+	public void dateInstalledPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Date Installed:"
+				+ CustomerCreateContactPage.dateInstalled + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("DateInstalled");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.dateInstalled);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.dateInstalled)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 59)
+	public void warrantyInformationPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Equipment Warranty Information:" + CustomerCreateContactPage.warrantyInformation
+						+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("WarrantyInformation");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.warrantyInformation);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.warrantyInformation)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 60)
+	public void accessHoursPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Equipment Access Hours:"
+				+ CustomerCreateContactPage.accessHours + " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("AccessHours");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.accessHours);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.accessHours)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 61)
+	public void installationNotesPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Equipment Installation:" + CustomerCreateContactPage.installationNotes
+						+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("InstallationNotes");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.installationNotes);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.installationNotes)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.clearFields("Previous");
+			edit.clearAllFields("ContactPage");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.clearFields("Previous");
+			edit.clearAllFields("ContactPage");
+		}
+
+	}
+
+	@Test(priority = 62)
 	private void editMandatoryValidation() throws AWTException, IOException {
 		extentTest = extentReports.createTest(
 				"Check Customer Contact Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -1178,7 +1669,6 @@ public class CustomerCreateContactModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1186,11 +1676,10 @@ public class CustomerCreateContactModule extends BaseClass {
 			File file = new File("MandatoryValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("MandatoryValidation.png");
-
 		}
 	}
 
-	@Test(priority = 41)
+	@Test(priority = 63)
 	private void editMaxValidationFirstNameField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact First Name Field exceed its max-256 limit");
@@ -1218,7 +1707,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 42)
+	@Test(priority = 64)
 	private void editMaxValidationLastNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
@@ -1242,7 +1731,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 43)
+	@Test(priority = 65)
 	private void editMaxValidationJobTittle() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Job Tittle Field exceed its max-256 limit");
@@ -1267,7 +1756,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 44)
+	@Test(priority = 66)
 	private void editMaxValidationEmailField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Email Field exceed its max-256 limit");
@@ -1292,7 +1781,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 45)
+	@Test(priority = 67)
 	private void editInvalidValidationEmailField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify error message is displayed when Customer Contact invalid email is entered in Email Field");
@@ -1316,7 +1805,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 46)
+	@Test(priority = 68)
 	private void editSpecialCharacterPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when special character provided in Phone Number field");
@@ -1341,7 +1830,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 47)
+	@Test(priority = 69)
 	private void editInvalidPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when alphabetic character provided in Phone Number field");
@@ -1366,7 +1855,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 48)
+	@Test(priority = 70)
 	private void editInValidationPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field");
@@ -1391,7 +1880,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 49)
+	@Test(priority = 71)
 	private void editMaxValidationPhoneNumberField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Phone Number Field exceed its max-20 limit");
@@ -1420,7 +1909,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 50)
+	@Test(priority = 72)
 	private void editMaxValidationPropertyFirstNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property First Name Field exceed its max-256 limit");
@@ -1445,7 +1934,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 51)
+	@Test(priority = 73)
 	private void editMaxValidationPropertyLastNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
@@ -1470,7 +1959,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 52)
+	@Test(priority = 74)
 	private void editMaxValidationPropertyNameField() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property Name Field exceed its max-256 limit");
@@ -1495,7 +1984,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 53)
+	@Test(priority = 75)
 	private void editMaxValidationAddress1() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property Address1 Field exceed its max-256 limit");
@@ -1520,7 +2009,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 54)
+	@Test(priority = 76)
 	private void editMaxValidationAddress22Field() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property Address2 Field exceed its max-256 limit");
@@ -1544,7 +2033,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 55)
+	@Test(priority = 77)
 	private void editMaxValidationCityField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property City Field exceed its max-256 limit");
@@ -1569,7 +2058,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 56)
+	@Test(priority = 78)
 	private void editMaxValidationStateField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property State Field exceed its max-45 limit");
@@ -1593,7 +2082,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 57)
+	@Test(priority = 79)
 	private void editMinValidationZipcodeField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field");
@@ -1617,7 +2106,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 58)
+	@Test(priority = 80)
 	private void editMaxValidationZipcodeField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
@@ -1641,7 +2130,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 59)
+	@Test(priority = 81)
 	private void editSpecialCharacterZipcodeField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
@@ -1671,7 +2160,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 60)
+	@Test(priority = 82)
 	private void editMaxValidationProductNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Product Name Field exceed its max-256 limit");
@@ -1695,7 +2184,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 61)
+	@Test(priority = 83)
 	private void editMaxValidationBrandNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Brand Name Field exceed its max-256 limit");
@@ -1719,7 +2208,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 62)
+	@Test(priority = 84)
 	private void editMaxValdidationModelNumberField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Model Number Field exceed its max-256 limit");
@@ -1743,7 +2232,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 63)
+	@Test(priority = 85)
 	private void editMaxValidationSerialNumberField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Serial Number Field exceed its max-256 limit");
@@ -1767,7 +2256,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 64)
+	@Test(priority = 86)
 	private void editDateValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Date Installed Field enter the Future Date");
@@ -1791,7 +2280,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 65)
+	@Test(priority = 87)
 	private void editMaxValidationAccessHoursField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Access Hours Field exceed its max-256 limit");
@@ -1815,7 +2304,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 66)
+	@Test(priority = 88)
 	private void editMaxValidationInstallationNotesField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Installation Notes Field exceed its max-2048 limit");
@@ -1841,7 +2330,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 67)
+	@Test(priority = 89)
 	private void editContactList() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify updated successful message is displayed, when the Customer Contact Updated");
@@ -1869,7 +2358,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 68)
+	@Test(priority = 90)
 	private void deleteContactList() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify deleted successful message is displayed, when the Customer Contact Deleted");

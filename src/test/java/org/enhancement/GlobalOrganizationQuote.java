@@ -130,6 +130,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		mandatory.saveFunction("Organization");
 		mandatory.autoCompleteField("OrganizationCreate");
 		mandatory.message("message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("OrgVisibleName");
 		mandatory.CRUDValidation("CreateValue");
 		String errorPasswordField = mandatory.message("message");

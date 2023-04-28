@@ -128,6 +128,7 @@ public class GlobalContactJob extends BaseClass {
 		mandatory.mandatoryContactField();
 		mandatory.autoCompleteField("ContactCreate");
 		mandatory.message("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("CreateJob");
 		String errorPasswordField = mandatory.message("Message");

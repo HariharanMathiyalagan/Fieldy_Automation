@@ -29,22 +29,6 @@ public class TeamCompanyContractor extends BaseClass {
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
 	ExtentTest extentTest;
-	static String ContractorName;
-	static String ContractorFirstName;
-	static String ContractorLastName;
-	static String ContractorEmail;
-	static String ContractorPhoneNumber;
-	static String ContractorWebSite;
-	static String ContractorFaxNumber;
-	static String ContractorLocationName;
-	static String ContractorLocationEmail;
-	static String ContractorLocationContactPerson;
-	static String ContractorLocationPhoneNumber;
-	static String ContractorLocationAddress1;
-	static String ContractorLocationAddress2;
-	static String ContractorLocationCity;
-	static String ContractorLocationState;
-	static String ContractorLocationZipcode;
 
 	@BeforeClass
 	public void setup() throws IOException {
@@ -65,7 +49,7 @@ public class TeamCompanyContractor extends BaseClass {
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -131,7 +115,6 @@ public class TeamCompanyContractor extends BaseClass {
 		if (error_text.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			contractorPage.companyName("ValidData");
-			ContractorName = contractorPage.prepopulation(0);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -140,7 +123,6 @@ public class TeamCompanyContractor extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("7.png");
 			contractorPage.companyName("ValidData");
-			ContractorName = contractorPage.prepopulation(0);
 		}
 
 	}
@@ -691,21 +673,6 @@ public class TeamCompanyContractor extends BaseClass {
 			extentTest.addScreenCaptureFromPath("27.png");
 			create.responseMessage("AlternateFunction");
 		}
-		ContractorFirstName = create.prepopulation(1);
-		ContractorLastName = create.prepopulation(2);
-		ContractorEmail = create.prepopulation(3);
-		ContractorPhoneNumber = create.prepopulation(4);
-		ContractorWebSite = create.prepopulation(5);
-		ContractorFaxNumber = create.prepopulation(6);
-		ContractorLocationName = create.prepopulation(7);
-		ContractorLocationEmail = create.prepopulation(8);
-		ContractorLocationContactPerson = create.prepopulation(9);
-		ContractorLocationPhoneNumber = create.prepopulation(10);
-		ContractorLocationAddress1 = create.prepopulation(11);
-		ContractorLocationAddress2 = create.prepopulation(12);
-		ContractorLocationCity = create.prepopulation(13);
-		ContractorLocationState = create.prepopulation(14);
-		ContractorLocationZipcode = create.prepopulation(15);
 	}
 
 	@Test(priority = 29)
@@ -946,14 +913,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 39)
 	public void contractorNamePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Company  Name:" + ContractorName + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Company  Name:" + CreateContractorPage.ContractorName
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("CompanyName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorName);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorName)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -968,14 +935,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 40)
 	public void firstNamePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the First Name:" + ContractorFirstName + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the First Name:" + CreateContractorPage.ContractorFirstName
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("FirstName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorFirstName)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorFirstName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -990,14 +957,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 41)
 	public void lastNamePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Last Name:" + ContractorLastName + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Last Name:" + CreateContractorPage.ContractorLastName
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LastName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLastName);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLastName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLastName)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLastName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1012,14 +979,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 42)
 	public void emailPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Email:" + ContractorEmail + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Email:" + CreateContractorPage.ContractorEmail
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("Email");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorEmail);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorEmail);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorEmail)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorEmail)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1034,14 +1001,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 43)
 	public void faxPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Fax Number:" + ContractorFaxNumber + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Fax Number:" + CreateContractorPage.ContractorFaxNumber
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("Fax");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorFaxNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorFaxNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorFaxNumber)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorFaxNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1056,14 +1023,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 44)
 	public void phoneNumberPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Phone Number:" + ContractorPhoneNumber
+		extentTest = extentReports.createTest("Verify the Phone Number:" + CreateContractorPage.ContractorPhoneNumber
 				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("PhoneNumber");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorPhoneNumber)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1078,14 +1045,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 45)
 	public void websitePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Website:" + ContractorWebSite + " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Website:" + CreateContractorPage.ContractorWebSite
+				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("Website");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorWebSite);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorWebSite);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorWebSite)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorWebSite)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			edit.clickEvent("Next");
 		} else {
@@ -1102,14 +1069,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 46)
 	public void locationNamePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Name:" + ContractorLocationName
+		extentTest = extentReports.createTest("Verify the Location Name:" + CreateContractorPage.ContractorLocationName
 				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationName);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationName)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationName)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1124,14 +1091,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 47)
 	public void locationEmailPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Name Email:" + ContractorLocationEmail
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Location Name Email:"
+				+ CreateContractorPage.ContractorLocationEmail + " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationEmail");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationEmail);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationEmail);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationEmail)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationEmail)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1146,14 +1113,15 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 48)
 	public void locationContactPersonPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Contact Person:" + ContractorLocationContactPerson
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports
+				.createTest("Verify the Location Contact Person:" + CreateContractorPage.ContractorLocationContactPerson
+						+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationContactPerson");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationContactPerson);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationContactPerson);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationContactPerson)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationContactPerson)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1168,14 +1136,15 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 49)
 	public void locationPhoneNumberPersonPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Phone Number:" + ContractorLocationPhoneNumber
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports
+				.createTest("Verify the Location Phone Number:" + CreateContractorPage.ContractorLocationPhoneNumber
+						+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationPhoneNumber");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationPhoneNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationPhoneNumber)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1190,14 +1159,15 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 50)
 	public void locationAddress1Prepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Address1:" + ContractorLocationAddress1
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports
+				.createTest("Verify the Location Address1:" + CreateContractorPage.ContractorLocationAddress1
+						+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationAddress1");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationAddress1);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationAddress1);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationAddress1)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationAddress1)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1212,14 +1182,15 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 51)
 	public void locationAddress2Prepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Address2:" + ContractorLocationAddress2
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports
+				.createTest("Verify the Location Address2:" + CreateContractorPage.ContractorLocationAddress2
+						+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationAddress2");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationAddress2);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationAddress2);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationAddress2)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationAddress2)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1234,14 +1205,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 52)
 	public void locationCityPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location City:" + ContractorLocationCity
+		extentTest = extentReports.createTest("Verify the Location City:" + CreateContractorPage.ContractorLocationCity
 				+ " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationCity");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationCity);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationCity);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationCity)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationCity)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1256,14 +1227,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 53)
 	public void locationStatePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location State:" + ContractorLocationState
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Location State:"
+				+ CreateContractorPage.ContractorLocationState + " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationState");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationState);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationState);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationState)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationState)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1278,14 +1249,14 @@ public class TeamCompanyContractor extends BaseClass {
 
 	@Test(priority = 54)
 	public void locationZipcodePrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Location Zipcode:" + ContractorLocationZipcode
-				+ " is prepopulated in the contractor edit form page");
+		extentTest = extentReports.createTest("Verify the Location Zipcode:"
+				+ CreateContractorPage.ContractorLocationZipcode + " is prepopulated in the contractor edit form page");
 		CreateContractorPage edit = PageFactory.initElements(driver, CreateContractorPage.class);
 		String assertionMessage = edit.prepopulationFields("LocationZipcode");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + ContractorLocationZipcode);
+		extentTest.log(Status.INFO, "Expected Result is -" + CreateContractorPage.ContractorLocationZipcode);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(ContractorLocationZipcode)) {
+		if (assertionMessage.equals(CreateContractorPage.ContractorLocationZipcode)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			edit.clickEvent("Previous");
 			edit.clearAllFields("Basic");

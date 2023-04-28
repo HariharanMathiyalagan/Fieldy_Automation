@@ -71,8 +71,8 @@ public class DispatchPage extends BaseClass {
 
 	By Label = By.xpath("//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div[1]/div");
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/span/a"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']/tbody/tr[2]/td[1]/span/a") })
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']/tbody/tr[2]/td[2]") })
 	WebElement ListPage;
 
 	By UnAssignButton = By.xpath("//*[@id='dispatch-container']/div/div/div/div[3]/div[1]/span");

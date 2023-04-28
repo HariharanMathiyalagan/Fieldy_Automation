@@ -3,145 +3,24 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.enhancement.CustomerContactRequest">
+      <class name="org.test.DispatchModule">
         <methods>
+          <include name="unassignRequest"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="assignRequest"/>
           <include name="exitBrowser"/>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
+          <include name="unassignJob"/>
+          <include name="dispatchModule"/>
+          <include name="cancelRequest"/>
           <include name="setup"/>
           <include name="deleteAfterCatch"/>
-          <include name="deleteBeforeCatch"/>
+          <include name="dispatchRequest"/>
+          <include name="assignJob"/>
+          <include name="autoCompleteContactCreationRequest"/>
+          <include name="cancelJob"/>
+          <include name="dispatchJob"/>
         </methods>
-      </class> <!-- org.enhancement.CustomerContactRequest -->
-      <class name="org.enhancement.ProductModule">
-        <methods>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="createProduct"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.enhancement.ProductModule -->
-      <class name="org.enhancement.GlobalOrganizationInvoice">
-        <methods>
-          <include name="setup"/>
-          <include name="createInvoice"/>
-          <include name="deleteAfterCatch"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalOrganizationInvoice -->
-      <class name="org.enhancement.GlobalOrganizationQuote">
-        <methods>
-          <include name="loginPage"/>
-          <include name="setup"/>
-          <include name="createQuote"/>
-          <include name="exitBrowser"/>
-          <include name="labelValidation"/>
-          <include name="deleteAfterCatch"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="quoteModule"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalOrganizationQuote -->
-      <class name="org.enhancement.GlobalOrganizationJob">
-        <methods>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="createJob_FromDateandTime_ToDateandTime"/>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalOrganizationJob -->
-      <class name="org.enhancement.GlobalOrganizationRequest">
-        <methods>
-          <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalOrganizationRequest -->
-      <class name="org.enhancement.Onboarding">
-        <methods>
-          <include name="ownerName"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="createTenant"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- org.enhancement.Onboarding -->
-      <class name="org.enhancement.LeadSource">
-        <methods>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="setup"/>
-          <include name="leadSourceCreate"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.LeadSource -->
-      <class name="org.enhancement.GlobalContactQuote">
-        <methods>
-          <include name="createQuote"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalContactQuote -->
-      <class name="org.enhancement.CustomerOrganizationRequest">
-        <methods>
-          <include name="deleteBeforeCatch"/>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.enhancement.CustomerOrganizationRequest -->
-      <class name="org.enhancement.GlobalContactInvoice">
-        <methods>
-          <include name="setup"/>
-          <include name="createInvoice"/>
-          <include name="deleteAfterCatch"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalContactInvoice -->
-      <class name="org.enhancement.CategoryModule">
-        <methods>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-          <include name="createCategoryProduct"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.CategoryModule -->
-      <class name="org.enhancement.GlobalContactJob">
-        <methods>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="createJob_FromDateandTime_ToDateandTime"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalContactJob -->
-      <class name="org.enhancement.GlobalContactRequest">
-        <methods>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.enhancement.GlobalContactRequest -->
-      <class name="org.enhancement.ServiceModule">
-        <methods>
-          <include name="deleteAfterCatch"/>
-          <include name="exitBrowser"/>
-          <include name="createProduct"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- org.enhancement.ServiceModule -->
+      </class> <!-- org.test.DispatchModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

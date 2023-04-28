@@ -21,6 +21,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.TeamUserPage;
+import com.zaigo.pageobjects.CreateContractorPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.utility.BrowserSetup;
@@ -46,12 +47,12 @@ public class TeamUser extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -642,9 +643,7 @@ public class TeamUser extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.responseMessage("AlternateFunction");
-
 		}
-
 	}
 
 	@Test(priority = 29)
@@ -813,7 +812,6 @@ public class TeamUser extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (labelValidation.equals(getPropertyValue("TeamUserEditPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			landing.clearAllFields("Basic");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -821,12 +819,280 @@ public class TeamUser extends BaseClass {
 			File file = new File("65.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("65.png");
-			landing.clearAllFields("Basic");
 		}
 
 	}
 
 	@Test(priority = 36)
+	public void firstNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the First Name:" + TeamUserPage.firstName + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("FirstName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.firstName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.firstName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 37)
+	public void lastNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Last Name:" + TeamUserPage.lastName + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.lastName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.lastName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 38)
+	public void emailPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Email:" + TeamUserPage.email + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("Email");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.email);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.email)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+	@Test(priority = 38)
+	public void jobTittlePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Job Tittle:" + TeamUserPage.jobTittle + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("JobTittle");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.jobTittle);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.jobTittle)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 39)
+	public void typePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Type Name:" + TeamUserPage.type + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("Type");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.type);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.type)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 40)
+	public void phoneNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Phone Number:" + TeamUserPage.phoneNumber + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("PhoneNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.phoneNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.phoneNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.clickEvent("Next");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.clickEvent("Next");
+		}
+
+	}
+
+	@Test(priority = 41)
+	public void locationNamePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Location Name:" + TeamUserPage.locationName + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.locationName);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.locationName)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 42)
+	public void locationAddress1Prepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Location Address1:" + TeamUserPage.address1 + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationAddress1");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.address1);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.address1)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 43)
+	public void locationAddress2Prepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Location Address2:" + TeamUserPage.address2 + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationAddress2");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.address2);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.address2)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 44)
+	public void locationCityPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Location City:" + TeamUserPage.city + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationCity");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.city);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.city)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 45)
+	public void locationStatePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Location State:" + TeamUserPage.state + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationState");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.state);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.state)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 46)
+	public void locationZipcodePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest(
+				"Verify the Location Zipcode:" + TeamUserPage.zipcode + " is prepopulated in the team user edit form page");
+		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
+		String assertionMessage = edit.prepopulationFields("LocationZipcode");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.zipcode);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(TeamUserPage.zipcode)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.clickEvent("Previous");
+			edit.clearAllFields("Basic");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.clickEvent("Previous");
+			edit.clearAllFields("Basic");
+		}
+
+	}
+
+	@Test(priority = 47)
 	private void editmandatoryValidationFirstNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Check the User Creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -849,7 +1115,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 38)
+	@Test(priority = 48)
 	private void editmandatoryValidationEmailField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Check the User creation form page, Email field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -871,7 +1137,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 39)
+	@Test(priority = 49)
 	private void editmaxValidationFirstNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] First Name Field exceed its max-256 limit");
@@ -896,7 +1162,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 40)
+	@Test(priority = 50)
 	private void editmaxValidationLastNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Last Name Field exceed its max-256 limit");
@@ -921,7 +1187,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 41)
+	@Test(priority = 51)
 	private void editmaxValidationJobTittleField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
@@ -946,7 +1212,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 42)
+	@Test(priority = 52)
 	private void editmaxValidationEmailFields() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Job Tittle Field exceed its max-256 limit");
@@ -971,7 +1237,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 43)
+	@Test(priority = 53)
 	private void editinvalidEmailValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify error message is displayed when [Team User form] invalid email is entered in Email Field");
@@ -997,7 +1263,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 44)
+	@Test(priority = 54)
 	private void editspecialCharacterPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when special character provided in Phone Number field");
@@ -1022,7 +1288,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 45)
+	@Test(priority = 55)
 	private void editminValidatonPhoneNumber() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field of [Team User form]");
@@ -1048,7 +1314,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 46)
+	@Test(priority = 56)
 	private void editmaxValidatonPhoneNumber() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
@@ -1079,7 +1345,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 47)
+	@Test(priority = 57)
 	private void editmaxValidationLocationName() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Location Name Field exceed its max-256 limit");
@@ -1104,7 +1370,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 48)
+	@Test(priority = 58)
 	private void editmaxValidationAddress1() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Address1 Field exceed its max-256 limit");
@@ -1129,7 +1395,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 49)
+	@Test(priority = 59)
 	private void editmaxValidationAddress2() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Address2 Field exceed its max-256 limit");
@@ -1154,7 +1420,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 50)
+	@Test(priority = 60)
 	private void editmaxValidationState() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] State Name Field exceed its max-45 limit");
@@ -1179,7 +1445,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 51)
+	@Test(priority = 61)
 	private void editmaxValidationCity() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] City Name Field exceed its max-256 limit");
@@ -1204,7 +1470,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 52)
+	@Test(priority = 62)
 	private void editminValidationZipcode() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field of [Team User form]");
@@ -1229,7 +1495,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 53)
+	@Test(priority = 63)
 	private void editspecialCharacterValidationZipcode() throws IOException {
 		extentTest = extentReports.createTest("Verify the Special Character Validation Zipcode Field");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1253,7 +1519,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 54)
+	@Test(priority = 64)
 	private void editmaxValidationZipcode() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
@@ -1280,7 +1546,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 55)
+	@Test(priority = 65)
 	public void verifyUpdateExist() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Team User Updated Button is displayed in the Edit Form page");
 		TeamUserPage contractorPage = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1303,7 +1569,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 56)
+	@Test(priority = 66)
 	private void userEdit() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the User Updated");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1326,7 +1592,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 57)
+	@Test(priority = 67)
 	private void deleteUserDetails() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the User Deleted");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);

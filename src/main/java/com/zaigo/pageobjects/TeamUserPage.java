@@ -118,6 +118,12 @@ public class TeamUserPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
 	}
 
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+	}
+
 	public void dropDownByIndex(By element, int num) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -554,7 +560,7 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(Edit);
 			this.visibility(Label);
 			this.invisible(Spinner);
-			driver.navigate().refresh();
+//			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);
 		} else if (value.equals("ContractorEdit")) {
@@ -563,7 +569,7 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(Edit);
 			this.visibility(ContractorLabel);
 			this.invisible(Spinner);
-			driver.navigate().refresh();
+//			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);
 		} else if (value.equals("Delete")) {
@@ -618,6 +624,72 @@ public class TeamUserPage extends BaseClass {
 		return value;
 	}
 
+	public static String firstName;
+	public static String lastName;
+	public static String email;
+	public static String type;
+	public static String jobTittle;
+	public static String phoneNumber;
+	public static String locationName;
+	public static String address1;
+	public static String address2;
+	public static String city;
+	public static String state;
+	public static String zipcode;
+	public static String bussinessUnit;
+	public static String serviceType;
+	public static String companyName;
+
+	public String prepopulationFields(String value) {
+		if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(FirstName);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(LastName);
+			return data;
+		} else if (value.equals("Type")) {
+			String data = this.getTextAttribute(Type);
+			return data;
+		} else if (value.equals("JobTittle")) {
+			String data = this.getTextAttribute(JobTittle);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(Email);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(PhoneNumber);
+			return data;
+		} else if (value.equals("LocationName")) {
+			String data = this.getTextAttribute(LocationName);
+			return data;
+		} else if (value.equals("BussinessUnit")) {
+			String data = this.getTextAttribute(BussinessUnit);
+			return data;
+		} else if (value.equals("ServiceType")) {
+			String data = this.getTextAttribute(ServiceType);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(Address1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(Address2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(City);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(State);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(Zipcode);
+			return data;
+		} else if (value.equals("CompanyName")) {
+			String data = this.getTextAttribute(CompanyName);
+			return data;
+		}
+		return value;
+	}
+
 	public void validateFillData(String value) {
 		if (value.equals("Basic")) {
 			Faker faker = new Faker(new Locale("en-IND"));
@@ -627,12 +699,18 @@ public class TeamUserPage extends BaseClass {
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			String fakeTittle = faker.name().title();
 			this.inputText(FirstName, fakeFirstName);
+			firstName = this.getTextAttribute(FirstName);
 			this.inputText(LastName, fakeLastName);
+			lastName = this.getTextAttribute(LastName);
 			this.mouseActionClick(Type);
 			this.mouseActionClick(Technician);
+			type = this.getTextAttribute(Type);
 			this.inputText(JobTittle, fakeTittle);
+			jobTittle = this.getTextAttribute(JobTittle);
 			this.inputText(Email, fakeEmail);
+			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			phoneNumber = this.getTextAttribute(PhoneNumber);
 		} else if (value.equals("Location")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeAddress1 = faker.address().buildingNumber();
@@ -641,11 +719,17 @@ public class TeamUserPage extends BaseClass {
 			String fakeState = faker.address().state();
 			String fakeZipcode = faker.address().zipCode();
 			this.inputText(LocationName, fakecountry);
+			locationName = this.getTextAttribute(LocationName);
 			this.inputText(Address1, fakeAddress1);
+			address1 = this.getTextAttribute(Address1);
 			this.inputText(Address2, fakeAddress2);
+			address2 = this.getTextAttribute(Address2);
 			this.inputText(City, fakeCity);
+			city = this.getTextAttribute(City);
 			this.inputText(State, fakeState);
+			state = this.getTextAttribute(State);
 			this.inputText(Zipcode, fakeZipcode);
+			zipcode = this.getTextAttribute(Zipcode);
 		} else if (value.equals("BasicContractor")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
@@ -653,17 +737,24 @@ public class TeamUserPage extends BaseClass {
 			String fakeEmail = faker.internet().safeEmailAddress();
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			this.inputText(FirstName, fakeFirstName);
+			firstName = this.getTextAttribute(FirstName);
 			this.inputText(LastName, fakeLastName);
+			lastName = this.getTextAttribute(LastName);
 			this.mouseActionClick(BussinessUnit);
 			this.mouseActionClick(General);
+			bussinessUnit = this.getTextAttribute(BussinessUnit);
 			this.mouseActionClick(ServiceType);
 			this.mouseActionClick(Repair);
+			serviceType = this.getTextAttribute(ServiceType);
 			this.inputText(Email, fakeEmail);
+			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			phoneNumber = this.getTextAttribute(PhoneNumber);
 		} else if (value.equals("ContractorCompany")) {
 			this.scrollDown();
 			this.mouseActionClick(CompanyName);
 			this.mouseActionClick(FirstCompanyName);
+			companyName = this.getTextAttribute(CompanyName);
 		}
 
 	}
@@ -682,7 +773,8 @@ public class TeamUserPage extends BaseClass {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
 					if (this.conditionChecking(Message)) {
-						listData = this.responseMessage("Message");
+						listData = this.getText(Message);
+						this.invisible(Message);
 						if (listData.equals(getPropertyValue("UserCreatedMessgae"))
 								|| listData.equals(getPropertyValue("UserUpdatedMessage"))) {
 							check = false;
@@ -700,6 +792,7 @@ public class TeamUserPage extends BaseClass {
 					&& (label.equals(getPropertyValue("TeamCreateContractorPage"))
 							|| label.equals(getPropertyValue("TeamEditContractorPage")))) {
 				this.mouseActionClick(User);
+				this.visibility(PageLand);
 				this.mouseActionClick(Contractor);
 				this.visibility(PageLand);
 			}

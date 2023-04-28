@@ -59,7 +59,9 @@ public class CreateContractorPage extends BaseClass {
 	private By company = By.xpath("//span[text()='Companies']");
 
 	private By contractor = By.xpath("//div[@id='inner-id']//following::a[text()='Contractor']");
-
+	
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
+	
 	private By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
@@ -460,8 +462,7 @@ public class CreateContractorPage extends BaseClass {
 			this.mouseActionClick(Previous);
 		} else if (value.equals("SaveButton")) {
 			this.mouseActionClick(saveform);
-			if (this.conditionChecking(ErrorCompanyName)) {
-			} else {
+			if (!this.conditionChecking(ErrorCompanyName)) {
 				do {
 					this.mouseActionClick(saveform);
 				} while (!this.conditionChecking(ErrorCompanyName));
@@ -483,7 +484,8 @@ public class CreateContractorPage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.valuePresent(CompanyName, text);
-			driver.navigate().refresh();
+//			driver.navigate().refresh();
+			this.invisible(Spinner);
 			this.valuePresent(CompanyName, text);
 			this.elementtobeClickable(saveform);
 		} else if (value.equals("Delete")) {
@@ -648,32 +650,22 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
-	static String ContractorName;
-	static String ContractorFirstName;
-	static String ContractorLastName;
-	static String ContractorEmail;
-	static String ContractorPhoneNumber;
-	static String ContractorWebSite;
-	static String ContractorFaxNumber;
-	static String ContractorLocationName;
-	static String ContractorLocationEmail;
-	static String ContractorLocationContactPerson;
-	static String ContractorLocationPhoneNumber;
-	static String ContractorLocationAddress1;
-	static String ContractorLocationAddress2;
-	static String ContractorLocationCity;
-	static String ContractorLocationState;
-	static String ContractorLocationZipcode;
-
-	public String prepopulation(int value) {
-		String data[] = { ContractorName, ContractorFirstName, ContractorLastName, ContractorEmail,
-				ContractorPhoneNumber, ContractorWebSite, ContractorFaxNumber, ContractorLocationName,
-				ContractorLocationEmail, ContractorLocationContactPerson, ContractorLocationPhoneNumber,
-				ContractorLocationAddress1, ContractorLocationAddress2, ContractorLocationCity, ContractorLocationState,
-				ContractorLocationZipcode };
-		return data[value];
-
-	}
+	public static String ContractorName;
+	public static String ContractorFirstName;
+	public static String ContractorLastName;
+	public static String ContractorEmail;
+	public static String ContractorPhoneNumber;
+	public static String ContractorWebSite;
+	public static String ContractorFaxNumber;
+	public static String ContractorLocationName;
+	public static String ContractorLocationEmail;
+	public static String ContractorLocationContactPerson;
+	public static String ContractorLocationPhoneNumber;
+	public static String ContractorLocationAddress1;
+	public static String ContractorLocationAddress2;
+	public static String ContractorLocationCity;
+	public static String ContractorLocationState;
+	public static String ContractorLocationZipcode;
 
 	public String prepopulationFields(String value) {
 		if (value.equals("CompanyName")) {
@@ -793,7 +785,8 @@ public class CreateContractorPage extends BaseClass {
 					Thread.sleep(10000);
 					this.mouseActionClick(saveform);
 					if (this.conditionChecking(Message)) {
-						this.responseMessage("Message");
+						response = this.getText(Message);
+						this.invisible(Message);
 						if (response.equals(getPropertyValue("CompanyContractorCreatedMessage"))
 								|| response.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
 							conditionCheck = false;

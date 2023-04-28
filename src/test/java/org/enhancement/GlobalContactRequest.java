@@ -128,6 +128,8 @@ public class GlobalContactRequest extends BaseClass {
 				.createTest("Create a Request  with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.validData("GlobalSchedule");
 		String errorPasswordField = mandatory.message("Message");

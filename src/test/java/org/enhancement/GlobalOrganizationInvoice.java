@@ -101,6 +101,7 @@ public class GlobalOrganizationInvoice extends BaseClass{
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.autoCompleteField("GlobalOrganization");
 		mandatory.responseMessage("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("VisibleCustomerOrgName");
 		mandatory.CRUDValidation("CreateValue");
 		String errorPasswordField = mandatory.responseMessage("Message");

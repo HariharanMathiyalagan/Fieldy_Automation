@@ -128,6 +128,7 @@ public class GlobalContactQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.autoCompleteField("ContactCreate");
 		mandatory.message("message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.CRUDValidation("CreateValue");
 		String errorPasswordField = mandatory.message("message");

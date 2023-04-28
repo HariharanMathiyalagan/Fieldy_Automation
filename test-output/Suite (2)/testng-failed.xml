@@ -6,20 +6,13 @@
       <class name="org.test.GlobalContactQuote">
         <methods>
           <include name="listQuoteReference"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
           <include name="setup"/>
+          <include name="listQuoteTittle"/>
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.GlobalContactQuote -->
-      <class name="org.test.CustomerContactQuote">
-        <methods>
-          <include name="listQuoteTittle"/>
-          <include name="filterDateInvoice"/>
-          <include name="listQuoteNo"/>
-          <include name="listQuoteReference"/>
-          <include name="setup"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.CustomerContactQuote -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (2)] -->

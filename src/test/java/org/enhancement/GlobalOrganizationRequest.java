@@ -129,6 +129,8 @@ public class GlobalOrganizationRequest extends BaseClass {
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.clickEvent("RadioOrganization");
 		mandatory.autoCompleteField("OrganizationCreate");
+		mandatory.message("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("OrgVisibleName");
 		mandatory.validData("GlobalSchedule");
 		String errorPasswordField = mandatory.message("Message");

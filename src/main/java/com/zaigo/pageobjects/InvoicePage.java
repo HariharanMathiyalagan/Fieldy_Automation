@@ -118,8 +118,8 @@ public class InvoicePage extends BaseClass {
 	public Boolean valuePresentCondition(By element, String value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
-			text = wait.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 		} catch (Exception e) {
 			return text;
 		}
@@ -907,6 +907,7 @@ public class InvoicePage extends BaseClass {
 				}
 				if (this.conditionChecking(Message)) {
 					alternateMessage = this.getText(Message);
+					this.invisible(Message);
 					if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 						conditionCheck = false;
 					}
@@ -916,6 +917,7 @@ public class InvoicePage extends BaseClass {
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
 							alternateMessage = this.getText(Message);
+							this.invisible(Message);
 							if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 								conditionCheck = false;
 							}
@@ -1128,7 +1130,12 @@ public class InvoicePage extends BaseClass {
 				}
 			}
 		}
+	}
 
+	public void createFunction() throws IOException, InterruptedException {
+		if (!response.equals(getPropertyValue("CustomerCreatedMessage"))) {
+			this.responseMessage("AlternateFunction");
+		}
 	}
 
 }

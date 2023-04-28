@@ -417,7 +417,7 @@ public class CategoryPage extends BaseClass {
 	static String message;
 
 	public String message() throws IOException {
-		Boolean Condition = false;
+		Boolean Condition = true;
 		if (this.conditionChecking(Message)) {
 			message = this.getText(Message);
 			this.invisible(Message);
@@ -427,10 +427,12 @@ public class CategoryPage extends BaseClass {
 				String fakeCategoryName = faker.aviation().airport();
 				this.inputText(CategoryName, fakeCategoryName);
 				this.mouseActionClick(Button);
-				String message2 = this.message();
-				if (message2.equals(getPropertyValue("CategoryCreated"))
-						|| message2.equals(getPropertyValue("CategoryEdited"))) {
-					Condition = true;
+				if (this.conditionChecking(Message)) {
+					message = this.getText(Message);
+					if (message.equals(getPropertyValue("CategoryCreated"))
+							|| message.equals(getPropertyValue("CategoryEdited"))) {
+						Condition = false;
+					}
 				}
 			} while (Condition);
 		}

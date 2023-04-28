@@ -281,7 +281,8 @@ public class SendInvitePage extends BaseClass {
 					this.mouseActionClick(next);
 					this.mouseActionClick(sendbtn);
 					if (this.conditionChecking(Message)) {
-						this.responseMessage("Message");
+						message = this.getText(Message);
+						this.invisible(Message);
 						if (message.equals(getPropertyValue("CustomerCreatedMessage"))) {
 							conditionCheck = false;
 						}
@@ -295,9 +296,7 @@ public class SendInvitePage extends BaseClass {
 	public String clickEvent(String value) {
 		if (value.equals("SendInvite")) {
 			this.mouseActionClick(sendbtn);
-			if (this.conditionChecking(firstnameerr)) {
-
-			} else {
+			if (!this.conditionChecking(firstnameerr)) {
 				do {
 					this.mouseActionClick(sendbtn);
 				} while (!this.conditionChecking(firstnameerr));

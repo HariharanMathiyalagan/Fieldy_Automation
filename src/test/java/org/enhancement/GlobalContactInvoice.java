@@ -100,6 +100,7 @@ public class GlobalContactInvoice extends BaseClass {
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.autoCompleteField("GlobalContact");
 		mandatory.responseMessage("Message");
+		mandatory.createFunction();
 		mandatory.autoCompleteField("VisibleCustomerName");
 		mandatory.CRUDValidation("CreateValue");
 		String errorPasswordField = mandatory.responseMessage("Message");
