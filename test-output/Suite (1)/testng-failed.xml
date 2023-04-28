@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite (1)]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="org.test.GlobalContactJob">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="setup"/>
+          <include name="searchLocation"/>
+        </methods>
+      </class> <!-- org.test.GlobalContactJob -->
+      <class name="org.test.AvailabilityTechnicians">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="setup"/>
+          <include name="userCreate"/>
+        </methods>
+      </class> <!-- org.test.AvailabilityTechnicians -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite (1)] -->

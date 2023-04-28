@@ -3,15 +3,24 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.CustomerCreateOrganizationModule">
+      <class name="org.test.DispatchModule">
         <methods>
-          <include name="searchEmailListValidation"/>
+          <include name="unassignRequest"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="assignRequest"/>
           <include name="exitBrowser"/>
-          <include name="filterListValidation"/>
+          <include name="unassignJob"/>
+          <include name="dispatchModule"/>
+          <include name="cancelRequest"/>
           <include name="setup"/>
-          <include name="searchPhoneNumberListValidation"/>
+          <include name="deleteAfterCatch"/>
+          <include name="dispatchRequest"/>
+          <include name="assignJob"/>
+          <include name="autoCompleteContactCreationRequest"/>
+          <include name="cancelJob"/>
+          <include name="dispatchJob"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateOrganizationModule -->
+      </class> <!-- org.test.DispatchModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

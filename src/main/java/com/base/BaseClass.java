@@ -10,20 +10,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +28,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.github.javafaker.Faker;
 
@@ -39,6 +40,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	public static WebDriver driver;
+	WebDriverWait wait;
 
 	public static void browserConfigChrome() {
 		WebDriverManager.chromedriver().setup();
@@ -89,18 +91,15 @@ public class BaseClass {
 		WebElement findElement = driver.findElement(By.xpath(Xpath));
 		return findElement;
 	}
-
-	public static void inputText(WebElement element, String value) {
-		element.sendKeys(value);
-	}
-
 	public static void Click(WebElement element) {
 		element.click();
 	}
 
-	public static void getText(WebElement element) {
-		element.getText();
-	}
+//	public String getText(WebElement element) {
+//		WebDriverWait wait = new WebDriverWait(driver, 10);
+//		String text = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+//		return text;
+//	}
 
 	public static void AlertAccept() {
 		Alert alert = driver.switchTo().alert();
@@ -151,9 +150,11 @@ public class BaseClass {
 		driver.switchTo().window(childWindow);
 	}
 
-	public static void selectByIndex(WebElement dnd, int value) {
-		Select select = new Select(dnd);
-		select.selectByIndex(value);
+	public void selectByIndex(WebElement element, int num) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Select select = new Select(until);
+		select.selectByIndex(num);
 	}
 
 	public static void text(String txt, WebElement text) {
@@ -216,31 +217,37 @@ public class BaseClass {
 		return value;
 
 	}
-
-	public void excelWrite(String value) throws IOException {
-		File file = new File(System.getProperty("user.dir") + "\\Folder\\config.properties");
-		FileInputStream fin = new FileInputStream(file);
-		Workbook book =  new XSSFWorkbook(fin);
-		Sheet sheet = book.getSheet("sheet1");
-		Row row = sheet.getRow(1);
-		Cell cell = row.getCell(1);
-		cell.setCellValue(value);
-		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		book.write(fileOutputStream);
-		
+	
+	public static String getBrowserValue(String key) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\config.properties");
+		properties.load(stream);
+		String value = (String) properties.get(key);
+		return value;
 
 	}
 	
-	
-	public double calculation(String quantity, String price, String discount, String tax) {
+	public String getPropertyValueUpdate(String key) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");
+		properties.load(stream);
+		String value = (String) properties.get(key);
+		return value;
+
+	}
+
+	public String calculation(String quantity, String price, String discount, String tax) {
 		double quantityValue = Double.parseDouble(quantity);
 		double priceValue = Double.parseDouble(price);
 		double discountValue = Double.parseDouble(discount);
 		double taxValue = Double.parseDouble(tax);
-		double taxAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
+		double grossAmount = ((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
 				+ (((quantityValue * priceValue) - (quantityValue * priceValue * (discountValue / 100)))
 						* (taxValue / 100));
-		return taxAmount;
+		DecimalFormat f = new DecimalFormat("0.00");
+		String format = f.format(grossAmount);
+		return format;
 
 	}
+
 }

@@ -2,6 +2,9 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +15,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +33,7 @@ public class CreateContractorPage extends BaseClass {
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
+	String fakeContactPersonName = faker.name().fullName();
 	String fakeEmail = faker.internet().safeEmailAddress();
 	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 	String fakeAddress1 = faker.address().buildingNumber();
@@ -40,25 +46,33 @@ public class CreateContractorPage extends BaseClass {
 	String fakeFaxNumber = faker.number().digits(7);
 	String fakecountry = faker.address().country();
 
+	String characters256 = RandomStringUtils.randomAlphabetic(257);
+	String characters512 = RandomStringUtils.randomAlphabetic(513);
+	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
+	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
+	String maxPhoneNumber = RandomStringUtils.randomNumeric(25);
+	String minPhoneNumber = RandomStringUtils.randomNumeric(2);
 	private By team = By.id("team-menu");
+
+	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 
 	private By company = By.xpath("//span[text()='Companies']");
 
 	private By contractor = By.xpath("//div[@id='inner-id']//following::a[text()='Contractor']");
-
+	
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
+	
 	private By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
-
-//	private By contractorrmenu=By.xpath("//a[@data-automationid='vendorw']");
 
 	private By contractortab = By.xpath("//a[@data-automationid='contractor']");
 
 	private By contractorcreatebtn = By.xpath("//*[@id='root']/div/div/div[3]/div/div/button");
 
-	private By contractorname = By.id("name");
+	private By CompanyName = By.id("name");
 
-	private By contractornameer = By.id("name_error");
+	private By ErrorCompanyName = By.id("name_error");
 
 	private By nextbtn = By.xpath("//button[@data-automationid='next']");
 
@@ -96,7 +110,7 @@ public class CreateContractorPage extends BaseClass {
 
 	private By warningpopup = By.xpath("//button[@data-automationid='yesBtn']");
 
-	private By saveform = By.xpath("//button[@data-formsubmit='company_contractor_create']");
+	private By saveform = By.xpath("//*[@data-automationid='save_complete']");
 
 	private By successmessage = By.xpath("//*[@data-automationid='sucmessage']");
 
@@ -114,31 +128,36 @@ public class CreateContractorPage extends BaseClass {
 
 	private By addressname = By.xpath("//button[@data-automationid='saveAndComplete']");
 
-	private By addressnameerr = By.xpath("//button[@data-automationid='saveAndComplete']");
+	By addressnameerr = By.xpath("//button[@data-automationid='saveAndComplete']");
 
-	private By city = By.xpath("//input[@data-automationid='cityVillage']");
+	By city = By.xpath("//input[@data-automationid='cityVillage']");
 
-	private By cityerr = By.xpath("//*[contains(text(),'Not allowed more than 150 characters')]");
+	By cityerr = By.xpath("//*[contains(text(),'Not allowed more than 150 characters')]");
 
-	private By zipcode = By.xpath("//input[@data-automationid='zipCode']");
+	By zipcode = By.xpath("//input[@data-automationid='zipCode']");
 
-	private By zipcoderr = By.xpath("//*[contains(text(),'The field must be minimum 6')]");
+	By zipcoderr = By.xpath("//*[contains(text(),'The field must be minimum 6')]");
 
-	private By zipcoderr1 = By.xpath("//*[contains(text(),'Not allowed more than 30 characters')]");
+	By zipcoderr1 = By.xpath("//*[contains(text(),'Not allowed more than 30 characters')]");
 
-	private By country = By.xpath("//button[@data-automationid='saveAndComplete']");
+	By country = By.xpath("//button[@data-automationid='saveAndComplete']");
 
-	private By state = By.xpath("//button[@data-automationid='saveAndComplete']");
+	By state = By.xpath("//button[@data-automationid='saveAndComplete']");
 
-	private By clickmenu = By.xpath("//button[@data-automationid='activeContractor']");
+	By clickmenu = By.xpath("//button[@data-automationid='activeContractor']");
 
-	private By clickDelete = By.xpath("//*[@data-automationid='Delete Contractor']");
+	By clickDelete = By.xpath("//*[@data-automationid='Delete Contractor']");
 
-	private By listname = By.xpath("//h3[contains(text(),'erg')]");
+	By listname = By.xpath("//h3[contains(text(),'erg')]");
 
-	private By contractordetail = By.xpath("//button [@data-automationid='close']//following::h3");
+	By contractordetail = By.xpath("//button [@data-automationid='close']//following::h3");
 
-	private By clickclosebutton = By.xpath("//button[@data-automationid='c']");
+	By clickclosebutton = By.xpath("//button[@data-automationid='c']");
+
+	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
+
+	By Edit = By
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 
 	By NameValidation = By.xpath("(//a[@data-goesto='user-profile-view'])[1]");
 
@@ -146,21 +165,18 @@ public class CreateContractorPage extends BaseClass {
 
 	By ClickSearchBox = By.xpath("//input[@data-automationid='search']");
 
-	By ErrorValidation = By.xpath("//div[text()='No Result Found']");
+	By Invalid = By.xpath("//div[text()='No Result Found']");
 
-	By Search = By.id("team-company-search-button");
+	By Search = By.id("team-user-contract-search");
 
-	By ContractorCount = By.xpath("total-company-contractor-count");
+	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
+
+	By ContractorCount = By.id("total-company-contractor-count");
 
 	By Email = By.id("login");
 	By Pass = By.id("password");
 	By Click = By.xpath("//button[@type='submit']");
 	By Team = By.xpath("//a[@id='team-menu']");
-	// By contractor =
-	// By.xpath("//div[@id='inner-id']//following::a[text()='Contractor']");
-	By ThreeDots = By.xpath("//*[@id=\"fieldy-user-company-contractor-list_aserpttbl\"]/tbody/tr[2]/td[8]/div/div[1]");
-	By Edit = By
-			.xpath("//*[@id=\"fieldy-user-company-contractor-list_aserpttbl\"]/tbody/tr[2]/td[8]/div/div[2]/ul/li[1]");
 
 	By Name = By.id("name");
 	By SaveNext = By.xpath("//*[@id=\"team-company-contractor\"]/div/div/div[2]/button");
@@ -168,7 +184,7 @@ public class CreateContractorPage extends BaseClass {
 	By Assertion = By.xpath("//span[text()='Contractor have been updated successfully']");
 
 	By Delete = By
-			.xpath("//*[@id=\"fieldy-user-company-contractor-list_aserpttbl\"]/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By DeleteAssert = By.xpath("//span[text()='Contractor have been deleted successfully']");
 
@@ -181,6 +197,14 @@ public class CreateContractorPage extends BaseClass {
 
 	By AddContractor = By.xpath("//button[@data-formsactions='create']");
 	By TotalCount = By.id("total-company-contractor-count");
+	By Label = By.xpath("//a[@data-exitpopup='team_companies_contractor']");
+
+	private void elementtobeClickable(By element) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
+
 	static int parseInt;
 
 	public int getCount() {
@@ -196,450 +220,19 @@ public class CreateContractorPage extends BaseClass {
 		return a;
 	}
 
-	By ContactName = By.xpath("//*[text()='Company']");
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Company']") })
+	private WebElement ContactName;
 
 	public int totalCount() throws InterruptedException {
-		this.assertName(ContactName, "Company");
+		this.visibility(ContactName);
 		String text2 = this.getText(TotalCount);
 		int parseInt = Integer.parseInt(text2);
 		return parseInt;
 	}
 
-	public String validation() {
-		wait = new WebDriverWait(driver, 10);
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated((NameValidation))).getText();
-		return text;
-
-	}
-
-	public void nameValidationList(String name) {
-		wait = new WebDriverWait(driver, 10);
-		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated((SearchBox)));
-		until.sendKeys(name);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Search)).click();
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated((NameValidation))).getText();
-		Assert.assertEquals(text, "Dhamu");
-		until.clear();
-	}
-
-	By name1 = By.xpath("//td[text()='Company']");
-
-	public void invalidValidation(String name) {
-		wait = new WebDriverWait(driver, 10);
-		String text2 = wait.until(ExpectedConditions.visibilityOfElementLocated((name1))).getText();
-		Assert.assertEquals(text2, "Company");
-		wait.until(ExpectedConditions.visibilityOfElementLocated((SearchBox))).sendKeys(name, Keys.ENTER);
-
-	}
-
-	public String invlaidValidate() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated((ErrorValidation))).getText();
-		return text;
-
-	}
-
-	public void clickCreateCompany() {
-		wait.until(ExpectedConditions.elementToBeClickable((createcontractorbutton)));
-		driver.findElement(createcontractorbutton).click();
-	}
-
-	public String getButtonText() {
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated((saveform)));
-		return driver.findElement(saveform).getText();
-
-	}
-
-	public void clickCompany() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((company)));
-		driver.findElement(company).click();
-	}
-
-	public void clickContractor() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractor)));
-		driver.findElement(contractor).click();
-	}
-
-	public void clickContractors() {
-		this.mouseActionClick(contractor);
-		this.assertName(ContactName, "Company");
-		this.getCount();
-		this.mouseActionClick(createcontractorbutton);
-
-	}
-
-	public void createContractorButtonj() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((createcontractorbutton)));
-		driver.findElement(createcontractorbutton).click();
-	}
-
-	public void clearPhone() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorphone)));
-		driver.findElement(contractorphone).clear();
-
-	}
-
-	public void clickTeam() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((team)));
-		driver.findElement(team).click();
-	}
-
-	public String getCreatedContractorNameDetail() {
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractordetail)));
-		return driver.findElement(contractordetail).getText();
-	}
-
-	public void clickSuccessClose() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((clickclosebutton)));
-		driver.findElement(clickclosebutton).click();
-	}
-
-	public void clickContractorName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((listname)));
-		driver.findElement(listname).click();
-	}
-
-	public String getCreatedContractorName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((listname)));
-		return driver.findElement(listname).getText();
-	}
-
-	public void clickActionMenu() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((clickmenu)));
-		driver.findElement(clickmenu).click();
-	}
-
-	public void clickDeleteMenu() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((clickDelete)));
-		driver.findElement(clickDelete).click();
-	}
-
-	public void clickLocationOne() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((locationone)));
-		driver.findElement(locationone).click();
-	}
-
-	public void clickAddLocation() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((addlocationbtn)));
-		driver.findElement(addlocationbtn).click();
-	}
-
-	public void clickSaveandComplete() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((saveform)));
-		driver.findElement(saveform).click();
-	}
-
-	public void clearFax() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorfax)));
-		driver.findElement(contractorfax).clear();
-	}
-
-	public void uploadImage(String teamname) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(contractorimageupload));
-		driver.findElement(contractorimageupload).sendKeys(teamname);
-	}
-
-	public void dashBoardUserMenu() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((usermenu)));
-		driver.findElement(usermenu).click();
-	}
-
-	public void clickNextButton() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((nextbtn)));
-		driver.findElement(nextbtn).click();
-	}
-
-	public void clickYesButton() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((warningpopup)));
-		driver.findElement(warningpopup).click();
-	}
-
-	public void clickCloseButton() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((closepopup)));
-		driver.findElement(closepopup).click();
-	}
-
-	public String dashBoardUserMenuText() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((usermenu)));
-		return driver.findElement(usermenu).getText();
-	}
-
-	public String dashBoardVendorMenuText() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractortab)));
-		return driver.findElement(contractortab).getText();
-	}
-
-	public void clickVendorTab() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractortab)));
-		driver.findElement(contractortab).click();
-	}
-
-	public void contractorCreateButton() {
-		wait.until(ExpectedConditions.presenceOfElementLocated((contractorcreatebtn)));
-		driver.findElement(contractorcreatebtn).click();
-	}
-
-	public void contractorName(String name) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorname)));
-		driver.findElement(contractorname).sendKeys(name);
-	}
-
-	public void clearContractorName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorname)));
-		driver.findElement(contractorname).clear();
-	}
-
-	public void contractorEmail(String Email) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractoremail)));
-		driver.findElement(contractoremail).sendKeys(Email);
-
-	}
-
-	public void clearContractorEmail() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractoremail)));
-		driver.findElement(contractoremail).clear();
-
-	}
-
-	public void clearContractorPersonFirstName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonfirstname)));
-		driver.findElement(contractorcpersonfirstname).clear();
-
-	}
-
-	public void clearContractorPersonLastName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonlastname)));
-		driver.findElement(contractorcpersonlastname).clear();
-
-	}
-
-	public void contractorContactPersonFirstName(String ContactPerson) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonfirstname)));
-		driver.findElement(contractorcpersonfirstname).sendKeys(ContactPerson);
-	}
-
-	public void contractorContactPersonLastName(String ContactPerson) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonlastname)));
-		driver.findElement(contractorcpersonlastname).sendKeys(ContactPerson);
-	}
-
-	public void contractorPhone(String ContactPhone) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorphone)));
-		driver.findElement(contractorphone).sendKeys(ContactPhone);
-	}
-
-	public void contractorFax(String Fax) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorfax)));
-		driver.findElement(contractorfax).sendKeys(Fax, Keys.TAB);
-	}
-
-	// Testing
-
-	public void contractorWebsite(String Website) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorsite)));
-		driver.findElement(contractorsite).sendKeys(Website);
-	}
-
-//	public void clearContactPerson() {
-//		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcperson)));
-//		driver.findElement(contractorcperson).clear();
-//
-//	}
-
-	public String contractorNameError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractornameer)));
-		return driver.findElement(contractornameer).getText();
-	}
-
-	public String contractorEmailError() {
-		wait.until(ExpectedConditions.presenceOfElementLocated((contractoremailerr)));
-		return driver.findElement(contractoremailerr).getText();
-	}
-
-	public String contractorFaxError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorfaxerror)));
-		return driver.findElement(contractorfaxerror).getText();
-	}
-
-	public String contractorContactFirstNameError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonerrfirstname)));
-		return driver.findElement(contractorcpersonerrfirstname).getText();
-	}
-
-	public String contractorContactLastNameError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorcpersonerrlastname)));
-		return driver.findElement(contractorcpersonerrlastname).getText();
-	}
-
-	public String contractorPhoneError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorphoneerr)));
-		return driver.findElement(contractorphoneerr).getText();
-	}
-
-	public String contractorWebsiteError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((contractorsiteerr)));
-		return driver.findElement(contractorsiteerr).getText();
-	}
-
-	public String contractorSuccessMessage() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((successmessage)));
-		return driver.findElement(successmessage).getText();
-	}
-
-	public String vendorImageError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((imagerror)));
-		return driver.findElement(imagerror).getText();
-	}
-
-	// Address Form
-
-	public void selectCountry() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(country));
-		driver.findElement(country).click();
-		Select select = new Select(driver.findElement(country));
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		select.selectByVisibleText("india");
-	}
-
-	public void selectState() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(state));
-		driver.findElement(state).click();
-		Select select = new Select(driver.findElement(state));
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		select.selectByVisibleText("tamil nadu");
-	}
-
-	public void contractorLineOne(String services) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((lineone)));
-		driver.findElement(lineone).sendKeys(services);
-	}
-
-	public String contractorLineOneError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((lineoneerr)));
-		return driver.findElement(lineoneerr).getText();
-	}
-
-	public void contractorLineTwo(String services) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((linetwo)));
-		driver.findElement(linetwo).sendKeys(services);
-	}
-
-	public String contractorLineTwoError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((linetwoerr)));
-		return driver.findElement(linetwoerr).getText();
-	}
-
-	public void contractorCity(String services) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((city)));
-		driver.findElement(city).sendKeys(services);
-	}
-
-	public String contractorCityError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((cityerr)));
-		return driver.findElement(cityerr).getText();
-	}
-
-	public void contractorAddressContactPerson(String services) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((addressname)));
-		driver.findElement(addressname).sendKeys(services);
-	}
-
-	public String contractorContctPersonError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((addressnameerr)));
-		return driver.findElement(addressnameerr).getText();
-	}
-
-	public void contractorZipcode(String services) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((zipcode)));
-		driver.findElement(zipcode).sendKeys(services);
-	}
-
-	public String contractorZipcodeError() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((zipcoderr)));
-		return driver.findElement(zipcoderr).getText();
-	}
-
-	public String contractorZipcodeError1() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((zipcoderr1)));
-		return driver.findElement(zipcoderr1).getText();
-	}
-
-	public void listValidation() {
-		// this.clickTeam();
-//		this.clickContractor();
-		this.validation();
-
-	}
-
-	public void nameValidation(String name) {
-		this.nameValidationList(name);
-
-	}
-
-	public void invalidData(String name) {
-		this.invalidValidation(name);
-
-	}
-
-	private void ContractorField(String CompanyName, String textEmail, String firstName, String lastName,
-			String phoneNo, String fax, String webSite) throws InterruptedException {
-		wait = new WebDriverWait(driver, 20);
-		this.clearField(Name);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Name)).sendKeys(CompanyName);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtEmail)).sendKeys(textEmail);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(contractorcpersonfirstname)).sendKeys(firstName);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(contractorcpersonlastname)).sendKeys(lastName);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtPhoneNo)).sendKeys(phoneNo);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtFax)).sendKeys(fax);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtWebSite)).sendKeys(webSite);
-		this.mouseActionClick(Next);
-
-	}
-
-	public void alreadyExistsValidation() throws IOException {
-		String text = this.getText(ListCompanyName);
-		this.mouseActionClick(AddContractor);
-		this.validationTab(Name, text);
-
-	}
-
-	By BackButton = By.xpath("//*[@class='page-header-left back-btn']//a");
-
-	public void backPage() {
-		this.mouseActionClick(BackButton);
-		this.mouseActionClick(Yes);
-	}
-
-	public void CreateContractor() throws InterruptedException, IOException {
-		this.ContractorField(fakeCompanyName, fakeEmail, fakeFirstName, fakeLastName, fakePhoneNumber, fakeFaxNumber,
-				fakeWebsite);
-
-	}
-
-	private void ErrorMessage() {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Pre)).click();
-	}
-
-	private void changeEmail() {
-		wait = new WebDriverWait(driver, 10);
-		String randomAlphanumeric = RandomStringUtils.randomAlphanumeric(4);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtEmail)).clear();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(txtEmail)).sendKeys(randomAlphanumeric);
-
-	}
-
-	private void saveComplete() {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(SaveNext1)).click();
-
-	}
-
-	public void recheck() {
-		this.ErrorMessage();
-		this.changeEmail();
-		this.saveComplete();
+	public void valuePresent(By element, String value) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 	}
 
 	public CreateContractorPage(WebDriver driver) {
@@ -647,69 +240,45 @@ public class CreateContractorPage extends BaseClass {
 		this.wait = new WebDriverWait(this.driver, 20);
 	}
 
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+
 	By LocationName = By.id("addresses__name__0");
-	By comEmail = By.id("addresses__email__0");
-	By ContactPerson = By.id("addresses__contact_person__0");
-	By PhoneNo = By.id("addresses__phone_number__0");
-	By FlatName = By.id("addresses__line_1__0");
-	By StreetName = By.id("addresses__line_2__0");
-	By StateName = By.id("addresses__state__0");
-	By CityName = By.id("addresses__city__0");
-	By ZipCode = By.id("addresses__zipcode__0");
+	By LocationEmail = By.id("addresses__email__0");
+	By LocationContactPerson = By.id("addresses__contact_person__0");
+	By LocationPhoneNumber = By.id("addresses__phone_number__0");
+	By LocationAddress1 = By.id("addresses__line_1__0");
+	By LocationAddress2 = By.id("addresses__line_2__0");
+	By LocationState = By.id("addresses__state__0");
+	By LocationCity = By.id("addresses__city__0");
+	By LocationZipcode = By.id("addresses__zipcode__0");
 	By CreateContractor = By.xpath("//span[text()='Contractor have been created successfully']");
 	By SaveNext1 = By.xpath("//*[@id=\"team-company-contractor\"]/div/div/div[2]/button");
 	By Next = By.xpath("//span[text()='Next']");
 	By Pre = By.xpath("//span[text()='Previous']");
 
-	private void clickNext() {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Next)).click();
-	}
-
-	private void LocationField(String location, String tEmail, String contact, String Number, String Flat,
-			String Street, String State, String City, String Zip) throws InterruptedException {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(LocationName)).sendKeys(location);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(comEmail)).sendKeys(tEmail);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(ContactPerson)).sendKeys(contact);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(PhoneNo)).sendKeys(Number);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(FlatName)).sendKeys(Flat);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(StreetName)).sendKeys(Street);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(StateName)).sendKeys(State);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(CityName)).sendKeys(City);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(ZipCode)).sendKeys(Zip);
-		// Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(SaveNext1)).click();
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(SaveNext)).click();
-
-	}
-
-	public String asssertCreate() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(CreateContractor)).getText();
-		return text;
-
-	}
-
-	public void Location() throws InterruptedException, IOException {
-		this.LocationField(fakecountry, fakeEmail, fakeFirstName + fakeLastName, fakePhoneNumber, fakeAddress1,
-				fakeAddress2, fakeState, fakeCity, fakeZipcode);
-
-	}
-
-	public By errorLocationName = By.id("addresses__name__0_error");
-	public By errorEmail = By.id("addresses__email__0_error");
-	public By errorContactPerson = By.id("addresses__contact_person__0_error");
-	public By errorPhoneNo = By.id("addresses__phone_number__0_error");
-	public By errorNo = By.id("addresses__line_1__0_error");
-	public By errorStreetName = By.id("addresses__line_2__0_error");
-	public By errorStateName = By.id("addresses__state__0_error");
-	public By errorCity = By.id("addresses__city__0_error");
-	public By errorZipCode = By.id("addresses__zipcode__0_error");
+	public By ErrorLocationName = By.id("addresses__name__0_error");
+	public By ErrorLocationEmail = By.id("addresses__email__0_error");
+	public By ErrorLocationContactPerson = By.id("addresses__contact_person__0_error");
+	public By ErrorLocationPhoneNumber = By.id("addresses__phone_number__0_error");
+	public By ErrorAddress1 = By.id("addresses__line_1__0_error");
+	public By ErrorAddress2 = By.id("addresses__line_2__0_error");
+	public By ErrorState = By.id("addresses__state__0_error");
+	public By ErrorCity = By.id("addresses__city__0_error");
+	public By ErrorZipCode = By.id("addresses__zipcode__0_error");
 	public By Previous = By.xpath("//*[text()='Previous']");
 
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+	}
+
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
 	}
 
 	public void clearField(By element) {
@@ -722,6 +291,11 @@ public class CreateContractorPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).click();
 	}
 
+	private void tagValidation(By element, String text) {
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.ENTER);
+	}
+
 	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -730,9 +304,27 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public void assertName(By element, String text) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		Assert.assertEquals(until, text);
+	}
+
+	public void assertName(WebElement element, String text) {
+		wait = new WebDriverWait(driver, 50);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		Assert.assertEquals(until, text);
+	}
+
+	private void visibility(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+
+	}
+
+	private void visibilitys(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+
 	}
 
 	public void validationTab(By element, String text) {
@@ -748,194 +340,16 @@ public class CreateContractorPage extends BaseClass {
 	}
 
 	public String getText(By element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		return until;
 
 	}
 
-	String r = RandomStringUtils.randomAlphabetic(600);
-
-	public void maxValidationLocationName() {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(clickNext)).click();
-		this.validationTab(LocationName, r);
-
-	}
-
-	public String locationErrorMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorLocationName)).getText();
-		return text;
-
-	}
-
-	public void clearLocationName() {
-		this.clearField(LocationName);
-
-	}
-
-	public void validateEmail() {
-		this.validationTab(comEmail, "dnfjs");
-
-	}
-
-	public String emailErrorMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorEmail)).getText();
-		return text;
-
-	}
-
-	public void clearEmail() {
-		this.clearField(comEmail);
-
-	}
-
-	public void maxValidationEmail() {
-		this.validationTab(comEmail, r);
-
-	}
-
-	public void minValidationPhoneNumber() {
-		this.validationTab(PhoneNo, "2134");
-
-	}
-
-	public String phoneNumberErrorMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorPhoneNo)).getText();
-		return text;
-
-	}
-
-	public void clearPhoneNumber() {
-		this.clearField(PhoneNo);
-
-	}
-
-	public void maxValidationPhoneNumberField() {
-		this.validationTab(PhoneNo, "978456213456454498797");
-
-	}
-
-	public void maxValidationAddress1() {
-		this.validationTab(FlatName, r);
-
-	}
-
-	public String errorAddress1Message() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorNo)).getText();
-		return text;
-
-	}
-
-	public void clearAddress1() {
-		this.clearField(FlatName);
-
-	}
-
-	public void maxValidationAddress2() {
-		this.validationTab(StreetName, r);
-
-	}
-
-	public String errorAddress2Message() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorStreetName)).getText();
-		return text;
-
-	}
-
-	public void clearAddress2() {
-		this.clearField(StreetName);
-
-	}
-
-	public void maxValidationStateName() {
-		this.validationTab(StateName, r);
-
-	}
-
-	public String errorStateNameMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorStateName)).getText();
-		return text;
-
-	}
-
-	public void clearStateName() {
-		this.clearField(StateName);
-
-	}
-
-	public void maxValidationCityName() {
-		this.validationTab(CityName, r);
-
-	}
-
-	public String errorCityNameMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorCity)).getText();
-		return text;
-
-	}
-
-	public void clearCityName() {
-		this.clearField(CityName);
-
-	}
-
-	public void specialCharacterValidationZipCode() {
-		this.validationTab(ZipCode, "!@#$%^&");
-
-	}
-
-	public String errorZipCodeMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorZipCode)).getText();
-		return text;
-
-	}
-
-	public void clearZipCode() {
-		this.clearField(ZipCode);
-
-	}
-
-	public void maxValidationContactPerson() {
-		this.validationTab(ContactPerson, r);
-
-	}
-
-	public String errorContactPersonMessage() {
-		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(errorContactPerson)).getText();
-		return text;
-
-	}
-
-	public void clearContactPersons() {
-		this.clearField(ContactPerson);
-
-	}
-
-	public void minValidationZipCode() {
-		this.validationTab(ZipCode, "12");
-
-	}
-
-	public void maxValidationZipCode() {
-		this.validationTab(ZipCode, "12231212322121321123");
-
-	}
-
-	public void previousButton() {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Previous)).click();
-
-	}
-
-	private void maxLocationField() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(Previous)).click();
-
-	}
-
-	public void conMaxValidation() {
-		this.maxLocationField();
-		this.clearContractorName();
+	public String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 50);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
 
 	}
 
@@ -943,124 +357,509 @@ public class CreateContractorPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
 	By EditHeading = By.xpath("//a[@data-exitpopup='team_companies_company']");
-	By ListCompanyName = By.xpath("(//a[@data-detailheadermenu=\"tmusr-user-profile\"])[1]");
-	By ListName = By.xpath("(//*[@data-n-linkto='team_companies_contractor_profile'])[5]");
-	By ListEmail = By.xpath("(//a[@class='false'])[1]");
-	By ListPhoneNumber = By.xpath("(//td[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
-	By CreateCont = By.xpath("//a[@data-exitpopup='team_companies_contractor']");
-
-	public void maxSizeLogoValidation() throws AWTException, InterruptedException {
-		this.assertName(CreateCont, "Team / Create Contractor");
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("dsc00531");
-
-	}
-
-	public String errorLogo() {
-		String text2 = this.getText(LogoError);
-		return text2;
-
-	}
-
-	public String fileLogoError() {
-		String text2 = this.getText(FileLogo);
-		return text2;
-	}
-
-	public void formatLogoValidation() throws InterruptedException, AWTException {
-		this.mouseActionClick(Logo);
-		Thread.sleep(1500);
-		attachmentFile("sample-file.pdf");
-
-	}
-
-	public void logo() throws InterruptedException, AWTException {
-		this.mouseActionClick(Logo);
-		Thread.sleep(1000);
-		attachmentFile("images");
-
-	}
-
-	public String searchListCompanyNameValidation() {
-		String text = this.getText(ListCompanyName);
-		this.inputText(SearchBox, text);
-		this.mouseActionClick(Search);
-		return text;
-	}
-
-	public void clearSearchField() {
-		this.clearField(SearchBox);
-
-	}
-
-	public String listCompanyName() {
-		String text = this.getText(ListCompanyName);
-		return text;
-
-	}
-
-	public String searchListNameValidation() {
-		String text = this.getText(ListName);
-		this.inputText(SearchBox, text);
-		this.mouseActionClick(Search);
-		return text;
-
-	}
-
-	public String listName() {
-		String text = this.getText(ListName);
-		return text;
-
-	}
-
-	public String searchEmailListValidation() {
-		String text = this.getText(ListEmail);
-		this.inputText(SearchBox, text);
-		this.mouseActionClick(Search);
-		return text;
-
-	}
-
-	public String listEmail() {
-		String text = this.getText(ListEmail);
-		return text;
-
-	}
-
-	public String searchPhoneNumberListValidation() {
-		String text = this.getText(ListPhoneNumber);
-		this.inputText(SearchBox, text);
-		this.mouseActionClick(Search);
-		return text;
-
-	}
-
-	public String listPhoneNumber() {
-		String text = this.getText(ListPhoneNumber);
-		return text;
-
-	}
-
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListCompanyName;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListName;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListEmail;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[6]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
+	WebElement ListPhoneNumber;
+	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
 	By resert = By.xpath("//a[text()=' Reset Search']");
 
-	public void reserOption() {
-		this.mouseActionClick(resert);
+	public void clearFields(String value) {
+		if (value.equals("CompanyName")) {
+			this.clearField(CompanyName);
+		} else if (value.equals("FirstName")) {
+			this.clearField(contractorcpersonfirstname);
+		} else if (value.equals("LastName")) {
+			this.clearField(contractorcpersonlastname);
+		} else if (value.equals("Email")) {
+			this.clearField(contractoremail);
+		} else if (value.equals("PhoneNumber")) {
+			this.clearField(contractorphone);
+		} else if (value.equals("Fax")) {
+			this.clearField(contractorfax);
+		} else if (value.equals("Website")) {
+			this.clearField(contractorsite);
+		} else if (value.equals("LocationName")) {
+			this.clearField(LocationName);
+		} else if (value.equals("LocationEmail")) {
+			this.clearField(LocationEmail);
+		} else if (value.equals("LocationContactPerson")) {
+			this.clearField(LocationContactPerson);
+		} else if (value.equals("LocationPhoneNumber")) {
+			this.clearField(LocationPhoneNumber);
+		} else if (value.equals("LocationAddress1")) {
+			this.clearField(LocationAddress1);
+		} else if (value.equals("LocationAddress2")) {
+			this.clearField(LocationAddress2);
+		} else if (value.equals("LocationCity")) {
+			this.clearField(LocationCity);
+		} else if (value.equals("LocationState")) {
+			this.clearField(LocationState);
+		} else if (value.equals("LocationZipcode")) {
+			this.clearField(LocationZipcode);
+		} else if (value.equals("Search")) {
+			this.clearField(Search);
+		}
+
 	}
 
-	public void alreadyEamil() throws IOException {
-		String text = this.getText(ListEmail);
-		this.mouseActionClick(AddContractor);
-		this.validationTab(txtEmail, text);
-		this.mouseActionClick(Next);
-		this.mouseActionClick(Previous);
-
+	public String errorFields(String value) {
+		if (value.equals("CompanyName")) {
+			return this.getText(ErrorCompanyName);
+		} else if (value.equals("FirstName")) {
+			return this.getText(contractorcpersonerrfirstname);
+		} else if (value.equals("LastName")) {
+			return this.getText(contractorcpersonerrlastname);
+		} else if (value.equals("Email")) {
+			if (this.conditionChecking(contractoremailerr)) {
+				return this.getText(contractoremailerr);
+			} else {
+				this.mouseActionClick(saveform);
+				return this.getText(contractoremailerr);
+			}
+		} else if (value.equals("PhoneNumber")) {
+			return this.getText(contractorphoneerr);
+		} else if (value.equals("Fax")) {
+			return this.getText(contractorfaxerror);
+		} else if (value.equals("Website")) {
+			return this.getText(contractorsiteerr);
+		} else if (value.equals("LocationName")) {
+			return this.getText(ErrorLocationName);
+		} else if (value.equals("LocationEmail")) {
+			return this.getText(ErrorLocationEmail);
+		} else if (value.equals("LocationContactPerson")) {
+			return this.getText(ErrorLocationContactPerson);
+		} else if (value.equals("LocationPhoneNumber")) {
+			return this.getText(ErrorLocationPhoneNumber);
+		} else if (value.equals("LocationAddress1")) {
+			return this.getText(ErrorAddress1);
+		} else if (value.equals("LocationAddress2")) {
+			return this.getText(ErrorAddress2);
+		} else if (value.equals("LocationCity")) {
+			return this.getText(ErrorCity);
+		} else if (value.equals("LocationState")) {
+			return this.getText(ErrorState);
+		} else if (value.equals("LocationZipcode")) {
+			return this.getText(ErrorZipCode);
+		} else if (value.equals("Invalid")) {
+			return this.getText(Invalid);
+		}
+		return value;
 	}
 
-	public String errorEmail() {
-		String text = this.getText(contractoremailerr);
+	public String clickEvent(String value) throws IOException {
+		if (value.equals("Next")) {
+			this.mouseActionClick(Next);
+		} else if (value.equals("Previous")) {
+			this.mouseActionClick(Previous);
+		} else if (value.equals("SaveButton")) {
+			this.mouseActionClick(saveform);
+			if (!this.conditionChecking(ErrorCompanyName)) {
+				do {
+					this.mouseActionClick(saveform);
+				} while (!this.conditionChecking(ErrorCompanyName));
+			}
+		} else if (value.equals("Navigate")) {
+			this.mouseActionClick(Team);
+			this.visibilitys(Tittle);
+			this.mouseActionClick(contractor);
+			this.visibility(ContactName);
+			this.getCount();
+			this.mouseActionClick(createcontractorbutton);
+		} else if (value.equals("BackButton")) {
+			this.mouseActionClick(Label);
+			this.mouseActionClick(Yes);
+		} else if (value.equals("Reset")) {
+			this.mouseActionClick(resert);
+		} else if (value.equals("Edit")) {
+			String text = this.getText(ListCompanyName);
+			this.mouseActionClick(ThreeDots);
+			this.mouseActionClick(Edit);
+			this.valuePresent(CompanyName, text);
+//			driver.navigate().refresh();
+			this.invisible(Spinner);
+			this.valuePresent(CompanyName, text);
+			this.elementtobeClickable(saveform);
+		} else if (value.equals("Delete")) {
+			this.mouseActionClick(ThreeDots);
+			this.mouseActionClick(Delete);
+			this.mouseActionClick(Yes);
+		} else if (value.equals("SubmissionButton")) {
+			String text = this.getText(saveform);
+			return text;
+		} else if (value.equals("ClickButton")) {
+			this.mouseActionClick(saveform);
+		}
+		return value;
+	}
+
+	public String labelValidation() {
+		String text = this.getText(Label);
 		return text;
 
+	}
+
+	public void companyName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(CompanyName, characters256);
+		} else if (value.equals("Unique")) {
+			String text = this.getText(ListCompanyName);
+			this.mouseActionClick(createcontractorbutton);
+			this.validationTab(CompanyName, text);
+		} else if (value.equals("ValidData")) {
+			this.inputText(CompanyName, fakeCompanyName);
+			ContractorName = this.getTextAttribute(CompanyName);
+		}
+
+	}
+
+	public void contractorPhoneNumber(String value) {
+		if (value.equals("MinValidation")) {
+			this.validationTab(contractorphone, "123");
+		} else if (value.equals("MaxValidation")) {
+			this.validationTab(contractorphone, "1231234567891234567812345678");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(contractorphone, "!@#$%^&*(*&^%");
+		}
+	}
+
+	public void contractorEmail(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(contractoremail, characters256);
+		} else if (value.equals("Unique")) {
+			String text = this.getText(ListEmail);
+			this.mouseActionClick(createcontractorbutton);
+			this.validationTab(contractoremail, text);
+		} else if (value.equals("InValid")) {
+			this.validationTab(contractoremail, "dsfhhdsf");
+		}
+
+	}
+
+	public void contractorFax(String value) {
+		if (value.equals("MinValidation")) {
+			this.validationTab(contractorfax, "1234");
+		} else if (value.equals("MaxValidation")) {
+			this.validationTab(contractorfax, "221323111311313131313");
+		} else if (value.equals("InValid")) {
+			this.validationTab(contractorfax, "jskjfdfshf");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(contractorfax, "!@#$%^&*");
+		}
+
+	}
+
+	public void contractorFirstName(String value) {
+		if (value.equals("MaxValdation")) {
+			this.validationTab(contractorcpersonfirstname, characters256);
+		}
+
+	}
+
+	public void contractorLastName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(contractorcpersonlastname, characters256);
+		}
+
+	}
+
+	public void contractorWebsite(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(contractorsite, characters2048);
+		}
+
+	}
+
+	public void locationName(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationName, characters256);
+		}
+
+	}
+
+	public void locationEmail(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationEmail, characters256);
+		} else if (value.equals("InValid")) {
+			this.validationTab(LocationEmail, "dsfhhdsf");
+		}
+
+	}
+
+	public void locationContactPerson(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationContactPerson, characters512);
+		}
+
+	}
+
+	public void locationPhoneNumber(String value) {
+		if (value.equals("MinValidation")) {
+			this.validationTab(LocationPhoneNumber, "123");
+		} else if (value.equals("MaxValidation")) {
+			this.validationTab(LocationPhoneNumber, "1231234567891234567812345678");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(LocationPhoneNumber, "!@#$%^&*(*&^%");
+		}
+	}
+
+	public void locationAddress1(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationAddress1, characters256);
+		}
+
+	}
+
+	public void locationAddress2(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationAddress2, characters256);
+		}
+
+	}
+
+	public void locationCity(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationCity, characters256);
+		}
+
+	}
+
+	public void locationState(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationState, characters256);
+		}
+
+	}
+
+	public void locationZipcode(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(LocationZipcode, "123456787676543234");
+		} else if (value.equals("MinValidation")) {
+			this.validationTab(LocationZipcode, "21");
+		} else if (value.equals("SpecialCharacter")) {
+			this.validationTab(LocationZipcode, "!@#$%^");
+		}
+
+	}
+
+	public static String ContractorName;
+	public static String ContractorFirstName;
+	public static String ContractorLastName;
+	public static String ContractorEmail;
+	public static String ContractorPhoneNumber;
+	public static String ContractorWebSite;
+	public static String ContractorFaxNumber;
+	public static String ContractorLocationName;
+	public static String ContractorLocationEmail;
+	public static String ContractorLocationContactPerson;
+	public static String ContractorLocationPhoneNumber;
+	public static String ContractorLocationAddress1;
+	public static String ContractorLocationAddress2;
+	public static String ContractorLocationCity;
+	public static String ContractorLocationState;
+	public static String ContractorLocationZipcode;
+
+	public String prepopulationFields(String value) {
+		if (value.equals("CompanyName")) {
+			String data = this.getTextAttribute(CompanyName);
+			return data;
+		} else if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(contractorcpersonfirstname);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(contractorcpersonlastname);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(contractoremail);
+			return data;
+		} else if (value.equals("Fax")) {
+			String data = this.getTextAttribute(contractorfax);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(contractorphone);
+			return data;
+		} else if (value.equals("Website")) {
+			String data = this.getTextAttribute(contractorsite);
+			return data;
+		} else if (value.equals("LocationName")) {
+			String data = this.getTextAttribute(LocationName);
+			return data;
+		} else if (value.equals("LocationEmail")) {
+			String data = this.getTextAttribute(LocationEmail);
+			return data;
+		} else if (value.equals("LocationContactPerson")) {
+			String data = this.getTextAttribute(LocationContactPerson);
+			return data;
+		} else if (value.equals("LocationPhoneNumber")) {
+			String data = this.getTextAttribute(LocationPhoneNumber);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(LocationAddress1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(LocationAddress2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(LocationCity);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(LocationState);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(LocationZipcode);
+			return data;
+		}
+		return value;
+	}
+
+	public void validData(String value) throws IOException {
+		if (value.equals("BasicPage")) {
+			this.inputText(contractorcpersonfirstname, fakeFirstName);
+			ContractorFirstName = this.getTextAttribute(contractorcpersonfirstname);
+			this.inputText(contractorcpersonlastname, fakeLastName);
+			ContractorLastName = this.getTextAttribute(contractorcpersonlastname);
+			this.inputText(contractoremail, fakeEmail);
+			ContractorEmail = this.getTextAttribute(contractoremail);
+			this.inputText(contractorphone, fakePhoneNumber);
+			ContractorPhoneNumber = this.getTextAttribute(contractorphone);
+			this.inputText(contractorfax, fakeFaxNumber);
+			ContractorFaxNumber = this.getTextAttribute(contractorfax);
+			this.inputText(contractorsite, fakeWebsite);
+			ContractorWebSite = this.getTextAttribute(contractorsite);
+			this.clickEvent("Next");
+		} else if (value.equals("LocationPage")) {
+			this.inputText(LocationName, fakecountry);
+			ContractorLocationName = this.getTextAttribute(LocationName);
+			this.inputText(LocationEmail, fakeEmail);
+			ContractorLocationEmail = this.getTextAttribute(LocationEmail);
+			this.inputText(LocationContactPerson, fakeContactPersonName);
+			ContractorLocationContactPerson = this.getTextAttribute(LocationContactPerson);
+			this.inputText(LocationPhoneNumber, fakePhoneNumber);
+			ContractorLocationPhoneNumber = this.getTextAttribute(LocationPhoneNumber);
+			this.inputText(LocationAddress1, fakeAddress1);
+			ContractorLocationAddress1 = this.getTextAttribute(LocationAddress1);
+			this.inputText(LocationAddress2, fakeAddress2);
+			ContractorLocationAddress2 = this.getTextAttribute(LocationAddress2);
+			this.inputText(LocationCity, fakeCity);
+			ContractorLocationCity = this.getTextAttribute(LocationCity);
+			this.inputText(LocationState, fakeState);
+			ContractorLocationState = this.getTextAttribute(LocationState);
+			this.inputText(LocationZipcode, fakeZipcode);
+			ContractorLocationZipcode = this.getTextAttribute(LocationZipcode);
+			this.clickEvent("ClickButton");
+		}
+
+	}
+
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	By Message = By.xpath("//*[@class='js-snackbar__message']");
+	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
+	static String response;
+
+	public String responseMessage(String value) throws IOException, InterruptedException {
+		Boolean conditionCheck = true;
+		if (value.equals("Message")) {
+			if (this.conditionChecking(Message)) {
+				response = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(saveform);
+					if (this.conditionChecking(Message)) {
+						response = this.getText(Message);
+						this.invisible(Message);
+						if (response.equals(getPropertyValue("CompanyContractorCreatedMessage"))
+								|| response.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
+		} else if (value.equals("AlternateFunction")) {
+			if (response.equals(getPropertyValue("AlreadyExistedEmail"))
+					|| response.equals(getPropertyValue("CompanyNameExists"))) {
+				this.clickEvent("BackButton");
+			}
+		}
+		return response;
+	}
+
+	public String listValidation(String value) {
+		if (value.equals("SearchData")) {
+			this.inputText(Search, response);
+			this.mouseActionClick(SearchButton);
+		} else if (value.equals("ListCompanyName")) {
+			response = this.getText(ListCompanyName);
+			return response;
+		} else if (value.equals("ListEmail")) {
+			response = this.getText(ListEmail);
+			return response;
+		} else if (value.equals("ListPhoneNumber")) {
+			response = this.getText(ListPhoneNumber);
+			return response;
+		} else if (value.equals("ListName")) {
+			response = this.getText(ListName);
+			return response;
+		} else if (value.equals("Invalid")) {
+			this.tagValidation(Search, "dfkjhjfhshkdsh");
+		}
+		return value;
+
+	}
+
+	public void clearAllFields(String value) {
+		if (value.equals("Basic")) {
+			List<String> asList = Arrays.asList("CompanyName", "FirstName", "LastName", "Email", "PhoneNumber", "Fax",
+					"Website");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		} else if (value.equals("Location")) {
+			List<String> asList = Arrays.asList("LocationName", "LocationEmail", "LocationContactPerson",
+					"LocationPhoneNumber", "LocationAddress1", "LocationAddress2", "LocationCity", "LocationState",
+					"LocationZipcode");
+			for (int i = 0; i < asList.size(); i++) {
+				this.clearFields(asList.get(i));
+			}
+		}
+
+	}
+
+	public String dataConditionCheck(String value) throws IOException, InterruptedException {
+		if (value.equals("Condition")) {
+			response = this.getText(ContactName);
+			return response;
+		} else if (value.equals("AlternateFunction")) {
+			if (response.equals("Company")) {
+				this.visibility(ContactName);
+			} else if (response.equals("No Result Found")) {
+				this.mouseActionClick(createcontractorbutton);
+				this.inputText(CompanyName, fakeCompanyName);
+				this.validData("BasicPage");
+				this.validData("LocationPage");
+				this.responseMessage("Message");
+			}
+		}
+		return response;
 	}
 
 }

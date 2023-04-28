@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.base.BaseClass;
 
-public class LoginPage extends BaseClass{
+public class LoginPage extends BaseClass {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
@@ -29,7 +29,7 @@ public class LoginPage extends BaseClass{
 	private By lockpopuptwo = By.xpath("//*[contains(text(),'Your account is locked. Please contact admin.')]");
 	private By dashboard = By.id("dashboard-customer-name");
 	private By multiaccount = By.xpath("//h4[contains(text(),'Fieldy Tenant 2')]");
-	private By Team = By.id("team-menu");
+	private By Dashboard = By.xpath("//*[text()=' Company Performance']");
 
 	public LoginPage(WebDriver driver) throws IOException {
 		this.driver = driver;
@@ -43,9 +43,9 @@ public class LoginPage extends BaseClass{
 	}
 
 	public String dashBoardText() {
-		wait = new WebDriverWait(driver, 50);
-		wait.until(ExpectedConditions.visibilityOfElementLocated((Team)));
-		return driver.findElement(Team).getText();
+		wait = new WebDriverWait(driver, 100);
+		wait.until(ExpectedConditions.visibilityOfElementLocated((Dashboard)));
+		return driver.findElement(Dashboard).getText();
 	}
 
 	public String toastText() {
@@ -130,15 +130,5 @@ public class LoginPage extends BaseClass{
 			driver.findElement(password_by).sendKeys(password);
 		}
 	}
-
-////	public String getPropertyValue(String key) throws IOException {
-//		Properties properties = new Properties();
-//		FileInputStream stream = new FileInputStream(
-//				System.getProperty("user.dir") + "\\src\\test\\resources\\ValidationSheet.properties");
-//		properties.load(stream);
-//		String value = (String) properties.get(key);
-//		return value;
-//
-////	}
 
 }
