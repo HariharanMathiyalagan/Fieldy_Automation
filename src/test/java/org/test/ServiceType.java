@@ -383,7 +383,7 @@ public class ServiceType extends BaseClass {
 	@Test(priority = 9)
 	public void alreadyExists() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify [Service Type Exists] Service Type form, Error is dispalyed when already existing Service Type is provided");
+				"Verify [Service Type Name Exists] Service Type form, Error is dispalyed when already existing Service Type is provided");
 		BusinessDaysPage contractorPage = PageFactory.initElements(driver, BusinessDaysPage.class);
 		contractorPage.serviceTypeField("UniqueValidation");
 		String text_button = contractorPage.errorField("ServiceType");
@@ -504,7 +504,7 @@ public class ServiceType extends BaseClass {
 
 	@Test(priority = 19)
 	private void deleteLeadSource() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Delete Business Unit Name is:" + ListField
+		extentTest = extentReports.createTest("Verify the Deleted Business Unit Name is:" + ListField
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.userClick();

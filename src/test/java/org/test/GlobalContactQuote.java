@@ -1639,7 +1639,7 @@ public class GlobalContactQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Declined"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (responseMessage.equals(getPropertyValue("Declin	ed"))) {
+		if (responseMessage.equals(getPropertyValue("Declined"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.visible();
 			QuoteListData = create.listTextValidation("GlobalCustomerName");

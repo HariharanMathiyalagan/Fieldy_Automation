@@ -727,7 +727,6 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Tax");
 			mandatory.taxValidation("value");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;

@@ -55,11 +55,19 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
+<<<<<<< HEAD
+<td>Tests passed/Failed/Skipped:</td><td>26/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Thu May 04 00:33:03 IST 2023</td>
+</tr>
+<tr><td>Total time:</td><td>269 seconds (269175 ms)</td>
+=======
 <td>Tests passed/Failed/Skipped:</td><td>12/6/33</td>
 </tr><tr>
 <td>Started on:</td><td>Tue May 02 11:56:05 IST 2023</td>
 </tr>
 <tr><td>Total time:</td><td>106 seconds (106069 ms)</td>
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -540,6 +548,15 @@ Session ID: c09642942b964bec3243145ad7c85452
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='org.test.TaxModule.deleteTaxRefectProductService()'><b>deleteTaxRefectProductService</b><br>Test class: org.test.TaxModule</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[text()=&apos; Product / Service&apos;] (tried for 100 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+	at com.zaigo.pageobjects.TaxPage.mouseActionClick(TaxPage.java:78)
+	at com.zaigo.pageobjects.TaxPage.reflection(TaxPage.java:507)
+	at org.test.TaxModule.deleteTaxRefectProductService(TaxModule.java:675)
+=======
 <td title='org.test.TeamUserContractor.maxValidationAddress1()'><b>maxValidationAddress1</b><br>Test class: org.test.TeamUserContractor</td>
 <td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: addresses__line_1__0 (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;3.141.5&apos;, revision: &apos;d54ebd709a&apos;, time: &apos;2018-11-06T11:42:16&apos;
@@ -552,6 +569,7 @@ Session ID: c09642942b964bec3243145ad7c85452
 	at com.zaigo.pageobjects.TeamUserPage.validationTab(TeamUserPage.java:111)
 	at com.zaigo.pageobjects.TeamUserPage.address1(TeamUserPage.java:448)
 	at org.test.TeamUserContractor.maxValidationAddress1(TeamUserContractor.java:405)
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -580,6 +598,42 @@ Session ID: c09642942b964bec3243145ad7c85452
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+<<<<<<< HEAD
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[text()=&apos; Product / Service&apos;]&quot;}
+  (Session info: chrome=112.0.5615.138)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.141.5&apos;, revision: &apos;d54ebd709a&apos;, time: &apos;2018-11-06T11:42:16&apos;
+System info: host: &apos;DESKTOP-5M7AM2E&apos;, ip: &apos;192.168.56.1&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.3&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 112.0.5615.138, chrome: {chromedriverVersion: 112.0.5615.49 (bd2a7bcb881c..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54803}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: da7e3f9b2fb3d34d3907892a8bbf44eb
+*** Element info: {Using=xpath, value=//*[text()=&apos; Product / Service&apos;]}
+	at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+	... 31 more
+</pre></div><a href='#' onClick='toggleBox("stack-trace1766818343", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1766818343'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[text()=&apos; Product / Service&apos;] (tried for 100 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+	at com.zaigo.pageobjects.TaxPage.mouseActionClick(TaxPage.java:78)
+	at com.zaigo.pageobjects.TaxPage.reflection(TaxPage.java:507)
+	at org.test.TaxModule.deleteTaxRefectProductService(TaxModule.java:675)
+=======
 </pre></div><a href='#' onClick='toggleBox("stack-trace199937448", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace199937448'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: addresses__line_1__0 (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;3.141.5&apos;, revision: &apos;d54ebd709a&apos;, time: &apos;2018-11-06T11:42:16&apos;
@@ -592,6 +646,7 @@ Session ID: c09642942b964bec3243145ad7c85452
 	at com.zaigo.pageobjects.TeamUserPage.validationTab(TeamUserPage.java:111)
 	at com.zaigo.pageobjects.TeamUserPage.address1(TeamUserPage.java:448)
 	at org.test.TeamUserContractor.maxValidationAddress1(TeamUserContractor.java:405)
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -620,6 +675,38 @@ Session ID: c09642942b964bec3243145ad7c85452
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+<<<<<<< HEAD
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[text()=&apos; Product / Service&apos;]&quot;}
+  (Session info: chrome=112.0.5615.138)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.141.5&apos;, revision: &apos;d54ebd709a&apos;, time: &apos;2018-11-06T11:42:16&apos;
+System info: host: &apos;DESKTOP-5M7AM2E&apos;, ip: &apos;192.168.56.1&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.3&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 112.0.5615.138, chrome: {chromedriverVersion: 112.0.5615.49 (bd2a7bcb881c..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54803}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: da7e3f9b2fb3d34d3907892a8bbf44eb
+*** Element info: {Using=xpath, value=//*[text()=&apos; Product / Service&apos;]}
+	at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+	... 31 more
+</pre></div></td>
+<td>100</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+=======
 </pre></div></td>
 <td>10</td>
 <td>org.test.TeamUserContractor@3ee37e5a</td></tr>
@@ -1133,6 +1220,7 @@ Session ID: c09642942b964bec3243145ad7c85452
 </pre></div></td>
 <td>10</td>
 <td>org.test.TeamUserContractor@3ee37e5a</td></tr>
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -1142,6 +1230,137 @@ Session ID: c09642942b964bec3243145ad7c85452
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='org.test.TaxModule.loginPage()'><b>loginPage</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>21</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editmandatoryValidationTaxName()'><b>editmandatoryValidationTaxName</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editFormLabel()'><b>editFormLabel</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>4</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.createdTaxRefectProductService()'><b>createdTaxRefectProductService</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>17</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editmaximumValidationProductName()'><b>editmaximumValidationProductName</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>8</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.updateButton()'><b>updateButton</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editmaximumValidationTaxPercentage()'><b>editmaximumValidationTaxPercentage</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>8</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.updatedTax()'><b>updatedTax</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>7</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.subTaxNameUnique()'><b>subTaxNameUnique</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>7</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.mandatoryValidationDescription()'><b>mandatoryValidationDescription</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.createFormLabel()'><b>createFormLabel</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>1</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.uniqueValidationTaxName()'><b>uniqueValidationTaxName</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>8</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.updatedTaxList()'><b>updatedTaxList</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>15</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editmandatoryValidationDescription()'><b>editmandatoryValidationDescription</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.deleteTax()'><b>deleteTax</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>7</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.createdTaxList()'><b>createdTaxList</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.maximumValidationProductName()'><b>maximumValidationProductName</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>8</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.createButton()'><b>createButton</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editsubTaxNameUnique()'><b>editsubTaxNameUnique</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>6</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.maximumValidationTaxPercentage()'><b>maximumValidationTaxPercentage</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>7</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editsubTaxPercentageEqual()'><b>editsubTaxPercentageEqual</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>7</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.mandatoryValidationTaxName()'><b>mandatoryValidationTaxName</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>0</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.createTax()'><b>createTax</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>6</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.subTaxPercentageEqual()'><b>subTaxPercentageEqual</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>8</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.editTaxRefectProductService()'><b>editTaxRefectProductService</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>5</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+<tr>
+<td title='org.test.TaxModule.settingModule()'><b>settingModule</b><br>Test class: org.test.TaxModule</td>
+<td></td>
+<td>2</td>
+<td>org.test.TaxModule@2805d709</td></tr>
+=======
 <td title='org.test.TeamUserContractor.mandatoryValidationContractorEmailField()'><b>mandatoryValidationContractorEmailField</b><br>Test class: org.test.TeamUserContractor</td>
 <td></td>
 <td>0</td>
@@ -4971,6 +5190,7 @@ Session ID: c09642942b964bec3243145ad7c85452
 </pre></div></td>
 <td>0</td>
 <td>org.test.TeamUserContractor@3ee37e5a</td></tr>
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 </table><p>
 </body>
 </html>

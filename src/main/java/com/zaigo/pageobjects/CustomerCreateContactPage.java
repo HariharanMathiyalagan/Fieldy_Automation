@@ -49,6 +49,31 @@ public class CustomerCreateContactPage extends BaseClass {
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
 	String fakeTittle = faker.name().title();
+	String fakeProductName = faker.book().genre();
+	String fakeBrandName = faker.book().author();
+	public static String firstName;
+	public static String lastName;
+	public static String jobTittle;
+	public static String email;
+	public static String phoneNumber;
+	public static String taxNumber;
+	public static String leadSources;
+	public static String propertyFirstName;
+	public static String propertyLastName;
+	public static String propertyName;
+	public static String address1;
+	public static String address2;
+	public static String stateName;
+	public static String cityName;
+	public static String zipcode;
+	public static String productName;
+	public static String brandName;
+	public static String modelNumber;
+	public static String serialNumber;
+	public static String dateInstalled;
+	public static String warrantyInformation;
+	public static String accessHours;
+	public static String installationNotes;
 
 	public CustomerCreateContactPage(WebDriver driver) {
 		this.driver = driver;
@@ -64,11 +89,18 @@ public class CustomerCreateContactPage extends BaseClass {
 	By CreateContactLabel = By.xpath("//*[@data-goesto='contractor-view']");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By ResponseMessage = By.xpath("//*[@class='created_successfully d-flex d-none']");
-	By ListName = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[1]/span/a");
+	By ListName = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[2]/span");
 	By Search = By.id("customer-contact-search-value");
 	By SearchButton = By.id("customer-contact-search-button");
 	By InvalidList = By.xpath("//div[text()='No Result Found']");
 	By TotalCount = By.id("Total-number-customer-count");
+	@FindAll({
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']") })
+	WebElement SubPageVisible;
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
@@ -101,6 +133,15 @@ public class CustomerCreateContactPage extends BaseClass {
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
+	}
+
+	private void currentDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 0);
+		String currentDate = sdf.format(cal.getTime());
+		this.inputText(DateInstalled, currentDate);
+
 	}
 
 	public void mouseActionClick(WebElement element) {
@@ -174,6 +215,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		return until;
 	}
 
+	public String getTextAttribute(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getAttribute("value");
+		return until;
+	}
+
 	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Customer Name')]"),
 			@FindBy(xpath = "//*[contains(text(),'No Result Found')]"),
 			@FindBy(xpath = "//*[contains(text(),'Contact Name')]") })
@@ -215,6 +262,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.visibility(CustomerList);
 		this.getCount();
 		this.mouseActionClick(AddContact);
+		if (!this.conditionChecking(CreateContactLabel)) {
+			do {
+				this.mouseActionClick(AddContact);
+			} while (!this.conditionChecking(CreateContactLabel));
+
+		}
 		return text2;
 
 	}
@@ -241,7 +294,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[3]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]") })
 	WebElement LeadSources;
-
+	By TaxNumber = By.id("tax_number");
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Social;
@@ -257,10 +310,9 @@ public class CustomerCreateContactPage extends BaseClass {
 	By StateName = By.id("addresses__state__0");
 	By CityName = By.id("addresses__city__0");
 	By Zipcode = By.id("addresses__zipcode__0");
-
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
 	By AddProperty = By.xpath("(//*[@data-automationid='add-more']//child::i[@class='fa fa-plus'])[2]");
-
 	By ErrorPropertyName = By.id("addresses__location_name__0_error");
 	By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
 	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
@@ -270,9 +322,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorStateName = By.id("addresses__state__0_error");
 	By ErrorCityName = By.id("addresses__city__0_error");
 	By ErrorZipCode = By.id("addresses__zipcode__0_error");
-
 	By Previous = By.xpath("//i[@class='fa fa-chevron-left font-14 pr-2']");
-
 	By ProductName = By.id("equipments__product_name__0");
 	By ErrorProductName = By.id("equipments__product_name__0_error");
 	By BrandName = By.id("equipments__brand_name__0");
@@ -287,19 +337,19 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorAccessHours = By.id("equipments__access_hours__0_error");
 	By InstallationNotes = By.id("equipments__installation_notes__0");
 	By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
-	By Dots = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[1]");
-	By Edit = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[1]");
-	By Deleted = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
+	By Dots = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
+	By Edit = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
+	By Deleted = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 	By EditLabel = By.xpath("//*[@data-exitpopup='customer_contact']");
 	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerContactTable('','','','','reset')\"]");
 	By Status = By.id("customer-contact-status-active");
 	By Filter = By.xpath("//*[@id='customer-contact-timeline']/div[1]/div[4]/button/div");
 	By Apply = By.xpath("//*[@id='customer-contact-timeline']/div[2]/div/div/div/div[3]/button");
-	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[3]/a");
+	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[4]/a");
 	By ListSocial = By.xpath("//*[@id='customer-lead-source-div']/div[1]/div[1]/div[1]/input[1]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");
-	By ListEmail = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[4]/a");
+	By ListEmail = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[5]/a");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
 	public void visibility(WebElement element) {
@@ -376,7 +426,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void nextFunction() {
 		this.mouseActionClick(Tittle);
 		this.mouseActionClick(Yes);
-
 	}
 
 	static String data;
@@ -414,7 +463,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	By ListLeadSources = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[6]/span");
+	By ListLeadSources = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[7]/span");
 
 	public String listFirstName() {
 		String text2 = this.getText(ListName);
@@ -570,65 +619,25 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else if (value.equals("Previous")) {
 			this.mouseActionClick(Previous);
 			this.mouseActionClick(Previous);
+		} else if (value.equals("TaxNumber")) {
+			this.clearField(TaxNumber);
 		}
 
 	}
 
-	public String errorField(String value) {
-		if (value.equals("FirstName")) {
-			return this.getText(ErrorFirstName);
-		} else if (value.equals("LastName")) {
-			return this.getText(ErrorLastName);
-		} else if (value.equals("Email")) {
-			return this.getText(ErrorEmail);
-		} else if (value.equals("JobTittle")) {
-			return this.getText(ErrorJobTittle);
-		} else if (value.equals("PhoneNumber")) {
-			return this.getText(ErrorPhoneNo);
-		} else if (value.equals("PropertyFirstName")) {
-			return this.getText(ErrorPropertyFirstName);
-		} else if (value.equals("PropertyLastName")) {
-			return this.getText(ErrorPropertyLastName);
-		} else if (value.equals("PropertyName")) {
-			return this.getText(ErrorPropertyName);
-		} else if (value.equals("PropertyAddress1")) {
-			return this.getText(ErrorAddress1);
-		} else if (value.equals("PropertyAddress2")) {
-			return this.getText(ErrorAddress2);
-		} else if (value.equals("City")) {
-			return this.getText(ErrorCityName);
-		} else if (value.equals("State")) {
-			return this.getText(ErrorStateName);
-		} else if (value.equals("Zipcode")) {
-			return this.getText(ErrorZipCode);
-		} else if (value.equals("ProductName")) {
-			return this.getText(ErrorProductName);
-		} else if (value.equals("BrandName")) {
-			return this.getText(ErrorBrandName);
-		} else if (value.equals("ModelNumber")) {
-			return this.getText(ErrorModelNumber);
-		} else if (value.equals("SerialNumber")) {
-			return this.getText(ErrorSerialNumber);
-		} else if (value.equals("DateInstalled")) {
-			return this.getText(ErrorDateInstalled);
-		} else if (value.equals("AccessHours")) {
-			return this.getText(ErrorAccessHours);
-		} else if (value.equals("InstallationNotes")) {
-			return this.getText(ErrorInstallationNotes);
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
+				this.mouseActionClick(SaveComplete);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
 		}
-		return value;
-
+		return this.getText(ErrorMessage);
 	}
 
 	public void firstNameValidation(String value) throws IOException {
 		if (value.equals("MandatoryValidation")) {
 			this.mouseActionClick(SaveComplete);
-			if (this.conditionChecking1(ErrorFirstName)) {
-			} else {
-				do {
-					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ErrorFirstName));
-			}
 		} else if (value.equals("MaxValidation")) {
 			this.validationTab(FirstName, characters256);
 		}
@@ -638,14 +647,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(LastName, characters256);
 		}
-
 	}
 
 	public void jobTittleValidation(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(JobTittle, characters256);
 		}
-
 	}
 
 	public void emailValidation(String value) {
@@ -671,7 +678,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else if (value.equals("SpecialCharacter")) {
 			this.validationTab(Phone, "!@#$%^&*");
 		}
+	}
 
+	public void taxNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(TaxNumber, characters2048);
+		}
 	}
 
 	public void propertyFirstNameValidation(String value) {
@@ -782,7 +794,6 @@ public class CustomerCreateContactPage extends BaseClass {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
-				return responseMessage;
 			} else {
 				do {
 					Thread.sleep(10000);
@@ -791,7 +802,8 @@ public class CustomerCreateContactPage extends BaseClass {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+								|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))
+								|| responseMessage.equals(getPropertyValue("DateMessage"))) {
 							check = false;
 						}
 					}
@@ -803,13 +815,14 @@ public class CustomerCreateContactPage extends BaseClass {
 				this.visibility(CustomerList);
 			}
 		}
-		return value;
+		return responseMessage;
 
 	}
 
 	public void clearAllFields(String value) {
 		if (value.equals("ContactPage")) {
-			List<String> asList = Arrays.asList("FirstName", "LastName", "Email", "JobTittle", "PhoneNumber");
+			List<String> asList = Arrays.asList("FirstName", "LastName", "Email", "JobTittle", "TaxNumber",
+					"PhoneNumber");
 			for (int i = 0; i < asList.size(); i++) {
 				this.clearFields(asList.get(i));
 			}
@@ -830,26 +843,42 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void propertyPage() {
 		this.inputText(PropertyFirstName, fakeFirstName);
+		propertyFirstName = this.getTextAttribute(PropertyFirstName);
 		this.inputText(PropertyLastName, fakeLastName);
+		propertyLastName = this.getTextAttribute(PropertyLastName);
 		this.inputText(PropertyName, fakeCompanyName);
+		propertyName = this.getTextAttribute(PropertyName);
 		this.inputText(Address1, fakeAddress1);
+		address1 = this.getTextAttribute(Address1);
 		this.inputText(Address2, fakeAddress2);
+		address2 = this.getTextAttribute(Address2);
 		this.inputText(StateName, fakeState);
+		stateName = this.getTextAttribute(StateName);
 		this.inputText(CityName, fakeCity);
+		cityName = this.getTextAttribute(CityName);
 		this.inputText(Zipcode, fakeZipcode);
+		zipcode = this.getTextAttribute(Zipcode);
 		this.nextButton();
 
 	}
 
-	public void equipmentPage() throws InterruptedException {
-		this.inputText(ProductName, "Samsung");
-		this.inputText(BrandName, "Neo QLED TVs");
+	public void equipmentPage() throws InterruptedException, IOException {
+		this.inputText(ProductName, fakeProductName);
+		productName = this.getTextAttribute(ProductName);
+		this.inputText(BrandName, fakeBrandName);
+		brandName = this.getTextAttribute(BrandName);
 		this.inputText(ModelNumber, fakeFaxNumber);
-		this.inputText(SerialNumber, "8794562155");
-		this.inputText(DateInstalled, "08/25/2022");
+		modelNumber = this.getTextAttribute(ModelNumber);
+		this.inputText(SerialNumber, maxPhoneNumber);
+		serialNumber = this.getTextAttribute(SerialNumber);
+		this.currentDate();
+		dateInstalled = this.getTextAttribute(DateInstalled);
 		this.dropDownByIndex(WarrantyInformation, 1);
+		warrantyInformation = this.getTextAttribute(WarrantyInformation);
 		this.inputText(AccessHours, "8hrs");
-		this.inputText(InstallationNotes, characters256);
+		accessHours = this.getTextAttribute(AccessHours);
+		this.inputText(InstallationNotes, getPropertyValue("Notes"));
+		installationNotes = this.getTextAttribute(InstallationNotes);
 		this.mouseActionClick(SaveComplete);
 
 	}
@@ -857,11 +886,18 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void contactPage() throws AWTException, InterruptedException, IOException {
 		this.clearFields("FirstName");
 		this.inputText(FirstName, fakeFirstName);
+		firstName = this.getTextAttribute(FirstName);
 		this.inputText(LastName, fakeLastName);
+		lastName = this.getTextAttribute(LastName);
 		this.inputText(JobTittle, fakeTittle);
+		jobTittle = this.getTextAttribute(JobTittle);
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
+		email = this.getTextAttribute(Email);
+		this.inputText(TaxNumber, maxPhoneNumber);
+		taxNumber = this.getTextAttribute(TaxNumber);
 		this.inputText(Phone, fakePhoneNumber);
+		phoneNumber = this.getTextAttribute(Phone);
 		this.mouseActionClick(LeadSources);
 		if (this.getText(Social).equals("No Data Found")) {
 			Thread.sleep(5000);
@@ -870,21 +906,96 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else {
 			this.mouseActionClick(Social);
 		}
+		leadSources = this.getTextAttribute(LeadSources);
 		this.nextButton();
 
 	}
 
-	@FindAll({
-			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
-			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']") })
-	WebElement Visible;
-
 	public void nextButton() {
+		Boolean condition = true;
 		this.mouseActionClick(Next);
-		if (!this.conditionChecking1(Visible)) {
-			this.mouseActionClick(Next);
+		if (!this.conditionChecking1(SubPageVisible)) {
+			do {
+				this.mouseActionClick(Next);
+				if (this.conditionChecking1(SubPageVisible)) {
+					condition = false;
+				}
+			} while (condition);
 		}
 
 	}
 
+	public String prepopulationFields(String value) {
+		if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(FirstName);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(LastName);
+			return data;
+		} else if (value.equals("LeadSources")) {
+			String data = this.getTextAttribute(LeadSources);
+			return data;
+		} else if (value.equals("JobTittle")) {
+			String data = this.getTextAttribute(JobTittle);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(Email);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(Phone);
+			return data;
+		} else if (value.equals("PropertyFirstName")) {
+			String data = this.getTextAttribute(PropertyFirstName);
+			return data;
+		} else if (value.equals("PropertyLastName")) {
+			String data = this.getTextAttribute(PropertyLastName);
+			return data;
+		} else if (value.equals("PropertyName")) {
+			String data = this.getTextAttribute(PropertyName);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(Address1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(Address2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(CityName);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(StateName);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(Zipcode);
+			return data;
+		} else if (value.equals("ProductName")) {
+			String data = this.getTextAttribute(ProductName);
+			return data;
+		} else if (value.equals("BrandName")) {
+			String data = this.getTextAttribute(BrandName);
+			return data;
+		} else if (value.equals("ModelNumber")) {
+			String data = this.getTextAttribute(ModelNumber);
+			return data;
+		} else if (value.equals("SerialNumber")) {
+			String data = this.getTextAttribute(SerialNumber);
+			return data;
+		} else if (value.equals("DateInstalled")) {
+			String data = this.getTextAttribute(DateInstalled);
+			return data;
+		} else if (value.equals("WarrantyInformation")) {
+			String data = this.getTextAttribute(WarrantyInformation);
+			return data;
+		} else if (value.equals("AccessHours")) {
+			String data = this.getTextAttribute(AccessHours);
+			return data;
+		} else if (value.equals("InstallationNotes")) {
+			String data = this.getTextAttribute(InstallationNotes);
+			return data;
+		} else if (value.equals("TaxNumber")) {
+			String data = this.getTextAttribute(TaxNumber);
+			return data;
+		}
+		return value;
+	}
 }

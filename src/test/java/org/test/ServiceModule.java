@@ -105,7 +105,7 @@ public class ServiceModule extends BaseClass {
 
 	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the User to Land on the Create Product Page");
+		extentTest = extentReports.createTest("Verify the User to Land on the Create Service Page");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
 		String editContact = initElements.labelValidation("Create");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
@@ -455,7 +455,7 @@ public class ServiceModule extends BaseClass {
 
 	@Test(priority = 18)
 	private void createProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Product is created successfully from Create Product");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Service Created");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.validData("FillFieldService");
 		mandatory.validData("ServiceTaxable");
@@ -852,7 +852,7 @@ public class ServiceModule extends BaseClass {
 
 	@Test(priority = 34)
 	private void updateProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Service is updated successfully from Edit Service");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Service Updated");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.validData("FillFieldService");
 		if (listValidation.equals("Yes")) {

@@ -228,15 +228,15 @@ public class CategoryPage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div") })
 	WebElement Label;
 
-	By ListCategoryName = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[1]//span");
+	By ListCategoryName = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[2]");
 
-	By ListType = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[5]//span");
+	By ListType = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[6]");
 
-	By ThreeDots = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[6]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[1]");
 
-	By Edit = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[6]//li[1]");
+	By Edit = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[1]//li[1]");
 
-	By Delete = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[6]//li[2]");
+	By Delete = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[1]//li[2]");
 
 	By CreateDate = By.xpath("//*[@id='fieldy-category-list_aserpttbl']//tr[2]//td[2]//span");
 
@@ -417,7 +417,7 @@ public class CategoryPage extends BaseClass {
 	static String message;
 
 	public String message() throws IOException {
-		Boolean Condition = false;
+		Boolean Condition = true;
 		if (this.conditionChecking(Message)) {
 			message = this.getText(Message);
 			this.invisible(Message);
@@ -427,10 +427,12 @@ public class CategoryPage extends BaseClass {
 				String fakeCategoryName = faker.aviation().airport();
 				this.inputText(CategoryName, fakeCategoryName);
 				this.mouseActionClick(Button);
-				String message2 = this.message();
-				if (message2.equals(getPropertyValue("CategoryCreated"))
-						|| message2.equals(getPropertyValue("CategoryEdited"))) {
-					Condition = true;
+				if (this.conditionChecking(Message)) {
+					message = this.getText(Message);
+					if (message.equals(getPropertyValue("CategoryCreated"))
+							|| message.equals(getPropertyValue("CategoryEdited"))) {
+						Condition = false;
+					}
 				}
 			} while (Condition);
 		}

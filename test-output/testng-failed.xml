@@ -3,6 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
+<<<<<<< HEAD
+      <class name="org.test.TaxModule">
+        <methods>
+          <include name="deleteTaxRefectProductService"/>
+          <include name="exitBrowser"/>
+          <include name="setup"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.TaxModule -->
+=======
       <class name="org.test.TeamUserContractor">
         <methods>
           <include name="editmandatoryValidationContractorEmailField"/>
@@ -50,6 +61,7 @@
           <include name="maxValidationState"/>
         </methods>
       </class> <!-- org.test.TeamUserContractor -->
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

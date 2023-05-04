@@ -385,7 +385,7 @@ public class LeadSource extends BaseClass {
 	@Test(priority = 15)
 	public void alreadyExists() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
-				"Verify [Lead Source Exists] Lead Source form, Error is dispalyed when already existing Lead Source is provided");
+				"Verify [Lead Source Name Exists] Lead Source form, Error is dispalyed when already existing Lead Source is provided");
 		BusinessDaysPage contractorPage = PageFactory.initElements(driver, BusinessDaysPage.class);
 		contractorPage.leadSourceField("UniqueValidation");
 		String text_button = contractorPage.errorField("LeadSource");

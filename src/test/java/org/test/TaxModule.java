@@ -47,12 +47,12 @@ public class TaxModule extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -147,8 +147,8 @@ public class TaxModule extends BaseClass {
 
 	@Test(priority = 4)
 	private void mandatoryValidationDescription() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify Tax Rate field is set as Mandatory & Error Message is displayed when it is BLANK");
+		extentTest = extentReports
+				.createTest("Verify Tax Rate field is set as Mandatory & Error Message is displayed when it is BLANK");
 		TaxPage initElements = PageFactory.initElements(driver, TaxPage.class);
 		String editContact = initElements.errorField("TaxPercentage");
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
@@ -219,6 +219,58 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
+	@Test(priority = 6)
+	private void subTaxNameUnique() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed, when Associate Tax Name is same as the Parent Tax Name");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.taxNameField("AssociateTaxUnique");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AssociateTaxNameUnique"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearField("SubTaxName");
+			mandatory.clearField("SubTaxPercentage");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactInvoiceReferenceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
+			mandatory.clearField("SubTaxName");
+			mandatory.clearField("SubTaxPercentage");
+		}
+	}
+
+	@Test(priority = 6)
+	private void subTaxPercentageEqual() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed, when Associate Tax Percentage should be equal to Parent Tax Percentage");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.taxNameField("TaxPercentage");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AssociateTaxValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AssociateTaxValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearField("SubTaxPercentage");
+			mandatory.taxNameField("SubTaxValue");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactInvoiceReferenceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
+			mandatory.clearField("SubTaxPercentage");
+			mandatory.taxNameField("SubTaxValue");
+		}
+	}
+
 	@Test(priority = 7)
 	private void createButton() throws IOException, AWTException {
 		extentTest = extentReports
@@ -244,7 +296,7 @@ public class TaxModule extends BaseClass {
 
 	@Test(priority = 8)
 	private void createTax() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Tax is created successfully from Create Tax");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Tax Created");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");
@@ -285,6 +337,30 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
+	@Test(priority = 9)
+	private void uniqueValidationTaxName() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Verify [Tax Name Already Exists] Error is dispalyed when already existing tax name is provided");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.taxNameField("UniqueValidation");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyTax"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AlreadyTax"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clickEvent("BackButton");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("UnscheduleJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.clickEvent("BackButton");
+		}
+	}
+
 	@Test(priority = 10)
 	private void editFormLabel() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Edit Tax Page");
@@ -295,7 +371,8 @@ public class TaxModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (editContact.equals(getPropertyValue("EditTax"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			initElements.clearAllFields();
+			initElements.clearAllFields("SubTax");
+			initElements.clickEvent("CheckBox");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -303,7 +380,8 @@ public class TaxModule extends BaseClass {
 			File file = new File("ContactList.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
-			initElements.clearAllFields();
+			initElements.clearAllFields("SubTax");
+			initElements.clickEvent("CheckBox");
 		}
 	}
 
@@ -404,6 +482,58 @@ public class TaxModule extends BaseClass {
 	}
 
 	@Test(priority = 15)
+	private void editsubTaxNameUnique() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed, when Associate Tax Name is same as the Parent Tax Name");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.taxNameField("AssociateTaxUnique");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AssociateTaxNameUnique"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearField("SubTaxName");
+			mandatory.clearField("SubTaxPercentage");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactInvoiceReferenceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
+			mandatory.clearField("SubTaxName");
+			mandatory.clearField("SubTaxPercentage");
+		}
+	}
+
+	@Test(priority = 16)
+	private void editsubTaxPercentageEqual() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed, when Associate Tax Percentage should be equal to Parent Tax Percentage");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.taxNameField("TaxPercentage");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AssociateTaxValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("AssociateTaxValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.clearField("SubTaxPercentage");
+			mandatory.taxNameField("SubTaxValue");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactInvoiceReferenceMaximumValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
+			mandatory.clearField("SubTaxPercentage");
+			mandatory.taxNameField("SubTaxValue");
+		}
+	}
+
+	@Test(priority = 17)
 	private void updateButton() throws IOException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify the Edit Tax page Update Button is displayed in the Edit form page");
@@ -424,9 +554,9 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 16)
+	@Test(priority = 18)
 	private void updatedTax() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Tax is updated successfully from Edit Tax");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Tax Updated");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");
@@ -446,7 +576,29 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 17)
+	@Test(priority = 19)
+	private void deleteTax() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the Tax deleted");
+		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+		mandatory.clickEvent("Delete");
+		String errorPasswordField = mandatory.message("Message");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TaxDelete"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("TaxDelete"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("UnscheduleJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.message("AlternateMessage");
+		}
+	}
+
+	@Test(priority = 20)
 	private void updatedTaxList() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Updated Tax Name :" + listValidation + " is listed in the Setting page");
@@ -469,7 +621,7 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 18)
+	@Test(priority = 21)
 	private void createdTaxRefectProductService() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the newly created Tax Name is:" + ListField
 				+ " & it's reflect the Tax field in the Product & Service Create Page");
@@ -492,9 +644,32 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 19)
+	@Test(priority = 22)
 	private void editTaxRefectProductService() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Edited Tax Name is:" + ListField
+				+ " & it's reflect the Tax field in the Product & Service Create Page");
+		TaxPage landing = PageFactory.initElements(driver, TaxPage.class);
+		String createMessage = landing.reflection();
+		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (createMessage.equals(ListField)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			ListField = landing.createEdit("Delete");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("58.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("58.png");
+			ListField = landing.createEdit("Delete");
+		}
+	}
+
+//	@Test(priority = 23)
+	private void deleteTaxRefectProductService() throws IOException, AWTException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Deleted Tax Name is:" + ListField
 				+ " & it's reflect the Tax field in the Product & Service Create Page");
 		TaxPage landing = PageFactory.initElements(driver, TaxPage.class);
 		String createMessage = landing.reflection();

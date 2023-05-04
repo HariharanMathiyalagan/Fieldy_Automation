@@ -42,10 +42,39 @@ public class LoginPage extends BaseClass {
 		driver.get(APP_URL);
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 100);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	static String value;
+
 	public String dashBoardText() {
+		Boolean condition = true;
+		if (this.conditionChecking(Dashboard)) {
+			value = this.getText(Dashboard);
+		} else {
+			do {
+				driver.navigate().refresh();
+				if (this.conditionChecking(Dashboard)) {
+					value = this.getText(Dashboard);
+					condition = false;
+				}
+			} while (condition);
+		}
+		return value;
+	}
+
+	public String getText(By element) {
 		wait = new WebDriverWait(driver, 100);
-		wait.until(ExpectedConditions.visibilityOfElementLocated((Dashboard)));
-		return driver.findElement(Dashboard).getText();
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
+		return until;
 	}
 
 	public String toastText() {

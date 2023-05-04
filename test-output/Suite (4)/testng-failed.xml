@@ -5,12 +5,19 @@
     <classes>
       <class name="org.test.DispatchModule">
         <methods>
-          <include name="assignJob"/>
+          <include name="unassignRequest"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="assignRequest"/>
           <include name="exitBrowser"/>
           <include name="unassignJob"/>
+          <include name="dispatchModule"/>
           <include name="cancelRequest"/>
           <include name="setup"/>
+          <include name="deleteAfterCatch"/>
           <include name="dispatchRequest"/>
+          <include name="assignJob"/>
+          <include name="cancelJob"/>
+          <include name="dispatchJob"/>
         </methods>
       </class> <!-- org.test.DispatchModule -->
     </classes>

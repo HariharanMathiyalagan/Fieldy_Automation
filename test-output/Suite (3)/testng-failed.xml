@@ -3,30 +3,6 @@
 <suite name="Failed suite [Suite (3)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.BusinessUnit">
-        <methods>
-          <include name="verifyUpdateButtonExist"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="editmaximumValidationBussinessUnit"/>
-          <include name="exitBrowser"/>
-          <include name="editmandatoryValidation"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="businessUpdate"/>
-        </methods>
-      </class> <!-- org.test.BusinessUnit -->
-      <class name="org.test.ServiceModule">
-        <methods>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
-          <include name="setup"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="deleteAfterCatch"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-        </methods>
-      </class> <!-- org.test.ServiceModule -->
       <class name="org.test.ProductModule">
         <methods>
           <include name="editafterDecimalPointTaxPercentageField"/>
@@ -39,18 +15,18 @@
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.ProductModule -->
-      <class name="org.test.ServiceType">
+      <class name="org.test.ServiceModule">
         <methods>
-          <include name="verifyUpdateButtonExist"/>
-          <include name="deleteAfterCatch"/>
-          <include name="leadSourceUpdate"/>
-          <include name="setup"/>
           <include name="deleteBeforeCatch"/>
-          <include name="editmandatoryValidation"/>
           <include name="exitBrowser"/>
-          <include name="editmaximumValidationLeadSource"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="setup"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteAfterCatch"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
         </methods>
-      </class> <!-- org.test.ServiceType -->
+      </class> <!-- org.test.ServiceModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (3)] -->

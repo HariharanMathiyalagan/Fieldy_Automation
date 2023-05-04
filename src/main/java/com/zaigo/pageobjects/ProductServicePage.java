@@ -253,28 +253,27 @@ public class ProductServicePage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Result Found']"),
 			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
 	WebElement ListPage;
-	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No.']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement QuoteListPage;
 
-	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[1]//span");
+	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[2]");
 
-	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[4]//span"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[3]//span") })
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[5]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]") })
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]") })
 	WebElement ThreeDots;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]//li[1]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]//li[1]") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]") })
 	WebElement Edit;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[6]//li[2]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[5]//li[2]") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]") })
 	WebElement Delete;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='modal-confirmation-popup']//*[text()='Yes']"),
@@ -509,12 +508,26 @@ public class ProductServicePage extends BaseClass {
 	static String ResponseMessage;
 	static String message;
 
-	public String message(String value) throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			ResponseMessage = this.getText(Message);
-			this.invisible(Message);
-			return ResponseMessage;
+			if (conditionChecking(Message)) {
+				ResponseMessage = this.getText(Message);
+				this.invisible(Message);
+				return ResponseMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(SaveComplete);
+					if (conditionChecking(Message)) {
+						ResponseMessage = this.getText(Message);
+						if (ResponseMessage.equals(getPropertyValue("InventoryCreatedMessage"))
+								|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateFunction")) {
 			do {
 				if (ResponseMessage.equals(getPropertyValue("AlreadyExists"))) {
@@ -590,6 +603,7 @@ public class ProductServicePage extends BaseClass {
 		} else if (value.equals("ServiceTaxable")) {
 			this.mouseActionClick(TaxName);
 			if (this.getText(FirstTaxName).equals("No Data Found")) {
+				this.scrollUp();
 				this.mouseActionClick(NoTaxableRadio);
 			} else {
 				this.mouseActionClick(FirstTaxName);
@@ -637,7 +651,7 @@ public class ProductServicePage extends BaseClass {
 		return value;
 	}
 
-	public String createProdutService(String value) throws IOException {
+	public String createProdutService(String value) throws IOException, InterruptedException {
 		if (value.equals("Create")) {
 			this.mouseActionClick(CreateButton);
 			this.inputText(InventoryName, fakeProductName);
@@ -664,7 +678,7 @@ public class ProductServicePage extends BaseClass {
 		return listData;
 	}
 
-	public String deleteProduct() throws IOException {
+	public String deleteProduct() throws IOException, InterruptedException {
 		this.visibility(ListPage);
 		String text = this.getText(ListInventoryName);
 		this.mouseActionClick(ThreeDots);

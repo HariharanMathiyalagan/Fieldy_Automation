@@ -11,6 +11,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -51,7 +53,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	By Dashboard = By.xpath("//div[@data-menuselector='dashboard-menu']");
 	By Team = By.id("team-menu");
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
-	By Tittle1 = By.xpath("//*[@id='team-company-details-company-name']//div[2]");
+	By Tittle1 = By.xpath("//*[@id='team-company-details-company-name']//div[1]");
 	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
 	By Next = By.xpath("//span[text()='Next']");
 	By CompanyWebsite = By.id("company_website");
@@ -71,7 +73,10 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__1");
 	By Description = By.id("notes");
 	By ErrorDescription = By.id("notes_error");
-
+	By TaxNumber = By.id("tax_number");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 	By ErrorLocation = By.id("addresses__name__1_error");
 	By ErrorEmail = By.id("addresses__email__1_error");
 	By ErrorContactPerson = By.id("addresses__contact_person__1_error");
@@ -88,6 +93,8 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	By AccountOwner = By.id("account_owner");
 
 	By Save_Complete = By.id("team-company-edit-submit");
+
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 
 	By response = By.xpath("//span[text()='Company Information updated successfully']");
 
@@ -129,6 +136,17 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)", "");
 
+	}
+
+	public Boolean conditionChecking1(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 2);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
 	}
 
 	private void dashBoard() {
@@ -295,7 +313,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	public String editContent() throws InterruptedException {
 		String text = this.getText(Tittle1);
 		this.clickEdit();
-		this.valuePresent(CompanyWebsite, text);
+		this.valuePresent(CompanyName, text);
 		this.elementtobeClickable(Next);
 		String text2 = this.getText(Label);
 		return text2;
@@ -379,6 +397,13 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	}
 
+	private String getText(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
+		return until;
+
+	}
+
 	private String getAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
@@ -446,6 +471,8 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 			this.clearField(CompanyWebsite);
 		} else if (value.equals("Description")) {
 			this.clearField(Description);
+		} else if (value.equals("TaxNumber")) {
+			this.clearField(TaxNumber);
 		}
 	}
 
@@ -544,9 +571,14 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	public void description(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(Description, characters2048);
+			this.validationTab(Description, characters256);
 		}
+	}
 
+	public void taxNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(TaxNumber, characters2048);
+		}
 	}
 
 	public String errorFields(String value) {
@@ -580,11 +612,22 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		return value;
 	}
 
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
+				this.mouseActionClick(Save_Complete);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
+		}
+		return this.getText(ErrorMessage);
+	}
+
 	public void fieldsFillData(String value) throws IOException {
 		if (value.equals("BasicPage")) {
 			this.inputText(CompanyWebsite, fakeWebsite);
 			this.inputText(FirstName, fakeFirstName);
 			this.inputText(LastName, fakeLastName);
+			this.inputText(TaxNumber, maxPhoneNumber);
 			this.clickNext();
 		} else if (value.equals("LocationPage")) {
 			this.scrollDown();

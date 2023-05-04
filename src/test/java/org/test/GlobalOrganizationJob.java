@@ -223,9 +223,9 @@ public class GlobalOrganizationJob extends BaseClass {
 		mandatory.locationField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearValidation("Location");
 		} else {
@@ -531,11 +531,11 @@ public class GlobalOrganizationJob extends BaseClass {
 				.createTest("Verify Error Message is displayed when Location Field exceed its max-2048 limit");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.tittleField("MaxValidation");
-		String errorPasswordField = mandatory.errorValidation("Tittle");
+		String errorPasswordField = mandatory.errorValidation("Location");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearValidation("Location");
 		} else {

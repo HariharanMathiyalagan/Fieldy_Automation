@@ -424,9 +424,9 @@ public class OnBoardingModule extends BaseClass {
 		industryValidation.maximumValidationIndustryField();
 		String errorIndustryField = industryValidation.errorIndustryField();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorIndustryField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("IndustryMaxValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max64CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorIndustryField.equals(getPropertyValue("IndustryMaxValidation"))) {
+		if (errorIndustryField.equals(getPropertyValue("Max64CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			industryValidation.clearIndustry();
 		} else {

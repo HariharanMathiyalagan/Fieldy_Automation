@@ -67,10 +67,10 @@ public class TeamUserPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -95,6 +95,13 @@ public class TeamUserPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	public void mouseActionClick(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(until).click().build().perform();
+	}
+
 	private void tagValidation(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.ENTER);
@@ -109,6 +116,12 @@ public class TeamUserPage extends BaseClass {
 	public void validationTab(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
+	}
+
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
 	}
 
 	public void dropDownByIndex(By element, int num) {
@@ -185,14 +198,23 @@ public class TeamUserPage extends BaseClass {
 	By ContractorSearch = By.id("team-user-contractor-search-main");
 	By ContractorSearchButton = By.id("team-user-contractor-search-btn");
 	By Reset = By.xpath("//*[text()=' Reset Search']");
-	By ListFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
-	By ListPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[4]");
-	By ListEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
-	By ListContractorPhoneNumber = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[5]");
-	By ListContractorEmail = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
-	By ThreeDots = By.xpath("(//*[@class='dot dot-hover'])[1]");
-	By Edit = By.xpath("(//li[@data-formsactions='edit'])[1]");
-	By Delete = By.xpath("(//li[@data-tabformid='undefined'])[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[3]") })
+	WebElement ListFirstName;
+	By ListPhoneNumber = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[6]");
+	By ListEmail = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[7]");
+	By ListContractorPhoneNumber = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[7]");
+	By ListContractorEmail = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[8]");
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i") })
+	WebElement ThreeDots;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
+	WebElement Edit;
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]") })
+	WebElement Delete;
 	By SendInvite = By.xpath("//*[@data-formdynamic='user_send_invite']");
 	By Contractor = By.xpath("//a[@data-n-linkto='team_user_contractor']");
 	By Logo = By.xpath("//label[@for='user_image']");
@@ -253,15 +275,17 @@ public class TeamUserPage extends BaseClass {
 	By InValid = By.xpath("//*[text()='No Result Found']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DropDownSearch = By.id("team-user-contractor-dropdown-serach");
-	By ListCompanyFirstName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[3]");
+	By ListCompanyFirstName = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[5]");
 	By CreateContractorMessage = By.xpath("//*[text()='Contractor user created successfully']");
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 	By TotalCount = By.id("All-Count");
 	By ContractorCount = By.id("total-user-contractor-count");
-	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*text()='Company']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement PageLand;
 	static int parseInt;
 
@@ -345,49 +369,45 @@ public class TeamUserPage extends BaseClass {
 		}
 	}
 
+	public String errorMessage(By value) {
+		if (!this.conditionChecking(value, 3)) {
+			do {
+				this.mouseActionClick(SaveComplete);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking(value, 3));
+		}
+		return this.getText(value);
+	}
+
 	public String errorField(String value) {
 		if (value.equals("FirstName")) {
-			String text = this.getText(ErrorFirstName);
-			return text;
+			return this.errorMessage(ErrorFirstName);
 		} else if (value.equals("LastName")) {
-			String text = this.getText(ErrorLastName);
-			return text;
+			return this.errorMessage(ErrorLastName);
 		} else if (value.equals("JobTittle")) {
-			String text = this.getText(ErrorJobTittle);
-			return text;
+			return this.errorMessage(ErrorJobTittle);
 		} else if (value.equals("Email")) {
-			String text = this.getText(ErrorEmail);
-			return text;
+			return this.errorMessage(ErrorEmail);
 		} else if (value.equals("UserType")) {
-			String text = this.getText(ErrorType);
-			return text;
+			return this.errorMessage(ErrorType);
 		} else if (value.equals("PhoneNumber")) {
-			String text = this.getText(ErrorPhoneNumber);
-			return text;
+			return this.errorMessage(ErrorPhoneNumber);
 		} else if (value.equals("LocationName")) {
-			String text = this.getText(ErrorLocationName);
-			return text;
+			return this.errorMessage(ErrorLocationName);
 		} else if (value.equals("Address1")) {
-			String text = this.getText(ErrorAddress1);
-			return text;
+			return this.errorMessage(ErrorAddress1);
 		} else if (value.equals("Address2")) {
-			String text = this.getText(ErrorAddress2);
-			return text;
+			return this.errorMessage(ErrorAddress2);
 		} else if (value.equals("City")) {
-			String text = this.getText(ErrorCity);
-			return text;
+			return this.errorMessage(ErrorCity);
 		} else if (value.equals("State")) {
-			String text = this.getText(ErrorState);
-			return text;
+			return this.errorMessage(ErrorState);
 		} else if (value.equals("Zipcode")) {
-			String text = this.getText(ErrorZipcode);
-			return text;
+			return this.errorMessage(ErrorZipcode);
 		} else if (value.equals("Invalid")) {
-			String text = this.getText(InValid);
-			return text;
+			return this.getText(InValid);
 		} else if (value.equals("CompanyName")) {
-			String text = this.getText(CompanyNameError);
-			return text;
+			return this.errorMessage(CompanyNameError);
 		}
 		return value;
 	}
@@ -537,9 +557,9 @@ public class TeamUserPage extends BaseClass {
 			String text = this.getText(ListFirstName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
-			this.invisible(Spinner);
 			this.visibility(Label);
-			driver.navigate().refresh();
+			this.invisible(Spinner);
+//			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);
 		} else if (value.equals("ContractorEdit")) {
@@ -547,7 +567,8 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.visibility(ContractorLabel);
-			driver.navigate().refresh();
+			this.invisible(Spinner);
+//			driver.navigate().refresh();
 			this.valuePresent(FirstName, text);
 			this.elementClickable(Next);
 		} else if (value.equals("Delete")) {
@@ -602,6 +623,72 @@ public class TeamUserPage extends BaseClass {
 		return value;
 	}
 
+	public static String firstName;
+	public static String lastName;
+	public static String email;
+	public static String type;
+	public static String jobTittle;
+	public static String phoneNumber;
+	public static String locationName;
+	public static String address1;
+	public static String address2;
+	public static String city;
+	public static String state;
+	public static String zipcode;
+	public static String bussinessUnit;
+	public static String serviceType;
+	public static String companyName;
+
+	public String prepopulationFields(String value) {
+		if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(FirstName);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(LastName);
+			return data;
+		} else if (value.equals("Type")) {
+			String data = this.getTextAttribute(Type);
+			return data;
+		} else if (value.equals("JobTittle")) {
+			String data = this.getTextAttribute(JobTittle);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(Email);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(PhoneNumber);
+			return data;
+		} else if (value.equals("LocationName")) {
+			String data = this.getTextAttribute(LocationName);
+			return data;
+		} else if (value.equals("BussinessUnit")) {
+			String data = this.getTextAttribute(BussinessUnit);
+			return data;
+		} else if (value.equals("ServiceType")) {
+			String data = this.getTextAttribute(ServiceType);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(Address1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(Address2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(City);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(State);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(Zipcode);
+			return data;
+		} else if (value.equals("CompanyName")) {
+			String data = this.getTextAttribute(CompanyName);
+			return data;
+		}
+		return value;
+	}
+
 	public void validateFillData(String value) {
 		if (value.equals("Basic")) {
 			Faker faker = new Faker(new Locale("en-IND"));
@@ -611,12 +698,18 @@ public class TeamUserPage extends BaseClass {
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			String fakeTittle = faker.name().title();
 			this.inputText(FirstName, fakeFirstName);
+			firstName = this.getTextAttribute(FirstName);
 			this.inputText(LastName, fakeLastName);
+			lastName = this.getTextAttribute(LastName);
 			this.mouseActionClick(Type);
 			this.mouseActionClick(Technician);
+			type = this.getTextAttribute(Type);
 			this.inputText(JobTittle, fakeTittle);
+			jobTittle = this.getTextAttribute(JobTittle);
 			this.inputText(Email, fakeEmail);
+			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			phoneNumber = this.getTextAttribute(PhoneNumber);
 		} else if (value.equals("Location")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeAddress1 = faker.address().buildingNumber();
@@ -625,11 +718,17 @@ public class TeamUserPage extends BaseClass {
 			String fakeState = faker.address().state();
 			String fakeZipcode = faker.address().zipCode();
 			this.inputText(LocationName, fakecountry);
+			locationName = this.getTextAttribute(LocationName);
 			this.inputText(Address1, fakeAddress1);
+			address1 = this.getTextAttribute(Address1);
 			this.inputText(Address2, fakeAddress2);
+			address2 = this.getTextAttribute(Address2);
 			this.inputText(City, fakeCity);
+			city = this.getTextAttribute(City);
 			this.inputText(State, fakeState);
+			state = this.getTextAttribute(State);
 			this.inputText(Zipcode, fakeZipcode);
+			zipcode = this.getTextAttribute(Zipcode);
 		} else if (value.equals("BasicContractor")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
@@ -637,17 +736,24 @@ public class TeamUserPage extends BaseClass {
 			String fakeEmail = faker.internet().safeEmailAddress();
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			this.inputText(FirstName, fakeFirstName);
+			firstName = this.getTextAttribute(FirstName);
 			this.inputText(LastName, fakeLastName);
+			lastName = this.getTextAttribute(LastName);
 			this.mouseActionClick(BussinessUnit);
 			this.mouseActionClick(General);
+			bussinessUnit = this.getTextAttribute(BussinessUnit);
 			this.mouseActionClick(ServiceType);
 			this.mouseActionClick(Repair);
+			serviceType = this.getTextAttribute(ServiceType);
 			this.inputText(Email, fakeEmail);
+			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			phoneNumber = this.getTextAttribute(PhoneNumber);
 		} else if (value.equals("ContractorCompany")) {
 			this.scrollDown();
 			this.mouseActionClick(CompanyName);
 			this.mouseActionClick(FirstCompanyName);
+			companyName = this.getTextAttribute(CompanyName);
 		}
 
 	}
@@ -658,15 +764,16 @@ public class TeamUserPage extends BaseClass {
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
 		if (value.equals("Message")) {
-			if (this.conditionChecking(Message)) {
+			if (this.conditionChecking(Message, 20)) {
 				listData = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (this.conditionChecking(Message)) {
-						listData = this.responseMessage("Message");
+					if (this.conditionChecking(Message, 20)) {
+						listData = this.getText(Message);
+						this.invisible(Message);
 						if (listData.equals(getPropertyValue("UserCreatedMessgae"))
 								|| listData.equals(getPropertyValue("UserUpdatedMessage"))) {
 							check = false;
@@ -684,6 +791,7 @@ public class TeamUserPage extends BaseClass {
 					&& (label.equals(getPropertyValue("TeamCreateContractorPage"))
 							|| label.equals(getPropertyValue("TeamEditContractorPage")))) {
 				this.mouseActionClick(User);
+				this.visibility(PageLand);
 				this.mouseActionClick(Contractor);
 				this.visibility(PageLand);
 			}
@@ -725,7 +833,7 @@ public class TeamUserPage extends BaseClass {
 			return response;
 		} else if (value.equals("UserCreate") || value.equals("UserContractorCreate")) {
 			if (value.equals("UserCreate")) {
-				this.getCount(3);
+				this.getCount(1);
 				int userCount = 5 - parseInt;
 				if (userCount <= 5) {
 					for (int i = 0; i < userCount; i++) {
@@ -737,8 +845,11 @@ public class TeamUserPage extends BaseClass {
 						this.responseMessage("Message");
 						this.visibility(PageLand);
 					}
-				} else if (value.equals("UserContractorCreate")) {
-					int userContractorCount = 5 - parseInt;
+				}
+			} else if (value.equals("UserContractorCreate")) {
+				this.getCount(2);
+				int userContractorCount = 10 - parseInt;
+				if (userContractorCount <= 10) {
 					for (int i = 0; i < userContractorCount; i++) {
 						this.mouseActionClick(CreateContractor);
 						this.validateFillData("BasicContractor");

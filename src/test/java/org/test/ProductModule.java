@@ -629,7 +629,7 @@ public class ProductModule extends BaseClass {
 
 	@Test(priority = 24)
 	private void createProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Product is created successfully from Create Product");
+		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Product Created");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.validData("FillFields");
 		mandatory.validData("Taxable");
@@ -743,7 +743,6 @@ public class ProductModule extends BaseClass {
 	private void editmandatoryValidationTaxName() throws InterruptedException, IOException, AWTException {
 		if (listValidation.equals("No")) {
 			throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
-		} else {
 		}
 		extentTest = extentReports
 				.createTest("Verify Tax Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -1175,7 +1174,7 @@ public class ProductModule extends BaseClass {
 	@Test(priority = 46)
 	private void updateButton() throws IOException, AWTException {
 		extentTest = extentReports
-				.createTest("Verify the Create Product page Update Button is displayed in the Edit form page");
+				.createTest("Verify the Edit Product page Update Button is displayed in the Edit form page");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		String errorPasswordField = mandatory.clickEvent("ButtonPresent");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1197,7 +1196,7 @@ public class ProductModule extends BaseClass {
 
 	@Test(priority = 47)
 	private void updateProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify Product is updated successfully from Edit Product");
+		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Product Updated");
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.validData("FillFields");
 		if (listValidation.equals("Yes")) {
@@ -1348,7 +1347,7 @@ public class ProductModule extends BaseClass {
 
 	@Test(priority = 53)
 	private void deleteProduct() throws IOException, AWTException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Delete Product Name is:" + ListField
+		extentTest = extentReports.createTest("Verify the Deleted Product Name is:" + ListField
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
 		String createMessage = landing.reflectedFunction();

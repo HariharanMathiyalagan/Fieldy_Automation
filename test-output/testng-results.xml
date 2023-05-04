@@ -1,4 +1,418 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testng-results ignored="0" total="27" passed="26" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-05-04T00:33:03 IST" name="Default suite" finished-at="2023-05-04T00:37:32 IST" duration-ms="269175">
+    <groups>
+    </groups>
+    <test started-at="2023-05-04T00:33:03 IST" name="Default test" finished-at="2023-05-04T00:37:32 IST" duration-ms="269175">
+      <class name="org.test.TaxModule">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:03 IST" name="setup" finished-at="2023-05-04T00:33:07 IST" duration-ms="3854" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:07 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:07 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="loginPage()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:07 IST" name="loginPage" finished-at="2023-05-04T00:33:28 IST" duration-ms="21767" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginPage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:28 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:28 IST" duration-ms="54" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:28 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:28 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="settingModule()[pri:1, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:28 IST" name="settingModule" finished-at="2023-05-04T00:33:31 IST" duration-ms="2231" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- settingModule -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:31 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:31 IST" duration-ms="29" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:31 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:31 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createFormLabel()[pri:2, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:31 IST" name="createFormLabel" finished-at="2023-05-04T00:33:32 IST" duration-ms="1414" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:32 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:32 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:32 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:32 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="mandatoryValidationTaxName()[pri:3, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:32 IST" name="mandatoryValidationTaxName" finished-at="2023-05-04T00:33:33 IST" duration-ms="452" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mandatoryValidationTaxName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:33 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:33 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="mandatoryValidationDescription()[pri:4, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="mandatoryValidationDescription" finished-at="2023-05-04T00:33:33 IST" duration-ms="150" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mandatoryValidationDescription -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:33 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:33 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="maximumValidationProductName()[pri:5, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:33 IST" name="maximumValidationProductName" finished-at="2023-05-04T00:33:42 IST" duration-ms="8779" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationProductName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:42 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:42 IST" duration-ms="27" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:42 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:42 IST" duration-ms="37" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="maximumValidationTaxPercentage()[pri:6, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:42 IST" name="maximumValidationTaxPercentage" finished-at="2023-05-04T00:33:49 IST" duration-ms="7745" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationTaxPercentage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:49 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:49 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:49 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:49 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="subTaxNameUnique()[pri:6, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:49 IST" name="subTaxNameUnique" finished-at="2023-05-04T00:33:57 IST" duration-ms="7054" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- subTaxNameUnique -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:57 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:33:57 IST" duration-ms="23" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:57 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:33:57 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="subTaxPercentageEqual()[pri:6, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:33:57 IST" name="subTaxPercentageEqual" finished-at="2023-05-04T00:34:05 IST" duration-ms="8157" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- subTaxPercentageEqual -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:05 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:05 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createButton()[pri:7, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="createButton" finished-at="2023-05-04T00:34:05 IST" duration-ms="110" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createButton -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:05 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:05 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createTax()[pri:8, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:05 IST" name="createTax" finished-at="2023-05-04T00:34:12 IST" duration-ms="6877" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createTax -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:12 IST" duration-ms="26" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:12 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createdTaxList()[pri:9, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="createdTaxList" finished-at="2023-05-04T00:34:12 IST" duration-ms="123" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createdTaxList -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:12 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:12 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="uniqueValidationTaxName()[pri:9, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:12 IST" name="uniqueValidationTaxName" finished-at="2023-05-04T00:34:21 IST" duration-ms="8729" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- uniqueValidationTaxName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:21 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:21 IST" duration-ms="90" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:21 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:21 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editFormLabel()[pri:10, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:21 IST" name="editFormLabel" finished-at="2023-05-04T00:34:25 IST" duration-ms="4242" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:25 IST" duration-ms="27" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:25 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmandatoryValidationTaxName()[pri:11, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="editmandatoryValidationTaxName" finished-at="2023-05-04T00:34:25 IST" duration-ms="334" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmandatoryValidationTaxName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:25 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:25 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmandatoryValidationDescription()[pri:12, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:25 IST" name="editmandatoryValidationDescription" finished-at="2023-05-04T00:34:26 IST" duration-ms="132" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmandatoryValidationDescription -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:26 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:26 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:26 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:26 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmaximumValidationProductName()[pri:13, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:26 IST" name="editmaximumValidationProductName" finished-at="2023-05-04T00:34:34 IST" duration-ms="8689" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmaximumValidationProductName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:34 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:34 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:34 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:34 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmaximumValidationTaxPercentage()[pri:14, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:34 IST" name="editmaximumValidationTaxPercentage" finished-at="2023-05-04T00:34:42 IST" duration-ms="8127" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmaximumValidationTaxPercentage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:42 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:42 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:42 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:43 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editsubTaxNameUnique()[pri:15, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:43 IST" name="editsubTaxNameUnique" finished-at="2023-05-04T00:34:49 IST" duration-ms="6835" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editsubTaxNameUnique -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:49 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:49 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:49 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:49 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editsubTaxPercentageEqual()[pri:16, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:49 IST" name="editsubTaxPercentageEqual" finished-at="2023-05-04T00:34:57 IST" duration-ms="7574" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editsubTaxPercentageEqual -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:57 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:57 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="updateButton()[pri:17, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="updateButton" finished-at="2023-05-04T00:34:57 IST" duration-ms="116" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateButton -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:34:57 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:34:57 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="updatedTax()[pri:18, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:34:57 IST" name="updatedTax" finished-at="2023-05-04T00:35:04 IST" duration-ms="7371" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatedTax -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:05 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:35:05 IST" duration-ms="28" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:05 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:35:05 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="deleteTax()[pri:19, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:05 IST" name="deleteTax" finished-at="2023-05-04T00:35:12 IST" duration-ms="7510" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteTax -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:12 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:35:12 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:12 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:35:12 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="updatedTaxList()[pri:20, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:12 IST" name="updatedTaxList" finished-at="2023-05-04T00:35:28 IST" duration-ms="15429" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatedTaxList -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:28 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:35:28 IST" duration-ms="28" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:28 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:35:28 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createdTaxRefectProductService()[pri:21, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:28 IST" name="createdTaxRefectProductService" finished-at="2023-05-04T00:35:45 IST" duration-ms="17560" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createdTaxRefectProductService -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:45 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:35:45 IST" duration-ms="30" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:45 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:35:45 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editTaxRefectProductService()[pri:22, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:45 IST" name="editTaxRefectProductService" finished-at="2023-05-04T00:35:50 IST" duration-ms="5029" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editTaxRefectProductService -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:50 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:35:50 IST" duration-ms="26" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:50 IST" name="deleteBeforeCatch" finished-at="2023-05-04T00:35:50 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="deleteTaxRefectProductService()[pri:23, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:35:50 IST" name="deleteTaxRefectProductService" finished-at="2023-05-04T00:37:31 IST" duration-ms="100520" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //*[text()=' Product / Service'] (tried for 100 second(s) with 500 milliseconds interval)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[text()=' Product / Service'] (tried for 100 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+at com.zaigo.pageobjects.TaxPage.mouseActionClick(TaxPage.java:78)
+at com.zaigo.pageobjects.TaxPage.reflection(TaxPage.java:507)
+at org.test.TaxModule.deleteTaxRefectProductService(TaxModule.java:675)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//*[text()=' Product / Service']"}
+  (Session info: chrome=112.0.5615.138)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 112.0.5615.138, chrome: {chromedriverVersion: 112.0.5615.49 (bd2a7bcb881c..., userDataDir: C:\Users\ZAIGOP~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54803}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: da7e3f9b2fb3d34d3907892a8bbf44eb
+*** Element info: {Using=xpath, value=//*[text()=' Product / Service']}
+at jdk.internal.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+... 31 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteTaxRefectProductService -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:37:31 IST" name="deleteAfterCatch" finished-at="2023-05-04T00:37:31 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.TaxModule@2805d709]" started-at="2023-05-04T00:37:31 IST" name="exitBrowser" finished-at="2023-05-04T00:37:32 IST" duration-ms="1024" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- exitBrowser -->
+      </class> <!-- org.test.TaxModule -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+=======
 <testng-results ignored="0" total="555" passed="555" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
@@ -6748,4 +7162,5 @@
       </class> <!-- org.test.CustomerOrganizationInvoice -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
 </testng-results>

@@ -5,6 +5,16 @@
     <classes>
       <class name="org.test.ServiceModule">
         <methods>
+<<<<<<< HEAD
+          <include name="listQuoteReference"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="listQuoteTittle"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.test.GlobalContactQuote -->
+=======
           <include name="createProduct"/>
           <include name="editFormLabel"/>
           <include name="editmandatoryValidationPrice"/>
@@ -45,6 +55,7 @@
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.ServiceType -->
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (2)] -->

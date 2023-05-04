@@ -49,11 +49,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
-
+	String fakeProductName = faker.book().genre();
+	String fakeBrandName = faker.book().author();
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
+	String maxPhoneNumber = RandomStringUtils.randomNumeric(25);
 	WebDriver driver;
 	WebDriverWait wait;
 
@@ -142,6 +144,18 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	public String getTextAttribute(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+	}
+
+	public String getTextAttribute(WebElement element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOf(element)).getAttribute("value");
+		return until;
+	}
+
 	public String getText(WebElement element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
@@ -189,7 +203,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ZipCodeError = By.id("zipcode_error");
 	By Email = By.id("email");
 	By EmailError = By.id("email_error");
-	By LeadSource = By.xpath("//input[@data-dropdownlist='lead-source']");
+	@FindAll({ @FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[3]/div[10]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[2]/div[10]/div[2]/input[1]") })
+	WebElement LeadSource;
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By PhoneNumber = By.id("phones__number__0");
 	By PhoneNumberError = By.id("phones__number__0_error");
 	By SaveComplete = By.id("customerdrop");
@@ -223,6 +240,15 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			return text;
 		}
 		return text;
+	}
+
+	private void currentDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 0);
+		String currentDate = sdf.format(cal.getTime());
+		this.inputText(DateInstalled, currentDate);
+
 	}
 
 	public Boolean conditionChecking1(By element) {
@@ -263,7 +289,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 						response = this.getText(Message);
 						this.invisible(Message);
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| response.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+								|| response.equals(getPropertyValue("CustomerUpdatedMesssage"))
+								|| response.equals(getPropertyValue("DateMessage"))) {
 							check = false;
 						}
 					}
@@ -329,9 +356,15 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	public void nextButton() {
+		Boolean condition = true;
 		this.mouseActionClick(Next);
 		if (!this.conditionChecking1(Visible)) {
-			this.mouseActionClick(Next);
+			do {
+				this.mouseActionClick(Next);
+				if (this.conditionChecking1(Visible)) {
+					condition = false;
+				}
+			} while (condition);
 		}
 
 	}
@@ -403,6 +436,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By InstallationNotes = By.id("equipments__installation_notes__0");
 	By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
 	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 
 	private void scrollDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -410,17 +446,60 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
+	public static String organizationName;
+	public static String website;
+	public static String address1;
+	public static String address2;
+	public static String city;
+	public static String state;
+	public static String zipCode;
+	public static String email;
+	public static String phoneNumber;
+	public static String leadSource;
+
+	public static String firstName;
+	public static String lastName;
+	public static String jobTittle;
+	public static String contactEmail;
+	public static String contactPhoneNumber;
+
+	public static String propertyFirstName;
+	public static String propertyLastName;
+	public static String propertyName;
+	public static String propertyAddress1;
+	public static String propertyAddress2;
+	public static String propertyCityName;
+	public static String propertyStateName;
+	public static String propertyZipcode;
+
+	public static String productName;
+	public static String brandName;
+	public static String modelNumber;
+	public static String serialNumber;
+	public static String dateInstalled;
+	public static String warrantyInformation;
+	public static String accessHours;
+	public static String installationNotes;
+
 	public void organizationPage() throws InterruptedException, AWTException {
 		this.clearField(OrganizationName);
 		this.inputText(OrganizationName, fakeCompanyName);
+		organizationName = this.getTextAttribute(OrganizationName);
 		this.inputText(Website, fakeWebsite);
+		website = this.getTextAttribute(Website);
 		this.inputText(Address1, fakeAddress1);
+		address1 = this.getTextAttribute(Address1);
 		this.inputText(Address2, fakeAddress2);
+		address2 = this.getTextAttribute(Address2);
 		this.inputText(City, fakeCity);
+		city = this.getTextAttribute(City);
 		this.inputText(State, fakeState);
+		state = this.getTextAttribute(State);
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
+		zipCode = this.getTextAttribute(ZipCode);
 		this.inputText(Email, fakeEmail);
+		email = this.getTextAttribute(Email);
 		this.mouseActionClick(LeadSource);
 		if (this.getText(Social).equals("No Data Found")) {
 			Thread.sleep(5000);
@@ -429,7 +508,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		} else {
 			this.mouseActionClick(Social);
 		}
+		leadSource = this.getTextAttribute(LeadSource);
 		this.inputText(PhoneNumber, fakePhoneNumber);
+		phoneNumber = this.getTextAttribute(PhoneNumber);
 		this.nextButton();
 
 	}
@@ -457,6 +538,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				this.mouseActionClick(AddMoreContact);
 				this.scrollDown();
 			}
+			firstName = this.getTextAttribute(FirstName);
+			lastName = this.getTextAttribute(LastName);
+			contactEmail = this.getTextAttribute(ContactEmail);
+			contactPhoneNumber = this.getTextAttribute(ContactPhoneNumber);
+			jobTittle = this.getTextAttribute(JobTittle);
 			this.nextButton();
 		} else if (value.equals("EditContact")) {
 			Faker faker = new Faker(new Locale("en-IND"));
@@ -476,27 +562,42 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public void propertyPage() {
 		this.inputText(PropertyFirstName, fakeFirstName);
+		propertyFirstName = this.getTextAttribute(PropertyFirstName);
 		this.inputText(PropertyLastName, fakeLastName);
-		this.inputText(PropertyName, "Fieldy");
+		propertyLastName = this.getTextAttribute(PropertyLastName);
+		this.inputText(PropertyName, fakeCompanyName);
+		propertyName = this.getTextAttribute(PropertyName);
 		this.inputText(PropertyAddress1, fakeAddress1);
+		propertyAddress1 = this.getTextAttribute(PropertyAddress1);
 		this.inputText(PropertyAddress2, fakeAddress2);
+		propertyAddress2 = this.getTextAttribute(PropertyAddress2);
 		this.inputText(PropertyCityName, fakeCity);
+		propertyCityName = this.getTextAttribute(PropertyCityName);
 		this.inputText(PropertyStateName, fakeState);
+		propertyStateName = this.getTextAttribute(PropertyStateName);
 		this.inputText(PropertyZipcode, fakeZipcode);
+		propertyZipcode = this.getTextAttribute(PropertyZipcode);
 		this.nextButton();
 
 	}
 
-	public void equipmentPage() throws InterruptedException {
-		String Note = RandomStringUtils.randomAlphabetic(500);
-		this.inputText(ProductName, "Sony");
-		this.inputText(BrandName, "Sony X10");
+	public void equipmentPage() throws InterruptedException, IOException {
+		this.inputText(ProductName, fakeProductName);
+		productName = this.getTextAttribute(ProductName);
+		this.inputText(BrandName, fakeBrandName);
+		brandName = this.getTextAttribute(BrandName);
 		this.inputText(ModelNumber, fakeFaxNumber);
-		this.inputText(SerialNumber, "8765645345978");
-		this.inputText(DateInstalled, "09/18/2022");
+		modelNumber = this.getTextAttribute(ModelNumber);
+		this.inputText(SerialNumber, maxPhoneNumber);
+		serialNumber = this.getTextAttribute(SerialNumber);
+		this.currentDate();
+		dateInstalled = this.getTextAttribute(DateInstalled);
 		this.dropDownByIndex(WarrantyInformation, 1);
+		warrantyInformation = this.getTextAttribute(WarrantyInformation);
 		this.inputText(AccessHours, "8hrs");
-		this.inputText(InstallationNotes, Note);
+		accessHours = this.getTextAttribute(AccessHours);
+		this.inputText(InstallationNotes, getPropertyValue("Notes"));
+		installationNotes = this.getTextAttribute(InstallationNotes);
 		this.mouseActionClick(SaveComplete);
 	}
 
@@ -557,13 +658,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return value;
 	}
 
-	By Dots = By.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[1]");
-	By Edit = By
-			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[1]");
+	By Dots = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
+	By Edit = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
 	By Deleted = By
-			.xpath("//*[@id=\"fieldy-customer-organization-list_aserpttbl\"]/tbody/tr[2]/td[9]/div/div[2]/ul/li[2]");
+			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('','','','','reset')\"]");
 
 	public void resetOption() {
@@ -578,80 +678,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	By Name = By.xpath("//td[text()='Organization Name']");
-
-	public void Condition() {
-		this.assertName(Name, "Organization Name");
-
-	}
-
-	public String errorField(String value) {
-		if (value.equals("OrganizationName")) {
-			return this.getText(OrganizationError);
-		} else if (value.equals("Website")) {
-			return this.getText(WebsiteError);
-		} else if (value.equals("Address1")) {
-			return this.getText(Address1Error);
-		} else if (value.equals("Address2")) {
-			return this.getText(Address2Error);
-		} else if (value.equals("City")) {
-			return this.getText(CityError);
-		} else if (value.equals("State")) {
-			return this.getText(StateError);
-		} else if (value.equals("Zipcode")) {
-			return this.getText(ZipCodeError);
-		} else if (value.equals("Email")) {
-			return this.getText(EmailError);
-		} else if (value.equals("PhoneNumber")) {
-			return this.getText(PhoneNumberError);
-		} else if (value.equals("ContactFirstName")) {
-			return this.getText(FirstNameError);
-		} else if (value.equals("ContactLastName")) {
-			return this.getText(LastNameError);
-		} else if (value.equals("ContactEmail")) {
-			if (this.conditionChecking1(ContactEmailError)) {
-				return this.getText(ContactEmailError);
-			} else {
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
 				this.mouseActionClick(SaveComplete);
-				return this.getText(ContactEmailError);
-			}
-		} else if (value.equals("ContactPhoneNumber")) {
-			return this.getText(ContactPhoneNumberError);
-		} else if (value.equals("ContactJobTittle")) {
-			return this.getText(JobTittleError);
-		} else if (value.equals("PropertyFirstName")) {
-			return this.getText(ErrorPropertyFirstName);
-		} else if (value.equals("PropertyLastName")) {
-			return this.getText(ErrorPropertyLastName);
-		} else if (value.equals("PropertyName")) {
-			return this.getText(ErrorPropertyName);
-		} else if (value.equals("PropertyAddress1")) {
-			return this.getText(ErrorPropertyAddress1);
-		} else if (value.equals("PropertyAddress2")) {
-			return this.getText(ErrorPropertyAddress2);
-		} else if (value.equals("PropertyCity")) {
-			return this.getText(ErrorPropertyCityName);
-		} else if (value.equals("PropertyState")) {
-			return this.getText(ErrorPropertyStateName);
-		} else if (value.equals("PropertyZipcode")) {
-			return this.getText(ErrorPropertyZipCode);
-		} else if (value.equals("ProductName")) {
-			return this.getText(ErrorProductName);
-		} else if (value.equals("BrandName")) {
-			return this.getText(ErrorBrandName);
-		} else if (value.equals("ModelNumber")) {
-			return this.getText(ErrorModelNumber);
-		} else if (value.equals("SerialNumber")) {
-			return this.getText(ErrorSerialNumber);
-		} else if (value.equals("DateInstalled")) {
-			return this.getText(ErrorDateInstalled);
-		} else if (value.equals("AccessHours")) {
-			return this.getText(ErrorAccessHours);
-		} else if (value.equals("InstallationNotes")) {
-			return this.getText(ErrorInstallationNotes);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
 		}
-		return value;
-
+		return this.getText(ErrorMessage);
 	}
 
 	public void clearFields(String value) {
@@ -1003,7 +1037,103 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				this.clearFields(asList.get(i));
 			}
 		}
-
 	}
 
+	public String prepopulationFields(String value) {
+		if (value.equals("FirstName")) {
+			String data = this.getTextAttribute(FirstName);
+			return data;
+		} else if (value.equals("LastName")) {
+			String data = this.getTextAttribute(LastName);
+			return data;
+		} else if (value.equals("OrganizationName")) {
+			String data = this.getTextAttribute(OrganizationName);
+			return data;
+		} else if (value.equals("Website")) {
+			String data = this.getTextAttribute(Website);
+			return data;
+		} else if (value.equals("Address1")) {
+			String data = this.getTextAttribute(Address1);
+			return data;
+		} else if (value.equals("Address2")) {
+			String data = this.getTextAttribute(Address2);
+			return data;
+		} else if (value.equals("City")) {
+			String data = this.getTextAttribute(City);
+			return data;
+		} else if (value.equals("State")) {
+			String data = this.getTextAttribute(State);
+			return data;
+		} else if (value.equals("Zipcode")) {
+			String data = this.getTextAttribute(ZipCode);
+			return data;
+		} else if (value.equals("LeadSources")) {
+			String data = this.getTextAttribute(LeadSource);
+			return data;
+		} else if (value.equals("PhoneNumber")) {
+			String data = this.getTextAttribute(PhoneNumber);
+			return data;
+		} else if (value.equals("JobTittle")) {
+			String data = this.getTextAttribute(JobTittle);
+			return data;
+		} else if (value.equals("Email")) {
+			String data = this.getTextAttribute(Email);
+			return data;
+		} else if (value.equals("ContactEmail")) {
+			String data = this.getTextAttribute(ContactEmail);
+			return data;
+		} else if (value.equals("ContactPhoneNumber")) {
+			String data = this.getTextAttribute(ContactPhoneNumber);
+			return data;
+		} else if (value.equals("PropertyFirstName")) {
+			String data = this.getTextAttribute(PropertyFirstName);
+			return data;
+		} else if (value.equals("PropertyLastName")) {
+			String data = this.getTextAttribute(PropertyLastName);
+			return data;
+		} else if (value.equals("PropertyName")) {
+			String data = this.getTextAttribute(PropertyName);
+			return data;
+		} else if (value.equals("LocationAddress1")) {
+			String data = this.getTextAttribute(PropertyAddress1);
+			return data;
+		} else if (value.equals("LocationAddress2")) {
+			String data = this.getTextAttribute(PropertyAddress2);
+			return data;
+		} else if (value.equals("LocationCity")) {
+			String data = this.getTextAttribute(PropertyCityName);
+			return data;
+		} else if (value.equals("LocationState")) {
+			String data = this.getTextAttribute(PropertyStateName);
+			return data;
+		} else if (value.equals("LocationZipcode")) {
+			String data = this.getTextAttribute(PropertyZipcode);
+			return data;
+		} else if (value.equals("ProductName")) {
+			String data = this.getTextAttribute(ProductName);
+			return data;
+		} else if (value.equals("BrandName")) {
+			String data = this.getTextAttribute(BrandName);
+			return data;
+		} else if (value.equals("ModelNumber")) {
+			String data = this.getTextAttribute(ModelNumber);
+			return data;
+		} else if (value.equals("SerialNumber")) {
+			String data = this.getTextAttribute(SerialNumber);
+			return data;
+		} else if (value.equals("DateInstalled")) {
+			String data = this.getTextAttribute(DateInstalled);
+			return data;
+		} else if (value.equals("WarrantyInformation")) {
+			String data = this.getTextAttribute(WarrantyInformation);
+			return data;
+		} else if (value.equals("AccessHours")) {
+			String data = this.getTextAttribute(AccessHours);
+			return data;
+		} else if (value.equals("InstallationNotes")) {
+			String data = this.getTextAttribute(InstallationNotes);
+			return data;
+		}
+		return value;
+	}
 }

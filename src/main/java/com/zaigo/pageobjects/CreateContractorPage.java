@@ -60,6 +60,8 @@ public class CreateContractorPage extends BaseClass {
 
 	private By contractor = By.xpath("//div[@id='inner-id']//following::a[text()='Contractor']");
 
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
+
 	private By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
@@ -152,9 +154,10 @@ public class CreateContractorPage extends BaseClass {
 
 	By clickclosebutton = By.xpath("//button[@data-automationid='c']");
 
-	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[1]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
 
-	By Edit = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[8]/div/div[2]/ul/li[2]");
+	By Edit = By
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 
 	By NameValidation = By.xpath("(//a[@data-goesto='user-profile-view'])[1]");
 
@@ -165,7 +168,7 @@ public class CreateContractorPage extends BaseClass {
 	By Invalid = By.xpath("//div[text()='No Result Found']");
 
 	By Search = By.id("team-user-contract-search");
-	
+
 	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
 
 	By ContractorCount = By.id("total-company-contractor-count");
@@ -180,7 +183,8 @@ public class CreateContractorPage extends BaseClass {
 	By SaveNxt = By.xpath("//button[@data-spinloader='company_contractor_create_edit']");
 	By Assertion = By.xpath("//span[text()='Contractor have been updated successfully']");
 
-	By Delete = By.xpath("(//*[@data-tabformid='undefined'])[4]");
+	By Delete = By
+			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By DeleteAssert = By.xpath("//span[text()='Contractor have been deleted successfully']");
 
@@ -265,6 +269,9 @@ public class CreateContractorPage extends BaseClass {
 	public By ErrorCity = By.id("addresses__city__0_error");
 	public By ErrorZipCode = By.id("addresses__zipcode__0_error");
 	public By Previous = By.xpath("//*[text()='Previous']");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
@@ -353,16 +360,16 @@ public class CreateContractorPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
 	By EditHeading = By.xpath("//a[@data-exitpopup='team_companies_company']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[2]/span/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListCompanyName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]/span/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListEmail;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[6]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListPhoneNumber;
 	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
@@ -407,6 +414,16 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
+				this.mouseActionClick(saveform);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
+		}
+		return this.getText(ErrorMessage);
+	}
+
 	public String errorFields(String value) {
 		if (value.equals("CompanyName")) {
 			return this.getText(ErrorCompanyName);
@@ -415,7 +432,12 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("LastName")) {
 			return this.getText(contractorcpersonerrlastname);
 		} else if (value.equals("Email")) {
-			return this.getText(contractoremailerr);
+			if (this.conditionChecking(contractoremailerr)) {
+				return this.getText(contractoremailerr);
+			} else {
+				this.mouseActionClick(saveform);
+				return this.getText(contractoremailerr);
+			}
 		} else if (value.equals("PhoneNumber")) {
 			return this.getText(contractorphoneerr);
 		} else if (value.equals("Fax")) {
@@ -453,8 +475,7 @@ public class CreateContractorPage extends BaseClass {
 			this.mouseActionClick(Previous);
 		} else if (value.equals("SaveButton")) {
 			this.mouseActionClick(saveform);
-			if (this.conditionChecking(ErrorCompanyName)) {
-			} else {
+			if (!this.conditionChecking(ErrorCompanyName)) {
 				do {
 					this.mouseActionClick(saveform);
 				} while (!this.conditionChecking(ErrorCompanyName));
@@ -476,7 +497,8 @@ public class CreateContractorPage extends BaseClass {
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
 			this.valuePresent(CompanyName, text);
-			driver.navigate().refresh();
+//			driver.navigate().refresh();
+			this.invisible(Spinner);
 			this.valuePresent(CompanyName, text);
 			this.elementtobeClickable(saveform);
 		} else if (value.equals("Delete")) {
@@ -641,32 +663,22 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
-	static String ContractorName;
-	static String ContractorFirstName;
-	static String ContractorLastName;
-	static String ContractorEmail;
-	static String ContractorPhoneNumber;
-	static String ContractorWebSite;
-	static String ContractorFaxNumber;
-	static String ContractorLocationName;
-	static String ContractorLocationEmail;
-	static String ContractorLocationContactPerson;
-	static String ContractorLocationPhoneNumber;
-	static String ContractorLocationAddress1;
-	static String ContractorLocationAddress2;
-	static String ContractorLocationCity;
-	static String ContractorLocationState;
-	static String ContractorLocationZipcode;
-
-	public String prepopulation(int value) {
-		String data[] = { ContractorName, ContractorFirstName, ContractorLastName, ContractorEmail,
-				ContractorPhoneNumber, ContractorWebSite, ContractorFaxNumber, ContractorLocationName,
-				ContractorLocationEmail, ContractorLocationContactPerson, ContractorLocationPhoneNumber,
-				ContractorLocationAddress1, ContractorLocationAddress2, ContractorLocationCity, ContractorLocationState,
-				ContractorLocationZipcode };
-		return data[value];
-
-	}
+	public static String ContractorName;
+	public static String ContractorFirstName;
+	public static String ContractorLastName;
+	public static String ContractorEmail;
+	public static String ContractorPhoneNumber;
+	public static String ContractorWebSite;
+	public static String ContractorFaxNumber;
+	public static String ContractorLocationName;
+	public static String ContractorLocationEmail;
+	public static String ContractorLocationContactPerson;
+	public static String ContractorLocationPhoneNumber;
+	public static String ContractorLocationAddress1;
+	public static String ContractorLocationAddress2;
+	public static String ContractorLocationCity;
+	public static String ContractorLocationState;
+	public static String ContractorLocationZipcode;
 
 	public String prepopulationFields(String value) {
 		if (value.equals("CompanyName")) {
@@ -771,6 +783,17 @@ public class CreateContractorPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking1(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 3);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 	static String response;
@@ -786,7 +809,8 @@ public class CreateContractorPage extends BaseClass {
 					Thread.sleep(10000);
 					this.mouseActionClick(saveform);
 					if (this.conditionChecking(Message)) {
-						this.responseMessage("Message");
+						response = this.getText(Message);
+						this.invisible(Message);
 						if (response.equals(getPropertyValue("CompanyContractorCreatedMessage"))
 								|| response.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
 							conditionCheck = false;
