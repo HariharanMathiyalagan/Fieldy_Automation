@@ -4,14 +4,14 @@
 	<suite-files>
 
 		<suite-file path="Onboarding_Login_Team_Customer.xml" />
-
+		
+		<suite-file path="Dispatch.xml" />
+		
 		<suite-file path="JobRequest.xml" />
 
 		<suite-file path="QuoteInvoice.xml" />
 
 		<suite-file path="Settings.xml" />
-		
-		<suite-file path="Dispatch.xml" />
 
 	</suite-files>
 </suite> <!-- Suite -->

@@ -3,25 +3,32 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.CustomerOrganizationRequest">
+      <class name="org.test.ServiceModule">
         <methods>
-          <include name="startedRequest"/>
-          <include name="searchRequestNo"/>
-          <include name="searchLocation"/>
-          <include name="dispatchedRequest"/>
-          <include name="requestDraftStatus"/>
-          <include name="searchFilterByDate"/>
-          <include name="searchInvalid"/>
-          <include name="cancelledRequest"/>
+          <include name="createProduct"/>
+          <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
-          <include name="deletedRequest"/>
-          <include name="requestCompleteStatus"/>
-          <include name="completedRequest"/>
-          <include name="requestCancelledStatus"/>
-          <include name="requestStartedStatus"/>
+          <include name="updateProduct"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
           <include name="setup"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteAfterCatch"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
         </methods>
-      </class> <!-- org.test.CustomerOrganizationRequest -->
+      </class> <!-- org.test.ServiceModule -->
+      <class name="org.test.ProductModule">
+        <methods>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.test.ProductModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
