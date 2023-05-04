@@ -23,6 +23,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
+import com.zaigo.pageobjects.EditDetailScreenCompaniesPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.utility.BrowserSetup;
@@ -59,7 +60,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		driver.manage().deleteAllCookies();
 	}
 
-	@Test(priority = -2) // 1-Login
+	@Test(priority = -1) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
@@ -83,7 +84,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = -1)
+	@Test(priority = 0)
 	private void contactModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Navigate to Customer Contact Page");
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
@@ -104,7 +105,7 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 0)
+	@Test(priority = 1)
 	private void createLabel() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Customer Contact Page");
 		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
@@ -169,14 +170,15 @@ public class CustomerCreateContactModule extends BaseClass {
 //
 //	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void mandatoryValidation() throws AWTException, IOException {
 		extentTest = extentReports.createTest(
 				"Check Customer Contact Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		CustomerCreateContactPage mandatoryValidation = PageFactory.initElements(driver,
 				CustomerCreateContactPage.class);
 		mandatoryValidation.firstNameValidation("MandatoryValidation");
-		String errorMandatoryValidation = mandatoryValidation.errorField("FirstName");
+//		String errorMandatoryValidation = mandatoryValidation.errorField("FirstName");
+		String errorMandatoryValidation = mandatoryValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -192,13 +194,14 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	private void maxValidationFirstNameField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.firstNameValidation("MaxValidation");
-		String errorFirstName = maxValidation.errorField("FirstName");
+//		String errorFirstName = maxValidation.errorField("FirstName");
+		String errorFirstName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result - Maximum Validation First Name Field is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result - Maximum Validation First Name Field is -"
 				+ getPropertyValue("Max256CharacterValidation"));
@@ -220,13 +223,14 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void maxValidationLastNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.lastNameValidation("MaxValidation");
-		String errorFirstName = minValidation.errorField("LastName");
+//		String errorFirstName = minValidation.errorField("LastName");
+		String errorFirstName = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -244,13 +248,14 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5)
 	private void maxValidationJobTittle() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Job Tittle Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.jobTittleValidation("MaxValidation");
-		String errorJobTittle = maxValidation.errorField("JobTittle");
+//		String errorJobTittle = maxValidation.errorField("JobTittle");
+		String errorJobTittle = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorJobTittle);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -269,13 +274,14 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 6)
 	private void maxValidationEmailField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Customer Contact Email Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.emailValidation("MaxValidation");
-		String errorEmail = maxValidation.errorField("Email");
+//		String errorEmail = maxValidation.errorField("Email");
+		String errorEmail = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -294,13 +300,40 @@ public class CustomerCreateContactModule extends BaseClass {
 
 	}
 
+	@Test(priority = 7)
+	private void maxValidationTaxNumberField() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Customer Contact] Tax Number Field exceed its max-256 limit");
+		CustomerCreateContactPage maxValidationLocationField = PageFactory.initElements(driver,
+				CustomerCreateContactPage.class);
+		maxValidationLocationField.taxNumber("MaxValidation");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidationLocationField.clearFields("TaxNumber");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLastNameMaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
+			maxValidationLocationField.clearFields("TaxNumber");
+		}
+	}
+
 	@Test(priority = 8)
 	private void invalidValidationEmailField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify error message is displayed when Customer Contact invalid email is entered in Email Field");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.emailValidation("ValidEmail");
-		String errorEmail = maxValidation.errorField("Email");
+//		String errorEmail = maxValidation.errorField("Email");
+		String errorEmail = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -324,7 +357,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				.createTest("Verify Error Message is displayed when special character provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("SpecialCharacter");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterPhoneNumber"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -340,7 +374,6 @@ public class CustomerCreateContactModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("MinPhoneNumberValidation.png");
 			minValidation.clearFields("PhoneNumber");
 		}
-
 	}
 
 	@Test(priority = 10)
@@ -349,7 +382,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when alphabetic character provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("ValidPhoneNumber");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -374,7 +408,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("MinValidation");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -399,7 +434,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Phone Number Field exceed its max-20 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.phoneNumberValidation("MaxValidation");
-		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -426,7 +462,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyFirstNameValidation("MaxValidation");
-		String errorPropertyName = maxValidation.errorField("PropertyFirstName");
+//		String errorPropertyName = maxValidation.errorField("PropertyFirstName");
+		String errorPropertyName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -451,7 +488,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyLastNameValidation("MaxValidation");
-		String errorPropertyName = maxValidation.errorField("PropertyLastName");
+//		String errorPropertyName = maxValidation.errorField("PropertyLastName");
+		String errorPropertyName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -476,7 +514,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyNameValidation("MaxValidation");
-		String errorContactPerson = maxValidation.errorField("PropertyName");
+//		String errorContactPerson = maxValidation.errorField("PropertyName");
+		String errorContactPerson = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -501,7 +540,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Address1 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyAddress1Validation("MaxValidation");
-		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
+//		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
+		String errorAddress1Field = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -526,7 +566,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Address2 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyAddress2Validation("MaxValidation");
-		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
+//		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
+		String errorAddress1Field = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result Field is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -550,7 +591,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property City Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyCityValidation("MaxValidation");
-		String errorCityField = maxValidation.errorField("City");
+//		String errorCityField = maxValidation.errorField("City");
+		String errorCityField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -575,7 +617,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property State Field exceed its max-45 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyStateValidation("MaxValidation");
-		String errorStateField = maxValidation.errorField("State");
+//		String errorStateField = maxValidation.errorField("State");
+		String errorStateField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorStateField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -599,7 +642,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.propertyZipcodeValidation("MinValidation");
-		String errorZipcodeField = minValidation.errorField("Zipcode");
+//		String errorZipcodeField = minValidation.errorField("Zipcode");
+		String errorZipcodeField = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -623,7 +667,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyZipcodeValidation("MaxValidation");
-		String errorZipcodeField = maxValidation.errorField("Zipcode");
+//		String errorZipcodeField = maxValidation.errorField("Zipcode");
+		String errorZipcodeField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -647,7 +692,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when special character provided in Property Zipcode field");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyZipcodeValidation("SpecialCharacter");
-		String errorZipcodeField = maxValidation.errorField("Zipcode");
+//		String errorZipcodeField = maxValidation.errorField("Zipcode");
+		String errorZipcodeField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -673,7 +719,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Product Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.productNameValidation("MaxValidation");
-		String errorProductField = maxValidation.errorField("ProductName");
+//		String errorProductField = maxValidation.errorField("ProductName");
+		String errorProductField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorProductField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -697,7 +744,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Brand Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.brandNameValidation("MaxValidation");
-		String errorBrandField = maxValidation.errorField("BrandName");
+//		String errorBrandField = maxValidation.errorField("BrandName");
+		String errorBrandField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorBrandField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -721,7 +769,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Model Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.modelNumberValidation("MaxValidation");
-		String errorModelField = maxValidation.errorField("ModelNumber");
+//		String errorModelField = maxValidation.errorField("ModelNumber");
+		String errorModelField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorModelField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -745,7 +794,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Serial Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.serialNumberValidation("MaxValidation");
-		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
+//		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
+		String errorSerialNumberField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -793,7 +843,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Access Hours Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.accessHoursValidation("MaxValidation");
-		String errorAccessHours = maxValidation.errorField("AccessHours");
+//		String errorAccessHours = maxValidation.errorField("AccessHours");
+		String errorAccessHours = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -817,7 +868,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Installation Notes Field exceed its max-2048 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.installationNotesValidation("MaxValidation");
-		String errorAccessHours = maxValidation.errorField("InstallationNotes");
+//		String errorAccessHours = maxValidation.errorField("InstallationNotes");
+		String errorAccessHours = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -825,7 +877,6 @@ public class CustomerCreateContactModule extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("InstallationNotes");
 			maxValidation.clearFields("Previous");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -969,7 +1020,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify [Email Already Exists] Error is dispalyed when already existing mail ID is provided");
 		CustomerCreateContactPage alreadyExisted = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		alreadyExisted.emailValidation("UniqueEmail");
-		String responseMessageCreateContact = alreadyExisted.errorField("Email");
+//		String responseMessageCreateContact = alreadyExisted.errorField("Email");
+		String responseMessageCreateContact = alreadyExisted.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessageCreateContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1261,6 +1313,28 @@ public class CustomerCreateContactModule extends BaseClass {
 		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.jobTittle);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(CustomerCreateContactPage.jobTittle)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 44)
+	public void taxNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Tax Number:" + CustomerCreateContactPage.taxNumber
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("TaxNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.taxNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.taxNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1663,7 +1737,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage mandatoryValidation = PageFactory.initElements(driver,
 				CustomerCreateContactPage.class);
 		mandatoryValidation.firstNameValidation("MandatoryValidation");
-		String errorMandatoryValidation = mandatoryValidation.errorField("FirstName");
+//		String errorMandatoryValidation = mandatoryValidation.errorField("FirstName");
+		String errorMandatoryValidation = mandatoryValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatoryValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1685,7 +1760,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.firstNameValidation("MaxValidation");
-		String errorFirstName = maxValidation.errorField("FirstName");
+//		String errorFirstName = maxValidation.errorField("FirstName");
+		String errorFirstName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result - Maximum Validation First Name Field is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result - Maximum Validation First Name Field is -"
 				+ getPropertyValue("Max256CharacterValidation"));
@@ -1713,7 +1789,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.lastNameValidation("MaxValidation");
-		String errorFirstName = minValidation.errorField("LastName");
+//		String errorFirstName = minValidation.errorField("LastName");
+		String errorFirstName = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1737,7 +1814,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Job Tittle Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.jobTittleValidation("MaxValidation");
-		String errorJobTittle = maxValidation.errorField("JobTittle");
+//		String errorJobTittle = maxValidation.errorField("JobTittle");
+		String errorJobTittle = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorJobTittle);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1762,7 +1840,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Email Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.emailValidation("MaxValidation");
-		String errorEmail = maxValidation.errorField("Email");
+//		String errorEmail = maxValidation.errorField("Email");
+		String errorEmail = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1787,7 +1866,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify error message is displayed when Customer Contact invalid email is entered in Email Field");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.emailValidation("ValidEmail");
-		String errorEmail = maxValidation.errorField("Email");
+//		String errorEmail = maxValidation.errorField("Email");
+		String errorEmail = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1805,13 +1885,40 @@ public class CustomerCreateContactModule extends BaseClass {
 		}
 	}
 
+	@Test(priority = 67)
+	private void editmaxValidationTaxNumberField() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Customer Contact] Tax Number Field exceed its max-256 limit");
+		CustomerCreateContactPage maxValidationLocationField = PageFactory.initElements(driver,
+				CustomerCreateContactPage.class);
+		maxValidationLocationField.taxNumber("MaxValidation");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidationLocationField.clearFields("TaxNumber");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLastNameMaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
+			maxValidationLocationField.clearFields("TaxNumber");
+		}
+	}
+
 	@Test(priority = 68)
 	private void editSpecialCharacterPhoneNumberField() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when special character provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("SpecialCharacter");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterPhoneNumber"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1836,7 +1943,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when alphabetic character provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("ValidPhoneNumber");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1861,7 +1969,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when less than min-6 limit is provided in Phone Number field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.phoneNumberValidation("MinValidation");
-		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1886,7 +1995,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Phone Number Field exceed its max-20 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.phoneNumberValidation("MaxValidation");
-		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
+//		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
+		String errorPhoneNumber = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1915,7 +2025,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property First Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyFirstNameValidation("MaxValidation");
-		String errorPropertyName = maxValidation.errorField("PropertyFirstName");
+//		String errorPropertyName = maxValidation.errorField("PropertyFirstName");
+		String errorPropertyName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1940,7 +2051,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Last Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyLastNameValidation("MaxValidation");
-		String errorPropertyName = maxValidation.errorField("PropertyLastName");
+//		String errorPropertyName = maxValidation.errorField("PropertyLastName");
+		String errorPropertyName = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1965,7 +2077,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyNameValidation("MaxValidation");
-		String errorContactPerson = maxValidation.errorField("PropertyName");
+//		String errorContactPerson = maxValidation.errorField("PropertyName");
+		String errorContactPerson = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1990,7 +2103,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Address1 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyAddress1Validation("MaxValidation");
-		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
+//		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
+		String errorAddress1Field = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2015,7 +2129,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Address2 Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyAddress2Validation("MaxValidation");
-		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
+//		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
+		String errorAddress1Field = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result Field is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2039,7 +2154,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property City Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyCityValidation("MaxValidation");
-		String errorCityField = maxValidation.errorField("City");
+//		String errorCityField = maxValidation.errorField("City");
+		String errorCityField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2064,7 +2180,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property State Field exceed its max-45 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyStateValidation("MaxValidation");
-		String errorStateField = maxValidation.errorField("State");
+//		String errorStateField = maxValidation.errorField("State");
+		String errorStateField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorStateField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2088,7 +2205,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when less than min-3 limit is provided in Zipcode field");
 		CustomerCreateContactPage minValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		minValidation.propertyZipcodeValidation("MinValidation");
-		String errorZipcodeField = minValidation.errorField("Zipcode");
+//		String errorZipcodeField = minValidation.errorField("Zipcode");
+		String errorZipcodeField = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2112,7 +2230,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyZipcodeValidation("MaxValidation");
-		String errorZipcodeField = maxValidation.errorField("Zipcode");
+//		String errorZipcodeField = maxValidation.errorField("Zipcode");
+		String errorZipcodeField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2136,7 +2255,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Property Zipcode Field exceed its max-10 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.propertyZipcodeValidation("SpecialCharacter");
-		String errorZipcodeField = maxValidation.errorField("Zipcode");
+//		String errorZipcodeField = maxValidation.errorField("Zipcode");
+		String errorZipcodeField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2145,7 +2265,6 @@ public class CustomerCreateContactModule extends BaseClass {
 			maxValidation.clearFields("Zipcode");
 			maxValidation.nextButton();
 			maxValidation.clearAllFields("EquipmentPage");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -2166,7 +2285,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Product Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.productNameValidation("MaxValidation");
-		String errorProductField = maxValidation.errorField("ProductName");
+//		String errorProductField = maxValidation.errorField("ProductName");
+		String errorProductField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorProductField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2190,7 +2310,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Brand Name Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.brandNameValidation("MaxValidation");
-		String errorBrandField = maxValidation.errorField("BrandName");
+//		String errorBrandField = maxValidation.errorField("BrandName");
+		String errorBrandField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorBrandField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2214,7 +2335,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Model Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.modelNumberValidation("MaxValidation");
-		String errorModelField = maxValidation.errorField("ModelNumber");
+//		String errorModelField = maxValidation.errorField("ModelNumber");
+		String errorModelField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorModelField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2238,7 +2360,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Serial Number Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.serialNumberValidation("MaxValidation");
-		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
+//		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
+		String errorSerialNumberField = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2286,7 +2409,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Access Hours Field exceed its max-256 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.accessHoursValidation("MaxValidation");
-		String errorAccessHours = maxValidation.errorField("AccessHours");
+//		String errorAccessHours = maxValidation.errorField("AccessHours");
+		String errorAccessHours = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2310,7 +2434,8 @@ public class CustomerCreateContactModule extends BaseClass {
 				"Verify Error Message is displayed when Customer Contact Installation Notes Field exceed its max-2048 limit");
 		CustomerCreateContactPage maxValidation = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		maxValidation.installationNotesValidation("MaxValidation");
-		String errorAccessHours = maxValidation.errorField("InstallationNotes");
+//		String errorAccessHours = maxValidation.errorField("InstallationNotes");
+		String errorAccessHours = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

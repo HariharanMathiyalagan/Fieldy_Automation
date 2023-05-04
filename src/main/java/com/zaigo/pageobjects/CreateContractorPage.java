@@ -59,9 +59,9 @@ public class CreateContractorPage extends BaseClass {
 	private By company = By.xpath("//span[text()='Companies']");
 
 	private By contractor = By.xpath("//div[@id='inner-id']//following::a[text()='Contractor']");
-	
+
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
-	
+
 	private By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
@@ -269,6 +269,9 @@ public class CreateContractorPage extends BaseClass {
 	public By ErrorCity = By.id("addresses__city__0_error");
 	public By ErrorZipCode = By.id("addresses__zipcode__0_error");
 	public By Previous = By.xpath("//*[text()='Previous']");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
@@ -409,6 +412,16 @@ public class CreateContractorPage extends BaseClass {
 			this.clearField(Search);
 		}
 
+	}
+
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
+				this.mouseActionClick(saveform);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
+		}
+		return this.getText(ErrorMessage);
 	}
 
 	public String errorFields(String value) {
@@ -764,6 +777,17 @@ public class CreateContractorPage extends BaseClass {
 		try {
 			wait = new WebDriverWait(driver, 20);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 3);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}

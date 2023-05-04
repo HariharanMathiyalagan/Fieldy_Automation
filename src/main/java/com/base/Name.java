@@ -53,10 +53,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name {
 	public static void main(String[] args) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, 0);
-		String currentDate = sdf.format(cal.getTime());
-		System.out.println(currentDate);
+		int parseInt = Integer.parseInt("6");
+		int halfValue = parseInt / 2;
+//		System.out.println(halfValue);
+		String valueOf = String.valueOf(halfValue);
+		System.out.println(halfValue + 1);
 	}
 }

@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import com.base.BaseClass;
 import com.github.javafaker.Business;
@@ -124,10 +125,10 @@ public class TaxPage extends BaseClass {
 		select.selectByIndex(num);
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -201,7 +202,9 @@ public class TaxPage extends BaseClass {
 
 	By Label = By.xpath("//*[@id='fieldy-body-ele']//header//div//div//div//a");
 
-	By Edit = By.xpath("//*[@id='tax-list']/div[1]/div/div/div[3]/button/div/i");
+	By Edit = By.xpath("//*[@id='tax-list']/div[1]/div/div/div[3]/button[1]");
+
+	By Delete = By.xpath("//*[@id='tax-list']/div[1]/div/div/div[3]/button[2]");
 
 	By ListTaxName = By.xpath("//*[@id='tax-list']/div[1]/div/div/div[1]");
 
@@ -224,6 +227,20 @@ public class TaxPage extends BaseClass {
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 
 	By ProductService = By.xpath("//*[text()=' Product / Service']");
+
+	By Back = By.xpath("//*[@id='fieldy-body-ele']/div[1]/header/div/div/div/a/img");
+
+	By Yes = By.xpath("//*[text()='Yes']");
+
+	By AssociateTaxCheckBox = By.xpath("//*[@id='tax-view']");
+
+	By SubTaxName1 = By.xpath("//*[@id='associated_tax']//div[1]//div[1]//div[1]//div//input");
+
+	By SubTaxName2 = By.xpath("//*[@id='associated_tax']//div//div[2]//div[1]//div//input");
+
+	By SubTaxNumber1 = By.xpath("//*[@id='associated_tax']//div//div[1]//div[2]//div//input");
+
+	By SubTaxNumber2 = By.xpath("//*[@id='associated_tax']//div//div[2]//div[2]//div//input");
 
 	@FindAll({
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
@@ -258,6 +275,10 @@ public class TaxPage extends BaseClass {
 		} else if (value.equals("TaxPercentage")) {
 			this.clearField(TaxPercentage);
 //			this.inputText(TaxPercentage, fakeTaxPercentage);
+		} else if (value.equals("SubTaxName")) {
+			this.clearField(SubTaxName1);
+		} else if (value.equals("SubTaxPercentage")) {
+			this.clearField(SubTaxNumber1);
 		}
 	}
 
@@ -276,34 +297,75 @@ public class TaxPage extends BaseClass {
 	}
 
 	static String ResponseMessage;
-	static String AlternateResponseMessage;
 
-	public String message(String value) throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			ResponseMessage = this.getText(Message);
-			this.invisible(Message);
-			return ResponseMessage;
+			if (this.conditionChecking(Message, 20)) {
+				ResponseMessage = this.getText(Message);
+				this.invisible(Message);
+				return ResponseMessage;
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(Button);
+					if (this.conditionChecking(Message, 20)) {
+						ResponseMessage = this.getText(Message);
+						this.invisible(Message);
+						if (ResponseMessage.equals(getPropertyValue("CreatedTax"))
+								|| ResponseMessage.equals(getPropertyValue("EditedTax"))
+								|| ResponseMessage.equals(getPropertyValue("AlreadyTax"))
+								|| ResponseMessage.equals(getPropertyValue("AssociateTaxValidation"))
+								|| ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+							conditionCheck = false;
+						}
+					}
+				} while (conditionCheck);
+			}
 		} else if (value.equals("AlternateMessage")) {
 			do {
-				if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
+				if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))
+						|| ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
 					String TaxValue = RandomStringUtils.randomNumeric(2);
 					this.clearField(TaxPercentage);
 					this.inputText(TaxPercentage, TaxValue);
 					this.mouseActionClick(Button);
-					AlternateResponseMessage = this.getText(Message);
-					this.invisible(Message);
-					return AlternateResponseMessage;
+				} else if (ResponseMessage.equals(getPropertyValue("AlreadyTax"))) {
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeTaxName = faker.book().genre();
+					this.clearField(TaxName);
+					this.inputText(TaxName, fakeTaxName);
+					this.mouseActionClick(Button);
 				}
-				if (AlternateResponseMessage.equals(getPropertyValue("CreatedTax"))
-						|| AlternateResponseMessage.equals(getPropertyValue("EditedTax"))) {
-					conditionCheck = false;
+				if (this.conditionChecking(Message, 20)) {
+					ResponseMessage = this.getText(Message);
+					this.invisible(Message);
+					if (ResponseMessage.equals(getPropertyValue("CreatedTax"))
+							|| ResponseMessage.equals(getPropertyValue("EditedTax"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(Button);
+						if (this.conditionChecking(Message, 20)) {
+							ResponseMessage = this.getText(Message);
+							this.invisible(Message);
+							if (ResponseMessage.equals(getPropertyValue("CreatedTax"))
+									|| ResponseMessage.equals(getPropertyValue("EditedTax"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
 				}
 			} while (conditionCheck);
 		}
 		return value;
 
 	}
+
+	static String taxName;
+	static String taxPercentage;
 
 	public void taxNameField(String value) {
 		if (value.equals("MaxValidation")) {
@@ -312,12 +374,34 @@ public class TaxPage extends BaseClass {
 			this.mouseActionClick(Button);
 		} else if (value.equals("Mandatory")) {
 			this.mouseActionClick(Button);
-			if (this.conditionChecking(TaxNameError)) {
+			if (this.conditionChecking(TaxNameError, 2)) {
 			} else {
 				do {
 					this.mouseActionClick(Button);
-				} while (!this.conditionChecking(TaxNameError));
+				} while (!this.conditionChecking(TaxNameError, 2));
 			}
+		} else if (value.equals("UniqueValidation")) {
+			String text = this.getText(ListTaxName);
+			this.mouseActionClick(Button);
+			this.inputText(TaxName, text);
+			this.inputText(TaxPercentage, "10");
+			this.mouseActionClick(Button);
+		} else if (value.equals("AssociateTaxUnique")) {
+			taxName = this.getTextAttribute(TaxName);
+			taxPercentage = this.getTextAttribute(TaxPercentage);
+			this.mouseActionClick(AssociateTaxCheckBox);
+			this.inputText(SubTaxName1, taxName);
+			this.inputText(SubTaxNumber1, taxPercentage);
+			this.mouseActionClick(Button);
+		} else if (value.equals("TaxPercentage")) {
+			this.inputText(SubTaxName1, fakeTaxName);
+			int parseInt = Integer.parseInt(taxPercentage);
+			int halfValue = parseInt / 2;
+			String valueOf = String.valueOf(halfValue);
+			this.inputText(SubTaxNumber1, valueOf);
+			this.mouseActionClick(Button);
+		} else if (value.equals("SubTaxValue")) {
+			this.inputText(SubTaxNumber1, taxPercentage);
 		}
 	}
 
@@ -345,6 +429,18 @@ public class TaxPage extends BaseClass {
 			this.mouseActionClick(Button);
 		} else if (value.equals("ButtonPresent")) {
 			return this.getText(Button);
+		} else if (value.equals("BackButton")) {
+			this.mouseActionClick(Back);
+			this.mouseActionClick(Yes);
+		} else if (value.equals("Delete")) {
+			if (this.conditionChecking(Delete, 5)) {
+				this.mouseActionClick(Delete);
+				this.mouseActionClick(Yes);
+			} else {
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
+			}
+		} else if (value.equals("CheckBox")) {
+			this.mouseActionClick(AssociateTaxCheckBox);
 		}
 		return value;
 	}
@@ -354,14 +450,18 @@ public class TaxPage extends BaseClass {
 		return text;
 	}
 
-	public void clearAllFields() {
+	public void clearAllFields(String value) {
 		this.clearField(TaxName);
 		this.clearField(TaxPercentage);
+		if (value.equals("SubTax")) {
+			this.clearField(SubTaxName1);
+			this.clearField(SubTaxNumber1);
+		}
 	}
 
 	static String FieldTaxName;
 
-	public String createEdit(String value) throws IOException {
+	public String createEdit(String value) throws IOException, InterruptedException {
 		if (value.equals("Create")) {
 			this.mouseActionClick(Button);
 			this.inputText(TaxName, fakeTaxName);
@@ -379,7 +479,7 @@ public class TaxPage extends BaseClass {
 			String text = this.getText(ListTaxName);
 			this.mouseActionClick(Edit);
 			this.valuePresent(TaxName, text);
-			this.clearAllFields();
+			this.clearAllFields("value");
 			this.inputText(TaxName, fakeTaxName);
 			FieldTaxName = this.getTextAttribute(TaxName);
 			this.inputText(TaxPercentage, fakeTaxPercentage);
@@ -387,6 +487,13 @@ public class TaxPage extends BaseClass {
 			String message2 = this.message("Message");
 			if (!message2.equals(getPropertyValue("EditedTax"))) {
 				this.message("AlternateMessage");
+			} else if (value.equals("Delete")) {
+				this.mouseActionClick(settings_menu);
+				this.mouseActionClick(TaxSettings);
+				FieldTaxName = this.getText(TaxName);
+				this.mouseActionClick(Delete);
+				this.mouseActionClick(Yes);
+				this.message("Message");
 			}
 			return FieldTaxName;
 		}

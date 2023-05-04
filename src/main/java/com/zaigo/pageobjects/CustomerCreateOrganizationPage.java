@@ -678,82 +678,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	By Name = By.xpath("//td[text()='Organization Name']");
-
-	public void Condition() {
-		this.assertName(Name, "Organization Name");
-
-	}
-
-	public String errorField(String value) {
-		if (value.equals("OrganizationName")) {
-			return this.getText(OrganizationError);
-		} else if (value.equals("Website")) {
-			return this.getText(WebsiteError);
-		} else if (value.equals("Address1")) {
-			return this.getText(Address1Error);
-		} else if (value.equals("Address2")) {
-			return this.getText(Address2Error);
-		} else if (value.equals("City")) {
-			return this.getText(CityError);
-		} else if (value.equals("State")) {
-			return this.getText(StateError);
-		} else if (value.equals("Zipcode")) {
-			return this.getText(ZipCodeError);
-		} else if (value.equals("Email")) {
-			return this.getText(EmailError);
-		} else if (value.equals("PhoneNumber")) {
-			return this.getText(PhoneNumberError);
-		} else if (value.equals("ContactFirstName")) {
-			return this.getText(FirstNameError);
-		} else if (value.equals("ContactLastName")) {
-			return this.getText(LastNameError);
-		} else if (value.equals("ContactEmail")) {
-			if (!this.conditionChecking1(ContactEmailError)) {
-				do {
-					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ContactEmailError));
-			}
-			return this.getText(ContactEmailError);
-		} else if (value.equals("ContactPhoneNumber")) {
-			return this.getText(ContactPhoneNumberError);
-		} else if (value.equals("ContactJobTittle")) {
-			return this.getText(JobTittleError);
-		} else if (value.equals("PropertyFirstName")) {
-			return this.getText(ErrorPropertyFirstName);
-		} else if (value.equals("PropertyLastName")) {
-			return this.getText(ErrorPropertyLastName);
-		} else if (value.equals("PropertyName")) {
-			return this.getText(ErrorPropertyName);
-		} else if (value.equals("PropertyAddress1")) {
-			return this.getText(ErrorPropertyAddress1);
-		} else if (value.equals("PropertyAddress2")) {
-			return this.getText(ErrorPropertyAddress2);
-		} else if (value.equals("PropertyCity")) {
-			return this.getText(ErrorPropertyCityName);
-		} else if (value.equals("PropertyState")) {
-			return this.getText(ErrorPropertyStateName);
-		} else if (value.equals("PropertyZipcode")) {
-			return this.getText(ErrorPropertyZipCode);
-		} else if (value.equals("ProductName")) {
-			return this.getText(ErrorProductName);
-		} else if (value.equals("BrandName")) {
-			return this.getText(ErrorBrandName);
-		} else if (value.equals("ModelNumber")) {
-			return this.getText(ErrorModelNumber);
-		} else if (value.equals("SerialNumber")) {
-			return this.getText(ErrorSerialNumber);
-		} else if (value.equals("DateInstalled")) {
-			return this.getText(ErrorDateInstalled);
-		} else if (value.equals("AccessHours")) {
-			return this.getText(ErrorAccessHours);
-		} else if (value.equals("InstallationNotes")) {
-			return this.getText(ErrorInstallationNotes);
-		}
-
-		return value;
-	}
-
 	public String errorMessage() {
 		if (!this.conditionChecking1(ErrorMessage)) {
 			do {
@@ -762,7 +686,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			} while (!this.conditionChecking1(ErrorMessage));
 		}
 		return this.getText(ErrorMessage);
-
 	}
 
 	public void clearFields(String value) {

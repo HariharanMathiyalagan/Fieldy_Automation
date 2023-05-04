@@ -56,6 +56,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	public static String jobTittle;
 	public static String email;
 	public static String phoneNumber;
+	public static String taxNumber;
 	public static String leadSources;
 	public static String propertyFirstName;
 	public static String propertyLastName;
@@ -97,6 +98,9 @@ public class CustomerCreateContactPage extends BaseClass {
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']") })
 	WebElement SubPageVisible;
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 
 	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
@@ -258,6 +262,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.visibility(CustomerList);
 		this.getCount();
 		this.mouseActionClick(AddContact);
+		if (!this.conditionChecking(CreateContactLabel)) {
+			do {
+				this.mouseActionClick(AddContact);
+			} while (!this.conditionChecking(CreateContactLabel));
+
+		}
 		return text2;
 
 	}
@@ -284,7 +294,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[3]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]") })
 	WebElement LeadSources;
-
+	By TaxNumber = By.id("tax_number");
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Social;
@@ -300,10 +310,9 @@ public class CustomerCreateContactPage extends BaseClass {
 	By StateName = By.id("addresses__state__0");
 	By CityName = By.id("addresses__city__0");
 	By Zipcode = By.id("addresses__zipcode__0");
-
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
 	By AddProperty = By.xpath("(//*[@data-automationid='add-more']//child::i[@class='fa fa-plus'])[2]");
-
 	By ErrorPropertyName = By.id("addresses__location_name__0_error");
 	By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
 	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
@@ -313,9 +322,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorStateName = By.id("addresses__state__0_error");
 	By ErrorCityName = By.id("addresses__city__0_error");
 	By ErrorZipCode = By.id("addresses__zipcode__0_error");
-
 	By Previous = By.xpath("//i[@class='fa fa-chevron-left font-14 pr-2']");
-
 	By ProductName = By.id("equipments__product_name__0");
 	By ErrorProductName = By.id("equipments__product_name__0_error");
 	By BrandName = By.id("equipments__brand_name__0");
@@ -419,7 +426,6 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void nextFunction() {
 		this.mouseActionClick(Tittle);
 		this.mouseActionClick(Yes);
-
 	}
 
 	static String data;
@@ -613,64 +619,25 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else if (value.equals("Previous")) {
 			this.mouseActionClick(Previous);
 			this.mouseActionClick(Previous);
+		} else if (value.equals("TaxNumber")) {
+			this.clearField(TaxNumber);
 		}
 
 	}
 
-	public String errorField(String value) {
-		if (value.equals("FirstName")) {
-			return this.getText(ErrorFirstName);
-		} else if (value.equals("LastName")) {
-			return this.getText(ErrorLastName);
-		} else if (value.equals("Email")) {
-			return this.getText(ErrorEmail);
-		} else if (value.equals("JobTittle")) {
-			return this.getText(ErrorJobTittle);
-		} else if (value.equals("PhoneNumber")) {
-			return this.getText(ErrorPhoneNo);
-		} else if (value.equals("PropertyFirstName")) {
-			return this.getText(ErrorPropertyFirstName);
-		} else if (value.equals("PropertyLastName")) {
-			return this.getText(ErrorPropertyLastName);
-		} else if (value.equals("PropertyName")) {
-			return this.getText(ErrorPropertyName);
-		} else if (value.equals("PropertyAddress1")) {
-			return this.getText(ErrorAddress1);
-		} else if (value.equals("PropertyAddress2")) {
-			return this.getText(ErrorAddress2);
-		} else if (value.equals("City")) {
-			return this.getText(ErrorCityName);
-		} else if (value.equals("State")) {
-			return this.getText(ErrorStateName);
-		} else if (value.equals("Zipcode")) {
-			return this.getText(ErrorZipCode);
-		} else if (value.equals("ProductName")) {
-			return this.getText(ErrorProductName);
-		} else if (value.equals("BrandName")) {
-			return this.getText(ErrorBrandName);
-		} else if (value.equals("ModelNumber")) {
-			return this.getText(ErrorModelNumber);
-		} else if (value.equals("SerialNumber")) {
-			return this.getText(ErrorSerialNumber);
-		} else if (value.equals("DateInstalled")) {
-			return this.getText(ErrorDateInstalled);
-		} else if (value.equals("AccessHours")) {
-			return this.getText(ErrorAccessHours);
-		} else if (value.equals("InstallationNotes")) {
-			return this.getText(ErrorInstallationNotes);
+	public String errorMessage() {
+		if (!this.conditionChecking1(ErrorMessage)) {
+			do {
+				this.mouseActionClick(SaveComplete);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking1(ErrorMessage));
 		}
-		return value;
-
+		return this.getText(ErrorMessage);
 	}
 
 	public void firstNameValidation(String value) throws IOException {
 		if (value.equals("MandatoryValidation")) {
 			this.mouseActionClick(SaveComplete);
-			if (!this.conditionChecking1(ErrorFirstName)) {
-				do {
-					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ErrorFirstName));
-			}
 		} else if (value.equals("MaxValidation")) {
 			this.validationTab(FirstName, characters256);
 		}
@@ -711,7 +678,12 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else if (value.equals("SpecialCharacter")) {
 			this.validationTab(Phone, "!@#$%^&*");
 		}
+	}
 
+	public void taxNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(TaxNumber, characters2048);
+		}
 	}
 
 	public void propertyFirstNameValidation(String value) {
@@ -830,7 +802,8 @@ public class CustomerCreateContactPage extends BaseClass {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+								|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))
+								|| responseMessage.equals(getPropertyValue("DateMessage"))) {
 							check = false;
 						}
 					}
@@ -848,7 +821,8 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	public void clearAllFields(String value) {
 		if (value.equals("ContactPage")) {
-			List<String> asList = Arrays.asList("FirstName", "LastName", "Email", "JobTittle", "PhoneNumber");
+			List<String> asList = Arrays.asList("FirstName", "LastName", "Email", "JobTittle", "TaxNumber",
+					"PhoneNumber");
 			for (int i = 0; i < asList.size(); i++) {
 				this.clearFields(asList.get(i));
 			}
@@ -920,6 +894,8 @@ public class CustomerCreateContactPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
 		email = this.getTextAttribute(Email);
+		this.inputText(TaxNumber, maxPhoneNumber);
+		taxNumber = this.getTextAttribute(TaxNumber);
 		this.inputText(Phone, fakePhoneNumber);
 		phoneNumber = this.getTextAttribute(Phone);
 		this.mouseActionClick(LeadSources);
@@ -1015,6 +991,9 @@ public class CustomerCreateContactPage extends BaseClass {
 			return data;
 		} else if (value.equals("InstallationNotes")) {
 			String data = this.getTextAttribute(InstallationNotes);
+			return data;
+		} else if (value.equals("TaxNumber")) {
+			String data = this.getTextAttribute(TaxNumber);
 			return data;
 		}
 		return value;

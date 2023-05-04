@@ -48,18 +48,18 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	public void verify() throws IOException {
 		// Single Account User
 		extentTest = extentReports.createTest(
@@ -84,7 +84,7 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		}
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void teamModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Details Screen Tenant Name");
 		EditDetailScreenCompaniesPage module = new EditDetailScreenCompaniesPage(driver);
@@ -106,7 +106,7 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	public void editLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Edit Company Page");
 		EditDetailScreenCompaniesPage edit = PageFactory.initElements(driver, EditDetailScreenCompaniesPage.class);
@@ -127,14 +127,15 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	private void maxValidationCompanyWebsiteField() throws IOException {
-		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when [Company] Website Field exceed its max-2048 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when [Company] Website Field exceed its max-2048 limit");
 		EditDetailScreenCompaniesPage maxValidationLocationField = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidationLocationField.companyWebsite("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorFields("CompanyWebsite");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("CompanyWebsite");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -153,14 +154,15 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	private void maxValidationFirstNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Company] First Name Field exceed its max-256 limit");
 		EditDetailScreenCompaniesPage maxValidationLocationField = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidationLocationField.firstName("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorFields("FirstName");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("FirstName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -179,21 +181,21 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5)
 	private void maxValidationLastNameField() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Company] Last Name Field exceed its max-256 limit");
 		EditDetailScreenCompaniesPage maxValidationLocationField = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidationLocationField.lastName("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidationLocationField.clearFields("LastName");
-			maxValidationLocationField.fieldsFillData("BasicPage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -202,9 +204,36 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
 			maxValidationLocationField.clearFields("LastName");
-			maxValidationLocationField.fieldsFillData("BasicPage");
 		}
 
+	}
+
+	@Test(priority = 6)
+	private void maxValidationTaxNumberField() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Company] Tax Number Field exceed its max-256 limit");
+		EditDetailScreenCompaniesPage maxValidationLocationField = PageFactory.initElements(driver,
+				EditDetailScreenCompaniesPage.class);
+		maxValidationLocationField.taxNumber("MaxValidation");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidationLocationField.clearFields("TaxNumber");
+			maxValidationLocationField.fieldsFillData("BasicPage");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLastNameMaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
+			maxValidationLocationField.clearFields("TaxNumber");
+			maxValidationLocationField.fieldsFillData("BasicPage");
+		}
 	}
 
 	@Test(priority = 7)
@@ -215,7 +244,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 				EditDetailScreenCompaniesPage.class);
 		maxValidationLocationField.clickAddMore();
 		maxValidationLocationField.locationName("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorFields("Location");
+//		String assertionMessage = maxValidationLocationField.errorFields("Location");
+		String assertionMessage = maxValidationLocationField.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -241,7 +271,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage validateEmail = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		validateEmail.email("InvalidValidEmail");
-		String emailErrorMessage = validateEmail.errorFields("Email");
+		String emailErrorMessage = validateEmail.errorMessage();
+//		String emailErrorMessage = validateEmail.errorFields("Email");
 		extentTest.log(Status.INFO, "Actual Result is -" + emailErrorMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -267,7 +298,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.email("MaxValidation");
-		String emailErrorMessage = maxValidation.errorFields("Email");
+//		String emailErrorMessage = maxValidation.errorFields("Email");
+		String emailErrorMessage = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + emailErrorMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -293,7 +325,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage minValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		minValidation.PhoneNumber("MinValidation");
-		String phoneNumberErrorMessage = minValidation.errorFields("PhoneNumber");
+//		String phoneNumberErrorMessage = minValidation.errorFields("PhoneNumber");
+		String phoneNumberErrorMessage = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + phoneNumberErrorMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -319,7 +352,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage minValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		minValidation.PhoneNumber("MaxValidation");
-		String phoneNumberErrorMessage = minValidation.errorFields("PhoneNumber");
+//		String phoneNumberErrorMessage = minValidation.errorFields("PhoneNumber");
+		String phoneNumberErrorMessage = minValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + phoneNumberErrorMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -340,12 +374,13 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	@Test(priority = 12)
 	private void maxValidationCompanyAddress1Field() throws IOException {
-		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when [Company] Address1 Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when [Company] Address1 Field exceed its max-256 limit");
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.address1("MaxValidation");
-		String errorAddress1Message = maxValidation.errorFields("Address1");
+//		String errorAddress1Message = maxValidation.errorFields("Address1");
+		String errorAddress1Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actuals Result is -" + errorAddress1Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -366,12 +401,13 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	@Test(priority = 13)
 	private void maxValidationCompanyAddress2Field() throws IOException {
-		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when [Company] Address2 Field exceed its max-256 limit");
+		extentTest = extentReports
+				.createTest("Verify Error Message is displayed when [Company] Address2 Field exceed its max-256 limit");
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.address2("MaxValidation");
-		String errorAddress2Message = maxValidation.errorFields("Address2");
+//		String errorAddress2Message = maxValidation.errorFields("Address2");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -397,7 +433,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.state("MaxValidation");
-		String errorAddress2Message = maxValidation.errorFields("State");
+//		String errorAddress2Message = maxValidation.errorFields("State");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -423,7 +460,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.city("MaxValidation");
-		String errorAddress2Message = maxValidation.errorFields("City");
+//		String errorAddress2Message = maxValidation.errorFields("City");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -449,7 +487,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.zipcode("MaxValidation");
-		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+//		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -475,7 +514,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.zipcode("MinValidation");
-		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+//		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -500,7 +540,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxValidation = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxValidation.zipcode("SpecialCharacter");
-		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+//		String errorAddress2Message = maxValidation.errorFields("Zipcode");
+		String errorAddress2Message = maxValidation.errorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress2Message);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -528,7 +569,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 		EditDetailScreenCompaniesPage maxContactPerson = PageFactory.initElements(driver,
 				EditDetailScreenCompaniesPage.class);
 		maxContactPerson.contactPerson("MaxValidation");
-		String errorContactPersonMessage = maxContactPerson.errorFields("ContactPerson");
+		String errorContactPersonMessage = maxContactPerson.errorMessage();
+//		String errorContactPersonMessage = maxContactPerson.errorFields("ContactPerson");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPersonMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max512CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -554,7 +596,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 				.createTest("Verify Error Message is displayed when Description field exceed its max-2048 limit");
 		EditDetailScreenCompaniesPage mandatory = PageFactory.initElements(driver, EditDetailScreenCompaniesPage.class);
 		mandatory.description("MaxValidation");
-		String errorPasswordField = mandatory.errorFields("Description");
+		String errorPasswordField = mandatory.errorMessage();
+//		String errorPasswordField = mandatory.errorFields("Description");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Expected  Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -577,7 +620,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	@Test(priority = 20)
 	private void responseMessage() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Compnay Details Updated");
+		extentTest = extentReports
+				.createTest("Verify updated successful message is displayed, when the Compnay Details Updated");
 		EditDetailScreenCompaniesPage add = new EditDetailScreenCompaniesPage(driver);
 		String responseMessage = add.responseMessages("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -597,7 +641,8 @@ public class TeamCompaniesDetailScreen extends BaseClass {
 
 	@Test(priority = 21)
 	private void deleteLocation() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the Company Location Deleted");
+		extentTest = extentReports
+				.createTest("Verify deleted successful message is displayed, when the Company Location Deleted");
 		EditDetailScreenCompaniesPage delete = new EditDetailScreenCompaniesPage(driver);
 		delete.deleteLocation();
 		String deleteMessage = delete.responseMessages("Message");

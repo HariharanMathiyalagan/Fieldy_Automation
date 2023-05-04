@@ -67,10 +67,10 @@ public class TeamUserPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -280,6 +280,9 @@ public class TeamUserPage extends BaseClass {
 	By UpdateContractorMessage = By.xpath("//*[text()='Contractor user information updated successfully']");
 	By DeleteContractorMessage = By.xpath("//*[text()='Contractor user have been deleted successfully']");
 	By Name = By.xpath("//td[text()='First Name']");
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
+			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
+	WebElement ErrorMessage;
 	By TotalCount = By.id("All-Count");
 	By ContractorCount = By.id("total-user-contractor-count");
 	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
@@ -366,49 +369,45 @@ public class TeamUserPage extends BaseClass {
 		}
 	}
 
+	public String errorMessage(By value) {
+		if (!this.conditionChecking(value, 3)) {
+			do {
+				this.mouseActionClick(SaveComplete);
+				this.invisible(Spinner);
+			} while (!this.conditionChecking(value, 3));
+		}
+		return this.getText(value);
+	}
+
 	public String errorField(String value) {
 		if (value.equals("FirstName")) {
-			String text = this.getText(ErrorFirstName);
-			return text;
+			return this.errorMessage(ErrorFirstName);
 		} else if (value.equals("LastName")) {
-			String text = this.getText(ErrorLastName);
-			return text;
+			return this.errorMessage(ErrorLastName);
 		} else if (value.equals("JobTittle")) {
-			String text = this.getText(ErrorJobTittle);
-			return text;
+			return this.errorMessage(ErrorJobTittle);
 		} else if (value.equals("Email")) {
-			String text = this.getText(ErrorEmail);
-			return text;
+			return this.errorMessage(ErrorEmail);
 		} else if (value.equals("UserType")) {
-			String text = this.getText(ErrorType);
-			return text;
+			return this.errorMessage(ErrorType);
 		} else if (value.equals("PhoneNumber")) {
-			String text = this.getText(ErrorPhoneNumber);
-			return text;
+			return this.errorMessage(ErrorPhoneNumber);
 		} else if (value.equals("LocationName")) {
-			String text = this.getText(ErrorLocationName);
-			return text;
+			return this.errorMessage(ErrorLocationName);
 		} else if (value.equals("Address1")) {
-			String text = this.getText(ErrorAddress1);
-			return text;
+			return this.errorMessage(ErrorAddress1);
 		} else if (value.equals("Address2")) {
-			String text = this.getText(ErrorAddress2);
-			return text;
+			return this.errorMessage(ErrorAddress2);
 		} else if (value.equals("City")) {
-			String text = this.getText(ErrorCity);
-			return text;
+			return this.errorMessage(ErrorCity);
 		} else if (value.equals("State")) {
-			String text = this.getText(ErrorState);
-			return text;
+			return this.errorMessage(ErrorState);
 		} else if (value.equals("Zipcode")) {
-			String text = this.getText(ErrorZipcode);
-			return text;
+			return this.errorMessage(ErrorZipcode);
 		} else if (value.equals("Invalid")) {
-			String text = this.getText(InValid);
-			return text;
+			return this.getText(InValid);
 		} else if (value.equals("CompanyName")) {
-			String text = this.getText(CompanyNameError);
-			return text;
+			return this.errorMessage(CompanyNameError);
 		}
 		return value;
 	}
@@ -765,14 +764,14 @@ public class TeamUserPage extends BaseClass {
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
 		if (value.equals("Message")) {
-			if (this.conditionChecking(Message)) {
+			if (this.conditionChecking(Message, 20)) {
 				listData = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (this.conditionChecking(Message)) {
+					if (this.conditionChecking(Message, 20)) {
 						listData = this.getText(Message);
 						this.invisible(Message);
 						if (listData.equals(getPropertyValue("UserCreatedMessgae"))

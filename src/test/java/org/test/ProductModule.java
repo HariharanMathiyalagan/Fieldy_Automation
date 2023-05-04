@@ -743,7 +743,6 @@ public class ProductModule extends BaseClass {
 	private void editmandatoryValidationTaxName() throws InterruptedException, IOException, AWTException {
 		if (listValidation.equals("No")) {
 			throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
-		} else {
 		}
 		extentTest = extentReports
 				.createTest("Verify Tax Name field is set as Mandatory & Error Message is displayed when it is BLANK");
