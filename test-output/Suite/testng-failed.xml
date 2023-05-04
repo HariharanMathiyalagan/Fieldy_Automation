@@ -3,6 +3,7 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="org.test.DispatchModule">
         <methods>
           <include name="unassignRequest"/>
@@ -21,6 +22,34 @@
           <include name="dispatchJob"/>
         </methods>
       </class> <!-- org.test.DispatchModule -->
+=======
+      <class name="org.test.ServiceModule">
+        <methods>
+          <include name="createProduct"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+          <include name="updateProduct"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="setup"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteAfterCatch"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+        </methods>
+      </class> <!-- org.test.ServiceModule -->
+      <class name="org.test.ProductModule">
+        <methods>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.test.ProductModule -->
+>>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
