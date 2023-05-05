@@ -1,4 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testng-results ignored="0" total="17" passed="17" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-05-05T16:30:58 IST" name="Default suite" finished-at="2023-05-05T16:37:04 IST" duration-ms="366541">
+    <groups>
+    </groups>
+    <test started-at="2023-05-05T16:30:58 IST" name="Default test" finished-at="2023-05-05T16:37:04 IST" duration-ms="366541">
+      <class name="org.enhancement.TeamUser">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:30:58 IST" name="setup" finished-at="2023-05-05T16:31:01 IST" duration-ms="2778" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:01 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:31:01 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="verify()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:01 IST" name="verify" finished-at="2023-05-05T16:31:44 IST" duration-ms="42962" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verify -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:44 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:31:44 IST" duration-ms="27" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:44 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:31:44 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="TeamUserPage()[pri:1, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:44 IST" name="TeamUserPage" finished-at="2023-05-05T16:31:58 IST" duration-ms="14616" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TeamUserPage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:58 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:31:58 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:58 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:31:58 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:31:58 IST" name="userCreate" finished-at="2023-05-05T16:32:18 IST" duration-ms="19197" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:18 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:32:18 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:18 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:32:18 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:18 IST" name="userCreate" finished-at="2023-05-05T16:32:39 IST" duration-ms="21111" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:39 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:32:39 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:39 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:32:39 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:32:39 IST" name="userCreate" finished-at="2023-05-05T16:33:04 IST" duration-ms="25028" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:04 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:33:04 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:04 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:33:04 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:04 IST" name="userCreate" finished-at="2023-05-05T16:33:20 IST" duration-ms="16503" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:20 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:33:20 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:20 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:33:20 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:20 IST" name="userCreate" finished-at="2023-05-05T16:33:55 IST" duration-ms="34944" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:55 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:33:55 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:55 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:33:55 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:33:55 IST" name="userCreate" finished-at="2023-05-05T16:34:14 IST" duration-ms="19161" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:14 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:34:14 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:14 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:34:14 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:14 IST" name="userCreate" finished-at="2023-05-05T16:34:30 IST" duration-ms="15212" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:30 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:34:30 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:30 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:34:30 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:30 IST" name="userCreate" finished-at="2023-05-05T16:34:49 IST" duration-ms="18969" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:49 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:34:49 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:49 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:34:49 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:34:49 IST" name="userCreate" finished-at="2023-05-05T16:35:07 IST" duration-ms="18424" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:07 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:35:07 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:07 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:35:07 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:07 IST" name="userCreate" finished-at="2023-05-05T16:35:22 IST" duration-ms="15251" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:22 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:35:22 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:22 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:35:22 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:22 IST" name="userCreate" finished-at="2023-05-05T16:35:39 IST" duration-ms="16353" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:39 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:35:39 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:39 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:35:39 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:39 IST" name="userCreate" finished-at="2023-05-05T16:35:58 IST" duration-ms="19391" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:58 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:35:58 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:58 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:35:58 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:35:58 IST" name="userCreate" finished-at="2023-05-05T16:36:19 IST" duration-ms="20273" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:19 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:36:19 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:19 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:36:19 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:19 IST" name="userCreate" finished-at="2023-05-05T16:36:42 IST" duration-ms="23174" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:42 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:36:42 IST" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:42 IST" name="deleteBeforeCatch" finished-at="2023-05-05T16:36:42 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="userCreate()[pri:3, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:36:42 IST" name="userCreate" finished-at="2023-05-05T16:37:04 IST" duration-ms="21794" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCreate -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:37:04 IST" name="deleteAfterCatch" finished-at="2023-05-05T16:37:04 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.enhancement.TeamUser@57cf54e1]" started-at="2023-05-05T16:37:04 IST" name="exitBrowser" finished-at="2023-05-05T16:37:04 IST" duration-ms="855" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- exitBrowser -->
+      </class> <!-- org.enhancement.TeamUser -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+=======
 <testng-results ignored="0" total="1096" passed="1004" failed="84" skipped="8">
   <reporter-output>
   </reporter-output>
@@ -19103,4 +19328,5 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
       </class> <!-- org.test.CustomerOrganizationJob -->
     </test> <!-- Test -->
   </suite> <!-- Suite (2) -->
+>>>>>>> 7b711c5e1a0aa6f49c75723401ab3b5b8dee68eb
 </testng-results>
