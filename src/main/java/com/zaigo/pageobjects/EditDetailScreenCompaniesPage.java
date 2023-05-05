@@ -571,7 +571,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	public void description(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(Description, characters256);
+			this.validationTab(Description, characters2048);
 		}
 	}
 

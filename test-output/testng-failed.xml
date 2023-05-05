@@ -1,67 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="org.test.TaxModule">
+      <class name="org.test.AvailabilityTechnicians">
         <methods>
-          <include name="deleteTaxRefectProductService"/>
           <include name="exitBrowser"/>
+          <include name="listabelValidation"/>
           <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
           <include name="deleteAfterCatch"/>
+          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.TaxModule -->
-=======
-      <class name="org.test.TeamUserContractor">
+      </class> <!-- org.test.AvailabilityTechnicians -->
+      <class name="org.test.CustomerOrganizationRequest">
         <methods>
-          <include name="editmandatoryValidationContractorEmailField"/>
-          <include name="deleteAfterCatch"/>
-          <include name="deleteUserDetails"/>
-          <include name="editmaxValidationContractorEmailFields"/>
-          <include name="searchEmailValidation"/>
-          <include name="editmaxValidationContractorLastNameField"/>
-          <include name="editmaxValidationLocationName"/>
+          <include name="autoCompleteOrganizationContactCreation"/>
+          <include name="maximumValidationTittle"/>
+          <include name="editmaximumValidationLocation"/>
+          <include name="mandatoryValidationLocation"/>
+          <include name="editmaxTagLimitValidation"/>
+          <include name="cancelledRequest"/>
+          <include name="unsssignedRequest"/>
+          <include name="deletedRequest"/>
+          <include name="editmaximumValidationTittle"/>
+          <include name="requestCancelledStatus"/>
+          <include name="editmaximumTagValidation"/>
+          <include name="editmandatoryValidationDescription"/>
+          <include name="editmaximumValidationNotes"/>
           <include name="setup"/>
-          <include name="editspecialCharacterValidationZipcode"/>
-          <include name="editmandatoryValidationContractorFirstNameField"/>
-          <include name="verifyUpdateExist"/>
-          <include name="landingOnEditForm"/>
-          <include name="userCount"/>
-          <include name="editmaxValidationState"/>
-          <include name="maxValidatonContractorPhoneNumber"/>
-          <include name="editmaxValidationContractorFirstNameField"/>
-          <include name="editmaxValidationCity"/>
-          <include name="editminValidatonContractorPhoneNumber"/>
-          <include name="searchPhoneNumberValidation"/>
-          <include name="verifySaveButtonExist"/>
-          <include name="editmaxValidatonContractorPhoneNumber"/>
-          <include name="editinvalidContractorEmailValidation"/>
-          <include name="invalidDataValidation"/>
-          <include name="userEdit"/>
-          <include name="maxValidationAddress2"/>
-          <include name="minValidationZipcode"/>
-          <include name="searchNameValidation"/>
-          <include name="userCreate"/>
-          <include name="alreadyExistedMailValidation"/>
-          <include name="editmaxValidationZipcode"/>
-          <include name="editspecialCharacterPhoneNumberField"/>
-          <include name="maxValidationAddress1"/>
-          <include name="maxValidationLocationName"/>
-          <include name="specialCharacterValidationZipcode"/>
-          <include name="exitBrowser"/>
+          <include name="maximumValidationNotes"/>
+          <include name="namePrepopulation"/>
+          <include name="deleteAfterCatch"/>
+          <include name="duplicateTagsValidation"/>
+          <include name="labelValidation"/>
+          <include name="mandatoryValidationDescription"/>
+          <include name="maximumValidationLocation"/>
+          <include name="maxTagLimitValidation"/>
+          <include name="requestDraftStatus"/>
+          <include name="editmandatoryValidationLocation"/>
+          <include name="labelEditValidation"/>
           <include name="deleteBeforeCatch"/>
-          <include name="editmaxValidationAddress2"/>
-          <include name="editminValidationZipcode"/>
-          <include name="maxValidationCity"/>
-          <include name="editmaxValidationAddress1"/>
-          <include name="maxValidationZipcode"/>
-          <include name="filterByCompany"/>
-          <include name="maxValidationState"/>
+          <include name="editduplicateTagsValidation"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="maximumTagValidation"/>
+          <include name="exitBrowser"/>
+          <include name="createButton"/>
+          <include name="updateButton"/>
+          <include name="updatedRequest"/>
+          <include name="requestUnassignedStatus"/>
+          <include name="maximumValidationDescription"/>
         </methods>
-      </class> <!-- org.test.TeamUserContractor -->
->>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
+      </class> <!-- org.test.CustomerOrganizationRequest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite (2)] -->
