@@ -3,59 +3,54 @@
 <suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.ServiceModule">
+      <class name="org.test.AvailabilityTechnicians">
         <methods>
-<<<<<<< HEAD
-          <include name="listQuoteReference"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="deleteAfterCatch"/>
+          <include name="exitBrowser"/>
+          <include name="listabelValidation"/>
           <include name="setup"/>
-          <include name="listQuoteTittle"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.GlobalContactQuote -->
-=======
-          <include name="createProduct"/>
-          <include name="editFormLabel"/>
-          <include name="editmandatoryValidationPrice"/>
-          <include name="deletedService"/>
-          <include name="updateProduct"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="editmandatoryValidationServiceName"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="deleteAfterCatch"/>
           <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.test.AvailabilityTechnicians -->
+      <class name="org.test.CustomerOrganizationRequest">
+        <methods>
+          <include name="autoCompleteOrganizationContactCreation"/>
+          <include name="maximumValidationTittle"/>
+          <include name="editmaximumValidationLocation"/>
+          <include name="mandatoryValidationLocation"/>
+          <include name="editmaxTagLimitValidation"/>
+          <include name="cancelledRequest"/>
+          <include name="unsssignedRequest"/>
+          <include name="deletedRequest"/>
+          <include name="editmaximumValidationTittle"/>
+          <include name="requestCancelledStatus"/>
+          <include name="editmaximumTagValidation"/>
           <include name="editmandatoryValidationDescription"/>
-          <include name="searchInvalid"/>
-          <include name="searchServiceName"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="editmaximumValidationNotes"/>
           <include name="setup"/>
+          <include name="maximumValidationNotes"/>
+          <include name="namePrepopulation"/>
           <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.ProductModule">
-        <methods>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxName"/>
+          <include name="duplicateTagsValidation"/>
+          <include name="labelValidation"/>
+          <include name="mandatoryValidationDescription"/>
+          <include name="maximumValidationLocation"/>
+          <include name="maxTagLimitValidation"/>
+          <include name="requestDraftStatus"/>
+          <include name="editmandatoryValidationLocation"/>
+          <include name="labelEditValidation"/>
           <include name="deleteBeforeCatch"/>
+          <include name="editduplicateTagsValidation"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="maximumTagValidation"/>
           <include name="exitBrowser"/>
+          <include name="createButton"/>
+          <include name="updateButton"/>
+          <include name="updatedRequest"/>
+          <include name="requestUnassignedStatus"/>
+          <include name="maximumValidationDescription"/>
         </methods>
-      </class> <!-- org.test.ProductModule -->
-      <class name="org.test.ServiceType">
-        <methods>
-          <include name="deleteAfterCatch"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.ServiceType -->
->>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
+      </class> <!-- org.test.CustomerOrganizationRequest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (2)] -->

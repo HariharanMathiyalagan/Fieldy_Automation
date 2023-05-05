@@ -5,28 +5,101 @@
     <classes>
       <class name="org.test.ProductModule">
         <methods>
-          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="editbeforeDecimalPointPriceField"/>
+          <include name="reflectQuotePage"/>
+          <include name="editafterDecimalPointPriceField"/>
+          <include name="editmaximumValidationSKU"/>
           <include name="editmandatoryValidationTaxPercentage"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
           <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmaximumValidationLowStockThresold"/>
+          <include name="editafterDecimalPointLowStockThresoldField"/>
+          <include name="editmandatoryValidationDescription"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationPrice"/>
+          <include name="editmandatoryValidationProductName"/>
           <include name="editmandatoryValidationTaxName"/>
+          <include name="inactiveProduct"/>
+          <include name="searchProductName"/>
+          <include name="updateProduct"/>
+          <include name="editFormLabel"/>
+          <include name="editafterDecimalPointQuantityHandField"/>
+          <include name="editbeforeDecimalPointQuantityHandField"/>
+          <include name="editbeforeDecimalPointLowStockThresoldField"/>
+          <include name="editmaximumValidationQuantityHand"/>
+          <include name="deleteProduct"/>
+          <include name="editmaximumValidationPrice"/>
           <include name="deleteBeforeCatch"/>
+          <include name="updateButton"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="deletedProduct"/>
+          <include name="editmaximumValidationProductName"/>
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.ProductModule -->
       <class name="org.test.ServiceModule">
         <methods>
+          <include name="editFormLabel"/>
+          <include name="editmandatoryValidationPrice"/>
+          <include name="deletedService"/>
+          <include name="updateProduct"/>
+          <include name="editafterDecimalPointPriceField"/>
+          <include name="inactiveProduct"/>
+          <include name="reflectQuotePage"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="editmandatoryValidationServiceName"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
           <include name="deleteBeforeCatch"/>
+          <include name="editmaximumValidationDescription"/>
           <include name="exitBrowser"/>
+          <include name="editbeforeDecimalPointPriceField"/>
+          <include name="editmandatoryValidationDescription"/>
+          <include name="editmaximumValidationProductName"/>
+          <include name="searchServiceName"/>
           <include name="editbeforeDecimalPointTaxPercentageField"/>
           <include name="editmandatoryValidationTaxPercentage"/>
           <include name="setup"/>
-          <include name="editmandatoryValidationTaxName"/>
+          <include name="deleteProduct"/>
+          <include name="editmaximumValidationPrice"/>
+          <include name="updateButton"/>
           <include name="deleteAfterCatch"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
         </methods>
       </class> <!-- org.test.ServiceModule -->
+      <class name="org.test.LeadSource">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="reflectCreateContactPage"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.test.LeadSource -->
+      <class name="org.test.CategoryModule">
+        <methods>
+          <include name="reflectCategoryService"/>
+          <include name="deleteAfterCatch"/>
+          <include name="inactiveProductService"/>
+          <include name="setup"/>
+          <include name="reflectCategoryProduct"/>
+          <include name="inactiveProductCategory"/>
+          <include name="exitBrowser"/>
+          <include name="deleteProduct"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="editFormLabel"/>
+        </methods>
+      </class> <!-- org.test.CategoryModule -->
+      <class name="org.test.TaxModule">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="createdTaxRefectProductService"/>
+          <include name="updatedTaxList"/>
+          <include name="setup"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="editTaxRefectProductService"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.TaxModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (3)] -->
