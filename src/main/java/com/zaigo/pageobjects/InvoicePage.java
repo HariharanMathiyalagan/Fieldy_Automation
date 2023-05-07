@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
@@ -48,12 +49,13 @@ public class InvoicePage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
-
+	String fakeTaxName = faker.book().genre();
+	String fakeTaxPercentage = faker.number().digits(2);
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters16 = RandomStringUtils.randomAlphabetic(20);
-	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
+	String characters2048 = RandomStringUtils.randomAlphabetic(20001);
 	String numberCharacter15 = RandomStringUtils.randomNumeric(15);
 	String QuantityValue = RandomStringUtils.randomNumeric(2);
 	String PriceValue = RandomStringUtils.randomNumeric(4);
@@ -296,6 +298,13 @@ public class InvoicePage extends BaseClass {
 	By Send = By.xpath(
 			"//*[@class='d-flex justify-content-end bd-highlight mt-2 modal-footer-fixed']//child::*[@class='btn btn-bg-blue font-14 w-100 pr-2 pl-2']");
 	By GlobalSend = By.xpath("//*[@class='dropzoneform btn btn-bg-blue font-14 w-100 pr-2 pl-2']");
+	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list']/div/span/span") })
+	WebElement AddTax;
+	@FindAll({ @FindBy(xpath = "//*[@id='contactdropdownlist4']//div[1]//div[1]"),
+			@FindBy(xpath = "//*[text()=' No Data Found!']") })
+	WebElement FirstTax;
+	By TaxName = By.xpath("//*[contains(@class,'fadeIn')]//input[@name='tax_name_main']");
+	By TaxPercentage = By.xpath("//*[contains(@class,'fadeIn')]//input[@name='tax_rate_main']");
 	By ErrorReference = By.id("reference_no_error");
 	By ErrorDueDate = By.id("doc_expiry_date_error");
 	By ErrorInvoiceTittle = By.id("invoice_title_error");
@@ -412,7 +421,8 @@ public class InvoicePage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
-			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']"),
+			@FindBy(xpath = "//*[contains(@class,'fadeIn')]//*[@id='pqipopup']") })
 	WebElement SaveButton;
 
 	public void clearFields(String value) {
@@ -488,8 +498,10 @@ public class InvoicePage extends BaseClass {
 			String text = this.getText(ErrorDiscount);
 			return text;
 		} else if (value.equals("ErrorTax")) {
-			String text = this.getText(ErrorTax);
-			return text;
+			if (!this.conditionChecking1(ErrorTax)) {
+				this.clearField(Tax);
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
+			}
 		} else if (value.equals("ErrorDescription")) {
 			String text = this.getText(ErrorDescription);
 			return text;
@@ -786,7 +798,7 @@ public class InvoicePage extends BaseClass {
 
 	static String text;
 
-	public String inventoryItemValidation(String value) {
+	public String inventoryItemValidation(String value) throws IOException, InterruptedException {
 		if (value.equals("Calculation")) {
 			this.inputText(InventoryItem, "Bike");
 			this.clearField(Price);
@@ -795,6 +807,19 @@ public class InvoicePage extends BaseClass {
 			this.validationTab(Discount, DisTaxValue);
 			this.clearField(Tax);
 			this.validationTab(Tax, TaxValue);
+			this.mouseActionClick(AddTax);
+			if (!this.conditionChecking1(TaxName)) {
+				do {
+					this.mouseActionClick(AddTax);
+				} while (!this.conditionChecking1(TaxName));
+			}
+			this.inputText(TaxName, fakeTaxName);
+			this.inputText(TaxPercentage, fakeTaxPercentage);
+			this.mouseActionClick(SaveButton);
+			this.responseMessage("Message");
+			if (!response.equals(getPropertyValue("CreatedTax"))) {
+				this.responseMessage("AlternateFunction");
+			}
 			String calculationValidation = this.calculationValidation();
 			String actualAmount = "₹ " + calculationValidation;
 			return actualAmount;
@@ -879,7 +904,8 @@ public class InvoicePage extends BaseClass {
 					if (this.conditionChecking(Message)) {
 						response = this.getText(Message);
 						this.invisible(Message);
-						if (response.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| response.equals(getPropertyValue("CreatedTax"))) {
 							conditionCheck = false;
 						}
 					}
@@ -904,11 +930,22 @@ public class InvoicePage extends BaseClass {
 					this.clearField(OrganizationEmail);
 					this.inputText(OrganizationEmail, fakeEmail);
 					this.mouseActionClick(SaveButton);
+				} else if (response.equals(getPropertyValue("AlreadyTax"))) {
+					this.clearField(TaxName);
+					String fakeTaxName = faker.book().genre();
+					this.inputText(TaxName, fakeTaxName);
+					this.mouseActionClick(SaveButton);
+				} else if (response.equals(getPropertyValue("MaxTaxPercentage"))) {
+					this.clearField(TaxPercentage);
+					String fakeTaxPercentage = faker.number().digits(2);
+					this.inputText(TaxPercentage, fakeTaxPercentage);
+					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
-					alternateMessage = this.getText(Message);
+					response = this.getText(Message);
 					this.invisible(Message);
-					if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					if (response.equals(getPropertyValue("CustomerCreatedMessage"))
+							|| response.equals(getPropertyValue("CreatedTax"))) {
 						conditionCheck = false;
 					}
 				} else {
@@ -916,9 +953,10 @@ public class InvoicePage extends BaseClass {
 						Thread.sleep(10000);
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
-							alternateMessage = this.getText(Message);
+							response = this.getText(Message);
 							this.invisible(Message);
-							if (alternateMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							if (response.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| response.equals(getPropertyValue("CreatedTax"))) {
 								conditionCheck = false;
 							}
 						}

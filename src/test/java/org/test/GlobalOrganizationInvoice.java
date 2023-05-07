@@ -744,14 +744,14 @@ public class GlobalOrganizationInvoice extends BaseClass {
 	@Test(priority = 26)
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Note field exceed its max-2048 limit");
+				.createTest("Verify Error Message is displayed when Note field exceed its max-20000 limit");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.maxNotes();
 		String errorPasswordField = mandatory.errorValidation("ErrorNotes");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20000Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max20000Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Notes");
 		} else {
@@ -1437,14 +1437,14 @@ public class GlobalOrganizationInvoice extends BaseClass {
 	@Test(priority = 55)
 	private void maximumEditValidationNotes() throws IOException {
 		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Note field exceed its max-2048 limit");
+				.createTest("Verify Error Message is displayed when Note field exceed its max-20000 limit");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.maxNotes();
 		String errorPasswordField = mandatory.errorValidation("ErrorNotes");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20000Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max2048Validation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max20000Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Notes");
 		} else {

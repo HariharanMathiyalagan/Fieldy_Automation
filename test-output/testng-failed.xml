@@ -1,56 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Test(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.AvailabilityTechnicians">
+      <class name="org.test.CustomerContactInvoice">
         <methods>
-          <include name="exitBrowser"/>
-          <include name="listabelValidation"/>
           <include name="setup"/>
-          <include name="deleteAfterCatch"/>
           <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.test.AvailabilityTechnicians -->
-      <class name="org.test.CustomerOrganizationRequest">
-        <methods>
-          <include name="autoCompleteOrganizationContactCreation"/>
-          <include name="maximumValidationTittle"/>
-          <include name="editmaximumValidationLocation"/>
-          <include name="mandatoryValidationLocation"/>
-          <include name="editmaxTagLimitValidation"/>
-          <include name="cancelledRequest"/>
-          <include name="unsssignedRequest"/>
-          <include name="deletedRequest"/>
-          <include name="editmaximumValidationTittle"/>
-          <include name="requestCancelledStatus"/>
-          <include name="editmaximumTagValidation"/>
-          <include name="editmandatoryValidationDescription"/>
-          <include name="editmaximumValidationNotes"/>
-          <include name="setup"/>
-          <include name="maximumValidationNotes"/>
-          <include name="namePrepopulation"/>
-          <include name="deleteAfterCatch"/>
-          <include name="duplicateTagsValidation"/>
-          <include name="labelValidation"/>
-          <include name="mandatoryValidationDescription"/>
-          <include name="maximumValidationLocation"/>
-          <include name="maxTagLimitValidation"/>
-          <include name="requestDraftStatus"/>
-          <include name="editmandatoryValidationLocation"/>
-          <include name="labelEditValidation"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editduplicateTagsValidation"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="maximumTagValidation"/>
+          <include name="afterDecimalEditPointTaxField"/>
+          <include name="maxEditLimitTaxField"/>
           <include name="exitBrowser"/>
-          <include name="createButton"/>
-          <include name="updateButton"/>
-          <include name="updatedRequest"/>
-          <include name="requestUnassignedStatus"/>
-          <include name="maximumValidationDescription"/>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="deleteAfterCatch"/>
+          <include name="maxLimitTaxField"/>
+          <include name="beforeDecimalPointTaxField"/>
         </methods>
-      </class> <!-- org.test.CustomerOrganizationRequest -->
+      </class> <!-- org.test.CustomerContactInvoice -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite (2)] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

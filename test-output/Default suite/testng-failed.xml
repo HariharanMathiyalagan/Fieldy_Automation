@@ -3,65 +3,20 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="org.test.TaxModule">
+      <class name="org.test.CustomerContactInvoice">
         <methods>
-          <include name="deleteTaxRefectProductService"/>
-          <include name="exitBrowser"/>
           <include name="setup"/>
           <include name="deleteBeforeCatch"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.TaxModule -->
-=======
-      <class name="org.test.TeamUserContractor">
-        <methods>
-          <include name="editmandatoryValidationContractorEmailField"/>
-          <include name="deleteAfterCatch"/>
-          <include name="deleteUserDetails"/>
-          <include name="editmaxValidationContractorEmailFields"/>
-          <include name="searchEmailValidation"/>
-          <include name="editmaxValidationContractorLastNameField"/>
-          <include name="editmaxValidationLocationName"/>
-          <include name="setup"/>
-          <include name="editspecialCharacterValidationZipcode"/>
-          <include name="editmandatoryValidationContractorFirstNameField"/>
-          <include name="verifyUpdateExist"/>
-          <include name="landingOnEditForm"/>
-          <include name="userCount"/>
-          <include name="editmaxValidationState"/>
-          <include name="maxValidatonContractorPhoneNumber"/>
-          <include name="editmaxValidationContractorFirstNameField"/>
-          <include name="editmaxValidationCity"/>
-          <include name="editminValidatonContractorPhoneNumber"/>
-          <include name="searchPhoneNumberValidation"/>
-          <include name="verifySaveButtonExist"/>
-          <include name="editmaxValidatonContractorPhoneNumber"/>
-          <include name="editinvalidContractorEmailValidation"/>
-          <include name="invalidDataValidation"/>
-          <include name="userEdit"/>
-          <include name="maxValidationAddress2"/>
-          <include name="minValidationZipcode"/>
-          <include name="searchNameValidation"/>
-          <include name="userCreate"/>
-          <include name="alreadyExistedMailValidation"/>
-          <include name="editmaxValidationZipcode"/>
-          <include name="editspecialCharacterPhoneNumberField"/>
-          <include name="maxValidationAddress1"/>
-          <include name="maxValidationLocationName"/>
-          <include name="specialCharacterValidationZipcode"/>
+          <include name="afterDecimalEditPointTaxField"/>
+          <include name="maxEditLimitTaxField"/>
           <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmaxValidationAddress2"/>
-          <include name="editminValidationZipcode"/>
-          <include name="maxValidationCity"/>
-          <include name="editmaxValidationAddress1"/>
-          <include name="maxValidationZipcode"/>
-          <include name="filterByCompany"/>
-          <include name="maxValidationState"/>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="deleteAfterCatch"/>
+          <include name="maxLimitTaxField"/>
+          <include name="beforeDecimalPointTaxField"/>
         </methods>
-      </class> <!-- org.test.TeamUserContractor -->
->>>>>>> 0854a1eab27eed2f52fc7f8faa0085f4f5986c02
+      </class> <!-- org.test.CustomerContactInvoice -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

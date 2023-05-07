@@ -37,12 +37,12 @@
 
 	<dependencies>
 
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-java</artifactId>
-    <version>3.141.5</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.5</version>
+		</dependency>
 
 
 		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
@@ -116,7 +116,7 @@
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-edge-driver -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-edge-driver -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-edge-driver</artifactId>
