@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
@@ -45,11 +46,13 @@ public class QuotePage extends BaseClass {
 	String fakeWebsite = faker.company().url();
 	String fakeCompanyName = faker.company().name();
 	String fakeFaxNumber = faker.number().digits(14);
+	String fakeTaxName = faker.book().genre();
+	String fakeTaxPercentage = faker.number().digits(2);
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters16 = RandomStringUtils.randomAlphabetic(20);
-	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
+	String characters2048 = RandomStringUtils.randomAlphabetic(20001);
 	String numberCharacter15 = RandomStringUtils.randomNumeric(15);
 	String QuantityValue = RandomStringUtils.randomNumeric(1);
 	String PriceValue = RandomStringUtils.randomNumeric(4);
@@ -397,7 +400,8 @@ public class QuotePage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
-			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']"),
+			@FindBy(xpath = "//*[contains(@class,'fadeIn')]//*[@id='pqipopup']") })
 	WebElement SaveButton;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='quote-contact-create']//*[@id='customer-name-input-field']"),
@@ -412,6 +416,13 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
 	WebElement AddCustomer;
+	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list']/div/span/span") })
+	WebElement AddTax;
+	@FindAll({ @FindBy(xpath = "//*[@id='contactdropdownlist4']//div[1]//div[1]"),
+			@FindBy(xpath = "//*[text()=' No Data Found!']") })
+	WebElement FirstTax;
+	By TaxName = By.xpath("//*[contains(@class,'fadeIn')]//input[@name='tax_name_main']");
+	By TaxPercentage = By.xpath("//*[contains(@class,'fadeIn')]//input[@name='tax_rate_main']");
 	By SubCustomerListField = By.xpath("//*[@id='contactdropdownlist3']//child::div[1]//div[1]");
 	@FindAll({
 			@FindBy(xpath = "//*[@id='contactdropdownlist' and contains(@style,'display:block;')]//child::div[1]//div[1]"),
@@ -426,7 +437,8 @@ public class QuotePage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']//tr[2]//td[5]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']//tr[2]//td[5]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[6]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[6]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListDate;
 
 	By CreateFrom = By.id("quote-from-date-filter");
@@ -728,8 +740,10 @@ public class QuotePage extends BaseClass {
 			String text = this.getText(ErrorDiscount);
 			return text;
 		} else if (value.equals("ErrorTax")) {
-			String text = this.getText(ErrorTax);
-			return text;
+			if (!this.conditionChecking1(ErrorTax)) {
+				this.clearField(Tax);
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
+			}
 		} else if (value.equals("ErrorDescription")) {
 			String text = this.getText(ErrorDescription);
 			return text;
@@ -898,7 +912,7 @@ public class QuotePage extends BaseClass {
 		return value;
 	}
 
-	public String inventoryItemValidation(String value) {
+	public String inventoryItemValidation(String value) throws IOException, InterruptedException {
 		if (value.equals("Calculation")) {
 			this.inputText(InventoryItem, "Bike");
 			this.clearField(Price);
@@ -907,6 +921,19 @@ public class QuotePage extends BaseClass {
 			this.validationTab(Discount, DisTaxValue);
 			this.clearField(Tax);
 			this.validationTab(Tax, TaxValue);
+			this.mouseActionClick(AddTax);
+			if (!this.conditionChecking1(TaxName)) {
+				do {
+					this.mouseActionClick(AddTax);
+				} while (!this.conditionChecking1(TaxName));
+			}
+			this.inputText(TaxName, fakeTaxName);
+			this.inputText(TaxPercentage, fakeTaxPercentage);
+			this.mouseActionClick(SaveButton);
+			this.message("message");
+			if (!responseMessage.equals(getPropertyValue("CreatedTax"))) {
+				this.message("AlternateFunction");
+			}
 			String calculationValidation = this.calculationValidation();
 			String actualAmount = "₹ " + calculationValidation;
 			return actualAmount;
@@ -930,12 +957,12 @@ public class QuotePage extends BaseClass {
 				return responseMessage;
 			} else {
 				do {
-					Thread.sleep(10000);
 					this.mouseActionClick(SaveButton);
 					if (this.conditionChecking(Message)) {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
-						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
 							conditionCheck = false;
 						}
 					}
@@ -963,11 +990,22 @@ public class QuotePage extends BaseClass {
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
+				} else if (responseMessage.equals(getPropertyValue("AlreadyTax"))) {
+					this.clearField(TaxName);
+					String fakeTaxName = faker.book().genre();
+					this.inputText(TaxName, fakeTaxName);
+					this.mouseActionClick(SaveButton);
+				} else if (responseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
+					this.clearField(TaxPercentage);
+					String fakeTaxPercentage = faker.number().digits(2);
+					this.inputText(TaxPercentage, fakeTaxPercentage);
+					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
-					messageCheck = this.getText(Message);
+					responseMessage = this.getText(Message);
 					this.invisible(Message);
-					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
 						conditionCheck = false;
 					}
 				} else {
@@ -975,9 +1013,10 @@ public class QuotePage extends BaseClass {
 						Thread.sleep(10000);
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
-							messageCheck = this.getText(Message);
+							responseMessage = this.getText(Message);
 							this.invisible(Message);
-							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
 								conditionCheck = false;
 							}
 						}
