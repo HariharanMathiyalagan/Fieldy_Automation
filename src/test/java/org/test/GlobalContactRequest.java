@@ -21,6 +21,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
@@ -56,7 +57,7 @@ public class GlobalContactRequest extends BaseClass {
 		driver.manage().deleteAllCookies();
 	}
 
-	@Test(priority = -1) // 1-Login
+	@Test(priority = -2) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
@@ -80,7 +81,7 @@ public class GlobalContactRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 0)
+	@Test(priority = -1)
 	public void requestModule() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Global Request List Page is opened when clicking on Global Request");
@@ -101,7 +102,7 @@ public class GlobalContactRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Create Request page is opened from Global-> Request -> Create Request");
@@ -122,7 +123,7 @@ public class GlobalContactRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Contact Field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -144,7 +145,7 @@ public class GlobalContactRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void autoCompleteContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -165,6 +166,28 @@ public class GlobalContactRequest extends BaseClass {
 			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
 			contactMandatory.message("AlternateFunction");
 			contactMandatory.autoCompleteField("GlobalContactVisibleName");
+		}
+
+	}
+
+	@Test(priority = 3)
+	private void contactNumberDisplayed() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Contact Number: " + RequestPage.ContactPhoneNumber
+				+ " is displayed in the Contact Number Field");
+		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
+		String errorContact = contactMandatory.contactNumberField("Prepopulate");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + RequestPage.ContactPhoneNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorContact.equals(RequestPage.ContactPhoneNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("AutocompleteContactCreate.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
 		}
 
 	}

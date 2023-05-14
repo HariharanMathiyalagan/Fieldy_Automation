@@ -98,8 +98,19 @@ public class InvoicePage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 50);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -920,14 +931,17 @@ public class InvoicePage extends BaseClass {
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 					this.clearField(OrganizationName);
+					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(OrgEmail);
+					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(OrgEmail, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("CompanyContactEmailMessage"))) {
 					this.clearField(OrganizationEmail);
+					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(OrganizationEmail, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("AlreadyTax"))) {
@@ -973,37 +987,92 @@ public class InvoicePage extends BaseClass {
 
 	public String listTextValidation(String value) throws IOException, InterruptedException {
 		if (value.equals("ListPartialStatus")) {
+			if (!this.conditionChecking(ListPartialStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListPartialStatus));
+			}
 			String text = this.getText(ListPartialStatus);
 			return text;
 		} else if (value.equals("ListAwaitingStatus")) {
+			if (!this.conditionChecking(ListAwaitingStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListAwaitingStatus));
+			}
 			String text = this.getText(ListAwaitingStatus);
 			return text;
 		} else if (value.equals("ListDraftStatus")) {
+			if (!this.conditionChecking(ListDraftStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListDraftStatus));
+			}
 			String text = this.getText(ListDraftStatus);
 			return text;
 		} else if (value.equals("ListPaidStatus")) {
+			if (!this.conditionChecking(ListPaidStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListPaidStatus));
+			}
 			String text = this.getText(ListPaidStatus);
 			return text;
 		} else if (value.equals("GlobalListStatus")) {
+			if (!this.conditionChecking(GlobalListInvoiceStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(GlobalListInvoiceStatus));
+			}
 			String text = this.getText(GlobalListInvoiceStatus);
 			return text;
 		} else if (value.equals("InvoiceNo")) {
+			if (!this.conditionChecking(ListInvoiceNo)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListInvoiceNo));
+			}
 			SearchData = this.getText(ListInvoiceNo);
 			return SearchData;
 		} else if (value.equals("Reference")) {
+			if (!this.conditionChecking(ListReference1)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListReference1));
+			}
 			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("SearchInvoiceNo")) {
+			if (!this.conditionChecking(ListInvoiceNo1)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListInvoiceNo1));
+			}
 			SearchData = this.getText(ListInvoiceNo1);
 			return SearchData;
 		} else if (value.equals("SearchReference")) {
+			if (!this.conditionChecking(ListReference1)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListReference1));
+			}
 			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("GlobalCustomerName")) {
 			this.elementtobeClickable(InvoiceSearchButton);
+			if (!this.conditionChecking(ListCustomerName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListCustomerName));
+			}
 			SearchData = this.getText(ListCustomerName);
 			return SearchData;
 		} else if (value.equals("SearchGlobalCustomerName")) {
+			if (!this.conditionChecking(GlobalListCustomerName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(GlobalListCustomerName));
+			}
 			return this.getText(GlobalListCustomerName);
 		} else if (value.equals("SearchData")) {
 			this.inputText(Search, SearchData);
@@ -1026,6 +1095,11 @@ public class InvoicePage extends BaseClass {
 			DecimalFormat f = new DecimalFormat("0.00");
 			SearchData = f.format(PartialPay);
 		} else if (value.equals("Paid")) {
+			if (!this.conditionChecking(DueAmount)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(DueAmount));
+			}
 			SearchData = this.getText(DueAmount);
 			this.mouseActionClick(PayButton);
 		} else if (value.equals("PayAmount")) {
