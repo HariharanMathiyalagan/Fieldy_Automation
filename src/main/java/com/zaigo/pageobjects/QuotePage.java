@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 
+import com.aventstack.extentreports.Status;
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
 
@@ -204,8 +205,19 @@ public class QuotePage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 50);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -704,6 +716,11 @@ public class QuotePage extends BaseClass {
 //			this.inputText(CreateTo, format);
 			this.mouseActionClick(Apply);
 		} else if (value.equals("ListCreateDate")) {
+			if (!this.conditionChecking(ListDate)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListDate));
+			}
 			text = this.getText(ListDate);
 			return text;
 		}
@@ -857,8 +874,7 @@ public class QuotePage extends BaseClass {
 				this.mouseActionClick(RadioOrganization);
 			}
 			this.mouseActionClick(Save);
-			if (this.conditionChecking1(ErrorExpiryDate)) {
-			} else {
+			if (!this.conditionChecking1(ErrorExpiryDate)) {
 				do {
 					this.mouseActionClick(Save);
 				} while (!this.conditionChecking1(ErrorExpiryDate));
@@ -957,6 +973,7 @@ public class QuotePage extends BaseClass {
 				return responseMessage;
 			} else {
 				do {
+					Thread.sleep(10000);
 					this.mouseActionClick(SaveButton);
 					if (this.conditionChecking(Message)) {
 						responseMessage = this.getText(Message);
@@ -970,7 +987,9 @@ public class QuotePage extends BaseClass {
 			}
 		} else if (value.equals("AlternateFunction")) {
 			do {
-				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+						|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))
+						|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(EmailField);
 					String fakeEmail = faker.internet().safeEmailAddress();
 					this.inputText(EmailField, fakeEmail);
@@ -979,16 +998,6 @@ public class QuotePage extends BaseClass {
 					this.clearField(OrganizationName);
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
-					this.mouseActionClick(SaveButton);
-				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
-					this.clearField(EmailField);
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(EmailField, fakeEmail);
-					this.mouseActionClick(SaveButton);
-				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
-					this.clearField(EmailField);
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("AlreadyTax"))) {
 					this.clearField(TaxName);
@@ -1032,20 +1041,40 @@ public class QuotePage extends BaseClass {
 	public String listTextValidation(String value) {
 		driver.manage().deleteAllCookies();
 		if (value.equals("ListStatus")) {
-			String text = this.getText(ListQuoteStatus);
-			return text;
+			if (!this.conditionChecking(ListQuoteStatus)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListQuoteStatus));
+			}
+			searchData = this.getText(ListQuoteStatus);
 		} else if (value.equals("QuoteNo")) {
+			if (!this.conditionChecking(ListQuoteNo)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListQuoteNo));
+			}
 			searchData = this.getText(ListQuoteNo);
-			return searchData;
 		} else if (value.equals("Tittle")) {
+			if (!this.conditionChecking(ListTittle)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListTittle));
+			}
 			searchData = this.getText(ListTittle);
-			return searchData;
 		} else if (value.equals("Reference")) {
+			if (!this.conditionChecking(ListReference)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListReference));
+			}
 			searchData = this.getText(ListReference);
-			return searchData;
 		} else if (value.equals("GlobalCustomerName")) {
+			if (!this.conditionChecking(GlobalListCustomerName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(GlobalListCustomerName));
+			}
 			searchData = this.getText(GlobalListCustomerName);
-			return searchData;
 		} else if (value.equals("SearchData")) {
 			this.elementClickable(SearchButton);
 			this.tagValidation(Search, searchData);
@@ -1053,10 +1082,9 @@ public class QuotePage extends BaseClass {
 			this.inputText(Search, "rewwrewrwrwrwrew");
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("InvalidList")) {
-			String text = this.getText(Invalid);
-			return text;
+			searchData = this.getText(Invalid);
 		}
-		return value;
+		return searchData;
 	}
 
 	static int parseInt;

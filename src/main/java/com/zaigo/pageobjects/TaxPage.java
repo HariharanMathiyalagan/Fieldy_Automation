@@ -324,8 +324,7 @@ public class TaxPage extends BaseClass {
 			}
 		} else if (value.equals("AlternateMessage")) {
 			do {
-				if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))
-						|| ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+				if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
 					String TaxValue = RandomStringUtils.randomNumeric(2);
 					this.clearField(TaxPercentage);
 					this.inputText(TaxPercentage, TaxValue);
@@ -335,6 +334,12 @@ public class TaxPage extends BaseClass {
 					String fakeTaxName = faker.book().genre();
 					this.clearField(TaxName);
 					this.inputText(TaxName, fakeTaxName);
+					this.mouseActionClick(Button);
+				} else if (ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeTaxName = faker.book().genre();
+					this.clearField(SubTaxName1);
+					this.inputText(SubTaxName1, fakeTaxName);
 					this.mouseActionClick(Button);
 				}
 				if (this.conditionChecking(Message, 20)) {

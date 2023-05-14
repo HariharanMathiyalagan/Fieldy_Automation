@@ -45,7 +45,7 @@ public class LoginPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 100);
+			wait = new WebDriverWait(driver, 150);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -55,8 +55,9 @@ public class LoginPage extends BaseClass {
 
 	static String value;
 
-	public String dashBoardText() {
+	public String dashBoardText() throws IOException {
 		Boolean condition = true;
+		this.checkDashboardPage();
 		if (this.conditionChecking(Dashboard)) {
 			value = this.getText(Dashboard);
 		} else {
@@ -69,6 +70,18 @@ public class LoginPage extends BaseClass {
 			} while (condition);
 		}
 		return value;
+	}
+
+	public void checkDashboardPage() throws IOException {
+		if (!this.conditionChecking(Dashboard)) {
+			do {
+				this.userField(getPropertyValueUpdate("UserName"));
+				this.passwordField(getPropertyValue("Password"));
+				this.clickLoginButton();
+			} while (!this.conditionChecking(Dashboard));
+
+		}
+
 	}
 
 	public String getText(By element) {

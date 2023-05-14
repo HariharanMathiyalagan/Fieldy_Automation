@@ -3,15 +3,15 @@
 <suite name="Failed suite [Suite (0)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.TeamCompaniesDetailScreen">
+      <class name="org.test.TeamUserContractor">
         <methods>
-          <include name="deleteLocation"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
+          <include name="editmandatoryValidationContractorEmailField"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.TeamCompaniesDetailScreen -->
+      </class> <!-- org.test.TeamUserContractor -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (0)] -->

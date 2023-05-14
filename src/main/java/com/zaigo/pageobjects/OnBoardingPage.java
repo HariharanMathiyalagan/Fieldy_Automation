@@ -558,7 +558,7 @@ public class OnBoardingPage extends BaseClass {
 				this.mouseActionClick(Continue);
 			} else {
 				do {
-					if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail1"))) {
+					if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail"))) {
 						Faker faker = new Faker(new Locale("en-IND"));
 						this.clearField(Email);
 						String fakeEmail = faker.internet().safeEmailAddress();

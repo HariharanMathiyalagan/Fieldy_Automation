@@ -101,7 +101,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	private void mouseActionClick(WebElement element) {
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 30);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
@@ -203,6 +203,18 @@ public class RequestPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
 	}
 
+	String text;
+
+	public String errorMessage(By value) {
+		if (!this.conditionChecking(value)) {
+			do {
+				text = this.getText(value);
+			} while (!this.conditionChecking(value));
+		}
+		return text;
+
+	}
+
 	By ContactListName = By.xpath("(//*[@data-n-linkto='customer_contact_timeline'])[1]");
 	By OrganizationListName = By.xpath("(//*[@data-n-linkto='customer_organization_timeline'])[1]");
 	By ClickContactRequest = By.xpath("//*[@data-detailheadermenu='cstmr-contact-request']");
@@ -230,6 +242,7 @@ public class RequestPage extends BaseClass {
 	By StartDate = By.id("schedule_from_date");
 	By EndDate = By.id("schedule_to_date");
 	By StartTime = By.id("schedule_from_time");
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By EndTime = By.id("schedule_to_time");
 	By Crew = By.id("crew-radio-button");
 	By Single = By.id("technician-radio-button");
@@ -305,7 +318,7 @@ public class RequestPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Save = By.id("contact-create");
 	By GlobalStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
-	By ThreeDots = By.xpath("//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
+	By ThreeDots = By.xpath("//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]//i");
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='main_request_edit'])[1]");
 	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
 	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
@@ -380,7 +393,10 @@ public class RequestPage extends BaseClass {
 	WebElement ZipcodeField;
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
-			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']"),
+			@FindBy(xpath = "//*[@id='shorter_contact_create' and contains(@class,'d-none')]//ancestor::*[@id='fieldy-body-ele']//child::div[1]//div[1]//*[contains(text(),'Schedule Request')]"),
+			@FindBy(xpath = "//*[@id='shorter_organization_create' and contains(@class,'d-none')]//ancestor::*[@id='fieldy-body-ele']//child::div[1]//div[1]//*[contains(text(),'Schedule Request')]"),
+			@FindBy(xpath = "//*[contains(@disabled,'') and @id='customer-name-input-field']//ancestor::div[@id='fieldy-body-ele']//child::div[1]//div[1]//*[@id='scheduledrop']")})
 	WebElement SaveButton;
 
 	@FindAll({
@@ -471,7 +487,7 @@ public class RequestPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[4]"),
 			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[2]//td[7]") })
+			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[2]//td[7]//span") })
 	WebElement Status;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[25]"),
@@ -494,6 +510,10 @@ public class RequestPage extends BaseClass {
 	@FindAll({ @FindBy(id = "request-main-to-date-filter"), @FindBy(id = "customer-contact-request-to-date-filter"),
 			@FindBy(id = "customer-company-request-to-date") })
 	WebElement FilterToDate;
+
+	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_groups']"),
+			@FindBy(xpath = "//*[@id='id_customer_orgcntgroup' and contains(@class,'field-input')]") })
+	WebElement ContactNumber;
 	static int parseInt;
 
 	public int getCount() throws InterruptedException {
@@ -522,7 +542,15 @@ public class RequestPage extends BaseClass {
 
 	public void picKLocation() {
 		this.inputText(Location, fakeState);
-		this.mouseActionClick(firstLocation);
+		if (!conditionChecking1(firstLocation)) {
+			do {
+				this.clearField(Location);
+				this.inputText(Location, fakeState);
+			} while (!conditionChecking1(firstLocation));
+		} else {
+			this.mouseActionClick(firstLocation);
+		}
+
 	}
 
 	public void currentPickerFromDate() {
@@ -590,6 +618,7 @@ public class RequestPage extends BaseClass {
 
 	static String ContactFirstName;
 	static String ContactLastName;
+	public static String ContactPhoneNumber;
 
 	public void autoCompleteField(String value) throws InterruptedException, IOException {
 		Boolean condition = true;
@@ -610,6 +639,7 @@ public class RequestPage extends BaseClass {
 			ContactLastName = this.getTextAttribute(LastNameField);
 			this.inputText(EmailField, fakeEmail);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			ContactPhoneNumber = this.getTextAttribute(PhoneNumber);
 			this.inputText(JobTittle, fakeTittle);
 			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
@@ -672,8 +702,10 @@ public class RequestPage extends BaseClass {
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
 			ContactLastName = this.getTextAttribute(LastNameField);
+//			this.inputText(EmailField, "leela.johar@example.com");
 			this.inputText(EmailField, fakeEmail);
 			this.inputText(PhoneNumber, fakePhoneNumber);
+			ContactPhoneNumber = this.getTextAttribute(PhoneNumber);
 			this.inputText(Address1Field, fakeAddress1);
 			this.inputText(Address2Field, fakeAddress2);
 			this.inputText(CityField, fakeCity);
@@ -747,8 +779,19 @@ public class RequestPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 50);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 50);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -815,25 +858,17 @@ public class RequestPage extends BaseClass {
 			}
 		} else if (value.equals("AlternateFunction")) {
 			do {
-				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
-					this.clearField(Email);
+				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+						|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+						|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
+					this.clearField(EmailField);
 					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(Email, fakeEmail);
+					this.inputText(EmailField, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 					this.clearField(OrganizationName);
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
-					this.mouseActionClick(SaveButton);
-				} else if (responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
-					this.clearField(OrgEmail);
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(OrgEmail, fakeEmail);
-					this.mouseActionClick(SaveButton);
-				} else if (responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
-					this.clearField(OrganizationEmail);
-					String fakeEmail = faker.internet().safeEmailAddress();
-					this.inputText(OrganizationEmail, fakeEmail);
 					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
@@ -929,6 +964,13 @@ public class RequestPage extends BaseClass {
 		}
 	}
 
+	public String contactNumberField(String value) {
+		if (value.equals("Prepopulate")) {
+			return this.getTextAttribute(ContactNumber);
+		}
+		return value;
+	}
+
 	public void tittle(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(Tittle, characters256);
@@ -939,6 +981,17 @@ public class RequestPage extends BaseClass {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(Notes, characters2048);
 		}
+	}
+
+	String customer;
+
+	public String customerField() {
+		if (this.conditionChecking1(ContactNameError)) {
+			customer = this.getText(ContactNameError);
+		} else {
+			customer = "null";
+		}
+		return customer;
 	}
 
 	public String clickEvent(String value) {
@@ -995,7 +1048,9 @@ public class RequestPage extends BaseClass {
 			this.currentPickerFromDate();
 			this.currentPickerToDate();
 			this.inputText(StartTime, "10.00");
+			this.invisible(Spinner);
 			this.inputText(EndTime, "18.00");
+			this.invisible(Spinner);
 			this.scrollDown();
 			this.assertName(TechnicianLabel, "Technician");
 			this.mouseActionClick(Technician);
@@ -1081,16 +1136,36 @@ public class RequestPage extends BaseClass {
 			this.inputText(Search, listData);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("Location")) {
+			if (!this.conditionChecking(ListLocationName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListLocationName));
+			}
 			listData = this.getText(ListLocationName);
 		} else if (value.equals("RequestNo")) {
+			if (!this.conditionChecking(ListRequestNo)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListRequestNo));
+			}
 			listData = this.getText(ListRequestNo);
 		} else if (value.equals("CancelRequestNo")) {
+			if (!this.conditionChecking(CancelListRequestNo)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(CancelListRequestNo));
+			}
 			listData = this.getText(CancelListRequestNo);
 		} else if (value.equals("Status")) {
 			listData = this.getText(Status);
 		} else if (value.equals("CancelStatus")) {
 			listData = this.getText(CancelStatus);
 		} else if (value.equals("CustomerName")) {
+			if (!this.conditionChecking(CustomerNameList)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(CustomerNameList));
+			}
 			listData = this.getText(CustomerNameList);
 		} else if (value.equals("Invlaid")) {
 			this.tagValidation(Search, "fdsshfsfkshfkshf");
@@ -1120,13 +1195,21 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String validateListFromDate() {
-		String text = this.getText(ListFromDate);
-		return text;
+		if (!this.conditionChecking(ListFromDate)) {
+			do {
+				driver.navigate().refresh();
+			} while (!this.conditionChecking(ListFromDate));
+		}
+		return this.getText(ListFromDate);
 	}
 
 	public String validateToDate() {
-		String text = this.getText(ListToDate);
-		return text;
+		if (!this.conditionChecking(ListToDate)) {
+			do {
+				driver.navigate().refresh();
+			} while (!this.conditionChecking(ListToDate));
+		}
+		return this.getText(ListToDate);
 	}
 
 	public void createFunction() throws IOException, InterruptedException {
