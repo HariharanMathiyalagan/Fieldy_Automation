@@ -3,20 +3,59 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CustomerContactInvoice">
+      <class name="org.test.GlobalContactRequest">
         <methods>
+          <include name="searchFilterByDate"/>
+          <include name="searchCustomerName"/>
+          <include name="searchInvalid"/>
+          <include name="contactNumberDisplayed"/>
+          <include name="maximumValidationTittle"/>
+          <include name="requestCancelledStatus"/>
+          <include name="startedRequest"/>
+          <include name="editmaximumValidationNotes"/>
           <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="afterDecimalEditPointTaxField"/>
-          <include name="maxEditLimitTaxField"/>
+          <include name="editmaxTagLimitValidation"/>
+          <include name="cancelledRequest"/>
+          <include name="unsssignedRequest"/>
+          <include name="editmaximumTagValidation"/>
+          <include name="labelEditValidation"/>
+          <include name="duplicateTagsValidation"/>
+          <include name="labelValidation"/>
+          <include name="mandatoryValidationDescription"/>
+          <include name="requestStartedStatus"/>
+          <include name="requestScheduleStatus"/>
+          <include name="requestUnassignedStatus"/>
+          <include name="loginPage"/>
+          <include name="createRequest_FromDateandTime_ToDateandTime"/>
           <include name="exitBrowser"/>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="contactMandatoryValidation"/>
+          <include name="editmandatoryValidationDescription"/>
+          <include name="mandatoryValidationLocation"/>
+          <include name="searchLocation"/>
+          <include name="maximumValidationNotes"/>
           <include name="deleteAfterCatch"/>
-          <include name="maxLimitTaxField"/>
-          <include name="beforeDecimalPointTaxField"/>
+          <include name="editmaximumValidationTittle"/>
+          <include name="autoCompleteContactCreation"/>
+          <include name="updatedRequest"/>
+          <include name="editmandatoryValidationLocation"/>
+          <include name="completedRequest"/>
+          <include name="requestModule"/>
+          <include name="searchRequestNo"/>
+          <include name="maximumValidationLocation"/>
+          <include name="dispatchedRequest"/>
+          <include name="maxTagLimitValidation"/>
+          <include name="requestDispatchedStatus"/>
+          <include name="createButton"/>
+          <include name="updateButton"/>
+          <include name="maximumValidationDescription"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="editduplicateTagsValidation"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="maximumTagValidation"/>
+          <include name="requestCompleteStatus"/>
+          <include name="editmaximumValidationLocation"/>
         </methods>
-      </class> <!-- org.test.CustomerContactInvoice -->
+      </class> <!-- org.test.GlobalContactRequest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

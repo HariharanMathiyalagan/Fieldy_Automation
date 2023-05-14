@@ -91,10 +91,10 @@ public class ProductServicePage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -102,11 +102,11 @@ public class ProductServicePage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking1(By element) {
+	public Boolean conditionChecking(WebElement element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 2);
-			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -262,8 +262,9 @@ public class ProductServicePage extends BaseClass {
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]") })
+	@FindAll({
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i"),
+			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i") })
 	WebElement ThreeDots;
 
 	@FindAll({
@@ -441,11 +442,11 @@ public class ProductServicePage extends BaseClass {
 			this.validationTab(InventoryName, text);
 		} else if (value.equals("Mandatory")) {
 			this.mouseActionClick(SaveComplete);
-			if (this.conditionChecking1(ErrorInventoryName)) {
+			if (this.conditionChecking(ErrorInventoryName, 2)) {
 			} else {
 				do {
 					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ErrorInventoryName));
+				} while (!this.conditionChecking(ErrorInventoryName, 2));
 			}
 		}
 	}
@@ -511,7 +512,7 @@ public class ProductServicePage extends BaseClass {
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
-			if (conditionChecking(Message)) {
+			if (conditionChecking(Message, 20)) {
 				ResponseMessage = this.getText(Message);
 				this.invisible(Message);
 				return ResponseMessage;
@@ -519,7 +520,7 @@ public class ProductServicePage extends BaseClass {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (conditionChecking(Message)) {
+					if (conditionChecking(Message, 20)) {
 						ResponseMessage = this.getText(Message);
 						if (ResponseMessage.equals(getPropertyValue("InventoryCreatedMessage"))
 								|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))) {
@@ -621,6 +622,11 @@ public class ProductServicePage extends BaseClass {
 		} else if (value.equals("Edit")) {
 			String text = this.getText(ListInventoryName);
 			this.mouseActionClick(ThreeDots);
+			if (!conditionChecking(Edit, 2)) {
+				do {
+					this.mouseActionClick(ThreeDots);
+				} while (!conditionChecking(Edit, 2));
+			}
 			this.mouseActionClick(Edit);
 			this.valuePresent(InventoryName, text);
 		}
@@ -645,6 +651,11 @@ public class ProductServicePage extends BaseClass {
 			return this.getText(Invalid);
 		} else if (value.equals("Delete")) {
 			this.mouseActionClick(ThreeDots);
+			if (!conditionChecking(Delete, 2)) {
+				do {
+					this.mouseActionClick(ThreeDots);
+				} while (!conditionChecking(Delete, 2));
+			}
 			this.mouseActionClick(Delete);
 			this.mouseActionClick(Yes);
 		}
@@ -664,6 +675,11 @@ public class ProductServicePage extends BaseClass {
 			this.visibility(ListPage);
 			listData = this.getText(ListInventoryName);
 			this.mouseActionClick(ThreeDots);
+			if (!conditionChecking(Edit, 2)) {
+				do {
+					this.mouseActionClick(ThreeDots);
+				} while (!conditionChecking(Edit, 2));
+			}
 			this.mouseActionClick(Edit);
 			this.valuePresent(InventoryName, listData);
 			this.mouseActionClick(Inactive);
@@ -682,6 +698,11 @@ public class ProductServicePage extends BaseClass {
 		this.visibility(ListPage);
 		String text = this.getText(ListInventoryName);
 		this.mouseActionClick(ThreeDots);
+		if (!conditionChecking(Edit, 2)) {
+			do {
+				this.mouseActionClick(ThreeDots);
+			} while (!conditionChecking(Edit, 2));
+		}
 		this.mouseActionClick(Delete);
 		this.mouseActionClick(Yes);
 		this.message("Message");

@@ -56,7 +56,7 @@ public class GlobalContactJob extends BaseClass {
 		driver.manage().deleteAllCookies();
 	}
 
-	@Test(priority = -1) // 1-Login
+	@Test(priority = -2) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
@@ -80,7 +80,7 @@ public class GlobalContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 0)
+	@Test(priority = -1)
 	public void jobModule() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify Global Job List Page is opened when clicking on Global Job");
 		JobPage module = PageFactory.initElements(driver, JobPage.class);
@@ -100,7 +100,7 @@ public class GlobalContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify Create Job page is opened from Contacts-> Jobs -> Create Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
@@ -120,7 +120,7 @@ public class GlobalContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Contact Name field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -143,7 +143,7 @@ public class GlobalContactJob extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void autoCompleteContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		JobPage contactMandatory = PageFactory.initElements(driver, JobPage.class);
@@ -164,6 +164,28 @@ public class GlobalContactJob extends BaseClass {
 			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
 			contactMandatory.message("AlternateFunction");
 			contactMandatory.autoCompleteField("GlobalContactVisibleName");
+		}
+
+	}
+
+	@Test(priority = 3)
+	private void contactNumberDisplayed() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Contact Number: " + JobPage.ContactPhoneNumber
+				+ " is displayed in the Contact Number Field");
+		JobPage contactMandatory = PageFactory.initElements(driver, JobPage.class);
+		String errorContact = contactMandatory.contactNumberField("Prepopulate");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + JobPage.ContactPhoneNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorContact.equals(JobPage.ContactPhoneNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("AutocompleteContactCreate.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
 		}
 
 	}
@@ -988,8 +1010,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("SearchCustomerName.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("SearchCustomerName.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("JobNo1");
 		}
 
@@ -1016,8 +1036,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("searchJobNo.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchJobNo.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("Location");
 		}
 
@@ -1044,8 +1062,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 			dateFrom = mandatory.dateFrom();
 		}
 

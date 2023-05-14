@@ -21,6 +21,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
@@ -45,18 +46,18 @@ public class GlobalOrganizationRequest extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
 	}
 
-	@Test(priority = -2) // 1-Login
+	@Test(priority = -3) // 1-Login
 	public void loginPage() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
@@ -80,7 +81,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = -1)
+	@Test(priority = -2)
 	public void requestModule() throws InterruptedException, WebDriverException, IOException {
 		extentTest = extentReports
 				.createTest("Verify Global Request List Page is opened when clicking on Global Request");
@@ -101,7 +102,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 0)
+	@Test(priority = -1)
 	private void labelValidation() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify Create Request page is opened from Global-> Request -> Create Request");
@@ -122,16 +123,16 @@ public class GlobalOrganizationRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Mandatory Validation in Contact Field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.clickEvent("RadioOrganization");
-//		String errorContact = contactMandatory.errorField("CustomerField");
-		extentTest.log(Status.INFO, "Actual Result is -" + "null");
+		String customerField = contactMandatory.customerField();
+		extentTest.log(Status.INFO, "Actual Result is -" + customerField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if ("null".equals(getPropertyValue("MandatoryErrorMessage"))) {
+		if (customerField.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -144,8 +145,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 
 	}
 
-
-	@Test(priority = 2)
+	@Test(priority = 1)
 	private void autoCompleteOrganizationCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Organization Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -170,7 +170,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -190,6 +190,28 @@ public class GlobalOrganizationRequest extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("AutocompleteOrganzationContactCreate.png");
 			contactMandatory.autoCompleteField("VisibleName");
+		}
+
+	}
+
+	@Test(priority = 3)
+	private void contactNumberDisplayed() throws IOException, InterruptedException {
+		extentTest = extentReports.createTest("Verify the Customer Organization Contact Number: "
+				+ RequestPage.ContactPhoneNumber + " is displayed in the Contact Number Field");
+		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
+		String errorContact = contactMandatory.contactNumberField("Prepopulate");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
+		extentTest.log(Status.INFO, "Expected Result is -" + RequestPage.ContactPhoneNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorContact.equals(RequestPage.ContactPhoneNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("AutocompleteContactCreate.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("AutocompleteContactCreate.png");
 		}
 
 	}
@@ -877,7 +899,8 @@ public class GlobalOrganizationRequest extends BaseClass {
 
 	@Test(priority = 33)
 	private void requestStartedStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Active Status");
+		extentTest = extentReports
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Active Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -921,8 +944,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	@Test(priority = 35)
 	private void requestCompleteStatus() throws InterruptedException, IOException {
 		extentTest = extentReports
-				.createTest(
-						"Verify the Request No:(" + CustomerListPage + ") is in the Completed Status");
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Completed Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("Status");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -966,8 +988,8 @@ public class GlobalOrganizationRequest extends BaseClass {
 
 	@Test(priority = 37)
 	private void requestCancelledStatus() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest(
-				"Verify the Request No:(" + CustomerListPage + ") is in the Cancelled Status");
+		extentTest = extentReports
+				.createTest("Verify the Request No:(" + CustomerListPage + ") is in the Cancelled Status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		String errorPasswordField = mandatory.listValidation("CancelStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1076,7 +1098,8 @@ public class GlobalOrganizationRequest extends BaseClass {
 
 	@Test(priority = 41)
 	private void searchFilterByDate() throws InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
+		extentTest = extentReports
+				.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.filterByDate();
 		String validateListFromDate = mandatory.validateListFromDate();
@@ -1119,6 +1142,5 @@ public class GlobalOrganizationRequest extends BaseClass {
 		}
 
 	}
-
 
 }
