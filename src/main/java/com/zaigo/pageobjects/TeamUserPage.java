@@ -78,6 +78,17 @@ public class TeamUserPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking(WebElement element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	public void clearField(By element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).clear();
@@ -590,12 +601,27 @@ public class TeamUserPage extends BaseClass {
 			this.inputText(Search, listData);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("FirstName")) {
+			if (!this.conditionChecking(ListFirstName, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListFirstName, 20));
+			}
 			listData = this.getText(ListFirstName);
 			return listData;
 		} else if (value.equals("PhoneNumber")) {
+			if (!this.conditionChecking(ListPhoneNumber, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListPhoneNumber, 20));
+			}
 			listData = this.getText(ListPhoneNumber);
 			return listData;
 		} else if (value.equals("Email")) {
+			if (!this.conditionChecking(ListEmail, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListEmail, 20));
+			}
 			listData = this.getText(ListEmail);
 			return listData;
 		} else if (value.equals("Invalid")) {
@@ -605,18 +631,38 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("ContractorSearchData")) {
 			this.tagValidation(ContractorSearch, listData);
 		} else if (value.equals("ContractorPhoneNumber")) {
+			if (!this.conditionChecking(ListContractorPhoneNumber, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListContractorPhoneNumber, 20));
+			}
 			listData = this.getText(ListContractorPhoneNumber);
 			return listData;
 		} else if (value.equals("ContractorListEmail")) {
+			if (!this.conditionChecking(ListContractorEmail, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListContractorEmail, 20));
+			}
 			listData = this.getText(ListContractorEmail);
 			return listData;
 		} else if (value.equals("ContractorListCompany")) {
+			if (!this.conditionChecking(ListCompanyFirstName, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListCompanyFirstName, 20));
+			}
 			listData = this.getText(ListCompanyFirstName);
 			return listData;
 		} else if (value.equals("FilterCompany")) {
 			this.mouseAction(FilterByCompany);
 			this.mouseActionClick(ListFilterCompany);
 			this.mouseActionClick(FilterSearch);
+			if (!this.conditionChecking(ListCompanyFirstName, 20)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListCompanyFirstName, 20));
+			}
 			String text = this.getText(ListCompanyFirstName);
 			return text;
 		}
