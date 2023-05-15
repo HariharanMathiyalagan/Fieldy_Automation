@@ -393,10 +393,7 @@ public class RequestPage extends BaseClass {
 	WebElement ZipcodeField;
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
-			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']"),
-			@FindBy(xpath = "//*[@id='shorter_contact_create' and contains(@class,'d-none')]//ancestor::*[@id='fieldy-body-ele']//child::div[1]//div[1]//*[contains(text(),'Schedule Request')]"),
-			@FindBy(xpath = "//*[@id='shorter_organization_create' and contains(@class,'d-none')]//ancestor::*[@id='fieldy-body-ele']//child::div[1]//div[1]//*[contains(text(),'Schedule Request')]"),
-			@FindBy(xpath = "//*[contains(@disabled,'') and @id='customer-name-input-field']//ancestor::div[@id='fieldy-body-ele']//child::div[1]//div[1]//*[@id='scheduledrop']")})
+			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']") })
 	WebElement SaveButton;
 
 	@FindAll({
@@ -842,7 +839,6 @@ public class RequestPage extends BaseClass {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
-				return responseMessage;
 			} else {
 				do {
 					Thread.sleep(10000);
@@ -872,9 +868,9 @@ public class RequestPage extends BaseClass {
 					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
-					alternateResponseMessage = this.getText(Message);
+					responseMessage = this.getText(Message);
 					this.invisible(Message);
-					if (alternateResponseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 						conditionCheck = false;
 					}
 				} else {
@@ -882,9 +878,9 @@ public class RequestPage extends BaseClass {
 						Thread.sleep(10000);
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
-							alternateResponseMessage = this.getText(Message);
+							responseMessage = this.getText(Message);
 							this.invisible(Message);
-							if (alternateResponseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 								conditionCheck = false;
 							}
 						}
@@ -893,7 +889,7 @@ public class RequestPage extends BaseClass {
 			} while (conditionCheck);
 
 		}
-		return value;
+		return responseMessage;
 	}
 
 	public String labelValidation(String value) throws InterruptedException {
