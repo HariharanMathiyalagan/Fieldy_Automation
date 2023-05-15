@@ -783,6 +783,17 @@ public class CreateContractorPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking(WebElement element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 20);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	public Boolean conditionChecking1(WebElement element) {
 		Boolean text = false;
 		try {
@@ -832,15 +843,35 @@ public class CreateContractorPage extends BaseClass {
 			this.inputText(Search, response);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("ListCompanyName")) {
+			if (!this.conditionChecking(ListCompanyName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListCompanyName));
+			}
 			response = this.getText(ListCompanyName);
 			return response;
 		} else if (value.equals("ListEmail")) {
+			if (!this.conditionChecking(ListEmail)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListEmail));
+			}
 			response = this.getText(ListEmail);
 			return response;
 		} else if (value.equals("ListPhoneNumber")) {
+			if (!this.conditionChecking(ListPhoneNumber)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListPhoneNumber));
+			}
 			response = this.getText(ListPhoneNumber);
 			return response;
 		} else if (value.equals("ListName")) {
+			if (!this.conditionChecking(ListName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.conditionChecking(ListName));
+			}
 			response = this.getText(ListName);
 			return response;
 		} else if (value.equals("Invalid")) {
