@@ -359,6 +359,10 @@ public class TaxPage extends BaseClass {
 							if (ResponseMessage.equals(getPropertyValue("CreatedTax"))
 									|| ResponseMessage.equals(getPropertyValue("EditedTax"))) {
 								conditionCheck = false;
+							} else if (ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))
+									|| ResponseMessage.equals(getPropertyValue("AlreadyTax"))
+									|| ResponseMessage.equals("AssociateTaxNameUnique")) {
+								this.message("AlternateMessage");
 							}
 						}
 					} while (conditionCheck);

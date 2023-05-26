@@ -65,7 +65,7 @@ public class GlobalContactInvoice extends BaseClass {
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);

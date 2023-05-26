@@ -173,7 +173,6 @@ public class JobPage extends BaseClass {
 	By SaveComplete = By.id("scheduledrop");
 	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
-
 	@FindAll({ @FindBy(xpath = "//*[@class='pac-item'][1]") })
 	WebElement LocationPick;
 //	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
@@ -194,6 +193,7 @@ public class JobPage extends BaseClass {
 	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
 	By TechnicianFirstName = By.xpath("//*[@id='technician_ids-autocomplete-list']//div[1]");
 	By TechnicianSecoundName = By.xpath("//*[@id='technician_ids-autocomplete-list']//div[2]");
+	By TechnicianThirdName = By.xpath("//*[@id='technician_ids-autocomplete-list']//div[3]");
 	By Priority = By.id("priority");
 	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
@@ -644,7 +644,6 @@ public class JobPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='No Result Found']"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Name;
-
 	By Reset = By.xpath("//*[text()=' Reset Search']");
 
 	public String module() throws InterruptedException {
@@ -698,7 +697,15 @@ public class JobPage extends BaseClass {
 
 	public void picKLocation() {
 		this.inputText(Location, fakeState);
-		this.mouseActionClick(LocationPick);
+		if (!conditionChecking1(LocationPick, 2)) {
+			do {
+				this.clearField(Location);
+				String fakeState = faker.address().state();
+				this.inputText(Location, fakeState);
+			} while (!conditionChecking1(LocationPick, 2));
+		} else {
+			this.mouseActionClick(LocationPick);
+		}
 	}
 
 	public void picKLocation1() {
@@ -884,7 +891,14 @@ public class JobPage extends BaseClass {
 			this.inputText(Description, getPropertyValue("Description"));
 			this.scrollDown();
 			this.mouseActionClick(Technician);
+			String text = this.getText(TechnicianFirstName);
 			this.mouseActionClick(TechnicianFirstName);
+			if (!text.equals(this.getTextAttribute(Technician))) {
+				do {
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianFirstName);
+				} while (!text.equals(this.getTextAttribute(Technician)));
+			}
 			this.validationTab(Tags, randomCharacter);
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.clearField(Tags);
@@ -924,7 +938,14 @@ public class JobPage extends BaseClass {
 			}
 			this.visibility(TechnicianLabel);
 			this.mouseActionClick(Technician);
+			String text = this.getText(TechnicianSecoundName);
 			this.mouseActionClick(TechnicianSecoundName);
+			if (!text.equals(this.getTextAttribute(Technician))) {
+				do {
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianSecoundName);
+				} while (!text.equals(this.getTextAttribute(Technician)));
+			}
 			this.tagValidation(Tags, randomCharacter);
 			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(SaveComplete);
@@ -961,8 +982,7 @@ public class JobPage extends BaseClass {
 			return text;
 		} else if (value.equals("ButtonClick")) {
 			this.mouseActionClick(SaveComplete);
-			if (this.conditionChecking1(ErrorLocation, 1)) {
-			} else {
+			if (!this.conditionChecking1(ErrorLocation, 1)) {
 				do {
 					this.mouseActionClick(SaveComplete);
 				} while (!this.conditionChecking1(ErrorLocation, 1));
@@ -1064,12 +1084,32 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking1(WebElement element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public String techcnianNotAvailable() {
+		String name2 = responseMessage;
+		int startIndex = name2.indexOf("Technician");
+		if (startIndex != -1) {
+			responseMessage = name2.substring(startIndex);
+		}
+		return responseMessage;
+	}
+
 	static String responseMessage;
 	static String messageCheck;
 
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
-		if (value.equals("Message")) {
+		if (value.equals("Message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
@@ -1077,7 +1117,11 @@ public class JobPage extends BaseClass {
 			} else {
 				do {
 					Thread.sleep(10000);
-					this.mouseActionClick(SaveButton);
+					if (value.equals("Message")) {
+						this.mouseActionClick(SaveButton);
+					} else if (value.equals("FormMessage")) {
+						this.mouseActionClick(SaveComplete);
+					}
 					if (this.conditionChecking(Message)) {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
@@ -1089,7 +1133,7 @@ public class JobPage extends BaseClass {
 					}
 				} while (conditionCheck);
 			}
-		} else if (value.equals("AlternateFunction")) {
+		} else if (value.equals("AlternateFunction") || value.equals("AlternateForm")) {
 			do {
 				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
 						|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
@@ -1104,25 +1148,36 @@ public class JobPage extends BaseClass {
 					this.inputText(OrganizationName, fakeCompanyName);
 					firstName = this.getTextAttribute(OrganizationName);
 					this.mouseActionClick(SaveButton);
+				} else if (responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
+					this.scrollDown();
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianThirdName);
+					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message)) {
 					messageCheck = this.getText(Message);
 					this.invisible(Message);
-					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
 						conditionCheck = false;
 					}
 				} else {
-					do {
-						Thread.sleep(10000);
+					Thread.sleep(10000);
+					if (value.equals("AlternateFunction")) {
 						this.mouseActionClick(SaveButton);
-						if (this.conditionChecking(Message)) {
-							messageCheck = this.getText(Message);
-							this.invisible(Message);
-							if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))) {
-								conditionCheck = false;
-							}
+					} else if (value.equals("AlternateForm")) {
+						this.mouseActionClick(SaveComplete);
+					}
+					if (this.conditionChecking(Message)) {
+						responseMessage = this.getText(Message);
+						this.invisible(Message);
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
+							conditionCheck = false;
 						}
-					} while (conditionCheck);
+					}
 				}
 			} while (conditionCheck);
 		}

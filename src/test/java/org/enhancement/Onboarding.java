@@ -7,6 +7,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -19,6 +20,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.OnBoardingPage;
+import com.zaigo.pageobjects.RequestPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class Onboarding extends BaseClass {
@@ -56,7 +58,7 @@ public class Onboarding extends BaseClass {
 	@Test(priority = 1)
 	public void createTenant() throws IOException {
 		extentTest = extentReports.createTest("Creating a New Tenant, the page is redirect into the Dashboard page");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);		
 		mismatchPassword.fillData();
 		String errorConfirmMessage = mismatchPassword.dashBoardPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
@@ -78,7 +80,7 @@ public class Onboarding extends BaseClass {
 	@Test(priority = 2)
 	public void subDomineURL() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain URL");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		String actualURL = mismatchPassword.urlGet();
 		String expectedURL = mismatchPassword.expectedURL();
 		extentTest.log(Status.INFO, "Actual Result is -" + actualURL);
@@ -100,7 +102,7 @@ public class Onboarding extends BaseClass {
 	@Test(priority = 3)
 	public void ownerName() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain tenant owner profile name");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		String actualOwner = mismatchPassword.getOwnerName();
 		String expectedOwner = mismatchPassword.expectedOwnerName();
 		extentTest.log(Status.INFO, "Actual Result is -" + actualOwner);

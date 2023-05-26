@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -53,10 +54,20 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name {
 	public static void main(String[] args) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, 30);
-		String currentDate = sdf.format(cal.getTime());
-		System.out.println(currentDate);
+		String intialAmount = "₹3,000,0000000.00";
+		String intamount = intialAmount.replace("₹", "").replace(",", "");
+		double value1 = Double.parseDouble(intamount);
+		System.out.println(value1);
+		double value2 = (value1 * 18/100)+value1;
+		System.out.println(value2);
+//		DecimalFormat f = new DecimalFormat("0.00");
+//		String format = f.format(value2);
+//		
+		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+		String formattedValue = decimalFormat.format(value2);
+
+//		System.out.println(formattedValue);
+		String valueOf = String.valueOf(formattedValue);
+		System.out.println(valueOf);
 	}
 }

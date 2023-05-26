@@ -51,12 +51,12 @@ public class CustomerContactJob extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -68,7 +68,7 @@ public class CustomerContactJob extends BaseClass {
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -442,7 +442,7 @@ public class CustomerContactJob extends BaseClass {
 				.createTest("Verify Unassigned Job is created successfully from Customer Contact->Create Job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Unassigned");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -456,6 +456,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("UnscheduleJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.message("FormMessage");
 			JobListData = mandatory.listValidation("JobNo1");
 		}
 	}
@@ -766,7 +767,7 @@ public class CustomerContactJob extends BaseClass {
 				"Verfiy the unassigned Job is updated to scheduled when assigning the available technician");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("UpdateData");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -779,6 +780,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("EditJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("EditJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
 		}
 
 	}
@@ -791,7 +794,7 @@ public class CustomerContactJob extends BaseClass {
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Create");
 		mandatory.jobStatusCreation("CreateJob");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -805,6 +808,8 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
 			JobListData = mandatory.listValidation("JobNo1");
 		}
 	}

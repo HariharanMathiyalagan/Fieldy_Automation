@@ -37,7 +37,7 @@ public class LoginPage extends BaseClass {
 		String APP_URL = null;
 
 		if (APP_URL == null) {
-			APP_URL = getPropertyValue("URL");
+			APP_URL = getPropertyValue("URL", getPropertyValue("Enviromment"));
 		}
 		driver.get(APP_URL);
 	}
@@ -45,7 +45,7 @@ public class LoginPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 150);
+			wait = new WebDriverWait(driver, 100);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -76,7 +76,7 @@ public class LoginPage extends BaseClass {
 		if (!this.conditionChecking(Dashboard)) {
 			do {
 				this.userField(getPropertyValueUpdate("UserName"));
-				this.passwordField(getPropertyValue("Password"));
+				this.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 				this.clickLoginButton();
 			} while (!this.conditionChecking(Dashboard));
 

@@ -134,11 +134,22 @@ public class OnBoardingPage extends BaseClass {
 
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 5);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(By element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.invisibilityOfElementLocated(element)).booleanValue();
 		} catch (Exception e) {
 			return text;
 		}
@@ -150,6 +161,7 @@ public class OnBoardingPage extends BaseClass {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
 	}
 
+	By Invisible = By.xpath("//*[contains(@disabled,'true')]");
 	By LandingHeading = By.xpath("//h2[text()='Great to meet you!']");
 	By CompanyName = By.id("company_name");
 	By BussinessWebSite = By.id("company_website");
@@ -186,7 +198,7 @@ public class OnBoardingPage extends BaseClass {
 	By EmployeeCount = By.xpath("//*[text()='101-500 Employees']");
 	By Booking = By.xpath("//*[@value='Online Booking']");
 	By location = By.id("addresses");
-	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+	By firstLocation = By.xpath("(//*[@class='pac-item'])[2]");
 	By CreatingTeanant = By.xpath("//*[text()='We're just adding some finishing touches']");
 	By ButtonVisible = By.xpath("//*[@disabled='true']");
 	By DashBoard = By.xpath("//*[text()=' Company Performance']");
@@ -239,7 +251,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void emailText() throws IOException {
-		driver.get(getPropertyValue("OnBoardingURL"));
+		driver.get(getPropertyValue("OnBoardingURL", getPropertyValue("Enviromment")));
 //		this.mouseActionClick(ClickTrail);
 //		Set<String> windowHandles = driver.getWindowHandles();
 //		ArrayList<String> list = new ArrayList<String>(windowHandles);
@@ -455,11 +467,12 @@ public class OnBoardingPage extends BaseClass {
 		this.clearField(location);
 		this.inputText(location, "Chennai");
 		this.mouseActionClick(firstLocation);
-		this.elementtobeClickable(Continue);
 		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
-		this.mouseActionClick(Continue);
-
+		if (!this.conditionChecking(PasswordHeading, 1)) {
+			do {
+				this.mouseActionClick(Continue);
+			} while (!this.conditionChecking(PasswordHeading, 1));
+		}
 	}
 
 	public void passwordFieldMandatory() {
@@ -554,7 +567,7 @@ public class OnBoardingPage extends BaseClass {
 			this.inputText(Email, fakeEmail);
 			TenantEmail = this.getAttribute(Email);
 			this.validationTab(BussinessWebSite, fakeWebsite);
-			if (this.conditionChecking(Continue)) {
+			if (this.conditionChecking1(Invisible, 10)) {
 				this.mouseActionClick(Continue);
 			} else {
 				do {
@@ -582,13 +595,13 @@ public class OnBoardingPage extends BaseClass {
 						this.validationTab(CompanyName, fakeCompanyName);
 						BussinessName = this.getAttribute(CompanyName);
 					}
-				} while (!this.conditionChecking(Continue));
+				} while (!this.conditionChecking1(Invisible, 10));
 				this.mouseActionClick(Continue);
 			}
 
 		} else if (value.equals("Password")) {
-			this.inputText(Password, getPropertyValue("Password"));
-			this.inputText(ConfirmPassword, getPropertyValue("Password"));
+			this.inputText(Password, getPropertyValue("Password", getPropertyValue("Enviromment")));
+			this.inputText(ConfirmPassword, getPropertyValue("Password", getPropertyValue("Enviromment")));
 			this.mouseActionClick(Continue);
 		}
 
@@ -601,7 +614,7 @@ public class OnBoardingPage extends BaseClass {
 
 	public String expectedURL() throws IOException {
 		String expectedURL = "https://" + (BussinessName.toLowerCase().replaceAll("\\s", ""))
-				+ getPropertyValue("DomainURL") + "/";
+				+ getPropertyValue("DomainURL", getPropertyValue("Enviromment")) + "/";
 		return expectedURL;
 	}
 
@@ -617,7 +630,7 @@ public class OnBoardingPage extends BaseClass {
 	}
 
 	public void fillData() throws IOException {
-		driver.get(getPropertyValue("OnBoardingURL"));
+		driver.get(getPropertyValue("OnBoardingURL", getPropertyValue("Enviromment")));
 		this.inputText(CompanyName, fakeCompanyName);
 		this.validFillData("FirstPage");
 		this.updateValue();

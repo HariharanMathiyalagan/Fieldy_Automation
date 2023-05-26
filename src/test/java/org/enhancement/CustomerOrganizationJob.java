@@ -63,7 +63,7 @@ public class CustomerOrganizationJob extends BaseClass{
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);

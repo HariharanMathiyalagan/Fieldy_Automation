@@ -26,7 +26,7 @@ import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class Login {
+public class Login extends BaseClass{
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -224,8 +224,8 @@ public class Login {
 		extentTest = extentReports.createTest(
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
-		loginInPage.userField(loginInPage.getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(loginInPage.getPropertyValue("Password"));
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
