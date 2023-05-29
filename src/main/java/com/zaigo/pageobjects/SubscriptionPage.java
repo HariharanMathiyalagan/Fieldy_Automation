@@ -201,7 +201,7 @@ public class SubscriptionPage extends BaseClass {
 	By PowerHouseAmount = By.id("power_house_price");
 	By StarterDropDown = By.id("starter_select");
 	By TeamDropDown = By.id("team_select");
-	By PowerHouse = By.id("power_house_select");
+	By PowerHouseDropDown = By.id("power_house_select");
 	By StarterChoosePlan = By.xpath("//*[@id='starter_plan_header']//button");
 	By TeamChoosePlan = By.xpath("//*[@id='team_plan_header']//button");
 	By PowerHouseChoosePlan = By.xpath("//*[@id='power_house_plan_header']//button");
@@ -212,6 +212,7 @@ public class SubscriptionPage extends BaseClass {
 			@FindBy(xpath = "//*[@id='subscription_contianers']/div[2]/div/div/div[3]/button") })
 	WebElement SubmitButton;
 	By MonthlyAmount = By.xpath("//*[@id='monthly-amount']");
+	By YearlyAmount = By.xpath("//*[@id='yearly-amount']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Payment Details')]"),
 			@FindBy(xpath = "//*[contains(text(),'Billing Contact :')]//ancestor::*[@id='fieldy-body-ele']//*[@id='upgrade-proceed-to-payment']//header//div//div//div//span"),
@@ -219,6 +220,7 @@ public class SubscriptionPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='Confirm Order']//ancestor::*[@id='fieldy-body-ele']//*[@id='change_plan_monthly-header']//header//div//div//div//span") })
 	WebElement Label;
 	By MainAmount = By.xpath("//*[@id='main-total']");
+	By AnnualButton = By.xpath("//*[@id='plantab']/button[2]");
 
 	public void modulePage() {
 		this.mouseAction(Profile);
@@ -233,8 +235,18 @@ public class SubscriptionPage extends BaseClass {
 	}
 
 	public String labelValidation(String value) {
-		if (value.equals("ChoosePlan")) {
-			this.mouseActionClick(StarterChoosePlan);
+		if (value.equals("StarterPlan") || value.equals("TeamPlan") || value.equals("PowerHousePlan")) {
+			switch (value) {
+			case "StarterPlan":
+				this.mouseActionClick(StarterChoosePlan);
+				break;
+			case "TeamPlan":
+				this.mouseActionClick(TeamChoosePlan);
+			case "PowerHousePlan":
+				this.mouseActionClick(PowerHouseChoosePlan);
+			default:
+				break;
+			}
 			this.visibility(ProRataAmount);
 		} else if (value.equals("1") || value.equals("2") || value.equals("3")) {
 			this.mouseActionClick(SubmitButton);
@@ -269,10 +281,20 @@ public class SubscriptionPage extends BaseClass {
 	static String intialAmount;
 
 	public void subscriptionFlow(String value) {
-		if (value.equals("Starter")) {
+		if (value.equals("Annual")) {
+			this.mouseActionClick(AnnualButton);
+		} else if (value.equals("Starter")) {
 			intialAmount = this.getText(StarterAmount);
 			this.dropDownByIndex(StarterDropDown, 2);
 			proAmount = this.getTextAttribute(StarterDropDown);
+		} else if (value.equals("Team")) {
+			intialAmount = this.getText(TeamAmount);
+			this.dropDownByIndex(TeamDropDown, 2);
+			proAmount = this.getTextAttribute(TeamDropDown);
+		} else if (value.equals("PowerHouse")) {
+			intialAmount = this.getText(PowerHouseAmount);
+			this.dropDownByIndex(PowerHouseDropDown, 2);
+			proAmount = this.getTextAttribute(PowerHouseDropDown);
 		}
 	}
 
@@ -281,8 +303,15 @@ public class SubscriptionPage extends BaseClass {
 			return this.getText(ProRataAmount);
 		} else if (value.equals("TotalAmount")) {
 			return this.getText(TotalAmount);
-		} else if (value.equals("BillingAmount")) {
-			return this.getText(MonthlyAmount);
+		} else if (value.equals("BillingAmount") || value.equals("YearlyBillingAmount")) {
+			switch (value) {
+			case "BillingAmount":
+				return this.getText(MonthlyAmount);
+			case "YearlyBillingAmount":
+				return this.getText(YearlyAmount);
+			default:
+				break;
+			}
 		} else if (value.equals("MainAmount")) {
 			return this.getText(MainAmount);
 		}
@@ -293,8 +322,8 @@ public class SubscriptionPage extends BaseClass {
 	public static String valueOf;
 
 	public String calculation(String value) {
-		if (value.equals("Starter")) {
-			convertion = this.convertion(1) * 3;
+		if (value.equals("ProAmount")) {
+			convertion = this.convertion(1) * this.convertion(2);
 		} else if (value.equals("TotalAmount")) {
 			convertion = convertion * 18 / 100 + convertion;
 		}

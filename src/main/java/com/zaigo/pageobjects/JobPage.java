@@ -926,9 +926,11 @@ public class JobPage extends BaseClass {
 			this.scrollDown();
 			this.currentPickerFromDate();
 			this.dropDownByIndex(StartTime, 41);
+			this.invisible(Spinner);
 			if (value.equals("CreateJob")) {
 				this.currentPickerToDate();
 				this.inputText(EndTime, "18.00");
+				this.invisible(Spinner);
 			} else if (value.equals("TwoDaysWork")) {
 				this.invisible(Spinner);
 				this.twoDaysPickerToDate("Format");

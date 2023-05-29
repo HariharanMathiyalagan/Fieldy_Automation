@@ -54,20 +54,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name {
 	public static void main(String[] args) {
-		String intialAmount = "₹3,000,0000000.00";
-		String intamount = intialAmount.replace("₹", "").replace(",", "");
-		double value1 = Double.parseDouble(intamount);
-		System.out.println(value1);
-		double value2 = (value1 * 18/100)+value1;
-		System.out.println(value2);
-//		DecimalFormat f = new DecimalFormat("0.00");
-//		String format = f.format(value2);
-//		
-		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-		String formattedValue = decimalFormat.format(value2);
 
-//		System.out.println(formattedValue);
-		String valueOf = String.valueOf(formattedValue);
-		System.out.println(valueOf);
+		String name = "hariharan";
+		String[] split = name.split("");
+		System.out.println(split);
+		for (int i = 0; i < split.length; i++) {
+		
+		}
+
 	}
 }

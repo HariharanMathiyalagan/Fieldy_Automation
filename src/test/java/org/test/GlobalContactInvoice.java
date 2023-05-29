@@ -751,7 +751,7 @@ public class GlobalContactInvoice extends BaseClass {
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -800,7 +800,7 @@ public class GlobalContactInvoice extends BaseClass {
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.CRUDValidation("Create");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1444,7 +1444,7 @@ public class GlobalContactInvoice extends BaseClass {
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -1472,7 +1472,7 @@ public class GlobalContactInvoice extends BaseClass {
 		mandatory.CRUDValidation("Edit");
 		mandatory.inventoryItemValidation("Calculation");
 		mandatory.saveFunction("ClickButton");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

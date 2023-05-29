@@ -345,7 +345,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By reset = By.xpath("//*[@onclick=\"generateCustomerContactTable('','','','','reset')\"]");
 	By Status = By.id("customer-contact-status-active");
 	By Filter = By.xpath("//*[@id='customer-contact-timeline']/div[1]/div[4]/button/div");
-	By Apply = By.xpath("//*[@id='customer-contact-timeline']/div[2]/div/div/div/div[3]/button");
+	By Apply = By.xpath("//*[@id='customer-contact-timeline']/div[2]/div/div/div/div[4]/button");
 	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[4]/a");
 	By ListSocial = By.xpath("//*[@id='customer-lead-source-div']/div[1]/div[1]/div[1]/input[1]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");

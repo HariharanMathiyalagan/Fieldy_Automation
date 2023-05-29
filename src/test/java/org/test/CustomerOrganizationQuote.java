@@ -830,7 +830,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.message("message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -879,7 +879,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 				.createTest("Verify Quote is created successfully from Customer Contact->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.CRUDValidation("Create");
-		String errorPasswordField = mandatory.message("message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1549,7 +1549,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDateError");
-		String errorPasswordField = mandatory.message("message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO,
 				"Expected Result is -" + "The doc expiry date must be a date after or equal to " + currentDate + ".");
@@ -1575,7 +1575,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 				.createTest("Verify Quote is updated successfully from Customer Organization->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.CRUDValidation("Create");
-		String errorPasswordField = mandatory.message("message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

@@ -611,7 +611,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By LeadSourceCheckBox = By.xpath("//*[@id='customer-organization-lead-source-div']//div[1]//div[1]//input[1]");
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
-	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[3]/button");
+	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[4]/button");
 	@FindAll({ @FindBy(id = "customer-organization-search-enter"), @FindBy(id = "customer-contact-search-button") })
 	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");

@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.SubscriptionModule">
+      <class name="org.test.CustomerCreateOrganizationModule">
         <methods>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
           <include name="setup"/>
           <include name="deleteAfterCatch"/>
-          <include name="exitBrowser"/>
-          <include name="totalAmount"/>
-          <include name="deleteBeforeCatch"/>
+          <include name="editmaxValidation"/>
         </methods>
-      </class> <!-- org.test.SubscriptionModule -->
+      </class> <!-- org.test.CustomerCreateOrganizationModule -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

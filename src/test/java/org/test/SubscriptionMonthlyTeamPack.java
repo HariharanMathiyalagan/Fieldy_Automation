@@ -1,3 +1,4 @@
+
 package org.test;
 
 import java.io.File;
@@ -19,13 +20,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
-import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.pageobjects.SubscriptionPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class SubscriptionStarterPack extends BaseClass {
-
+public class SubscriptionMonthlyTeamPack extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -35,7 +34,7 @@ public class SubscriptionStarterPack extends BaseClass {
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
-		extentHtmlReporter = new ExtentHtmlReporter("SubscriptionStarterPack.html");
+		extentHtmlReporter = new ExtentHtmlReporter("SubscriptionMonthlyTeamPack.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
@@ -149,8 +148,8 @@ public class SubscriptionStarterPack extends BaseClass {
 	public void confirmPage() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to land on the Confirm Page Order");
 		SubscriptionPage module = PageFactory.initElements(driver, SubscriptionPage.class);
-		module.subscriptionFlow("Starter");
-		String modulePage = module.labelValidation("ChoosePlan");
+		module.subscriptionFlow("Team");
+		String modulePage = module.labelValidation("TeamPlan");
 		extentTest.log(Status.INFO, "Actual Result is -" + modulePage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ConfirmPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -171,7 +170,7 @@ public class SubscriptionStarterPack extends BaseClass {
 		extentTest = extentReports.createTest("Verify the User to check the Pro rata amount in the Confirm order page");
 		SubscriptionPage module = PageFactory.initElements(driver, SubscriptionPage.class);
 		String value = module.getValue("ProAmount");
-		String calculation = module.calculation("Starter");
+		String calculation = module.calculation("ProAmount");
 		extentTest.log(Status.INFO, "Actual Result is -" + value);
 		extentTest.log(Status.INFO, "Expected Result is -" + calculation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -289,5 +288,4 @@ public class SubscriptionStarterPack extends BaseClass {
 			extentTest.addScreenCaptureFromPath("TotalAmount.png");
 		}
 	}
-
 }

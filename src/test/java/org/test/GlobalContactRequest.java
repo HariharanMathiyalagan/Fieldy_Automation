@@ -437,7 +437,7 @@ public class GlobalContactRequest extends BaseClass {
 				"Verify Unassigned Request is created successfully from Global Request Contact->Create Request");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Unassigned");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -741,7 +741,7 @@ public class GlobalContactRequest extends BaseClass {
 				.createTest("Verify Scheduled Request is updated successfully from Customer Contact->Edit Request");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Updated");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -754,6 +754,7 @@ public class GlobalContactRequest extends BaseClass {
 			File file = new File("UnscheduleRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleRequest.png");
+			mandatory.message("AlternateFormMessage");
 		}
 	}
 
@@ -767,7 +768,7 @@ public class GlobalContactRequest extends BaseClass {
 		mandatory.autoCompleteField("ContactCreate");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.validData("GlobalSchedule");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -781,6 +782,7 @@ public class GlobalContactRequest extends BaseClass {
 			File file = new File("GlobalContactCreatedRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("GlobalContactCreatedRequest.png");
+			mandatory.message("AlternateFormMessage");
 			CustomerListPage = mandatory.listValidation("RequestNo");
 		}
 	}
