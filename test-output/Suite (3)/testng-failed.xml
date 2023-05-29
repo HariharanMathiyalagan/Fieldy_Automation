@@ -3,21 +3,6 @@
 <suite name="Failed suite [Suite (3)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.CustomerOrganizationQuote">
-        <methods>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="beforeDecimalPointTaxField"/>
-          <include name="editbeforeDecimalPointTaxField"/>
-          <include name="exitBrowser"/>
-          <include name="editmaxLimitTaxField"/>
-          <include name="editafterDecimalPointTaxField"/>
-          <include name="filterDateInvoice"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="maxLimitTaxField"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.test.CustomerOrganizationQuote -->
       <class name="org.test.GlobalContactQuote">
         <methods>
           <include name="maxLimitTaxField"/>
@@ -32,6 +17,63 @@
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.GlobalContactQuote -->
+      <class name="org.test.GlobalOrganizationQuote">
+        <methods>
+          <include name="editmaxLimitTaxField"/>
+          <include name="beforeDecimalPointTaxField"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="editbeforeDecimalPointTaxField"/>
+          <include name="exitBrowser"/>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="maxLimitTaxField"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="editafterDecimalPointTaxField"/>
+        </methods>
+      </class> <!-- org.test.GlobalOrganizationQuote -->
+      <class name="org.test.CustomerOrganizationQuote">
+        <methods>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="beforeDecimalPointTaxField"/>
+          <include name="editbeforeDecimalPointTaxField"/>
+          <include name="exitBrowser"/>
+          <include name="editmaxLimitTaxField"/>
+          <include name="editafterDecimalPointTaxField"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="maxLimitTaxField"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.test.CustomerOrganizationQuote -->
+      <class name="org.test.GlobalContactInvoice">
+        <methods>
+          <include name="beforeDecimalPointTaxField"/>
+          <include name="afterDecimalEditPointTaxField"/>
+          <include name="maxEditLimitTaxField"/>
+          <include name="deleteAfterCatch"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="maximumValidationDescription"/>
+          <include name="exitBrowser"/>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="setup"/>
+          <include name="maxLimitTaxField"/>
+        </methods>
+      </class> <!-- org.test.GlobalContactInvoice -->
+      <class name="org.test.CustomerOrganizationInvoice">
+        <methods>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="exitBrowser"/>
+          <include name="maxLimitTaxField"/>
+          <include name="setup"/>
+          <include name="afterDecimalEditPointTaxField"/>
+          <include name="beforeDecimalPointTaxField"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="maxEditLimitTaxField"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.CustomerOrganizationInvoice -->
       <class name="org.test.CustomerContactQuote">
         <methods>
           <include name="maxLimitTaxField"/>
@@ -46,22 +88,26 @@
           <include name="afterDecimalPointTaxField"/>
         </methods>
       </class> <!-- org.test.CustomerContactQuote -->
-      <class name="org.test.CustomerOrganizationInvoice">
+      <class name="org.test.GlobalOrganizationInvoice">
         <methods>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="createInvoice"/>
-          <include name="beforeDecimalEditPointTaxField"/>
-          <include name="exitBrowser"/>
           <include name="maxLimitTaxField"/>
-          <include name="updatedInvoice"/>
-          <include name="setup"/>
-          <include name="afterDecimalEditPointTaxField"/>
           <include name="beforeDecimalPointTaxField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="maxEditLimitTaxField"/>
+          <include name="createInvoice"/>
+          <include name="afterDecimalEditPointTaxField"/>
+          <include name="afterDecimalPointTaxField"/>
+          <include name="filterDateInvoice"/>
+          <include name="beforeDecimalEditPointTaxField"/>
+          <include name="editLableValidation"/>
+          <include name="maximumValidationDescription"/>
           <include name="deleteAfterCatch"/>
+          <include name="expiryFieldPastDateValidation"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="listInvalid"/>
+          <include name="setup"/>
+          <include name="maxEditLimitTaxField"/>
+          <include name="exitBrowser"/>
         </methods>
-      </class> <!-- org.test.CustomerOrganizationInvoice -->
+      </class> <!-- org.test.GlobalOrganizationInvoice -->
       <class name="org.test.CustomerContactInvoice">
         <methods>
           <include name="setup"/>
@@ -74,55 +120,9 @@
           <include name="deleteAfterCatch"/>
           <include name="maxLimitTaxField"/>
           <include name="beforeDecimalPointTaxField"/>
-          <include name="createInvoice"/>
+          <include name="expiryFieldPastDateValidation"/>
         </methods>
       </class> <!-- org.test.CustomerContactInvoice -->
-      <class name="org.test.GlobalContactInvoice">
-        <methods>
-          <include name="beforeDecimalPointTaxField"/>
-          <include name="afterDecimalEditPointTaxField"/>
-          <include name="maxEditLimitTaxField"/>
-          <include name="deleteAfterCatch"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="beforeDecimalEditPointTaxField"/>
-          <include name="exitBrowser"/>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="createInvoice"/>
-          <include name="setup"/>
-          <include name="maxLimitTaxField"/>
-        </methods>
-      </class> <!-- org.test.GlobalContactInvoice -->
-      <class name="org.test.GlobalOrganizationInvoice">
-        <methods>
-          <include name="maxLimitTaxField"/>
-          <include name="beforeDecimalEditPointTaxField"/>
-          <include name="deleteAfterCatch"/>
-          <include name="beforeDecimalPointTaxField"/>
-          <include name="createInvoice"/>
-          <include name="afterDecimalEditPointTaxField"/>
-          <include name="updatedInvoice"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="setup"/>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="maxEditLimitTaxField"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.GlobalOrganizationInvoice -->
-      <class name="org.test.GlobalOrganizationQuote">
-        <methods>
-          <include name="editmaxLimitTaxField"/>
-          <include name="beforeDecimalPointTaxField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editbeforeDecimalPointTaxField"/>
-          <include name="exitBrowser"/>
-          <include name="afterDecimalPointTaxField"/>
-          <include name="maxLimitTaxField"/>
-          <include name="deleteAfterCatch"/>
-          <include name="createQuote"/>
-          <include name="setup"/>
-          <include name="editafterDecimalPointTaxField"/>
-        </methods>
-      </class> <!-- org.test.GlobalOrganizationQuote -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (3)] -->

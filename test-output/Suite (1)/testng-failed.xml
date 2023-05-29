@@ -6,11 +6,11 @@
       <class name="org.test.DispatchModule">
         <methods>
           <include name="deleteBeforeCatch"/>
-          <include name="assignJob"/>
           <include name="exitBrowser"/>
-          <include name="unassignJob"/>
+          <include name="cancelRequest"/>
           <include name="setup"/>
           <include name="deleteAfterCatch"/>
+          <include name="dispatchRequest"/>
         </methods>
       </class> <!-- org.test.DispatchModule -->
     </classes>

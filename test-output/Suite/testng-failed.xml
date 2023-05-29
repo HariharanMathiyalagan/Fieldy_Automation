@@ -3,24 +3,6 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.LeadSource">
-        <methods>
-          <include name="exitBrowser"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- org.test.LeadSource -->
-      <class name="org.test.CategoryModule">
-        <methods>
-          <include name="deleteAfterCatch"/>
-          <include name="inactiveProductService"/>
-          <include name="setup"/>
-          <include name="exitBrowser"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.test.CategoryModule -->
       <class name="org.test.ServiceModule">
         <methods>
           <include name="updateProduct"/>
@@ -41,47 +23,29 @@
           <include name="deleteAfterCatch"/>
         </methods>
       </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.BusinessUnit">
-        <methods>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="exitBrowser"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.test.BusinessUnit -->
       <class name="org.test.ProductModule">
         <methods>
+          <include name="editafterDecimalPointTaxPercentageField"/>
           <include name="editbeforeDecimalPointPriceField"/>
-          <include name="searchInvalid"/>
-          <include name="reflectQuotePage"/>
+          <include name="editmandatoryValidationTaxName"/>
           <include name="editafterDecimalPointPriceField"/>
           <include name="editmaximumValidationSKU"/>
+          <include name="searchProductName"/>
+          <include name="updateProduct"/>
+          <include name="editafterDecimalPointQuantityHandField"/>
+          <include name="editbeforeDecimalPointQuantityHandField"/>
           <include name="editmandatoryValidationTaxPercentage"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmaximumValidationLowStockThresold"/>
-          <include name="editafterDecimalPointLowStockThresoldField"/>
-          <include name="editmandatoryValidationDescription"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationPrice"/>
-          <include name="editmandatoryValidationProductName"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="inactiveProduct"/>
-          <include name="searchProductName"/>
-          <include name="updateProduct"/>
-          <include name="editFormLabel"/>
-          <include name="editafterDecimalPointQuantityHandField"/>
-          <include name="editbeforeDecimalPointQuantityHandField"/>
           <include name="editbeforeDecimalPointLowStockThresoldField"/>
           <include name="editmaximumValidationQuantityHand"/>
-          <include name="deleteProduct"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
           <include name="editmaximumValidationPrice"/>
           <include name="deleteBeforeCatch"/>
           <include name="updateButton"/>
+          <include name="editmaximumValidationLowStockThresold"/>
           <include name="editmaximumValidationDescription"/>
-          <include name="deletedProduct"/>
+          <include name="editafterDecimalPointLowStockThresoldField"/>
           <include name="editmaximumValidationProductName"/>
           <include name="exitBrowser"/>
         </methods>
