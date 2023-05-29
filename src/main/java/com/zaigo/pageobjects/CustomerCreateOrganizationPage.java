@@ -33,8 +33,6 @@ import com.github.javafaker.Faker;
 
 public class CustomerCreateOrganizationPage extends BaseClass {
 
-	String SaveCompleteButton = "Save & Complete";
-
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
@@ -203,6 +201,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By ZipCodeError = By.id("zipcode_error");
 	By Email = By.id("email");
 	By EmailError = By.id("email_error");
+	By TaxNumber = By.id("tax_number");
 	@FindAll({ @FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[3]/div[10]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[2]/div[10]/div[2]/input[1]") })
 	WebElement LeadSource;
@@ -455,6 +454,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public static String zipCode;
 	public static String email;
 	public static String phoneNumber;
+	public static String taxNumber;
 	public static String leadSource;
 
 	public static String firstName;
@@ -498,6 +498,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.scrollDown();
 		this.inputText(ZipCode, fakeZipcode);
 		zipCode = this.getTextAttribute(ZipCode);
+		this.inputText(TaxNumber, maxPhoneNumber);
+		taxNumber = this.getTextAttribute(TaxNumber);
 		this.inputText(Email, fakeEmail);
 		email = this.getTextAttribute(Email);
 		this.mouseActionClick(LeadSource);
@@ -609,7 +611,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By LeadSourceCheckBox = By.xpath("//*[@id='customer-organization-lead-source-div']//div[1]//div[1]//input[1]");
 	By ListLeadSource = By.id("customer-organization-lead-input-place");
 	By Status = By.id("customer-contact-status-active");
-	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[3]/button");
+	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[4]/button");
 	@FindAll({ @FindBy(id = "customer-organization-search-enter"), @FindBy(id = "customer-contact-search-button") })
 	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");
@@ -749,6 +751,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			this.clearField(InstallationNotes);
 		} else if (value.equals("Search")) {
 			this.clearField(Search);
+		} else if (value.equals("TaxNumber")) {
+			this.clearField(TaxNumber);
 		}
 
 	}
@@ -804,6 +808,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public void state(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(State, characters256);
+		}
+	}
+
+	public void taxNumber(String value) {
+		if (value.equals("MaxValidation")) {
+			this.validationTab(TaxNumber, characters2048);
 		}
 	}
 
@@ -1014,7 +1024,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public void clearAllFields(String value) {
 		if (value.equals("OrganizationPage")) {
 			List<String> asList = Arrays.asList("OrganizationName", "Website", "Address1", "Address2", "City", "State",
-					"Zipcode", "Email", "PhoneNumber");
+					"Zipcode", "Email", "TaxNumber", "PhoneNumber");
 			for (int i = 0; i < asList.size(); i++) {
 				this.clearFields(asList.get(i));
 			}
@@ -1132,6 +1142,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			return data;
 		} else if (value.equals("InstallationNotes")) {
 			String data = this.getTextAttribute(InstallationNotes);
+			return data;
+		} else if (value.equals("TaxNumber")) {
+			String data = this.getTextAttribute(TaxNumber);
 			return data;
 		}
 		return value;

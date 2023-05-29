@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -53,10 +54,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name {
 	public static void main(String[] args) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, 30);
-		String currentDate = sdf.format(cal.getTime());
-		System.out.println(currentDate);
+
+		String name = "hariharan";
+		String[] split = name.split("");
+		System.out.println(split);
+		for (int i = 0; i < split.length; i++) {
+		
+		}
+
 	}
 }

@@ -62,7 +62,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -461,7 +461,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 				"Verify Unassigned Request is created successfully from Customer Organization->Create Request");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Unassigned");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -789,7 +789,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 				.createTest("Verify Scheduled Request is updated successfully from Customer Contact->Edit Request");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Updated");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -802,6 +802,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 			File file = new File("UnscheduleRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleRequest.png");
+			mandatory.message("AlternateFormMessage");
 		}
 	}
 
@@ -812,7 +813,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 				.createTest("Create a Request with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Schedule");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -826,6 +827,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 			File file = new File("CustomerOrganizationCreatedRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerOrganizationCreatedRequest.png");
+			mandatory.message("AlternateFormMessage");
 			customerOrganizationRequestListPage = mandatory.listValidation("RequestNo");
 		}
 	}

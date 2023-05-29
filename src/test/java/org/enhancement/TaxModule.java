@@ -63,7 +63,7 @@ public class TaxModule extends BaseClass {
 				.createTest("Verify the Fieldy Dashboard Page is launched when valid Email & Password is provided");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result Validation Data -" + text);
@@ -102,7 +102,7 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 2)
+	 @Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Tax Page");
 		TaxPage initElements = PageFactory.initElements(driver, TaxPage.class);
@@ -126,6 +126,7 @@ public class TaxModule extends BaseClass {
 	private void createTax() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Tax Created");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
+//		mandatory.modulePage("CreatePage");
 		mandatory.validRecord();
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");

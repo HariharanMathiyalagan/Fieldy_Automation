@@ -20,6 +20,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.LoginPage;
@@ -62,7 +63,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
 		LoginPage loginInPage = new LoginPage(this.driver);
 		loginInPage.userField(getPropertyValueUpdate("UserName"));
-		loginInPage.passwordField(getPropertyValue("Password"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
@@ -439,6 +440,32 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgMaxEmailValidation.png");
 			maxValidation.clearFields("Email");
+		}
+	}
+
+	@Test(priority = 14)
+	private void maxValidationTaxNumberField() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Customer Organization] Tax Number Field exceed its max-256 limit");
+		CustomerCreateOrganizationPage maxValidationLocationField = PageFactory.initElements(driver,
+				CustomerCreateOrganizationPage.class);
+		maxValidationLocationField.taxNumber("MaxValidation");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidationLocationField.clearFields("TaxNumber");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLastNameMaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
+			maxValidationLocationField.clearFields("TaxNumber");
 		}
 	}
 
@@ -1655,11 +1682,32 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	}
 
+	@Test(priority = 63)
+	public void taxNumberPrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Tax Number:" + CustomerCreateOrganizationPage.taxNumber
+				+ " is prepopulated in the customer organization edit form page");
+		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		String assertionMessage = edit.prepopulationFields("TaxNumber");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.taxNumber);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.taxNumber)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
 	@Test(priority = 64)
 	public void phoneNumberPrepopulate() throws InterruptedException, IOException {
-		extentTest = extentReports
-				.createTest("Verify the Phone Number:" + CustomerCreateOrganizationPage.phoneNumber
-						+ " is prepopulated in the customer organization edit form page");
+		extentTest = extentReports.createTest("Verify the Phone Number:" + CustomerCreateOrganizationPage.phoneNumber
+				+ " is prepopulated in the customer organization edit form page");
 		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		String assertionMessage = edit.prepopulationFields("PhoneNumber");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
@@ -2478,6 +2526,32 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgMaxEmailValidation.png");
 			maxValidation.clearFields("Email");
+		}
+	}
+
+	@Test(priority = 97)
+	private void editmaxValidationTaxNumberField() throws IOException {
+		extentTest = extentReports.createTest(
+				"Verify Error Message is displayed when [Customer Organization] Tax Number Field exceed its max-256 limit");
+		CustomerCreateOrganizationPage maxValidationLocationField = PageFactory.initElements(driver,
+				CustomerCreateOrganizationPage.class);
+		maxValidationLocationField.taxNumber("MaxValidation");
+		String assertionMessage = maxValidationLocationField.errorMessage();
+//		String assertionMessage = maxValidationLocationField.errorFields("LastName");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(getPropertyValue("Max256CharacterValidation"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			maxValidationLocationField.clearFields("TaxNumber");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLastNameMaxValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLastNameMaxValidation.png");
+			maxValidationLocationField.clearFields("TaxNumber");
 		}
 	}
 

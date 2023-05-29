@@ -28,6 +28,17 @@ public class DispatchPage extends BaseClass {
 
 	}
 
+	public Boolean conditionChecking(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 5);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	public String getText(By element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
@@ -122,6 +133,13 @@ public class DispatchPage extends BaseClass {
 
 	public void tiggerFunction(String value) {
 		this.mouseActionClick(CalendarData);
+		if (!this.conditionChecking(UnAssignButton)) {
+			do {
+				driver.navigate().refresh();
+				this.mouseActionClick(Next);
+				this.mouseActionClick(CalendarData);
+			} while (!this.conditionChecking(UnAssignButton));
+		}
 		if (value.equals("Unassign")) {
 			this.mouseActionClick(UnAssignButton);
 		} else if (value.equals("Dispatch")) {
