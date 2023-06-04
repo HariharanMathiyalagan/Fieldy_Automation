@@ -13,5 +13,7 @@
 
 		<suite-file path="Settings.xml" />
 
+		<suite-file path="Subscription.xml" />
+
 	</suite-files>
 </suite> <!-- Suite -->

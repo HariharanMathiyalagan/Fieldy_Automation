@@ -61,7 +61,7 @@ public class Name {
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://www.facebook.com/login");
-		driver.switchTo().newWindow(WindowType.WINDOW);
+//		driver.switchTo().newWindow(WindowType.WINDOW);
 	}
 }
 
