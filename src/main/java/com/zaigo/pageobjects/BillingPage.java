@@ -36,8 +36,8 @@ public class BillingPage extends BaseClass {
 	String prefixName = RandomStringUtils.randomAlphabetic(4).toUpperCase();
 	String prefixNumber = RandomStringUtils.randomNumeric(50);
 	String email_txt = "normal@gmail.com";
-	String zipcode ="600075";
-	
+	String zipcode = "600075";
+
 	private void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
@@ -217,7 +217,7 @@ public class BillingPage extends BaseClass {
 		}
 		return text;
 	}
-	
+
 	By Profile = By.xpath("//*[@id='avator-ele']");
 	By Subscribtion = By.xpath("//*[@id='myDropdown']//li[2]");
 	By StarterAmount = By.id("starter_price");
@@ -251,116 +251,97 @@ public class BillingPage extends BaseClass {
 	By Companyfield = By.id("company");
 	By company_error = By.id("company_error");
 	By email = By.id("billing_email");
-	By Email_error =	By.id("billing_email_error");	
+	By Email_error = By.id("billing_email_error");
 	By billing_address = By.id("billing_address_one");
 	By address_error = By.id("billing_address_one_error");
-    By city = By.id("billing_city");
-    By city_error = By.id("billing_city_error");
+	By city = By.id("billing_city");
+	By city_error = By.id("billing_city_error");
 	By state = By.id("billing_state");
 	By state_error = By.id("billing_state_error");
 	By Zipcode = By.id("billing_zipcode");
 	By Zipcode_error = By.id("billing_zipcode_error");
 	By lable = By.xpath("//span[@data-automationid='payment-details']");
-    
-    
-    
-    
-	
+
 	public void clearField(WebElement element) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(element)).clear();
 	}
-	
-	public void click_pay()
-	{
+
+	public void click_pay() {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(pay_btn)).click();
 	}
 
-	public String FirstnameErrorMessage()
-	{
-		
+	public String FirstnameErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(Firstname_errormessage)).getText();
 		return until;
-		
+
 	}
-	
-	public String LastnameErrorMessage()
-	{
-		
+
+	public String LastnameErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(Lastname_errormessage)).getText();
 		return until;
-		
+
 	}
-	
-	public String CompanyErrorMessage()
-	{
-		
+
+	public String CompanyErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(company_error)).getText();
 		return until;
-		
+
 	}
-	
-	
-	public String AddressError()
-	{
-		
+
+	public String AddressError() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(address_error)).getText();
 		return until;
-		
+
 	}
-	
-	public String EmailErrorMessage()
-	{
-		
+
+	public String EmailErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(Email_error)).getText();
 		return until;
-		
+
 	}
-	
-	
-	
-	public String CityErrorMessage()
-	{
-		
+
+	public String CityErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(city_error)).getText();
 		return until;
-		
+
 	}
-	
-	
-	public String StateErrorMessage()
-	{
-		
+
+	public String StateErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(state_error)).getText();
 		return until;
-		
+
 	}
-	
-	public String ZipcodeErrorMessage()
-	{
-		
+
+	public String ZipcodeErrorMessage() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(Zipcode_error)).getText();
 		return until;
-		
+
 	}
-	
-	
-	public String PaymentLable()
-	{
-		
+
+	public String PaymentLable() {
+
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(lable)).getText();
 		return until;
-		
+
 	}
 
 	public void modulePage() {
@@ -375,29 +356,23 @@ public class BillingPage extends BaseClass {
 		}
 	}
 
-	
-	public void visitPaymentPage()
-	{
+	public void visitPaymentPage() {
 		this.mouseActionClick(pay_btn);
-		if(!this.conditionChecking(Label, 2)) 
-		do{
+		if (!this.conditionChecking(Label, 2))
+			do {
 
-			this.mouseActionClick(pay_btn);
-			
-		}
-		while(!this.conditionChecking(Label, 2));
+				this.mouseActionClick(pay_btn);
+
+			} while (!this.conditionChecking(Label, 2));
 	}
-	
-	
-	
+
 	public String labelValidation(String value) {
 		if (value.equals("ChoosePlan")) {
 			this.mouseActionClick(StarterChoosePlan);
-			if(!this.conditionChecking(ProRataAmount, 3)) {
+			if (!this.conditionChecking(ProRataAmount, 3)) {
 				do {
 					this.mouseActionClick(StarterChoosePlan);
-				}
-				while(!this.conditionChecking(ProRataAmount, 3));
+				} while (!this.conditionChecking(ProRataAmount, 3));
 			}
 			this.visibility(ProRataAmount);
 		} else if (value.equals("1") || value.equals("2") || value.equals("3")) {
@@ -467,8 +442,7 @@ public class BillingPage extends BaseClass {
 		valueOf = String.valueOf(format);
 		return "₹" + valueOf;
 	}
-	
-	
+
 	public void validData(String value) throws IOException {
 		if (value.equals("firstname")) {
 			this.clearField(FirstName);
@@ -484,10 +458,10 @@ public class BillingPage extends BaseClass {
 			this.inputText(Companyfield, BusinessName);
 		} else if (value.equals("address")) {
 			this.clearField(billing_address);
-			this.inputText(billing_address,BusinessName );
+			this.inputText(billing_address, BusinessName);
 		} else if (value.equals("city")) {
 			this.clearField(city);
-			this.validationTab(city , BusinessName);
+			this.validationTab(city, BusinessName);
 		} else if (value.equals("state")) {
 			this.clearField(state);
 			this.validationTab(state, BusinessName);
@@ -497,23 +471,19 @@ public class BillingPage extends BaseClass {
 		}
 	}
 
-	
-	
-	
-	
 	public void maxValidation(String value) throws IOException {
 		if (value.equals("email")) {
 			this.validationTab(email, characters45);
 		} else if (value.equals("firstname")) {
-			this.validationTab(FirstName,characters256 );
+			this.validationTab(FirstName, characters256);
 		} else if (value.equals("lastname")) {
 			this.validationTab(Lastname, characters256);
 		} else if (value.equals("company")) {
 			this.validationTab(Companyfield, characters256);
 		} else if (value.equals("address")) {
-			this.validationTab(billing_address , characters256);
+			this.validationTab(billing_address, characters256);
 		} else if (value.equals("city")) {
-			this.validationTab(city , characters256);
+			this.validationTab(city, characters256);
 		} else if (value.equals("state")) {
 			this.validationTab(state, characters256);
 		} else if (value.equals("zipcode")) {
@@ -522,29 +492,24 @@ public class BillingPage extends BaseClass {
 
 	}
 
-	
-	
 	public void clearField(String value) {
 		if (value.equals("firstname")) {
 			this.clearField(FirstName);
 		} else if (value.equals("LastName")) {
 			this.clearField(Lastname);
-		}else if (value.equals("company")) {
+		} else if (value.equals("company")) {
 			this.clearField(Companyfield);
-		}else if (value.equals("addressone")) {
+		} else if (value.equals("addressone")) {
 			this.clearField(billing_address);
-		}else if (value.equals("email")) {
+		} else if (value.equals("email")) {
 			this.clearField(email);
-		}else if (value.equals("state")) {
+		} else if (value.equals("state")) {
 			this.clearField(state);
-		}else if (value.equals("city")) {
+		} else if (value.equals("city")) {
 			this.clearField(city);
-		}else if (value.equals("zipcode")) {
+		} else if (value.equals("zipcode")) {
 			this.clearField(Zipcode);
 		}
-		} 
+	}
 
-	
 }
-
-
