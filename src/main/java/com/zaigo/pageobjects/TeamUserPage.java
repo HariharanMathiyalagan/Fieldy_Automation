@@ -2,9 +2,15 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -203,7 +209,7 @@ public class TeamUserPage extends BaseClass {
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 	By User = By.id("team-user-menu");
 	By ListLabel = By.xpath("//*[@class='page-header-left back-btn']");
-	By CreateUser = By.xpath("//*[@data-formdynamic='user_create_edit']");
+	public static By CreateUser = By.xpath("//*[@data-formdynamic='user_create_edit']");
 	By Search = By.id("team-user-user-user-search-filter");
 	By SearchButton = By.id("team-user-user-search-button");
 	By ContractorSearch = By.id("team-user-contractor-search-main");
@@ -271,7 +277,7 @@ public class TeamUserPage extends BaseClass {
 	By FirstCompanyName = By
 			.xpath("(//div[@class='p-2 list-hover-bg team-contractor-company w-20-ellipsis w-100'])[1]");
 	By CompanyNameError = By.id("company_id_error");
-	By CreateContractor = By.xpath("//*[@data-tabformid='team-user-contract-create']");
+	public static By CreateContractor = By.xpath("//*[@data-tabformid='team-user-contract-create']");
 	By FilterByCompany = By.id("Organization-filter-reset");
 	By ListFilterCompany = By.xpath("(//input[@type='checkbox'])[1]");
 	By ListCompnayName = By.xpath("(//div[@id='SearchableDropdown'])[1]");
@@ -735,7 +741,8 @@ public class TeamUserPage extends BaseClass {
 		return value;
 	}
 
-	public void validateFillData(String value) {
+	public void validateFillData(String value)
+			throws MalformedURLException, AWTException, IOException, InterruptedException {
 		if (value.equals("Basic")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeFirstName = faker.name().firstName();
@@ -873,7 +880,7 @@ public class TeamUserPage extends BaseClass {
 	static String listLabel;
 	static String techCount;
 
-	public String dataConditionCheck(String value) throws IOException, InterruptedException {
+	public String dataConditionCheck(String value) throws IOException, InterruptedException, AWTException {
 		if (value.equals("Condition")) {
 			response = this.getText(PageLand);
 			listLabel = this.getText(ListLabel);
@@ -913,7 +920,7 @@ public class TeamUserPage extends BaseClass {
 
 	}
 
-	public String createUser() throws InterruptedException, IOException {
+	public String createUser() throws InterruptedException, IOException, AWTException {
 		for (int i = 0; i < 3; i++) {
 			this.mouseActionClick(CreateUser);
 			this.validateFillData("Basic");
@@ -922,8 +929,29 @@ public class TeamUserPage extends BaseClass {
 			this.clickEvent("SaveUpdate");
 			this.responseMessage("Message");
 		}
-//		return this.responseMessage("Message");
 		return listData;
 	}
 
+	By Attachment = By.xpath("//*[@id='upload-box']/div/div[1]/label");
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		if (value.equals("User") || value.equals("Contractor")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(1000);
+			switch (value) {
+			case "User":
+				BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\pic.jpg");
+				break;
+			case "Contractor":
+				BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\pexels-suliman-sallehi-1704488.jpg");
+				break;
+			default:
+				break;
+			}
+			Thread.sleep(1000);
+		}
+	}
 }

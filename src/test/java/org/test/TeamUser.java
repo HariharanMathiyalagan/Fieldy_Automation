@@ -372,7 +372,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 13)
-	private void maxValidatonPhoneNumber() throws IOException, InterruptedException {
+	private void maxValidatonPhoneNumber() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -384,6 +384,7 @@ public class TeamUser extends BaseClass {
 		if (mandatoryValidationFirstNameField.equals(getPropertyValue("Max20Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clearField("PhoneNumber");
+			landing.attachmentFileCheck("User");
 			landing.validateFillData("Basic");
 			landing.clickEvent("Next");
 		} else {
@@ -394,6 +395,7 @@ public class TeamUser extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("49.png");
 			landing.clearField("PhoneNumber");
+			landing.attachmentFileCheck("URLCheck");
 			landing.validateFillData("Basic");
 			landing.clickEvent("Next");
 		}
@@ -575,7 +577,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 21)
-	private void maxValidationZipcode() throws IOException, InterruptedException {
+	private void maxValidationZipcode() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1315,7 +1317,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 56)
-	private void editmaxValidatonPhoneNumber() throws IOException, InterruptedException {
+	private void editmaxValidatonPhoneNumber() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User] Phone Number Field exceed its max-256 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1520,7 +1522,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 64)
-	private void editmaxValidationZipcode() throws IOException, InterruptedException {
+	private void editmaxValidationZipcode() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when [Team User] Zipcode Field exceed its max-10 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);

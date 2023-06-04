@@ -1,5 +1,6 @@
 package org.enhancement;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 
@@ -121,9 +122,9 @@ public class GlobalOrganizationRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, invocationCount = 5)
 	private void createRequest_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Request  with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -133,12 +134,13 @@ public class GlobalOrganizationRequest extends BaseClass {
 		mandatory.createFunction();
 		mandatory.autoCompleteField("OrgVisibleName");
 		mandatory.validData("GlobalSchedule");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("RequestCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(RequestPage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -146,6 +148,8 @@ public class GlobalOrganizationRequest extends BaseClass {
 			File file = new File("GlobalContactCreatedRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("GlobalContactCreatedRequest.png");
+			mandatory.message("AlternateFormMessage");
+			mandatory.mouseActionClick(RequestPage.CreateButton);
 		}
 	}
 }

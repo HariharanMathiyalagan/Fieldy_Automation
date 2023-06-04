@@ -3,6 +3,7 @@
 <suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="org.test.GlobalContactRequest">
         <methods>
           <include name="editmandatoryValidationDescription"/>
@@ -14,14 +15,26 @@
         </methods>
       </class> <!-- org.test.GlobalContactRequest -->
       <class name="org.test.CustomerOrganizationRequest">
+=======
+      <class name="org.enhancement.GlobalOrganizationInvoice">
+>>>>>>> 8f032e9abfd9edfc56ded76230782504aeca4741
         <methods>
+          <include name="loginPage"/>
+          <include name="setup"/>
+          <include name="createInvoice"/>
+          <include name="deleteAfterCatch"/>
           <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
+<<<<<<< HEAD
           <include name="editmandatoryValidationLocation"/>
           <include name="setup"/>
           <include name="deleteAfterCatch"/>
         </methods>
       </class> <!-- org.test.CustomerOrganizationRequest -->
+=======
+        </methods>
+      </class> <!-- org.enhancement.GlobalOrganizationInvoice -->
+>>>>>>> 8f032e9abfd9edfc56ded76230782504aeca4741
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (2)] -->

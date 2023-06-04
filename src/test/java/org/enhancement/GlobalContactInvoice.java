@@ -93,7 +93,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, invocationCount = 5)
 	private void createInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
@@ -103,12 +103,13 @@ public class GlobalContactInvoice extends BaseClass {
 		mandatory.createFunction();
 		mandatory.autoCompleteField("VisibleCustomerName");
 		mandatory.CRUDValidation("CreateValue");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InvoiceCreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(InvoicePage.CreateGlobalInvoice);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -116,6 +117,7 @@ public class GlobalContactInvoice extends BaseClass {
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+			mandatory.mouseActionClick(InvoicePage.CreateGlobalInvoice);
 		}
 	}
 

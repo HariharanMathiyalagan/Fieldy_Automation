@@ -2,11 +2,17 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -58,6 +64,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	public static String phoneNumber;
 	public static String taxNumber;
 	public static String leadSources;
+	public static String IndustryTypes;
 	public static String propertyFirstName;
 	public static String propertyLastName;
 	public static String propertyName;
@@ -83,7 +90,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Today = By.xpath("(//div[@class='mb-2']//parent::div)[4]");
 	By Customer = By.id("customer-main");
 	By Contact = By.id("customer-contact-menu");
-	By AddContact = By.id("scheduledrop");
+	public static By AddContact = By.id("scheduledrop");
 	By ErrorLogo = By.id("logo_error");
 	By FormatErrorLogo = By.xpath("//div[text()='Only jpg,jpeg,png Formats Allowed']");
 	By CreateContactLabel = By.xpath("//*[@data-goesto='contractor-view']");
@@ -96,7 +103,8 @@ public class CustomerCreateContactPage extends BaseClass {
 	By TotalCount = By.id("Total-number-customer-count");
 	@FindAll({
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
-			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']") })
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active') and contains(text(),'Attachment')]") })
 	WebElement SubPageVisible;
 	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
 			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
@@ -294,10 +302,21 @@ public class CustomerCreateContactPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[3]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]") })
 	WebElement LeadSources;
+	@FindAll({ @FindBy(xpath = "//*[@id='industry_type-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
+	WebElement IndustryTypeDropDown;
+	By FirstIndusrty = By.xpath("//*[@id='industry_type-autocomplete-list']//div[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[3]/div[5]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[5]/div[2]/input[1]") })
+	WebElement IndustryType;
+
 	By TaxNumber = By.id("tax_number");
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement Social;
+	@FindAll({ @FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span") })
+	WebElement FirstAttachment;
 	By AlreadyEmail = By.xpath("//span[text()='The e-mail is already exit']");
 	By Next = By.xpath("//*[contains(text(),'Next')]");
 	By MakethisProperty = By.id("addresses__is_primary__0");
@@ -348,9 +367,12 @@ public class CustomerCreateContactPage extends BaseClass {
 	By Apply = By.xpath("//*[@id='customer-contact-timeline']/div[2]/div/div/div/div[4]/button");
 	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[4]/a");
 	By ListSocial = By.xpath("//*[@id='customer-lead-source-div']/div[1]/div[1]/div[1]/input[1]");
+	By ListIndustry = By.xpath("//*[@id='customer-industry-type-div']/div[1]/div[1]/div[1]/input[1]");
 	By ListLeadSource = By.id("customer-contact-lead-source-search");
+	By ListIndustryType = By.id("customer-contact-industry-type-search");
 	By ListEmail = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[5]/a");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
+	By Attachment = By.xpath("//*[@id='customerDropZone']/div/span/b");
 
 	public void visibility(WebElement element) {
 		wait = new WebDriverWait(driver, 50);
@@ -455,8 +477,15 @@ public class CustomerCreateContactPage extends BaseClass {
 			this.mouseActionClick(ListSocial);
 			this.dropDownByIndex(Status, 1);
 			this.mouseActionClick(Apply);
+		} else if (value.equals("IndustryFilter")) {
+			this.mouseActionClick(ListIndustryType);
+			this.mouseActionClick(ListIndustry);
+			this.mouseActionClick(Apply);
 		} else if (value.equals("LeadSource")) {
 			String text2 = this.getText(ListLeadSources);
+			return text2;
+		} else if (value.equals("IndustryType")) {
+			String text2 = this.getText(ListIndustryTypes);
 			return text2;
 		}
 		return value;
@@ -464,6 +493,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	By ListLeadSources = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[7]/span");
+	By ListIndustryTypes = By.xpath("//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[8]/span");
 
 	public String listFirstName() {
 		String text2 = this.getText(ListName);
@@ -617,6 +647,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		} else if (value.equals("Search")) {
 			this.clearField(Search);
 		} else if (value.equals("Previous")) {
+			this.mouseActionClick(Previous);
 			this.mouseActionClick(Previous);
 			this.mouseActionClick(Previous);
 		} else if (value.equals("TaxNumber")) {
@@ -862,7 +893,7 @@ public class CustomerCreateContactPage extends BaseClass {
 
 	}
 
-	public void equipmentPage() throws InterruptedException, IOException {
+	public void equipmentPage(String value) throws InterruptedException, IOException {
 		this.inputText(ProductName, fakeProductName);
 		productName = this.getTextAttribute(ProductName);
 		this.inputText(BrandName, fakeBrandName);
@@ -879,8 +910,11 @@ public class CustomerCreateContactPage extends BaseClass {
 		accessHours = this.getTextAttribute(AccessHours);
 		this.inputText(InstallationNotes, getPropertyValue("Notes"));
 		installationNotes = this.getTextAttribute(InstallationNotes);
-		this.mouseActionClick(SaveComplete);
-
+		if (value.equals("SaveComplete")) {
+			this.mouseActionClick(SaveComplete);
+		} else {
+			this.nextButton();
+		}
 	}
 
 	public void contactPage() throws AWTException, InterruptedException, IOException {
@@ -900,15 +934,72 @@ public class CustomerCreateContactPage extends BaseClass {
 		phoneNumber = this.getTextAttribute(Phone);
 		this.mouseActionClick(LeadSources);
 		if (this.getText(Social).equals("No Data Found")) {
-			Thread.sleep(5000);
-			this.mouseActionClick(LeadSources);
+			do {
+				Thread.sleep(5000);
+				this.mouseActionClick(LeadSources);
+			} while (this.getText(Social).equals("No Data Found"));
 			this.mouseActionClick(Social);
 		} else {
 			this.mouseActionClick(Social);
 		}
 		leadSources = this.getTextAttribute(LeadSources);
+		this.mouseActionClick(IndustryType);
+		if (this.getText(IndustryTypeDropDown).equals("No Data Found")) {
+			do {
+				Thread.sleep(5000);
+				this.mouseActionClick(IndustryType);
+			} while (!this.conditionChecking1(FirstIndusrty));
+			this.mouseActionClick(IndustryTypeDropDown);
+		} else {
+			this.mouseActionClick(IndustryTypeDropDown);
+		}
+		IndustryTypes = this.getTextAttribute(IndustryType);
 		this.nextButton();
 
+	}
+
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment)) {
+				do {
+					this.mouseActionClick(Attachment);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment));
+			}
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			if (value.equals("LoopNext")) {
+				for (int i = 0; i < 3; i++) {
+					this.nextButton();
+				}
+			}
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
+		}
 	}
 
 	public void nextButton() {
@@ -934,6 +1025,9 @@ public class CustomerCreateContactPage extends BaseClass {
 			return data;
 		} else if (value.equals("LeadSources")) {
 			String data = this.getTextAttribute(LeadSources);
+			return data;
+		} else if (value.equals("IndustryType")) {
+			String data = this.getTextAttribute(IndustryType);
 			return data;
 		} else if (value.equals("JobTittle")) {
 			String data = this.getTextAttribute(JobTittle);

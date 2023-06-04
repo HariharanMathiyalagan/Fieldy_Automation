@@ -149,7 +149,7 @@ public class OnBoardingPage extends BaseClass {
 		Boolean text = false;
 		try {
 			wait = new WebDriverWait(driver, value);
-			text = wait.until(ExpectedConditions.invisibilityOfElementLocated(element)).booleanValue();
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -203,7 +203,7 @@ public class OnBoardingPage extends BaseClass {
 	By ButtonVisible = By.xpath("//*[@disabled='true']");
 	By DashBoard = By.xpath("//*[text()=' Company Performance']");
 	By OwnerName = By.id("dashboard-customer-name");
-
+	By ErrorMessage = By.xpath("//*[contains(@class,'in-validate')]//parent::div//child::*[3]");
 	HttpURLConnection connection;
 
 	public void login() throws MalformedURLException, IOException {
@@ -565,26 +565,26 @@ public class OnBoardingPage extends BaseClass {
 			this.inputText(LastName, fakeLastName);
 			TenantLastName = this.getAttribute(LastName);
 			this.inputText(Email, fakeEmail);
+//			this.inputText(Email, "fieldy@mailinator.com");
 			TenantEmail = this.getAttribute(Email);
 			this.validationTab(BussinessWebSite, fakeWebsite);
-			if (this.conditionChecking1(Invisible, 10)) {
+			if (!this.conditionChecking1(ErrorMessage, 10)) {
 				this.mouseActionClick(Continue);
 			} else {
 				do {
-					if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail"))) {
+					if (this.conditionChecking1(EmailError, 2)) {
 						Faker faker = new Faker(new Locale("en-IND"));
 						this.clearField(Email);
 						String fakeEmail = faker.internet().safeEmailAddress();
 						this.validationTab(Email, fakeEmail);
 						TenantEmail = this.getAttribute(Email);
-					} else if (errorMessageBussinessName().equals(getPropertyValue("BussinessNameAlready"))) {
+					} else if (this.conditionChecking1(CompanyError, 2)) {
 						Faker faker = new Faker(new Locale("en-IND"));
 						this.clearBussinessName();
 						String fakeCompanyName = faker.company().name().replaceAll("[^a-zA-Z0-9]", " ");
 						this.validationTab(CompanyName, fakeCompanyName);
 						BussinessName = this.getAttribute(CompanyName);
-					} else if (errorEmail().equals(getPropertyValue("AlreadyExistedEmail1"))
-							&& errorMessageBussinessName().equals(getPropertyValue("BussinessNameAlready"))) {
+					} else if (this.conditionChecking1(EmailError, 2) && this.conditionChecking1(CompanyError, 2)) {
 						Faker faker = new Faker(new Locale("en-IND"));
 						this.clearBussinessName();
 						this.clearEmail();
@@ -595,7 +595,7 @@ public class OnBoardingPage extends BaseClass {
 						this.validationTab(CompanyName, fakeCompanyName);
 						BussinessName = this.getAttribute(CompanyName);
 					}
-				} while (!this.conditionChecking1(Invisible, 10));
+				} while (this.conditionChecking1(ErrorMessage, 10));
 				this.mouseActionClick(Continue);
 			}
 
@@ -632,6 +632,7 @@ public class OnBoardingPage extends BaseClass {
 	public void fillData() throws IOException {
 		driver.get(getPropertyValue("OnBoardingURL", getPropertyValue("Enviromment")));
 		this.inputText(CompanyName, fakeCompanyName);
+//		this.inputText(CompanyName, "kaniyarcorp");
 		this.validFillData("FirstPage");
 		this.updateValue();
 		this.mouseActionClick(xpath);

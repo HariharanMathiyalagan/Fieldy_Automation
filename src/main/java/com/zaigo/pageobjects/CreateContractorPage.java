@@ -2,6 +2,8 @@ package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,7 +64,7 @@ public class CreateContractorPage extends BaseClass {
 
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 
-	private By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
+	public static By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
 
@@ -519,7 +521,7 @@ public class CreateContractorPage extends BaseClass {
 		return text;
 
 	}
-
+	
 	public void companyName(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(CompanyName, characters256);
@@ -531,7 +533,6 @@ public class CreateContractorPage extends BaseClass {
 			this.inputText(CompanyName, fakeCompanyName);
 			ContractorName = this.getTextAttribute(CompanyName);
 		}
-
 	}
 
 	public void contractorPhoneNumber(String value) {
@@ -917,4 +918,17 @@ public class CreateContractorPage extends BaseClass {
 		return response;
 	}
 
+	By Attachment = By.xpath("//*[@id='upload-box']/div/div[1]/label");
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		if (value.equals("CompanyContractor")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(1000);
+			BaseClass.attachmentFile(System.getProperty("user.dir")
+					+ "\\ImagePicture\\png-transparent-homo-sapiens-line-art-cartoon-avatar-youtube-horse-legendary-creature-white.png");
+			Thread.sleep(1000);
+		}
+
+	}
 }

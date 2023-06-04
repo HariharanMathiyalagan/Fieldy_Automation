@@ -3,6 +3,7 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="org.test.TeamUserContractor">
         <methods>
           <include name="deleteAfterCatch"/>
@@ -30,6 +31,35 @@
           <include name="deleteBeforeCatch"/>
         </methods>
       </class> <!-- org.test.CustomerCreateContactModule -->
+=======
+      <class name="org.enhancement.CustomerOrganizationInvoice">
+        <methods>
+          <include name="setup"/>
+          <include name="deleteAfterCatch"/>
+          <include name="createInvoice"/>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.enhancement.CustomerOrganizationInvoice -->
+      <class name="org.enhancement.GlobalContactInvoice">
+        <methods>
+          <include name="setup"/>
+          <include name="createInvoice"/>
+          <include name="deleteAfterCatch"/>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.enhancement.GlobalContactInvoice -->
+      <class name="org.enhancement.GlobalOrganizationInvoice">
+        <methods>
+          <include name="setup"/>
+          <include name="createInvoice"/>
+          <include name="deleteAfterCatch"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.enhancement.GlobalOrganizationInvoice -->
+>>>>>>> 8f032e9abfd9edfc56ded76230782504aeca4741
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

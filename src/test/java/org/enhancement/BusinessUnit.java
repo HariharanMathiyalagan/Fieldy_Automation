@@ -143,7 +143,7 @@ public class BusinessUnit extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void businessCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify a new business unit is created successfully through [Business Settings]");
@@ -156,6 +156,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("BusinessUnitCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			landing.mouseActionClick(BusinessDaysPage.create_button);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -164,6 +165,7 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.message("AlternateFunction");
+			landing.mouseActionClick(BusinessDaysPage.create_button);
 		}
 	}
 }

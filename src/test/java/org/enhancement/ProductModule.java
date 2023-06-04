@@ -122,7 +122,7 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify created successful message is displayed, when the Product Created");
@@ -135,6 +135,7 @@ public class ProductModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InventoryCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(ProductServicePage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -143,6 +144,8 @@ public class ProductModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
 			mandatory.message("AlternateFunction");
+			mandatory.mouseActionClick(ProductServicePage.CreateButton);
+
 		}
 	}
 
