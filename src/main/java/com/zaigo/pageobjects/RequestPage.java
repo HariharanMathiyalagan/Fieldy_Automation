@@ -250,6 +250,7 @@ public class RequestPage extends BaseClass {
 	By Technician1 = By.xpath("//*[@data-dropdownlist='technician-list']");
 	By TechnicianFirstName = By.xpath("//*[@id='technician_ids-autocomplete-list']/div[1]");
 	By TechnicianSecoundName = By.xpath("//*[@id='technician_ids-autocomplete-list']/div[2]");
+	By TechnicianThirdName = By.xpath("//*[@id='technician_ids-autocomplete-list']/div[3]");
 	By Priority = By.id("priority");
 	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
 	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
@@ -539,11 +540,12 @@ public class RequestPage extends BaseClass {
 
 	public void picKLocation() {
 		this.inputText(Location, fakeState);
-		if (!conditionChecking1(firstLocation)) {
+		if (!conditionChecking1(firstLocation, 2)) {
 			do {
 				this.clearField(Location);
+				String fakeState = faker.address().state();
 				this.inputText(Location, fakeState);
-			} while (!conditionChecking1(firstLocation));
+			} while (!conditionChecking1(firstLocation, 2));
 		} else {
 			this.mouseActionClick(firstLocation);
 		}
@@ -699,7 +701,6 @@ public class RequestPage extends BaseClass {
 			ContactFirstName = this.getTextAttribute(FirstNameField);
 			this.inputText(LastNameField, fakeLastName);
 			ContactLastName = this.getTextAttribute(LastNameField);
-//			this.inputText(EmailField, "leela.johar@example.com");
 			this.inputText(EmailField, fakeEmail);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			ContactPhoneNumber = this.getTextAttribute(PhoneNumber);
@@ -817,15 +818,24 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking1(By element) {
+	public Boolean conditionChecking1(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 1);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
 		return text;
+	}
+
+	public String techcnianNotAvailable() {
+		String name2 = responseMessage;
+		int startIndex = name2.indexOf("Technician");
+		if (startIndex != -1) {
+			responseMessage = name2.substring(startIndex);
+		}
+		return responseMessage;
 	}
 
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
@@ -835,24 +845,30 @@ public class RequestPage extends BaseClass {
 
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
-		if (value.equals("Message")) {
+		if (value.equals("Message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
-					this.mouseActionClick(SaveButton);
+					if (value.equals("Message")) {
+						this.mouseActionClick(SaveButton);
+					} else if (value.equals("FormMessage")) {
+						this.mouseActionClick(SaveComplete);
+					}
 					if (this.conditionChecking(Message)) {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
-						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
+								|| responseMessage.equals("RequestUpdatedMessage")) {
 							conditionCheck = false;
 						}
 					}
 				} while (conditionCheck);
 			}
-		} else if (value.equals("AlternateFunction")) {
+		} else if (value.equals("AlternateFunction") || value.equals("AlternateFormMessage")) {
 			do {
 				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
 						|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
@@ -866,21 +882,34 @@ public class RequestPage extends BaseClass {
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
 					this.mouseActionClick(SaveButton);
+				} else if (responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
+					this.scrollDown();
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianThirdName);
+					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message)) {
 					responseMessage = this.getText(Message);
 					this.invisible(Message);
-					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
+							|| responseMessage.equals("RequestUpdatedMessage")) {
 						conditionCheck = false;
 					}
 				} else {
 					do {
 						Thread.sleep(10000);
-						this.mouseActionClick(SaveButton);
+						if (value.equals("Message")) {
+							this.mouseActionClick(SaveButton);
+						} else if (value.equals("AlternateFormMessage")) {
+							this.mouseActionClick(SaveComplete);
+						}
 						if (this.conditionChecking(Message)) {
 							responseMessage = this.getText(Message);
 							this.invisible(Message);
-							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
+							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
+									|| responseMessage.equals("RequestUpdatedMessage")) {
 								conditionCheck = false;
 							}
 						}
@@ -982,7 +1011,7 @@ public class RequestPage extends BaseClass {
 	String customer;
 
 	public String customerField() {
-		if (this.conditionChecking1(ContactNameError)) {
+		if (this.conditionChecking1(ContactNameError, 2)) {
 			customer = this.getText(ContactNameError);
 		} else {
 			customer = "null";
@@ -997,20 +1026,20 @@ public class RequestPage extends BaseClass {
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("RadioContact")) {
 			this.mouseActionClick(SaveComplete);
-			if (this.conditionChecking1(ErrorLocation)) {
+			if (this.conditionChecking1(ErrorLocation, 2)) {
 			} else {
 				do {
 					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ErrorLocation));
+				} while (!this.conditionChecking1(ErrorLocation, 2));
 			}
 		} else if (value.equals("RadioOrganization")) {
 			this.mouseActionClick(RadioButtonOrganization);
 			this.mouseActionClick(SaveComplete);
-			if (this.conditionChecking1(ErrorLocation)) {
+			if (this.conditionChecking1(ErrorLocation, 2)) {
 			} else {
 				do {
 					this.mouseActionClick(SaveComplete);
-				} while (!this.conditionChecking1(ErrorLocation));
+				} while (!this.conditionChecking1(ErrorLocation, 2));
 			}
 		}
 		return value;
@@ -1029,7 +1058,14 @@ public class RequestPage extends BaseClass {
 			this.clearField(Description);
 			this.scrollDown();
 			this.mouseActionClick(Technician);
+			String text = this.getText(TechnicianFirstName);
 			this.mouseActionClick(TechnicianFirstName);
+			if (!text.equals(this.getTextAttribute(Technician))) {
+				do {
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianFirstName);
+				} while (!text.equals(this.getTextAttribute(Technician)));
+			}
 		} else if (value.equals("Schedule") || value.equals("GlobalSchedule") || value.equals("CreateSchedule")) {
 			if (value.equals("Schedule")) {
 				this.visibility(JobList);
@@ -1042,15 +1078,22 @@ public class RequestPage extends BaseClass {
 			this.dropDownByIndex(Priority, 2);
 			this.inputText(Tittle, fakeTittle);
 			this.currentPickerFromDate();
-			this.currentPickerToDate();
 			this.inputText(StartTime, "10.00");
 			this.invisible(Spinner);
+			this.currentPickerToDate();
 			this.inputText(EndTime, "18.00");
 			this.invisible(Spinner);
 			this.scrollDown();
 			this.assertName(TechnicianLabel, "Technician");
 			this.mouseActionClick(Technician);
+			String text = this.getText(TechnicianSecoundName);
 			this.mouseActionClick(TechnicianSecoundName);
+			if (!text.equals(this.getTextAttribute(Technician))) {
+				do {
+					this.mouseActionClick(Technician);
+					this.mouseActionClick(TechnicianSecoundName);
+				} while (!text.equals(this.getTextAttribute(Technician)));
+			}
 		}
 		this.scrollUp();
 		this.picKLocation();

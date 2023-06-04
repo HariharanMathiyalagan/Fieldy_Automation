@@ -903,7 +903,7 @@ public class InvoicePage extends BaseClass {
 
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
-		if (value.equals("Message")) {
+		if (value.equals("Message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
 				response = this.getText(Message);
 				this.invisible(Message);
@@ -911,12 +911,18 @@ public class InvoicePage extends BaseClass {
 			} else {
 				do {
 					Thread.sleep(10000);
-					this.mouseActionClick(SaveButton);
+					if (value.equals("Message")) {
+						this.mouseActionClick(SaveButton);
+					} else if (value.equals("FormMessage")) {
+						this.mouseActionClick(Save);
+					}
 					if (this.conditionChecking(Message)) {
 						response = this.getText(Message);
 						this.invisible(Message);
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| response.equals(getPropertyValue("CreatedTax"))) {
+								|| response.equals(getPropertyValue("CreatedTax"))
+								|| response.equals(getPropertyValue("InvoiceCreateMessage"))
+								|| response.equals(getPropertyValue("InvoiceUpdatedMessage"))) {
 							conditionCheck = false;
 						}
 					}

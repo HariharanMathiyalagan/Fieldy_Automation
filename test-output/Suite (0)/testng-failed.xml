@@ -5,13 +5,80 @@
     <classes>
       <class name="org.test.TeamUserContractor">
         <methods>
-          <include name="editmandatoryValidationContractorEmailField"/>
+          <include name="businessUnitPrepopulate"/>
           <include name="deleteAfterCatch"/>
+          <include name="deleteUserDetails"/>
+          <include name="searchEmailValidation"/>
+          <include name="editmaxValidationLocationName"/>
           <include name="setup"/>
+          <include name="editmandatoryValidationContractorFirstNameField"/>
+          <include name="landingOnCreateForm"/>
+          <include name="landingOnEditForm"/>
+          <include name="specialCharacterPhoneNumberField"/>
+          <include name="userCount"/>
+          <include name="locationCityPrepopulate"/>
+          <include name="maxValidatonContractorPhoneNumber"/>
+          <include name="TeamUserPage"/>
+          <include name="searchPhoneNumberValidation"/>
+          <include name="minValidatonContractorPhoneNumber"/>
+          <include name="locationZipcodePrepopulate"/>
+          <include name="verifySaveButtonExist"/>
+          <include name="contractorCompanyNamePrepopulate"/>
+          <include name="editmaxValidatonContractorPhoneNumber"/>
+          <include name="serviceTypePrepopulate"/>
+          <include name="maxValidationContractorEmailFields"/>
+          <include name="maxValidationContractorFirstNameField"/>
+          <include name="invalidDataValidation"/>
+          <include name="mandatoryValidationContractorEmailField"/>
+          <include name="maxValidationAddress2"/>
+          <include name="minValidationZipcode"/>
+          <include name="searchNameValidation"/>
+          <include name="userCreate"/>
+          <include name="alreadyExistedMailValidation"/>
+          <include name="locationAddress1Prepopulate"/>
+          <include name="maxValidationAddress1"/>
+          <include name="mandatoryValidationContractorFirstNameField"/>
+          <include name="maxValidationLocationName"/>
+          <include name="locationStatePrepopulate"/>
+          <include name="specialCharacterValidationZipcode"/>
           <include name="exitBrowser"/>
           <include name="deleteBeforeCatch"/>
+          <include name="locationAddress2Prepopulate"/>
+          <include name="maxValidationCity"/>
+          <include name="maxValidationZipcode"/>
+          <include name="mandatoryOrganizationName"/>
+          <include name="invalidContractorEmailValidation"/>
+          <include name="locationNamePrepopulate"/>
+          <include name="filterByCompany"/>
+          <include name="maxValidationState"/>
+          <include name="maxValidationContractorLastNameField"/>
         </methods>
       </class> <!-- org.test.TeamUserContractor -->
+      <class name="org.test.TeamCompanyContractor">
+        <methods>
+          <include name="editmaxValidationCityField"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+          <include name="editmaxValidationStateField"/>
+          <include name="editmaxValidationAddress1Field"/>
+          <include name="editmaxValidationZipcodeField"/>
+          <include name="editmaxValidationPhoneNumberField"/>
+          <include name="editmaxValidationLocationNameField"/>
+          <include name="editmaxValidationAddress2Field"/>
+          <include name="editminValidationPhoneNumberField"/>
+          <include name="setup"/>
+          <include name="editvalidateEmailField"/>
+          <include name="editverifyContractorNameMandatory"/>
+          <include name="deleteAfterCatch"/>
+          <include name="editmaxValidationEmailField"/>
+          <include name="editcharacterValidationZipcodeField"/>
+          <include name="editminValidationZipcodeField"/>
+          <include name="editverifyCpersonLastNameMaxValidation"/>
+          <include name="deleteContractorDetails"/>
+          <include name="editmaxValidationContactPerson"/>
+          <include name="UpdateContract"/>
+        </methods>
+      </class> <!-- org.test.TeamCompanyContractor -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (0)] -->

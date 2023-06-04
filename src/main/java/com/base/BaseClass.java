@@ -91,6 +91,7 @@ public class BaseClass {
 		WebElement findElement = driver.findElement(By.xpath(Xpath));
 		return findElement;
 	}
+
 	public static void Click(WebElement element) {
 		element.click();
 	}
@@ -217,7 +218,28 @@ public class BaseClass {
 		return value;
 
 	}
-	
+
+	public String getPropertyValue(String key, String value) throws IOException {
+		if (value.equals("dev")) {
+			Properties properties = new Properties();
+			FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\DEV.properties");
+			properties.load(stream);
+			return (String) properties.get(key);
+		} else if (value.equals("qa")) {
+			Properties properties = new Properties();
+			FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\QA.properties");
+			properties.load(stream);
+			return (String) properties.get(key);
+		} else if (value.equals("pro")) {
+			Properties properties = new Properties();
+			FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\LIVE.properties");
+			properties.load(stream);
+			return (String) properties.get(key);
+		}
+		return value;
+
+	}
+
 	public static String getBrowserValue(String key) throws IOException {
 		Properties properties = new Properties();
 		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\config.properties");
@@ -226,7 +248,7 @@ public class BaseClass {
 		return value;
 
 	}
-	
+
 	public String getPropertyValueUpdate(String key) throws IOException {
 		Properties properties = new Properties();
 		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\Folder\\Update.properties");

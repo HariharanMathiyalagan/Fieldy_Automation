@@ -3,37 +3,25 @@
 <suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.AvailabilityTechnicians">
+      <class name="org.test.GlobalContactRequest">
         <methods>
-          <include name="exitBrowser"/>
+          <include name="editmandatoryValidationDescription"/>
+          <include name="editmandatoryValidationLocation"/>
           <include name="setup"/>
-          <include name="technicianAvailability1"/>
-          <include name="createdJob90min"/>
-          <include name="technicianAvailability2"/>
           <include name="deleteAfterCatch"/>
-          <include name="technicianAvailability6"/>
           <include name="deleteBeforeCatch"/>
-        </methods>
-      </class> <!-- org.test.AvailabilityTechnicians -->
-      <class name="org.test.CustomerOrganizationJob">
-        <methods>
-          <include name="createJob_FromDateandTime_ToDateandTime"/>
-          <include name="editJobwithFromDateFromTime"/>
-          <include name="setup"/>
-          <include name="startedJob"/>
-          <include name="jobDraftStatus"/>
-          <include name="deletedJob"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="cancelledJob"/>
           <include name="exitBrowser"/>
-          <include name="searchInvalid"/>
-          <include name="jobCancelledStatus"/>
-          <include name="searchFilterByDate"/>
-          <include name="searchLocation"/>
-          <include name="searchJobNo"/>
+        </methods>
+      </class> <!-- org.test.GlobalContactRequest -->
+      <class name="org.test.CustomerOrganizationRequest">
+        <methods>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+          <include name="editmandatoryValidationLocation"/>
+          <include name="setup"/>
           <include name="deleteAfterCatch"/>
         </methods>
-      </class> <!-- org.test.CustomerOrganizationJob -->
+      </class> <!-- org.test.CustomerOrganizationRequest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (2)] -->

@@ -3,16 +3,23 @@
 <suite name="Failed suite [Suite (1)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.DispatchModule">
+      <class name="org.test.AvailabilityTechnicians">
         <methods>
-          <include name="deleteBeforeCatch"/>
+          <include name="technicianAvailability5"/>
+          <include name="technicianAvailability2"/>
+          <include name="technicianAvailability4"/>
+          <include name="technianAvailabilityMidDate"/>
+          <include name="technicianAvailability6"/>
+          <include name="technicianAvailability3"/>
           <include name="exitBrowser"/>
-          <include name="cancelRequest"/>
           <include name="setup"/>
+          <include name="technicianAvailability1"/>
+          <include name="createdJob90min"/>
+          <include name="createdJobTwoDays"/>
           <include name="deleteAfterCatch"/>
-          <include name="dispatchRequest"/>
+          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.DispatchModule -->
+      </class> <!-- org.test.AvailabilityTechnicians -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (1)] -->

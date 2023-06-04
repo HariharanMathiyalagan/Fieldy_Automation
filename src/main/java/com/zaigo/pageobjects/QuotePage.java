@@ -966,7 +966,7 @@ public class QuotePage extends BaseClass {
 
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
-		if (value.equals("message")) {
+		if (value.equals("message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
@@ -974,12 +974,19 @@ public class QuotePage extends BaseClass {
 			} else {
 				do {
 					Thread.sleep(10000);
-					this.mouseActionClick(SaveButton);
+					if (value.equals("message")) {
+						this.mouseActionClick(SaveButton);
+					} else if (value.equals("FormMessage")) {
+						this.mouseActionClick(Save);
+					}
 					if (this.conditionChecking(Message)) {
 						responseMessage = this.getText(Message);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
+								|| responseMessage.equals(getPropertyValue("CreatedTax"))
+								|| responseMessage.equals(getPropertyValue("CreateMessage"))
+								|| responseMessage.equals(getPropertyValue("UpdatedMessage")) || responseMessage.equals(
+										"The doc expiry date must be a date after or equal to " + currentDate + ".")) {
 							conditionCheck = false;
 						}
 					}
@@ -1020,7 +1027,9 @@ public class QuotePage extends BaseClass {
 				} else {
 					do {
 						Thread.sleep(10000);
-						this.mouseActionClick(SaveButton);
+						if (value.equals("AlternateFunction")) {
+							this.mouseActionClick(SaveButton);
+						}
 						if (this.conditionChecking(Message)) {
 							responseMessage = this.getText(Message);
 							this.invisible(Message);
@@ -1135,15 +1144,13 @@ public class QuotePage extends BaseClass {
 			} else if (value.equals("GlobalContactDraft") || value.equals("GlobalOrgDraft")) {
 				if (value.equals("GlobalContactDraft")) {
 					this.autoCompleteField("ContactCreate");
-					if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-					} else {
+					if (!this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
 						this.message("AlternateFunction");
 					}
 					this.autoCompleteField("GlobalContactVisibleName");
 				} else if (value.equals("GlobalOrgDraft")) {
 					this.autoCompleteField("OrganizationCreate");
-					if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-					} else {
+					if (!this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
 						this.message("AlternateFunction");
 					}
 					this.autoCompleteField("OrgVisibleName");
@@ -1179,15 +1186,13 @@ public class QuotePage extends BaseClass {
 				|| value.equals("CreateDeclined") || value.equals("CreateDeclinedOrg")) {
 			if (value.equals("GlobalCreateDeclined")) {
 				this.autoCompleteField("ContactCreate");
-				if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-				} else {
+				if (!this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
 					this.message("AlternateFunction");
 				}
 				this.autoCompleteField("GlobalContactVisibleName");
 			} else if (value.equals("GlobalCreateOrgDeclined")) {
 				this.autoCompleteField("OrganizationCreate");
-				if (this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
-				} else {
+				if (!this.message("message").equals(getPropertyValue("CustomerCreatedMessage"))) {
 					this.message("AlternateFunction");
 				}
 				this.autoCompleteField("OrgVisibleName");

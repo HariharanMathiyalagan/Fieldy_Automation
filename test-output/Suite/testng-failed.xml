@@ -3,53 +3,33 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.ServiceModule">
+      <class name="org.test.TeamUserContractor">
         <methods>
-          <include name="updateProduct"/>
-          <include name="editafterDecimalPointPriceField"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="exitBrowser"/>
-          <include name="editbeforeDecimalPointPriceField"/>
-          <include name="editmaximumValidationProductName"/>
-          <include name="searchServiceName"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
-          <include name="setup"/>
-          <include name="editmaximumValidationPrice"/>
-          <include name="updateButton"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.ProductModule">
-        <methods>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editbeforeDecimalPointPriceField"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="editafterDecimalPointPriceField"/>
-          <include name="editmaximumValidationSKU"/>
-          <include name="searchProductName"/>
-          <include name="updateProduct"/>
-          <include name="editafterDecimalPointQuantityHandField"/>
-          <include name="editbeforeDecimalPointQuantityHandField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
-          <include name="editbeforeDecimalPointLowStockThresoldField"/>
-          <include name="editmaximumValidationQuantityHand"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmaximumValidationPrice"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="updateButton"/>
-          <include name="editmaximumValidationLowStockThresold"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="editafterDecimalPointLowStockThresoldField"/>
-          <include name="editmaximumValidationProductName"/>
+          <include name="filterByCompany"/>
           <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.ProductModule -->
+      </class> <!-- org.test.TeamUserContractor -->
+      <class name="org.test.CustomerCreateOrganizationModule">
+        <methods>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+          <include name="filterListValidation"/>
+          <include name="setup"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.CustomerCreateOrganizationModule -->
+      <class name="org.test.CustomerCreateContactModule">
+        <methods>
+          <include name="setup"/>
+          <include name="deleteAfterCatch"/>
+          <include name="filterField"/>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.test.CustomerCreateContactModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
