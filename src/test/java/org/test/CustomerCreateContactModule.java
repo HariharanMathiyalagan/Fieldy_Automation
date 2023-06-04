@@ -970,7 +970,8 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("");
+		initElements.attachmentFileCheck("URLCheck");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -1156,6 +1157,30 @@ public class CustomerCreateContactModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listFirstName.equals(listData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			listData = search.listValidation("IndustryType");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("FilterValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("FilterValidation.png");
+			listData = search.listValidation("IndustryType");
+		}
+
+	}
+
+	@Test(priority = 37)
+	private void filterIndustryField() throws IOException {
+		extentTest = extentReports.createTest("Verify to Pick the Filter field & select Industry Type is:" + listData);
+		CustomerCreateContactPage search = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		search.listValidation("IndustryFilter");
+		String listFirstName = search.listValidation("IndustryType");
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listData);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (listFirstName.equals(listData)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			search.clearFields("Search");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1269,6 +1294,28 @@ public class CustomerCreateContactModule extends BaseClass {
 		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.leadSources);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(CustomerCreateContactPage.leadSources)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 42)
+	public void industryTypePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Industry Type Name:" + CustomerCreateContactPage.IndustryTypes
+				+ " is prepopulated in the customer contact edit form page");
+		CustomerCreateContactPage edit = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		String assertionMessage = edit.prepopulationFields("IndustryType");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.IndustryTypes);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateContactPage.IndustryTypes)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -2442,7 +2489,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		if (errorAccessHours.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.clearFields("Previous");
+			maxValidation.nextButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -2451,7 +2498,32 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("InstallationValidation.png");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.clearFields("Previous");
+			maxValidation.nextButton();
+		}
+	}
+
+	@Test(priority = 89)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Attacthment response code in customer contact module");
+		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+			initElements.clearFields("Previous");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
+			initElements.clearFields("Previous");
 		}
 	}
 
@@ -2462,7 +2534,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,

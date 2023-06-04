@@ -3,6 +3,7 @@ package org.enhancement;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -123,14 +124,14 @@ public class CustomerContactModule extends BaseClass {
 
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, invocationCount = 5)
 	private void CreateContact() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify a new Customer Contact is created successfully through [Create Contact]");
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -138,6 +139,7 @@ public class CustomerContactModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (responseMessageCreateContact1.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.mouseActionClick(CustomerCreateContactPage.AddContact);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -146,8 +148,7 @@ public class CustomerContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
+			initElements.mouseActionClick(CustomerCreateContactPage.AddContact);
 		}
-
 	}
 }

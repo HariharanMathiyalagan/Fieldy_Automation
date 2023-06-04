@@ -25,7 +25,7 @@ import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class GlobalOrganizationInvoice extends BaseClass{
+public class GlobalOrganizationInvoice extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -90,26 +90,27 @@ public class GlobalOrganizationInvoice extends BaseClass{
 				.createTest("Verify Customer Contact List Page is opened when clicking on Cusotmer->Contact");
 		InvoicePage initElements = PageFactory.initElements(driver, InvoicePage.class);
 		initElements.labelValidation("Global");
-		initElements.labelValidation("OrganizationAPI");
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, invocationCount = 5)
 	private void createInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+		mandatory.labelValidation("OrganizationAPI");
 		mandatory.autoCompleteField("GlobalOrganization");
 		mandatory.responseMessage("Message");
 		mandatory.createFunction();
 		mandatory.autoCompleteField("VisibleCustomerOrgName");
 		mandatory.CRUDValidation("CreateValue");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InvoiceCreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(InvoicePage.CreateGlobalInvoice);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -117,6 +118,7 @@ public class GlobalOrganizationInvoice extends BaseClass{
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+			mandatory.mouseActionClick(InvoicePage.CreateGlobalInvoice);
 		}
 	}
 

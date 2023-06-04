@@ -122,18 +122,19 @@ public class CategoryModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7, invocationCount = 5)
 	private void createCategoryProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify created successful message is displayed, when the Category Created");
 		CategoryPage mandatory = PageFactory.initElements(driver, CategoryPage.class);
 		mandatory.validData("Product");
-		String errorPasswordField = mandatory.message();
+		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CategoryCreated"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("CategoryCreated"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.modulePage("CreatePage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -141,6 +142,8 @@ public class CategoryModule extends BaseClass {
 			File file = new File("UnscheduleJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.message("AlternateFunction");
+			mandatory.modulePage("CreatePage");
 		}
 	}
 }

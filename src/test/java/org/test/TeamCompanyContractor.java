@@ -677,6 +677,7 @@ public class TeamCompanyContractor extends BaseClass {
 	public void createContract() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contractor Company has Successfully Created");
 		CreateContractorPage create = PageFactory.initElements(driver, CreateContractorPage.class);
+		create.attachmentFileCheck("CompanyContractor");
 		create.validData("BasicPage");
 		create.validData("LocationPage");
 		String asssertCreate = create.responseMessage("Message");

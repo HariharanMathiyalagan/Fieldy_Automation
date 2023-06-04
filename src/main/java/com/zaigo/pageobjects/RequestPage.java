@@ -1,13 +1,19 @@
 package com.zaigo.pageobjects;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -93,14 +99,14 @@ public class RequestPage extends BaseClass {
 		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).size();
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 20);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
 
-	private void mouseActionClick(WebElement element) {
+	public void mouseActionClick(WebElement element) {
 		wait = new WebDriverWait(driver, 30);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
@@ -414,7 +420,7 @@ public class RequestPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-contact-request-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-organization-request-create']"),
 			@FindBy(xpath = "//*[@data-automationid='request-create']") })
-	WebElement CreateButton;
+	public static WebElement CreateButton;
 
 	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
@@ -829,6 +835,17 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking1(WebElement element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	public String techcnianNotAvailable() {
 		String name2 = responseMessage;
 		int startIndex = name2.indexOf("Technician");
@@ -1045,7 +1062,7 @@ public class RequestPage extends BaseClass {
 		return value;
 	}
 
-	public void validData(String value) throws InterruptedException, IOException {
+	public void validData(String value) throws InterruptedException, IOException, AWTException {
 		if (value.equals("Unassigned")) {
 			this.dropDownByIndex(Priority, 2);
 			this.currentPickerFromDate();
@@ -1058,13 +1075,12 @@ public class RequestPage extends BaseClass {
 			this.clearField(Description);
 			this.scrollDown();
 			this.mouseActionClick(Technician);
-			String text = this.getText(TechnicianFirstName);
 			this.mouseActionClick(TechnicianFirstName);
-			if (!text.equals(this.getTextAttribute(Technician))) {
+			if (!(this.getTextAttribute(Technician).length() > 0)) {
 				do {
 					this.mouseActionClick(Technician);
 					this.mouseActionClick(TechnicianFirstName);
-				} while (!text.equals(this.getTextAttribute(Technician)));
+				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
 		} else if (value.equals("Schedule") || value.equals("GlobalSchedule") || value.equals("CreateSchedule")) {
 			if (value.equals("Schedule")) {
@@ -1086,13 +1102,12 @@ public class RequestPage extends BaseClass {
 			this.scrollDown();
 			this.assertName(TechnicianLabel, "Technician");
 			this.mouseActionClick(Technician);
-			String text = this.getText(TechnicianSecoundName);
 			this.mouseActionClick(TechnicianSecoundName);
-			if (!text.equals(this.getTextAttribute(Technician))) {
+			if (!(this.getTextAttribute(Technician).length() > 0)) {
 				do {
 					this.mouseActionClick(Technician);
 					this.mouseActionClick(TechnicianSecoundName);
-				} while (!text.equals(this.getTextAttribute(Technician)));
+				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
 		}
 		this.scrollUp();
@@ -1101,6 +1116,9 @@ public class RequestPage extends BaseClass {
 		this.inputText(Description, getPropertyValue("Description"));
 		this.tagValidation(Tags, randomCharacter);
 		this.inputText(Notes, getPropertyValue("Notes"));
+		if (value.equals("Unassigned")) {
+			this.attachmentFileCheck("URLCheck");
+		}
 		this.mouseActionClick(SaveComplete);
 	}
 
@@ -1254,6 +1272,50 @@ public class RequestPage extends BaseClass {
 	public void createFunction() throws IOException, InterruptedException {
 		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			this.message("AlternateFunction");
+		}
+	}
+
+	By Attachment = By.xpath("//*[@id='scheduleDropzone']");
+	@FindAll({ @FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span") })
+	WebElement FirstAttachment;
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		this.scrollDown();
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(2000);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment, 3)) {
+				do {
+					this.mouseActionClick(Attachment);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment, 3));
+			}
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
 		}
 	}
 }

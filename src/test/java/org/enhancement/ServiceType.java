@@ -143,7 +143,7 @@ public class ServiceType extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, invocationCount = 5)
 	private void serviceTypeCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify a new Service Type is created successfully through [Business Settings]");
@@ -156,6 +156,7 @@ public class ServiceType extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("ServiceTypeCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			landing.mouseActionClick(BusinessDaysPage.service_create_btn);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -164,6 +165,8 @@ public class ServiceType extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.message("AlternateFunction");
+			landing.mouseActionClick(BusinessDaysPage.service_create_btn);
+
 		}
 	}
 

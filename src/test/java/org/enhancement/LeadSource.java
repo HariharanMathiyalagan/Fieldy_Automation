@@ -143,7 +143,7 @@ public class LeadSource extends BaseClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, invocationCount = 5)
 	private void leadSourceCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify a new Lead Source is created successfully through [Business Settings]");
@@ -156,6 +156,7 @@ public class LeadSource extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("LeadSourceCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			landing.mouseActionClick(BusinessDaysPage.lead_source_create_btn);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -164,6 +165,7 @@ public class LeadSource extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.message("AlternateFunction");
+			landing.mouseActionClick(BusinessDaysPage.lead_source_create_btn);
 		}
 	}
 }

@@ -114,7 +114,7 @@ public class CustomerContactJob extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -437,7 +437,7 @@ public class CustomerContactJob extends BaseClass {
 	}
 
 	@Test(priority = 16)
-	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException {
+	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Unassigned Job is created successfully from Customer Contact->Create Job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -504,7 +504,7 @@ public class CustomerContactJob extends BaseClass {
 	}
 
 	@Test(priority = 20)
-	private void labelEditValidation() throws IOException, InterruptedException {
+	private void labelEditValidation() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify Edit Job page is opened from Contacts-> Jobs -> Edit Job");
 		JobPage jobPage = PageFactory.initElements(driver, JobPage.class);
 		jobPage.jobStatusCreation("Edit");
@@ -736,7 +736,29 @@ public class CustomerContactJob extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactJobNotesMaximumValidation.png");
 			mandatory.clearValidation("Notes");
 		}
+	}
 
+	@Test(priority = 30)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Attacthment response code in customer contact job module");
+		JobPage initElements = PageFactory.initElements(driver, JobPage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
+		}
 	}
 
 	@Test(priority = 30)
@@ -762,7 +784,8 @@ public class CustomerContactJob extends BaseClass {
 	}
 
 	@Test(priority = 31)
-	private void editJobwithFromDateFromTime() throws WebDriverException, IOException, InterruptedException {
+	private void editJobwithFromDateFromTime()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verfiy the unassigned Job is updated to scheduled when assigning the available technician");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -788,7 +811,7 @@ public class CustomerContactJob extends BaseClass {
 
 	@Test(priority = 32)
 	private void createJob_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -1017,7 +1040,7 @@ public class CustomerContactJob extends BaseClass {
 	}
 
 	@Test(priority = 42)
-	private void jobDraftStatus() throws InterruptedException, IOException {
+	private void jobDraftStatus() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Job has been Draft Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("CustomerContactDraft");

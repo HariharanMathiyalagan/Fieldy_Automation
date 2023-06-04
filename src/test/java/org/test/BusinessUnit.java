@@ -411,9 +411,9 @@ public class BusinessUnit extends BaseClass {
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BusinessUnitCreatedMessage"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BusinessUnitUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (createMessage.equals(getPropertyValue("BusinessUnitCreatedMessage"))) {
+		if (createMessage.equals(getPropertyValue("BusinessUnitUpdatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");

@@ -30,7 +30,7 @@ import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class CustomerOrganizationInvoice extends BaseClass{
+public class CustomerOrganizationInvoice extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -53,12 +53,12 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -93,7 +93,8 @@ public class CustomerOrganizationInvoice extends BaseClass{
 	private void modulePage() throws InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Customer Organization List Page is opened when clicking on Cusotmer->Organization");
-		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver,
+				CustomerCreateOrganizationPage.class);
 		modulePage.modulePage();
 
 	}
@@ -106,7 +107,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -165,7 +166,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CustomerContactNamePrepopulate.png");
 		}
 	}
-	
+
 	@Test(priority = 3)
 	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
@@ -841,12 +842,13 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			mandatory.clearFields("Expiry");
 		}
 	}
-	
+
 	@Test(priority = 29)
-	private void createInvoice() throws IOException, InterruptedException, ParseException {
+	private void createInvoice() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+		mandatory.attachmentFileCheck("URLCheck");
 		mandatory.CRUDValidation("Create");
 		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1534,6 +1536,30 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		}
 
 	}
+	
+	@Test(priority = 57)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Attacthment response code in customer organization invoice module");
+		InvoicePage initElements = PageFactory.initElements(driver, InvoicePage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
+		}
+	}
 
 	@Test(priority = 57)
 	private void updatedInvoice() throws IOException, InterruptedException, ParseException {
@@ -1558,7 +1584,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceUpdated.png");
 		}
 	}
-	
+
 	@Test(priority = 58)
 	private void draftInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice has been draft status");

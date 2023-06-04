@@ -48,12 +48,12 @@ public class CategoryModule extends BaseClass {
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -220,10 +220,11 @@ public class CategoryModule extends BaseClass {
 
 	@Test(priority = 7)
 	private void createCategoryProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Category Created");
+		extentTest = extentReports
+				.createTest("Verify created successful message is displayed, when the Category Created");
 		CategoryPage mandatory = PageFactory.initElements(driver, CategoryPage.class);
 		listData = mandatory.validData("Product");
-		String errorPasswordField = mandatory.message();
+		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CategoryCreated"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -236,6 +237,7 @@ public class CategoryModule extends BaseClass {
 			File file = new File("UnscheduleJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.message("AlternateFunction");
 		}
 	}
 
@@ -428,10 +430,11 @@ public class CategoryModule extends BaseClass {
 
 	@Test(priority = 16)
 	private void UpdateCategoryProduct() throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports.createTest("Verify updated successful message is displayed, when the Category Updated");
+		extentTest = extentReports
+				.createTest("Verify updated successful message is displayed, when the Category Updated");
 		CategoryPage mandatory = PageFactory.initElements(driver, CategoryPage.class);
 		listData = mandatory.validData("Product");
-		String errorPasswordField = mandatory.message();
+		String errorPasswordField = mandatory.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CategoryEdited"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -444,6 +447,7 @@ public class CategoryModule extends BaseClass {
 			File file = new File("UnscheduleJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
+			mandatory.message("AlternateFunction");
 		}
 	}
 
@@ -453,7 +457,7 @@ public class CategoryModule extends BaseClass {
 				.createTest("Verify deleted successfully message is displayed, when the Category Deleted");
 		CategoryPage landing = PageFactory.initElements(driver, CategoryPage.class);
 		landing.listValidation("Delete");
-		String createMessage = landing.message();
+		String createMessage = landing.message("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CategoryDeleted"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -461,7 +465,8 @@ public class CategoryModule extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clickEvent("Visible");
 			ListField = landing.validData("ReflectionProduct");
-			landing.message();
+			landing.message("Message");
+			landing.message("AlternateFunction");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -471,7 +476,8 @@ public class CategoryModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.clickEvent("Visible");
 			ListField = landing.validData("ReflectionProduct");
-			landing.message();
+			landing.message("Message");
+			landing.message("AlternateFunction");
 		}
 	}
 

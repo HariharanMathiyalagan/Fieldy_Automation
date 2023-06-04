@@ -126,7 +126,7 @@ public class TeamUserContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 25)
 	private void userCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a new User is created successfully through [Team User]");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -140,8 +140,7 @@ public class TeamUserContractor extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("ContractorCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-//			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("UserContractorCreate");
+			landing.mouseActionClick(TeamUserPage.CreateContractor);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -150,11 +149,9 @@ public class TeamUserContractor extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.responseMessage("AlternateFunction");
-//			landing.dataConditionCheck("Condition");
-			landing.dataConditionCheck("UserContractorCreate");
+			landing.mouseActionClick(TeamUserPage.CreateContractor);
 
 		}
-
 	}
 
 }

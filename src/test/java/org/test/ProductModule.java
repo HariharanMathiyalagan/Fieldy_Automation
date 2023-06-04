@@ -42,7 +42,6 @@ public class ProductModule extends BaseClass {
 		extentHtmlReporter = new ExtentHtmlReporter("InventoryProduct.html");
 		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
-
 	}
 
 	@AfterClass

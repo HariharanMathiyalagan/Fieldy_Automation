@@ -1,6 +1,10 @@
 package com.zaigo.pageobjects;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +15,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -35,6 +40,7 @@ public class InvoicePage extends BaseClass {
 
 	WebDriver driver;
 	WebDriverWait wait;
+
 	Faker faker = new Faker(new Locale("en-IND"));
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
@@ -54,7 +60,7 @@ public class InvoicePage extends BaseClass {
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
-	String characters16 = RandomStringUtils.randomAlphabetic(20);
+	String characters16 = RandomStringUtils.randomAlphabetic(250);
 	String characters2048 = RandomStringUtils.randomAlphabetic(20001);
 	String numberCharacter15 = RandomStringUtils.randomNumeric(15);
 	String QuantityValue = RandomStringUtils.randomNumeric(2);
@@ -139,11 +145,22 @@ public class InvoicePage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking1(By element) {
+	public Boolean conditionChecking1(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 2);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(WebElement element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -160,7 +177,7 @@ public class InvoicePage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
@@ -271,10 +288,10 @@ public class InvoicePage extends BaseClass {
 	By OrganizationListName = By
 			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
 	By ClickOrganizationInvoice = By.xpath("//*[@id='customer-organization-nav-menu']/div/ul/li[6]/a");
-	By CreateOrganizationInvoice = By.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
+	public static By CreateOrganizationInvoice = By.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
 	By ClickContactInvoice = By.xpath("//*[@id='customer-contact-nav-menu']/div/ul/li[6]/a");
-	By CreateGlobalInvoice = By.xpath("//*[@data-automationid='invoice_create']");
-	By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
+	public static By CreateGlobalInvoice = By.xpath("//*[@data-automationid='invoice_create']");
+	public static By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
 	By CustomerName = By.id("customer-name");
 	By ContactName = By.id("customer-name-input-field");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
@@ -509,7 +526,7 @@ public class InvoicePage extends BaseClass {
 			String text = this.getText(ErrorDiscount);
 			return text;
 		} else if (value.equals("ErrorTax")) {
-			if (!this.conditionChecking1(ErrorTax)) {
+			if (!this.conditionChecking1(ErrorTax, 1)) {
 				this.clearField(Tax);
 				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
@@ -576,11 +593,11 @@ public class InvoicePage extends BaseClass {
 	public void saveFunction(String value) throws InterruptedException {
 		if (value.equals("Mandatory")) {
 			this.mouseActionClick(Save);
-			if (this.conditionChecking1(ErrorDueDate)) {
+			if (this.conditionChecking1(ErrorDueDate, 20)) {
 			} else {
 				do {
 					this.mouseActionClick(Save);
-				} while (!this.conditionChecking1(ErrorDueDate));
+				} while (!this.conditionChecking1(ErrorDueDate, 20));
 			}
 		} else if (value.equals("ClickButton")) {
 			this.mouseActionClick(Save);
@@ -624,11 +641,11 @@ public class InvoicePage extends BaseClass {
 			}
 		} else if (value.equals("ContactAPI")) {
 			this.mouseActionClick(Save);
-			if (this.conditionChecking1(ErrorDueDate)) {
+			if (this.conditionChecking1(ErrorDueDate, 20)) {
 			} else {
 				do {
 					this.mouseActionClick(Save);
-				} while (!this.conditionChecking1(ErrorDueDate));
+				} while (!this.conditionChecking1(ErrorDueDate, 20));
 			}
 		} else if (value.equals("OrganizationAPI")) {
 			this.mouseActionClick(RadioOrganization);
@@ -819,10 +836,10 @@ public class InvoicePage extends BaseClass {
 			this.clearField(Tax);
 			this.validationTab(Tax, TaxValue);
 			this.mouseActionClick(AddTax);
-			if (!this.conditionChecking1(TaxName)) {
+			if (!this.conditionChecking1(TaxName, 3)) {
 				do {
 					this.mouseActionClick(AddTax);
-				} while (!this.conditionChecking1(TaxName));
+				} while (!this.conditionChecking1(TaxName, 3));
 			}
 			this.inputText(TaxName, fakeTaxName);
 			this.inputText(TaxPercentage, fakeTaxPercentage);
@@ -1256,4 +1273,48 @@ public class InvoicePage extends BaseClass {
 		}
 	}
 
+	By Attachment = By.xpath("//*[@id='invoiceDropZone']");
+	@FindAll({ @FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span") })
+	WebElement FirstAttachment;
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		this.scrollDown();
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(1000);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment, 3)) {
+				do {
+					this.mouseActionClick(Attachment);
+					Thread.sleep(1000);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment, 3));
+			}
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
+		}
+	}
 }

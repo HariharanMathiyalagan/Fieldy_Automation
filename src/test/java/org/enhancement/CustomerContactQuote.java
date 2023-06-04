@@ -27,7 +27,7 @@ import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.QuotePage;
 import com.zaigo.utility.BrowserSetup;
 
-public class CustomerContactQuote extends BaseClass{
+public class CustomerContactQuote extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -49,12 +49,12 @@ public class CustomerContactQuote extends BaseClass{
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -113,7 +113,7 @@ public class CustomerContactQuote extends BaseClass{
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -174,20 +174,21 @@ public class CustomerContactQuote extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CreateJobLabel.png");
 		}
 	}
-	
-	@Test(priority = 29)
+
+	@Test(priority = 29, invocationCount = 5)
 	private void createQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Quote is created successfully from Customer Contact->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
 		mandatory.customerName("PlaceHolderName");
 		mandatory.CRUDValidation("CreateValue");
-		String errorPasswordField = mandatory.message("message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("CreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(QuotePage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -195,6 +196,7 @@ public class CustomerContactQuote extends BaseClass{
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+			mandatory.mouseActionClick(QuotePage.CreateButton);
 		}
 	}
 }

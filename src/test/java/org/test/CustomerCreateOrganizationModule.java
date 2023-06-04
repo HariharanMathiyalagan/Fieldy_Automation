@@ -1208,7 +1208,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		if (errorAccessHours.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.loopPreviousButton();
+			maxValidation.loopPreviousButton("3");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1217,7 +1217,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgInstallationValidation.png");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.loopPreviousButton();
+			maxValidation.loopPreviousButton("3");
 		}
 	}
 
@@ -1229,7 +1229,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("");
+		create.attachmentFileCheck("URLCheck");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -1447,7 +1448,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listValidation.equals(listFilterValidation)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			filter.clearFields("Search");
+			listValidation = filter.listValidation("IndustryType");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1455,7 +1456,32 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			File file = new File("orgfilter.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("orgfilter.png");
-			filter.clearFields("Search");
+			listValidation = filter.listValidation("IndustryType");
+		}
+
+	}
+
+	@Test(priority = 54)
+	private void filterIndustryField() throws IOException {
+		extentTest = extentReports
+				.createTest("Verify to Pick the Filter field & select Industry Type is:" + listValidation);
+		CustomerCreateOrganizationPage search = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		search.listValidation("IndustryFilter");
+		String listFirstName = search.listValidation("IndustryType");
+		extentTest.log(Status.INFO, "Actual Result is -" + listFirstName);
+		extentTest.log(Status.INFO, "Expected Result is -" + listValidation);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (listFirstName.equals(listValidation)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			search.clearFields("Search");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("FilterValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("FilterValidation.png");
+			search.clearFields("Search");
 		}
 
 	}
@@ -1683,15 +1709,38 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 	}
 
 	@Test(priority = 63)
+	public void industryTypePrepopulate() throws InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Industry Type Name:" + CustomerCreateOrganizationPage.IndustryTypes
+						+ " is prepopulated in the customer organization edit form page");
+		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		String assertionMessage = edit.prepopulationFields("IndustryType");
+		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateOrganizationPage.IndustryTypes);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (assertionMessage.equals(CustomerCreateOrganizationPage.IndustryTypes)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("EditCompanyLabel.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+		}
+
+	}
+
+	@Test(priority = 63)
 	public void taxNumberPrepopulate() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Tax Number:" + CustomerCreateOrganizationPage.taxNumber
 				+ " is prepopulated in the customer organization edit form page");
 		CustomerCreateOrganizationPage edit = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
 		String assertionMessage = edit.prepopulationFields("TaxNumber");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateContactPage.taxNumber);
+		extentTest.log(Status.INFO, "Expected Result is -" + CustomerCreateOrganizationPage.taxNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (assertionMessage.equals(CustomerCreateContactPage.taxNumber)) {
+		if (assertionMessage.equals(CustomerCreateOrganizationPage.taxNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -2195,7 +2244,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(CustomerCreateOrganizationPage.installationNotes)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			edit.loopPreviousButton();
+			edit.loopPreviousButton("3");
 			edit.clearAllFields("OrganizationPage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -2204,7 +2253,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			File file = new File("EditCompanyLabel.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
-			edit.loopPreviousButton();
+			edit.loopPreviousButton("3");
 			edit.clearAllFields("OrganizationPage");
 		}
 
@@ -3300,7 +3349,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		if (errorAccessHours.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.loopPreviousButton();
+			maxValidation.nextButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -3309,7 +3358,35 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgInstallationValidation.png");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.loopPreviousButton();
+			maxValidation.nextButton();
+		}
+	}
+
+	@Test(priority = 126)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Attacthment response code in customer organization module");
+		CustomerCreateOrganizationPage initElements = PageFactory.initElements(driver,
+				CustomerCreateOrganizationPage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+			initElements.loopPreviousButton("3");
+			initElements.loopPreviousButton("1");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
+			initElements.loopPreviousButton("3");
+			initElements.loopPreviousButton("1");
 		}
 	}
 
@@ -3321,7 +3398,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		create.organizationPage();
 		create.contactPage("EditContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerUpdatedMesssage"));

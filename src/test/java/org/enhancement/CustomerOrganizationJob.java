@@ -26,7 +26,7 @@ import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class CustomerOrganizationJob extends BaseClass{
+public class CustomerOrganizationJob extends BaseClass {
 	static String JobListData;
 	private WebDriver driver = null;
 	ExtentReports extentReports;
@@ -46,12 +46,12 @@ public class CustomerOrganizationJob extends BaseClass{
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -111,7 +111,7 @@ public class CustomerOrganizationJob extends BaseClass{
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -174,20 +174,21 @@ public class CustomerOrganizationJob extends BaseClass{
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createJob_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.customerName("PlaceHolderName");
 		mandatory.jobStatusCreation("CreateJob");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected  Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(JobPage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -195,6 +196,8 @@ public class CustomerOrganizationJob extends BaseClass{
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.message("AlternateForm");
+			mandatory.mouseActionClick(JobPage.CreateButton);
 		}
 	}
 

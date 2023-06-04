@@ -103,7 +103,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	public void createContract() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contractor Company has Successfully Created");
 		CreateContractorPage create = PageFactory.initElements(driver, CreateContractorPage.class);
@@ -116,6 +116,7 @@ public class TeamCompanyContractor extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (asssertCreate.equals(getPropertyValue("CompanyContractorCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.mouseActionClick(CreateContractorPage.createcontractorbutton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -124,6 +125,7 @@ public class TeamCompanyContractor extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("27.png");
 			create.responseMessage("AlternateFunction");
+			create.mouseActionClick(CreateContractorPage.createcontractorbutton);
 		}
 	}
 }

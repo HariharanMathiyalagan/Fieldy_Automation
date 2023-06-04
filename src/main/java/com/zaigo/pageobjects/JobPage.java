@@ -1,13 +1,19 @@
 package com.zaigo.pageobjects;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -99,7 +105,7 @@ public class JobPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-contact-job-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-organization-job-create']"),
 			@FindBy(xpath = "//*[@data-n-linkto='main_job_create']") })
-	WebElement CreateButton;
+	public static WebElement CreateButton;
 	By CustomerName = By.id("customer-name");
 	By ClickJob = By.xpath("//*[@data-menuswitcher='cstmr-contact-job']");
 	@FindAll({ @FindBy(xpath = "//*[@id='job-create']//*[@id='customer-name-input-field']"),
@@ -195,8 +201,14 @@ public class JobPage extends BaseClass {
 	By TechnicianSecoundName = By.xpath("//*[@id='technician_ids-autocomplete-list']//div[2]");
 	By TechnicianThirdName = By.xpath("//*[@id='technician_ids-autocomplete-list']//div[3]");
 	By Priority = By.id("priority");
-	By General = By.xpath("//*[@class='p-2 list-hover-bg team-business-unit w-20-ellipsis w-100']");
-	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
+//	By General = By.xpath("//*[@id='id_business_unit-autocomplete-list']//div[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='id_business_unit-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[contains(text(),'No Data Found')]") })
+	WebElement General;
+//	By Repair = By.xpath("//*[@class='p-2 list-hover-bg team-service-type w-20-ellipsis w-100']");
+	@FindAll({ @FindBy(xpath = "//*[@id='id_service_type-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[contains(text(),'No Data Found')]") })
+	WebElement Repair;
 	By EalierTime = By.xpath("//*[text()='From Time should be current or future time only']");
 	By TimeMismatch = By.xpath("//*[text()='Start time should be earlier than End time']");
 	By SelectTechnician = By.xpath("//*[@id='assign-technician']/div[1]/div[1]");
@@ -467,7 +479,7 @@ public class JobPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
-	private void mouseActionClick(WebElement element) {
+	public void mouseActionClick(WebElement element) {
 		wait = new WebDriverWait(driver, 30);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
@@ -703,6 +715,7 @@ public class JobPage extends BaseClass {
 				String fakeState = faker.address().state();
 				this.inputText(Location, fakeState);
 			} while (!conditionChecking1(LocationPick, 2));
+			this.mouseActionClick(LocationPick);
 		} else {
 			this.mouseActionClick(LocationPick);
 		}
@@ -856,13 +869,29 @@ public class JobPage extends BaseClass {
 		return currentFilterPickerToDate;
 	}
 
-	public String jobStatusCreation(String value) throws IOException, InterruptedException {
+	public String jobStatusCreation(String value) throws IOException, InterruptedException, AWTException {
 		driver.manage().deleteAllCookies();
 		if (value.equals("Unassigned")) {
 			this.mouseActionClick(BussinessUnit);
-			this.mouseActionClick(General);
+			if (this.getText(General).equals("No Data Found")) {
+				do {
+					Thread.sleep(3000);
+					this.mouseActionClick(BussinessUnit);
+				} while (this.getText(General).equals("No Data Found"));
+				this.mouseActionClick(General);
+			} else {
+				this.mouseActionClick(General);
+			}
 			this.mouseActionClick(ServiceType);
-			this.mouseActionClick(Repair);
+			if (this.getText(Repair).equals("No Data Found")) {
+				do {
+					Thread.sleep(3000);
+					this.mouseActionClick(BussinessUnit);
+				} while (this.getText(Repair).equals("No Data Found"));
+				this.mouseActionClick(Repair);
+			} else {
+				this.mouseActionClick(Repair);
+			}
 			this.dropDownByIndex(Priority, 2);
 			this.picKLocation();
 			this.scrollDown();
@@ -874,6 +903,7 @@ public class JobPage extends BaseClass {
 			this.clearField(Description);
 			this.inputText(Description, getPropertyValue("Description"));
 			this.inputText(Notes, getPropertyValue("Notes"));
+			this.attachmentFileCheck("URLCheck");
 			this.assertName(SaveComplete, "Schedule Job");
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Edit")) {
@@ -891,13 +921,12 @@ public class JobPage extends BaseClass {
 			this.inputText(Description, getPropertyValue("Description"));
 			this.scrollDown();
 			this.mouseActionClick(Technician);
-			String text = this.getText(TechnicianFirstName);
 			this.mouseActionClick(TechnicianFirstName);
-			if (!text.equals(this.getTextAttribute(Technician))) {
+			if (!(this.getTextAttribute(Technician).length() > 0)) {
 				do {
 					this.mouseActionClick(Technician);
 					this.mouseActionClick(TechnicianFirstName);
-				} while (!text.equals(this.getTextAttribute(Technician)));
+				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
 			this.validationTab(Tags, randomCharacter);
 			this.inputText(Notes, getPropertyValue("Notes"));
@@ -917,9 +946,25 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("CreateJob") || value.equals("FromTime") || value.equals("TwoDaysWork")) {
 			this.picKLocation();
 			this.mouseActionClick(BussinessUnit);
-			this.mouseActionClick(General);
+			if (this.getText(General).equals("No Data Found")) {
+				do {
+					Thread.sleep(3000);
+					this.mouseActionClick(BussinessUnit);
+				} while (this.getText(General).equals("No Data Found"));
+				this.mouseActionClick(General);
+			} else {
+				this.mouseActionClick(General);
+			}
 			this.mouseActionClick(ServiceType);
-			this.mouseActionClick(Repair);
+			if (this.getText(Repair).equals("No Data Found")) {
+				do {
+					Thread.sleep(3000);
+					this.mouseActionClick(BussinessUnit);
+				} while (this.getText(Repair).equals("No Data Found"));
+				this.mouseActionClick(Repair);
+			} else {
+				this.mouseActionClick(Repair);
+			}
 			this.dropDownByIndex(Priority, 2);
 			this.inputText(Tittle, fakeTittle);
 			this.inputText(Description, getPropertyValue("Description"));
@@ -939,14 +984,14 @@ public class JobPage extends BaseClass {
 				this.invisible(Spinner);
 			}
 			this.visibility(TechnicianLabel);
+			this.scrollDown();
 			this.mouseActionClick(Technician);
-			String text = this.getText(TechnicianSecoundName);
 			this.mouseActionClick(TechnicianSecoundName);
-			if (!text.equals(this.getTextAttribute(Technician))) {
+			if (!(this.getTextAttribute(Technician).length() > 0)) {
 				do {
 					this.mouseActionClick(Technician);
 					this.mouseActionClick(TechnicianSecoundName);
-				} while (!text.equals(this.getTextAttribute(Technician)));
+				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
 			this.tagValidation(Tags, randomCharacter);
 			this.inputText(Notes, getPropertyValue("Notes"));
@@ -1364,6 +1409,50 @@ public class JobPage extends BaseClass {
 	public void createFunction() throws IOException, InterruptedException {
 		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			this.message("AlternateFunction");
+		}
+	}
+
+	By Attachment = By.xpath("//*[@id='scheduleDropzone']");
+	@FindAll({ @FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span") })
+	WebElement FirstAttachment;
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		this.scrollDown();
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(2000);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment, 3)) {
+				do {
+					this.mouseActionClick(Attachment);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment, 3));
+			}
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
 		}
 	}
 }

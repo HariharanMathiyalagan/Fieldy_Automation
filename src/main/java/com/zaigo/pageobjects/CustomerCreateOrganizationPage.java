@@ -5,12 +5,17 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.locks.Condition;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -87,7 +92,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 50);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
@@ -184,7 +189,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Customer = By.id("customer-main");
 	By Organization = By.id("customer-organization-menu");
-	By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
+	public static By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
 	By OrganizationName = By.id("company_name");
 	By OrganizationError = By.id("company_name_error");
 	By Website = By.id("website");
@@ -368,8 +373,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public void loopPreviousButton() {
-		for (int i = 1; i < 4; i++) {
+	public void loopPreviousButton(String value) {
+		if (value.equals("3")) {
+			for (int i = 1; i < 4; i++) {
+				this.mouseActionClick(Previous);
+			}
+		} else if (value.equals("1")) {
 			this.mouseActionClick(Previous);
 		}
 
@@ -378,7 +387,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	@FindAll({
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='contacts__first_name__0']"),
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='addresses__contact_person_first_name__0']"),
-			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']") })
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
+			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active') and contains(text(),'Attachment')]") })
 	WebElement Visible;
 	By FirstName = By.id("contacts__first_name__0");
 	By LastName = By.id("contacts__last_name__0");
@@ -438,6 +448,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
 			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
 	WebElement ErrorMessage;
+	By Attachment = By.xpath("//*[@id='customerDropZone']/div/span/b");
+	@FindAll({ @FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span") })
+	WebElement FirstAttachment;
 
 	private void scrollDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -452,6 +466,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public static String city;
 	public static String state;
 	public static String zipCode;
+	public static String IndustryTypes;
 	public static String email;
 	public static String phoneNumber;
 	public static String taxNumber;
@@ -511,6 +526,17 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			this.mouseActionClick(Social);
 		}
 		leadSource = this.getTextAttribute(LeadSource);
+		this.mouseActionClick(IndustryType);
+		if (this.getText(IndustryTypeDropDown).equals("No Data Found")) {
+			do {
+				Thread.sleep(5000);
+				this.mouseActionClick(IndustryType);
+			} while (!this.conditionChecking1(FirstIndusrty));
+			this.mouseActionClick(IndustryTypeDropDown);
+		} else {
+			this.mouseActionClick(IndustryTypeDropDown);
+		}
+		IndustryTypes = this.getTextAttribute(IndustryType);
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		phoneNumber = this.getTextAttribute(PhoneNumber);
 		this.nextButton();
@@ -583,7 +609,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public void equipmentPage() throws InterruptedException, IOException {
+	public void equipmentPage(String value) throws InterruptedException, IOException {
 		this.inputText(ProductName, fakeProductName);
 		productName = this.getTextAttribute(ProductName);
 		this.inputText(BrandName, fakeBrandName);
@@ -600,7 +626,56 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		accessHours = this.getTextAttribute(AccessHours);
 		this.inputText(InstallationNotes, getPropertyValue("Notes"));
 		installationNotes = this.getTextAttribute(InstallationNotes);
-		this.mouseActionClick(SaveComplete);
+		if (value.equals("SaveComplete")) {
+			this.mouseActionClick(SaveComplete);
+		} else {
+			this.nextButton();
+		}
+
+	}
+
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment)) {
+				do {
+					this.mouseActionClick(Attachment);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment));
+			}
+			this.mouseActionClick(SaveComplete);
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			if (value.equals("LoopNext")) {
+				for (int i = 0; i < 3; i++) {
+					this.nextButton();
+				}
+			}
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
+		}
 	}
 
 	By ListFirstName = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
@@ -648,11 +723,20 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			this.mouseActionClick(LeadSourceCheckBox);
 			this.dropDownByIndex(Status, 1);
 			this.mouseActionClick(Apply);
+		} else if (value.equals("IndustryFilter")) {
+			this.mouseActionClick(ListIndustryType);
+			this.mouseActionClick(ListIndustry);
+			this.mouseActionClick(Apply);
 		} else if (value.equals("LeadSource")) {
 			listValue = this.getText(ListLead);
 			return listValue;
 		} else if (value.equals("InvalidSearch")) {
 			this.tagValidation(Search, "fshfskjh");
+			if (!this.conditionChecking1(Invalid)) {
+				do {
+					this.tagValidation(Search, "fshfskjh");
+				} while (!this.conditionChecking1(Invalid));
+			}
 		} else if (value.equals("Invalid")) {
 			listValue = this.getText(Invalid);
 			return listValue;
@@ -660,6 +744,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return value;
 	}
 
+	By ListIndustryType = By.id("customer-organization-industry-type-search");
+	By ListIndustry = By.xpath("//*[@id='customer-org-industry-type-div']/div[1]/div[1]/input[1]");
 	By Dots = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
 	By Edit = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
@@ -667,6 +753,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Deleted = By
 			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
 	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('','','','','reset')\"]");
+	@FindAll({ @FindBy(xpath = "//*[@id='industry_type-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[text()='No Data Found']") })
+	WebElement IndustryTypeDropDown;
+	By FirstIndusrty = By.xpath("//*[@id='industry_type-autocomplete-list']//div[1]");
+	@FindAll({ @FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[2]/div[11]/div[2]/input[1]"),
+			@FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[3]/div[11]/div[2]/input[1]") })
+	WebElement IndustryType;
 
 	public void resetOption() {
 		this.mouseActionClick(reset);
@@ -1079,6 +1172,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			return data;
 		} else if (value.equals("LeadSources")) {
 			String data = this.getTextAttribute(LeadSource);
+			return data;
+		} else if (value.equals("IndustryType")) {
+			String data = this.getTextAttribute(IndustryType);
 			return data;
 		} else if (value.equals("PhoneNumber")) {
 			String data = this.getTextAttribute(PhoneNumber);

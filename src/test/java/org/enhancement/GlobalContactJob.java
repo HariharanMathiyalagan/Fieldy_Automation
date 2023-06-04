@@ -1,5 +1,6 @@
 package org.enhancement;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 
@@ -119,9 +120,9 @@ public class GlobalContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createJob_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -131,12 +132,13 @@ public class GlobalContactJob extends BaseClass {
 		mandatory.createFunction();
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("CreateJob");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(JobPage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -144,6 +146,8 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.message("AlternateForm");
+			mandatory.mouseActionClick(JobPage.CreateButton);
 		}
 	}
 }
