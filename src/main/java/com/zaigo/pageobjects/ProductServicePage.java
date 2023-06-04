@@ -113,14 +113,14 @@ public class ProductServicePage extends BaseClass {
 		return text;
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
 	}
 
-	private void mouseActionClick(WebElement element) {
+	public void mouseActionClick(WebElement element) {
 		wait = new WebDriverWait(driver, 100);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
@@ -238,7 +238,7 @@ public class ProductServicePage extends BaseClass {
 	WebElement Label;
 	@FindAll({ @FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button"),
 			@FindBy(xpath = "//*[@data-automationid='product-create']") })
-	WebElement CreateButton;
+	public static WebElement CreateButton;
 
 	By Search = By.id("product-service-serach-filter");
 

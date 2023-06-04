@@ -139,7 +139,7 @@ public class AvailabilityTechnicians extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -186,7 +186,7 @@ public class AvailabilityTechnicians extends BaseClass {
 	}
 
 	@Test(priority = 5)
-	private void createdJob90min() throws WebDriverException, IOException, InterruptedException {
+	private void createdJob90min() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job with 90min Duration - From Date is " + dateFrom + " From Time is 10.00 A.M");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -211,7 +211,7 @@ public class AvailabilityTechnicians extends BaseClass {
 	}
 
 	@Test(priority = 6)
-	private void technicianAvailability1() throws WebDriverException, IOException, InterruptedException {
+	private void technicianAvailability1() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Technician Name is " + JobListData
 				+ " not available for the Date is " + dateFrom + " and the time is 9.45 A.M");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -319,7 +319,7 @@ public class AvailabilityTechnicians extends BaseClass {
 	}
 
 	@Test(priority = 11)
-	private void technicianAvailability6() throws WebDriverException, IOException, InterruptedException {
+	private void technicianAvailability6() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Technician Name is " + JobListData
 				+ " available for the Date is " + dateFrom + " and the time is 11.45 A.M");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -344,7 +344,7 @@ public class AvailabilityTechnicians extends BaseClass {
 	}
 
 	@Test(priority = 12)
-	private void createdJobTwoDays() throws WebDriverException, IOException, InterruptedException {
+	private void createdJobTwoDays() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Create a Job with 2 Days Duration - From Date is " + dateFrom
 				+ " From Time is 10.00 A.M & To Date is " + dateTo + " To Time is 11.00A.M");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -371,7 +371,7 @@ public class AvailabilityTechnicians extends BaseClass {
 	}
 
 	@Test(priority = 13)
-	private void technianAvailabilityMidDate() throws WebDriverException, IOException, InterruptedException {
+	private void technianAvailabilityMidDate() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Technician Name is " + JobListData
 				+ " not available for the Date is " + dateFrom + " and the time is 10.00 A.M");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);

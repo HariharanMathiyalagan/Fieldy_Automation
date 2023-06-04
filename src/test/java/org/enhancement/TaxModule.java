@@ -102,7 +102,7 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	 @Test(priority = 2)
+	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Tax Page");
 		TaxPage initElements = PageFactory.initElements(driver, TaxPage.class);
@@ -122,11 +122,10 @@ public class TaxModule extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createTax() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify created successful message is displayed, when the Tax Created");
 		TaxPage mandatory = PageFactory.initElements(driver, TaxPage.class);
-//		mandatory.modulePage("CreatePage");
 		mandatory.validRecord();
 		mandatory.clickEvent("ClickButton");
 		String errorPasswordField = mandatory.message("Message");
@@ -135,6 +134,7 @@ public class TaxModule extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("CreatedTax"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.modulePage("CreatePage");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -143,6 +143,7 @@ public class TaxModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("UnscheduleJob.png");
 			mandatory.message("AlternateMessage");
+			mandatory.modulePage("CreatePage");
 		}
 	}
 

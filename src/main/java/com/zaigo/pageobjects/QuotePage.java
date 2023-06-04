@@ -1,13 +1,19 @@
 package com.zaigo.pageobjects;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.xml.xpath.XPath;
 
@@ -61,7 +67,7 @@ public class QuotePage extends BaseClass {
 	String TaxValue = RandomStringUtils.randomNumeric(2);
 	String ReferencePrefix = RandomStringUtils.randomAlphabetic(3).toUpperCase();
 	String ReferenceNo = RandomStringUtils.randomNumeric(3);
-
+	
 	public QuotePage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -120,7 +126,7 @@ public class QuotePage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
-	private void mouseActionClick(WebElement element) {
+	public void mouseActionClick(WebElement element) {
 		wait = new WebDriverWait(driver, 20);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
@@ -224,11 +230,22 @@ public class QuotePage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking1(By element) {
+	public Boolean conditionChecking1(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 1);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
+	public Boolean conditionChecking1(WebElement element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
 		}
@@ -257,7 +274,7 @@ public class QuotePage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-organization-quote-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-contact-quote-create']"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[3]//button") })
-	WebElement CreateButton;
+	public static WebElement CreateButton;
 
 	@FindAll({ @FindBy(xpath = "//a[@data-draftback='quotedraft']"),
 			@FindBy(xpath = "//a[@data-exitpopup='customer_contact_quote__all__status']"),
@@ -757,7 +774,7 @@ public class QuotePage extends BaseClass {
 			String text = this.getText(ErrorDiscount);
 			return text;
 		} else if (value.equals("ErrorTax")) {
-			if (!this.conditionChecking1(ErrorTax)) {
+			if (!this.conditionChecking1(ErrorTax, 1)) {
 				this.clearField(Tax);
 				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
@@ -780,7 +797,7 @@ public class QuotePage extends BaseClass {
 
 	public void referenceField(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(Reference, characters16);
+			this.validationTab(Reference, characters256);
 		}
 	}
 
@@ -874,10 +891,10 @@ public class QuotePage extends BaseClass {
 				this.mouseActionClick(RadioOrganization);
 			}
 			this.mouseActionClick(Save);
-			if (!this.conditionChecking1(ErrorExpiryDate)) {
+			if (!this.conditionChecking1(ErrorExpiryDate, 10)) {
 				do {
 					this.mouseActionClick(Save);
-				} while (!this.conditionChecking1(ErrorExpiryDate));
+				} while (!this.conditionChecking1(ErrorExpiryDate, 10));
 			}
 		} else if (value.equals("ClickButton")) {
 			this.mouseActionClick(Save);
@@ -938,10 +955,10 @@ public class QuotePage extends BaseClass {
 			this.clearField(Tax);
 			this.validationTab(Tax, TaxValue);
 			this.mouseActionClick(AddTax);
-			if (!this.conditionChecking1(TaxName)) {
+			if (!this.conditionChecking1(TaxName, 3)) {
 				do {
 					this.mouseActionClick(AddTax);
-				} while (!this.conditionChecking1(TaxName));
+				} while (!this.conditionChecking1(TaxName, 3));
 			}
 			this.inputText(TaxName, fakeTaxName);
 			this.inputText(TaxPercentage, fakeTaxPercentage);
@@ -1246,6 +1263,51 @@ public class QuotePage extends BaseClass {
 	public void createFunction() throws IOException, InterruptedException {
 		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			this.message("AlternateFunction");
+		}
+	}
+
+	By Attachment = By.xpath("//*[@id='quoteDropZone']");
+	@FindAll({ @FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span"),
+			@FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span") })
+	WebElement FirstAttachment;
+	HttpURLConnection connection;
+	List<String> list;
+
+	public void attachmentFileCheck(String value)
+			throws AWTException, MalformedURLException, IOException, InterruptedException {
+		this.scrollDown();
+		if (value.equals("URLCheck")) {
+			this.mouseActionClick(Attachment);
+			Thread.sleep(1000);
+			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment, 3)) {
+				do {
+					this.mouseActionClick(Attachment);
+					Thread.sleep(1000);
+					BaseClass.attachmentFile(
+							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment, 3));
+			}
+		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
+			this.mouseActionClick(FirstAttachment);
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
+			driver.switchTo().window(list.get(1));
+			String currentUrl = driver.getCurrentUrl();
+			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.connect();
+		} else if (value.equals("ParentWindow")) {
+			driver.switchTo().window(list.get(0));
+		}
+	}
+
+	public int responseCode() throws IOException {
+		int responseCode = connection.getResponseCode();
+		if (responseCode == 200) {
+			return responseCode;
+		} else {
+			return responseCode;
 		}
 	}
 }

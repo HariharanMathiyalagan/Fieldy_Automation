@@ -109,7 +109,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -172,20 +172,20 @@ public class CustomerOrganizationRequest extends BaseClass {
 		}
 	}
 	
-	@Test(priority = 30)
+	@Test(priority = 30, invocationCount = 5)
 	private void createRequest_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Request with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("CreateSchedule");
-		String errorPasswordField = mandatory.message("Message");
+		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("RequestCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			customerOrganizationRequestListPage = mandatory.listValidation("RequestNo");
+			mandatory.mouseActionClick(RequestPage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -193,7 +193,8 @@ public class CustomerOrganizationRequest extends BaseClass {
 			File file = new File("CustomerOrganizationCreatedRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerOrganizationCreatedRequest.png");
-			customerOrganizationRequestListPage = mandatory.listValidation("RequestNo");
+			mandatory.message("AlternateFormMessage");
+			mandatory.mouseActionClick(RequestPage.CreateButton);
 		}
 	}
 }

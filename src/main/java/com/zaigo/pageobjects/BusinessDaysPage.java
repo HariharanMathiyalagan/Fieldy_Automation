@@ -36,7 +36,7 @@ public class BusinessDaysPage extends BaseClass {
 	String fakeFirstName = faker.name().firstName();
 	String fakeCompanyName = faker.company().name();
 	String characters4 = RandomStringUtils.randomAlphabetic(4);
-	String characters2048 = RandomStringUtils.randomAlphabetic(2048);
+	String characters2048 = RandomStringUtils.randomAlphabetic(5000);
 
 	private void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
@@ -69,7 +69,7 @@ public class BusinessDaysPage extends BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
@@ -216,7 +216,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	By business_unit_label = By.xpath("//*[text()=' Business Unit']");
 
-	By create_button = By.id("bussines_unit_click");
+	public static By create_button = By.id("bussines_unit_click");
 
 	By bussiness_name = By.xpath("//input[@id='name']");
 
@@ -228,15 +228,15 @@ public class BusinessDaysPage extends BaseClass {
 
 	By bussiness_status_close = By.xpath("//span[@id='nav-close-popup']");
 
-	By edit_btn = By.xpath("//button[@id='bussines_unit_click']//following::button[1]");
+	By edit_btn = By.xpath("//*[@id='bussiness-unit-ele']/div/div/div/div[3]/div[1]/div/i");
 
-	By delete_btn = By.xpath("//button[@id='bussines_unit_click']//following::button[2]");
+	By delete_btn = By.xpath("//*[@id='bussiness-unit-ele']/div/div/div/div[3]/div[2]/div/i");
 
 	// Lead Source
 
 	By lead_source_label = By.xpath("//*[text()=' Lead Source']");
 
-	By lead_source_create_btn = By.id("lead_Source_click");
+	public static By lead_source_create_btn = By.id("lead_Source_click");
 
 	By leadsource_name = By.xpath("//input[@id='name']");
 
@@ -252,15 +252,15 @@ public class BusinessDaysPage extends BaseClass {
 
 	By leadsource_closebutton = By.xpath("//span[@id='nav-close-popup']");
 
-	By leadsource_edit_btn = By.xpath("//button[@id='lead_Source_click']//following::button[1]");
+	By leadsource_edit_btn = By.xpath("//*[@id='lead-source-ele']/div[1]/div/div/div[3]/div[1]/div/i");
 
-	By leadsource_delete_btn = By.xpath("//button[@id='lead_Source_click']//following::button[2]");
+	By leadsource_delete_btn = By.xpath("//*[@id='lead-source-ele']/div[1]/div/div/div[3]/div[2]/div/i");
 
 	// Service Type
 
 	By service_type_label = By.xpath("//*[text()=' Service Type']");
 
-	By service_create_btn = By.id("service_type_click");
+	public static By service_create_btn = By.id("service_type_click");
 
 	By service_name = By.xpath("//input[@id='name']");
 
@@ -274,9 +274,9 @@ public class BusinessDaysPage extends BaseClass {
 
 	By service_save_btn = By.xpath("//button[@id='category_submit_btn']");
 
-	By service_edit_btn = By.xpath("//button[@id='service_type_click']//following::button[1]");
+	By service_edit_btn = By.xpath("//*[@id='service-type-business-settings']/div/div/div/div[3]/div[1]/div/i");
 
-	By service_delete_btn = By.xpath("//button[@id='service_type_click']//following::button[2]");
+	By service_delete_btn = By.xpath("//*[@id='service-type-business-settings']/div/div/div/div[3]/div[2]/div/i");
 
 	// Checking Field
 
@@ -468,14 +468,14 @@ public class BusinessDaysPage extends BaseClass {
 	}
 
 	public void clearField(String value) {
-		for (int i = 0; i < 20; i++) {
-			if (value.equals("BussinessUnit")) {
-				this.clearField(bussiness_name);
-			} else if (value.equals("LeadSource")) {
-				this.clearField(leadsource_name);
-			} else if (value.equals("ServiceType")) {
-				this.clearField(service_name);
-			}
+//		for (int i = 0; i < 20; i++) {
+		if (value.equals("BussinessUnit")) {
+			this.clearField(bussiness_name);
+		} else if (value.equals("LeadSource")) {
+			this.clearField(leadsource_name);
+		} else if (value.equals("ServiceType")) {
+			this.clearField(service_name);
+//			}
 		}
 	}
 
@@ -563,9 +563,6 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(leadsource_edit_btn);
 			this.valuePresent(leadsource_name, textAttribute);
 			this.validationTab(leadsource_name, characters2048);
-			for (int i = 0; i < 5; i++) {
-				this.clearField("LeadSource");
-			}
 			this.validationTab(leadsource_name, textAttribute);
 			this.dropDownByIndex(leadsource_status, 1);
 			this.mouseActionClick(leadsource_save_btn);
@@ -592,9 +589,6 @@ public class BusinessDaysPage extends BaseClass {
 			textAttribute = this.getText(list_bussiness_unit_name);
 			this.mouseActionClick(edit_btn);
 			this.valuePresent(bussiness_name, textAttribute);
-			for (int i = 0; i < 5; i++) {
-				this.clearField("BusinessUnit");
-			}
 			this.dropDownByIndex(bussiness_status, 1);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
@@ -621,9 +615,6 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(service_edit_btn);
 			this.valuePresent(service_name, textAttribute);
 			this.validationTab(service_name, characters2048);
-			for (int i = 0; i < 5; i++) {
-				this.clearField("ServiceType");
-			}
 			this.inputText(service_name, textAttribute);
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
@@ -677,7 +668,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(Job);
 			this.visibility(CheckPage);
 			this.mouseActionClick(CreateButton);
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 10; i++) {
 				this.mouseActionClick(RadioButtonOrganization);
 				this.mouseActionClick(RadioButtonContact);
 			}
@@ -702,7 +693,7 @@ public class BusinessDaysPage extends BaseClass {
 		this.mouseActionClick(Job);
 		this.visibility(CheckPage);
 		this.mouseActionClick(CreateButton);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			this.mouseActionClick(RadioButtonOrganization);
 			this.mouseActionClick(RadioButtonContact);
 		}

@@ -390,7 +390,7 @@ public class CategoryPage extends BaseClass {
 
 	static String data;
 
-	public String backEvent(String value) throws IOException {
+	public String backEvent(String value) throws IOException, InterruptedException {
 		this.mouseActionClick(settings_menu);
 		this.mouseActionClick(Category);
 		if (value.equals("Edit")) {
@@ -409,30 +409,56 @@ public class CategoryPage extends BaseClass {
 			this.mouseActionClick(Button);
 			data = this.validData("ReflectService");
 		}
-		this.message();
+		this.message("Message");
 		return data;
 
 	}
 
 	static String message;
 
-	public String message() throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean Condition = true;
-		if (this.conditionChecking(Message)) {
-			message = this.getText(Message);
-			this.invisible(Message);
-		} else {
+		if (value.equals("Message")) {
+			if (this.conditionChecking(Message)) {
+				message = this.getText(Message);
+				this.invisible(Message);
+			} else {
+				do {
+					Thread.sleep(10000);
+					this.mouseActionClick(Button);
+					if (this.conditionChecking(Message)) {
+						message = this.getText(Message);
+						if (message.equals(getPropertyValue("CategoryCreated"))
+								|| message.equals(getPropertyValue("CategoryEdited"))) {
+							Condition = false;
+						}
+					}
+				} while (Condition);
+			}
+		} else if (value.equals("AlternateFunction")) {
 			do {
-				this.clearField(CategoryName);
-				String fakeCategoryName = faker.aviation().airport();
-				this.inputText(CategoryName, fakeCategoryName);
-				this.mouseActionClick(Button);
+				if (message.equals(getPropertyValue("CategoryAlreadyExist"))) {
+					this.clearField(CategoryName);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeCategoryName = faker.aviation().airport();
+					this.inputText(CategoryName, fakeCategoryName);
+					this.mouseActionClick(Button);
+				}
 				if (this.conditionChecking(Message)) {
 					message = this.getText(Message);
-					if (message.equals(getPropertyValue("CategoryCreated"))
-							|| message.equals(getPropertyValue("CategoryEdited"))) {
-						Condition = false;
-					}
+					this.invisible(Message);
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(Button);
+						if (this.conditionChecking(Message)) {
+							message = this.getText(Message);
+							if (message.equals(getPropertyValue("CategoryCreated"))
+									|| message.equals(getPropertyValue("CategoryEdited"))) {
+								Condition = false;
+							}
+						}
+					} while (Condition);
 				}
 			} while (Condition);
 		}
@@ -484,4 +510,5 @@ public class CategoryPage extends BaseClass {
 		String text = this.getText(CategoryListName);
 		return text;
 	}
+
 }

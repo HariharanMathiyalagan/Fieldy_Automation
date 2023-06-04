@@ -34,8 +34,11 @@ import org.apache.hc.core5.http.impl.nio.ExpandableBuffer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariDriver.WindowType;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,12 +58,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Name {
 	public static void main(String[] args) {
 
-		String name = "hariharan";
-		String[] split = name.split("");
-		System.out.println(split);
-		for (int i = 0; i < split.length; i++) {
-		
-		}
-
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.facebook.com/login");
+		driver.switchTo().newWindow(WindowType.WINDOW);
 	}
 }
+
+

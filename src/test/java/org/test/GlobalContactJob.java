@@ -21,6 +21,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.CustomerCreateContactPage;
 import com.zaigo.pageobjects.JobPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
@@ -35,7 +36,7 @@ public class GlobalContactJob extends BaseClass {
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
 		extentHtmlReporter = new ExtentHtmlReporter("GlobalContactJob.html");
-		extentReports.attachReporter( extentHtmlReporter);
+		extentReports.attachReporter(extentHtmlReporter);
 		this.driver = BrowserSetup.startBrowser();
 
 	}
@@ -430,7 +431,7 @@ public class GlobalContactJob extends BaseClass {
 	}
 
 	@Test(priority = 16)
-	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException {
+	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Unassigned Job is created successfully from Contact->Create Global Job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -718,6 +719,29 @@ public class GlobalContactJob extends BaseClass {
 	}
 
 	@Test(priority = 28)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Attacthment response code in global contact job module");
+		JobPage initElements = PageFactory.initElements(driver, JobPage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
+		}
+	}
+
+	@Test(priority = 28)
 	private void updateButton() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the Global Edit Job page Update Job Button is displayed in the Edit form page");
@@ -740,7 +764,8 @@ public class GlobalContactJob extends BaseClass {
 	}
 
 	@Test(priority = 29)
-	private void editJobwithFromDateFromTime() throws WebDriverException, IOException, InterruptedException {
+	private void editJobwithFromDateFromTime()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verfiy the unassigned Job is updated to scheduled when assigning the available technician");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -766,7 +791,7 @@ public class GlobalContactJob extends BaseClass {
 
 	@Test(priority = 30)
 	private void createJob_FromDateandTime_ToDateandTime()
-			throws WebDriverException, IOException, InterruptedException {
+			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);

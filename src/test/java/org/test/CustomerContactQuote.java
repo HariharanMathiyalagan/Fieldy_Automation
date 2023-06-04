@@ -117,7 +117,7 @@ public class CustomerContactQuote extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -318,9 +318,9 @@ public class CustomerContactQuote extends BaseClass {
 		mandatory.referenceField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max16CharacterValidation"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max16CharacterValidation"))) {
+		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Reference");
 		} else {
@@ -852,10 +852,11 @@ public class CustomerContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 29)
-	private void createQuote() throws IOException, InterruptedException, ParseException {
+	private void createQuote() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Quote is created successfully from Customer Contact->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.attachmentFileCheck("URLCheck");
 		mandatory.CRUDValidation("Create");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1566,6 +1567,30 @@ public class CustomerContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAmountValidation.png");
 			mandatory.clearFields("Expiry");
+		}
+	}
+
+	@Test(priority = 58)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Attacthment response code in customer contact quote module");
+		QuotePage initElements = PageFactory.initElements(driver, QuotePage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
 		}
 	}
 

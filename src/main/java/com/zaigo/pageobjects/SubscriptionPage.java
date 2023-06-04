@@ -202,9 +202,9 @@ public class SubscriptionPage extends BaseClass {
 	By StarterDropDown = By.id("starter_select");
 	By TeamDropDown = By.id("team_select");
 	By PowerHouseDropDown = By.id("power_house_select");
-	By StarterChoosePlan = By.xpath("//*[@id='starter_plan_header']//button");
-	By TeamChoosePlan = By.xpath("//*[@id='team_plan_header']//button");
-	By PowerHouseChoosePlan = By.xpath("//*[@id='power_house_plan_header']//button");
+	By StarterChoosePlan = By.id("starter_plan_button");
+	By TeamChoosePlan = By.id("team_plan_button");
+	By PowerHouseChoosePlan = By.id("power_house_plan_button");
 	By ProRataAmount = By.xpath("//*[@id='tb_total_pro_rata_amount']");
 	By TotalAmount = By.xpath("//*[@id='tb_total_amount']");
 	@FindAll({ @FindBy(xpath = "//*[@id='upgrade-proceed-to-payment']/div[3]/div/div[2]/div[2]/button"),

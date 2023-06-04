@@ -3,17 +3,33 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.enhancement.CustomerContactRequest">
+      <class name="org.enhancement.CustomerOrganizationInvoice">
         <methods>
-          <include name="exitBrowser"/>
-          <include name="createRequest_FromDateandTime_ToDateandTime"/>
-          <include name="labelValidation"/>
-          <include name="listabelValidation"/>
-          <include name="deleteAfterCatch"/>
           <include name="setup"/>
+          <include name="deleteAfterCatch"/>
+          <include name="createInvoice"/>
+          <include name="exitBrowser"/>
           <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.enhancement.CustomerContactRequest -->
+      </class> <!-- org.enhancement.CustomerOrganizationInvoice -->
+      <class name="org.enhancement.GlobalContactInvoice">
+        <methods>
+          <include name="setup"/>
+          <include name="createInvoice"/>
+          <include name="deleteAfterCatch"/>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.enhancement.GlobalContactInvoice -->
+      <class name="org.enhancement.GlobalOrganizationInvoice">
+        <methods>
+          <include name="setup"/>
+          <include name="createInvoice"/>
+          <include name="deleteAfterCatch"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.enhancement.GlobalOrganizationInvoice -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

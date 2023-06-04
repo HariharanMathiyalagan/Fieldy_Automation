@@ -176,7 +176,7 @@ public class DispatchModule extends BaseClass {
 	}
 
 	@Test(priority = 4)
-	private void unsssignedRequest() throws WebDriverException, IOException, InterruptedException {
+	private void unsssignedRequest() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
 				"Verify Unassigned Request is created successfully from Global Request Contact->Create Request");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -373,7 +373,7 @@ public class DispatchModule extends BaseClass {
 	}
 
 	@Test(priority = 15)
-	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException {
+	private void unsssignedJob() throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Unassigned Job is created successfully from Contact->Create Global Job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);

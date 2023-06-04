@@ -124,7 +124,7 @@ public class SubscriptionMonthlyTeamPack extends BaseClass {
 	}
 
 	@Test(priority = 4)
-	public void modulepage() throws IOException {
+	public void modulepage() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to land on the Subscription Choose Plan Page");
 		SubscriptionPage module = PageFactory.initElements(driver, SubscriptionPage.class);
 		module.modulePage();
@@ -145,7 +145,7 @@ public class SubscriptionMonthlyTeamPack extends BaseClass {
 	}
 
 	@Test(priority = 5)
-	public void confirmPage() throws IOException {
+	public void confirmPage() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to land on the Confirm Page Order");
 		SubscriptionPage module = PageFactory.initElements(driver, SubscriptionPage.class);
 		module.subscriptionFlow("Team");
@@ -166,7 +166,7 @@ public class SubscriptionMonthlyTeamPack extends BaseClass {
 	}
 
 	@Test(priority = 6)
-	public void proAmount() throws IOException {
+	public void proAmount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to check the Pro rata amount in the Confirm order page");
 		SubscriptionPage module = PageFactory.initElements(driver, SubscriptionPage.class);
 		String value = module.getValue("ProAmount");

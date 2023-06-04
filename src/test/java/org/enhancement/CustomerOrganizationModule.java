@@ -122,7 +122,7 @@ public class CustomerOrganizationModule extends BaseClass {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createOrganization() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports
 				.createTest("Verify created successful message is displayed, when the Customer Organization Created");
@@ -130,13 +130,14 @@ public class CustomerOrganizationModule extends BaseClass {
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listName.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.mouseActionClick(CustomerCreateOrganizationPage.AddOrganization);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -145,6 +146,7 @@ public class CustomerOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgCreateValidation.png");
 			create.responseMessage("AlternateFunction");
+			create.mouseActionClick(CustomerCreateOrganizationPage.AddOrganization);
 		}
 
 	}

@@ -103,7 +103,7 @@ public class CustomerContactInvoice extends BaseClass {
 		CustomerCreateContactPage initElements = PageFactory.initElements(driver, CustomerCreateContactPage.class);
 		initElements.contactPage();
 		initElements.propertyPage();
-		initElements.equipmentPage();
+		initElements.equipmentPage("SaveComplete");
 		String responseMessageCreateContact1 = initElements.responseMessage("CustomerCreate");
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseMessageCreateContact1);
 		extentTest.log(Status.INFO,
@@ -145,19 +145,20 @@ public class CustomerContactInvoice extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, invocationCount = 5)
 	private void createInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.customerName("PlaceHolderName");
 		mandatory.CRUDValidation("CreateValue");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InvoiceCreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(InvoicePage.CreateContactInvoice);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -165,6 +166,7 @@ public class CustomerContactInvoice extends BaseClass {
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+			mandatory.mouseActionClick(InvoicePage.CreateContactInvoice);
 		}
 	}
 

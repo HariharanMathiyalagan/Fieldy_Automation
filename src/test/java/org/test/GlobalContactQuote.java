@@ -824,9 +824,10 @@ public class GlobalContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 29)
-	private void createQuote() throws IOException, InterruptedException, ParseException {
+	private void createQuote() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports.createTest("Verify Quote is created successfully from Global Contact->Create Quote");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.attachmentFileCheck("URLCheck");
 		mandatory.CRUDValidation("Create");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1536,6 +1537,30 @@ public class GlobalContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAmountValidation.png");
 			mandatory.clearFields("Expiry");
+		}
+	}
+	
+	@Test(priority = 56)
+	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports
+				.createTest("Verify the Attacthment response code in global contact quote module");
+		QuotePage initElements = PageFactory.initElements(driver, QuotePage.class);
+		initElements.attachmentFileCheck("CheckResponse");
+		int responseCode = initElements.responseCode();
+		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
+		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseCode == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			initElements.attachmentFileCheck("ParentWindow");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreateValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreateValidation.png");
+			initElements.attachmentFileCheck("ParentWindow");
 		}
 	}
 

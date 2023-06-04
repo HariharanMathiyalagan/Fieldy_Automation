@@ -27,7 +27,7 @@ import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class CustomerOrganizationInvoice extends BaseClass{
+public class CustomerOrganizationInvoice extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -50,12 +50,12 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		this.driver.quit();
 		this.extentReports.flush();
 	}
-	
+
 	@BeforeMethod
 	public void deleteBeforeCatch() {
 		driver.manage().deleteAllCookies();
 	}
-	
+
 	@AfterMethod
 	public void deleteAfterCatch() {
 		driver.manage().deleteAllCookies();
@@ -90,7 +90,8 @@ public class CustomerOrganizationInvoice extends BaseClass{
 	private void modulePage() throws InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Verify Customer Organization List Page is opened when clicking on Cusotmer->Organization");
-		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		CustomerCreateOrganizationPage modulePage = PageFactory.initElements(driver,
+				CustomerCreateOrganizationPage.class);
 		modulePage.modulePage();
 
 	}
@@ -103,7 +104,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 		create.organizationPage();
 		create.contactPage("CreateContact");
 		create.propertyPage();
-		create.equipmentPage();
+		create.equipmentPage("SaveComplete");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -141,20 +142,21 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			extentTest.addScreenCaptureFromPath("CreateInvoiceLabel.png");
 		}
 	}
-	
-	@Test(priority = 2)
+
+	@Test(priority = 2, invocationCount = 5)
 	private void createInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Invoice is created successfully from Customer Contact->Create Invoice");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
 		mandatory.customerName("PlaceHolderName");
 		mandatory.CRUDValidation("CreateValue");
-		String errorPasswordField = mandatory.responseMessage("Message");
+		String errorPasswordField = mandatory.responseMessage("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceCreateMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InvoiceCreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			mandatory.mouseActionClick(InvoicePage.CreateOrganizationInvoice);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -162,6 +164,7 @@ public class CustomerOrganizationInvoice extends BaseClass{
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
+			mandatory.mouseActionClick(InvoicePage.CreateOrganizationInvoice);
 		}
 	}
 }

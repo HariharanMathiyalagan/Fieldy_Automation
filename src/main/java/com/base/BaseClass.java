@@ -218,6 +218,15 @@ public class BaseClass {
 		return value;
 
 	}
+	
+	public String getPropertyImageValue(String key) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+		properties.load(stream);
+		String value = (String) properties.get(key);
+		return value;
+
+	}
 
 	public String getPropertyValue(String key, String value) throws IOException {
 		if (value.equals("dev")) {
