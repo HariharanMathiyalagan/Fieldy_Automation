@@ -230,6 +230,7 @@ public class PrefixSettingPage extends BaseClass {
 
 	By duplicateErroMessageReq = By.xpath("//span[text()='The sequence is already exists for the request']");
 
+	
 	public String modulePage() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		this.mouseActionClick(settings_menu);
@@ -439,6 +440,15 @@ public class PrefixSettingPage extends BaseClass {
 		return getErrorRequiredMessage;
 
 	}
+	
+	
+	   public void jobInput() {
+	 	wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(Prefix_Job_No)).sendKeys("002");
+	}
+
+	
+	
 
 	public void Refresh() throws InterruptedException {
 		// wait.until(ExpectedConditions.visibilityOfElementLocated(Prefix_Job_No));

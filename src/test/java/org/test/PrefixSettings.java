@@ -469,6 +469,34 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+	//job_duplicate
+	
+	@Test(priority = 15)
+	private void errorMessageforJobDuplicateNumber() throws AWTException, InterruptedException, IOException {
+		extentTest = extentReports.createTest("Verify the Error Message Displayed If Invoice Prefix  is Max");
+		PrefixSettingPage edit = PageFactory.initElements(driver, PrefixSettingPage.class);
+		edit.jobInput();
+		String text = edit.getDuplicateErrorMessageRequest();
+		System.out.println(text);
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DuplicateMessage"));
+		System.out.println(getPropertyValue("DuplicateMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (text.equals(getPropertyValue("DuplicateMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("LoginFunctionality.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("LoginFunctionality17.png");
+		}
+
+	}
+
+	
 
 	@Test(priority = 16)
 	private void verifySuccessMessage() throws AWTException, InterruptedException, IOException {
