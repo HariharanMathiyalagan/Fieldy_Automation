@@ -168,6 +168,25 @@ public class JobPage extends BaseClass {
 			@FindBy(xpath = "//*[contains(@class,'fadeIn')]//*[@id='contact-create']"),
 			@FindBy(xpath = "//*[contains(@class,'fadeIn')]//*[@id='organization-contact-create']") })
 	WebElement SaveButton;
+	By Recurring = By.xpath("//*[@id='onetime-recurring-job']/div[2]/input");
+	By RepeatJob = By.xpath("//*[@id='daily_recurring_pattern']");
+	By Weekly = By.xpath("//*[@id='daily-job-pattern-dropdown']/div[2]/div/div[2]");
+	By Monthly = By.xpath("//*[@id='daily-job-pattern-dropdown']/div[2]/div/div[3]");
+	By Yearly = By.xpath("//*[@id='daily-job-pattern-dropdown']/div[2]/div/div[4]");
+	@FindAll({
+			@FindBy(xpath = "//*[@id='day_of_month' and contains(@class,'field-input')]//ancestor::*[@id='monthly-job-day-of-month']//input[1]"),
+			@FindBy(xpath = "//*[@id='day_of_week' and contains(@class,'field-input')]//parent::*//input[1]"),
+			@FindBy(xpath = "//*[@id='month' and contains(@class,'field-input')]//parent::*//input[1]") })
+	WebElement PickDay;
+	By Year_Month = By.xpath(
+			"//*[@id='day_of_month' and contains(@class,'field-input')]//ancestor::*[@id='yearly-day-of-month']//input[1]");
+	@FindAll({
+			@FindBy(xpath = "//*[@id='day_of_week' and contains(@class,'field-input')]//ancestor::div[@id='weekly-job-days-dropdown']//div[2]//div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='day_of_month' and contains(@class,'field-input')]//ancestor::div[@id='monthly-job-day-of-month']//div[2]//div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='month' and contains(@class,'field-input')]//ancestor::div[@id='yearly-job-month-dropdown']//div[contains(@class,'d-block')]//div//div[1]"),
+			@FindBy(xpath = "//*[@id='day_of_month' and contains(@class,'field-input')]//ancestor::*[@id='yearly-day-of-month']//div[contains(@class,'d-block')]//div[1]//div[1]") })
+	WebElement SelectDay;
+
 	By Website = By.xpath("//*[@id='customer_organization_create_edit']//*[@id='website']");
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel1 = By.xpath("//*[@class='js-snackbar__close bold']");
@@ -298,10 +317,10 @@ public class JobPage extends BaseClass {
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
-			if (!this.conditionChecking(PopupOpen)) {
+			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
 					this.mouseActionClick(AddCustomer);
-					if (this.conditionChecking(PopupOpen)) {
+					if (this.conditionChecking(PopupOpen, 5)) {
 						condition = false;
 					}
 				} while (condition);
@@ -363,10 +382,10 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("ContactCreate")) {
 			this.inputText(CustomerField, fakeFirstName);
 			this.mouseActionClick(AddCustomer);
-			if (!this.conditionChecking(PopupOpen)) {
+			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
 					this.mouseActionClick(AddCustomer);
-					if (this.conditionChecking(PopupOpen)) {
+					if (this.conditionChecking(PopupOpen, 5)) {
 						condition = false;
 					}
 				} while (condition);
@@ -387,10 +406,10 @@ public class JobPage extends BaseClass {
 		} else if (value.equals("OrganizationCreate")) {
 			this.inputText(CustomerField, fakeCompanyName);
 			this.mouseActionClick(AddCustomer);
-			if (!this.conditionChecking(PopupOpen)) {
+			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
 					this.mouseActionClick(AddCustomer);
-					if (this.conditionChecking(PopupOpen)) {
+					if (this.conditionChecking(PopupOpen, 5)) {
 						condition = false;
 					}
 				} while (condition);
@@ -522,6 +541,12 @@ public class JobPage extends BaseClass {
 	private String getText(By element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
+		return until;
+	}
+
+	private String getTexts(By element, int value) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).get(value).getText();
 		return until;
 	}
 
@@ -919,6 +944,9 @@ public class JobPage extends BaseClass {
 			this.picKLocation();
 			this.inputText(Tittle, fakeTittle);
 			this.inputText(Description, getPropertyValue("Description"));
+			this.validationTab(Tags, randomCharacter);
+			this.inputText(Notes, getPropertyValue("Notes"));
+			this.clearField(Tags);
 			this.scrollDown();
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianFirstName);
@@ -928,9 +956,6 @@ public class JobPage extends BaseClass {
 					this.mouseActionClick(TechnicianFirstName);
 				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
-			this.validationTab(Tags, randomCharacter);
-			this.inputText(Notes, getPropertyValue("Notes"));
-			this.clearField(Tags);
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Create")) {
 			this.customerName("DetailScreenCustomerName");
@@ -943,7 +968,9 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(Back);
 			this.mouseActionClick(Yes);
 			this.message("Message");
-		} else if (value.equals("CreateJob") || value.equals("FromTime") || value.equals("TwoDaysWork")) {
+		} else if (value.equals("CreateJob") || value.equals("FromTime") || value.equals("TwoDaysWork")
+				|| value.equals("DailyRecurring") || value.equals("WeeklyRecurring") || value.equals("MonthlyRecurring")
+				|| value.equals("YearlyRecurring")) {
 			this.picKLocation();
 			this.mouseActionClick(BussinessUnit);
 			if (this.getText(General).equals("No Data Found")) {
@@ -972,7 +999,65 @@ public class JobPage extends BaseClass {
 			this.currentPickerFromDate();
 			this.dropDownByIndex(StartTime, 41);
 			this.invisible(Spinner);
-			if (value.equals("CreateJob")) {
+			if (value.equals("CreateJob") || value.equals("DailyRecurring") || value.equals("WeeklyRecurring")
+					|| value.equals("MonthlyRecurring") || value.equals("YearlyRecurring")) {
+				if (value.equals("DailyRecurring") || value.equals("WeeklyRecurring")
+						|| value.equals("MonthlyRecurring") || value.equals("YearlyRecurring")) {
+					this.mouseActionClick(Recurring);
+					if (value.equals("WeeklyRecurring") || value.equals("YearlyRecurring")
+							|| value.equals("MonthlyRecurring")) {
+						this.mouseActionClick(RepeatJob);
+						switch (value) {
+						case "WeeklyRecurring":
+							this.mouseActionClick(Weekly);
+							if (!this.getTextAttribute(RepeatJob).equals("Weekly")) {
+								do {
+									this.mouseActionClick(RepeatJob);
+									this.mouseActionClick(Weekly);
+								} while (!this.getTextAttribute(RepeatJob).equals("Weekly"));
+							}
+							break;
+						case "MonthlyRecurring":
+							this.mouseActionClick(Monthly);
+							if (!this.getTextAttribute(RepeatJob).equals("Monthly")) {
+								do {
+									this.mouseActionClick(RepeatJob);
+									this.mouseActionClick(Monthly);
+								} while (!this.getTextAttribute(RepeatJob).equals("Monthly"));
+							}
+							break;
+						case "YearlyRecurring":
+							this.mouseActionClick(RepeatJob);
+							if (this.conditionChecking1(Yearly, 3)) {
+								this.mouseActionClick(Yearly);
+							} else {
+								do {
+									this.mouseActionClick(RepeatJob);
+									this.mouseActionClick(Yearly);
+								} while (!this.getTextAttribute(RepeatJob).equals("Yearly"));
+							}
+							this.mouseActionClick(PickDay);
+							this.mouseActionClick(SelectDay);
+							break;
+						default:
+							break;
+						}
+						if (value.equals("YearlyRecurring")) {
+							this.mouseActionClick(Year_Month);
+							if (this.conditionChecking1(SelectDay, 2)) {
+								this.mouseActionClick(SelectDay);
+							} else {
+								do {
+									this.mouseActionClick(Year_Month);
+								} while (!this.conditionChecking1(SelectDay, 2));
+								this.mouseActionClick(SelectDay);
+							}
+						} else {
+							this.mouseActionClick(PickDay);
+							this.mouseActionClick(SelectDay);
+						}
+					}
+				}
 				this.currentPickerToDate();
 				this.inputText(EndTime, "18.00");
 				this.invisible(Spinner);
@@ -985,6 +1070,8 @@ public class JobPage extends BaseClass {
 			}
 			this.visibility(TechnicianLabel);
 			this.scrollDown();
+			this.tagValidation(Tags, randomCharacter);
+			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(Technician);
 			this.mouseActionClick(TechnicianSecoundName);
 			if (!(this.getTextAttribute(Technician).length() > 0)) {
@@ -993,8 +1080,6 @@ public class JobPage extends BaseClass {
 					this.mouseActionClick(TechnicianSecoundName);
 				} while (!(this.getTextAttribute(Technician).length() > 0));
 			}
-			this.tagValidation(Tags, randomCharacter);
-			this.inputText(Notes, getPropertyValue("Notes"));
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("BackNav")) {
 			this.scrollUp();
@@ -1098,10 +1183,10 @@ public class JobPage extends BaseClass {
 
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 30);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -1153,12 +1238,13 @@ public class JobPage extends BaseClass {
 
 	static String responseMessage;
 	static String messageCheck;
+	static int increment;
 
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message") || value.equals("FormMessage")) {
-			if (this.conditionChecking(Message)) {
-				responseMessage = this.getText(Message);
+			if (this.conditionChecking(Message, 40)) {
+				responseMessage = this.getTexts(Message, 0);
 				this.invisible(Message);
 				return responseMessage;
 			} else {
@@ -1169,12 +1255,17 @@ public class JobPage extends BaseClass {
 					} else if (value.equals("FormMessage")) {
 						this.mouseActionClick(SaveComplete);
 					}
-					if (this.conditionChecking(Message)) {
-						responseMessage = this.getText(Message);
+					if (this.conditionChecking(Message, 40)) {
+						responseMessage = this.getTexts(Message, 0);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
+								|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))
+								|| responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
 							conditionCheck = false;
 						}
 					}
@@ -1198,11 +1289,13 @@ public class JobPage extends BaseClass {
 				} else if (responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
 					this.scrollDown();
 					this.mouseActionClick(Technician);
-					this.mouseActionClick(TechnicianThirdName);
+					increment++;
+					this.mouseActionClick(
+							By.xpath("//*[@id='technician_ids-autocomplete-list']//div[" + increment + "]"));
 					this.mouseActionClick(SaveComplete);
 				}
-				if (this.conditionChecking(Message)) {
-					messageCheck = this.getText(Message);
+				if (this.conditionChecking(Message, 40)) {
+					messageCheck = this.getTexts(Message, 0);
 					this.invisible(Message);
 					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
@@ -1216,13 +1309,15 @@ public class JobPage extends BaseClass {
 					} else if (value.equals("AlternateForm")) {
 						this.mouseActionClick(SaveComplete);
 					}
-					if (this.conditionChecking(Message)) {
-						responseMessage = this.getText(Message);
+					if (this.conditionChecking(Message, 40)) {
+						responseMessage = this.getTexts(Message, 0);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
 								|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
 							conditionCheck = false;
+						} else {
+							this.message("AlternateFunction");
 						}
 					}
 				}

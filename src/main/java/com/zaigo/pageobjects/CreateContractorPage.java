@@ -428,41 +428,116 @@ public class CreateContractorPage extends BaseClass {
 
 	public String errorFields(String value) {
 		if (value.equals("CompanyName")) {
+			if (!this.conditionChecking1(ErrorCompanyName)) {
+				do {
+					this.validationTab(CompanyName, "");
+				} while (!this.conditionChecking1(ErrorCompanyName));
+			}
 			return this.getText(ErrorCompanyName);
 		} else if (value.equals("FirstName")) {
+			if (!this.conditionChecking1(contractorcpersonerrfirstname)) {
+				do {
+					this.validationTab(contractorcpersonfirstname, "");
+				} while (!this.conditionChecking1(contractorcpersonerrfirstname));
+			}
 			return this.getText(contractorcpersonerrfirstname);
 		} else if (value.equals("LastName")) {
+			if (!this.conditionChecking1(contractorcpersonerrlastname)) {
+				do {
+					this.validationTab(contractorcpersonlastname, "");
+				} while (!this.conditionChecking1(contractorcpersonerrlastname));
+			}
 			return this.getText(contractorcpersonerrlastname);
 		} else if (value.equals("Email")) {
-			if (this.conditionChecking(contractoremailerr)) {
-				return this.getText(contractoremailerr);
-			} else {
-				this.mouseActionClick(saveform);
-				return this.getText(contractoremailerr);
+			if (!this.conditionChecking1(contractoremailerr)) {
+				do {
+					this.validationTab(contractoremail, "");
+				} while (!this.conditionChecking1(contractoremailerr));
 			}
+			return this.getText(contractoremailerr);
 		} else if (value.equals("PhoneNumber")) {
+			if (!this.conditionChecking1(contractorphoneerr)) {
+				do {
+					this.validationTab(contractorphone, "");
+				} while (!this.conditionChecking1(contractorphoneerr));
+			}
 			return this.getText(contractorphoneerr);
 		} else if (value.equals("Fax")) {
+			if (!this.conditionChecking1(contractorfaxerror)) {
+				do {
+					this.validationTab(contractorfax, "");
+				} while (!this.conditionChecking1(contractorfaxerror));
+			}
 			return this.getText(contractorfaxerror);
 		} else if (value.equals("Website")) {
+			if (!this.conditionChecking1(contractorsiteerr)) {
+				do {
+					this.validationTab(contractorsite, "");
+				} while (!this.conditionChecking1(contractorsiteerr));
+			}
 			return this.getText(contractorsiteerr);
 		} else if (value.equals("LocationName")) {
+			if (!this.conditionChecking1(ErrorLocationName)) {
+				do {
+					this.validationTab(LocationName, "");
+				} while (!this.conditionChecking1(ErrorLocationName));
+			}
 			return this.getText(ErrorLocationName);
 		} else if (value.equals("LocationEmail")) {
+			if (!this.conditionChecking1(ErrorLocationEmail)) {
+				do {
+					this.validationTab(LocationEmail, "");
+				} while (!this.conditionChecking1(ErrorLocationEmail));
+			}
 			return this.getText(ErrorLocationEmail);
 		} else if (value.equals("LocationContactPerson")) {
+			if (!this.conditionChecking1(ErrorLocationContactPerson)) {
+				do {
+					this.validationTab(LocationContactPerson, "");
+				} while (!this.conditionChecking1(ErrorLocationContactPerson));
+			}
 			return this.getText(ErrorLocationContactPerson);
 		} else if (value.equals("LocationPhoneNumber")) {
+			if (!this.conditionChecking1(ErrorLocationPhoneNumber)) {
+				do {
+					this.validationTab(LocationPhoneNumber, "");
+				} while (!this.conditionChecking1(ErrorLocationPhoneNumber));
+			}
 			return this.getText(ErrorLocationPhoneNumber);
 		} else if (value.equals("LocationAddress1")) {
+			if (!this.conditionChecking1(ErrorAddress1)) {
+				do {
+					this.validationTab(LocationAddress1, "");
+				} while (!this.conditionChecking1(ErrorAddress1));
+			}
 			return this.getText(ErrorAddress1);
 		} else if (value.equals("LocationAddress2")) {
+			if (!this.conditionChecking1(ErrorAddress2)) {
+				do {
+					this.validationTab(LocationAddress2, "");
+				} while (!this.conditionChecking1(ErrorAddress2));
+			}
 			return this.getText(ErrorAddress2);
 		} else if (value.equals("LocationCity")) {
+			if (!this.conditionChecking1(ErrorCity)) {
+				do {
+					this.validationTab(LocationCity, "");
+				} while (!this.conditionChecking1(ErrorCity));
+			}
 			return this.getText(ErrorCity);
 		} else if (value.equals("LocationState")) {
+			if (!this.conditionChecking1(ErrorState)) {
+				do {
+					this.validationTab(LocationState, "");
+				} while (!this.conditionChecking1(ErrorState));
+			}
 			return this.getText(ErrorState);
 		} else if (value.equals("LocationZipcode")) {
+			if (!this.conditionChecking1(ErrorZipCode)) {
+				do {
+					this.validationTab(LocationZipcode, "");
+				} while (!this.conditionChecking1(ErrorZipCode));
+			}
 			return this.getText(ErrorZipCode);
 		} else if (value.equals("Invalid")) {
 			return this.getText(Invalid);
@@ -521,7 +596,7 @@ public class CreateContractorPage extends BaseClass {
 		return text;
 
 	}
-	
+
 	public void companyName(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(CompanyName, characters256);
@@ -531,6 +606,7 @@ public class CreateContractorPage extends BaseClass {
 			this.validationTab(CompanyName, text);
 		} else if (value.equals("ValidData")) {
 			this.inputText(CompanyName, fakeCompanyName);
+//			this.inputText(CompanyName, "Butt-Jain");
 			ContractorName = this.getTextAttribute(CompanyName);
 		}
 	}
@@ -740,6 +816,7 @@ public class CreateContractorPage extends BaseClass {
 			ContractorFirstName = this.getTextAttribute(contractorcpersonfirstname);
 			this.inputText(contractorcpersonlastname, fakeLastName);
 			ContractorLastName = this.getTextAttribute(contractorcpersonlastname);
+//			this.inputText(contractoremail, "dharitri.patil@example.com");
 			this.inputText(contractoremail, fakeEmail);
 			ContractorEmail = this.getTextAttribute(contractoremail);
 			this.inputText(contractorphone, fakePhoneNumber);
@@ -806,6 +883,17 @@ public class CreateContractorPage extends BaseClass {
 		return text;
 	}
 
+	public Boolean conditionChecking1(By element) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 3);
+			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 	static String response;
@@ -831,10 +919,43 @@ public class CreateContractorPage extends BaseClass {
 				} while (conditionCheck);
 			}
 		} else if (value.equals("AlternateFunction")) {
-			if (response.equals(getPropertyValue("AlreadyExistedEmail"))
-					|| response.equals(getPropertyValue("CompanyNameExists"))) {
-				this.clickEvent("BackButton");
-			}
+			do {
+				if (response.equals(getPropertyValue("AlreadyExistedEmail"))) {
+					this.mouseActionClick(Previous);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.clearField(contractoremail);
+					this.inputText(contractoremail, fakeEmail);
+					this.mouseActionClick(Next);
+					this.mouseActionClick(saveform);
+				} else if (response.equals(getPropertyValue("CompanyNameExists"))) {
+					this.mouseActionClick(Previous);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeCompanyName = faker.company().name();
+					this.clearField(CompanyName);
+					this.inputText(CompanyName, fakeCompanyName);
+					this.mouseActionClick(Next);
+					this.mouseActionClick(saveform);
+				}
+				if (this.conditionChecking(Message)) {
+					response = this.getText(Message);
+					this.invisible(Message);
+					conditionCheck = false;
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(saveform);
+						if (this.conditionChecking(Message)) {
+							response = this.getText(Message);
+							this.invisible(Message);
+							if (response.equals(getPropertyValue("CompanyContractorCreatedMessage"))
+									|| response.equals(getPropertyValue("CompanyContractorUpdatedMessage"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
+				}
+			} while (conditionCheck);
 		}
 		return response;
 	}
@@ -924,10 +1045,10 @@ public class CreateContractorPage extends BaseClass {
 			throws AWTException, MalformedURLException, IOException, InterruptedException {
 		if (value.equals("CompanyContractor")) {
 			this.mouseActionClick(Attachment);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			BaseClass.attachmentFile(System.getProperty("user.dir")
 					+ "\\ImagePicture\\png-transparent-homo-sapiens-line-art-cartoon-avatar-youtube-horse-legendary-creature-white.png");
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 		}
 
 	}

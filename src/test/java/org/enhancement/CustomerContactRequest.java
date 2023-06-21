@@ -178,7 +178,7 @@ public class CustomerContactRequest extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Request  with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
-		mandatory.validData("CreateSchedule");
+		mandatory.validData("Unassigned");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));

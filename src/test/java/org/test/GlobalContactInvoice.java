@@ -1783,5 +1783,53 @@ public class GlobalContactInvoice extends BaseClass {
 		}
 
 	}
+	
+	@Test(priority = 68)
+	private void shareLinkResponseCOde() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
+		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
+		create.listTextValidation("SharePage");
+		create.attachmentFileCheck("");
+		int actual = create.responseCode();
+		extentTest.log(Status.INFO, "Actual Result is -" + actual);
+		extentTest.log(Status.INFO, "Expected Result is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actual == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.attachmentFileCheck("ParentWindow");
+			create.mouseActionClick(InvoicePage.CancelButton);
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListInvalidValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
+			create.attachmentFileCheck("ParentWindow");
+			create.mouseActionClick(InvoicePage.CancelButton);
+		}
+	}
+
+	@Test(priority = 69)
+	private void pdfLinkResponseCOde() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Verify the user check the response code on the PDF link page");
+		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
+		create.listTextValidation("PDFPage");
+		create.attachmentFileCheck("");
+		int actual = create.responseCode();
+		extentTest.log(Status.INFO, "Actual Result is -" + actual);
+		extentTest.log(Status.INFO, "Expected Result is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actual == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListInvalidValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
+		}
+	}
 
 }

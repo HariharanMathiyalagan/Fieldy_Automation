@@ -190,29 +190,30 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Customer = By.id("customer-main");
 	By Organization = By.id("customer-organization-menu");
 	public static By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
-	By OrganizationName = By.id("company_name");
-	By OrganizationError = By.id("company_name_error");
-	By Website = By.id("website");
-	By WebsiteError = By.id("website_error");
-	By Address1 = By.id("line_1");
-	By Address1Error = By.id("line_1_error");
-	By Address2 = By.id("line_2");
-	By Address2Error = By.id("line_2_error");
-	By City = By.id("city");
-	By CityError = By.id("city_error");
-	By State = By.id("state");
-	By StateError = By.id("state_error");
-	By ZipCode = By.id("zipcode");
-	By ZipCodeError = By.id("zipcode_error");
-	By Email = By.id("email");
-	By EmailError = By.id("email_error");
-	By TaxNumber = By.id("tax_number");
+	public static By OrganizationName = By.id("company_name");
+	public static By OrganizationError = By.id("company_name_error");
+	public static By Website = By.id("website");
+	public static By WebsiteError = By.id("website_error");
+	public static By Address1 = By.id("line_1");
+	public static By Address1Error = By.id("line_1_error");
+	public static By Address2 = By.id("line_2");
+	public static By Address2Error = By.id("line_2_error");
+	public static By City = By.id("city");
+	public static By CityError = By.id("city_error");
+	public static By State = By.id("state");
+	public static By StateError = By.id("state_error");
+	public static By ZipCode = By.id("zipcode");
+	public static By ZipCodeError = By.id("zipcode_error");
+	public static By Email = By.id("email");
+	public static By EmailError = By.id("email_error");
+	public static By TaxNumber = By.id("tax_number");
+	public static By TaxNumberError = By.id("tax_number_error");
 	@FindAll({ @FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[3]/div[10]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='customer_organization_create_edit']/div[1]/div[2]/div[10]/div[2]/input[1]") })
 	WebElement LeadSource;
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
-	By PhoneNumber = By.id("phones__number__0");
-	By PhoneNumberError = By.id("phones__number__0_error");
+	public static By PhoneNumber = By.id("phones__number__0");
+	public static By PhoneNumberError = By.id("phones__number__0_error");
 	By SaveComplete = By.id("customerdrop");
 	By Next = By.xpath("//*[@data-automationid='next']");
 	By Logo = By.xpath("//label[@for='company_logo']");
@@ -235,10 +236,10 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 //	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -282,14 +283,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
 		if (value.equals("ResponseMessage")) {
-			if (this.conditionChecking(Message)) {
+			if (this.conditionChecking(Message, 40)) {
 				response = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (this.conditionChecking(Message)) {
+					if (this.conditionChecking(Message, 40)) {
 						response = this.getText(Message);
 						this.invisible(Message);
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
@@ -301,17 +302,79 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				} while (check);
 			}
 		} else if (value.equals("AlternateFunction")) {
-			if (response.equals(getPropertyValue("CompanyAlreadyMessage"))
-					|| response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
-					|| response.equals(getPropertyValue("ContactEmailAlreadyMessage"))
-					|| response.equals(getPropertyValue("CompanyContact2EmailMessage"))
-					|| response.equals(getPropertyValue("CompanyContact3EmailMessage"))
-					|| response.equals(getPropertyValue("CompanyEmailContact1Email"))
-					|| response.equals(getPropertyValue("CompanyEmailContact2Email"))
-					|| response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
-				this.mouseActionClick(Organization);
-				this.visibility(CustomerList);
-			}
+			do {
+				if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+						|| response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+					for (int i = 0; i < 3; i++) {
+						this.mouseActionClick(Previous);
+					}
+					if (!this.conditionChecking1(Email)) {
+						this.mouseActionClick(Previous);
+					}
+					if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
+						this.clearFields("Email");
+						Faker faker = new Faker(new Locale("en-IND"));
+						String fakeEmail = faker.internet().safeEmailAddress();
+						this.inputText(Email, fakeEmail);
+					} else if (response.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+						this.clearFields("OrganizationName");
+						Faker faker = new Faker(new Locale("en-IND"));
+						String fakeCompanyName = faker.company().name();
+						this.inputText(OrganizationName, fakeCompanyName);
+					}
+					for (int i = 0; i < 3; i++) {
+						this.mouseActionClick(Next);
+					}
+					this.mouseActionClick(SaveComplete);
+				} else if (response.equals(getPropertyValue("CompanyContact1EmailMessage"))
+						|| response.equals(getPropertyValue("CompanyEmailContact2Email"))
+						|| response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
+					for (int i = 0; i < 2; i++) {
+						this.mouseActionClick(Previous);
+					}
+					if (!this.conditionChecking1(ContactEmail)) {
+						this.mouseActionClick(Previous);
+					}
+					if (response.equals(getPropertyValue("CompanyContact1EmailMessage"))) {
+						this.clearFields("ContactEmail");
+						Faker faker = new Faker(new Locale("en-IND"));
+						String fakeEmail = faker.internet().safeEmailAddress();
+						this.inputText(ContactEmail, fakeEmail);
+					} else if (response.equals(getPropertyValue("CompanyEmailContact2Email"))) {
+						this.clearField(ContactEmail2);
+						Faker faker = new Faker(new Locale("en-IND"));
+						String fakeEmail = faker.internet().safeEmailAddress();
+						this.inputText(ContactEmail2, fakeEmail);
+					} else if (response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
+						this.clearField(ContactEmail3);
+						Faker faker = new Faker(new Locale("en-IND"));
+						String fakeEmail = faker.internet().safeEmailAddress();
+						this.inputText(ContactEmail3, fakeEmail);
+					}
+					for (int i = 0; i < 2; i++) {
+						this.mouseActionClick(Next);
+					}
+					this.mouseActionClick(SaveComplete);
+				}
+				if (this.conditionChecking(Message, 40)) {
+					response = this.getText(Message);
+					this.invisible(Message);
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveComplete);
+						if (this.conditionChecking(Message, 40)) {
+							response = this.getText(Message);
+							this.invisible(Message);
+							if (response.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| response.equals(getPropertyValue("CustomerUpdatedMesssage"))
+									|| response.equals(getPropertyValue("DateMessage"))) {
+								check = false;
+							}
+						}
+					} while (check);
+				}
+			} while (check);
 		}
 		return response;
 	}
@@ -390,61 +453,62 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active')]//parent::div//input[@id='equipments__product_name__0']"),
 			@FindBy(xpath = "//*[contains(@class,'fieldy-tab-active') and contains(text(),'Attachment')]") })
 	WebElement Visible;
-	By FirstName = By.id("contacts__first_name__0");
-	By LastName = By.id("contacts__last_name__0");
-	By ContactEmail = By.id("contacts__email__0");
+	public static By FirstName = By.id("contacts__first_name__0");
+	public static By LastName = By.id("contacts__last_name__0");
+	public static By ContactEmail = By.id("contacts__email__0");
 	By ContactEmail2 = By.id("contacts__email__1");
 	By ContactEmail3 = By.id("contacts__email__2");
-	By ContactPhoneNumber = By.id("contacts__phone__0");
-	By JobTittle = By.id("contacts__job_title__0");
+	public static By ContactPhoneNumber = By.id("contacts__phone__0");
+	public static By JobTittle = By.id("contacts__job_title__0");
 	By AddMoreContact = By.id("add-more-contact-customer-organization");
-	By FirstNameError = By.id("contacts__first_name__0_error");
-	By LastNameError = By.id("contacts__last_name__0_error");
-	By ContactEmailError = By.id("contacts__email__0_error");
-	By ContactPhoneNumberError = By.id("contacts__phone__0_error");
-	By JobTittleError = By.id("contacts__job_title__0_error");
+	public static By FirstNameError = By.id("contacts__first_name__0_error");
+	public static By LastNameError = By.id("contacts__last_name__0_error");
+	public static By ContactEmailError = By.id("contacts__email__0_error");
+	public static By ContactPhoneNumberError = By.id("contacts__phone__0_error");
+	public static By JobTittleError = By.id("contacts__job_title__0_error");
 	By MakethisProperty = By.id("addresses__is_primary__0");
-	By PropertyName = By.id("addresses__location_name__0");
-	By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
-	By PropertyLastName = By.id("addresses__contact_person_last_name__0");
-	By ContactPersonName = By.id("addresses__name__0");
-	By PropertyAddress1 = By.id("addresses__line_1__0");
-	By PropertyAddress2 = By.id("addresses__line_2__0");
-	By PropertyStateName = By.id("addresses__state__0");
-	By PropertyCityName = By.id("addresses__city__0");
-	By PropertyZipcode = By.id("addresses__zipcode__0");
+	public static By PropertyName = By.id("addresses__location_name__0");
+	public static By PropertyFirstName = By.id("addresses__contact_person_first_name__0");
+	public static By PropertyLastName = By.id("addresses__contact_person_last_name__0");
+	public static By ContactPersonName = By.id("addresses__name__0");
+	public static By PropertyAddress1 = By.id("addresses__line_1__0");
+	public static By PropertyAddress2 = By.id("addresses__line_2__0");
+	public static By PropertyStateName = By.id("addresses__state__0");
+	public static By PropertyCityName = By.id("addresses__city__0");
+	public static By PropertyZipcode = By.id("addresses__zipcode__0");
 
 	By DeleteLocation = By.xpath("//div[@class='accordion-body']//child::div[text()='Delete Property']");
 	By AddProperty = By.id("add-more-property-customer-organization");
 
-	By ErrorPropertyName = By.id("addresses__location_name__0_error");
-	By ErrorContactPersonName = By.id("addresses__name__0_error");
-	By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
-	By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
-	By ErrorPropertyAddress1 = By.id("addresses__line_1__0_error");
-	By ErrorPropertyAddress2 = By.id("addresses__line_2__0_error");
-	By ErrorPropertyStreetName = By.id("addresses__line_2__0_error");
-	By ErrorPropertyStateName = By.id("addresses__state__0_error");
-	By ErrorPropertyCityName = By.id("addresses__city__0_error");
-	By ErrorPropertyZipCode = By.id("addresses__zipcode__0_error");
+	public static By ErrorPropertyName = By.id("addresses__location_name__0_error");
+	public static By ErrorContactPersonName = By.id("addresses__name__0_error");
+	public static By ErrorPropertyFirstName = By.id("addresses__contact_person_first_name__0_error");
+	public static By ErrorPropertyLastName = By.id("addresses__contact_person_last_name__0_error");
+	public static By ErrorPropertyAddress1 = By.id("addresses__line_1__0_error");
+	public static By ErrorPropertyAddress2 = By.id("addresses__line_2__0_error");
+	public static By ErrorPropertyStreetName = By.id("addresses__line_2__0_error");
+	public static By ErrorPropertyStateName = By.id("addresses__state__0_error");
+	public static By ErrorPropertyCityName = By.id("addresses__city__0_error");
+	public static By ErrorPropertyZipCode = By.id("addresses__zipcode__0_error");
 
 	By Previous = By.xpath("//*[text()='Previous']");
 
-	By ProductName = By.id("equipments__product_name__0");
-	By ErrorProductName = By.id("equipments__product_name__0_error");
-	By BrandName = By.id("equipments__brand_name__0");
-	By ErrorBrandName = By.id("equipments__brand_name__0_error");
-	By ModelNumber = By.id("equipments__model_number__0");
-	By ErrorModelNumber = By.id("equipments__model_number__0_error");
-	By SerialNumber = By.id("equipments__serial_number__0");
-	By DateInstalled = By.id("equipments__date_installed__0");
-	By ErrorSerialNumber = By.id("equipments__serial_number__0_error");
-	By WarrantyInformation = By.id("equipments__warrenty_info__0");
-	By AccessHours = By.id("equipments__access_hours__0");
-	By ErrorAccessHours = By.id("equipments__access_hours__0_error");
-	By InstallationNotes = By.id("equipments__installation_notes__0");
-	By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
-	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
+	public static By ProductName = By.id("equipments__product_name__0");
+	public static By ErrorProductName = By.id("equipments__product_name__0_error");
+	public static By BrandName = By.id("equipments__brand_name__0");
+	public static By ErrorBrandName = By.id("equipments__brand_name__0_error");
+	public static By ModelNumber = By.id("equipments__model_number__0");
+	public static By ErrorModelNumber = By.id("equipments__model_number__0_error");
+	public static By SerialNumber = By.id("equipments__serial_number__0");
+	public static By DateInstalled = By.id("equipments__date_installed__0");
+	public static By ErrorSerialNumber = By.id("equipments__serial_number__0_error");
+	public static By WarrantyInformation = By.id("equipments__warrenty_info__0");
+	public static By AccessHours = By.id("equipments__access_hours__0");
+	public static By ErrorAccessHours = By.id("equipments__access_hours__0_error");
+	public static By InstallationNotes = By.id("equipments__installation_notes__0");
+	public static By ErrorInstallationNotes = By.id("equipments__installation_notes__0_error");
+	public static By ErrorDateInstalled = By
+			.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
 	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
 			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
 	WebElement ErrorMessage;
@@ -456,7 +520,6 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	private void scrollDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-
 	}
 
 	public static String organizationName;
@@ -499,6 +562,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public void organizationPage() throws InterruptedException, AWTException {
 		this.clearField(OrganizationName);
 		this.inputText(OrganizationName, fakeCompanyName);
+//		this.inputText(OrganizationName, "Ahluwalia Limited");
 		organizationName = this.getTextAttribute(OrganizationName);
 		this.inputText(Website, fakeWebsite);
 		website = this.getTextAttribute(Website);
@@ -518,6 +582,11 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		this.inputText(Email, fakeEmail);
 		email = this.getTextAttribute(Email);
 		this.mouseActionClick(LeadSource);
+		if (!this.conditionChecking1(Social)) {
+			do {
+				this.mouseActionClick(LeadSource);
+			} while (!this.conditionChecking1(Social));
+		}
 		if (this.getText(Social).equals("No Data Found")) {
 			Thread.sleep(5000);
 			this.mouseActionClick(LeadSource);
@@ -527,11 +596,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		}
 		leadSource = this.getTextAttribute(LeadSource);
 		this.mouseActionClick(IndustryType);
-		if (this.getText(IndustryTypeDropDown).equals("No Data Found")) {
+		if (!this.conditionChecking1(IndustryTypeDropDown)) {
 			do {
-				Thread.sleep(5000);
 				this.mouseActionClick(IndustryType);
-			} while (!this.conditionChecking1(FirstIndusrty));
+			} while (!this.conditionChecking1(IndustryTypeDropDown));
+		}
+		if (this.getText(IndustryTypeDropDown).equals("No Data Found")) {
+			Thread.sleep(5000);
+			this.mouseActionClick(IndustryType);
 			this.mouseActionClick(IndustryTypeDropDown);
 		} else {
 			this.mouseActionClick(IndustryTypeDropDown);
@@ -773,14 +845,13 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	}
 
-	public String errorMessage() {
-		if (!this.conditionChecking1(ErrorMessage)) {
+	public String errorMessage(By element, By value) {
+		if (!this.conditionChecking1(element)) {
 			do {
-				this.mouseActionClick(SaveComplete);
-				this.invisible(Spinner);
-			} while (!this.conditionChecking1(ErrorMessage));
+				this.validationTab(value, "");
+			} while (!this.conditionChecking1(element));
 		}
-		return this.getText(ErrorMessage);
+		return this.getText(element);
 	}
 
 	public void clearFields(String value) {

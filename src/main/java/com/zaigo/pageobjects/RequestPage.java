@@ -859,6 +859,7 @@ public class RequestPage extends BaseClass {
 
 	static String responseMessage;
 	static String alternateResponseMessage;
+	static int increment = 2;
 
 	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
@@ -879,7 +880,12 @@ public class RequestPage extends BaseClass {
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
-								|| responseMessage.equals("RequestUpdatedMessage")) {
+								|| responseMessage.equals(getPropertyValue("RequestUpdatedMessage"))
+								|| responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
 							conditionCheck = false;
 						}
 					}
@@ -902,7 +908,9 @@ public class RequestPage extends BaseClass {
 				} else if (responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
 					this.scrollDown();
 					this.mouseActionClick(Technician);
-					this.mouseActionClick(TechnicianThirdName);
+					increment++;
+					this.mouseActionClick(
+							By.xpath("//*[@id='technician_ids-autocomplete-list']//div[" + increment + "]"));
 					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message)) {
@@ -910,7 +918,7 @@ public class RequestPage extends BaseClass {
 					this.invisible(Message);
 					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
-							|| responseMessage.equals("RequestUpdatedMessage")) {
+							|| responseMessage.equals(getPropertyValue("RequestUpdatedMessage"))) {
 						conditionCheck = false;
 					}
 				} else {
@@ -926,8 +934,10 @@ public class RequestPage extends BaseClass {
 							this.invisible(Message);
 							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 									|| responseMessage.equals(getPropertyValue("RequestCreatedMessage"))
-									|| responseMessage.equals("RequestUpdatedMessage")) {
+									|| responseMessage.equals(getPropertyValue("RequestUpdatedMessage"))) {
 								conditionCheck = false;
+							} else {
+								this.message("AlternateFunction");
 							}
 						}
 					} while (conditionCheck);

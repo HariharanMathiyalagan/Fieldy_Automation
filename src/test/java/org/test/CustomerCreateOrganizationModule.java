@@ -131,8 +131,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		CustomerCreateOrganizationPage maxValidation = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
 		maxValidation.organizationName("MandatoryValidation");
-//		String errorMandatory = maxValidation.errorField("OrganizationName");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.OrganizationError,
+				CustomerCreateOrganizationPage.OrganizationName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -157,7 +157,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.organizationName("MaxValidation");
 //		String errorMandatory = maxValidation.errorField("OrganizationName");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.OrganizationError,
+				CustomerCreateOrganizationPage.OrganizationName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -186,7 +187,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.website("MaxValidation");
 //		String errorMandatory = maxValidation.errorField("Website");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.WebsiteError,
+				CustomerCreateOrganizationPage.Website);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -213,7 +215,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		address1Validation.address1("MaxValidation");
 //		String errorAddress1Field = address1Validation.errorField("Address1");
-		String errorAddress1Field = address1Validation.errorMessage();
+		String errorAddress1Field = address1Validation.errorMessage(CustomerCreateOrganizationPage.Address1Error,
+				CustomerCreateOrganizationPage.Address1);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -240,7 +243,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		address2Validation.address2("MaxValidation");
 //		String errorAddress1Field = address2Validation.errorField("Address2");
-		String errorAddress1Field = address2Validation.errorMessage();
+		String errorAddress1Field = address2Validation.errorMessage(CustomerCreateOrganizationPage.Address2Error,
+				CustomerCreateOrganizationPage.Address2);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -267,7 +271,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		cityValidation.city("MaxValidation");
 //		String errorAddress1Field = cityValidation.errorField("City");
-		String errorAddress1Field = cityValidation.errorMessage();
+		String errorAddress1Field = cityValidation.errorMessage(CustomerCreateOrganizationPage.CityError,
+				CustomerCreateOrganizationPage.City);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -294,7 +299,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		stateValidation.state("MaxValidation");
 //		String errorStateField = stateValidation.errorField("State");
-		String errorStateField = stateValidation.errorMessage();
+		String errorStateField = stateValidation.errorMessage(CustomerCreateOrganizationPage.StateError,
+				CustomerCreateOrganizationPage.State);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorStateField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -320,7 +326,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.zipCode("MinValidation");
 //		String errorZipcodeField = minValidation.errorField("Zipcode");
-		String errorZipcodeField = minValidation.errorMessage();
+		String errorZipcodeField = minValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -347,7 +354,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.zipCode("MaxValidation");
 //		String errorZipcodeField = maxValidation.errorField("Zipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -373,7 +381,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.zipCode("SpecialCharacter");
 //		String errorZipcodeField = maxValidation.errorField("Zipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -399,7 +408,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		emailValidation.email("ValidEmail");
 //		String errorEmail = emailValidation.errorField("Email");
-		String errorEmail = emailValidation.errorMessage();
+		String errorEmail = emailValidation.errorMessage(CustomerCreateOrganizationPage.EmailError,
+				CustomerCreateOrganizationPage.Email);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -425,7 +435,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.email("MaxValidation");
 //		String errorEmail = maxValidation.errorField("Email");
-		String errorEmail = maxValidation.errorMessage();
+		String errorEmail = maxValidation.errorMessage(CustomerCreateOrganizationPage.EmailError,
+				CustomerCreateOrganizationPage.Email);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -450,7 +461,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		CustomerCreateOrganizationPage maxValidationLocationField = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
 		maxValidationLocationField.taxNumber("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorMessage();
+		String assertionMessage = maxValidationLocationField.errorMessage(CustomerCreateOrganizationPage.TaxNumberError,
+				CustomerCreateOrganizationPage.TaxNumber);
 //		String assertionMessage = maxValidationLocationField.errorFields("LastName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
@@ -477,7 +489,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.phoneNumber("ValidPhoneNumber");
 //		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -504,7 +517,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.phoneNumber("MinValidation");
 //		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -531,7 +545,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.phoneNumber("MaxValidation");
 //		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = maxValidation.errorMessage();
+		String errorPhoneNumber = maxValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -560,7 +575,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.firstName("MaxValidation");
 //		String errorFirstName = maxValidation.errorField("ContactFirstName");
-		String errorFirstName = maxValidation.errorMessage();
+		String errorFirstName = maxValidation.errorMessage(CustomerCreateOrganizationPage.FirstNameError,
+				CustomerCreateOrganizationPage.FirstName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -586,7 +602,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.lastName("MaxValidation");
 //		String errorFirstName = maxValidation.errorField("ContactLastName");
-		String errorFirstName = maxValidation.errorMessage();
+		String errorFirstName = maxValidation.errorMessage(CustomerCreateOrganizationPage.LastNameError,
+				CustomerCreateOrganizationPage.LastName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -612,7 +629,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.contactEmail("MaxValidation");
 //		String errorEmail = maxValidation.errorField("ContactEmail");
-		String errorEmail = maxValidation.errorMessage();
+		String errorEmail = maxValidation.errorMessage(CustomerCreateOrganizationPage.ContactEmailError,
+				CustomerCreateOrganizationPage.ContactEmail);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -638,7 +656,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		validateEmail.contactEmail("ValidEmail");
 //		String errorEmail = validateEmail.errorField("ContactEmail");
-		String errorEmail = validateEmail.errorMessage();
+		String errorEmail = validateEmail.errorMessage(CustomerCreateOrganizationPage.ContactEmailError,
+				CustomerCreateOrganizationPage.ContactEmail);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -664,7 +683,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.contactPhoneNumber("MinValidation");
 //		String errorPhoneNumber = minValidation.errorField("ContactPhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -690,7 +710,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.contactPhoneNumber("MaxValidation");
 //		String errorPhoneNumber = maxValidation.errorField("ContactPhoneNumber");
-		String errorPhoneNumber = maxValidation.errorMessage();
+		String errorPhoneNumber = maxValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -718,7 +739,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.contactPhoneNumber("ValidPhoneNumber");
 //		String errorPhoneNumber = minValidation.errorField("ContactPhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -745,7 +767,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.jobTittle("MaxValidation");
 //		String errorJobTittle = maxValidation.errorField("ContactJobTittle");
-		String errorJobTittle = maxValidation.errorMessage();
+		String errorJobTittle = maxValidation.errorMessage(CustomerCreateOrganizationPage.JobTittleError,
+				CustomerCreateOrganizationPage.JobTittle);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorJobTittle);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -774,7 +797,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyName("MaxValidation");
 //		String errorPropertyName = maxValidation.errorField("PropertyName");
-		String errorPropertyName = maxValidation.errorMessage();
+		String errorPropertyName = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyName,
+				CustomerCreateOrganizationPage.PropertyName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -801,7 +825,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyFirstName("MaxValidation");
 //		String errorContactPerson = maxValidation.errorField("PropertyFirstName");
-		String errorContactPerson = maxValidation.errorMessage();
+		String errorContactPerson = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyFirstName,
+				CustomerCreateOrganizationPage.PropertyFirstName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -828,7 +853,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyLastName("MaxValidation");
 //		String errorContactPerson = maxValidation.errorField("PropertyLastName");
-		String errorContactPerson = maxValidation.errorMessage();
+		String errorContactPerson = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyLastName,
+				CustomerCreateOrganizationPage.PropertyLastName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -855,7 +881,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyAddress1("MaxValidation");
 //		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
-		String errorAddress1Field = maxValidation.errorMessage();
+		String errorAddress1Field = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyAddress1,
+				CustomerCreateOrganizationPage.PropertyAddress1);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -882,7 +909,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyAddress2("MaxValidation");
 //		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
-		String errorAddress1Field = maxValidation.errorMessage();
+		String errorAddress1Field = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyAddress2,
+				CustomerCreateOrganizationPage.PropertyAddress2);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -908,7 +936,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyState("MaxValidation");
 //		String errorCityField = maxValidation.errorField("PropertyState");
-		String errorCityField = maxValidation.errorMessage();
+		String errorCityField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyStateName,
+				CustomerCreateOrganizationPage.PropertyStateName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -935,7 +964,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyCity("MaxValidation");
 //		String errorCityField = maxValidation.errorField("PropertyCity");
-		String errorCityField = maxValidation.errorMessage();
+		String errorCityField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyCityName,
+				CustomerCreateOrganizationPage.PropertyCityName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -962,7 +992,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyZipcode("SpecialCharacter");
 //		String errorZipcodeField = maxValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -988,7 +1019,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.propertyZipcode("MinValidation");
 //		String errorZipcodeField = minValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = minValidation.errorMessage();
+		String errorZipcodeField = minValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1016,7 +1048,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyZipcode("MaxValidation");
 //		String errorZipcodeField = maxValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1044,7 +1077,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.productName("MaxValidation");
 //		String errorProductField = maxValidation.errorField("ProductName");
-		String errorProductField = maxValidation.errorMessage();
+		String errorProductField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorProductName,
+				CustomerCreateOrganizationPage.ProductName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorProductField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1070,7 +1104,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.brandName("MaxValidation");
 //		String errorBrandField = maxValidation.errorField("BrandName");
-		String errorBrandField = maxValidation.errorMessage();
+		String errorBrandField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorBrandName,
+				CustomerCreateOrganizationPage.BrandName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorBrandField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1096,7 +1131,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.modelNumber("MaxValidation");
 //		String errorModelField = maxValidation.errorField("ModelNumber");
-		String errorModelField = maxValidation.errorMessage();
+		String errorModelField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorModelNumber,
+				CustomerCreateOrganizationPage.ModelNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorModelField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1123,7 +1159,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.serialNumber("MaxValidation");
 //		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
-		String errorSerialNumberField = maxValidation.errorMessage();
+		String errorSerialNumberField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorSerialNumber,
+				CustomerCreateOrganizationPage.SerialNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1174,7 +1211,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.accessHours("MaxValidation");
 //		String errorAccessHours = maxValidation.errorField("AccessHours");
-		String errorAccessHours = maxValidation.errorMessage();
+		String errorAccessHours = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorAccessHours,
+				CustomerCreateOrganizationPage.AccessHours);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1201,7 +1239,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.installationNotes("MaxValidation");
 //		String errorAccessHours = maxValidation.errorField("InstallationNotes");
-		String errorAccessHours = maxValidation.errorMessage();
+		String errorAccessHours = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorInstallationNotes,
+				CustomerCreateOrganizationPage.InstallationNotes);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1280,7 +1319,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		alreadyValidation.organizationName("UniqueValidation");
 //		String errorMandatory = alreadyValidation.errorField("OrganizationName");
-		String errorMandatory = alreadyValidation.errorMessage();
+		String errorMandatory = alreadyValidation.errorMessage(CustomerCreateOrganizationPage.OrganizationError,
+				CustomerCreateOrganizationPage.OrganizationName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ExistedCompanyName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1309,7 +1349,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		alreadyEmail.email("UniqueEmail");
 //		String alreadyExistEmail = alreadyEmail.errorField("Email");
-		String alreadyExistEmail = alreadyEmail.errorMessage();
+		String alreadyExistEmail = alreadyEmail.errorMessage(CustomerCreateOrganizationPage.EmailError,
+				CustomerCreateOrganizationPage.Email);
 		extentTest.log(Status.INFO, "Actual Result is -" + alreadyExistEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2267,7 +2308,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.organizationName("maxValidation");
 //		String errorMandatory = maxValidation.errorField("OrganizationName");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.OrganizationError,
+				CustomerCreateOrganizationPage.OrganizationName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2292,7 +2334,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.organizationName("MaxValidation");
 //		String errorMandatory = maxValidation.errorField("OrganizationName");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.OrganizationError,
+				CustomerCreateOrganizationPage.OrganizationName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2321,7 +2364,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.website("MaxValidation");
 //		String errorMandatory = maxValidation.errorField("Website");
-		String errorMandatory = maxValidation.errorMessage();
+		String errorMandatory = maxValidation.errorMessage(CustomerCreateOrganizationPage.WebsiteError,
+				CustomerCreateOrganizationPage.Website);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMandatory);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2348,7 +2392,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		address1Validation.address1("MaxValidation");
 //		String errorAddress1Field = address1Validation.errorField("Address1");
-		String errorAddress1Field = address1Validation.errorMessage();
+		String errorAddress1Field = address1Validation.errorMessage(CustomerCreateOrganizationPage.Address1Error,
+				CustomerCreateOrganizationPage.Address1);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2375,7 +2420,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		address2Validation.address2("MaxValidation");
 //		String errorAddress1Field = address2Validation.errorField("Address2");
-		String errorAddress1Field = address2Validation.errorMessage();
+		String errorAddress1Field = address2Validation.errorMessage(CustomerCreateOrganizationPage.Address2Error,
+				CustomerCreateOrganizationPage.Address2);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2402,7 +2448,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		cityValidation.city("MaxValidation");
 //		String errorAddress1Field = cityValidation.errorField("City");
-		String errorAddress1Field = cityValidation.errorMessage();
+		String errorAddress1Field = cityValidation.errorMessage(CustomerCreateOrganizationPage.CityError,
+				CustomerCreateOrganizationPage.City);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2429,7 +2476,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		stateValidation.state("MaxValidation");
 //		String errorStateField = stateValidation.errorField("State");
-		String errorStateField = stateValidation.errorMessage();
+		String errorStateField = stateValidation.errorMessage(CustomerCreateOrganizationPage.StateError,
+				CustomerCreateOrganizationPage.State);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorStateField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2455,7 +2503,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.zipCode("MinValidation");
 //		String errorZipcodeField = minValidation.errorField("Zipcode");
-		String errorZipcodeField = minValidation.errorMessage();
+		String errorZipcodeField = minValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2482,7 +2531,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.zipCode("MaxValidation");
 //		String errorZipcodeField = maxValidation.errorField("Zipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2508,7 +2558,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.zipCode("SpecialCharacter");
 //		String errorZipcodeField = maxValidation.errorField("Zipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ZipCodeError,
+				CustomerCreateOrganizationPage.ZipCode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2534,7 +2585,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		emailValidation.email("ValidEmail");
 //		String errorEmail = emailValidation.errorField("Email");
-		String errorEmail = emailValidation.errorMessage();
+		String errorEmail = emailValidation.errorMessage(CustomerCreateOrganizationPage.EmailError,
+				CustomerCreateOrganizationPage.Email);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2560,7 +2612,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.email("MaxValidation");
 //		String errorEmail = maxValidation.errorField("Email");
-		String errorEmail = maxValidation.errorMessage();
+		String errorEmail = maxValidation.errorMessage(CustomerCreateOrganizationPage.EmailError,
+				CustomerCreateOrganizationPage.Email);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2585,7 +2638,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		CustomerCreateOrganizationPage maxValidationLocationField = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
 		maxValidationLocationField.taxNumber("MaxValidation");
-		String assertionMessage = maxValidationLocationField.errorMessage();
+		String assertionMessage = maxValidationLocationField.errorMessage(CustomerCreateOrganizationPage.TaxNumberError,
+				CustomerCreateOrganizationPage.TaxNumber);
 //		String assertionMessage = maxValidationLocationField.errorFields("LastName");
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
@@ -2612,7 +2666,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.phoneNumber("ValidPhoneNumber");
 //		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2639,7 +2694,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.phoneNumber("MinValidation");
 //		String errorPhoneNumber = minValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2666,7 +2722,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.phoneNumber("MaxValidation");
 //		String errorPhoneNumber = maxValidation.errorField("PhoneNumber");
-		String errorPhoneNumber = maxValidation.errorMessage();
+		String errorPhoneNumber = maxValidation.errorMessage(CustomerCreateOrganizationPage.PhoneNumberError,
+				CustomerCreateOrganizationPage.PhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2697,7 +2754,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.firstName("MaxValidation");
 //		String errorFirstName = maxValidation.errorField("ContactFirstName");
-		String errorFirstName = maxValidation.errorMessage();
+		String errorFirstName = maxValidation.errorMessage(CustomerCreateOrganizationPage.FirstNameError,
+				CustomerCreateOrganizationPage.FirstName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2723,7 +2781,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.lastName("MaxValidation");
 //		String errorFirstName = maxValidation.errorField("ContactLastName");
-		String errorFirstName = maxValidation.errorMessage();
+		String errorFirstName = maxValidation.errorMessage(CustomerCreateOrganizationPage.LastNameError,
+				CustomerCreateOrganizationPage.LastName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2749,7 +2808,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.contactEmail("MaxValidation");
 //		String errorEmail = maxValidation.errorField("ContactEmail");
-		String errorEmail = maxValidation.errorMessage();
+		String errorEmail = maxValidation.errorMessage(CustomerCreateOrganizationPage.ContactEmailError,
+				CustomerCreateOrganizationPage.ContactEmail);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2775,7 +2835,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		validateEmail.contactEmail("ValidEmail");
 //		String errorEmail = validateEmail.errorField("ContactEmail");
-		String errorEmail = validateEmail.errorMessage();
+		String errorEmail = validateEmail.errorMessage(CustomerCreateOrganizationPage.ContactEmailError,
+				CustomerCreateOrganizationPage.ContactEmail);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2800,7 +2861,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		CustomerCreateOrganizationPage minValidation = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
 		minValidation.contactPhoneNumber("MinValidation");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 //		String errorPhoneNumber = minValidation.errorField("ContactPhoneNumber");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min6Validation"));
@@ -2827,7 +2889,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.contactPhoneNumber("MaxValidation");
 //		String errorPhoneNumber = maxValidation.errorField("ContactPhoneNumber");
-		String errorPhoneNumber = maxValidation.errorMessage();
+		String errorPhoneNumber = maxValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max20Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2855,7 +2918,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.contactPhoneNumber("ValidPhoneNumber");
 //		String errorPhoneNumber = minValidation.errorField("ContactPhoneNumber");
-		String errorPhoneNumber = minValidation.errorMessage();
+		String errorPhoneNumber = minValidation.errorMessage(CustomerCreateOrganizationPage.ContactPhoneNumberError,
+				CustomerCreateOrganizationPage.ContactPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPhoneNumber);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidPhoneNumberMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2882,7 +2946,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.jobTittle("MaxValidation");
 //		String errorJobTittle = maxValidation.errorField("ContactJobTittle");
-		String errorJobTittle = maxValidation.errorMessage();
+		String errorJobTittle = maxValidation.errorMessage(CustomerCreateOrganizationPage.JobTittleError,
+				CustomerCreateOrganizationPage.JobTittle);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorJobTittle);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2913,7 +2978,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyName("MaxValidation");
 //		String errorPropertyName = maxValidation.errorField("PropertyName");
-		String errorPropertyName = maxValidation.errorMessage();
+		String errorPropertyName = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyName,
+				CustomerCreateOrganizationPage.PropertyName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPropertyName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2940,7 +3006,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyFirstName("MaxValidation");
 //		String errorContactPerson = maxValidation.errorField("PropertyFirstName");
-		String errorContactPerson = maxValidation.errorMessage();
+		String errorContactPerson = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyFirstName,
+				CustomerCreateOrganizationPage.PropertyFirstName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2967,7 +3034,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyLastName("MaxValidation");
 //		String errorContactPerson = maxValidation.errorField("PropertyLastName");
-		String errorContactPerson = maxValidation.errorMessage();
+		String errorContactPerson = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyLastName,
+				CustomerCreateOrganizationPage.ErrorPropertyLastName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContactPerson);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -2994,7 +3062,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyAddress1("MaxValidation");
 //		String errorAddress1Field = maxValidation.errorField("PropertyAddress1");
-		String errorAddress1Field = maxValidation.errorMessage();
+		String errorAddress1Field = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyAddress1,
+				CustomerCreateOrganizationPage.PropertyAddress1);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3021,7 +3090,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyAddress2("MaxValidation");
 //		String errorAddress1Field = maxValidation.errorField("PropertyAddress2");
-		String errorAddress1Field = maxValidation.errorMessage();
+		String errorAddress1Field = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyAddress2,
+				CustomerCreateOrganizationPage.PropertyAddress2);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAddress1Field);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3047,7 +3117,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyState("MaxValidation");
 //		String errorCityField = maxValidation.errorField("PropertyState");
-		String errorCityField = maxValidation.errorMessage();
+		String errorCityField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyStateName,
+				CustomerCreateOrganizationPage.PropertyStateName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max45CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3074,7 +3145,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyCity("MaxValidation");
 //		String errorCityField = maxValidation.errorField("PropertyCity");
-		String errorCityField = maxValidation.errorMessage();
+		String errorCityField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyCityName,
+				CustomerCreateOrganizationPage.PropertyCityName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorCityField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3101,7 +3173,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyZipcode("SpecialCharacter");
 //		String errorZipcodeField = maxValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("SpecialCharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3127,7 +3200,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		minValidation.propertyZipcode("MinValidation");
 //		String errorZipcodeField = minValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = minValidation.errorMessage();
+		String errorZipcodeField = minValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Min3CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3155,7 +3229,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.propertyZipcode("MaxValidation");
 //		String errorZipcodeField = maxValidation.errorField("PropertyZipcode");
-		String errorZipcodeField = maxValidation.errorMessage();
+		String errorZipcodeField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorPropertyZipCode,
+				CustomerCreateOrganizationPage.PropertyZipcode);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorZipcodeField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max10CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3185,7 +3260,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.productName("MaxValidation");
 //		String errorProductField = maxValidation.errorField("ProductName");
-		String errorProductField = maxValidation.errorMessage();
+		String errorProductField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorProductName,
+				CustomerCreateOrganizationPage.ProductName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorProductField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3211,7 +3287,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.brandName("MaxValidation");
 //		String errorBrandField = maxValidation.errorField("BrandName");
-		String errorBrandField = maxValidation.errorMessage();
+		String errorBrandField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorBrandName,
+				CustomerCreateOrganizationPage.ErrorBrandName);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorBrandField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3237,7 +3314,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.modelNumber("MaxValidation");
 //		String errorModelField = maxValidation.errorField("ModelNumber");
-		String errorModelField = maxValidation.errorMessage();
+		String errorModelField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorModelNumber,
+				CustomerCreateOrganizationPage.ModelNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorModelField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3264,7 +3342,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.serialNumber("MaxValidation");
 //		String errorSerialNumberField = maxValidation.errorField("SerialNumber");
-		String errorSerialNumberField = maxValidation.errorMessage();
+		String errorSerialNumberField = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorSerialNumber,
+				CustomerCreateOrganizationPage.SerialNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorSerialNumberField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3315,7 +3394,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.accessHours("MaxValidation");
 //		String errorAccessHours = maxValidation.errorField("AccessHours");
-		String errorAccessHours = maxValidation.errorMessage();
+		String errorAccessHours = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorAccessHours,
+				CustomerCreateOrganizationPage.AccessHours);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -3342,7 +3422,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 				CustomerCreateOrganizationPage.class);
 		maxValidation.installationNotes("MaxValidation");
 //		String errorAccessHours = maxValidation.errorField("InstallationNotes");
-		String errorAccessHours = maxValidation.errorMessage();
+		String errorAccessHours = maxValidation.errorMessage(CustomerCreateOrganizationPage.ErrorInstallationNotes,
+				CustomerCreateOrganizationPage.InstallationNotes);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorAccessHours);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max2048Validation"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

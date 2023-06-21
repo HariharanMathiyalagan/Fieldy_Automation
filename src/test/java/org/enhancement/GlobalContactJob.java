@@ -131,7 +131,7 @@ public class GlobalContactJob extends BaseClass {
 		mandatory.message("Message");
 		mandatory.createFunction();
 		mandatory.autoCompleteField("GlobalContactVisibleName");
-		mandatory.jobStatusCreation("CreateJob");
+		mandatory.jobStatusCreation("Unassigned");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));

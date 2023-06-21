@@ -1213,5 +1213,109 @@ public class CustomerOrganizationJob extends BaseClass {
 		}
 
 	}
+	
+	@Test(priority = 48)
+	private void dailyRecurring()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports
+				.createTest("Create a Job with Daily basic recurring job");
+		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
+		mandatory.jobStatusCreation("Create");
+		mandatory.jobStatusCreation("DailyRecurring");
+		String errorPasswordField = mandatory.message("FormMessage");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreatedJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
+		}
+	}
+	
+	@Test(priority = 49)
+	private void weeklyRecurring()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports
+				.createTest("Create a Job with Weekly basic recurring job");
+		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
+		mandatory.jobStatusCreation("Create");
+		mandatory.jobStatusCreation("WeeklyRecurring");
+		String errorPasswordField = mandatory.message("FormMessage");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreatedJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
+		}
+	}
+	
+	@Test(priority = 50)
+	private void monthlyRecurring()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports
+				.createTest("Create a Job with Monthly basic recurring job");
+		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
+		mandatory.jobStatusCreation("Create");
+		mandatory.jobStatusCreation("MonthlyRecurring");
+		String errorPasswordField = mandatory.message("FormMessage");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreatedJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
+		}
+	}
+	
+	@Test(priority = 51)
+	private void yearlyRecurring()
+			throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports
+				.createTest("Create a Job with Yearly basic recurring job");
+		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
+		mandatory.jobStatusCreation("Create");
+		mandatory.jobStatusCreation("YearlyRecurring");
+		String errorPasswordField = mandatory.message("FormMessage");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (errorPasswordField.equals(getPropertyValue("JobCreatedMessage"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CreatedJob.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
+			mandatory.message("AlternateForm");
+		}
+	}
 
 }

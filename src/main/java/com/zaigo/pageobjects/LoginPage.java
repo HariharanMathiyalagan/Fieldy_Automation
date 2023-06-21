@@ -30,6 +30,8 @@ public class LoginPage extends BaseClass {
 	private By dashboard = By.id("dashboard-customer-name");
 	private By multiaccount = By.xpath("//h4[contains(text(),'Fieldy Tenant 2')]");
 	private By Dashboard = By.xpath("//*[text()=' Company Performance']");
+	By Welcome = By.xpath("//*[@data-automationid='welcomeText']");
+	By Spinner = By.xpath("//*[@id='submit-button']/span");
 
 	public LoginPage(WebDriver driver) throws IOException {
 		this.driver = driver;
@@ -42,10 +44,10 @@ public class LoginPage extends BaseClass {
 		driver.get(APP_URL);
 	}
 
-	public Boolean conditionChecking(By element) {
+	public Boolean conditionChecking(By element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 100);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -56,32 +58,35 @@ public class LoginPage extends BaseClass {
 	static String value;
 
 	public String dashBoardText() throws IOException {
-		Boolean condition = true;
-		this.checkDashboardPage();
-		if (this.conditionChecking(Dashboard)) {
-			value = this.getText(Dashboard);
-		} else {
+		Boolean conditionCheck = true;
+		this.invisible(Spinner);
+		if (!this.conditionChecking(Dashboard, 20)) {
 			do {
-				driver.navigate().refresh();
-				if (this.conditionChecking(Dashboard)) {
-					value = this.getText(Dashboard);
-					condition = false;
+				if (this.conditionChecking(username_by, 3)) {
+					this.userField(getPropertyValueUpdate("UserName"));
+					this.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
+					this.clickLoginButton();
+					this.invisible(Spinner);
+					if (this.conditionChecking(Dashboard, 20)) {
+						value = this.getText(Dashboard);
+						conditionCheck = false;
+					}
+				} else {
+					if (!this.conditionChecking(Dashboard, 1)) {
+						value = "Page Loading more than 20 sec";
+						conditionCheck = false;
+					}
 				}
-			} while (condition);
+			} while (conditionCheck);
+		} else {
+			value = this.getText(Dashboard);
 		}
 		return value;
 	}
 
-	public void checkDashboardPage() throws IOException {
-		if (!this.conditionChecking(Dashboard)) {
-			do {
-				this.userField(getPropertyValueUpdate("UserName"));
-				this.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
-				this.clickLoginButton();
-			} while (!this.conditionChecking(Dashboard));
-
-		}
-
+	private void invisible(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
 	}
 
 	public String getText(By element) {
