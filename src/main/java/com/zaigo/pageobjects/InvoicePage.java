@@ -60,7 +60,7 @@ public class InvoicePage extends BaseClass {
 	String characters256 = RandomStringUtils.randomAlphabetic(257);
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
-	String characters16 = RandomStringUtils.randomAlphabetic(250);
+	String characters16 = RandomStringUtils.randomAlphabetic(260);
 	String characters2048 = RandomStringUtils.randomAlphabetic(20001);
 	String numberCharacter15 = RandomStringUtils.randomNumeric(15);
 	String QuantityValue = RandomStringUtils.randomNumeric(2);
