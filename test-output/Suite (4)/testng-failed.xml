@@ -3,55 +3,38 @@
 <suite name="Failed suite [Suite (4)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.ServiceModule">
+      <class name="org.test.ProductModule">
         <methods>
-          <include name="updateProduct"/>
-          <include name="editafterDecimalPointPriceField"/>
-          <include name="editmandatoryValidationTaxName"/>
           <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="exitBrowser"/>
           <include name="editbeforeDecimalPointPriceField"/>
-          <include name="editmaximumValidationProductName"/>
-          <include name="searchServiceName"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="editafterDecimalPointPriceField"/>
+          <include name="editmaximumValidationSKU"/>
+          <include name="searchProductName"/>
+          <include name="updateProduct"/>
+          <include name="editafterDecimalPointQuantityHandField"/>
+          <include name="editbeforeDecimalPointQuantityHandField"/>
           <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="deleteAfterCatch"/>
           <include name="setup"/>
+          <include name="editbeforeDecimalPointLowStockThresoldField"/>
+          <include name="editmaximumValidationQuantityHand"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
           <include name="editmaximumValidationPrice"/>
+          <include name="deleteBeforeCatch"/>
           <include name="updateButton"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.BusinessUnit">
-        <methods>
-          <include name="deleteLeadSource"/>
-          <include name="editFormLabel"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="inactiveLeadSource"/>
+          <include name="editmaximumValidationLowStockThresold"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="editafterDecimalPointLowStockThresoldField"/>
+          <include name="editmaximumValidationProductName"/>
           <include name="exitBrowser"/>
-          <include name="deleteBusinessUnit"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.BusinessUnit -->
-      <class name="org.test.LeadSource">
-        <methods>
-          <include name="editFormLabel"/>
-          <include name="deleteBusinessUnit"/>
-          <include name="exitBrowser"/>
-          <include name="deleteLeadSource"/>
-          <include name="inactiveLeadSource"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- org.test.LeadSource -->
+      </class> <!-- org.test.ProductModule -->
       <class name="org.test.CategoryModule">
         <methods>
+          <include name="reflectCategoryService"/>
           <include name="deleteAfterCatch"/>
+          <include name="inactiveProductService"/>
           <include name="setup"/>
           <include name="reflectCategoryProduct"/>
           <include name="inactiveProductCategory"/>
@@ -63,49 +46,16 @@
       </class> <!-- org.test.CategoryModule -->
       <class name="org.test.ServiceType">
         <methods>
+          <include name="verifyUpdateButtonExist"/>
           <include name="deleteAfterCatch"/>
-          <include name="inactiveLeadSource"/>
-          <include name="reflectCreateContactPage"/>
-          <include name="deleteLeadSource"/>
+          <include name="leadSourceUpdate"/>
           <include name="setup"/>
           <include name="deleteBeforeCatch"/>
-          <include name="deleteBusinessUnit"/>
+          <include name="editmandatoryValidation"/>
           <include name="exitBrowser"/>
-          <include name="editFormLabel"/>
+          <include name="editmaximumValidationLeadSource"/>
         </methods>
       </class> <!-- org.test.ServiceType -->
-      <class name="org.test.ProductModule">
-        <methods>
-          <include name="editbeforeDecimalPointPriceField"/>
-          <include name="searchInvalid"/>
-          <include name="reflectQuotePage"/>
-          <include name="editafterDecimalPointPriceField"/>
-          <include name="editmaximumValidationSKU"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmaximumValidationLowStockThresold"/>
-          <include name="editafterDecimalPointLowStockThresoldField"/>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="inactiveProduct"/>
-          <include name="searchProductName"/>
-          <include name="updateProduct"/>
-          <include name="editafterDecimalPointQuantityHandField"/>
-          <include name="editbeforeDecimalPointQuantityHandField"/>
-          <include name="editbeforeDecimalPointLowStockThresoldField"/>
-          <include name="editmaximumValidationQuantityHand"/>
-          <include name="deleteProduct"/>
-          <include name="editmaximumValidationPrice"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="updateButton"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="deletedProduct"/>
-          <include name="editmaximumValidationProductName"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.ProductModule -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (4)] -->

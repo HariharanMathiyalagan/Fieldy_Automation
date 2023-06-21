@@ -873,7 +873,7 @@ public class QuotePage extends BaseClass {
 
 	public void descriptionValidation(String value) throws IOException {
 		if (value.equals("MaxCharacter")) {
-			this.validationTab(Description, characters256);
+			this.validationTab(Description, characters2048);
 		} else if (value.equals("value")) {
 			this.inputText(Description, getPropertyValue("Description"));
 		}

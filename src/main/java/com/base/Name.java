@@ -26,6 +26,9 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.Pattern;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
@@ -57,12 +60,30 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name {
 	public static void main(String[] args) {
+		String dummyPAN = generateDummyPAN();
+		System.out.println(dummyPAN);
+	}
 
-		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
-		driver.get("https://www.facebook.com/login");
-//		driver.switchTo().newWindow(WindowType.WINDOW);
+	private static String generateDummyPAN() {
+		Random random = new Random();
+		StringBuilder sb = new StringBuilder();
+
+		// Generate first five characters (uppercase letters)
+		for (int i = 0; i < 5; i++) {
+			char randomChar = (char) (random.nextInt(26) + 'A');
+			sb.append(randomChar);
+		}
+
+		// Generate next four characters (digits)
+		for (int i = 0; i < 4; i++) {
+			int randomDigit = random.nextInt(10);
+			sb.append(randomDigit);
+		}
+
+		// Generate last character (uppercase letter)
+		char randomChar = (char) (random.nextInt(26) + 'A');
+		sb.append(randomChar);
+
+		return sb.toString();
 	}
 }
-
-
