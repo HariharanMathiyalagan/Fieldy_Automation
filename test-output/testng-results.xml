@@ -1,4 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testng-results ignored="0" total="8" passed="4" failed="1" skipped="3">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-06-21T15:20:05 IST" name="Default suite" finished-at="2023-06-21T15:22:12 IST" duration-ms="126769">
+    <groups>
+    </groups>
+    <test started-at="2023-06-21T15:20:05 IST" name="Default test" finished-at="2023-06-21T15:22:12 IST" duration-ms="126769">
+      <class name="org.enhancement.GlobalContactRequest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:05 IST" name="setup" finished-at="2023-06-21T15:20:08 IST" duration-ms="2729" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:08 IST" name="deleteBeforeCatch" finished-at="2023-06-21T15:20:08 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="loginPage()[pri:-1, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:08 IST" name="loginPage" finished-at="2023-06-21T15:20:41 IST" duration-ms="32311" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginPage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:41 IST" name="deleteAfterCatch" finished-at="2023-06-21T15:20:41 IST" duration-ms="23" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:41 IST" name="deleteBeforeCatch" finished-at="2023-06-21T15:20:41 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="requestModule()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:41 IST" name="requestModule" finished-at="2023-06-21T15:20:43 IST" duration-ms="2040" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- requestModule -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:43 IST" name="deleteAfterCatch" finished-at="2023-06-21T15:20:43 IST" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:43 IST" name="deleteBeforeCatch" finished-at="2023-06-21T15:20:43 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="labelValidation()[pri:1, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:43 IST" name="labelValidation" finished-at="2023-06-21T15:20:44 IST" duration-ms="1318" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- labelValidation -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:44 IST" name="deleteAfterCatch" finished-at="2023-06-21T15:20:44 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:44 IST" name="deleteBeforeCatch" finished-at="2023-06-21T15:20:44 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createRequest_FromDateandTime_ToDateandTime()[pri:2, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:20:44 IST" name="createRequest_FromDateandTime_ToDateandTime" finished-at="2023-06-21T15:21:35 IST" duration-ms="50604" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequest_FromDateandTime_ToDateandTime -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:21:35 IST" name="deleteAfterCatch" finished-at="2023-06-21T15:21:35 IST" duration-ms="59" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:21:35 IST" name="deleteBeforeCatch" finished-at="2023-06-21T15:21:35 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createRequest_FromDateandTime_ToDateandTime()[pri:2, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:21:35 IST" name="createRequest_FromDateandTime_ToDateandTime" finished-at="2023-06-21T15:22:12 IST" duration-ms="37523" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:353)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:432)
+at org.openqa.selenium.By$ByXPath.findElements(By.java:348)
+at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:311)
+at org.openqa.selenium.support.pagefactory.ByAll.findElement(ByAll.java:53)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy15.isDisplayed(Unknown Source)
+at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:314)
+at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:43)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:300)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:297)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+at com.zaigo.pageobjects.RequestPage.clearField(RequestPage.java:89)
+at com.zaigo.pageobjects.RequestPage.message(RequestPage.java:904)
+at com.zaigo.pageobjects.RequestPage.createFunction(RequestPage.java:1291)
+at org.enhancement.GlobalContactRequest.createRequest_FromDateandTime_ToDateandTime(GlobalContactRequest.java:133)
+=======
 <testng-results ignored="0" total="280" passed="217" failed="4" skipped="59">
   <reporter-output>
   </reporter-output>
@@ -3941,6 +4041,7 @@ at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
 at com.zaigo.pageobjects.InvoicePage.mouseActionClick(InvoicePage.java:182)
 at com.zaigo.pageobjects.InvoicePage.attachmentFileCheck(InvoicePage.java:1287)
 at org.test.CustomerOrganizationInvoice.createInvoice(CustomerOrganizationInvoice.java:851)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3969,6 +4070,28 @@ at org.testng.TestNG.run(TestNG.java:1031)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+<<<<<<< HEAD
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequest_FromDateandTime_ToDateandTime -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteAfterCatch" finished-at="2023-06-21T15:22:12 IST" duration-ms="0" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+=======
 Caused by: org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
 from unknown error: web view not found
   (Session info: chrome=114.0.5735.134)
@@ -4031,12 +4154,19 @@ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpR
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
 at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
 at org.openqa.selenium.remote.RemoteWebDriver$RemoteWebDriverOptions.deleteAllCookies(RemoteWebDriver.java:694)
+<<<<<<< HEAD
+at org.enhancement.GlobalContactRequest.deleteAfterCatch(GlobalContactRequest.java:56)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+=======
 at org.test.CustomerOrganizationInvoice.deleteAfterCatch(CustomerOrganizationInvoice.java:64)
 at jdk.internal.reflect.GeneratedMethodAccessor40.invoke(Unknown Source)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
@@ -4070,6 +4200,30 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
+<<<<<<< HEAD
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteBeforeCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132689" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createRequest_FromDateandTime_ToDateandTime()[pri:2, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="createRequest_FromDateandTime_ToDateandTime" finished-at="2023-06-21T15:22:12 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+=======
           </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
           <reporter-output>
           </reporter-output>
@@ -4107,12 +4261,19 @@ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpR
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
 at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
 at org.openqa.selenium.remote.RemoteWebDriver$RemoteWebDriverOptions.deleteAllCookies(RemoteWebDriver.java:694)
+<<<<<<< HEAD
+at org.enhancement.GlobalContactRequest.deleteAfterCatch(GlobalContactRequest.java:56)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+=======
 at org.test.CustomerOrganizationInvoice.deleteAfterCatch(CustomerOrganizationInvoice.java:64)
 at jdk.internal.reflect.GeneratedMethodAccessor40.invoke(Unknown Source)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
@@ -4146,6 +4307,100 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
+<<<<<<< HEAD
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequest_FromDateandTime_ToDateandTime -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteAfterCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132694" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteBeforeCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132695" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createRequest_FromDateandTime_ToDateandTime()[pri:2, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="createRequest_FromDateandTime_ToDateandTime" finished-at="2023-06-21T15:22:12 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver$RemoteWebDriverOptions.deleteAllCookies(RemoteWebDriver.java:694)
+at org.enhancement.GlobalContactRequest.deleteAfterCatch(GlobalContactRequest.java:56)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+at org.testng.internal.TestInvoker.runAfterGroupsConfigurations(TestInvoker.java:676)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:660)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequest_FromDateandTime_ToDateandTime -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteAfterCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132699" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteBeforeCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132700" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createRequest_FromDateandTime_ToDateandTime()[pri:2, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="createRequest_FromDateandTime_ToDateandTime" finished-at="2023-06-21T15:22:12 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'DESKTOP-5M7AM2E', ip: '192.168.56.1', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+=======
           </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
           <reporter-output>
           </reporter-output>
@@ -4267,12 +4522,19 @@ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpR
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
 at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
 at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
 at org.openqa.selenium.remote.RemoteWebDriver$RemoteWebDriverOptions.deleteAllCookies(RemoteWebDriver.java:694)
+<<<<<<< HEAD
+at org.enhancement.GlobalContactRequest.deleteAfterCatch(GlobalContactRequest.java:56)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+=======
 at org.test.CustomerOrganizationInvoice.deleteAfterCatch(CustomerOrganizationInvoice.java:64)
 at jdk.internal.reflect.GeneratedMethodAccessor40.invoke(Unknown Source)
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
@@ -4306,6 +4568,23 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
+<<<<<<< HEAD
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequest_FromDateandTime_ToDateandTime -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="deleteAfterCatch" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132706" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.enhancement.GlobalContactRequest@6e0f5f7f]" started-at="2023-06-21T15:22:12 IST" name="exitBrowser" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687341132707" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- exitBrowser -->
+      </class> <!-- org.enhancement.GlobalContactRequest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+=======
           </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
           <reporter-output>
           </reporter-output>
@@ -7121,4 +7400,5 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
       </class> <!-- org.test.CustomerOrganizationInvoice -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
 </testng-results>

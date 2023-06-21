@@ -175,7 +175,7 @@ public class CustomerContactQuote extends BaseClass {
 		}
 	}
 
-	@Test(priority = 29, invocationCount = 5)
+	@Test(priority = 29)
 	private void createQuote() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports
 				.createTest("Verify Quote is created successfully from Customer Contact->Create Quote");
@@ -188,7 +188,6 @@ public class CustomerContactQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("CreateMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.mouseActionClick(QuotePage.CreateButton);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -196,7 +195,6 @@ public class CustomerContactQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteCreation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
-			mandatory.mouseActionClick(QuotePage.CreateButton);
 		}
 	}
 }

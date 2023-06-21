@@ -1,5 +1,6 @@
 package org.enhancement;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -70,7 +71,7 @@ public class GlobalContactQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(loginInPage.getPropertyValue("ValidationOfLandingPage"))) {
-			extentTest.log(Status.PASS, "Actual & Exp	ected Validation are Equal");
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -148,4 +149,6 @@ public class GlobalContactQuote extends BaseClass {
 			mandatory.mouseActionClick(QuotePage.CreateButton);
 		}
 	}
+
+
 }

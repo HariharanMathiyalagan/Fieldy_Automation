@@ -35,6 +35,7 @@ import org.testng.SkipException;
 import com.aventstack.extentreports.Status;
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
+import com.mifmif.common.regex.util.Iterator;
 
 public class QuotePage extends BaseClass {
 	WebDriver driver;
@@ -67,7 +68,7 @@ public class QuotePage extends BaseClass {
 	String TaxValue = RandomStringUtils.randomNumeric(2);
 	String ReferencePrefix = RandomStringUtils.randomAlphabetic(3).toUpperCase();
 	String ReferenceNo = RandomStringUtils.randomNumeric(3);
-	
+
 	public QuotePage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -114,7 +115,7 @@ public class QuotePage extends BaseClass {
 
 	}
 
-	private void mouseActionClick(By element) {
+	public void mouseActionClick(By element) {
 		wait = new WebDriverWait(driver, 50);
 		WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		Actions actions = new Actions(driver);
@@ -127,10 +128,15 @@ public class QuotePage extends BaseClass {
 	}
 
 	public void mouseActionClick(WebElement element) {
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 50);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
+	}
+
+	public void newWindowWait() {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.numberOfWindowsToBe(3));
 	}
 
 	public void assertName(By element, String text) {
@@ -142,6 +148,10 @@ public class QuotePage extends BaseClass {
 	private void validationTab(By element, String text) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text, Keys.TAB);
+	}
+
+	public void newWindow(String value) {
+		((JavascriptExecutor) driver).executeScript("window.open('" + value + "','_blank');");
 	}
 
 	private void tagValidation(By element, String text) {
@@ -159,6 +169,12 @@ public class QuotePage extends BaseClass {
 	private String getText(By element) {
 		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
+		return until;
+	}
+
+	private String getTexts(By element, int value) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).get(value).getText();
 		return until;
 	}
 
@@ -199,6 +215,12 @@ public class QuotePage extends BaseClass {
 	public String getTextAttribute(By element) {
 		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("value");
+		return until;
+	}
+
+	public String getTextAttribute1(By element) {
+		wait = new WebDriverWait(driver, 10);
+		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getAttribute("readOnly");
 		return until;
 	}
 
@@ -365,7 +387,11 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[1]//div[1]//div[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[1]") })
 	WebElement ThreeDots;
-
+	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[1]/i"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[4]//td[1]//div[1]//div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[4]//td[1]") })
+	WebElement ThreeDots1;
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//ul//li[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//ul//li[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list']//tr[2]//ul//li[2]") })
@@ -470,8 +496,20 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListDate;
 
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[4]") })
+	WebElement Share;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[5]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list_aserpttbl']/tbody/tr[4]/td[1]/div/div[2]/ul/li[5]") })
+	WebElement PDF;
+
+	By ShareField = By.id("share_url");
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	By CreateFrom = By.id("quote-from-date-filter");
 	By CreateTo = By.id("quote-to-date-filter");
+	public static By CancelButton = By.id("quote-share-popup-nav-url");
 
 	public int getCount(int value) {
 		if (value == 1) {
@@ -613,9 +651,11 @@ public class QuotePage extends BaseClass {
 				} while (condition);
 			}
 			this.inputText(OrganizationName, fakeCompanyName);
+//			this.inputText(OrganizationName, "Gupta Pvt Ltd");			
 			ContactFirstName = this.getTextAttribute(OrganizationName);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			this.inputText(EmailField, fakeEmail);
+//			this.inputText(EmailField, "jitendra.shah@example.com");
 			this.inputText(Website, fakeWebsite);
 			this.inputText(Address1Field, fakeAddress1);
 			this.inputText(Address2Field, fakeAddress2);
@@ -985,7 +1025,7 @@ public class QuotePage extends BaseClass {
 		Boolean conditionCheck = true;
 		if (value.equals("message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
-				responseMessage = this.getText(Message);
+				responseMessage = this.getTexts(Message, 0);
 				this.invisible(Message);
 				return responseMessage;
 			} else {
@@ -997,13 +1037,18 @@ public class QuotePage extends BaseClass {
 						this.mouseActionClick(Save);
 					}
 					if (this.conditionChecking(Message)) {
-						responseMessage = this.getText(Message);
+						responseMessage = this.getTexts(Message, 0);
 						this.invisible(Message);
 						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| responseMessage.equals(getPropertyValue("CreatedTax"))
 								|| responseMessage.equals(getPropertyValue("CreateMessage"))
-								|| responseMessage.equals(getPropertyValue("UpdatedMessage")) || responseMessage.equals(
-										"The doc expiry date must be a date after or equal to " + currentDate + ".")) {
+								|| responseMessage.equals(getPropertyValue("UpdatedMessage"))
+								|| responseMessage.equals(
+										"The doc expiry date must be a date after or equal to " + currentDate + ".")
+								|| responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
 							conditionCheck = false;
 						}
 					}
@@ -1022,6 +1067,7 @@ public class QuotePage extends BaseClass {
 					this.clearField(OrganizationName);
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
+					ContactFirstName = this.getTextAttribute(OrganizationName);
 					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("AlreadyTax"))) {
 					this.clearField(TaxName);
@@ -1035,7 +1081,7 @@ public class QuotePage extends BaseClass {
 					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
-					responseMessage = this.getText(Message);
+					responseMessage = this.getTexts(Message, 0);
 					this.invisible(Message);
 					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
@@ -1048,11 +1094,13 @@ public class QuotePage extends BaseClass {
 							this.mouseActionClick(SaveButton);
 						}
 						if (this.conditionChecking(Message)) {
-							responseMessage = this.getText(Message);
+							responseMessage = this.getTexts(Message, 0);
 							this.invisible(Message);
 							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 									|| responseMessage.equals(getPropertyValue("CreatedTax"))) {
 								conditionCheck = false;
+							} else {
+								this.message("AlternateFunction");
 							}
 						}
 					} while (conditionCheck);
@@ -1064,7 +1112,7 @@ public class QuotePage extends BaseClass {
 
 	static String searchData;
 
-	public String listTextValidation(String value) {
+	public String listTextValidation(String value) throws InterruptedException, AWTException {
 		driver.manage().deleteAllCookies();
 		if (value.equals("ListStatus")) {
 			if (!this.conditionChecking(ListQuoteStatus)) {
@@ -1109,10 +1157,26 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("InvalidList")) {
 			searchData = this.getText(Invalid);
+		} else if (value.equals("SharePage")) {
+			this.mouseActionClick(ThreeDots1);
+			this.mouseActionClick(Share);
+			this.visibility(Spinner);
+			this.invisible(Spinner);
+			this.newWindow(this.getTextAttribute(ShareField));
+		} else if (value.equals("PDFPage")) {
+			this.mouseActionClick(ThreeDots1);
+			if (!this.conditionChecking1(PDF, 2)) {
+				do {
+					this.mouseActionClick(ThreeDots1);
+				} while (!this.conditionChecking1(PDF, 2));
+			}
+			this.mouseActionClick(PDF);
+			this.newWindowWait();
 		}
 		return searchData;
 	}
 
+	String textAttribute;
 	static int parseInt;
 
 	public int getCount() {
@@ -1253,11 +1317,21 @@ public class QuotePage extends BaseClass {
 		this.elementClickable(SearchButton);
 	}
 
-	By Reset = By.xpath("//*[contains(text(),'Reset Search')]");
+	public static By Reset = By.xpath("//*[contains(text(),'Reset Search')]");
 
 	public void clickEvent() {
 		this.clearField(Search);
+	}
 
+	public void reset() {
+		this.mouseActionClick(Reset);
+		if (this.conditionChecking(ListDate)) {
+			if (this.getText(ListQuoteNo).equals("No Result Found")) {
+				do {
+					this.mouseActionClick(Reset);
+				} while (this.getText(ListQuoteNo).equals("No Result Found"));
+			}
+		}
 	}
 
 	public void createFunction() throws IOException, InterruptedException {
@@ -1288,26 +1362,26 @@ public class QuotePage extends BaseClass {
 							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 				} while (!this.conditionChecking1(FirstAttachment, 3));
 			}
-		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
-			this.mouseActionClick(FirstAttachment);
+		} else if (value.equals("CheckResponse") || value.equals("NewWindow")) {
+			if (value.equals("CheckResponse")) {
+				this.mouseActionClick(FirstAttachment);
+			}
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
 			driver.switchTo().window(list.get(1));
-			String currentUrl = driver.getCurrentUrl();
-			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
-			connection.setRequestMethod("HEAD");
-			connection.connect();
 		} else if (value.equals("ParentWindow")) {
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
 			driver.switchTo().window(list.get(0));
 		}
 	}
 
-	public int responseCode() throws IOException {
+	public int responseCode() throws IOException, InterruptedException {
+		String currentUrl = driver.getCurrentUrl();
+		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+		connection.setRequestMethod("HEAD");
+		connection.connect();
 		int responseCode = connection.getResponseCode();
-		if (responseCode == 200) {
-			return responseCode;
-		} else {
-			return responseCode;
-		}
+		return responseCode;
 	}
 }

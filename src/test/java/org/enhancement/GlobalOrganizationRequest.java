@@ -133,7 +133,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 		mandatory.message("Message");
 		mandatory.createFunction();
 		mandatory.autoCompleteField("OrgVisibleName");
-		mandatory.validData("GlobalSchedule");
+		mandatory.validData("Unassigned");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));

@@ -16,7 +16,7 @@
 			<class name="org.enhancement.CustomerContactModule" />
 
 			<class name="org.enhancement.CustomerOrganizationModule" />
-			
+
 			<class name="org.enhancement.CustomerContactJob" />
 
 			<class name="org.enhancement.CustomerOrganizationJob" />
@@ -32,7 +32,7 @@
 			<class name="org.enhancement.GlobalContactRequest" />
 
 			<class name="org.enhancement.GlobalOrganizationRequest" />
-			
+
 			<class name="org.enhancement.CustomerContactQuote" />
 
 			<class name="org.enhancement.CustomerOrganizationQuote" />
@@ -48,7 +48,7 @@
 			<class name="org.enhancement.GlobalContactInvoice" />
 
 			<class name="org.enhancement.GlobalOrganizationInvoice" />
-			
+
 			<class name="org.enhancement.BusinessUnit" />
 
 			<class name="org.enhancement.LeadSource" />

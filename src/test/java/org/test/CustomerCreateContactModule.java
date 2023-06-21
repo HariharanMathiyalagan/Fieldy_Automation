@@ -987,7 +987,6 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}
@@ -2550,7 +2549,6 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("Edit.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}

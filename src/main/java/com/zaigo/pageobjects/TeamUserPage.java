@@ -246,7 +246,10 @@ public class TeamUserPage extends BaseClass {
 	By Admin = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[1]");
 	By Manager = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[2]");
 	By Operator = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[3]");
-	By Technician = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[4]");
+//	By Technician = By.xpath("(//*[@class='p-2 list-hover-bg team-user-type w-20-ellipsis w-100'])[4]");
+	@FindAll({ @FindBy(xpath = "//*[@id='role_id-autocomplete-list']//div[4]"),
+			@FindBy(xpath = "//*[contains(text(),'No Data Found')]") })
+	WebElement Technician;
 	By JobTittle = By.id("job_title");
 	By ErrorJobTittle = By.id("job_title_error");
 	By Email = By.id("email");
@@ -386,11 +389,10 @@ public class TeamUserPage extends BaseClass {
 		}
 	}
 
-	public String errorMessage(By value) {
+	public String errorMessage(By value, By element) {
 		if (!this.conditionChecking(value, 3)) {
 			do {
-				this.mouseActionClick(SaveComplete);
-				this.invisible(Spinner);
+				this.validationTab(element, "");
 			} while (!this.conditionChecking(value, 3));
 		}
 		return this.getText(value);
@@ -398,33 +400,33 @@ public class TeamUserPage extends BaseClass {
 
 	public String errorField(String value) {
 		if (value.equals("FirstName")) {
-			return this.errorMessage(ErrorFirstName);
+			return this.errorMessage(ErrorFirstName, FirstName);
 		} else if (value.equals("LastName")) {
-			return this.errorMessage(ErrorLastName);
+			return this.errorMessage(ErrorLastName, LastName);
 		} else if (value.equals("JobTittle")) {
-			return this.errorMessage(ErrorJobTittle);
+			return this.errorMessage(ErrorJobTittle, JobTittle);
 		} else if (value.equals("Email")) {
-			return this.errorMessage(ErrorEmail);
+			return this.errorMessage(ErrorEmail, Email);
 		} else if (value.equals("UserType")) {
-			return this.errorMessage(ErrorType);
+			return this.errorMessage(ErrorType, Type);
 		} else if (value.equals("PhoneNumber")) {
-			return this.errorMessage(ErrorPhoneNumber);
+			return this.errorMessage(ErrorPhoneNumber, PhoneNumber);
 		} else if (value.equals("LocationName")) {
-			return this.errorMessage(ErrorLocationName);
+			return this.errorMessage(ErrorLocationName, LocationName);
 		} else if (value.equals("Address1")) {
-			return this.errorMessage(ErrorAddress1);
+			return this.errorMessage(ErrorAddress1, Address1);
 		} else if (value.equals("Address2")) {
-			return this.errorMessage(ErrorAddress2);
+			return this.errorMessage(ErrorAddress2, Address2);
 		} else if (value.equals("City")) {
-			return this.errorMessage(ErrorCity);
+			return this.errorMessage(ErrorCity, City);
 		} else if (value.equals("State")) {
-			return this.errorMessage(ErrorState);
+			return this.errorMessage(ErrorState, State);
 		} else if (value.equals("Zipcode")) {
-			return this.errorMessage(ErrorZipcode);
+			return this.errorMessage(ErrorZipcode, Zipcode);
 		} else if (value.equals("Invalid")) {
 			return this.getText(InValid);
 		} else if (value.equals("CompanyName")) {
-			return this.errorMessage(CompanyNameError);
+			return this.errorMessage(CompanyNameError, CompanyName);
 		}
 		return value;
 	}
@@ -607,26 +609,26 @@ public class TeamUserPage extends BaseClass {
 			this.inputText(Search, listData);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("FirstName")) {
-			if (!this.conditionChecking(ListFirstName, 20)) {
+			if (!this.conditionChecking(ListFirstName, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListFirstName, 20));
+				} while (!this.conditionChecking(ListFirstName, 50));
 			}
 			listData = this.getText(ListFirstName);
 			return listData;
 		} else if (value.equals("PhoneNumber")) {
-			if (!this.conditionChecking(ListPhoneNumber, 20)) {
+			if (!this.conditionChecking(ListPhoneNumber, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListPhoneNumber, 20));
+				} while (!this.conditionChecking(ListPhoneNumber, 50));
 			}
 			listData = this.getText(ListPhoneNumber);
 			return listData;
 		} else if (value.equals("Email")) {
-			if (!this.conditionChecking(ListEmail, 20)) {
+			if (!this.conditionChecking(ListEmail, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListEmail, 20));
+				} while (!this.conditionChecking(ListEmail, 50));
 			}
 			listData = this.getText(ListEmail);
 			return listData;
@@ -637,26 +639,26 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("ContractorSearchData")) {
 			this.tagValidation(ContractorSearch, listData);
 		} else if (value.equals("ContractorPhoneNumber")) {
-			if (!this.conditionChecking(ListContractorPhoneNumber, 20)) {
+			if (!this.conditionChecking(ListContractorPhoneNumber, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListContractorPhoneNumber, 20));
+				} while (!this.conditionChecking(ListContractorPhoneNumber, 50));
 			}
 			listData = this.getText(ListContractorPhoneNumber);
 			return listData;
 		} else if (value.equals("ContractorListEmail")) {
-			if (!this.conditionChecking(ListContractorEmail, 20)) {
+			if (!this.conditionChecking(ListContractorEmail, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListContractorEmail, 20));
+				} while (!this.conditionChecking(ListContractorEmail, 50));
 			}
 			listData = this.getText(ListContractorEmail);
 			return listData;
 		} else if (value.equals("ContractorListCompany")) {
-			if (!this.conditionChecking(ListCompanyFirstName, 20)) {
+			if (!this.conditionChecking(ListCompanyFirstName, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListCompanyFirstName, 20));
+				} while (!this.conditionChecking(ListCompanyFirstName, 50));
 			}
 			listData = this.getText(ListCompanyFirstName);
 			return listData;
@@ -664,10 +666,10 @@ public class TeamUserPage extends BaseClass {
 			this.mouseAction(FilterByCompany);
 			this.mouseActionClick(ListFilterCompany);
 			this.mouseActionClick(FilterSearch);
-			if (!this.conditionChecking(ListCompanyFirstName, 20)) {
+			if (!this.conditionChecking(ListCompanyFirstName, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListCompanyFirstName, 20));
+				} while (!this.conditionChecking(ListCompanyFirstName, 50));
 			}
 			String text = this.getText(ListCompanyFirstName);
 			return text;
@@ -756,11 +758,18 @@ public class TeamUserPage extends BaseClass {
 			this.inputText(LastName, fakeLastName);
 			lastName = this.getTextAttribute(LastName);
 			this.mouseActionClick(Type);
+			if (this.getText(Technician).equals("No Data Found")) {
+				do {
+					Thread.sleep(5000);
+					this.mouseActionClick(Type);
+				} while (this.getText(Technician).equals("No Data Found"));
+			}
 			this.mouseActionClick(Technician);
 			type = this.getTextAttribute(Type);
 			this.inputText(JobTittle, fakeTittle);
 			jobTittle = this.getTextAttribute(JobTittle);
 			this.inputText(Email, fakeEmail);
+//			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
@@ -799,7 +808,8 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(ServiceType);
 			this.mouseActionClick(Repair);
 			serviceType = this.getTextAttribute(ServiceType);
-			this.inputText(Email, fakeEmail);
+//			this.inputText(Email, fakeEmail);
+			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
@@ -818,37 +828,59 @@ public class TeamUserPage extends BaseClass {
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
 		if (value.equals("Message")) {
-			if (this.conditionChecking(Message, 20)) {
+			if (this.conditionChecking(Message, 50)) {
 				listData = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (this.conditionChecking(Message, 20)) {
+					if (this.conditionChecking(Message, 50)) {
 						listData = this.getText(Message);
 						this.invisible(Message);
 						if (listData.equals(getPropertyValue("UserCreatedMessgae"))
-								|| listData.equals(getPropertyValue("UserUpdatedMessage"))) {
+								|| listData.equals(getPropertyValue("UserUpdatedMessage"))
+								|| listData.equals(getPropertyValue("UserEmailAlreadyExist"))
+								|| listData.equals(getPropertyValue("ContractorCreatedMessage"))
+								|| listData.equals(getPropertyValue("ContractorUpdatedMessage"))) {
 							check = false;
 						}
 					}
 				} while (check);
 			}
 		} else if (value.equals("AlternateFunction")) {
-			if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))
-					&& (label.equals(getPropertyValue("TeamCreateUserPage"))
-							|| label.equals(getPropertyValue("TeamUserEditPage")))) {
-				this.mouseActionClick(User);
-				this.visibility(PageLand);
-			} else if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))
-					&& (label.equals(getPropertyValue("TeamCreateContractorPage"))
-							|| label.equals(getPropertyValue("TeamEditContractorPage")))) {
-				this.mouseActionClick(User);
-				this.visibility(PageLand);
-				this.mouseActionClick(Contractor);
-				this.visibility(PageLand);
-			}
+			do {
+				if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))) {
+					this.mouseActionClick(Previous);
+					this.clearField(Email);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(Email, fakeEmail);
+					this.mouseActionClick(Next);
+					this.mouseActionClick(SaveComplete);
+				}
+				if (this.conditionChecking(Message, 50)) {
+					listData = this.getText(Message);
+					this.invisible(Message);
+					check = false;
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveComplete);
+						if (this.conditionChecking(Message, 20)) {
+							listData = this.getText(Message);
+							this.invisible(Message);
+							if (listData.equals(getPropertyValue("UserCreatedMessgae"))
+									|| listData.equals(getPropertyValue("UserUpdatedMessage"))
+									|| listData.equals(getPropertyValue("UserEmailAlreadyExist"))
+									|| listData.equals(getPropertyValue("ContractorCreatedMessage"))
+									|| listData.equals(getPropertyValue("ContractorUpdatedMessage"))) {
+								check = false;
+							}
+						}
+					} while (check);
+				}
+			} while (check);
 		}
 		return listData;
 	}
@@ -946,7 +978,8 @@ public class TeamUserPage extends BaseClass {
 				BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\pic.jpg");
 				break;
 			case "Contractor":
-				BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\pexels-suliman-sallehi-1704488.jpg");
+				BaseClass.attachmentFile(
+						System.getProperty("user.dir") + "\\ImagePicture\\pexels-suliman-sallehi-1704488.jpg");
 				break;
 			default:
 				break;

@@ -3,19 +3,49 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+<<<<<<< HEAD
+      <class name="org.enhancement.TeamUserContractor">
+        <methods>
+          <include name="userCreate"/>
+          <include name="exitBrowser"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="deleteBeforeCatch"/>
+        </methods>
+      </class> <!-- org.enhancement.TeamUserContractor -->
+      <class name="org.enhancement.GlobalOrganizationJob">
+        <methods>
+=======
       <class name="org.test.GlobalContactInvoice">
         <methods>
           <include name="beforeDecimalPointTaxField"/>
           <include name="afterDecimalEditPointTaxField"/>
           <include name="maxEditLimitTaxField"/>
           <include name="deleteAfterCatch"/>
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
           <include name="deleteBeforeCatch"/>
           <include name="beforeDecimalEditPointTaxField"/>
           <include name="exitBrowser"/>
+<<<<<<< HEAD
+          <include name="createJob_FromDateandTime_ToDateandTime"/>
+=======
           <include name="afterDecimalPointTaxField"/>
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
           <include name="setup"/>
           <include name="maxLimitTaxField"/>
         </methods>
+<<<<<<< HEAD
+      </class> <!-- org.enhancement.GlobalOrganizationJob -->
+      <class name="org.enhancement.CustomerOrganizationRequest">
+        <methods>
+          <include name="deleteBeforeCatch"/>
+          <include name="createRequest_FromDateandTime_ToDateandTime"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="exitBrowser"/>
+        </methods>
+      </class> <!-- org.enhancement.CustomerOrganizationRequest -->
+=======
       </class> <!-- org.test.GlobalContactInvoice -->
       <class name="org.test.CustomerOrganizationInvoice">
         <methods>
@@ -98,6 +128,7 @@
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.GlobalOrganizationInvoice -->
+>>>>>>> 6361b6d50a4a4e0bf2d80f33dbb5a7135919b164
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

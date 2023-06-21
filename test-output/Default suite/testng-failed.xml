@@ -3,16 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.enhancement.GlobalOrganizationInvoice">
+      <class name="org.enhancement.GlobalContactRequest">
         <methods>
-          <include name="loginPage"/>
-          <include name="setup"/>
-          <include name="createInvoice"/>
-          <include name="deleteAfterCatch"/>
+          <include name="createRequest_FromDateandTime_ToDateandTime"/>
           <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- org.enhancement.GlobalOrganizationInvoice -->
+      </class> <!-- org.enhancement.GlobalContactRequest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

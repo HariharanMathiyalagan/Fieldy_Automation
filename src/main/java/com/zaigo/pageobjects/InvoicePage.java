@@ -191,6 +191,15 @@ public class InvoicePage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	public void newWindowWait() {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.numberOfWindowsToBe(3));
+	}
+
+	public void newWindow(String value) {
+		((JavascriptExecutor) driver).executeScript("window.open('" + value + "','_blank');");
+	}
+
 	public void assertName(By element, String text) {
 		wait = new WebDriverWait(driver, 50);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
@@ -242,6 +251,12 @@ public class InvoicePage extends BaseClass {
 		return until;
 	}
 
+	private String getTexts(By element, int value) {
+		wait = new WebDriverWait(driver, 30);
+		String until = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element)).get(value).getText();
+		return until;
+	}
+
 	private void invisible(By element) {
 		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
@@ -288,7 +303,8 @@ public class InvoicePage extends BaseClass {
 	By OrganizationListName = By
 			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
 	By ClickOrganizationInvoice = By.xpath("//*[@id='customer-organization-nav-menu']/div/ul/li[6]/a");
-	public static By CreateOrganizationInvoice = By.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
+	public static By CreateOrganizationInvoice = By
+			.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
 	By ClickContactInvoice = By.xpath("//*[@id='customer-contact-nav-menu']/div/ul/li[6]/a");
 	public static By CreateGlobalInvoice = By.xpath("//*[@data-automationid='invoice_create']");
 	public static By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
@@ -373,6 +389,11 @@ public class InvoicePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]") })
 	WebElement ThreeDots;
 	@FindAll({
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[1]"),
+			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[1]") })
+	WebElement ThreeDots1;
+	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
@@ -398,7 +419,7 @@ public class InvoicePage extends BaseClass {
 	By GlobalListInvoiceStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[8]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By Update = By.xpath("//*[text()='Update']");
-	By Reset = By.xpath("//*[text()=' Reset Search']");
+	public static By Reset = By.xpath("//*[text()=' Reset Search']");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[5]") })
@@ -446,12 +467,22 @@ public class InvoicePage extends BaseClass {
 	By OrgZipcode = By.id("zipcode");
 	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
 	By Website = By.xpath("(//*[@id='website'])[1]");
-
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]/a"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]") })
+	WebElement Share;
+	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]/a"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]"),
+			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]") })
+	WebElement PDF;
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='contact-create']"),
 			@FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='organization-contact-create']"),
 			@FindBy(xpath = "//*[contains(@class,'fadeIn')]//*[@id='pqipopup']") })
 	WebElement SaveButton;
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
+	public static By CancelButton = By.id("invoice-popup-url-id");
+	By ShareField = By.id("share_url");
 
 	public void clearFields(String value) {
 		if (value.equals("Reference")) {
@@ -707,7 +738,7 @@ public class InvoicePage extends BaseClass {
 	}
 
 	public void maxValidationReference() {
-		this.validationTab(Reference, characters16);
+		this.validationTab(Reference, characters256);
 	}
 
 	public void maxValidationInvoiceTittle() {
@@ -922,7 +953,7 @@ public class InvoicePage extends BaseClass {
 		Boolean conditionCheck = true;
 		if (value.equals("Message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
-				response = this.getText(Message);
+				response = this.getTexts(Message, 0);
 				this.invisible(Message);
 				return response;
 			} else {
@@ -934,7 +965,7 @@ public class InvoicePage extends BaseClass {
 						this.mouseActionClick(Save);
 					}
 					if (this.conditionChecking(Message)) {
-						response = this.getText(Message);
+						response = this.getTexts(Message, 0);
 						this.invisible(Message);
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| response.equals(getPropertyValue("CreatedTax"))
@@ -956,6 +987,7 @@ public class InvoicePage extends BaseClass {
 					this.clearField(OrganizationName);
 					String fakeCompanyName = faker.company().name();
 					this.inputText(OrganizationName, fakeCompanyName);
+					OrgName = this.getTextAttribute(OrganizationName);
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))) {
 					this.clearField(OrgEmail);
@@ -970,7 +1002,8 @@ public class InvoicePage extends BaseClass {
 				} else if (response.equals(getPropertyValue("AlreadyTax"))) {
 					this.clearField(TaxName);
 					String fakeTaxName = faker.book().genre();
-					this.inputText(TaxName, fakeTaxName);
+					String upperCase = RandomStringUtils.randomAlphabetic(5).toUpperCase();
+					this.inputText(TaxName, fakeTaxName + " " + upperCase);
 					this.mouseActionClick(SaveButton);
 				} else if (response.equals(getPropertyValue("MaxTaxPercentage"))) {
 					this.clearField(TaxPercentage);
@@ -979,7 +1012,7 @@ public class InvoicePage extends BaseClass {
 					this.mouseActionClick(SaveButton);
 				}
 				if (this.conditionChecking(Message)) {
-					response = this.getText(Message);
+					response = this.getTexts(Message, 0);
 					this.invisible(Message);
 					if (response.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| response.equals(getPropertyValue("CreatedTax"))) {
@@ -990,11 +1023,13 @@ public class InvoicePage extends BaseClass {
 						Thread.sleep(10000);
 						this.mouseActionClick(SaveButton);
 						if (this.conditionChecking(Message)) {
-							response = this.getText(Message);
+							response = this.getTexts(Message, 0);
 							this.invisible(Message);
 							if (response.equals(getPropertyValue("CustomerCreatedMessage"))
 									|| response.equals(getPropertyValue("CreatedTax"))) {
 								conditionCheck = false;
+							} else {
+								this.responseMessage("AlternateFunction");
 							}
 						}
 					} while (conditionCheck);
@@ -1130,6 +1165,16 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(Update);
 			this.responseMessage("Message");
 			this.invisible(PaidMessage);
+		} else if (value.equals("SharePage")) {
+			this.mouseActionClick(ThreeDots1);
+			this.mouseActionClick(Share);
+			this.visibility(Spinner);
+			this.invisible(Spinner);
+			this.newWindow(this.getTextAttribute(ShareField));
+		} else if (value.equals("PDFPage")) {
+			this.mouseActionClick(ThreeDots1);
+			this.mouseActionClick(PDF);
+			this.newWindowWait();
 		}
 		return value;
 	}
@@ -1295,26 +1340,26 @@ public class InvoicePage extends BaseClass {
 							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 				} while (!this.conditionChecking1(FirstAttachment, 3));
 			}
-		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
-			this.mouseActionClick(FirstAttachment);
+		} else if (value.equals("CheckResponse") || value.equals("NewWindow")) {
+			if (value.equals("CheckResponse")) {
+				this.mouseActionClick(FirstAttachment);
+			}
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
 			driver.switchTo().window(list.get(1));
-			String currentUrl = driver.getCurrentUrl();
-			connection = (HttpURLConnection) new URL(currentUrl).openConnection();
-			connection.setRequestMethod("HEAD");
-			connection.connect();
 		} else if (value.equals("ParentWindow")) {
+			Set<String> windowHandles = driver.getWindowHandles();
+			list = new ArrayList<String>(windowHandles);
 			driver.switchTo().window(list.get(0));
 		}
 	}
 
 	public int responseCode() throws IOException {
+		String currentUrl = driver.getCurrentUrl();
+		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
+		connection.setRequestMethod("HEAD");
+		connection.connect();
 		int responseCode = connection.getResponseCode();
-		if (responseCode == 200) {
-			return responseCode;
-		} else {
-			return responseCode;
-		}
+		return responseCode;
 	}
 }

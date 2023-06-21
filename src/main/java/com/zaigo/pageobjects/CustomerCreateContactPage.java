@@ -401,10 +401,10 @@ public class CustomerCreateContactPage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking1(WebElement element) {
+	public Boolean conditionChecking1(WebElement element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 2);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -516,6 +516,11 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void searchInvalidListName() {
 		this.inputText(Search, "sxrdcftyvghub");
 		this.mouseActionClick(SearchButton);
+		if (!this.conditionChecking(InvalidList)) {
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking(InvalidList));
+		}
 
 	}
 
@@ -657,11 +662,11 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public String errorMessage() {
-		if (!this.conditionChecking1(ErrorMessage)) {
+		if (!this.conditionChecking1(ErrorMessage, 2)) {
 			do {
 				this.mouseActionClick(SaveComplete);
 				this.invisible(Spinner);
-			} while (!this.conditionChecking1(ErrorMessage));
+			} while (!this.conditionChecking1(ErrorMessage, 2));
 		}
 		return this.getText(ErrorMessage);
 	}
@@ -841,10 +846,42 @@ public class CustomerCreateContactPage extends BaseClass {
 				} while (check);
 			}
 		} else if (value.equals("AlternateFunction")) {
-			if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
-				this.mouseActionClick(Contact);
-				this.visibility(CustomerList);
-			}
+			do {
+				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))) {
+					for (int i = 0; i < 2; i++) {
+						this.mouseActionClick(Previous);
+					}
+					if (!this.conditionChecking1(Email)) {
+						this.mouseActionClick(Previous);
+					}
+					this.clearFields("Email");
+					Faker faker = new Faker(new Locale("en-IND"));
+					String fakeEmail = faker.internet().safeEmailAddress();
+					this.inputText(Email, fakeEmail);
+					for (int i = 0; i < 2; i++) {
+						this.nextButton();
+					}
+					this.mouseActionClick(SaveComplete);
+				}
+				if (this.conditionChecking(Message)) {
+					responseMessage = this.getText(Message);
+					this.invisible(Message);
+					check = false;
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveComplete);
+						if (this.conditionChecking(Message)) {
+							responseMessage = this.getText(Message);
+							this.invisible(Message);
+							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("CustomerUpdatedMesssage"))) {
+								check = false;
+							}
+						}
+					} while (check);
+				}
+			} while (check);
 		}
 		return responseMessage;
 
@@ -927,6 +964,7 @@ public class CustomerCreateContactPage extends BaseClass {
 		jobTittle = this.getTextAttribute(JobTittle);
 		this.scrollDown();
 		this.inputText(Email, fakeEmail);
+//		this.inputText(Email, "de/eptimay.iyer@example.com");
 		email = this.getTextAttribute(Email);
 		this.inputText(TaxNumber, maxPhoneNumber);
 		taxNumber = this.getTextAttribute(TaxNumber);
@@ -965,13 +1003,17 @@ public class CustomerCreateContactPage extends BaseClass {
 			throws AWTException, MalformedURLException, IOException, InterruptedException {
 		if (value.equals("URLCheck")) {
 			this.mouseActionClick(Attachment);
-			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
-			if (!this.conditionChecking1(FirstAttachment)) {
+			Thread.sleep(2500);
+			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\ImagePicture\\Attachment.exe");
+//			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			if (!this.conditionChecking1(FirstAttachment, 20)) {
 				do {
 					this.mouseActionClick(Attachment);
-					BaseClass.attachmentFile(
-							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
-				} while (!this.conditionChecking1(FirstAttachment));
+					Thread.sleep(2500);
+					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\Attachment\\Attachment.exe");
+//					BaseClass.attachmentFile(
+//							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+				} while (!this.conditionChecking1(FirstAttachment, 20));
 			}
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
@@ -1005,10 +1047,10 @@ public class CustomerCreateContactPage extends BaseClass {
 	public void nextButton() {
 		Boolean condition = true;
 		this.mouseActionClick(Next);
-		if (!this.conditionChecking1(SubPageVisible)) {
+		if (!this.conditionChecking1(SubPageVisible, 3)) {
 			do {
 				this.mouseActionClick(Next);
-				if (this.conditionChecking1(SubPageVisible)) {
+				if (this.conditionChecking1(SubPageVisible, 3)) {
 					condition = false;
 				}
 			} while (condition);
