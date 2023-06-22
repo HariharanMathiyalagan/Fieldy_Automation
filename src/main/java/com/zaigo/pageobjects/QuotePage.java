@@ -1048,7 +1048,9 @@ public class QuotePage extends BaseClass {
 								|| responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
 								|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))
 								|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
-								|| responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))) {
+								|| responseMessage.equals(getPropertyValue("CompanyAlreadyMessage"))
+								|| responseMessage.equals(getPropertyValue("AlreadyTax"))
+								|| responseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
 							conditionCheck = false;
 						}
 					}
@@ -1101,6 +1103,7 @@ public class QuotePage extends BaseClass {
 								conditionCheck = false;
 							} else {
 								this.message("AlternateFunction");
+								conditionCheck = false;
 							}
 						}
 					} while (conditionCheck);

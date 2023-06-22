@@ -175,14 +175,14 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3, invocationCount = 5)
+	@Test(priority = 3, invocationCount = 20)
 	private void createJob_FromDateandTime_ToDateandTime()
 			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.customerName("PlaceHolderName");
-		mandatory.jobStatusCreation("Unassigned");
+		mandatory.jobStatusCreation("CreateJob");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
@@ -197,6 +197,7 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
+			mandatory.techcnianNotAvailable();
 			mandatory.message("AlternateForm");
 			mandatory.mouseActionClick(JobPage.CreateButton);
 		}
