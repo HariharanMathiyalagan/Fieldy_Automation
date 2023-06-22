@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="0" total="201" passed="177" failed="17" skipped="7">
   <reporter-output>
   </reporter-output>
@@ -2844,10 +2845,314 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </reporter-output>
         </test-method> <!-- deleteAfterCatch -->
         <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CategoryModule@7bab3f1a]" started-at="2023-06-22T13:28:55 IST" name="exitBrowser" finished-at="1970-01-01T05:30:00 IST" duration-ms="-1687420735127" status="SKIP">
+=======
+<testng-results ignored="0" total="24" passed="24" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-06-22T22:46:30 IST" name="Default suite" finished-at="2023-06-22T22:49:36 IST" duration-ms="186201">
+    <groups>
+    </groups>
+    <test started-at="2023-06-22T22:46:30 IST" name="Default test" finished-at="2023-06-22T22:49:36 IST" duration-ms="186201">
+      <class name="org.test.CategoryModule">
+        <test-method is-config="true" signature="setup()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:30 IST" name="setup" finished-at="2023-06-22T22:46:32 IST" duration-ms="2415" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:32 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:46:32 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="loginPage()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:32 IST" name="loginPage" finished-at="2023-06-22T22:46:55 IST" duration-ms="22799" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginPage -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:55 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:46:55 IST" duration-ms="48" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:55 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:46:55 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="settingModule()[pri:1, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:55 IST" name="settingModule" finished-at="2023-06-22T22:46:57 IST" duration-ms="1819" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- settingModule -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:57 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:46:57 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:57 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:46:57 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createFormLabel()[pri:2, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:57 IST" name="createFormLabel" finished-at="2023-06-22T22:46:58 IST" duration-ms="1548" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:58 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:46:58 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:58 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:46:58 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="mandatoryValidationCategoryName()[pri:3, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:46:58 IST" name="mandatoryValidationCategoryName" finished-at="2023-06-22T22:47:01 IST" duration-ms="2668" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mandatoryValidationCategoryName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:01 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:01 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:01 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:01 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="maximumValidationCategoryName()[pri:4, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:01 IST" name="maximumValidationCategoryName" finished-at="2023-06-22T22:47:06 IST" duration-ms="5382" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationCategoryName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:06 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:06 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:06 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:06 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="maximumValidationDescription()[pri:5, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:06 IST" name="maximumValidationDescription" finished-at="2023-06-22T22:47:13 IST" duration-ms="6798" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- maximumValidationDescription -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:13 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:13 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createButton()[pri:6, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="createButton" finished-at="2023-06-22T22:47:13 IST" duration-ms="80" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createButton -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:13 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:13 IST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="createCategoryProduct()[pri:7, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:13 IST" name="createCategoryProduct" finished-at="2023-06-22T22:47:22 IST" duration-ms="9050" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createCategoryProduct -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:22 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:22 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method signature="createCategoryProductList()[pri:8, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:22 IST" name="createCategoryProductList" finished-at="2023-06-22T22:47:22 IST" duration-ms="110" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createCategoryProductList -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:22 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:22 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:22 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:23 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:22 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:22 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method signature="searchProductName()[pri:9, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:23 IST" name="searchProductName" finished-at="2023-06-22T22:47:24 IST" duration-ms="1477" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchProductName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:24 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:24 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:24 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:24 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="searchInvalid()[pri:10, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:24 IST" name="searchInvalid" finished-at="2023-06-22T22:47:26 IST" duration-ms="1501" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchInvalid -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:26 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:26 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:26 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:26 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editFormLabel()[pri:11, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:26 IST" name="editFormLabel" finished-at="2023-06-22T22:47:30 IST" duration-ms="4918" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editFormLabel -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:30 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:30 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:30 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:30 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmandatoryValidationCategoryName()[pri:12, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:30 IST" name="editmandatoryValidationCategoryName" finished-at="2023-06-22T22:47:31 IST" duration-ms="312" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmandatoryValidationCategoryName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:31 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:31 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:31 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:31 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmaximumValidationCategoryName()[pri:13, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:31 IST" name="editmaximumValidationCategoryName" finished-at="2023-06-22T22:47:36 IST" duration-ms="5022" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmaximumValidationCategoryName -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:36 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:36 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:36 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:36 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="editmaximumValidationDescription()[pri:14, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:36 IST" name="editmaximumValidationDescription" finished-at="2023-06-22T22:47:43 IST" duration-ms="6774" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editmaximumValidationDescription -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:43 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:43 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="updateButton()[pri:15, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="updateButton" finished-at="2023-06-22T22:47:43 IST" duration-ms="112" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateButton -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:43 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:43 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="UpdateCategoryProduct()[pri:16, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:43 IST" name="UpdateCategoryProduct" finished-at="2023-06-22T22:47:51 IST" duration-ms="8462" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- UpdateCategoryProduct -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:51 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:47:51 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:51 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:47:51 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="deleteProduct()[pri:17, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:47:51 IST" name="deleteProduct" finished-at="2023-06-22T22:48:10 IST" duration-ms="19002" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteProduct -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:10 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:48:10 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:10 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:48:10 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="reflectCategoryProduct()[pri:18, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:10 IST" name="reflectCategoryProduct" finished-at="2023-06-22T22:48:31 IST" duration-ms="21077" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reflectCategoryProduct -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:31 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:48:31 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:31 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:48:31 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="inactiveProductCategory()[pri:19, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:31 IST" name="inactiveProductCategory" finished-at="2023-06-22T22:48:43 IST" duration-ms="11751" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- inactiveProductCategory -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:43 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:48:43 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method signature="deleteProductCategory()[pri:20, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:43 IST" name="deleteProductCategory" finished-at="2023-06-22T22:48:56 IST" duration-ms="12712" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteProductCategory -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:43 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:48:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:56 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:48:56 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:56 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:48:56 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method signature="reflectCategoryService()[pri:21, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:48:56 IST" name="reflectCategoryService" finished-at="2023-06-22T22:49:17 IST" duration-ms="20598" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reflectCategoryService -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:17 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:49:17 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method signature="inactiveProductService()[pri:22, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:17 IST" name="inactiveProductService" finished-at="2023-06-22T22:49:31 IST" duration-ms="14331" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- inactiveProductService -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:17 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:49:17 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:31 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:49:31 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method signature="deleteProductService()[pri:23, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:31 IST" name="deleteProductService" finished-at="2023-06-22T22:49:35 IST" duration-ms="4243" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteProductService -->
+        <test-method is-config="true" signature="deleteBeforeCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:31 IST" name="deleteBeforeCatch" finished-at="2023-06-22T22:49:31 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBeforeCatch -->
+        <test-method is-config="true" signature="deleteAfterCatch()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:35 IST" name="deleteAfterCatch" finished-at="2023-06-22T22:49:35 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteAfterCatch -->
+        <test-method is-config="true" signature="exitBrowser()[pri:0, instance:org.test.CategoryModule@2ea41516]" started-at="2023-06-22T22:49:35 IST" name="exitBrowser" finished-at="2023-06-22T22:49:36 IST" duration-ms="625" status="PASS">
+>>>>>>> 0ff5862a260a2948b3fda3694a19fa1f2c194aa2
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exitBrowser -->
       </class> <!-- org.test.CategoryModule -->
+<<<<<<< HEAD
       <class name="org.test.ServiceType">
         <test-method is-config="true" signature="setup()[pri:0, instance:org.test.ServiceType@66f57048]" started-at="2023-06-22T11:49:20 IST" name="setup" finished-at="2023-06-22T11:49:21 IST" duration-ms="954" status="PASS">
           <reporter-output>
@@ -4127,4 +4432,8 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
       </class> <!-- org.test.ProductModule -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
+=======
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+>>>>>>> 0ff5862a260a2948b3fda3694a19fa1f2c194aa2
 </testng-results>

@@ -629,6 +629,12 @@ public class RequestPage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
+			if (!this.conditionChecking(AddCustomer, 20)) {
+				do {
+					this.clearField(SubCustomerField);
+					this.inputText(SubCustomerField, fakeFirstName);
+				} while (!this.conditionChecking(AddCustomer, 20));
+			}
 			this.mouseActionClick(AddCustomer);
 			if (!this.conditionChecking(PopupOpen)) {
 				do {
@@ -791,10 +797,10 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking(WebElement element) {
+	public Boolean conditionChecking(WebElement element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 50);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -938,6 +944,7 @@ public class RequestPage extends BaseClass {
 								conditionCheck = false;
 							} else {
 								this.message("AlternateFunction");
+								conditionCheck = false;
 							}
 						}
 					} while (conditionCheck);
@@ -1203,24 +1210,24 @@ public class RequestPage extends BaseClass {
 			this.inputText(Search, listData);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("Location")) {
-			if (!this.conditionChecking(ListLocationName)) {
+			if (!this.conditionChecking(ListLocationName, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListLocationName));
+				} while (!this.conditionChecking(ListLocationName, 50));
 			}
 			listData = this.getText(ListLocationName);
 		} else if (value.equals("RequestNo")) {
-			if (!this.conditionChecking(ListRequestNo)) {
+			if (!this.conditionChecking(ListRequestNo, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListRequestNo));
+				} while (!this.conditionChecking(ListRequestNo, 50));
 			}
 			listData = this.getText(ListRequestNo);
 		} else if (value.equals("CancelRequestNo")) {
-			if (!this.conditionChecking(CancelListRequestNo)) {
+			if (!this.conditionChecking(CancelListRequestNo, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(CancelListRequestNo));
+				} while (!this.conditionChecking(CancelListRequestNo, 50));
 			}
 			listData = this.getText(CancelListRequestNo);
 		} else if (value.equals("Status")) {
@@ -1228,10 +1235,10 @@ public class RequestPage extends BaseClass {
 		} else if (value.equals("CancelStatus")) {
 			listData = this.getText(CancelStatus);
 		} else if (value.equals("CustomerName")) {
-			if (!this.conditionChecking(CustomerNameList)) {
+			if (!this.conditionChecking(CustomerNameList, 50)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(CustomerNameList));
+				} while (!this.conditionChecking(CustomerNameList, 50));
 			}
 			listData = this.getText(CustomerNameList);
 		} else if (value.equals("Invlaid")) {
@@ -1262,19 +1269,19 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String validateListFromDate() {
-		if (!this.conditionChecking(ListFromDate)) {
+		if (!this.conditionChecking(ListFromDate, 50)) {
 			do {
 				driver.navigate().refresh();
-			} while (!this.conditionChecking(ListFromDate));
+			} while (!this.conditionChecking(ListFromDate, 50));
 		}
 		return this.getText(ListFromDate);
 	}
 
 	public String validateToDate() {
-		if (!this.conditionChecking(ListToDate)) {
+		if (!this.conditionChecking(ListToDate, 50)) {
 			do {
 				driver.navigate().refresh();
-			} while (!this.conditionChecking(ListToDate));
+			} while (!this.conditionChecking(ListToDate, 50));
 		}
 		return this.getText(ListToDate);
 	}

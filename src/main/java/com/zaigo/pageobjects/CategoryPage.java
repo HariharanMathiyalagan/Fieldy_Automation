@@ -291,7 +291,12 @@ public class CategoryPage extends BaseClass {
 		if (value.equals("CategoryName")) {
 			return this.getText(ErrorCategoryName);
 		} else if (value.equals("Description")) {
-			return this.getText(ErrorDescription);
+			if (this.conditionChecking1(ErrorDescription)) {
+				return this.getText(ErrorDescription);
+			} else {
+				String value1 = "null";
+				return value1;
+			}
 		}
 		return value;
 	}
@@ -373,9 +378,7 @@ public class CategoryPage extends BaseClass {
 			if (value.equals("Visible")) {
 				this.visibility(CategoryName);
 			}
-			if (this.conditionChecking1(ErrorCategoryName)) {
-
-			} else {
+			if (!this.conditionChecking1(ErrorCategoryName)) {
 				do {
 					this.mouseActionClick(Button);
 				} while (!this.conditionChecking1(ErrorCategoryName));
@@ -409,7 +412,7 @@ public class CategoryPage extends BaseClass {
 			this.mouseActionClick(Button);
 			data = this.validData("ReflectService");
 		}
-		this.message("Message");
+		this.alternateMethod();
 		return data;
 
 	}
@@ -511,4 +514,11 @@ public class CategoryPage extends BaseClass {
 		return text;
 	}
 
+	public void alternateMethod() throws IOException, InterruptedException {
+		this.message("Message");
+		if (message.equals(getPropertyValue("CategoryAlreadyExist"))) {
+			this.message("AlternateFunction");
+		}
+
+	}
 }

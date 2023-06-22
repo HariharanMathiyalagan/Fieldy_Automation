@@ -970,7 +970,14 @@ public class InvoicePage extends BaseClass {
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| response.equals(getPropertyValue("CreatedTax"))
 								|| response.equals(getPropertyValue("InvoiceCreateMessage"))
-								|| response.equals(getPropertyValue("InvoiceUpdatedMessage"))) {
+								|| response.equals(getPropertyValue("InvoiceUpdatedMessage"))
+								|| response.equals(getPropertyValue("ContactEmailAlreadyMessage"))
+								|| response.equals(getPropertyValue("CompanyContactEmailMessage"))
+								|| response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+								|| response.equals(getPropertyValue("CompanyAlreadyMessage"))
+								|| response.equals(getPropertyValue("AlreadyTax"))
+								|| response.equals(getPropertyValue("MaxTaxPercentage")) || response.equals(
+										"The doc expiry date must be a date after or equal to " + currentDate + ".")) {
 							conditionCheck = false;
 						}
 					}
@@ -1030,6 +1037,7 @@ public class InvoicePage extends BaseClass {
 								conditionCheck = false;
 							} else {
 								this.responseMessage("AlternateFunction");
+								conditionCheck = false;
 							}
 						}
 					} while (conditionCheck);
