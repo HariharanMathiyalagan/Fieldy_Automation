@@ -465,8 +465,7 @@ public class CategoryModule extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			landing.clickEvent("Visible");
 			ListField = landing.validData("ReflectionProduct");
-			landing.message("Message");
-			landing.message("AlternateFunction");
+			landing.alternateMethod();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -476,8 +475,7 @@ public class CategoryModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 			landing.clickEvent("Visible");
 			ListField = landing.validData("ReflectionProduct");
-			landing.message("Message");
-			landing.message("AlternateFunction");
+			landing.alternateMethod();
 		}
 	}
 

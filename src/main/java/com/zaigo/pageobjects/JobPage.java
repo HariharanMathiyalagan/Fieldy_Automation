@@ -316,6 +316,12 @@ public class JobPage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
+			if (!this.conditionChecking(AddCustomer, 20)) {
+				do {
+					this.clearField(SubCustomerField);
+					this.inputText(SubCustomerField, fakeFirstName);
+				} while (!this.conditionChecking(AddCustomer, 20));
+			}
 			this.mouseActionClick(AddCustomer);
 			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
@@ -381,6 +387,12 @@ public class JobPage extends BaseClass {
 			}
 		} else if (value.equals("ContactCreate")) {
 			this.inputText(CustomerField, fakeFirstName);
+			if (!this.conditionChecking(AddCustomer, 20)) {
+				do {
+					this.clearField(CustomerField);
+					this.inputText(CustomerField, fakeFirstName);
+				} while (!this.conditionChecking(AddCustomer, 20));
+			}
 			this.mouseActionClick(AddCustomer);
 			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
@@ -405,6 +417,12 @@ public class JobPage extends BaseClass {
 			this.clickButton(SaveButton);
 		} else if (value.equals("OrganizationCreate")) {
 			this.inputText(CustomerField, fakeCompanyName);
+			if (!this.conditionChecking(AddCustomer, 20)) {
+				do {
+					this.clearField(CustomerField);
+					this.inputText(CustomerField, fakeFirstName);
+				} while (!this.conditionChecking(AddCustomer, 20));
+			}
 			this.mouseActionClick(AddCustomer);
 			if (!this.conditionChecking(PopupOpen, 5)) {
 				do {
@@ -1194,10 +1212,10 @@ public class JobPage extends BaseClass {
 		return text;
 	}
 
-	public Boolean conditionChecking(WebElement element) {
+	public Boolean conditionChecking(WebElement element, int value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 30);
+			wait = new WebDriverWait(driver, value);
 			text = wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -1289,6 +1307,11 @@ public class JobPage extends BaseClass {
 				} else if (responseMessage.equals(getPropertyValue("TechnicianAvailability"))) {
 					this.scrollDown();
 					this.mouseActionClick(Technician);
+					if (!this.conditionChecking(TechnicianFirstName, 3)) {
+						do {
+							this.mouseActionClick(Technician);
+						} while (!this.conditionChecking(TechnicianFirstName, 3));
+					}
 					increment++;
 					this.mouseActionClick(
 							By.xpath("//*[@id='technician_ids-autocomplete-list']//div[" + increment + "]"));
@@ -1303,23 +1326,26 @@ public class JobPage extends BaseClass {
 						conditionCheck = false;
 					}
 				} else {
-					Thread.sleep(10000);
-					if (value.equals("AlternateFunction")) {
-						this.mouseActionClick(SaveButton);
-					} else if (value.equals("AlternateForm")) {
-						this.mouseActionClick(SaveComplete);
-					}
-					if (this.conditionChecking(Message, 40)) {
-						responseMessage = this.getTexts(Message, 0);
-						this.invisible(Message);
-						if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
-								|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
-							conditionCheck = false;
-						} else {
-							this.message("AlternateFunction");
+					do {
+						Thread.sleep(10000);
+						if (value.equals("AlternateFunction")) {
+							this.mouseActionClick(SaveButton);
+						} else if (value.equals("AlternateForm")) {
+							this.mouseActionClick(SaveComplete);
 						}
-					}
+						if (this.conditionChecking(Message, 40)) {
+							responseMessage = this.getTexts(Message, 0);
+							this.invisible(Message);
+							if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
+								conditionCheck = false;
+							} else {
+								this.message("AlternateFunction");
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
 				}
 			} while (conditionCheck);
 		}
@@ -1406,59 +1432,59 @@ public class JobPage extends BaseClass {
 			this.inputText(SearchField, listData);
 			this.mouseActionClick(SearchButton);
 		} else if (value.equals("JobNo1")) {
-			if (!this.conditionChecking(ListJobNumber1)) {
+			if (!this.conditionChecking(ListJobNumber1, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListJobNumber1));
+				} while (!this.conditionChecking(ListJobNumber1, 30));
 			}
 			listData = this.getText(ListJobNumber1);
 		} else if (value.equals("JobNo2")) {
-			if (!this.conditionChecking(ListJobNumber2)) {
+			if (!this.conditionChecking(ListJobNumber2, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListJobNumber2));
+				} while (!this.conditionChecking(ListJobNumber2, 30));
 			}
 			listData = this.getText(ListJobNumber2);
 		} else if (value.equals("Location")) {
-			if (!this.conditionChecking(ListLocationName)) {
+			if (!this.conditionChecking(ListLocationName, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListLocationName));
+				} while (!this.conditionChecking(ListLocationName, 30));
 			}
 			listData = this.getText(ListLocationName);
 		} else if (value.equals("CustomerName")) {
-			if (!this.conditionChecking(CustomerNameList)) {
+			if (!this.conditionChecking(CustomerNameList, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(CustomerNameList));
+				} while (!this.conditionChecking(CustomerNameList, 30));
 			}
 			listData = this.getText(CustomerNameList);
 		} else if (value.equals("FromDate")) {
-			if (!this.conditionChecking(ListFromDate)) {
+			if (!this.conditionChecking(ListFromDate, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListFromDate));
+				} while (!this.conditionChecking(ListFromDate, 30));
 			}
 			listData = this.getText(ListFromDate);
 		} else if (value.equals("ToDate")) {
-			if (!this.conditionChecking(ListToDate)) {
+			if (!this.conditionChecking(ListToDate, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListToDate));
+				} while (!this.conditionChecking(ListToDate, 30));
 			}
 			listData = this.getText(ListToDate);
 		} else if (value.equals("Status")) {
-			if (!this.conditionChecking(StatusJob)) {
+			if (!this.conditionChecking(StatusJob, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(StatusJob));
+				} while (!this.conditionChecking(StatusJob, 30));
 			}
 			listData = this.getText(StatusJob);
 		} else if (value.equals("Status1")) {
-			if (!this.conditionChecking(StatusJob1)) {
+			if (!this.conditionChecking(StatusJob1, 30)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(StatusJob1));
+				} while (!this.conditionChecking(StatusJob1, 30));
 			}
 			listData = this.getText(StatusJob1);
 		} else if (value.equals("FilterDatePicker")) {
