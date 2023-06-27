@@ -273,7 +273,6 @@ public class TeamCompanyContractor extends BaseClass {
 			extentTest.addScreenCaptureFromPath("13.png");
 			contractorPage.clearFields("FirstName");
 		}
-
 	}
 
 	@Test(priority = 13)
@@ -1492,7 +1491,7 @@ public class TeamCompanyContractor extends BaseClass {
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);			
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
 			File file = new File("14.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("14.png");

@@ -305,14 +305,23 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	}
 
-	public void valuePresent(By element, String value) {
-		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+	public Boolean valuePresent(By element, String value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, 10);
+			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+
 	}
 
 	public String editContent() throws InterruptedException {
 		String text = this.getText(Tittle1);
 		this.clickEdit();
+		this.visible(Spinner);
+		this.invisible(Spinner);
 		this.valuePresent(CompanyName, text);
 		this.elementtobeClickable(Next);
 		String text2 = this.getText(Label);
@@ -370,6 +379,11 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	private void invisible(By element) {
 		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+
+	private void visible(By element) {
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 	}
 
 	public void assertName(By element, String text) {

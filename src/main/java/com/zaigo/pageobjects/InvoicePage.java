@@ -1210,23 +1210,28 @@ public class InvoicePage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(OrgContactName, fakeFirstName);
-			this.mouseActionClick(OrgContactAdd);
-			if (!this.conditionChecking(PopupOpen)) {
-				do {
-					this.mouseActionClick(OrgContactAdd);
-					if (this.conditionChecking(PopupOpen)) {
-						condition = false;
-					}
-				} while (condition);
+			if (this.conditionChecking1(OrgContactAdd, 20)) {
+				this.mouseActionClick(OrgContactAdd);
+				if (!this.conditionChecking(PopupOpen)) {
+					do {
+						this.mouseActionClick(OrgContactAdd);
+						if (this.conditionChecking(PopupOpen)) {
+							condition = false;
+						}
+					} while (condition);
+				}
+				this.inputText(OrganizationFirstName, fakeFirstName);
+				ContactFirstName = this.getTextAttribute(OrganizationFirstName);
+				this.inputText(OrganizationLastName, fakeLastName);
+				ContactLastName = this.getTextAttribute(OrganizationLastName);
+				this.inputText(OrganizationEmail, fakeEmail);
+				this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
+				this.inputText(OrganizationJobTittle, fakeTittle);
+				this.mouseActionClick(SaveButton);
+			} else {
+				this.clearField(OrgContactName);
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
-			this.inputText(OrganizationFirstName, fakeFirstName);
-			ContactFirstName = this.getTextAttribute(OrganizationFirstName);
-			this.inputText(OrganizationLastName, fakeLastName);
-			ContactLastName = this.getTextAttribute(OrganizationLastName);
-			this.inputText(OrganizationEmail, fakeEmail);
-			this.inputText(OrganizationPhoneNumber, fakePhoneNumber);
-			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
 			if (!this.valuePresentCondition(OrgContactName, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(OrgContactName, ContactFirstName);

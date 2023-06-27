@@ -570,6 +570,9 @@ public class CreateContractorPage extends BaseClass {
 		} else if (value.equals("Reset")) {
 			this.mouseActionClick(resert);
 		} else if (value.equals("Edit")) {
+			if (!this.conditionChecking(ListCompanyName)) {
+				driver.navigate().refresh();
+			}
 			String text = this.getText(ListCompanyName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
