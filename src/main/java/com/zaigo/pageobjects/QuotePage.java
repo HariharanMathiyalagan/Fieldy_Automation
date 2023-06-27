@@ -554,23 +554,28 @@ public class QuotePage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
-			this.mouseActionClick(AddCustomer);
-			if (!this.conditionChecking(PopupOpen)) {
-				do {
-					this.mouseActionClick(AddCustomer);
-					if (this.conditionChecking(PopupOpen)) {
-						condition = false;
-					}
-				} while (condition);
+			if (this.conditionChecking1(AddCustomer, 20)) {
+				this.mouseActionClick(AddCustomer);
+				if (!this.conditionChecking(PopupOpen)) {
+					do {
+						this.mouseActionClick(AddCustomer);
+						if (this.conditionChecking(PopupOpen)) {
+							condition = false;
+						}
+					} while (condition);
+				}
+				this.inputText(FirstNameField, fakeFirstName);
+				ContactFirstName = this.getTextAttribute(FirstNameField);
+				this.inputText(LastNameField, fakeLastName);
+				ContactLastName = this.getTextAttribute(LastNameField);
+				this.inputText(EmailField, fakeEmail);
+				this.inputText(PhoneNumber, fakePhoneNumber);
+				this.inputText(OrganizationJobTittle, fakeTittle);
+				this.mouseActionClick(SaveButton);
+			} else {
+				this.clearField(SubCustomerField);
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
-			this.inputText(FirstNameField, fakeFirstName);
-			ContactFirstName = this.getTextAttribute(FirstNameField);
-			this.inputText(LastNameField, fakeLastName);
-			ContactLastName = this.getTextAttribute(LastNameField);
-			this.inputText(EmailField, fakeEmail);
-			this.inputText(PhoneNumber, fakePhoneNumber);
-			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
 			if (!this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(SubCustomerField, ContactFirstName);

@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -118,13 +119,17 @@ public class Name extends BaseClass {
 //		name.name2();
 //
 //	}
-	private static int staticValue = 5;
-
-    public static void main(String[] args) {
-        // Change static value to dynamic value with increment
-        int dynamicValue = staticValue;
-        dynamicValue++; // Increment the dynamic value
-        System.out.println("Dynamic value: " + dynamicValue);
-    }
+	public static void main(String[] args) {
+		try {
+			URL url = new URL("http://www.google.com");
+			URLConnection connection = url.openConnection();
+			connection.connect();
+			System.out.println("Internet is connected");
+		} catch (MalformedURLException e) {
+			System.out.println("Internet is not connected");
+		} catch (IOException e) {
+			System.out.println("Internet is not connected");
+		}
+	}
 
 }

@@ -3,21 +3,38 @@
 <suite name="Failed suite [Suite (2)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.GlobalContactRequest">
+      <class name="org.test.GlobalOrganizationJob">
         <methods>
-          <include name="editmandatoryValidationDescription"/>
-          <include name="editmandatoryValidationLocation"/>
-          <include name="setup"/>
+          <include name="autoCompleteOrganizationContactCreation"/>
           <include name="deleteAfterCatch"/>
-          <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
+          <include name="setup"/>
+          <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.GlobalContactRequest -->
+      </class> <!-- org.test.GlobalOrganizationJob -->
+      <class name="org.test.CustomerOrganizationJob">
+        <methods>
+          <include name="autoCompleteOrganizationContactCreation"/>
+          <include name="exitBrowser"/>
+          <include name="setup"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.CustomerOrganizationJob -->
+      <class name="org.test.GlobalOrganizationRequest">
+        <methods>
+          <include name="exitBrowser"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="autoCompleteOrganizationContactCreation"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.test.GlobalOrganizationRequest -->
       <class name="org.test.CustomerOrganizationRequest">
         <methods>
           <include name="deleteBeforeCatch"/>
+          <include name="autoCompleteOrganizationContactCreation"/>
           <include name="exitBrowser"/>
-          <include name="editmandatoryValidationLocation"/>
           <include name="setup"/>
           <include name="deleteAfterCatch"/>
         </methods>

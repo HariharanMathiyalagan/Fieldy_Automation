@@ -3,32 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.test.CategoryModule">
+      <class name="org.test.TeamUserContractor">
         <methods>
-          <include name="editmaximumValidationCategoryName"/>
-          <include name="UpdateCategoryProduct"/>
-          <include name="searchInvalid"/>
-          <include name="deleteProductService"/>
-          <include name="createCategoryProduct"/>
-          <include name="searchProductName"/>
-          <include name="deleteProductCategory"/>
-          <include name="editmandatoryValidationCategoryName"/>
-          <include name="editFormLabel"/>
-          <include name="maximumValidationDescription"/>
-          <include name="reflectCategoryService"/>
           <include name="deleteAfterCatch"/>
-          <include name="inactiveProductService"/>
+          <include name="deleteUserDetails"/>
           <include name="setup"/>
-          <include name="createCategoryProductList"/>
-          <include name="updateButton"/>
-          <include name="reflectCategoryProduct"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="inactiveProductCategory"/>
           <include name="exitBrowser"/>
-          <include name="deleteProduct"/>
           <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.CategoryModule -->
+      </class> <!-- org.test.TeamUserContractor -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

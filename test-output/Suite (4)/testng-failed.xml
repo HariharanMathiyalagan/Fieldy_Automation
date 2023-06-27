@@ -3,52 +3,44 @@
 <suite name="Failed suite [Suite (4)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+      <class name="org.test.ServiceModule">
+        <methods>
+          <include name="deleteBeforeCatch"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="exitBrowser"/>
+          <include name="maximumValidationDescription"/>
+          <include name="setup"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.ServiceModule -->
       <class name="org.test.ProductModule">
         <methods>
-          <include name="editafterDecimalPointTaxPercentageField"/>
-          <include name="editbeforeDecimalPointPriceField"/>
-          <include name="editmandatoryValidationTaxName"/>
-          <include name="editafterDecimalPointPriceField"/>
-          <include name="editmaximumValidationSKU"/>
-          <include name="searchProductName"/>
-          <include name="updateProduct"/>
-          <include name="editafterDecimalPointQuantityHandField"/>
-          <include name="editbeforeDecimalPointQuantityHandField"/>
-          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="maximumValidationDescription"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
-          <include name="editbeforeDecimalPointLowStockThresoldField"/>
-          <include name="editmaximumValidationQuantityHand"/>
-          <include name="editbeforeDecimalPointTaxPercentageField"/>
-          <include name="editmaximumValidationPrice"/>
           <include name="deleteBeforeCatch"/>
-          <include name="updateButton"/>
-          <include name="editmaximumValidationLowStockThresold"/>
           <include name="editmaximumValidationDescription"/>
-          <include name="editafterDecimalPointLowStockThresoldField"/>
-          <include name="editmaximumValidationProductName"/>
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.ProductModule -->
-      <class name="org.test.CategoryModule">
+      <class name="org.test.BusinessUnit">
         <methods>
-          <include name="reflectCategoryService"/>
+          <include name="verifyUpdateButtonExist"/>
           <include name="deleteAfterCatch"/>
-          <include name="inactiveProductService"/>
           <include name="setup"/>
-          <include name="reflectCategoryProduct"/>
-          <include name="inactiveProductCategory"/>
+          <include name="editmaximumValidationBussinessUnit"/>
           <include name="exitBrowser"/>
-          <include name="deleteProduct"/>
+          <include name="editmandatoryValidation"/>
           <include name="deleteBeforeCatch"/>
-          <include name="editFormLabel"/>
+          <include name="businessUpdate"/>
         </methods>
-      </class> <!-- org.test.CategoryModule -->
+      </class> <!-- org.test.BusinessUnit -->
       <class name="org.test.ServiceType">
         <methods>
           <include name="verifyUpdateButtonExist"/>
           <include name="deleteAfterCatch"/>
           <include name="leadSourceUpdate"/>
+          <include name="reflectCreateContactPage"/>
           <include name="setup"/>
           <include name="deleteBeforeCatch"/>
           <include name="editmandatoryValidation"/>
@@ -56,6 +48,18 @@
           <include name="editmaximumValidationLeadSource"/>
         </methods>
       </class> <!-- org.test.ServiceType -->
+      <class name="org.test.LeadSource">
+        <methods>
+          <include name="editmaximumValidationLeadSource"/>
+          <include name="editmandatoryValidation"/>
+          <include name="exitBrowser"/>
+          <include name="leadSourceUpdate"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="verifyUpdateButtonExist"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.test.LeadSource -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (4)] -->
