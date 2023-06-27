@@ -208,7 +208,10 @@ public class TeamUserPage extends BaseClass {
 	By Team = By.id("team-menu");
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 	By User = By.id("team-user-menu");
-	By ListLabel = By.xpath("//*[@class='page-header-left back-btn']");
+//	By ListLabel = By.xpath("//*[@id='team__user__contianer']/div[1]/header/div/div/div");
+	@FindAll({ @FindBy(xpath = "//*[@id='team__user__contianer']/div[1]/header/div/div/div/span"),
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/span") })
+	WebElement ListLabel;
 	public static By CreateUser = By.xpath("//*[@data-formdynamic='user_create_edit']");
 	By Search = By.id("team-user-user-user-search-filter");
 	By SearchButton = By.id("team-user-user-search-button");
@@ -392,7 +395,7 @@ public class TeamUserPage extends BaseClass {
 	public String errorMessage(By value, By element) {
 		if (!this.conditionChecking(value, 3)) {
 			do {
-				this.validationTab(element, "");
+				this.validationTab(element, " ");
 			} while (!this.conditionChecking(value, 3));
 		}
 		return this.getText(value);
@@ -768,8 +771,8 @@ public class TeamUserPage extends BaseClass {
 			type = this.getTextAttribute(Type);
 			this.inputText(JobTittle, fakeTittle);
 			jobTittle = this.getTextAttribute(JobTittle);
-			this.inputText(Email, fakeEmail);
-//			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
+//			this.inputText(Email, fakeEmail);
+			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
@@ -852,6 +855,11 @@ public class TeamUserPage extends BaseClass {
 			do {
 				if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))) {
 					this.mouseActionClick(Previous);
+					if (!this.conditionChecking(Email, 3)) {
+						do {
+							this.mouseActionClick(Previous);
+						} while (!this.conditionChecking(Email, 3));
+					}
 					this.clearField(Email);
 					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeEmail = faker.internet().safeEmailAddress();
@@ -920,8 +928,8 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("UserCreate") || value.equals("UserContractorCreate")) {
 			if (value.equals("UserCreate")) {
 				this.getCount(1);
-				int userCount = 5 - parseInt;
-				if (userCount <= 5) {
+				int userCount = 10 - parseInt;
+				if (userCount <= 10) {
 					for (int i = 0; i < userCount; i++) {
 						this.mouseActionClick(CreateUser);
 						this.validateFillData("Basic");
@@ -929,6 +937,9 @@ public class TeamUserPage extends BaseClass {
 						this.validateFillData("Location");
 						this.clickEvent("SaveUpdate");
 						this.responseMessage("Message");
+						if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))) {
+							this.responseMessage("AlternateFunction");
+						}
 						this.visibility(PageLand);
 					}
 				}
@@ -943,6 +954,9 @@ public class TeamUserPage extends BaseClass {
 						this.validateFillData("Location");
 						this.clickEvent("SaveUpdate");
 						this.responseMessage("Message");
+						if (listData.equals(getPropertyValue("UserEmailAlreadyExist"))) {
+							this.responseMessage("AlternateFunction");
+						}
 						this.visibility(PageLand);
 					}
 				}

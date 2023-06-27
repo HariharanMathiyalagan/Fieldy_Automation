@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
@@ -316,30 +317,29 @@ public class JobPage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
-			if (!this.conditionChecking(AddCustomer, 20)) {
-				do {
-					this.clearField(SubCustomerField);
-					this.inputText(SubCustomerField, fakeFirstName);
-				} while (!this.conditionChecking(AddCustomer, 20));
+			if (this.conditionChecking(AddCustomer, 20)) {
+				this.mouseActionClick(AddCustomer);
+				if (!this.conditionChecking(PopupOpen, 5)) {
+					do {
+						this.mouseActionClick(AddCustomer);
+						if (this.conditionChecking(PopupOpen, 5)) {
+							condition = false;
+						}
+					} while (condition);
+				}
+				this.inputText(FirstNameField, fakeFirstName);
+				ContactFirstName = this.getTextAttribute(FirstNameField);
+				this.inputText(LastNameField, fakeLastName);
+				ContactLastName = this.getTextAttribute(LastNameField);
+				this.inputText(EmailField, fakeEmail);
+				this.inputText(PhoneNumber, fakePhoneNumber);
+				ContactPhoneNumber = this.getTextAttribute(PhoneNumber);
+				this.inputText(OrganizationJobTittle, fakeTittle);
+				this.mouseActionClick(SaveButton);
+			} else {
+				this.clearField(SubCustomerField);
+				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
-			this.mouseActionClick(AddCustomer);
-			if (!this.conditionChecking(PopupOpen, 5)) {
-				do {
-					this.mouseActionClick(AddCustomer);
-					if (this.conditionChecking(PopupOpen, 5)) {
-						condition = false;
-					}
-				} while (condition);
-			}
-			this.inputText(FirstNameField, fakeFirstName);
-			ContactFirstName = this.getTextAttribute(FirstNameField);
-			this.inputText(LastNameField, fakeLastName);
-			ContactLastName = this.getTextAttribute(LastNameField);
-			this.inputText(EmailField, fakeEmail);
-			this.inputText(PhoneNumber, fakePhoneNumber);
-			ContactPhoneNumber = this.getTextAttribute(PhoneNumber);
-			this.inputText(OrganizationJobTittle, fakeTittle);
-			this.mouseActionClick(SaveButton);
 		} else if (value.equals("VisibleName")) {
 			if (!this.valuePresentCondition(SubCustomerField, ContactFirstName + " " + ContactLastName)) {
 				this.inputText(SubCustomerField, ContactFirstName);

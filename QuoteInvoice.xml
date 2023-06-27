@@ -3,13 +3,13 @@
 <suite name="Suite">
 	<test thread-count="5" name="Test">
 		<classes>
-			<!--class name="org.test.CustomerContactQuote" />
+			<class name="org.test.CustomerContactQuote" />
 
 			<class name="org.test.CustomerOrganizationQuote" />
 
 			<class name="org.test.GlobalContactQuote" />
 
-			<class name="org.test.GlobalOrganizationQuote" /-->
+			<class name="org.test.GlobalOrganizationQuote" />
 
 			<class name="org.test.CustomerContactInvoice" />
 
