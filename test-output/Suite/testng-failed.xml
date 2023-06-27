@@ -3,70 +3,15 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="org.test.ServiceType">
+      <class name="org.test.TeamUserContractor">
         <methods>
-          <include name="verifyUpdateButtonExist"/>
           <include name="deleteAfterCatch"/>
-          <include name="leadSourceUpdate"/>
+          <include name="deleteUserDetails"/>
           <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmandatoryValidation"/>
           <include name="exitBrowser"/>
-          <include name="editmaximumValidationLeadSource"/>
-        </methods>
-      </class> <!-- org.test.ServiceType -->
-      <class name="org.test.LeadSource">
-        <methods>
-          <include name="editmaximumValidationLeadSource"/>
-          <include name="editmandatoryValidation"/>
-          <include name="exitBrowser"/>
-          <include name="leadSourceUpdate"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="verifyUpdateButtonExist"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- org.test.LeadSource -->
-      <class name="org.test.CategoryModule">
-        <methods>
-          <include name="UpdateCategoryProduct"/>
-          <include name="searchInvalid"/>
-          <include name="deleteProductService"/>
-          <include name="deleteProductCategory"/>
-          <include name="editFormLabel"/>
-          <include name="maximumValidationDescription"/>
-          <include name="reflectCategoryService"/>
-          <include name="deleteAfterCatch"/>
-          <include name="inactiveProductService"/>
-          <include name="setup"/>
-          <include name="reflectCategoryProduct"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="inactiveProductCategory"/>
-          <include name="exitBrowser"/>
-          <include name="deleteProduct"/>
           <include name="deleteBeforeCatch"/>
         </methods>
-      </class> <!-- org.test.CategoryModule -->
-      <class name="org.test.ServiceModule">
-        <methods>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="exitBrowser"/>
-          <include name="maximumValidationDescription"/>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.ServiceModule -->
-      <class name="org.test.ProductModule">
-        <methods>
-          <include name="maximumValidationDescription"/>
-          <include name="deleteAfterCatch"/>
-          <include name="setup"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editmaximumValidationDescription"/>
-          <include name="exitBrowser"/>
-        </methods>
-      </class> <!-- org.test.ProductModule -->
+      </class> <!-- org.test.TeamUserContractor -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

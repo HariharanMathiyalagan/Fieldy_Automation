@@ -3,6 +3,53 @@
 <suite name="Failed suite [Suite (4)]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
+      <class name="org.test.ServiceModule">
+        <methods>
+          <include name="updateProduct"/>
+          <include name="editafterDecimalPointPriceField"/>
+          <include name="editmandatoryValidationTaxName"/>
+          <include name="editafterDecimalPointTaxPercentageField"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="editmaximumValidationDescription"/>
+          <include name="exitBrowser"/>
+          <include name="editbeforeDecimalPointPriceField"/>
+          <include name="editmaximumValidationProductName"/>
+          <include name="searchServiceName"/>
+          <include name="editbeforeDecimalPointTaxPercentageField"/>
+          <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="maximumValidationDescription"/>
+          <include name="setup"/>
+          <include name="editmaximumValidationPrice"/>
+          <include name="updateButton"/>
+          <include name="deleteAfterCatch"/>
+        </methods>
+      </class> <!-- org.test.ServiceModule -->
+      <class name="org.test.LeadSource">
+        <methods>
+          <include name="editmaximumValidationLeadSource"/>
+          <include name="editmandatoryValidation"/>
+          <include name="exitBrowser"/>
+          <include name="inactiveLeadSource"/>
+          <include name="leadSourceUpdate"/>
+          <include name="reflectCreateContactPage"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="verifyUpdateButtonExist"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.test.LeadSource -->
+      <class name="org.test.BusinessUnit">
+        <methods>
+          <include name="verifyUpdateButtonExist"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
+          <include name="editmaximumValidationBussinessUnit"/>
+          <include name="exitBrowser"/>
+          <include name="editmandatoryValidation"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="businessUpdate"/>
+        </methods>
+      </class> <!-- org.test.BusinessUnit -->
       <class name="org.test.ProductModule">
         <methods>
           <include name="editafterDecimalPointTaxPercentageField"/>
@@ -15,6 +62,7 @@
           <include name="editafterDecimalPointQuantityHandField"/>
           <include name="editbeforeDecimalPointQuantityHandField"/>
           <include name="editmandatoryValidationTaxPercentage"/>
+          <include name="maximumValidationDescription"/>
           <include name="deleteAfterCatch"/>
           <include name="setup"/>
           <include name="editbeforeDecimalPointLowStockThresoldField"/>
@@ -30,30 +78,13 @@
           <include name="exitBrowser"/>
         </methods>
       </class> <!-- org.test.ProductModule -->
-      <class name="org.test.CategoryModule">
-        <methods>
-          <include name="reflectCategoryService"/>
-          <include name="deleteAfterCatch"/>
-          <include name="inactiveProductService"/>
-          <include name="setup"/>
-          <include name="reflectCategoryProduct"/>
-          <include name="inactiveProductCategory"/>
-          <include name="exitBrowser"/>
-          <include name="deleteProduct"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="editFormLabel"/>
-        </methods>
-      </class> <!-- org.test.CategoryModule -->
       <class name="org.test.ServiceType">
         <methods>
-          <include name="verifyUpdateButtonExist"/>
           <include name="deleteAfterCatch"/>
-          <include name="leadSourceUpdate"/>
+          <include name="reflectCreateContactPage"/>
           <include name="setup"/>
           <include name="deleteBeforeCatch"/>
-          <include name="editmandatoryValidation"/>
           <include name="exitBrowser"/>
-          <include name="editmaximumValidationLeadSource"/>
         </methods>
       </class> <!-- org.test.ServiceType -->
     </classes>

@@ -12,143 +12,15 @@
           <include name="deleteBeforeCatch"/>
         </methods>
       </class> <!-- org.test.TeamUserContractor -->
-      <class name="org.test.TeamSendInvite">
+      <class name="org.test.TeamCompaniesDetailScreen">
         <methods>
-          <include name="deleteBeforeCatch"/>
           <include name="exitBrowser"/>
-          <include name="userSendInvite"/>
-          <include name="setup"/>
-          <include name="deleteAfterCatch"/>
-        </methods>
-      </class> <!-- org.test.TeamSendInvite -->
-      <class name="org.test.TeamCompanyContractor">
-        <methods>
-          <include name="editmaxValidationCityField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="exitBrowser"/>
-          <include name="editmaxValidationStateField"/>
-          <include name="editmaxValidationAddress1Field"/>
-          <include name="editmaxValidationZipcodeField"/>
-          <include name="editmaxValidationPhoneNumberField"/>
-          <include name="editmaxValidationAddress2Field"/>
-          <include name="editminValidationPhoneNumberField"/>
-          <include name="setup"/>
-          <include name="editverifyContractorNameMandatory"/>
-          <include name="deleteAfterCatch"/>
-          <include name="editcharacterValidationZipcodeField"/>
-          <include name="editminValidationZipcodeField"/>
-          <include name="editverifyCpersonLastNameMaxValidation"/>
-          <include name="verifyUpdateButtonExist"/>
-          <include name="deleteContractorDetails"/>
-          <include name="editmaxValidationContactPerson"/>
-          <include name="UpdateContract"/>
-        </methods>
-      </class> <!-- org.test.TeamCompanyContractor -->
-      <class name="org.test.CustomerCreateContactModule">
-        <methods>
-          <include name="invalidValidationEmailField"/>
-          <include name="editMaxValidationPhoneNumberField"/>
-          <include name="deleteContactList"/>
-          <include name="alreadyExistedMail"/>
-          <include name="industryTypePrepopulate"/>
-          <include name="maxValidationBrandNameField"/>
-          <include name="maxValidationPropertyLastNameField"/>
-          <include name="checkResponseCode"/>
-          <include name="locationCityPrepopulate"/>
-          <include name="editMaxValidationJobTittle"/>
-          <include name="searchListEmailField"/>
-          <include name="propertyLastNamePrepopulate"/>
-          <include name="brandNamePrepopulate"/>
-          <include name="emailPrepopulate"/>
-          <include name="editMaxValidationFirstNameField"/>
-          <include name="editmaxValidationTaxNumberField"/>
-          <include name="maxValidationAddress1"/>
-          <include name="CreateContact"/>
-          <include name="editMaxValdidationModelNumberField"/>
-          <include name="editMaxValidationPropertyNameField"/>
-          <include name="maxValidationTaxNumberField"/>
-          <include name="editMaxValidationAddress1"/>
-          <include name="lastNamePrepopulate"/>
-          <include name="loginPage"/>
-          <include name="maxValidationPhoneNumberField"/>
-          <include name="editMaxValidationEmailField"/>
-          <include name="taxNumberPrepopulate"/>
-          <include name="dateInstalledPrepopulate"/>
-          <include name="editMandatoryValidation"/>
-          <include name="dateValidation"/>
-          <include name="deleteAfterCatch"/>
-          <include name="maxValidationAddress22Field"/>
-          <include name="editMaxValidationAccessHoursField"/>
-          <include name="editMaxValidationPropertyLastNameField"/>
-          <include name="editContactList"/>
-          <include name="editMaxValidationProductNameField"/>
-          <include name="searchInvalidListName"/>
-          <include name="installationNotesPrepopulate"/>
-          <include name="leadSourcePrepopulate"/>
-          <include name="maxValidationStateField"/>
-          <include name="editMaxValidationPropertyFirstNameField"/>
-          <include name="maxValidationPropertyFirstNameField"/>
-          <include name="filterIndustryField"/>
-          <include name="jobTittlePrepopulate"/>
-          <include name="locationAddress1Prepopulate"/>
-          <include name="minValidationZipcodeField"/>
-          <include name="specialCharacterZipcodeField"/>
-          <include name="deleteBeforeCatch"/>
-          <include name="maxValidationAccessHoursField"/>
-          <include name="createLabel"/>
-          <include name="characterFilterValidation"/>
-          <include name="editMinValidationZipcodeField"/>
-          <include name="maxValidationProductNameField"/>
-          <include name="editMaxValidationSerialNumberField"/>
-          <include name="invalidPhoneNumberField"/>
-          <include name="editSpecialCharacterPhoneNumberField"/>
-          <include name="editInValidationPhoneNumberField"/>
-          <include name="maxValdidationModelNumberField"/>
-          <include name="maxValidationPropertyNameField"/>
-          <include name="editMaxValidationAddress22Field"/>
-          <include name="setup"/>
           <include name="editLabel"/>
-          <include name="specialCharacterPhoneNumberField"/>
-          <include name="editInvalidValidationEmailField"/>
-          <include name="firstNamePrepopulate"/>
-          <include name="customerContactCount"/>
-          <include name="filterField"/>
-          <include name="contactModule"/>
-          <include name="editMaxValidationCityField"/>
-          <include name="propertyNamePrepopulate"/>
-          <include name="editInvalidPhoneNumberField"/>
-          <include name="editDateValidation"/>
-          <include name="exitBrowser"/>
-          <include name="phoneNumberPrepopulate"/>
-          <include name="searchListNameField"/>
-          <include name="maxValidationInstallationNotesField"/>
-          <include name="editMaxValidationStateField"/>
-          <include name="editMaxValidationZipcodeField"/>
-          <include name="minValidationPhoneNumberField"/>
-          <include name="editMaxValidationLastNameField"/>
-          <include name="accessHoursPrepopulate"/>
-          <include name="editSpecialCharacterZipcodeField"/>
-          <include name="propertyFirstNamePrepopulate"/>
-          <include name="locationZipcodePrepopulate"/>
-          <include name="serialNumberPrepopulate"/>
-          <include name="mandatoryValidation"/>
-          <include name="maxValidationFirstNameField"/>
-          <include name="warrantyInformationPrepopulate"/>
-          <include name="maxValidationSerialNumberField"/>
-          <include name="maxValidationEmailField"/>
-          <include name="maxValidationJobTittle"/>
-          <include name="locationStatePrepopulate"/>
-          <include name="modelNumberPrepopulate"/>
-          <include name="productNamePrepopulate"/>
-          <include name="maxValidationLastNameField"/>
-          <include name="locationAddress2Prepopulate"/>
-          <include name="editMaxValidationBrandNameField"/>
-          <include name="editMaxValidationInstallationNotesField"/>
-          <include name="maxValidationCityField"/>
-          <include name="maxValidationZipcodeField"/>
-          <include name="searchListPhoneNumberField"/>
+          <include name="deleteBeforeCatch"/>
+          <include name="deleteAfterCatch"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- org.test.CustomerCreateContactModule -->
+      </class> <!-- org.test.TeamCompaniesDetailScreen -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite (0)] -->
