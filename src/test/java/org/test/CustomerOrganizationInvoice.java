@@ -1832,7 +1832,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("SharePage");
-		create.attachmentFileCheck("");
+		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
@@ -1858,7 +1858,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		extentTest = extentReports.createTest("Verify the user check the response code on the PDF link page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("PDFPage");
-		create.attachmentFileCheck("");
+		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
