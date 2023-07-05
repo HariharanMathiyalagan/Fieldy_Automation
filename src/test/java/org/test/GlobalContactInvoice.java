@@ -1464,11 +1464,10 @@ public class GlobalContactInvoice extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 57)
 	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports
-				.createTest("Verify the Attacthment response code in global contact invoice module");
+		extentTest = extentReports.createTest("Verify the Attacthment response code in global contact invoice module");
 		InvoicePage initElements = PageFactory.initElements(driver, InvoicePage.class);
 		initElements.attachmentFileCheck("CheckResponse");
 		int responseCode = initElements.responseCode();
@@ -1773,6 +1772,7 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actual.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.resetFunction();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1780,16 +1780,17 @@ public class GlobalContactInvoice extends BaseClass {
 			File file = new File("CustomerContactInvoiceListInvalidValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceListInvalidValidation.png");
+			create.resetFunction();
 		}
 
 	}
-	
+
 	@Test(priority = 68)
 	private void shareLinkResponseCOde() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("SharePage");
-		create.attachmentFileCheck("");
+		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
@@ -1815,7 +1816,7 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest("Verify the user check the response code on the PDF link page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("PDFPage");
-		create.attachmentFileCheck("");
+		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
