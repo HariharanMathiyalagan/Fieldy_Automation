@@ -3,7 +3,7 @@
 <suite name="Suite">
 	<test thread-count="5" name="Test">
 		<classes>
-			<!--class name="org.test.OnBoardingModule" />
+			<class name="org.test.OnBoardingModule" />
 
 			<class name="org.test.Login" />
 
@@ -11,7 +11,7 @@
 
 			<class name="org.test.TeamCompanyContractor" />
 
-			<class name="org.test.TeamUser" /-->
+			<class name="org.test.TeamUser" />
 
 			<class name="org.test.TeamUserContractor" />
 
