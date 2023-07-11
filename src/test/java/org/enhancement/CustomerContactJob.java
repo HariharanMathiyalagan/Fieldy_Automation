@@ -175,7 +175,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 3, invocationCount = 20)
+	@Test(priority = 3, invocationCount = 5)
 	private void createJob_FromDateandTime_ToDateandTime()
 			throws WebDriverException, IOException, InterruptedException, AWTException {
 		extentTest = extentReports

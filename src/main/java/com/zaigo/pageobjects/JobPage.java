@@ -1318,7 +1318,7 @@ public class JobPage extends BaseClass {
 					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message, 40)) {
-					messageCheck = this.getTexts(Message, 0);
+					messageCheck = this.getTexts(Message, 40);
 					this.invisible(Message);
 					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))

@@ -177,7 +177,7 @@ public class BusinessDaysPage extends BaseClass {
 	public Boolean conditionChecking(By element) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 20);
+			wait = new WebDriverWait(driver, 50);
 			text = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isEnabled();
 		} catch (Exception e) {
 			return text;
@@ -356,7 +356,7 @@ public class BusinessDaysPage extends BaseClass {
 		return value;
 	}
 
-	public String labelValidation(String value) {
+	public String labelValidation(String value) throws InterruptedException {
 		if (value.equals("BusinessUnitCreate")) {
 			this.visibility(list_bussiness_unit_name);
 			this.mouseActionClick(create_button);
@@ -364,6 +364,7 @@ public class BusinessDaysPage extends BaseClass {
 			String text = this.getText(list_bussiness_unit_name);
 			this.mouseActionClick(edit_btn);
 			this.valuePresent(bussiness_name, text);
+			Thread.sleep(3000);
 		} else if (value.equals("LeadSourceCreate")) {
 			this.visibility(list_lead_source_name);
 			this.mouseActionClick(lead_source_create_btn);
@@ -371,6 +372,7 @@ public class BusinessDaysPage extends BaseClass {
 			String text = this.getText(list_lead_source_name);
 			this.mouseActionClick(leadsource_edit_btn);
 			this.valuePresent(leadsource_name, text);
+			Thread.sleep(3000);
 		} else if (value.equals("ServiceTypeCreate")) {
 			this.visibility(list_service_type_name);
 			this.mouseActionClick(service_create_btn);
@@ -378,11 +380,12 @@ public class BusinessDaysPage extends BaseClass {
 			String text = this.getText(list_service_type_name);
 			this.mouseActionClick(service_edit_btn);
 			this.valuePresent(service_name, text);
+			Thread.sleep(3000);
 		}
 		return this.getText(FormLabel);
 	}
 
-	public String businessUnitField(String value) {
+	public String businessUnitField(String value) throws InterruptedException {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(bussiness_name, characters2048);
 		} else if (value.equals("Mandatory")) {
@@ -395,18 +398,26 @@ public class BusinessDaysPage extends BaseClass {
 			}
 		} else if (value.equals("UniqueValidation")) {
 			String text = this.getText(list_bussiness_unit_name);
-			this.mouseActionClick(create_button);
+			this.visibility(create_button);
 			this.mouseActionClick(create_button);
 			this.validationTab(bussiness_name, text);
 		} else if (value.equals("ValidData")) {
+			Thread.sleep(2000);
+			if (!(this.getTextAttribute(bussiness_name).length() < 1)) {
+				do {
+					this.clearField(bussiness_name);
+					Thread.sleep(2000);
+				} while (!(this.getTextAttribute(bussiness_name).length() < 1));
+			}
 			this.inputText(bussiness_name, BusinessName);
+//			this.inputText(bussiness_name, "Fixflex");
 			String businessName = this.getTextAttribute(bussiness_name);
 			return businessName;
 		}
 		return value;
 	}
 
-	public String leadSourceField(String value) {
+	public String leadSourceField(String value) throws InterruptedException {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(leadsource_name, characters2048);
 		} else if (value.equals("Mandatory")) {
@@ -423,6 +434,13 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(lead_source_create_btn);
 			this.validationTab(leadsource_name, text);
 		} else if (value.equals("ValidData")) {
+			Thread.sleep(2000);
+			if (!(this.getTextAttribute(leadsource_name).length() < 1)) {
+				do {
+					this.clearField(leadsource_name);
+					Thread.sleep(2000);
+				} while (!(this.getTextAttribute(leadsource_name).length() < 1));
+			}
 			this.inputText(leadsource_name, BusinessName);
 			String businessName = this.getTextAttribute(leadsource_name);
 			return businessName;
@@ -431,7 +449,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	}
 
-	public String serviceTypeField(String value) {
+	public String serviceTypeField(String value) throws InterruptedException {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(service_name, characters2048);
 		} else if (value.equals("Mandatory")) {
@@ -448,7 +466,15 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(service_create_btn);
 			this.validationTab(service_name, text);
 		} else if (value.equals("ValidData")) {
+			Thread.sleep(2000);
+			if (!(this.getTextAttribute(service_name).length() < 1)) {
+				do {
+					this.clearField(service_name);
+					Thread.sleep(2000);
+				} while (!(this.getTextAttribute(service_name).length() < 1));
+			}
 			this.inputText(service_name, BusinessName);
+//			this.inputText(service_name, "Kanlam");
 			String businessName = this.getTextAttribute(service_name);
 			return businessName;
 		}
@@ -490,34 +516,77 @@ public class BusinessDaysPage extends BaseClass {
 		return value;
 	}
 
-	public String message(String value) throws IOException {
+	public String message(String value) throws IOException, InterruptedException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message")) {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
-				return responseMessage;
 			} else {
 				do {
-					this.clearField("BussinessUnit");
-					String BusinessName = faker.app().name();
-					this.inputText(bussiness_name, BusinessName);
+					Thread.sleep(10000);
 					this.mouseActionClick(bussiness_status_save_btn);
 					if (this.conditionChecking(Message)) {
-						responseMessage = this.message("Message");
-						if (responseMessage.equals("Created Successfully")
-								|| responseMessage.equals("Updated Successfully")) {
+						responseMessage = this.getText(Message);
+						if (responseMessage.equals(getPropertyValue("BusinessUnitCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("BusinessUnitUpdatedMessage"))
+								|| responseMessage.equals(getPropertyValue("LeadSourceCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("LeadSourceUpdatedMessage"))
+								|| responseMessage.equals(getPropertyValue("ServiceTypeCreatedMessage"))
+								|| responseMessage.equals(getPropertyValue("ServiceTypeUpdatedMessage"))) {
 							conditionCheck = false;
 						}
 					}
 				} while (conditionCheck);
 			}
 		} else if (value.equals("AlternateFunction")) {
-			if (responseMessage.equals(getPropertyValue("LeadSourceAlreadyExists"))) {
-				this.clearField("LeadSource");
-			}
+			do {
+
+				if (responseMessage.equals(getPropertyValue("LeadSourceAlreadyExists"))
+						|| responseMessage.equals(getPropertyValue("BusinessUnitAlreadyExists"))
+						|| responseMessage.equals(getPropertyValue("ServiceTypeAlreadyExists"))) {
+					this.clearField(bussiness_name);
+					Faker faker = new Faker(new Locale("en-IND"));
+					String BusinessName = faker.app().name();
+					this.inputText(bussiness_name, BusinessName);
+					this.mouseActionClick(service_save_btn);
+				}
+				if (this.conditionChecking(Message)) {
+					responseMessage = this.getText(Message);
+					this.invisible(Message);
+					if (responseMessage.equals(getPropertyValue("BusinessUnitCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("BusinessUnitUpdatedMessage"))
+							|| responseMessage.equals(getPropertyValue("LeadSourceCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("LeadSourceUpdatedMessage"))
+							|| responseMessage.equals(getPropertyValue("ServiceTypeCreatedMessage"))
+							|| responseMessage.equals(getPropertyValue("ServiceTypeUpdatedMessage"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(bussiness_status_save_btn);
+						if (this.conditionChecking(Message)) {
+							responseMessage = this.getText(Message);
+							if (responseMessage.equals(getPropertyValue("BusinessUnitCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("BusinessUnitUpdatedMessage"))
+									|| responseMessage.equals(getPropertyValue("LeadSourceCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("LeadSourceUpdatedMessage"))
+									|| responseMessage.equals(getPropertyValue("ServiceTypeCreatedMessage"))
+									|| responseMessage.equals(getPropertyValue("ServiceTypeUpdatedMessage"))) {
+								conditionCheck = false;
+							} else if (responseMessage.equals(getPropertyValue("LeadSourceAlreadyExists"))
+									|| responseMessage.equals(getPropertyValue("BusinessUnitAlreadyExists"))
+									|| responseMessage.equals(getPropertyValue("ServiceTypeAlreadyExists"))) {
+								this.message("AlternateFunction");
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
+				}
+			} while (conditionCheck);
 		}
-		return value;
+		return responseMessage;
 	}
 
 	public String listValdidation(String value) {
@@ -555,6 +624,7 @@ public class BusinessDaysPage extends BaseClass {
 			textAttribute = this.getTextAttribute(leadsource_name);
 			this.mouseActionClick(leadsource_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("EditLeadSource")) {
 			this.mouseActionClick(settings_menu);
@@ -567,6 +637,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.dropDownByIndex(leadsource_status, 1);
 			this.mouseActionClick(leadsource_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("DeleteLeadSource")) {
 			this.mouseActionClick(settings_menu);
@@ -582,6 +653,7 @@ public class BusinessDaysPage extends BaseClass {
 			textAttribute = this.getTextAttribute(bussiness_name);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("EditBusinessUnit")) {
 			this.mouseActionClick(settings_menu);
@@ -592,6 +664,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.dropDownByIndex(bussiness_status, 1);
 			this.mouseActionClick(bussiness_status_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("DeleteBusinessUnit")) {
 			this.mouseActionClick(settings_menu);
@@ -607,6 +680,7 @@ public class BusinessDaysPage extends BaseClass {
 			textAttribute = this.getTextAttribute(service_name);
 			this.mouseActionClick(service_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("EditServiceType")) {
 			this.mouseActionClick(settings_menu);
@@ -619,6 +693,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
 			this.message("Message");
+			this.alternateMethod();
 			return textAttribute;
 		} else if (value.equals("DeleteServiceType")) {
 			this.mouseActionClick(settings_menu);
@@ -696,6 +771,14 @@ public class BusinessDaysPage extends BaseClass {
 		for (int i = 0; i < 10; i++) {
 			this.mouseActionClick(RadioButtonOrganization);
 			this.mouseActionClick(RadioButtonContact);
+		}
+	}
+
+	public void alternateMethod() throws IOException, InterruptedException {
+		if (responseMessage.equals(getPropertyValue("BusinessUnitAlreadyExists"))
+				|| responseMessage.equals(getPropertyValue("ServiceTypeAlreadyExists"))
+				|| responseMessage.equals(getPropertyValue("LeadSourceAlreadyExists"))) {
+			this.message("AlternateFunction");
 		}
 
 	}

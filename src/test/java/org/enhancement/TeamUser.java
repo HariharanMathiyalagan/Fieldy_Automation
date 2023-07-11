@@ -125,7 +125,7 @@ public class TeamUser extends BaseClass {
 
 	}
 
-	@Test(priority = 3, invocationCount = 5)
+	@Test(priority = 3, invocationCount = 10)
 	private void userCreate() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify a new User is created successfully through [Team User]");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
