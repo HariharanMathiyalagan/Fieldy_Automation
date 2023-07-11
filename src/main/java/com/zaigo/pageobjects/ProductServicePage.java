@@ -51,7 +51,7 @@ public class ProductServicePage extends BaseClass {
 	String characters512 = RandomStringUtils.randomAlphabetic(513);
 	String randomCharacter = RandomStringUtils.randomAlphabetic(6);
 	String characters16 = RandomStringUtils.randomAlphabetic(20);
-	String characters2048 = RandomStringUtils.randomAlphabetic(2049);
+	String characters2048 = RandomStringUtils.randomAlphabetic(10000);
 	String numberCharacter15 = RandomStringUtils.randomNumeric(15);
 	String QuantityValue = RandomStringUtils.randomNumeric(2);
 	String PriceValue = RandomStringUtils.randomNumeric(4);
@@ -434,7 +434,7 @@ public class ProductServicePage extends BaseClass {
 
 	public void inventoryName(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(InventoryName, characters2048);
+			this.validationTab(InventoryName, characters256);
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Unique")) {
 			String text = this.getText(ListInventoryName);
@@ -461,7 +461,7 @@ public class ProductServicePage extends BaseClass {
 
 	public void description(String value) {
 		if (value.equals("MaxValidation")) {
-			this.validationTab(Description, characters2048);
+			this.validationTab(Description, characters2048 + characters2048 + "ww");
 		}
 	}
 
@@ -515,7 +515,6 @@ public class ProductServicePage extends BaseClass {
 			if (conditionChecking(Message, 20)) {
 				ResponseMessage = this.getText(Message);
 				this.invisible(Message);
-				return ResponseMessage;
 			} else {
 				do {
 					Thread.sleep(10000);
@@ -523,7 +522,8 @@ public class ProductServicePage extends BaseClass {
 					if (conditionChecking(Message, 20)) {
 						ResponseMessage = this.getText(Message);
 						if (ResponseMessage.equals(getPropertyValue("InventoryCreatedMessage"))
-								|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))) {
+								|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))
+								|| ResponseMessage.equals(getPropertyValue("AlreadyExists"))) {
 							conditionCheck = false;
 						}
 					}
@@ -536,16 +536,30 @@ public class ProductServicePage extends BaseClass {
 					this.clearField(InventoryName);
 					this.inputText(InventoryName, fakeProductName);
 					this.mouseActionClick(SaveComplete);
-					message = this.getText(Message);
-					this.invisible(Message);
 				}
-				if (message.equals(getPropertyValue("InventoryCreatedMessage"))
-						|| message.equals(getPropertyValue("InventoryUpdatedMessage"))) {
-					conditionCheck = false;
+				if (conditionChecking(Message, 20)) {
+					ResponseMessage = this.getText(Message);
+					this.invisible(Message);
+					if (ResponseMessage.equals(getPropertyValue("InventoryCreatedMessage"))
+							|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))) {
+						conditionCheck = false;
+					}
+				} else {
+					do {
+						Thread.sleep(10000);
+						this.mouseActionClick(SaveComplete);
+						if (conditionChecking(Message, 20)) {
+							ResponseMessage = this.getText(Message);
+							if (ResponseMessage.equals(getPropertyValue("InventoryCreatedMessage"))
+									|| ResponseMessage.equals(getPropertyValue("InventoryUpdatedMessage"))) {
+								conditionCheck = false;
+							}
+						}
+					} while (conditionCheck);
 				}
 			} while (conditionCheck);
 		}
-		return value;
+		return ResponseMessage;
 	}
 
 	public String clickEvent(String value) {
@@ -594,7 +608,7 @@ public class ProductServicePage extends BaseClass {
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.inputText(Price, PriceValue);
 		} else if (value.equals("FillFieldService")) {
-			this.inputText(InventoryName, fakeProductName);
+			this.inputText(InventoryName, fakeProductName);			
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
 			this.scrollDown();
 			this.mouseActionClick(Category);

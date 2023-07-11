@@ -562,6 +562,11 @@ public class InvoicePage extends BaseClass {
 				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
 		} else if (value.equals("ErrorDescription")) {
+			if (!this.conditionChecking1(ErrorDescription, 10)) {
+				do {
+					this.validationTab(Description, "     ");
+				} while (!this.conditionChecking1(ErrorDescription, 10));
+			}
 			String text = this.getText(ErrorDescription);
 			return text;
 		} else if (value.equals("ErrorNotes")) {
@@ -583,8 +588,20 @@ public class InvoicePage extends BaseClass {
 	public void pickFirstItem(String value) throws InterruptedException {
 		Boolean condition = true;
 		if (value.equals("Contact")) {
+			this.scrollUp();
 			this.mouseActionClick(InventoryItem);
-			this.mouseActionClick(InventoryFirstItem);
+			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
+				do {
+					Thread.sleep(5000);
+					this.mouseActionClick(InventoryItem);
+					if (this.conditionChecking(InventoryName)) {
+						condition = false;
+					}
+				} while (condition);
+				this.mouseActionClick(InventoryFirstItem);
+			} else {
+				this.mouseActionClick(InventoryFirstItem);
+			}
 		} else if (value.equals("Organization")) {
 			this.mouseActionClick(InventoryItem);
 			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
@@ -599,7 +616,6 @@ public class InvoicePage extends BaseClass {
 			} else {
 				this.mouseActionClick(InventoryFirstItem);
 			}
-
 		} else if (value.equals("ClickInventory")) {
 			this.mouseActionClick(InventoryItem);
 		}
@@ -828,6 +844,8 @@ public class InvoicePage extends BaseClass {
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
+			this.mouseActionClick(InventoryItem);
+			this.mouseActionClick(InventoryName);
 			this.inputText(DueDate, pastDate);
 			this.mouseActionClick(Save);
 		} else if (value.equals("GlobalPastDate")) {

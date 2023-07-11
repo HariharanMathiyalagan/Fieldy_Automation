@@ -8,6 +8,8 @@
 			<class name="org.test.LeadSource" />
 
 			<class name="org.test.ServiceType" />
+			
+			<class name="org.test.PrefixSettings"/>
 
 			<class name="org.test.ProductModule" />
 

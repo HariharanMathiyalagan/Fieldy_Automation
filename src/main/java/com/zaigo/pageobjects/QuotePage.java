@@ -824,6 +824,11 @@ public class QuotePage extends BaseClass {
 				throw new SkipException("Skipping / Ignoring - Script not Ready for Execution ");
 			}
 		} else if (value.equals("ErrorDescription")) {
+			if (!this.conditionChecking1(ErrorDescription, 10)) {
+				do {
+					this.validationTab(Description, "     ");
+				} while (!this.conditionChecking1(ErrorDescription, 10));
+			}
 			String text = this.getText(ErrorDescription);
 			return text;
 		} else if (value.equals("ErrorNotes")) {
@@ -1079,7 +1084,8 @@ public class QuotePage extends BaseClass {
 				} else if (responseMessage.equals(getPropertyValue("AlreadyTax"))) {
 					this.clearField(TaxName);
 					String fakeTaxName = faker.book().genre();
-					this.inputText(TaxName, fakeTaxName);
+					String upperCase = RandomStringUtils.randomAlphabetic(5).toUpperCase();
+					this.inputText(TaxName, fakeTaxName + " " + upperCase);
 					this.mouseActionClick(SaveButton);
 				} else if (responseMessage.equals(getPropertyValue("MaxTaxPercentage"))) {
 					this.clearField(TaxPercentage);
@@ -1376,7 +1382,11 @@ public class QuotePage extends BaseClass {
 			}
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
-			driver.switchTo().window(list.get(1));
+			if (value.equals("NewWindow")) {
+				driver.switchTo().window(list.get(0));
+			} else if (value.equals("CheckResponse")) {
+				driver.switchTo().window(list.get(1));
+			}
 		} else if (value.equals("ParentWindow")) {
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);

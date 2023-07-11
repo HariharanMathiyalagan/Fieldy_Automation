@@ -332,14 +332,16 @@ public class TaxPage extends BaseClass {
 				} else if (ResponseMessage.equals(getPropertyValue("AlreadyTax"))) {
 					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeTaxName = faker.book().genre();
+					String upperCase = RandomStringUtils.randomAlphabetic(5).toUpperCase();
 					this.clearField(TaxName);
-					this.inputText(TaxName, fakeTaxName);
+					this.inputText(TaxName, fakeTaxName + upperCase);
 					this.mouseActionClick(Button);
 				} else if (ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
 					Faker faker = new Faker(new Locale("en-IND"));
 					String fakeTaxName = faker.book().genre();
+					String upperCase = RandomStringUtils.randomAlphabetic(5).toUpperCase();
 					this.clearField(SubTaxName1);
-					this.inputText(SubTaxName1, fakeTaxName);
+					this.inputText(SubTaxName1, fakeTaxName + upperCase);
 					this.mouseActionClick(Button);
 				}
 				if (this.conditionChecking(Message, 20)) {
