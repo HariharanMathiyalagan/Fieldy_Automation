@@ -283,19 +283,24 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
 		if (value.equals("ResponseMessage")) {
-			if (this.conditionChecking(Message, 40)) {
+			if (this.conditionChecking(Message, 50)) {
 				response = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
 					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
-					if (this.conditionChecking(Message, 40)) {
+					if (this.conditionChecking(Message, 50)) {
 						response = this.getText(Message);
 						this.invisible(Message);
 						if (response.equals(getPropertyValue("CustomerCreatedMessage"))
 								|| response.equals(getPropertyValue("CustomerUpdatedMesssage"))
-								|| response.equals(getPropertyValue("DateMessage"))) {
+								|| response.equals(getPropertyValue("DateMessage"))
+								|| response.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
+								|| response.equals(getPropertyValue("CompanyAlreadyMessage"))
+								|| response.equals(getPropertyValue("CompanyContact1EmailMessage"))
+								|| response.equals(getPropertyValue("CompanyContact2EmailMessage"))
+								|| response.equals(getPropertyValue("CompanyContact3EmailMessage"))) {
 							check = false;
 						}
 					}
@@ -327,8 +332,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 					}
 					this.mouseActionClick(SaveComplete);
 				} else if (response.equals(getPropertyValue("CompanyContact1EmailMessage"))
-						|| response.equals(getPropertyValue("CompanyEmailContact2Email"))
-						|| response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
+						|| response.equals(getPropertyValue("CompanyContact2EmailMessage"))
+						|| response.equals(getPropertyValue("CompanyContact3EmailMessage"))) {
 					for (int i = 0; i < 2; i++) {
 						this.mouseActionClick(Previous);
 					}
@@ -340,12 +345,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 						Faker faker = new Faker(new Locale("en-IND"));
 						String fakeEmail = faker.internet().safeEmailAddress();
 						this.inputText(ContactEmail, fakeEmail);
-					} else if (response.equals(getPropertyValue("CompanyEmailContact2Email"))) {
+					} else if (response.equals(getPropertyValue("CompanyContact2EmailMessage"))) {
 						this.clearField(ContactEmail2);
 						Faker faker = new Faker(new Locale("en-IND"));
 						String fakeEmail = faker.internet().safeEmailAddress();
 						this.inputText(ContactEmail2, fakeEmail);
-					} else if (response.equals(getPropertyValue("CompanyEmailContact3Email"))) {
+					} else if (response.equals(getPropertyValue("CompanyContact3EmailMessage"))) {
 						this.clearField(ContactEmail3);
 						Faker faker = new Faker(new Locale("en-IND"));
 						String fakeEmail = faker.internet().safeEmailAddress();
@@ -356,14 +361,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 					}
 					this.mouseActionClick(SaveComplete);
 				}
-				if (this.conditionChecking(Message, 40)) {
+				if (this.conditionChecking(Message, 50)) {
 					response = this.getText(Message);
 					this.invisible(Message);
 				} else {
 					do {
 						Thread.sleep(10000);
 						this.mouseActionClick(SaveComplete);
-						if (this.conditionChecking(Message, 40)) {
+						if (this.conditionChecking(Message, 50)) {
 							response = this.getText(Message);
 							this.invisible(Message);
 							if (response.equals(getPropertyValue("CustomerCreatedMessage"))
@@ -924,8 +929,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public String organizationName(String value) {
 		if (value.equals("MandatoryValidation")) {
 			this.mouseActionClick(SaveComplete);
-			if (conditionChecking1(OrganizationError)) {
-			} else {
+			if (!conditionChecking1(OrganizationError)) {
 				do {
 					this.mouseActionClick(SaveComplete);
 				} while (!this.conditionChecking1(OrganizationError));

@@ -20,6 +20,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
+import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.pageobjects.SubscriptionPage;
 import com.zaigo.utility.BrowserSetup;
@@ -58,69 +59,28 @@ public class SubscriptionMonthlyTeamPack extends BaseClass {
 	}
 
 	@Test(priority = 1)
-	public void createTenant() throws IOException {
-		extentTest = extentReports.createTest("Creating a New Tenant, the page is redirect into the Dashboard page");
-		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
-		mismatchPassword.fillData();
-		String errorConfirmMessage = mismatchPassword.dashBoardPage();
-		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
+	public void verify() throws IOException {
+		// Single Account User
+		extentTest = extentReports.createTest(
+				"Verify the Fieldy Login Page to Validate the Valid Email & Valid Password and Land on the Fieldy Home Page");
+		LoginPage loginInPage = new LoginPage(this.driver);
+		loginInPage.userField(getPropertyValueUpdate("UserName"));
+		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
+		loginInPage.clickLoginButton();
+		String text = loginInPage.dashBoardText();
+		extentTest.log(Status.INFO, "Actual Result is -" + text);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidationOfLandingPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(getPropertyValue("ValidationOfLandingPage"))) {
+		if (text.equals(getPropertyValue("ValidationOfLandingPage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
 			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("MisMatchPasswordValidation.png");
+			File file = new File("1.png");
 			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
+			extentTest.addScreenCaptureFromPath("1.png");
 		}
-
-	}
-
-	@Test(priority = 2)
-	public void subDomineURL() throws IOException {
-		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain URL");
-		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
-		String actualURL = mismatchPassword.urlGet();
-		String expectedURL = mismatchPassword.expectedURL();
-		extentTest.log(Status.INFO, "Actual Result is -" + actualURL);
-		extentTest.log(Status.INFO, "Expected Result is -" + expectedURL);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (actualURL.equals(expectedURL)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("MisMatchPasswordValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
-		}
-
-	}
-
-	@Test(priority = 3)
-	public void ownerName() throws IOException {
-		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain tenant owner profile name");
-		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
-		String actualOwner = mismatchPassword.getOwnerName();
-		String expectedOwner = mismatchPassword.expectedOwnerName();
-		extentTest.log(Status.INFO, "Actual Result is -" + actualOwner);
-		extentTest.log(Status.INFO, "Expected Result is -" + expectedOwner);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (actualOwner.equals(expectedOwner)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("MisMatchPasswordValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
-		}
-
 	}
 
 	@Test(priority = 4)

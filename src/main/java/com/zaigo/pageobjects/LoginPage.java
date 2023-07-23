@@ -59,15 +59,17 @@ public class LoginPage extends BaseClass {
 
 	public String dashBoardText() throws IOException {
 		Boolean conditionCheck = true;
+		this.visible(Spinner);
 		this.invisible(Spinner);
-		if (!this.conditionChecking(Dashboard, 20)) {
+		if (!this.conditionChecking(Dashboard, 10)) {
 			do {
 				if (this.conditionChecking(username_by, 3)) {
 					this.userField(getPropertyValueUpdate("UserName"));
 					this.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
 					this.clickLoginButton();
+					this.visible(Spinner);
 					this.invisible(Spinner);
-					if (this.conditionChecking(Dashboard, 20)) {
+					if (this.conditionChecking(Dashboard, 10)) {
 						value = this.getText(Dashboard);
 						conditionCheck = false;
 					}
@@ -87,6 +89,11 @@ public class LoginPage extends BaseClass {
 	private void invisible(By element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+	
+	private void visible(By element) {
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 	}
 
 	public String getText(By element) {

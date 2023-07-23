@@ -989,7 +989,11 @@ public class RequestPage extends BaseClass {
 			getName = this.getText(CustomerName);
 			return getName;
 		} else if (value.equals("PlaceHolderName")) {
-			this.valuePresent(CustomerField, getName);
+			if (!this.valuePresentCondition(CustomerField, getName)) {
+				do {
+					driver.navigate().refresh();
+				} while (!this.valuePresent(CustomerField, getName));
+			}
 			String textAttribute = this.getTextAttribute(CustomerField);
 			return textAttribute;
 		}

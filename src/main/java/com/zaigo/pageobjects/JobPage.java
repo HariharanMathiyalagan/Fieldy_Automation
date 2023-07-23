@@ -1255,7 +1255,6 @@ public class JobPage extends BaseClass {
 	}
 
 	static String responseMessage;
-	static String messageCheck;
 	static int increment;
 
 	public String message(String value) throws IOException, InterruptedException {
@@ -1318,9 +1317,9 @@ public class JobPage extends BaseClass {
 					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message, 40)) {
-					messageCheck = this.getTexts(Message, 40);
+					responseMessage = this.getTexts(Message, 40);
 					this.invisible(Message);
-					if (messageCheck.equals(getPropertyValue("CustomerCreatedMessage"))
+					if (responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("JobCreatedMessage"))
 							|| responseMessage.equals(getPropertyValue("JobUpdatedMessage"))) {
 						conditionCheck = false;

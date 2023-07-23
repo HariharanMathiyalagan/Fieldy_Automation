@@ -1393,4 +1393,15 @@ public class InvoicePage extends BaseClass {
 		int responseCode = connection.getResponseCode();
 		return responseCode;
 	}
+
+	By PopupDisable = By.xpath("//*[@id='invoice_share_link' and contains(@class,'d-none')]");
+
+	public void cancelButton() {
+		this.mouseActionClick(CancelButton);
+		if (this.conditionChecking1(PopupDisable, 5)) {
+			do {
+				this.mouseActionClick(CancelButton);
+			} while (this.conditionChecking1(PopupDisable, 5));
+		}
+	}
 }

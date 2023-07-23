@@ -1791,7 +1791,7 @@ public class CustomerContactInvoice extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actual.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			create.mouseActionClick(InvoicePage.Reset);
+			create.resetFunction();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1799,7 +1799,7 @@ public class CustomerContactInvoice extends BaseClass {
 			File file = new File("CustomerContactInvoiceListInvalidValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceListInvalidValidation.png");
-			create.mouseActionClick(InvoicePage.Reset);
+			create.resetFunction();
 		}
 	}
 
@@ -1816,7 +1816,7 @@ public class CustomerContactInvoice extends BaseClass {
 		if (actual == 200) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1825,7 +1825,7 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		}
 	}
 
