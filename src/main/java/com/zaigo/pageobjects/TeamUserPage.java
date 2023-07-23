@@ -771,8 +771,8 @@ public class TeamUserPage extends BaseClass {
 			type = this.getTextAttribute(Type);
 			this.inputText(JobTittle, fakeTittle);
 			jobTittle = this.getTextAttribute(JobTittle);
-//			this.inputText(Email, fakeEmail);
-			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
+			this.inputText(Email, fakeEmail);
+//			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
@@ -811,8 +811,8 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(ServiceType);
 			this.mouseActionClick(Repair);
 			serviceType = this.getTextAttribute(ServiceType);
-//			this.inputText(Email, fakeEmail);
-			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
+			this.inputText(Email, fakeEmail);
+//			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);

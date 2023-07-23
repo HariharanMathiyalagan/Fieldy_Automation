@@ -1797,6 +1797,7 @@ public class GlobalOrganizationInvoice extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actual.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.resetFunction();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1804,6 +1805,7 @@ public class GlobalOrganizationInvoice extends BaseClass {
 			File file = new File("CustomerContactInvoiceListInvalidValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceListInvalidValidation.png");
+			create.resetFunction();
 		}
 
 	}
@@ -1821,7 +1823,7 @@ public class GlobalOrganizationInvoice extends BaseClass {
 		if (actual == 200) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1830,7 +1832,7 @@ public class GlobalOrganizationInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		}
 	}
 

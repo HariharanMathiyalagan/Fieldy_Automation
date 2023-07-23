@@ -69,67 +69,14 @@ import com.zaigo.pageobjects.QuotePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name extends BaseClass {
-	static HttpURLConnection connection;
-	static List<String> list;
-	WebDriver driver;
-
-//	private void name1() throws IOException, InterruptedException, AWTException {
-//		// TODO Auto-generated method stub
-////		String value = "https://qaapp.zaigotech.com/public/quote/view/?hashid=$2y$10$.RTFzDoewmH8cYIr0nFeaJLXX1Z7AdQf.dKvw.OYjAnYYuHUDt.";
-//		WebDriverManager.chromedriver().setup();
-//		driver = new ChromeDriver();
-//		driver.get("https://qaapp.zaigotech.com/login");
-//		LoginPage loginInPage = new LoginPage(this.driver);
-//		loginInPage.userField(getPropertyValueUpdate("UserName"));
-//		loginInPage.passwordField(getPropertyValue("Password", getPropertyValue("Enviromment")));
-//		loginInPage.clickLoginButton();
-//		loginInPage.dashBoardText();
-//		QuotePage module = PageFactory.initElements(driver, QuotePage.class);
-//		String editContact = module.labelValidation("Global");
-//		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-//		create.listTextValidation("PDFPage");
-////		driver.switchTo().newWindow(WindowType.WINDOW);
-////		JavascriptExecutor js = (JavascriptExecutor) driver;
-//////		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-////		js.executeScript("window.open('" + value + "','_blank');");
-//		Set<String> windowHandles = driver.getWindowHandles();
-//		list = new ArrayList<String>(windowHandles);
-//		driver.switchTo().window(list.get(1));
-//		String currentUrl = driver.getCurrentUrl();
-//		System.out.println(currentUrl);
-//		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
-//		connection.setRequestMethod("HEAD");
-//		connection.connect();
-//
-//	}
-//
-//	public void name2() throws IOException {
-//		int responseCode = connection.getResponseCode();
-//		if (responseCode == 200) {
-//			System.out.println(true);
-//		} else {
-//			System.out.println(false);
-//		}
-//		driver.switchTo().window(list.get(0));
-//	}
-//
-//	public static void main(String[] args) throws IOException, InterruptedException, AWTException {
-//		Name name = new Name();
-//		name.name1();
-//		name.name2();
-//
-//	}
 	public static void main(String[] args) {
 		try {
 			URL url = new URL("http://www.google.com");
 			URLConnection connection = url.openConnection();
 			connection.connect();
 			System.out.println("Internet is connected");
-		} catch (MalformedURLException e) {
-			System.out.println("Internet is not connected");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("Internet is not connected");
 		}
 	}
-
 }

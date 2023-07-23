@@ -40,6 +40,7 @@ public class CustomerContactRequest extends BaseClass {
 		this.driver = BrowserSetup.startBrowser();
 
 	}
+
 	@AfterClass
 	public void exitBrowser() {
 		this.driver.quit();
@@ -178,7 +179,7 @@ public class CustomerContactRequest extends BaseClass {
 		extentTest = extentReports
 				.createTest("Create a Request  with From Date & Time - To Date & Time with Scheduled status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
-		mandatory.validData("Schedule");
+		mandatory.validData("CreateSchedule");
 		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
