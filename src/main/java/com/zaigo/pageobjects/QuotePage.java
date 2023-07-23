@@ -1383,7 +1383,7 @@ public class QuotePage extends BaseClass {
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
 			if (value.equals("NewWindow")) {
-				driver.switchTo().window(list.get(0));
+//				driver.switchTo().window(list.get(0));
 			} else if (value.equals("CheckResponse")) {
 				driver.switchTo().window(list.get(1));
 			}
@@ -1401,5 +1401,16 @@ public class QuotePage extends BaseClass {
 		connection.connect();
 		int responseCode = connection.getResponseCode();
 		return responseCode;
+	}
+
+	By PopupDisable = By.xpath("//*[@id='quote_share_link' and contains(@class,'d-none')]");
+
+	public void cancelButton() {
+		this.mouseActionClick(CancelButton);
+		if (this.conditionChecking1(PopupDisable, 5)) {
+			do {
+				this.mouseActionClick(CancelButton);
+			} while (this.conditionChecking1(PopupDisable, 5));
+		}
 	}
 }

@@ -1852,7 +1852,7 @@ public class CustomerContactQuote extends BaseClass {
 		if (actual == 200) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(QuotePage.CancelButton);
+			create.cancelButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1861,7 +1861,7 @@ public class CustomerContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(QuotePage.CancelButton);
+			create.cancelButton();
 		}
 	}
 

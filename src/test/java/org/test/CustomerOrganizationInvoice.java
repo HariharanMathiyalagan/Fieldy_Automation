@@ -1536,7 +1536,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 57)
 	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports
@@ -1816,6 +1816,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actual.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.resetFunction();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1823,10 +1824,11 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			File file = new File("CustomerContactInvoiceListInvalidValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceListInvalidValidation.png");
+			create.resetFunction();
 		}
 
 	}
-	
+
 	@Test(priority = 68)
 	private void shareLinkResponseCOde() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
@@ -1840,7 +1842,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		if (actual == 200) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1849,7 +1851,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 			create.attachmentFileCheck("ParentWindow");
-			create.mouseActionClick(InvoicePage.CancelButton);
+			create.cancelButton();
 		}
 	}
 
