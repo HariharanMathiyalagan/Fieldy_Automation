@@ -34,7 +34,7 @@ public class BrowserSetup extends BaseClass {
 			WebDriver driver = null;
 			WebDriverManager.edgedriver().setup();
 			EdgeOptions options = new EdgeOptions();
-			options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "-inprivate");
+//			options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "-inprivate");
 			driver = new EdgeDriver(options);
 			driver.manage().deleteAllCookies();
 			driver.manage().window().maximize();

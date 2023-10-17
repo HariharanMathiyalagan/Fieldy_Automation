@@ -175,7 +175,7 @@ public class OnBoardingPage extends BaseClass {
 	By ChooseIndustry = By.xpath("//input[@value='Heating & Air Conditioning']");
 	By Industry = By.id("industry");
 	By IndustryError = By.id("industry_error");
-	By NextLandingPage = By.xpath("(//div[@class='floating-form meeting']//child::h2)[2]");
+	By NextLandingPage = By.xpath("//*[@id=\"company_create\"]/div[2]/div/h2");
 	By CompanySize = By.xpath("(//div[@class='floating-form meeting']//h2)[3]");
 	By CompanyEmployee = By.id("empdiv1");
 	By RadioButton = By.xpath("//input[@onclick='mustIntrestedCheckBox()']");

@@ -61,7 +61,7 @@ public class LoginPage extends BaseClass {
 		Boolean conditionCheck = true;
 		this.visible(Spinner);
 		this.invisible(Spinner);
-		if (!this.conditionChecking(Dashboard, 10)) {
+		if (!this.conditionChecking(Dashboard, 20)) {
 			do {
 				if (this.conditionChecking(username_by, 3)) {
 					this.userField(getPropertyValueUpdate("UserName"));
@@ -90,7 +90,7 @@ public class LoginPage extends BaseClass {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
 	}
-	
+
 	private void visible(By element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));

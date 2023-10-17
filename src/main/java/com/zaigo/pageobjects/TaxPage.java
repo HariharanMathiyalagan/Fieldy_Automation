@@ -316,7 +316,9 @@ public class TaxPage extends BaseClass {
 								|| ResponseMessage.equals(getPropertyValue("EditedTax"))
 								|| ResponseMessage.equals(getPropertyValue("AlreadyTax"))
 								|| ResponseMessage.equals(getPropertyValue("AssociateTaxValidation"))
-								|| ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))) {
+								|| ResponseMessage.equals(getPropertyValue("AssociateTaxNameUnique"))
+								|| ResponseMessage.equals(getPropertyValue("MaxTaxPercentage"))
+								|| ResponseMessage.equals(getPropertyValue("Max190CharacterValidation"))) {
 							conditionCheck = false;
 						}
 					}

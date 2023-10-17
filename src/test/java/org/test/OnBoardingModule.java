@@ -10,6 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +25,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.OnBoardingPage;
+import com.zaigo.pageobjects.SubscriptionPage;
 import com.zaigo.utility.BrowserSetup;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -84,7 +86,7 @@ public class OnBoardingModule extends BaseClass {
 	public void mandatoryBussinessNameFieldValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Check Business Name field is set as Mandatory & Error Message is displayed when it is BLANK");
-		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		OnBoardingPage mandatory = PageFactory.initElements(driver, OnBoardingPage.class);
 		mandatory.emailText();
 		mandatory.mandatoryValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
@@ -109,7 +111,7 @@ public class OnBoardingModule extends BaseClass {
 	public void mandatoryEmailFieldValidation() throws IOException {
 		extentTest = extentReports
 				.createTest("Check the Email field is set as Mandatory & Error Message is displayed when it is BLANK");
-		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		OnBoardingPage mandatory = PageFactory.initElements(driver, OnBoardingPage.class);
 		mandatory.mandatoryEmailValidation();
 		String manditoryValidations = mandatory.manditoryValidations();
 		extentTest.log(Status.INFO, "Actual Result is - " + manditoryValidations);
@@ -133,7 +135,7 @@ public class OnBoardingModule extends BaseClass {
 	private void alreadyBussinessNameValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify [Business Name Already Exists] Error is dispalyed when already existing Bussiness Name is provided");
-		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
+		OnBoardingPage alreadyBussiness = PageFactory.initElements(driver, OnBoardingPage.class);
 		alreadyBussiness.alreadyBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
 		extentTest.log(Status.INFO, "Actual Result Already Exited Data - " + errorMessageBussinessName);
@@ -159,7 +161,7 @@ public class OnBoardingModule extends BaseClass {
 	private void specialCharacterBussinessNameValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Error Message is displayed when the Bussiness Name field enter the Special Characters");
-		OnBoardingPage alreadyBussiness = new OnBoardingPage(driver);
+		OnBoardingPage alreadyBussiness = PageFactory.initElements(driver, OnBoardingPage.class);
 		alreadyBussiness.specialCharacterBussinessName();
 		String errorMessageBussinessName = alreadyBussiness.errorMessageBussinessName();
 		extentTest.log(Status.INFO, "Actual Result is - " + errorMessageBussinessName);
@@ -185,7 +187,7 @@ public class OnBoardingModule extends BaseClass {
 	public void maximumValidationBussinessName() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Name Field exceed its max-256 limit");
-		OnBoardingPage maxValidation = new OnBoardingPage(driver);
+		OnBoardingPage maxValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		maxValidation.maximumValidationBussinessName();
 		String errorMessageBussinessName = maxValidation.errorMessageBussinessName();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMessageBussinessName);
@@ -210,7 +212,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationBussinessWebSite() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Business Website Field exceed its max-2048 limit");
-		OnBoardingPage maxValidation = new OnBoardingPage(driver);
+		OnBoardingPage maxValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		maxValidation.maximumValidationBussinessWebSite();
 		String errorWebsite = maxValidation.errorWebsite();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorWebsite);
@@ -235,7 +237,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationFirstName() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when First Name Field exceed its max-256 limit");
-		OnBoardingPage maxValidation = new OnBoardingPage(driver);
+		OnBoardingPage maxValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		maxValidation.maximumValidationFirstName();
 		String errorFirstName = maxValidation.errorFirstName();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorFirstName);
@@ -260,7 +262,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationLastName() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Last Name Field exceed its max-256 limit");
-		OnBoardingPage maxValidation = new OnBoardingPage(driver);
+		OnBoardingPage maxValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		maxValidation.maximumValidationLastName();
 		String errorLastName = maxValidation.errorLastName();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorLastName);
@@ -286,7 +288,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationEmail() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Email Field exceed its max-256 limit");
-		OnBoardingPage maxValidation = new OnBoardingPage(driver);
+		OnBoardingPage maxValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		maxValidation.maximumValidationEmail();
 		String errorEmail = maxValidation.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
@@ -312,7 +314,7 @@ public class OnBoardingModule extends BaseClass {
 	private void validateEmailFormat() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify error message is displayed when invalid email is entered in Email Field");
-		OnBoardingPage validEmail = new OnBoardingPage(driver);
+		OnBoardingPage validEmail = PageFactory.initElements(driver, OnBoardingPage.class);
 		validEmail.validationEmail();
 		String errorEmail = validEmail.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
@@ -337,7 +339,7 @@ public class OnBoardingModule extends BaseClass {
 	private void existingEmailValidation() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify [Email Already Exists] Error is dispalyed when already existing mail ID is provided");
-		OnBoardingPage existing = new OnBoardingPage(driver);
+		OnBoardingPage existing = PageFactory.initElements(driver, OnBoardingPage.class);
 		existing.alreadyExistValidation();
 		String errorEmail = existing.errorEmail();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorEmail);
@@ -363,7 +365,7 @@ public class OnBoardingModule extends BaseClass {
 	private void correctValidationEmail() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify User is Landing in Industry Page after providing the Business details");
-		OnBoardingPage validation = new OnBoardingPage(driver);
+		OnBoardingPage validation = PageFactory.initElements(driver, OnBoardingPage.class);
 		validation.validFillData("FirstPage");
 		String messageLandingPage = validation.messageLandingPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + messageLandingPage);
@@ -387,7 +389,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 12)
 	private void validateRadioButtonClickable() {
 		extentTest = extentReports.createTest("Verify the Industry Radio Button are Clickable");
-		OnBoardingPage radioButton = new OnBoardingPage(driver);
+		OnBoardingPage radioButton = PageFactory.initElements(driver, OnBoardingPage.class);
 		radioButton.industryRadioButton();
 
 	}
@@ -396,7 +398,7 @@ public class OnBoardingModule extends BaseClass {
 	private void industryTypeFieldPresent() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Mention your industry information input field is Present in the Page");
-		OnBoardingPage fieldPresent = new OnBoardingPage(driver);
+		OnBoardingPage fieldPresent = PageFactory.initElements(driver, OnBoardingPage.class);
 		fieldPresent.industryTypeFieldPresent();
 		String messagePresent = fieldPresent.messagePresent();
 		extentTest.log(Status.INFO, "Actual Result is -" + messagePresent);
@@ -420,7 +422,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationIndustryField() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Industry type Field exceed its max-64 limit");
-		OnBoardingPage industryValidation = new OnBoardingPage(driver);
+		OnBoardingPage industryValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		industryValidation.maximumValidationIndustryField();
 		String errorIndustryField = industryValidation.errorIndustryField();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorIndustryField);
@@ -445,7 +447,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 15)
 	private void sizeCompanyValidation() {
 		extentTest = extentReports.createTest("Verify Available Size of the Company is Present");
-		OnBoardingPage sizeCompany = new OnBoardingPage(driver);
+		OnBoardingPage sizeCompany = PageFactory.initElements(driver, OnBoardingPage.class);
 		sizeCompany.sizeCompany();
 
 	}
@@ -453,7 +455,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 16)
 	private void validationRadioButtonIntrested() throws IOException {
 		extentTest = extentReports.createTest("Verify the User can Choose Intrest");
-		OnBoardingPage radioButton = new OnBoardingPage(driver);
+		OnBoardingPage radioButton = PageFactory.initElements(driver, OnBoardingPage.class);
 		radioButton.radioButtonCurrent();
 
 	}
@@ -462,7 +464,7 @@ public class OnBoardingModule extends BaseClass {
 	private void mandatoryValidationLocation() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Location field is set as Mandatory & Error Message is displayed when it is BLANK");
-		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		OnBoardingPage mandatory = PageFactory.initElements(driver, OnBoardingPage.class);
 		mandatory.mandatoryLocationValidation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -485,7 +487,7 @@ public class OnBoardingModule extends BaseClass {
 	private void maximumValidationLocation() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Location Field exceed its max-256 limit");
-		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		OnBoardingPage mandatory = PageFactory.initElements(driver, OnBoardingPage.class);
 		mandatory.maximumValidationLocation();
 		String errorPasswordField = mandatory.requiredFieldLocation();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -510,7 +512,7 @@ public class OnBoardingModule extends BaseClass {
 	private void passwordMandatoryField() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Password field is set as Mandatory & Error Message is displayed when it is BLANK");
-		OnBoardingPage mandatory = new OnBoardingPage(driver);
+		OnBoardingPage mandatory = PageFactory.initElements(driver, OnBoardingPage.class);
 		mandatory.passwordFieldMandatory();
 		String errorPasswordField = mandatory.errorPasswordField();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -533,7 +535,7 @@ public class OnBoardingModule extends BaseClass {
 	private void minValidationPassword() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-8 limit is provided in password field");
-		OnBoardingPage minValidation = new OnBoardingPage(driver);
+		OnBoardingPage minValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		minValidation.minimumValidationPassword();
 		String errorMinPassword = minValidation.errorMinPassword();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorMinPassword);
@@ -558,7 +560,7 @@ public class OnBoardingModule extends BaseClass {
 	private void minValidationConfirmPassword() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-8 limit is provided in confirm password field");
-		OnBoardingPage minValidation = new OnBoardingPage(driver);
+		OnBoardingPage minValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		minValidation.minimumValidationConfirmPassword();
 		String errorConfirmMessage = minValidation.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
@@ -583,7 +585,7 @@ public class OnBoardingModule extends BaseClass {
 	private void passwordFieldConditions() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify error message is displayed when Password Condition does not match in Password field");
-		OnBoardingPage condition = new OnBoardingPage(driver);
+		OnBoardingPage condition = PageFactory.initElements(driver, OnBoardingPage.class);
 		condition.passwordFieldCondition();
 		String errorPasswordField = condition.errorPasswordField();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -608,7 +610,7 @@ public class OnBoardingModule extends BaseClass {
 	private void confirmPasswordFieldCondition() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify error message is displayed when Password Condition does not match in Confirm Password field");
-		OnBoardingPage condition = new OnBoardingPage(driver);
+		OnBoardingPage condition = PageFactory.initElements(driver, OnBoardingPage.class);
 		condition.confirmPasswordFieldCondition();
 		String errorConfirmMessage = condition.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
@@ -632,7 +634,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 24)
 	private void lowerCaseValidation() throws IOException {
 		extentTest = extentReports.createTest("Verify to Check the Confirm Password Lower Case Validation");
-		OnBoardingPage lowerCaseValidation = new OnBoardingPage(driver);
+		OnBoardingPage lowerCaseValidation = PageFactory.initElements(driver, OnBoardingPage.class);
 		lowerCaseValidation.lowercaseValidation();
 		String errorConfirmMessage = lowerCaseValidation.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
@@ -657,7 +659,7 @@ public class OnBoardingModule extends BaseClass {
 	private void mismatchPassword() throws IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error message is displayed when confirm password does not match with the Password Field");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		mismatchPassword.mismatchPasswordValidation();
 		String errorConfirmMessage = mismatchPassword.errorConfirmMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
@@ -685,7 +687,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 26)
 	public void createTenant() throws IOException {
 		extentTest = extentReports.createTest("Creating a New Tenant, the page is redirect into the Dashboard page");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		String errorConfirmMessage = mismatchPassword.dashBoardPage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidationOfLandingPage"));
@@ -706,7 +708,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 27)
 	public void subDomineURL() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain URL");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		String actualURL = mismatchPassword.urlGet();
 		String expectedURL = mismatchPassword.expectedURL();
 		extentTest.log(Status.INFO, "Actual Result is -" + actualURL);
@@ -728,7 +730,7 @@ public class OnBoardingModule extends BaseClass {
 	@Test(priority = 28)
 	public void ownerName() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain tenant owner profile name");
-		OnBoardingPage mismatchPassword = new OnBoardingPage(driver);
+		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
 		String actualOwner = mismatchPassword.getOwnerName();
 		String expectedOwner = mismatchPassword.expectedOwnerName();
 		extentTest.log(Status.INFO, "Actual Result is -" + actualOwner);
