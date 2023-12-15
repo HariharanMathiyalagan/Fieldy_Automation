@@ -165,6 +165,8 @@ public class SubscriptionStarterPack extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ConfirmPage.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 6)
 	public void proAmount() throws IOException {

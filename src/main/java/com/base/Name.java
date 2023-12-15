@@ -46,7 +46,6 @@ import com.aventstack.extentreports.model.Category;
 import com.github.javafaker.Company;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.RandomService;
-import com.sun.tools.javac.code.Attribute.Array;
 import com.zaigo.pageobjects.InvoicePage;
 import com.zaigo.pageobjects.OnBoardingPage;
 
