@@ -29,7 +29,7 @@ public class LoginPage extends BaseClass {
 	private By lockpopuptwo = By.xpath("//*[contains(text(),'Your account is locked. Please contact admin.')]");
 	private By dashboard = By.id("dashboard-customer-name");
 	private By multiaccount = By.xpath("//h4[contains(text(),'Fieldy Tenant 2')]");
-	private By Dashboard = By.xpath("//*[text()=' Company Performance']");
+	public static By Dashboard;
 	By Welcome = By.xpath("//*[@data-automationid='welcomeText']");
 	By Spinner = By.xpath("//*[@id='submit-button']/span");
 
@@ -59,9 +59,11 @@ public class LoginPage extends BaseClass {
 
 	public String dashBoardText() throws IOException {
 		Boolean conditionCheck = true;
+		Dashboard = By.xpath("//*[@id='breadcrumb_placement']//div//div//span[contains(text(),'"
+				+ getPropertyValueUpdate("FirstName") + " " + getPropertyValueUpdate("LastName") + "')]");
 		this.visible(Spinner);
 		this.invisible(Spinner);
-		if (!this.conditionChecking(Dashboard, 20)) {
+		if (!this.conditionChecking(Dashboard, 10)) {
 			do {
 				if (this.conditionChecking(username_by, 3)) {
 					this.userField(getPropertyValueUpdate("UserName"));
@@ -97,7 +99,7 @@ public class LoginPage extends BaseClass {
 	}
 
 	public String getText(By element) {
-		wait = new WebDriverWait(driver, 100);
+		wait = new WebDriverWait(driver, 10);
 		String until = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).getText();
 		return until;
 	}
@@ -134,9 +136,26 @@ public class LoginPage extends BaseClass {
 		return title;
 	}
 
-	public String getErrorMessagePassword() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(password_error));
-		return driver.findElement(password_error).getText();
+	static String text;
+
+	public String checkError(By element) throws IOException {
+		int i = 0;
+		if (!this.conditionChecking(element, 3)) {
+			do {
+				this.clickLoginButton();
+				i++;
+			} while ((!this.conditionChecking(element, 3)) && i < 5);
+		}
+		if (i == 5) {
+			text = "null";
+		} else {
+			text = this.getText(element);
+		}
+		return text;
+	}
+
+	public String getErrorMessagePassword() throws IOException {
+		return checkError(password_error);
 	}
 
 	public String getUserText() {
@@ -149,9 +168,8 @@ public class LoginPage extends BaseClass {
 		return driver.findElement(password_by).getAttribute("value");
 	}
 
-	public String getErrorMessageUserName() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(username_error_by));
-		return driver.findElement(username_error_by).getText();
+	public String getErrorMessageUserName() throws IOException {
+		return checkError(username_error_by);
 	}
 
 	public void clickLoginButton() {

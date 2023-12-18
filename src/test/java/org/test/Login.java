@@ -1,11 +1,7 @@
 package org.test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
-
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -23,10 +19,9 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.LoginPage;
-import com.zaigo.pageobjects.OnBoardingPage;
 import com.zaigo.utility.BrowserSetup;
 
-public class Login extends BaseClass{
+public class Login extends BaseClass {
 	private WebDriver driver = null;
 	ExtentReports extentReports;
 	ExtentHtmlReporter extentHtmlReporter;
@@ -229,9 +224,10 @@ public class Login extends BaseClass{
 		loginInPage.clickLoginButton();
 		String text = loginInPage.dashBoardText();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
-		extentTest.log(Status.INFO, "Expected Result is -" + loginInPage.getPropertyValue("ValidationOfLandingPage"));
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValueUpdate("FirstName") + " "
+				+ getPropertyValueUpdate("LastName"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (text.equals(loginInPage.getPropertyValue("ValidationOfLandingPage"))) {
+		if (text.equals(getPropertyValueUpdate("FirstName") + " " + getPropertyValueUpdate("LastName"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");

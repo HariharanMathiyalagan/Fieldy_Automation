@@ -7,11 +7,9 @@ import com.github.javafaker.Faker;
 
 public class Name extends BaseClass {
 
-public static void main(String[] args) {
-	Faker faker = new Faker();
-	String url = faker.internet().url();
-String replace = url.replace("-", "");
-	System.out.println(replace);
-}
-   
+	public static void main(String[] args) {
+		String value = "Welcome Performance Testing";
+		System.out.println(value.replaceAll("Welcome ", ""));
+	}
+
 }

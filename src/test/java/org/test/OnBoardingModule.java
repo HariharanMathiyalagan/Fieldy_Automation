@@ -50,7 +50,6 @@ public class OnBoardingModule extends BaseClass {
 	public void exitBrowser() {
 		this.driver.quit();
 		this.extentReports.flush();
-
 	}
 
 	@BeforeMethod
@@ -681,31 +680,9 @@ public class OnBoardingModule extends BaseClass {
 			mismatchPassword.clearConfirmPassword();
 			mismatchPassword.validFillData("Password");
 		}
-
 	}
 
-	@Test(priority = 26)
-	public void createTenant() throws IOException {
-		extentTest = extentReports.createTest("Creating a New Tenant, the page is redirect into the Dashboard page");
-		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
-		String errorConfirmMessage = mismatchPassword.dashBoardPage();
-		extentTest.log(Status.INFO, "Actual Result is -" + errorConfirmMessage);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ValidationOfLandingPage"));
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorConfirmMessage.equals(getPropertyValue("ValidationOfLandingPage"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("MisMatchPasswordValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
-		}
-
-	}
-
-	@Test(priority = 27)
+	@Test(priority = 29)
 	public void subDomineURL() throws IOException {
 		extentTest = extentReports.createTest("Verify the User to Check the Sub Domain URL");
 		OnBoardingPage mismatchPassword = PageFactory.initElements(driver, OnBoardingPage.class);
@@ -724,7 +701,6 @@ public class OnBoardingModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("MisMatchConfirmPasswordValidation.png");
 		}
-
 	}
 
 	@Test(priority = 28)

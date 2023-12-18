@@ -202,7 +202,7 @@ public class OnBoardingPage extends BaseClass {
 	By CreatingTeanant = By.xpath("//*[text()='We're just adding some finishing touches']");
 	By ButtonVisible = By.xpath("//*[@disabled='true']");
 	By DashBoard = By.xpath("//*[text()=' Company Performance']");
-	By OwnerName = By.id("dashboard-customer-name");
+	static By OwnerName;
 	By ErrorMessage = By.xpath("//*[contains(@class,'in-validate')]//parent::div//child::*[3]");
 	HttpURLConnection connection;
 
@@ -618,9 +618,29 @@ public class OnBoardingPage extends BaseClass {
 		return expectedURL;
 	}
 
+	static boolean check;
+	static int i;
+
 	public String getOwnerName() {
-		String text = this.getText(OwnerName);
-		return text;
+		check = false;
+		OwnerName = By.xpath("//*[@id='breadcrumb_placement']//div//div//span[contains(text(),'" + TenantFirstName + " "
+				+ TenantLastName + "')]");
+		if (!this.conditionChecking(OwnerName, 10)) {
+			do {
+				if (!this.conditionChecking(OwnerName, 10)) {
+					driver.navigate().refresh();
+					check = true;
+				}
+				i++;
+			} while (check && i < 5);
+			if (i == 5) {
+				return "null";
+			} else {
+				return this.getText(OwnerName);
+			}
+		} else {
+			return this.getText(OwnerName);
+		}
 	}
 
 	public String expectedOwnerName() {
