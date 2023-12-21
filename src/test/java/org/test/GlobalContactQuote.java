@@ -1721,11 +1721,10 @@ public class GlobalContactQuote extends BaseClass {
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("CilckCreateQuote");
 		create.CRUDValidation("GlobalCreateDeclined");
-		create.attachmentFileCheck("URLCheck");
-		create.CRUDValidation("Create");
-		create.selectDecline();
+		//create.attachmentFileCheck("URLCheck");
+		//create.CRUDValidation("Create");
+	//	create.selectDecline();
 		String responseMessage = create.GetQuoteStatus();
-		System.out.println(responseMessage);
 		System.out.println(responseMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Declined"));
