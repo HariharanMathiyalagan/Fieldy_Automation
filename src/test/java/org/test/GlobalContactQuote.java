@@ -83,16 +83,6 @@ public class GlobalContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("LoginFunctionality.png");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@Test(priority = -1)
 	public void quoteModule() throws InterruptedException, IOException {
@@ -114,11 +104,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
-		
-	
-	
 
 	@Test(priority = 0)
 	private void labelValidation() throws IOException, InterruptedException {
@@ -139,11 +124,6 @@ public class GlobalContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CreateQuoteLabel.png");
 		}
 	}
-	
-	
-	
-	
-	
 
 	@Test(priority = 1)
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
@@ -252,9 +232,6 @@ public class GlobalContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuotePriceMandatory.png");
 		}
 	}
-	
-	
-	
 
 	@Test(priority = 6)
 	private void mandatoryValidationDescription() throws AWTException, IOException, InterruptedException {
@@ -276,7 +253,6 @@ public class GlobalContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
 	}
-	
 
 	@Test(priority = 7)
 	private void autoCompleteContactCreation() throws IOException, InterruptedException {
@@ -335,8 +311,8 @@ public class GlobalContactQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Reference Field exceed its max-256 limit");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		//mandatory.pickFirstItem("Contact");
-		//mandatory.validationQuantity("Value");
+		// mandatory.pickFirstItem("Contact");
+		// mandatory.validationQuantity("Value");
 		mandatory.referenceField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -380,8 +356,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-
 
 	@Test(priority = 11)
 	private void emptyValidationQuantityField() throws IOException, InterruptedException {
@@ -408,8 +382,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 12)
 	private void maxQuanitityLimit() throws IOException, InterruptedException {
@@ -514,8 +486,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 16)
 	private void maxPriceLimit() throws IOException, InterruptedException {
@@ -777,8 +747,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 26)
 	private void maximumValidationNotes() throws IOException {
@@ -854,8 +822,6 @@ public class GlobalContactQuote extends BaseClass {
 			mandatory.clearFields("Expiry");
 		}
 	}
-	
-	
 
 	@Test(priority = 29)
 	private void createQuote() throws IOException, InterruptedException, ParseException, AWTException {
@@ -899,14 +865,12 @@ public class GlobalContactQuote extends BaseClass {
 //			extentTest.addScreenCaptureFromPath("CompaniesContractorCount.png");
 //		}
 //	}
-	
-	
 
 	@Test(priority = 30)
 	private void quoteEdit() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the user is land on the Quote edit form page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		//create.labelValidation("Global");
+		// create.labelValidation("Global");
 		String responseMessage = create.labelValidation("GlobalEdit");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("EditPageQuoteLabel"));
@@ -929,8 +893,7 @@ public class GlobalContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 31)
-	private void editmandatoryValidationExpiryDate()
-	 throws AWTException, IOException, InterruptedException {
+	private void editmandatoryValidationExpiryDate() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Expiry Date field is set as Mandatory & Error Message is displayed when it is BLANK");
 		QuotePage mandatoryValidation = PageFactory.initElements(driver, QuotePage.class);
@@ -1113,8 +1076,6 @@ public class GlobalContactQuote extends BaseClass {
 //		}
 //
 //	}
-	
-	
 
 	@Test(priority = 38)
 	private void editemptyValidationQuantityField() throws IOException, InterruptedException {
@@ -1270,8 +1231,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
 
 	@Test(priority = 44)
 	private void editbeforeDecimalPointPriceField() throws IOException, InterruptedException {
@@ -1635,7 +1594,7 @@ public class GlobalContactQuote extends BaseClass {
 				.createTest("Verify to Created & Upated Quote Status is Open, It's displayed in the Quote List Page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		String responseMessage = create.listTextValidation("ListStatus");
-		///System.out.println(responseMessage);
+		System.out.println(responseMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Open"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1652,21 +1611,17 @@ public class GlobalContactQuote extends BaseClass {
 
 	}
 
-	
-	
-	
-	
 	@Test(priority = 59)
 	private void draftQuote() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports.createTest("Verify the Quote has been draft status");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		//create.CRUDValidation("CilckCreateQuote");
-		//create.CRUDValidation("GlobalContactDraft");
+		// create.CRUDValidation("CilckCreateQuote");
+		// create.CRUDValidation("GlobalContactDraft");
 		create.labelValidation("CreateLabel");
 		create.ChooseContact();
 		create.ClickDraft();
 		String responseMessage = create.GetQuoteStatus();
-		//System.out.println(responseMessage + "Draft");
+		// System.out.println(responseMessage + "Draft");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Draft"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1680,21 +1635,18 @@ public class GlobalContactQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDraftListStatus.png");
 		}
-		
-	}
-	
-	
 
-	
+	}
+
 	@Test(priority = 58)
 	private void convertQuote() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports.createTest("Verify the Quote has been Convert status");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		//create.CRUDValidation("GlobalDraftEdit");
+		// create.CRUDValidation("GlobalDraftEdit");
 		create.acceptQuote();
-		//String responseMessage = create.listTextValidation("ListStatus");
+		// String responseMessage = create.listTextValidation("ListStatus");
 		String responseMessage = create.GetQuoteStatus();
-		//System.out.println(responseMessage + "Convert");
+		// System.out.println(responseMessage + "Convert");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Convert"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1710,20 +1662,18 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
 
 	static String QuoteListData;
 
-	@Test(priority = 60)
+	@Test(priority = 59)
 	private void declinedStatus() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports.createTest("Verify the Quote has been Declined status");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.CRUDValidation("CilckCreateQuote");
 		create.CRUDValidation("GlobalCreateDeclined");
-		//create.attachmentFileCheck("URLCheck");
-		//create.CRUDValidation("Create");
-	//	create.selectDecline();
+		// create.attachmentFileCheck("URLCheck");
+		// create.CRUDValidation("Create");
+		// create.selectDecline();
 		String responseMessage = create.GetQuoteStatus();
 		System.out.println(responseMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -1745,9 +1695,6 @@ public class GlobalContactQuote extends BaseClass {
 		}
 
 	}
-	
-	
-	
 
 	@Test(priority = 61)
 	private void listCustomerName() throws IOException, InterruptedException, AWTException {
@@ -1756,6 +1703,7 @@ public class GlobalContactQuote extends BaseClass {
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("GlobalCustomerName");
+		System.out.println(expected);
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1783,6 +1731,7 @@ public class GlobalContactQuote extends BaseClass {
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("QuoteNo");
+		System.out.println(expected);
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1838,6 +1787,7 @@ public class GlobalContactQuote extends BaseClass {
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("Reference");
+		System.out.println(expected);
 		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
 		extentTest.log(Status.INFO, "Expected Result is -" + expected);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1857,18 +1807,20 @@ public class GlobalContactQuote extends BaseClass {
 	}
 
 	@Test(priority = 65)
-	private void listInvalid() throws IOException, InterruptedException, AWTException {
+	private void listInvalid() throws IOException, InterruptedException, AWTException, ParseException {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
 		create.listTextValidation("Invalid");
 		String actual = create.listTextValidation("InvalidList");
+		System.out.println(actual);
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (actual.equals(getPropertyValue("InvalidSearch"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			create.reset();
+//			create.reset();
+
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1876,8 +1828,14 @@ public class GlobalContactQuote extends BaseClass {
 			File file = new File("CustomerContactQuoteListInvalidValidation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
-			create.reset();
+//		create.reset();
 		}
+		driver.navigate().refresh();
+		create.CRUDValidation("CilckCreateQuote");
+		create.autoCompleteField("ContactCreate");
+		create.message("message");
+		create.CRUDValidation("CreateValue");
+		create.message("FormMessage");
 	}
 
 	@Test(priority = 68)
@@ -1887,6 +1845,7 @@ public class GlobalContactQuote extends BaseClass {
 		create.listTextValidation("SharePage");
 		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
+		System.out.println(actual);
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1913,6 +1872,7 @@ public class GlobalContactQuote extends BaseClass {
 		create.listTextValidation("PDFPage");
 		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
+		System.out.println(actual);
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1928,8 +1888,4 @@ public class GlobalContactQuote extends BaseClass {
 		}
 	}
 
-	
-  
-	
-	}
-
+}
