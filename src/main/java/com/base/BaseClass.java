@@ -266,6 +266,7 @@ public class BaseClass {
 		String value = (String) properties.get(key);
 		return value;
 
+		
 	}
 
 	public String calculation(String quantity, String price, String discount, String tax) {

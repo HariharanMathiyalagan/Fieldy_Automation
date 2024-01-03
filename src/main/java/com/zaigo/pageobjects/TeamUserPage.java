@@ -204,39 +204,55 @@ public class TeamUserPage extends BaseClass {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
 	}
+	
+	
+	By LocationLabel = By.id("location-0");
+	By ClickIndividualRadio= By.xpath("//input[@type='radio' and @name='contractor_type'][1]");
 
-	By Team = By.id("team-menu");
-	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
+	By Back = By.xpath("//*[@id='breadcrumb_placement']//ol//li[3]");
+	By teamuser = By.id("user-active");
+	By Team = By.xpath("//*[@id='user-active']//ul//li[2]");
+	By Tittle = By.xpath("//*[@id='breadcrumb_placement']//ol//li[3]");
 	By User = By.id("team-user-menu");
 //	By ListLabel = By.xpath("//*[@id='team__user__contianer']/div[1]/header/div/div/div");
 	@FindAll({ @FindBy(xpath = "//*[@id='team__user__contianer']/div[1]/header/div/div/div/span"),
-			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/span") })
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/span"),
+			@FindBy(xpath = "//*[@id='breadcrumb_placement']//ol//li[3]") })
+
 	WebElement ListLabel;
-	public static By CreateUser = By.xpath("//*[@data-formdynamic='user_create_edit']");
-	By Search = By.id("team-user-user-user-search-filter");
-	By SearchButton = By.id("team-user-user-search-button");
-	By ContractorSearch = By.id("team-user-contractor-search-main");
-	By ContractorSearchButton = By.id("team-user-contractor-search-btn");
-	By Reset = By.xpath("//*[text()=' Reset Search']");
+	public static By CreateUser = By.xpath("//*[@data-n-linkto='team_user_user_create']");
+	public static By Createcon = By.xpath("//div[@data-n-linkto='team_user_contractor_create']");
+	By Search = By.id("searchInput");
+	By SearchButton = By.id("searchBtn");
+	By ContractorSearch = By.id("searchInput");
+	By ContractorSearchButton = By.id("searchBtn");
+	By Reset = By.id("resetDiv");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[3]") })
-	WebElement ListFirstName;
-	By ListPhoneNumber = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[6]");
-	By ListEmail = By.xpath("//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[7]");
-	By ListContractorPhoneNumber = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[7]");
-	By ListContractorEmail = By.xpath("//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[8]");
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[3]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[3]") })
+	public static WebElement ListFirstName;
+	public static By ListPhoneNumber = By.xpath("//*[@id='new_table_with_search']//tr[1]//td[6]");
+	public static By ListEmail = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[7]");
+	public static By ListContractorPhoneNumber = By
+			.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[7]");
+	public static By ListContractorEmail = By
+			.xpath("//*[@id='new_table_with_search']//tbody//tr[1]//td[8]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div"),
-			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i") })
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[1]") })
 	WebElement ThreeDots;
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
+			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[1]//ul//li[2]") })
 	WebElement Edit;
 	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]") })
+			@FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[1]//ul//li[3]") })
+
 	WebElement Delete;
 	By SendInvite = By.xpath("//*[@data-formdynamic='user_send_invite']");
-	By Contractor = By.xpath("//a[@data-n-linkto='team_user_contractor']");
+	By Contractor = By.id("user-contrator-ele");
 	By Logo = By.xpath("//label[@for='user_image']");
 	By LogoError = By.id("user_image_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
@@ -260,6 +276,7 @@ public class TeamUserPage extends BaseClass {
 	By PhoneNumber = By.id("phones__number__0");
 	By ErrorPhoneNumber = By.id("phones__number__0_error");
 	By Next = By.xpath("//*[text()='Next']");
+	By ConNext = By.xpath("//button[@data-automationid='next']");
 	By Previous = By.xpath("//*[text()='Previous']");
 	By SaveComplete = By.xpath("//*[@data-automationid='save_complete']");
 	By LocationName = By.id("addresses__name__0");
@@ -294,6 +311,7 @@ public class TeamUserPage extends BaseClass {
 	By UserUpdatedMessgae = By.xpath("//*[text()='User information updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='User have been deleted successfully']");
 	By Yes = By.xpath("//*[text()='Yes']");
+	By clickContract= By.xpath("//input[@type='radio' and @name='contractor_type' and @value='2']");
 	By HeadingFirstName = By.xpath("//td[text()='First Name']");
 	By InValid = By.xpath("//*[text()='No Result Found']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
@@ -308,7 +326,7 @@ public class TeamUserPage extends BaseClass {
 	WebElement ErrorMessage;
 	By TotalCount = By.id("All-Count");
 	By ContractorCount = By.id("total-user-contractor-count");
-	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//th[text()=' First Name ']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement PageLand;
 	static int parseInt;
 
@@ -463,7 +481,7 @@ public class TeamUserPage extends BaseClass {
 			this.validationTab(Email, "dsfhhdsf");
 		} else if (value.equals("UniqueContractor")) {
 			String text = this.getText(ListContractorEmail);
-			this.mouseActionClick(CreateContractor);
+			this.mouseActionClick(Createcon);
 			this.validationTab(Email, text);
 		}
 
@@ -524,51 +542,72 @@ public class TeamUserPage extends BaseClass {
 
 	}
 
-	By Label = By.xpath("//a[@data-exitpopup='team_user_user__all__role']");
-	By ContractorLabel = By.xpath("//a[@data-exitpopup='team_user_contractor']");
+	By Label = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
+	By ContractorLabel = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
 	static String label;
 
 	public String labelValidation(String value) {
 		if (value.equals("FormLabel")) {
+			if (this.conditionChecking(CreateUser, 5)) {
+				this.mouseActionClick(CreateUser);
+			}
 			label = this.getText(Label);
 			return label;
 		} else if (value.equals("ListLabel")) {
+			this.mouseActionClick(Createcon);
 			label = this.getText(ListLabel);
 			return label;
 		} else if (value.equals("ContractorLabel")) {
+			this.mouseActionClick(Createcon);
+			label = this.getText(ContractorLabel);
+			return label;
+		}else if(value.equals("ConEdit"))
+		{
 			label = this.getText(ContractorLabel);
 			return label;
 		}
 		return value;
 	}
 
-	public String clickEvent(String value) {
+	public String clickEvent(String value) throws InterruptedException  {
 		if (value.equals("SaveUpdate")) {
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Next")) {
 			this.mouseActionClick(Next);
-		} else if (value.equals("Previous")) {
+		}else if(value.equals("ConNext"))
+		{
+			this.scrollDown();
+			this.mouseActionClick(ClickIndividualRadio);
+			do {
+			this.mouseActionClick(ConNext);
+			}
+			while(!this.conditionChecking(LocationLabel, 5));
+		}
+		else if (value.equals("Previous")) {
 			this.mouseActionClick(Previous);
 		} else if (value.equals("ButtonPresent")) {
 			String text = this.getText(SaveComplete);
 			return text;
 		} else if (value.equals("Navigate")) {
+			this.mouseAction(teamuser);
 			this.mouseActionClick(Team);
 			this.visibility(Tittle);
-			this.mouseActionClick(User);
+			// this.mouseActionClick(User);
 			this.visibility(PageLand);
-			this.getCount(1);
-			this.mouseActionClick(CreateUser);
+			// this.getCount(1);
+
 		} else if (value.equals("NavigateContractor")) {
+			this.mouseActionClick(teamuser);
 			this.mouseActionClick(Team);
-			this.visibility(Tittle);
-			this.mouseActionClick(User);
 			this.mouseActionClick(Contractor);
+			//Thread.sleep(3000);
+			this.visibility(Tittle);
+			//this.mouseActionClick(User);
 			this.visibility(PageLand);
-			this.getCount(2);
-			this.mouseActionClick(CreateContractor);
+			//this.getCount(2);
+			
 		} else if (value.equals("Back")) {
-			this.mouseActionClick(Label);
+			this.mouseActionClick(Back);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("ContractorBack")) {
 			this.mouseActionClick(ContractorLabel);
@@ -578,6 +617,7 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("Edit")) {
 			String text = this.getText(ListFirstName);
 			this.mouseActionClick(ThreeDots);
+			Thread.sleep(5000);
 			this.mouseActionClick(Edit);
 			this.visibility(Label);
 			this.invisible(Spinner);
@@ -587,6 +627,7 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("ContractorEdit")) {
 			String text = this.getText(ListFirstName);
 			this.mouseActionClick(ThreeDots);
+			Thread.sleep(5000);
 			this.mouseActionClick(Edit);
 			this.visibility(ContractorLabel);
 			this.invisible(Spinner);
@@ -595,6 +636,7 @@ public class TeamUserPage extends BaseClass {
 			this.elementClickable(Next);
 		} else if (value.equals("Delete")) {
 			this.mouseActionClick(ThreeDots);
+			Thread.sleep(5000);
 			this.mouseActionClick(Delete);
 			this.mouseActionClick(Yes);
 		} else if (value.equals("OrganizationRadioButton")) {
@@ -610,37 +652,44 @@ public class TeamUserPage extends BaseClass {
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
 			this.inputText(Search, listData);
-			this.mouseActionClick(SearchButton);
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("FirstName")) {
-			if (!this.conditionChecking(ListFirstName, 50)) {
+			if (!this.conditionChecking(ListFirstName, 10)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListFirstName, 50));
+				} while (!this.conditionChecking(ListFirstName, 10));
 			}
 			listData = this.getText(ListFirstName);
 			return listData;
 		} else if (value.equals("PhoneNumber")) {
-			if (!this.conditionChecking(ListPhoneNumber, 50)) {
+			if (!this.conditionChecking(ListPhoneNumber, 10)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListPhoneNumber, 50));
+				} while (!this.conditionChecking(ListPhoneNumber, 10));
 			}
 			listData = this.getText(ListPhoneNumber);
 			return listData;
 		} else if (value.equals("Email")) {
-			if (!this.conditionChecking(ListEmail, 50)) {
+			if (!this.conditionChecking(ListEmail, 10)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListEmail, 50));
+				} while (!this.conditionChecking(ListEmail, 10));
 			}
 			listData = this.getText(ListEmail);
 			return listData;
 		} else if (value.equals("Invalid")) {
 			this.tagValidation(Search, "fsdjfkjsjfsjfl");
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("ContractorInvalid")) {
 			this.tagValidation(ContractorSearch, "fsdjfkjsjfsjfl");
 		} else if (value.equals("ContractorSearchData")) {
 			this.tagValidation(ContractorSearch, listData);
+			this.mouseActionClick(SearchButton);
+			
 		} else if (value.equals("ContractorPhoneNumber")) {
 			if (!this.conditionChecking(ListContractorPhoneNumber, 50)) {
 				do {
@@ -745,6 +794,8 @@ public class TeamUserPage extends BaseClass {
 		}
 		return value;
 	}
+	
+	
 
 	public void validateFillData(String value)
 			throws MalformedURLException, AWTException, IOException, InterruptedException {
@@ -776,6 +827,7 @@ public class TeamUserPage extends BaseClass {
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
+			
 		} else if (value.equals("Location")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeAddress1 = faker.address().buildingNumber();
@@ -816,6 +868,7 @@ public class TeamUserPage extends BaseClass {
 			email = this.getTextAttribute(Email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
+			this.mouseActionClick(clickContract);
 		} else if (value.equals("ContractorCompany")) {
 			this.scrollDown();
 			this.mouseActionClick(CompanyName);
@@ -830,13 +883,12 @@ public class TeamUserPage extends BaseClass {
 
 	public String responseMessage(String value) throws IOException, InterruptedException {
 		Boolean check = true;
-		if (value.equals("Message")) {
+		if (value.equals("Message") || value.equals("DeleteMessage")) {
 			if (this.conditionChecking(Message, 50)) {
 				listData = this.getText(Message);
 				this.invisible(Message);
 			} else {
 				do {
-					Thread.sleep(10000);
 					this.mouseActionClick(SaveComplete);
 					if (this.conditionChecking(Message, 50)) {
 						listData = this.getText(Message);
