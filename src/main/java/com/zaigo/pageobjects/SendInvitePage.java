@@ -47,21 +47,22 @@ public class SendInvitePage extends BaseClass {
 	String maxPhoneNumber = RandomStringUtils.randomNumeric(25);
 	String minPhoneNumber = RandomStringUtils.randomNumeric(2);
 
+	By teamuser = By.id("user-active");
 	private By usermenu = By.id("team-menu");
 
 	// private By usermenu=By.xpath("//a[@data-automationid='user']");
 
 	private By usersubmenu = By.id("team-user-menu");
 
-	private By userinvitebtn = By.xpath("//button[@data-n-linkto='team_user_user_sendinvite']");
+	private By userinvitebtn = By.xpath("//*[@id='team__user__contianer']//following::div[@gloss='Send Invite']");
 
 	private By sendbtn = By.xpath("//button[@data-automationid='send-invite']");
 
 	// fn
-	@FindAll({ @FindBy(xpath = "//*[text()='First Name']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//th[text()=' First Name ']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement PageLand;
 	private By firstname = By.id("send_invite__first_name__0");
-	By ListLabel = By.xpath("//*[@class='page-header-left back-btn']");
+	By ListLabel = By.xpath("//*[@id='breadcrumb_placement']//ol//li[3]");
 
 	private By firstnameerr = By.id("send_invite__first_name__0_error");
 
@@ -104,8 +105,8 @@ public class SendInvitePage extends BaseClass {
 	private By clickSaveandComplete = By.xpath("//button[@data-automationid='send-invite']");
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
-	By Label = By.xpath("//a[@data-exitpopup='team_user_user__all__role']");
-	By Team = By.id("team-menu");
+	By Label = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
+	By Team = By.xpath("//*[@id='user-active']//ul//li[2]");
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
 	By User = By.id("team-user-menu");
 
@@ -261,6 +262,7 @@ public class SendInvitePage extends BaseClass {
 	public void message(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(messageBox, characters2048);
+			this.mouseActionClick(sendbtn);
 		}
 	}
 
@@ -304,10 +306,17 @@ public class SendInvitePage extends BaseClass {
 		} else if (value.equals("Next")) {
 			this.mouseActionClick(next);
 		} else if (value.equals("Navigate")) {
+			
+			this.mouseAction(teamuser);
 			this.mouseActionClick(Team);
-			this.visibility(Tittle);
-			this.mouseActionClick(User);
+			//this.visibility(Tittle);
+			// this.mouseActionClick(User);
 			this.visibility(PageLand);
+			
+			//this.mouseActionClick(Team);
+		//	this.visibility(Tittle);
+			//this.mouseActionClick(User);
+			//this.visibility(PageLand);
 			this.mouseActionClick(userinvitebtn);
 		} else if (value.equals("ButtonPresent")) {
 			String text = this.getText(sendbtn);
