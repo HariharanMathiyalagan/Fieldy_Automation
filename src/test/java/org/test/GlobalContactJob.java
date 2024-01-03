@@ -125,7 +125,7 @@ public class GlobalContactJob extends BaseClass {
 	private void contactMandatoryValidation() throws WebDriverException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Contact Name field is set as Mandatory & Error Message is displayed when it is BLANK");
-		JobPage contactMandatory = new JobPage(driver);
+		JobPage contactMandatory = PageFactory.initElements(driver, JobPage.class);
 		contactMandatory.mandatoryContactField();
 		String errorContact = contactMandatory.errorValidation("CustomerName");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
@@ -436,7 +436,8 @@ public class GlobalContactJob extends BaseClass {
 				.createTest("Verify Unassigned Job is created successfully from Contact->Create Global Job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Unassigned");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -487,7 +488,7 @@ public class GlobalContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (jobLandPage.equals(getPropertyValue("EditPageJobLabel"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			jobPage.clearAllFields("Page");
+
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -495,8 +496,9 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("CreateJobLabel.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateJobLabel.png");
-			jobPage.clearAllFields("Page");
 		}
+		Thread.sleep(5000);
+		jobPage.clearAllFields("Page");
 	}
 
 	@Test(priority = 19)
@@ -770,7 +772,8 @@ public class GlobalContactJob extends BaseClass {
 				"Verfiy the unassigned Job is updated to scheduled when assigning the available technician");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("UpdateData");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -783,7 +786,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("EditJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("EditJob.png");
-			mandatory.techcnianNotAvailable();
 			mandatory.message("AlternateForm");
 		}
 
@@ -796,10 +798,13 @@ public class GlobalContactJob extends BaseClass {
 				.createTest("Create a Job  with From Date & Time - To Date & Time with Scheduled status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalJob();
+		driver.navigate().refresh();
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("CreateJob");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -813,7 +818,6 @@ public class GlobalContactJob extends BaseClass {
 			File file = new File("CreatedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreatedJob.png");
-			mandatory.techcnianNotAvailable();
 			mandatory.message("AlternateForm");
 			JobListData = mandatory.listValidation("JobNo1");
 		}
@@ -1141,20 +1145,20 @@ public class GlobalContactJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchInvalid.png");
 		}
-
+		driver.navigate().refresh();
 	}
-	
+
 	@Test(priority = 48)
-	private void dailyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Daily basic recurring job");
+	private void dailyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Daily basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalJob();
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("DailyRecurring");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1171,18 +1175,18 @@ public class GlobalContactJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 49)
-	private void weeklyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Weekly basic recurring job");
+	private void weeklyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Weekly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalJob();
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("WeeklyRecurring");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1199,18 +1203,18 @@ public class GlobalContactJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 50)
-	private void monthlyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Monthly basic recurring job");
+	private void monthlyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Monthly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalJob();
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("MonthlyRecurring");
-		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
+//		String errorPasswordField = mandatory.message("FormMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1227,18 +1231,18 @@ public class GlobalContactJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 51)
-	private void yearlyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Yearly basic recurring job");
+	private void yearlyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Yearly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.globalJob();
 		mandatory.autoCompleteField("ContactCreate");
+		mandatory.message("Message");
 		mandatory.autoCompleteField("GlobalContactVisibleName");
 		mandatory.jobStatusCreation("YearlyRecurring");
-		String errorPasswordField = mandatory.message("FormMessage");
+//		String errorPasswordField = mandatory.message("FormMessage");
+		String errorPasswordField = mandatory.createandUpdateMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("JobCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

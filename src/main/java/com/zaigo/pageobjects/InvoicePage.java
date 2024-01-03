@@ -306,13 +306,15 @@ public class InvoicePage extends BaseClass {
 	public static By CreateOrganizationInvoice = By
 			.xpath("//*[@id='customer-organization-detail-invoice']/div[1]/div[5]/button");
 	By ClickContactInvoice = By.xpath("//*[@id='customer-contact-nav-menu']/div/ul/li[6]/a");
-	public static By CreateGlobalInvoice = By.xpath("//*[@data-automationid='invoice_create']");
+	public static By CreateGlobalInvoice = By.xpath(
+			"//*[@id='header_element']//following::div//div//div//following::div//div[contains(@gloss,'Create Invoice')]");
 	public static By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
 	By CustomerName = By.id("customer-name");
 	By ContactName = By.id("customer-name-input-field");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Invoice No']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[2]") })
 	private WebElement StartInvalid;
 	By InvoiceLable = By.xpath("//*[text()='Invoice No']");
 	By TotalCount = By.id("total-invoice-count");
@@ -323,7 +325,7 @@ public class InvoicePage extends BaseClass {
 	By DueonReceipt = By.id("invoice-due-by-filter");
 	By DueDate = By.id("doc_expiry_date");
 	By InvoiceTittle = By.id("invoice_title");
-	By InventoryItem = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
+	By InventoryItem = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[2]");
 	By Quantity = By.id("items__quantity__0");
 	By Price = By.id("items__price__0");
 	By Discount = By.id("items__discount__0");
@@ -364,8 +366,10 @@ public class InvoicePage extends BaseClass {
 	@FindAll({ @FindBy(id = "invoice-search-enter"), @FindBy(id = "invoice-search-filter-enter") })
 	WebElement SearchButton;
 	@FindAll({ @FindBy(xpath = "//*[text()='No Data Found']"),
-			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]") })
+			@FindBy(xpath = "//*[@id='inventorydropdownlist0']//div[1]") })
 	WebElement InventoryFirstItem;
+	public static By Inventory_Stock = By.xpath(
+			"//*[@id='modal-confirmation-popup']//div//div//div//div//h4//following::div//div//a[contains(text(),'Yes')]");
 	By InventoryName = By.xpath("//*[@id='items__item_name__0-autocomplete-list']//div[1]");
 //	By ListInvoiceNo = By.xpath("(//*[@class='ellipsis-100'])[3]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[2]"),
@@ -379,14 +383,14 @@ public class InvoicePage extends BaseClass {
 	WebElement ListInvoiceNo;
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[3]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	WebElement ListReference1;
 	By ListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[4]");
 //	By ListReference = By.xpath("(//*[@class='ellipsis-100'])[4]");
 	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[1]") })
 	WebElement ThreeDots;
 	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[1]"),
@@ -396,7 +400,7 @@ public class InvoicePage extends BaseClass {
 	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement ContactEdit;
 	By ListAwaitingStatus = By.xpath("//*[text()='Awaiting Payment']");
 	By ListPartialStatus = By.xpath("//*[text()='Partial Payment']");
@@ -441,7 +445,7 @@ public class InvoicePage extends BaseClass {
 	By OrganizationEmail = By.id("contacts__email__0");
 	By OrganizationPhoneNumber = By.id("contacts__phone__0");
 	By OrganizationJobTittle = By.id("contacts__job_title__0");
-	By Invoice = By.id("invoice-menu");
+	By Invoice = By.id("invoices");
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By RadioOrganization = By.id("organization");
 	By RadioContact = By.id("contact");
@@ -519,6 +523,11 @@ public class InvoicePage extends BaseClass {
 				"Discount", "Tax", "Description", "Notes", "Price");
 		for (int i = 0; i < asList.size(); i++) {
 			this.clearFields(asList.get(i));
+			if (this.conditionChecking1(Inventory_Stock, 2)) {
+				do {
+					this.mouseActionClick(Inventory_Stock);
+				} while (this.conditionChecking1(Inventory_Stock, 2));
+			}
 		}
 	}
 
@@ -531,27 +540,45 @@ public class InvoicePage extends BaseClass {
 		return calculation;
 	}
 
-	public String errorValidation(String value) {
+	static String error;
+
+	public String checkError(By element) throws IOException {
+		int i = 0;
+		if (!this.conditionChecking1(element, 3)) {
+			do {
+				this.mouseActionClick(Save);
+				i++;
+			} while ((!this.conditionChecking1(element, 3)) && i < 5);
+		}
+		if (i == 5) {
+			error = "null";
+		} else {
+			error = this.getText(element);
+		}
+		return error;
+	}
+
+	public String errorValidation(String value) throws IOException {
 		if (value.equals("ErrorReference")) {
-			String text = this.getText(ErrorReference);
+			String text = this.checkError(ErrorReference);
 			return text;
 		} else if (value.equals("ErrorDueDate")) {
-			String text = this.getText(ErrorDueDate);
+			String text = this.checkError(ErrorDueDate);
 			return text;
 		} else if (value.equals("ErrorInvoiceTittle")) {
-			String text = this.getText(ErrorInvoiceTittle);
+			String text = this.checkError(ErrorInvoiceTittle);
 			return text;
 		} else if (value.equals("ErrorInventoryItem")) {
-			String text = this.getText(ErrorInventoryItem);
+			String text = this.checkError(ErrorInventoryItem);
 			return text;
 		} else if (value.equals("ErrorMaxInventoryItem")) {
-			String text = this.getText(ErrorInventoryMax);
+			String text = this.checkError(ErrorInventoryMax);
 			return text;
 		} else if (value.equals("ErrorQuantity")) {
-			String text = this.getText(ErrorQuantity);
+			String text = this.checkError(ErrorQuantity);
 			return text;
 		} else if (value.equals("ErrorPrice")) {
-			String text = this.getText(ErrorPrice);
+			String text = this.checkError(ErrorPrice);
 			return text;
 		} else if (value.equals("ErrorDiscount")) {
 			String text = this.getText(ErrorDiscount);
@@ -567,15 +594,15 @@ public class InvoicePage extends BaseClass {
 					this.validationTab(Description, "     ");
 				} while (!this.conditionChecking1(ErrorDescription, 10));
 			}
-			String text = this.getText(ErrorDescription);
+			String text = this.checkError(ErrorDescription);
 			return text;
 		} else if (value.equals("ErrorNotes")) {
-			String text = this.getText(ErrorNotes);
+			String text = this.checkError(ErrorNotes);
 			return text;
 		} else if (value.equals("PastDateError")) {
 			By ErrorPastDate = By
 					.xpath("//*[text()='The doc expiry date must be a date after or equal to issue date.']");
-			String text = this.getText(ErrorPastDate);
+			String text = this.checkError(ErrorPastDate);
 			return text;
 		}
 //		else if (value.equals("ErrorContact")) {
@@ -589,11 +616,11 @@ public class InvoicePage extends BaseClass {
 		Boolean condition = true;
 		if (value.equals("Contact")) {
 			this.scrollUp();
-			this.mouseActionClick(InventoryItem);
+			this.inputText(InventoryItem, " ");
 			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
 				do {
 					Thread.sleep(5000);
-					this.mouseActionClick(InventoryItem);
+					this.inputText(InventoryItem, " ");
 					if (this.conditionChecking(InventoryName)) {
 						condition = false;
 					}
@@ -602,6 +629,9 @@ public class InvoicePage extends BaseClass {
 			} else {
 				this.mouseActionClick(InventoryFirstItem);
 			}
+			do {
+				this.mouseActionClick(Inventory_Stock);
+			} while (this.conditionChecking(Inventory_Stock));
 		} else if (value.equals("Organization")) {
 			this.mouseActionClick(InventoryItem);
 			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
@@ -681,11 +711,11 @@ public class InvoicePage extends BaseClass {
 		} else if (value.equals("GlobalContactInvoice") || value.equals("Global")) {
 			this.mouseActionClick(Invoice);
 			this.visibility(StartInvalid);
-			this.mouseActionClick(CreateGlobalInvoice);
-			if (value.equals("GlobalContactInvoice")) {
-				this.clearFields("Quantity");
-				this.clearFields("Price");
-			}
+//			this.mouseActionClick(CreateGlobalInvoice);
+//			if (value.equals("GlobalContactInvoice")) {
+//				this.clearFields("Quantity");
+//				this.clearFields("Price");
+//			}
 		} else if (value.equals("ContactAPI")) {
 			this.mouseActionClick(Save);
 			if (this.conditionChecking1(ErrorDueDate, 20)) {
@@ -763,7 +793,6 @@ public class InvoicePage extends BaseClass {
 
 	public void maxInventoryItem() throws IOException, InterruptedException {
 		this.validationTab(InventoryItem, getPropertyValue("256Characters"));
-
 	}
 
 	public void priceValidation(String value) {
@@ -819,14 +848,13 @@ public class InvoicePage extends BaseClass {
 
 	public void maxNotes() {
 		this.validationTab(Notes, characters2048);
-
 	}
 
 	static String currentDate;
 
 	public String dateValidation(String value) throws InterruptedException, ParseException {
 		if (value.equals("FutureDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 3);
 			String currentDate = sdf.format(cal.getTime());
@@ -840,16 +868,16 @@ public class InvoicePage extends BaseClass {
 			currentDate = sdf.format(cal.getTime());
 			return currentDate;
 		} else if (value.equals("PastDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
-			this.mouseActionClick(InventoryItem);
-			this.mouseActionClick(InventoryName);
+//			this.mouseActionClick(InventoryItem);
+//			this.mouseActionClick(InventoryName);
 			this.inputText(DueDate, pastDate);
 			this.mouseActionClick(Save);
 		} else if (value.equals("GlobalPastDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
@@ -1361,12 +1389,12 @@ public class InvoicePage extends BaseClass {
 		this.scrollDown();
 		if (value.equals("URLCheck")) {
 			this.mouseActionClick(Attachment);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 			if (!this.conditionChecking1(FirstAttachment, 3)) {
 				do {
 					this.mouseActionClick(Attachment);
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					BaseClass.attachmentFile(
 							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 				} while (!this.conditionChecking1(FirstAttachment, 3));
@@ -1403,5 +1431,13 @@ public class InvoicePage extends BaseClass {
 				this.mouseActionClick(CancelButton);
 			} while (this.conditionChecking1(PopupDisable, 5));
 		}
+	}
+
+	public void checkStockPopup() {
+		do {
+			if (this.conditionChecking1(Inventory_Stock, 2)) {
+				this.mouseActionClick(Inventory_Stock);
+			}
+		} while (this.conditionChecking1(Inventory_Stock, 2));
 	}
 }

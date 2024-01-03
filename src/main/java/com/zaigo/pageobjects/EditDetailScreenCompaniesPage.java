@@ -51,10 +51,10 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	String minPhoneNumber = RandomStringUtils.randomNumeric(2);
 
 	By Dashboard = By.xpath("//div[@data-menuselector='dashboard-menu']");
-	By Team = By.id("team-menu");
+	By Team = By.id("user-active");
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']//*[@class='company']");
-	By Tittle1 = By.xpath("//*[@id='team-company-details-company-name']//div[1]");
-	By Edit = By.xpath("//div[@class='col-lg-2 col-md-2 col-sm-6 col-6']//child::button[@data-tabposition='1']");
+	By Tittle1 = By.xpath("//*[@id='team-company-details-company-name']//div//div[1]");
+	By Edit = By.xpath("//*[@id='team-company-details-company-name']/div[1]/div[2]");
 	By Next = By.xpath("//span[text()='Next']");
 	By CompanyWebsite = By.id("company_website");
 	By ErrorCompanyWebsite = By.id("company_website_error");
@@ -94,16 +94,15 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	By Save_Complete = By.id("team-company-edit-submit");
 
-	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
+	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div");
 
 	By response = By.xpath("//span[text()='Company Information updated successfully']");
 
 	By deleteLocation = By.xpath("//*[@id=\"accordion-2\"]/div[2]/div[2]");
 
-	By dots = By.xpath("//*[@id='Team-Company-Card-Details-Section']/div[2]/div/div[1]/div/div[2]/div/div[1]//i");
+	By dots = By.xpath("//*[@id='Team-Company-Card-Details-Section']/div[2]/div");
 
-	By delete = By.xpath(
-			"//*[@id='Team-Company-Card-Details-Section']/div[2]/div/div[1]/div/div[2]/div/div[2]/ul/li[2]//a//i");
+	By delete = By.xpath("//*[@id='Team-Company-Card-Details-Section']/div[2]/div/div[1]/div/div/div[2]/a/i");
 
 	By Yes = By.xpath("//*[text()='Yes']");
 
@@ -111,7 +110,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 
 	By CompanyName = By.id("company_name");
 
-	By Label = By.xpath("//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div/a");
+	By Label = By.xpath("//*[@id='breadcrumb_placement']/div/ol//li[3]");
 
 	By ResponseMessage = By.xpath("//*[@class='js-snackbar__message']");
 
@@ -323,7 +322,7 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 		this.visible(Spinner);
 		this.invisible(Spinner);
 		this.valuePresent(CompanyName, text);
-		this.elementtobeClickable(Next);
+//		this.elementtobeClickable(Next);
 		String text2 = this.getText(Label);
 		return text2;
 
@@ -533,6 +532,9 @@ public class EditDetailScreenCompaniesPage extends BaseClass {
 	}
 
 	public void PhoneNumber(String value) {
+		if (this.getAttribute(PhoneNumber).length() > 0) {
+			this.clearField(PhoneNumber);
+		}
 		if (value.equals("MaxValidation")) {
 			this.validationTab(PhoneNumber, "2143567897654325675432425987654");
 		} else if (value.equals("MinValidation")) {

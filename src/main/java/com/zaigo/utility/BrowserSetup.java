@@ -25,7 +25,8 @@ public class BrowserSetup extends BaseClass {
 			WebDriver driver = null;
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "incognito");
+			options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "incognito",
+					"--ignore-certificate-errors");
 			driver = new ChromeDriver(options);
 			driver.manage().deleteAllCookies();
 			driver.manage().window().maximize();
