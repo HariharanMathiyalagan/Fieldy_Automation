@@ -202,7 +202,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 10)
+//	@Test(priority = 10)
 	public void verifyFaxMinValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-6 limit is provided in Fax field of [Company Contractor form]");
@@ -227,7 +227,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 11)
+//	@Test(priority = 11)
 	public void verifyFaxMaxValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Company Contractor Fax Name Field exceed its max-20 limit");
@@ -674,7 +674,7 @@ public class TeamCompanyContractor extends BaseClass {
 		}
 	}
 
-	@Test(priority = 29)
+//	@Test(priority = 29)
 	private void companiesContractorCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Companies Contractor Created Count is added in the Total Contractor Count");

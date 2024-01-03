@@ -106,6 +106,16 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		actions.moveToElement(until).click().build().perform();
 	}
 
+	public Boolean newWindowWait(int num, int wind) {
+		Boolean check = false;
+		wait = new WebDriverWait(driver, num);
+		try {
+			return check = wait.until(ExpectedConditions.numberOfWindowsToBe(wind));
+		} catch (Exception e) {
+			return check;
+		}
+	}
+
 	private void invisible(By element) {
 		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
@@ -187,9 +197,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
-	By Customer = By.id("customer-main");
-	By Organization = By.id("customer-organization-menu");
-	public static By AddOrganization = By.xpath("//*[@data-automationid='contact-creation']");
+	By Customer = By.id("customers");
+	By Organization = By.xpath("//*[@id='customers']//ul//li//a[@data-n-linkto='customer_organization']");
+	public static By AddOrganization = By.id("scheduledrop");
 	public static By OrganizationName = By.id("company_name");
 	public static By OrganizationError = By.id("company_name_error");
 	public static By Website = By.id("website");
@@ -219,7 +229,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Logo = By.xpath("//label[@for='company_logo']");
 	By LogoError = By.id("company_logo_error");
 	By MaxSizeLogoError = By.xpath("//div[text()='File Size Not Allowed More Than 2 MB']");
-	By Heading = By.xpath("//a[@data-goesto='organization-view']");
+	By Heading = By.xpath("//*[@id='breadcrumb_placement']//div//ol//li[3]");
 //	By Social = By.xpath("//*[text()='Social']");
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
@@ -229,9 +239,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Cancel = By.xpath("//*[@class='js-snackbar__close bold']");
 
-	@FindAll({ @FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[text()='Customer Name']") })
+	@FindAll({
+			@FindBy(xpath = "//*[@id='new_table_with_search']/thead/tr/th[contains(text(),'Customer Name')]//following::*[contains(text(),'No Result Found')]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/thead/tr/th[contains(text(),'Customer Name')]//following::tbody//tr[1]//td[2]") })
 	WebElement CustomerList;
+	@FindAll({
+			@FindBy(xpath = "//*[@id='new_table_with_search']/thead/tr/th[contains(text(),'Company Name')]//following::tbody//tr[1]//td[2]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//following::*[contains(text(),'Company Name')]//following::*[contains(text(),'No Result Found')]") })
+	WebElement OrganizationList;
 
 //	By Text = By.xpath("//*[text()='Customer Name']");
 	By TotalCount = By.id("Total-number-customer-count");
@@ -248,7 +263,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	private void currentDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 0);
 		String currentDate = sdf.format(cal.getTime());
@@ -399,7 +414,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return a;
 	}
 
-	By CustomerOrganization = By.xpath("//*[@data-goesto='user-contractor-list']");
+	By CustomerOrganization = By.xpath("//*[@id='breadcrumb_placement']//li[3]");
 
 	public int totalCount() throws InterruptedException {
 		this.visibility(CustomerList);
@@ -410,20 +425,20 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public String modulePage() throws InterruptedException, AWTException {
 		this.mouseActionClick(Customer);
-		this.elementtobeClickable(SearchButton);
+//		this.elementtobeClickable(SearchButton);
 		this.visibility(CustomerList);
 		this.mouseActionClick(Organization);
 		String text2 = this.getText(CustomerOrganization);
-		this.elementtobeClickable(SearchButton);
-		this.visibility(CustomerList);
-		this.getCount();
+//		this.elementtobeClickable(SearchButton);
+		this.visibility(OrganizationList);
+//		this.getCount();
 		this.mouseActionClick(AddOrganization);
 		return text2;
 	}
 
 	public void backButton() {
 		this.mouseActionClick(Heading);
-		this.mouseActionClick(Yes);
+//		this.mouseActionClick(Yes);
 
 	}
 
@@ -517,7 +532,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[3]"),
 			@FindBy(xpath = "//*[contains(@class,'in-validate')]//following-sibling::div[1]") })
 	WebElement ErrorMessage;
-	By Attachment = By.xpath("//*[@id='customerDropZone']/div/span/b");
+	By Attachment = By.id("customerDropZone");
 	@FindAll({ @FindBy(xpath = "//*[@id='edit-list-file']/div/div[1]/span"),
 			@FindBy(xpath = "//*[@id='previews']/div/div/div[1]/span") })
 	WebElement FirstAttachment;
@@ -564,7 +579,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	public static String accessHours;
 	public static String installationNotes;
 
-	public void organizationPage() throws InterruptedException, AWTException {
+	public void organizationPage() throws InterruptedException, AWTException, MalformedURLException, IOException {
 		this.clearField(OrganizationName);
 		this.inputText(OrganizationName, fakeCompanyName);
 //		this.inputText(OrganizationName, "Ahluwalia Limited");
@@ -616,6 +631,9 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		IndustryTypes = this.getTextAttribute(IndustryType);
 		this.inputText(PhoneNumber, fakePhoneNumber);
 		phoneNumber = this.getTextAttribute(PhoneNumber);
+		if (!this.conditionChecking1(FirstAttachment)) {
+			attachmentFileCheck("URLCheck");
+		}
 		this.nextButton();
 
 	}
@@ -697,43 +715,44 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		serialNumber = this.getTextAttribute(SerialNumber);
 		this.currentDate();
 		dateInstalled = this.getTextAttribute(DateInstalled);
-		this.dropDownByIndex(WarrantyInformation, 1);
-		warrantyInformation = this.getTextAttribute(WarrantyInformation);
+//		this.dropDownByIndex(WarrantyInformation, 1);
+//		warrantyInformation = this.getTextAttribute(WarrantyInformation);
 		this.inputText(AccessHours, "8hrs");
 		accessHours = this.getTextAttribute(AccessHours);
 		this.inputText(InstallationNotes, getPropertyValue("Notes"));
 		installationNotes = this.getTextAttribute(InstallationNotes);
-		if (value.equals("SaveComplete")) {
-			this.mouseActionClick(SaveComplete);
-		} else {
-			this.nextButton();
-		}
+		this.mouseActionClick(SaveComplete);
 
 	}
 
 	HttpURLConnection connection;
 	List<String> list;
 
+	@SuppressWarnings("static-access")
 	public void attachmentFileCheck(String value)
 			throws AWTException, MalformedURLException, IOException, InterruptedException {
 		if (value.equals("URLCheck")) {
 			this.mouseActionClick(Attachment);
-			BaseClass.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+			Thread.sleep(2500);
+			this.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 			if (!this.conditionChecking1(FirstAttachment)) {
 				do {
 					this.mouseActionClick(Attachment);
-					BaseClass.attachmentFile(
-							System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
+					Thread.sleep(2500);
+					this.attachmentFile(System.getProperty("user.dir") + "\\ImagePicture\\Free_Test_Data_1MB_PDF.pdf");
 				} while (!this.conditionChecking1(FirstAttachment));
 			}
-			this.mouseActionClick(SaveComplete);
+//			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("CheckResponse") || value.equals("LoopNext")) {
 			if (value.equals("LoopNext")) {
 				for (int i = 0; i < 3; i++) {
-					this.nextButton();
+					this.mouseActionClick(Previous);
 				}
 			}
-			this.mouseActionClick(FirstAttachment);
+			do {
+				this.mouseActionClick(FirstAttachment);
+				this.scrollDown();
+			} while (!this.newWindowWait(5, 2));
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
 			driver.switchTo().window(list.get(1));
@@ -755,26 +774,29 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		}
 	}
 
-	By ListFirstName = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span/a");
-	By Search = By.id("customer-organization-search-box");
-	By ListPhoneNumber = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[4]/a");
-	By ListEmail = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[5]/a");
-	By Filter = By.xpath("//*[@id='customer-organization-timeline']/div/div[1]/div[4]/button/div");
-	By LeadSourceCheckBox = By.xpath("//*[@id='customer-organization-lead-source-div']//div[1]//div[1]//input[1]");
-	By ListLeadSource = By.id("customer-organization-lead-input-place");
+	By ListFirstName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[2]");
+	By Search = By.id("searchInput");
+	By ListPhoneNumber = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[4]");
+	By ListEmail = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[5]");
+	By IndustryTypeFilter = By.id("accordionindusties");
+	By LeadSourceFilter = By.id("accordionleadSource");
+	By LeadSourceCheckBox = By.xpath("//*[@id='select2-leadSource-results']/li[1]");
+	By ListLeadSource = By.xpath("//*[@id='collapseleadSource']/span/span[1]/span/ul");
 	By Status = By.id("customer-contact-status-active");
-	By Apply = By.xpath("//*[@id='customer-organization-timeline']/div/div[2]/div/div/div/div[4]/button");
-	@FindAll({ @FindBy(id = "customer-organization-search-enter"), @FindBy(id = "customer-contact-search-button") })
+	By Apply = By.id("filterBtn");
+	@FindAll({ @FindBy(id = "searchBtn"), @FindBy(id = "customer-contact-search-button") })
 	WebElement SearchButton;
 	By Invalid = By.xpath("//*[text()='No Result Found']");
-	By ListLead = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[7]//span");
+	By ListLead = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[7]");
 
 	static String listValue;
 
 	public String listValidation(String value) {
 		if (value.equals("SearchField")) {
 			this.tagValidation(Search, listValue);
-			return listValue;
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("OrganizationName")) {
 			listValue = this.getText(ListFirstName);
 			return listValue;
@@ -795,25 +817,28 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			listValue = String.valueOf(first);
 			return listValue;
 		} else if (value.equals("Filter")) {
-			this.mouseActionClick(Filter);
+			this.mouseActionClick(LeadSourceFilter);
 			this.mouseActionClick(ListLeadSource);
 			this.mouseActionClick(LeadSourceCheckBox);
-			this.dropDownByIndex(Status, 1);
-			this.mouseActionClick(Apply);
+//			this.dropDownByIndex(Status, 1);
+			do {
+				this.mouseActionClick(Apply);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("IndustryFilter")) {
+			this.mouseActionClick(IndustryTypeFilter);
 			this.mouseActionClick(ListIndustryType);
 			this.mouseActionClick(ListIndustry);
-			this.mouseActionClick(Apply);
+			do {
+				this.mouseActionClick(Apply);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("LeadSource")) {
 			listValue = this.getText(ListLead);
 			return listValue;
 		} else if (value.equals("InvalidSearch")) {
 			this.tagValidation(Search, "fshfskjh");
-			if (!this.conditionChecking1(Invalid)) {
-				do {
-					this.tagValidation(Search, "fshfskjh");
-				} while (!this.conditionChecking1(Invalid));
-			}
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("Invalid")) {
 			listValue = this.getText(Invalid);
 			return listValue;
@@ -821,15 +846,14 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 		return value;
 	}
 
-	By ListIndustryType = By.id("customer-organization-industry-type-search");
-	By ListIndustry = By.xpath("//*[@id='customer-org-industry-type-div']/div[1]/div[1]/input[1]");
-	By Dots = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
-	By Edit = By.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[1]");
+	By ListIndustryType = By.xpath("//*[@id='collapseindusties']/span/span[1]/span/ul");
+	By ListIndustry = By.xpath("//*[@id='select2-industies-results']/li[1]");
+	By Dots = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]//div//div[1]");
+	By Edit = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]//div//div[2]//ul//li[1]");
 	By Update = By.xpath("//*[text()='Customer details updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='Customer deleted successfully']");
-	By Deleted = By
-			.xpath("//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
-	By reset = By.xpath("//*[@onclick=\"generateCustomerOrganizationTable('','','','','reset')\"]");
+	By Deleted = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]//div//div[2]//ul//li[2]");
+	By reset = By.id("resetDiv");
 	@FindAll({ @FindBy(xpath = "//*[@id='industry_type-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement IndustryTypeDropDown;
@@ -1145,12 +1169,12 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	public void dateInstalled(String value) {
 		if (value.equals("MaxValidation")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 			String currentDate = sdf.format(cal.getTime());
 			this.validationTab(DateInstalled, currentDate);
-			this.elementtobeClickable(SaveComplete);
+//			this.elementtobeClickable(SaveComplete);
 			this.mouseActionClick(SaveComplete);
 		}
 	}
@@ -1168,7 +1192,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	}
 
 	static String ListContactName;
-	By FormLabel = By.xpath("//*[@data-goesto='organization-view']");
+	By FormLabel = By.xpath("//*[@id='breadcrumb_placement']//div//ol//li[4]");
 
 	public String LabelValidation(String value) throws AWTException, InterruptedException {
 		if (value.equals("Create")) {

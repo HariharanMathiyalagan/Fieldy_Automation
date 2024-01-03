@@ -64,7 +64,8 @@ public class CreateContractorPage extends BaseClass {
 
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 
-	public static By createcontractorbutton = By.xpath("//button[@data-tabformid='team-company-contractor']");
+	public static By createcontractorbutton = By
+			.xpath("//*[@id='activesubscription']/section/div[5]/div[1]/div[2]/div[1]/div/div[2]/div[4]");
 
 	private By usermenu = By.xpath("//a[@data-automationid='user']");
 
@@ -169,7 +170,7 @@ public class CreateContractorPage extends BaseClass {
 
 	By Invalid = By.xpath("//div[text()='No Result Found']");
 
-	By Search = By.id("team-user-contract-search");
+	By Search = By.id("searchInput");
 
 	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
 
@@ -178,7 +179,7 @@ public class CreateContractorPage extends BaseClass {
 	By Email = By.id("login");
 	By Pass = By.id("password");
 	By Click = By.xpath("//button[@type='submit']");
-	By Team = By.xpath("//a[@id='team-menu']");
+	By Team = By.id("user-active");
 
 	By Name = By.id("name");
 	By SaveNext = By.xpath("//*[@id=\"team-company-contractor\"]/div/div/div[2]/button");
@@ -199,7 +200,7 @@ public class CreateContractorPage extends BaseClass {
 
 	By AddContractor = By.xpath("//button[@data-formsactions='create']");
 	By TotalCount = By.id("total-company-contractor-count");
-	By Label = By.xpath("//a[@data-exitpopup='team_companies_contractor']");
+	By Label = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li[4]");
 
 	private void elementtobeClickable(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -222,7 +223,8 @@ public class CreateContractorPage extends BaseClass {
 		return a;
 	}
 
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Company']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	private WebElement ContactName;
 
 	public int totalCount() throws InterruptedException {
@@ -362,16 +364,16 @@ public class CreateContractorPage extends BaseClass {
 	By LogoError = By.id("company_logo_error");
 	By FileLogo = By.xpath("//div[text()='Only png,jpeg,jpg Formats Allowed']");
 	By EditHeading = By.xpath("//a[@data-exitpopup='team_companies_company']");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[3]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListCompanyName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[4]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[4]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListName;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[5]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[5]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListEmail;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[6]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[6]"),
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListPhoneNumber;
 	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
@@ -562,7 +564,7 @@ public class CreateContractorPage extends BaseClass {
 			this.visibilitys(Tittle);
 			this.mouseActionClick(contractor);
 			this.visibility(ContactName);
-			this.getCount();
+//			this.getCount();
 			this.mouseActionClick(createcontractorbutton);
 		} else if (value.equals("BackButton")) {
 			this.mouseActionClick(Label);
@@ -824,8 +826,8 @@ public class CreateContractorPage extends BaseClass {
 			ContractorEmail = this.getTextAttribute(contractoremail);
 			this.inputText(contractorphone, fakePhoneNumber);
 			ContractorPhoneNumber = this.getTextAttribute(contractorphone);
-			this.inputText(contractorfax, fakeFaxNumber);
-			ContractorFaxNumber = this.getTextAttribute(contractorfax);
+//			this.inputText(contractorfax, fakeFaxNumber);
+//			ContractorFaxNumber = this.getTextAttribute(contractorfax);
 			this.inputText(contractorsite, fakeWebsite);
 			ContractorWebSite = this.getTextAttribute(contractorsite);
 			this.clickEvent("Next");
@@ -966,7 +968,9 @@ public class CreateContractorPage extends BaseClass {
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
 			this.inputText(Search, response);
-			this.mouseActionClick(SearchButton);
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("ListCompanyName")) {
 			if (!this.conditionChecking(ListCompanyName)) {
 				do {

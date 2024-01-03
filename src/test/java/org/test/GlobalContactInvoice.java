@@ -104,11 +104,11 @@ public class GlobalContactInvoice extends BaseClass {
 		initElements.clearFields("Quantity");
 		initElements.clearFields("Price");
 		initElements.saveFunction("Mandatory");
-//		String errorContact = initElements.errorValidation("ErrorContact");
-		extentTest.log(Status.INFO, "Actual Result is -" + "null");
+		String errorContact = initElements.errorValidation("ErrorContact");
+		extentTest.log(Status.INFO, "Actual Result is -" + errorContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("MandatoryErrorMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if ("null".equals(getPropertyValue("MandatoryErrorMessage"))) {
+		if (errorContact.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -861,7 +861,7 @@ public class GlobalContactInvoice extends BaseClass {
 		}
 	}
 
-//	@Test(priority = 33)
+	@Test(priority = 33)
 	private void mandatoryValidationEditInventoryItem() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Inventory Item field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -943,6 +943,11 @@ public class GlobalContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		do {
+			if (mandatoryValidation.conditionChecking1(InvoicePage.Inventory_Stock, 2)) {
+				mandatoryValidation.mouseActionClick(InvoicePage.Inventory_Stock);	
+			}
+		} while (mandatoryValidation.conditionChecking1(InvoicePage.Inventory_Stock, 2));
 	}
 
 	@Test(priority = 37)

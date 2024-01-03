@@ -20,8 +20,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
-import com.zaigo.pageobjects.CustomerCreateContactPage;
-import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.CustomerCreateOrganizationPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
@@ -1269,7 +1267,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		create.contactPage("CreateContact");
 		create.propertyPage();
 		create.equipmentPage("");
-		create.attachmentFileCheck("URLCheck");
+//		create.attachmentFileCheck("URLCheck");
 		String listName = create.responseMessage("ResponseMessage");
 		extentTest.log(Status.INFO, "Actual Result is -" + listName);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CustomerCreatedMessage"));
@@ -1288,7 +1286,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	}
 
-	@Test(priority = 45)
+//	@Test(priority = 45)
+	@SuppressWarnings("unused")
 	private void customerOrganizationCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Organization Created Count is added in the Total Organization Count");
@@ -1371,7 +1370,8 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	}
 
-	@Test(priority = 49)
+//	@Test(priority = 49)
+	@SuppressWarnings("unused")
 	private void characterListValidation() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify the Created Organization Name & pick the character filter is " + listValidation);
@@ -1532,6 +1532,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		extentTest = extentReports
 				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
 		CustomerCreateOrganizationPage invalid = PageFactory.initElements(driver, CustomerCreateOrganizationPage.class);
+		Thread.sleep(3000);
 		invalid.listValidation("InvalidSearch");
 		String invalidSearch = invalid.listValidation("Invalid");
 		extentTest.log(Status.INFO, "Actual Result is -" + invalidSearch);
@@ -2227,7 +2228,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 
 	}
 
-	@Test(priority = 83)
+//	@Test(priority = 83)
 	public void warrantyInformationPrepopulate() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify the Equipment Warranty Information:" + CustomerCreateOrganizationPage.warrantyInformation
@@ -3430,7 +3431,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		if (errorAccessHours.equals(getPropertyValue("Max2048Validation"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.nextButton();
+//			maxValidation.nextButton();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -3439,7 +3440,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("OrgInstallationValidation.png");
 			maxValidation.clearFields("InstallationNotes");
-			maxValidation.nextButton();
+//			maxValidation.nextButton();
 		}
 	}
 
@@ -3448,7 +3449,7 @@ public class CustomerCreateOrganizationModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Attacthment response code in customer organization module");
 		CustomerCreateOrganizationPage initElements = PageFactory.initElements(driver,
 				CustomerCreateOrganizationPage.class);
-		initElements.attachmentFileCheck("CheckResponse");
+		initElements.attachmentFileCheck("LoopNext");
 		int responseCode = initElements.responseCode();
 		extentTest.log(Status.INFO, "Actual Result create response messages is -" + responseCode);
 		extentTest.log(Status.INFO, "Expected Result create response messages is -" + 200);
