@@ -89,6 +89,7 @@ public class TeamSendInvite extends BaseClass{
 		SendInvitePage edit = PageFactory.initElements(driver, SendInvitePage.class);
 		edit.clickEvent("Navigate");
 		String assertionMessage = edit.labelValidation("ListLabel");
+		System.out.println(assertionMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamListLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -301,7 +302,7 @@ public class TeamSendInvite extends BaseClass{
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Send Invite] Message Field exceed its max-256 limit");
 		SendInvitePage landing = PageFactory.initElements(driver, SendInvitePage.class);
-		landing.clickEvent("Next");
+	//	landing.clickEvent("Next");
 		landing.message("MaxValidation");
 		String mandatoryValidationFirstNameField = landing.errorField("Message");
 		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);

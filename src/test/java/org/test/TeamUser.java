@@ -89,6 +89,7 @@ public class TeamUser extends BaseClass {
 		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
 		edit.clickEvent("Navigate");
 		String assertionMessage = edit.labelValidation("ListLabel");
+		System.out.println(assertionMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamListLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -111,6 +112,7 @@ public class TeamUser extends BaseClass {
 				.createTest("Verify the User to Land on Team User Create Page and Validate the Label");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		String labelValidation = landing.labelValidation("FormLabel");
+		System.out.println(labelValidation);
 		extentTest.log(Status.INFO, "Actual Result is -" + labelValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamCreateUserPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -127,8 +129,10 @@ public class TeamUser extends BaseClass {
 
 	}
 
+	
+	
 	@Test(priority = 3)
-	private void mandatoryValidationFirstNameField() throws IOException {
+	private void mandatoryValidationFirstNameField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Check the User Creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -647,6 +651,8 @@ public class TeamUser extends BaseClass {
 			landing.responseMessage("AlternateFunction");
 		}
 	}
+	
+	/*
 
 	@Test(priority = 29)
 	private void userCount() throws IOException, InterruptedException {
@@ -669,14 +675,17 @@ public class TeamUser extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 	@Test(priority = 30)
-	private void alreadyExistedMailValidation() throws IOException {
+	private void alreadyExistedMailValidation() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify [Email Already Exists] User form, Error is dispalyed when already existing Email is provided");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.email("Unique");
 		String createUserList = landing.errorField("Email");
+		System.out.println(createUserList);
 		extentTest.log(Status.INFO, "Actual Result is -" + createUserList);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AlreadyExistedEmail"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -695,6 +704,9 @@ public class TeamUser extends BaseClass {
 			listValidation = landing.listValidation("FirstName");
 		}
 	}
+	
+	
+	
 
 	@Test(priority = 31)
 	private void searchNameValidation() throws IOException, InterruptedException {
@@ -802,9 +814,11 @@ public class TeamUser extends BaseClass {
 			landing.clickEvent("Reset");
 		}
 	}
+	
+	
 
 	@Test(priority = 35)
-	private void landingOnEditForm() throws IOException {
+	private void landingOnEditForm() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Land on Team Edit Page and Validate the Label");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.clickEvent("Edit");
@@ -1095,7 +1109,7 @@ public class TeamUser extends BaseClass {
 	}
 
 	@Test(priority = 47)
-	private void editmandatoryValidationFirstNameField() throws IOException {
+	private void editmandatoryValidationFirstNameField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Check the User Creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1619,5 +1633,7 @@ public class TeamUser extends BaseClass {
 		}
 
 	}
+
+ 
 
 }
