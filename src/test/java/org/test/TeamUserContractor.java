@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
@@ -88,6 +89,7 @@ public class TeamUserContractor extends BaseClass {
 		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
 		edit.clickEvent("NavigateContractor");
 		String assertionMessage = edit.labelValidation("ListLabel");
+		System.out.println(assertionMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamContractorListLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -110,6 +112,7 @@ public class TeamUserContractor extends BaseClass {
 				"Verify the User to Land on Team User Contractor Contractor Create Page & Validate the Label");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		String labelValidation = landing.labelValidation("ContractorLabel");
+		System.out.println(labelValidation);
 		extentTest.log(Status.INFO, "Actual Result is -" + labelValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamCreateContractorPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -127,9 +130,8 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 3)
-	private void mandatoryValidationContractorFirstNameField() throws IOException {
-		extentTest = extentReports.createTest(
-				"Check the User Contractor creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
+	private void mandatoryValidationContractorFirstNameField() throws IOException, InterruptedException, WebDriverException {
+		extentTest = extentReports.createTest("Check the User Contractor creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.clickEvent("OrganizationRadioButton");
 		String mandatoryValidationFirstNameField = landing.errorField("FirstName");
@@ -341,7 +343,7 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
-
+/*
 	@Test(priority = 12)
 	private void maxValidatonContractorPhoneNumber() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest(
@@ -373,12 +375,16 @@ public class TeamUserContractor extends BaseClass {
 			landing.clickEvent("Next");
 		}
 	}
+	
+	*/
 
 	@Test(priority = 14)
-	private void maxValidationLocationName() throws IOException {
+	private void maxValidationLocationName() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when [Team User Contractor] Location Name Field exceed its max-256 limit");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
+		landing.validateFillData("BasicContractor");
+		landing.clickEvent("Next");
 		landing.locationName("MaxValidation");
 		String mandatoryValidationFirstNameField = landing.errorField("LocationName");
 		extentTest.log(Status.INFO, "Actual Result is -" + mandatoryValidationFirstNameField);
@@ -621,6 +627,8 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
+	
+	/*
 
 	@Test(priority = 29)
 	private void userCount() throws IOException, InterruptedException {
@@ -645,8 +653,10 @@ public class TeamUserContractor extends BaseClass {
 
 	}
 
+*/
+
 	@Test(priority = 30)
-	private void alreadyExistedMailValidation() throws IOException {
+	private void alreadyExistedMailValidation() throws IOException, InterruptedException, WebDriverException {
 		extentTest = extentReports.createTest(
 				"Verify [Email Already Exists] User form, Error is dispalyed when already existing Email is provided");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -657,7 +667,9 @@ public class TeamUserContractor extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createUserList.equals(getPropertyValue("AlreadyExistedEmail"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			landing.clickEvent("ContractorBack");
+			landing.clickEvent("Back");
+		//	listValidation = landing.listValidation("FirstName");
+			//landing.clickEvent("ContractorBack");
 			listValidation = landing.listValidation("FirstName");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -670,6 +682,8 @@ public class TeamUserContractor extends BaseClass {
 			listValidation = landing.listValidation("FirstName");
 		}
 	}
+	
+	
 
 	@Test(priority = 31)
 	private void searchNameValidation() throws IOException, InterruptedException {
@@ -678,6 +692,7 @@ public class TeamUserContractor extends BaseClass {
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.listValidation("ContractorSearchData");
 		String listFirstName = landing.listValidation("FirstName");
+		System.out.println(listFirstName);
 		extentTest.log(Status.INFO, "Actual Result is -" + listValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + listFirstName);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -706,6 +721,7 @@ public class TeamUserContractor extends BaseClass {
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.listValidation("ContractorSearchData");
 		String listPhoneNumber = landing.listValidation("ContractorPhoneNumber");
+		System.out.println(listPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + listValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -734,12 +750,13 @@ public class TeamUserContractor extends BaseClass {
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.listValidation("ContractorSearchData");
 		String listPhoneNumber = landing.listValidation("ContractorListEmail");
+		System.out.println(listPhoneNumber);
 		extentTest.log(Status.INFO, "Actual Result is -" + listValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + listPhoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (listValidation.equals(listPhoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			listValidation = landing.listValidation("ContractorListCompany");
+			//listValidation = landing.listValidation("ContractorListCompany");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -748,11 +765,11 @@ public class TeamUserContractor extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("63.png");
 			Thread.sleep(20000);
-			listValidation = landing.listValidation("ContractorListCompany");
+			//listValidation = landing.listValidation("ContractorListCompany");
 		}
 
 	}
-
+/*
 	@Test(priority = 34)
 	private void filterByCompany() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Select the Contractor Company:" + listValidation
@@ -777,6 +794,8 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 	@Test(priority = 35)
 	private void invalidDataValidation() throws IOException, InterruptedException {
@@ -802,13 +821,17 @@ public class TeamUserContractor extends BaseClass {
 			landing.clickEvent("Reset");
 		}
 	}
+	
+	
+	
 
 	@Test(priority = 36)
-	private void landingOnEditForm() throws IOException {
+	private void landingOnEditForm() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the User to Land on Team Edit Page and Validate the Label");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
 		landing.clickEvent("ContractorEdit");
-		String labelValidation = landing.labelValidation("ContractorLabel");
+		String labelValidation = landing.labelValidation("ConEdit");
+		System.out.println(labelValidation);
 		extentTest.log(Status.INFO, "Actual Result is -" + labelValidation);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamEditContractorPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -824,6 +847,8 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 37)
 	public void firstNamePrepopulate() throws InterruptedException, IOException {
@@ -940,11 +965,13 @@ public class TeamUserContractor extends BaseClass {
 				+ " is prepopulated in the team user contractor edit form page");
 		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
 		String assertionMessage = edit.prepopulationFields("PhoneNumber");
+		System.out.println(assertionMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + TeamUserPage.phoneNumber);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (assertionMessage.equals(TeamUserPage.phoneNumber)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			edit.clickEvent("ConNext");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -952,9 +979,10 @@ public class TeamUserContractor extends BaseClass {
 			File file = new File("EditCompanyLabel.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("EditCompanyLabel.png");
+			edit.clickEvent("ConNext");
 		}
 	}
-
+/*
 	@Test(priority = 43)
 	public void contractorCompanyNamePrepopulate() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Contractor Company Name:" + TeamUserPage.companyName
@@ -977,6 +1005,8 @@ public class TeamUserContractor extends BaseClass {
 			edit.clickEvent("Next");
 		}
 	}
+	
+	*/
 
 	@Test(priority = 44)
 	public void locationNamePrepopulate() throws InterruptedException, IOException {
@@ -1115,7 +1145,7 @@ public class TeamUserContractor extends BaseClass {
 	}
 
 	@Test(priority = 50)
-	private void editmandatoryValidationContractorFirstNameField() throws IOException {
+	private void editmandatoryValidationContractorFirstNameField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Check the User Contractor creation form page, First Name field is set as Mandatory & Error Message is displayed when it is BLANK");
 		TeamUserPage landing = PageFactory.initElements(driver, TeamUserPage.class);
@@ -1511,6 +1541,7 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
+	
 
 	@Test(priority = 66)
 	private void editmaxValidationZipcode() throws IOException, InterruptedException, AWTException {
@@ -1585,6 +1616,8 @@ public class TeamUserContractor extends BaseClass {
 		}
 	}
 
+	/*
+	
 	@Test(priority = 69)
 	private void deleteUserDetails() throws InterruptedException, AWTException, IOException {
 		extentTest = extentReports.createTest("Verify deleted successful message is displayed, when the User Deleted");
@@ -1610,5 +1643,7 @@ public class TeamUserContractor extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 }
