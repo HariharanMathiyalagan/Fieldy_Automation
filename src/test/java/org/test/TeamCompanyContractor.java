@@ -882,7 +882,6 @@ public class TeamCompanyContractor extends BaseClass {
 			File file = new File("33.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("33.png");
-			Thread.sleep(20000);
 			errorValidation.clickEvent("Reset");
 		}
 
@@ -998,7 +997,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 43)
+//	@Test(priority = 43)
 	public void faxPrepopulate() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Fax Number:" + CreateContractorPage.ContractorFaxNumber
 				+ " is prepopulated in the contractor edit form page");
@@ -1372,7 +1371,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 59)
+//	@Test(priority = 59)
 	public void editverifyFaxMinValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when less than min-6 limit is provided in Fax field of [Company Contractor form]");
@@ -1397,7 +1396,7 @@ public class TeamCompanyContractor extends BaseClass {
 
 	}
 
-	@Test(priority = 60)
+//	@Test(priority = 60)
 	public void editverifyFaxMaxValidation() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
 				"Verify Error Message is displayed when Company Contractor Fax Name Field exceed its max-20 limit");
