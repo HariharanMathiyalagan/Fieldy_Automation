@@ -157,10 +157,9 @@ public class CreateContractorPage extends BaseClass {
 
 	By clickclosebutton = By.xpath("//button[@data-automationid='c']");
 
-	By ThreeDots = By.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]");
+	By ThreeDots = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[1]");
 
-	By Edit = By
-			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]");
+	By Edit = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[1]");
 
 	By NameValidation = By.xpath("(//a[@data-goesto='user-profile-view'])[1]");
 
@@ -172,7 +171,9 @@ public class CreateContractorPage extends BaseClass {
 
 	By Search = By.id("searchInput");
 
-	By SearchButton = By.xpath("//*[@id='team-company-search-button']/span/i");
+	By SearchButton = By.id("searchBtn");
+
+	By LasyLoader = By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]");
 
 	By ContractorCount = By.id("total-company-contractor-count");
 
@@ -186,8 +187,7 @@ public class CreateContractorPage extends BaseClass {
 	By SaveNxt = By.xpath("//button[@data-spinloader='company_contractor_create_edit']");
 	By Assertion = By.xpath("//span[text()='Contractor have been updated successfully']");
 
-	By Delete = By
-			.xpath("//*[@id='fieldy-user-company-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[3]");
+	By Delete = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By DeleteAssert = By.xpath("//span[text()='Contractor have been deleted successfully']");
 
@@ -201,6 +201,7 @@ public class CreateContractorPage extends BaseClass {
 	By AddContractor = By.xpath("//button[@data-formsactions='create']");
 	By TotalCount = By.id("total-company-contractor-count");
 	By Label = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li[4]");
+	By BackLabel = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li[3]");
 
 	private void elementtobeClickable(By element) {
 		wait = new WebDriverWait(driver, 10);
@@ -377,7 +378,7 @@ public class CreateContractorPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement ListPhoneNumber;
 	By CreateCont = By.xpath("//*[@data-exitpopup='team_companies_contractor']");
-	By resert = By.xpath("//a[text()=' Reset Search']");
+	By resert = By.id("resetDiv");
 
 	public void clearFields(String value) {
 		if (value.equals("CompanyName")) {
@@ -567,14 +568,16 @@ public class CreateContractorPage extends BaseClass {
 //			this.getCount();
 			this.mouseActionClick(createcontractorbutton);
 		} else if (value.equals("BackButton")) {
-			this.mouseActionClick(Label);
-			this.mouseActionClick(Yes);
+			this.mouseActionClick(BackLabel);
+//			this.mouseActionClick(Yes);
 		} else if (value.equals("Reset")) {
 			this.mouseActionClick(resert);
 		} else if (value.equals("Edit")) {
-			if (!this.conditionChecking(ListCompanyName)) {
+			this.visibilitys(LasyLoader);
+			if (!this.conditionChecking(Edit)) {
 				driver.navigate().refresh();
 			}
+//			this.visibilitys(Edit);
 			String text = this.getText(ListCompanyName);
 			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Edit);
@@ -970,7 +973,7 @@ public class CreateContractorPage extends BaseClass {
 			this.inputText(Search, response);
 			do {
 				this.mouseActionClick(SearchButton);
-			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
+			} while (!this.conditionChecking1(LasyLoader));
 		} else if (value.equals("ListCompanyName")) {
 			if (!this.conditionChecking(ListCompanyName)) {
 				do {
@@ -1012,7 +1015,7 @@ public class CreateContractorPage extends BaseClass {
 
 	public void clearAllFields(String value) {
 		if (value.equals("Basic")) {
-			List<String> asList = Arrays.asList("CompanyName", "FirstName", "LastName", "Email", "PhoneNumber", "Fax",
+			List<String> asList = Arrays.asList("CompanyName", "FirstName", "LastName", "Email", "PhoneNumber",
 					"Website");
 			for (int i = 0; i < asList.size(); i++) {
 				this.clearFields(asList.get(i));
