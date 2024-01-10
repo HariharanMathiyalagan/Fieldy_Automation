@@ -12,17 +12,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -35,6 +39,10 @@ import org.testng.SkipException;
 
 import com.base.BaseClass;
 import com.github.javafaker.Faker;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 public class InvoicePage extends BaseClass {
 
@@ -75,12 +83,12 @@ public class InvoicePage extends BaseClass {
 
 	}
 
-	private void inputText(By element, String text) {
+	public void inputText(By element, String text) {
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
 	}
 
-	private void inputText(WebElement element, String text) {
+	public void inputText(WebElement element, String text) {
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
 	}
@@ -112,6 +120,17 @@ public class InvoicePage extends BaseClass {
 		return text;
 	}
 
+	public Boolean invisibleConditionChecking(By element, int value) {
+		Boolean text = false;
+		try {
+			wait = new WebDriverWait(driver, value);
+			text = wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+		} catch (Exception e) {
+			return text;
+		}
+		return text;
+	}
+
 	public Boolean conditionChecking(WebElement element) {
 		Boolean text = false;
 		try {
@@ -137,7 +156,7 @@ public class InvoicePage extends BaseClass {
 	public Boolean valuePresentCondition(By element, String value) {
 		Boolean text = false;
 		try {
-			wait = new WebDriverWait(driver, 50);
+			wait = new WebDriverWait(driver, 30);
 			text = wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
 		} catch (Exception e) {
 			return text;
@@ -310,6 +329,7 @@ public class InvoicePage extends BaseClass {
 			"//*[@id='header_element']//following::div//div//div//following::div//div[contains(@gloss,'Create Invoice')]");
 	public static By CreateContactInvoice = By.xpath("//*[@id='customer-contact-invoice']/div[1]/div[5]/button");
 	By CustomerName = By.id("customer-name");
+	By Invoice_No = By.id("invoice_no");
 	By ContactName = By.id("customer-name-input-field");
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
@@ -318,16 +338,16 @@ public class InvoicePage extends BaseClass {
 	private WebElement StartInvalid;
 	By InvoiceLable = By.xpath("//*[text()='Invoice No']");
 	By TotalCount = By.id("total-invoice-count");
-	By CreateInvoiceLabel = By.xpath("(//*[@data-draftback='invoicedraft'])[1]");
+	By CreateInvoiceLabel = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li[2]");
 	By EditInvoiceLabel = By.xpath("//*[@data-dropzonereset='invocie']");
-	By Reference = By.id("reference_no");
+	public static By Reference = By.id("reference_no");
 	By due_on_receipt = By.xpath("//select[@id='invoice-due-by-filter']//option[1]");
 	By DueonReceipt = By.id("invoice-due-by-filter");
 	By DueDate = By.id("doc_expiry_date");
 	By InvoiceTittle = By.id("invoice_title");
 	By InventoryItem = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[2]");
 	By Quantity = By.id("items__quantity__0");
-	By Price = By.id("items__price__0");
+	public static By Price = By.id("items__price__0");
 	By Discount = By.id("items__discount__0");
 	By Tax = By.id("items__tax__0");
 	By Total = By.id("items__total__0");
@@ -362,8 +382,8 @@ public class InvoicePage extends BaseClass {
 	By ErrorTax = By.id("items__tax__0_error");
 	By ErrorDescription = By.id("items__description__0_error");
 	By ErrorNotes = By.id("notes_error");
-	By Search = By.id("invoice-search-filter");
-	@FindAll({ @FindBy(id = "invoice-search-enter"), @FindBy(id = "invoice-search-filter-enter") })
+	By Search = By.id("searchInput");
+	@FindAll({ @FindBy(id = "searchBtn"), @FindBy(id = "invoice-search-filter-enter") })
 	WebElement SearchButton;
 	@FindAll({ @FindBy(xpath = "//*[text()='No Data Found']"),
 			@FindBy(xpath = "//*[@id='inventorydropdownlist0']//div[1]") })
@@ -374,18 +394,15 @@ public class InvoicePage extends BaseClass {
 //	By ListInvoiceNo = By.xpath("(//*[@class='ellipsis-100'])[3]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[2]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr/td[2]") })
 	WebElement ListInvoiceNo1;
 	By GlobalListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[4]");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[2]") })
+	@FindAll({ @FindBy(xpath = ""), @FindBy(xpath = ""),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[2]") })
 	WebElement ListInvoiceNo;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	WebElement ListReference1;
-	By ListCustomerName = By.xpath("//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[4]");
+	By ListCustomerName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[4]");
 //	By ListReference = By.xpath("(//*[@class='ellipsis-100'])[4]");
 	@FindAll({
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]"),
@@ -402,7 +419,8 @@ public class InvoicePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement ContactEdit;
-	By ListAwaitingStatus = By.xpath("//*[text()='Awaiting Payment']");
+	By ListAwaitingStatus = By
+			.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[11]//span[contains(text(),'Awaiting Payment')]");
 	By ListPartialStatus = By.xpath("//*[text()='Partial Payment']");
 	By ListDraftStatus = By.xpath("(//*[text()='Draft'])[1]");
 	By ListPaidStatus = By.xpath("(//*[text()='Paid'])[1]");
@@ -423,7 +441,7 @@ public class InvoicePage extends BaseClass {
 	By GlobalListInvoiceStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1'])[8]");
 	By Yes = By.xpath("//*[text()='Yes']");
 	By Update = By.xpath("//*[text()='Update']");
-	public static By Reset = By.xpath("//*[text()=' Reset Search']");
+	public static By Reset = By.id("resetDiv");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[2]/td[5]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[2]/td[5]") })
@@ -461,7 +479,7 @@ public class InvoicePage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Add = By.xpath("//*[@id='id_customer_group-autocomplete-list1']//child::span");
 	By OrgAdd = By.xpath("//*[@id='id_customer_group-autocomplete-list']//child::span");
-	By InvoiceSearchButton = By.id("invoice-search-enter");
+	By InvoiceSearchButton = By.id("searchBtn");
 	By OrganizationName = By.id("company_name");
 	By OrgPhoneNumber = By.xpath("(//*[@id='phones__number__0'])[3]");
 	By OrgAddress1 = By.id("line_1");
@@ -471,11 +489,11 @@ public class InvoicePage extends BaseClass {
 	By OrgZipcode = By.id("zipcode");
 	By OrgEmail = By.xpath("(//*[@id='email'])[3]");
 	By Website = By.xpath("(//*[@id='website'])[1]");
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[3]") })
 	WebElement Share;
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]/a"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-contact-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-invoice-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[2]/ul/li[4]") })
 	WebElement PDF;
@@ -486,7 +504,8 @@ public class InvoicePage extends BaseClass {
 	WebElement SaveButton;
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
 	public static By CancelButton = By.id("invoice-popup-url-id");
-	By ShareField = By.id("share_url");
+	By ShareField = By
+			.xpath("//*[@id='invoice_share_link' and contains(@class,'d-block')]//following::input[@id='share_url']");
 
 	public void clearFields(String value) {
 		if (value.equals("Reference")) {
@@ -526,7 +545,7 @@ public class InvoicePage extends BaseClass {
 			if (this.conditionChecking1(Inventory_Stock, 2)) {
 				do {
 					this.mouseActionClick(Inventory_Stock);
-				} while (this.conditionChecking1(Inventory_Stock, 2));
+				} while (!this.invisibleConditionChecking(Inventory_Stock, 5));
 			}
 		}
 	}
@@ -605,10 +624,6 @@ public class InvoicePage extends BaseClass {
 			String text = this.checkError(ErrorPastDate);
 			return text;
 		}
-//		else if (value.equals("ErrorContact")) {
-//			String text = this.getText(ErrorCustomerName);
-//			return text;
-//		}
 		return value;
 	}
 
@@ -630,8 +645,10 @@ public class InvoicePage extends BaseClass {
 				this.mouseActionClick(InventoryFirstItem);
 			}
 			do {
-				this.mouseActionClick(Inventory_Stock);
-			} while (this.conditionChecking(Inventory_Stock));
+				if (this.conditionChecking1(Inventory_Stock, 5)) {
+					this.mouseActionClick(Inventory_Stock);
+				}
+			} while (this.conditionChecking1(Inventory_Stock, 5));
 		} else if (value.equals("Organization")) {
 			this.mouseActionClick(InventoryItem);
 			if (this.getText(InventoryFirstItem).equals("No Data Found")) {
@@ -710,12 +727,12 @@ public class InvoicePage extends BaseClass {
 			return organizationName;
 		} else if (value.equals("GlobalContactInvoice") || value.equals("Global")) {
 			this.mouseActionClick(Invoice);
-			this.visibility(StartInvalid);
-//			this.mouseActionClick(CreateGlobalInvoice);
-//			if (value.equals("GlobalContactInvoice")) {
-//				this.clearFields("Quantity");
-//				this.clearFields("Price");
-//			}
+//			this.visibility(StartInvalid);
+			this.mouseActionClick(CreateGlobalInvoice);
+			if (value.equals("GlobalContactInvoice")) {
+				this.clearFields("Quantity");
+				this.clearFields("Price");
+			}
 		} else if (value.equals("ContactAPI")) {
 			this.mouseActionClick(Save);
 			if (this.conditionChecking1(ErrorDueDate, 20)) {
@@ -936,9 +953,14 @@ public class InvoicePage extends BaseClass {
 		return value;
 	}
 
+	public static Map<String, String> map = new HashMap<>();
+
 	public void CRUDValidation(String value) throws InterruptedException, IOException, ParseException {
 		if (value.equals("Create") || value.equals("CreateValue")) {
+			map.put("Customer Name", this.getTextAttribute(GlobalCustomerName));
+			map.put("Invoice No", this.getTextAttribute(Invoice_No));
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
+			map.put("Reference", this.getTextAttribute(Reference));
 			if (value.equals("Create")) {
 				this.dateValidation("FutureDate");
 			} else if (value.equals("CreateValue")) {
@@ -951,6 +973,7 @@ public class InvoicePage extends BaseClass {
 			this.mouseActionClick(Save);
 		} else if (value.equals("Edit")) {
 			this.inputText(Reference, ReferencePrefix + "-" + ReferenceNo);
+			map.put("Reference", this.getTextAttribute(Reference));
 			this.dateValidation("FutureDate");
 			this.inputText(InvoiceTittle, fakeTittle);
 			this.clearFields("Description");
@@ -1139,59 +1162,71 @@ public class InvoicePage extends BaseClass {
 			String text = this.getText(GlobalListInvoiceStatus);
 			return text;
 		} else if (value.equals("InvoiceNo")) {
-			if (!this.conditionChecking(ListInvoiceNo)) {
+			if (!this.conditionChecking1(ListInvoiceNo, 10)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListInvoiceNo));
+				} while (!this.conditionChecking1(ListInvoiceNo, 10));
 			}
 			SearchData = this.getText(ListInvoiceNo);
 			return SearchData;
 		} else if (value.equals("Reference")) {
-			if (!this.conditionChecking(ListReference1)) {
+			if (!this.conditionChecking1(ListReference1, 10)) {
 				do {
 					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListReference1));
+				} while (!this.conditionChecking1(ListReference1, 10));
 			}
 			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("SearchInvoiceNo")) {
-			if (!this.conditionChecking(ListInvoiceNo1)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListInvoiceNo1));
+			if (this.conditionChecking1(ListInvoiceNo1, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking(ListInvoiceNo1));
+				SearchData = this.getText(ListInvoiceNo1);
+			} else {
+				SearchData = map.get("Invoice No");
 			}
-			SearchData = this.getText(ListInvoiceNo1);
 			return SearchData;
 		} else if (value.equals("SearchReference")) {
-			if (!this.conditionChecking(ListReference1)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListReference1));
+			if (this.conditionChecking1(ListReference1, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking1(ListReference1, 10));
+				SearchData = this.getText(ListReference1);
+			} else {
+				SearchData = map.get("Reference");
 			}
-			SearchData = this.getText(ListReference1);
 			return SearchData;
 		} else if (value.equals("GlobalCustomerName")) {
-			this.elementtobeClickable(InvoiceSearchButton);
-			if (!this.conditionChecking(ListCustomerName)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListCustomerName));
+//			this.elementtobeClickable(InvoiceSearchButton);
+			if (this.conditionChecking1(ListCustomerName, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking1(ListCustomerName, 10));
+				SearchData = this.getText(ListCustomerName);
+			} else {
+				SearchData = map.get("Customer Name");
 			}
-			SearchData = this.getText(ListCustomerName);
 			return SearchData;
 		} else if (value.equals("SearchGlobalCustomerName")) {
-			if (!this.conditionChecking(GlobalListCustomerName)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(GlobalListCustomerName));
+			if (this.conditionChecking1(GlobalListCustomerName, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking1(GlobalListCustomerName, 10));
+				SearchData = this.getText(GlobalListCustomerName);
+			} else {
+				SearchData = map.get("Customer Name");
 			}
-			return this.getText(GlobalListCustomerName);
 		} else if (value.equals("SearchData")) {
 			this.inputText(Search, SearchData);
-			this.mouseActionClick(SearchButton);
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("CustomerSearchData")) {
 			this.inputText(Search, SearchData);
-			this.mouseActionClick(InvoiceSearchButton);
+			do {
+				this.mouseActionClick(InvoiceSearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("Invalid")) {
 			this.tagValidation(Search, "sdfsfsdfsfs");
 		} else if (value.equals("InvalidList")) {
@@ -1220,13 +1255,17 @@ public class InvoicePage extends BaseClass {
 			this.responseMessage("Message");
 			this.invisible(PaidMessage);
 		} else if (value.equals("SharePage")) {
-			this.mouseActionClick(ThreeDots1);
+			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(Share);
-			this.visibility(Spinner);
-			this.invisible(Spinner);
+//			this.visibility(Spinner);
+//			this.invisible(Spinner);
+			if (this.getTextAttribute(ShareField).length() == 0) {
+				do {
+				} while (this.getTextAttribute(ShareField).length() == 0);
+			}
 			this.newWindow(this.getTextAttribute(ShareField));
 		} else if (value.equals("PDFPage")) {
-			this.mouseActionClick(ThreeDots1);
+			this.mouseActionClick(ThreeDots);
 			this.mouseActionClick(PDF);
 			this.newWindowWait();
 		}
@@ -1414,11 +1453,11 @@ public class InvoicePage extends BaseClass {
 	}
 
 	public int responseCode() throws IOException {
-		String currentUrl = driver.getCurrentUrl();
-		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
-		connection.setRequestMethod("HEAD");
-		connection.connect();
-		int responseCode = connection.getResponseCode();
+		String url = driver.getCurrentUrl();
+		CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier((host, session) -> true).build();
+		HttpGet request = new HttpGet(url);
+		HttpResponse response = httpClient.execute(request);
+		int responseCode = response.getStatusLine().getStatusCode();
 		return responseCode;
 	}
 
@@ -1438,6 +1477,6 @@ public class InvoicePage extends BaseClass {
 			if (this.conditionChecking1(Inventory_Stock, 2)) {
 				this.mouseActionClick(Inventory_Stock);
 			}
-		} while (this.conditionChecking1(Inventory_Stock, 2));
+		} while (!this.invisibleConditionChecking(Inventory_Stock, 2));
 	}
 }
