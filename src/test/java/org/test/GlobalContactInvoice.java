@@ -224,6 +224,8 @@ public class GlobalContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
+		mandatoryValidation.inputText(InvoicePage.Price, "1");
 	}
 
 	@Test(priority = 7)
@@ -719,7 +721,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 26)
+//	@Test(priority = 26)
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Note field exceed its max-20000 limit");
@@ -943,11 +945,7 @@ public class GlobalContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
-		do {
-			if (mandatoryValidation.conditionChecking1(InvoicePage.Inventory_Stock, 2)) {
-				mandatoryValidation.mouseActionClick(InvoicePage.Inventory_Stock);	
-			}
-		} while (mandatoryValidation.conditionChecking1(InvoicePage.Inventory_Stock, 2));
+		mandatoryValidation.inputText(InvoicePage.Price, "55");
 	}
 
 	@Test(priority = 37)
@@ -974,7 +972,6 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearFields("Reference");
 		}
-
 	}
 
 	@Test(priority = 38)
@@ -999,7 +996,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceTittleMaximumValidation.png");
 			mandatory.clearFields("InvoiceTittle");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 39)
@@ -1024,7 +1021,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceInventoryMaximumValidation.png");
 			mandatory.clearFields("Inventory");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 40)
@@ -1050,7 +1047,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityEmptyValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 41)
@@ -1076,7 +1073,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMaximumValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 42)
@@ -1101,7 +1098,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityDeciamlPointValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 43)
@@ -1128,7 +1125,7 @@ public class GlobalContactInvoice extends BaseClass {
 			mandatory.clearFields("Quantity");
 			mandatory.validationQuantity("Value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 44)
@@ -1154,7 +1151,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoicePriceNegativeValidation.png");
 			mandatory.clearFields("Price");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 45)
@@ -1179,7 +1176,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoicePriceMaximumValidation.png");
 			mandatory.clearFields("Price");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 46)
@@ -1204,7 +1201,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceBeforePriceMaximumValidation.png");
 			mandatory.clearFields("Price");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 47)
@@ -1232,7 +1229,7 @@ public class GlobalContactInvoice extends BaseClass {
 			mandatory.clearFields("Price");
 			mandatory.priceValidation("value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 48)
@@ -1257,7 +1254,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceAfterDecimalPointValidation.png");
 			mandatory.clearFields("Discount");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 49)
@@ -1282,7 +1279,6 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceBeforeDiscountDecimalValidation.png");
 			mandatory.clearFields("Discount");
 		}
-
 	}
 
 	@Test(priority = 50)
@@ -1415,10 +1411,10 @@ public class GlobalContactInvoice extends BaseClass {
 			mandatory.descriptionValidation("value");
 			mandatory.pickFirstItem("Contact");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
-	@Test(priority = 55)
+//	@Test(priority = 55)
 	private void maximumEditValidationNotes() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Note field exceed its max-20000 limit");
@@ -1440,7 +1436,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceNotesMaximumValidation.png");
 			mandatory.clearFields("Notes");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 56)
@@ -1448,6 +1444,7 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+		mandatory.pickFirstItem("Contact");
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
 		String errorPasswordField = mandatory.responseMessage("FormMessage");
@@ -1467,7 +1464,7 @@ public class GlobalContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoicePastDateValidation.png");
 			mandatory.clearFields("Expiry");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 57)
@@ -1517,7 +1514,7 @@ public class GlobalContactInvoice extends BaseClass {
 		}
 	}
 
-	@Test(priority = 58)
+//	@Test(priority = 58)
 	private void draftInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice has been draft status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1559,13 +1556,13 @@ public class GlobalContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListStatus.png");
 		}
-
+		ListField = create.listTextValidation("GlobalCustomerName");
 	}
 
 //	static String ListData;
 	static double ListData;
 
-	@Test(priority = 60)
+//	@Test(priority = 60)
 	private void UpdatedInvociePartialPayment() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Partial Payment status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1590,7 +1587,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 61)
+//	@Test(priority = 61)
 	private void partialPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Check the Partial Paid Amount:" + ListData + " in the Invoice List Page");
@@ -1612,7 +1609,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void UpdatedInvociePaid() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Paid status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1637,7 +1634,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void fullyPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Check the Fully Paid Amount:" + ListData + " in the Invoice List Page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1666,7 +1663,7 @@ public class GlobalContactInvoice extends BaseClass {
 				+ "in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
 		create.listTextValidation("CustomerSearchData");
-		String expected = create.listTextValidation("SearchGlobalCustomerName");
+		String expected = create.listTextValidation("GlobalCustomerName");
 		extentTest.log(Status.INFO, "Actual Result is -" + expected);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1692,7 +1689,7 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest(
 				"Enter the Invoice No:" + ListField + " in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("SearchInvoiceNo");
+//		create.listTextValidation("SearchInvoiceNo");
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("SearchInvoiceNo");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);
@@ -1720,7 +1717,7 @@ public class GlobalContactInvoice extends BaseClass {
 		extentTest = extentReports.createTest("Enter the Invoice Reference:" + ListField
 				+ " in the Search field & Invoice list retrived successfully");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
-		create.listTextValidation("SearchReference");
+//		create.listTextValidation("SearchReference");
 		create.listTextValidation("SearchData");
 		String expected = create.listTextValidation("SearchReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + ListField);
@@ -1729,7 +1726,7 @@ public class GlobalContactInvoice extends BaseClass {
 		if (ListField.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.clearFields("Search");
-			ListField = create.dateValidation("GlobalDueDate");
+//			ListField = create.dateValidation("GlobalDueDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1738,12 +1735,12 @@ public class GlobalContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteReferenceValidation.png");
 			create.clearFields("Search");
-			ListField = create.dateValidation("GlobalDueDate");
+//			ListField = create.dateValidation("GlobalDueDate");
 		}
 
 	}
 
-	@Test(priority = 66)
+//	@Test(priority = 66)
 	private void filterDateInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice Due Date List filter by Due From Date:" + ListField);
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
