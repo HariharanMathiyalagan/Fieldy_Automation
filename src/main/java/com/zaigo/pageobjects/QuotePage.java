@@ -494,13 +494,14 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='quote-contact-create']//*[@id='id_customer_group']") })
 	WebElement CustomerField;
 
-	@FindAll({ @FindBy(xpath = "//*[@class='col-lg-12 switchcontact d-block']//*[@id='id_customer']") })
+	@FindAll({ @FindBy(xpath = "//*[@id='id_customer']") })
 	WebElement SubCustomerField;
 	By PopupOpen = By.xpath("//*[contains(@class,'fadeIn')]//child::h5");
 	@FindAll({
 			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
-			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
+			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']"),
+			@FindBy(xpath="//*[@id='id_customer_group-autocomplete-list2']/div/span/button")})
 	WebElement AddCustomer;
 	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list']/div/span/span") })
 	WebElement AddTax;
@@ -924,15 +925,17 @@ public class QuotePage extends BaseClass {
 
 	}
 
-	public void validationQuantity(String value) {
+	public void validationQuantity(String value) throws InterruptedException {
 		if (value.equals("EmptyValidation")) {
 			this.validationTab(Quantity, "");
 		} else if (value.equals("MaxQuantity")) {
 			this.validationTab(Quantity, numberCharacter15);
 		} else if (value.equals("AfterDecimalPoint")) {
 			this.validationTab(Quantity, "4564.5445664");
+			
 		} else if (value.equals("Value")) {
 			this.inputText(Quantity, "10");
+
 		} else if (value.equals("BeforeDecimalPoint")) {
 			this.validationTab(Quantity, "231231231231231231231.00000000");
 		}

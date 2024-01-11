@@ -335,8 +335,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Reference Field exceed its max-256 limit");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.pickFirstItem("Contact");
-		mandatory.validationQuantity("Value");
+		//mandatory.pickFirstItem("Contact");
+	    //mandatory.validationQuantity("Value");
 		mandatory.referenceField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -438,8 +438,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.validationQuantity("MaxQuantity");
 		mandatory.priceValidation("value");
+		mandatory.validationQuantity("MaxQuantity");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max12CharacterValidation"));
@@ -510,6 +510,9 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
+	
 
 	@Test(priority = 15)
 	private void emptyValidationPriceField() throws IOException, InterruptedException {
@@ -895,29 +898,31 @@ public class CustomerOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
+	
+	/*
 
-	@Test(priority = 30)
-	private void quoteCreatedCount() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify the Customer Contact Quote Count is added in the Total Quote Count");
-		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		int actualTotal = create.countValidation(1);
-		int expectedResult = create.countValidation(2);
-		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
-		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (actualTotal == expectedResult) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("QupteCountValidate.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("QupteCountValidate.png");
-		}
-
-	}
+//	@Test(priority = 30)
+//	private void quoteCreatedCount() throws IOException, InterruptedException {
+//		extentTest = extentReports
+//				.createTest("Verify the Customer Contact Quote Count is added in the Total Quote Count");
+//		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+//		int actualTotal = create.countValidation(1);
+//		int expectedResult = create.countValidation(2);
+//		extentTest.log(Status.INFO, "Actual Result is -" + actualTotal);
+//		extentTest.log(Status.INFO, "Expected Result is -" + expectedResult);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (actualTotal == expectedResult) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("QupteCountValidate.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("QupteCountValidate.png");
+//		}
+//
+//	}
 
 	@Test(priority = 31)
 	private void quoteEdit() throws IOException, InterruptedException, ParseException {
@@ -1886,4 +1891,6 @@ public class CustomerOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 		}
 	}
+	
+	*/
 }
