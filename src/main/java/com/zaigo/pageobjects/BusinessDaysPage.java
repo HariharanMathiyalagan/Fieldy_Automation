@@ -288,18 +288,19 @@ public class BusinessDaysPage extends BaseClass {
 
 	// Checking Field
 
-	By Customer = By.id("customer-main");
+	By Customer = By.id("customers");
 
-	By Contact = By.id("customer-contact-menu");
+	By Contact = By.xpath("//*[@id='customers']//li[1]");
 
-	By Organization = By.id("customer-organization-menu");
+	By Organization = By.xpath("//*[@id='customers']//li[2]");
 	
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='contact-creation']"), @FindBy(id = "scheduledrop"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button[1]"),
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div/div[2]/div[1]/div/div[3]/div[4]/button"),
 			@FindBy(xpath ="//*[@gloss=' Create Job']"),
-			@FindBy(xpath="//*[@gloss=' Create Contractor']")})
+			@FindBy(xpath="//*[@gloss=' Create Contractor']"),
+			@FindBy(xpath="//*[@id='scheduledrop']")})
 	WebElement CreateButton;
 
 	By SaveButton = By.id("customerdrop");
@@ -329,10 +330,10 @@ public class BusinessDaysPage extends BaseClass {
 //	By  = By.xpath("//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='job_create_edit']/div/div[1]/div[4]/div[2]/input[1]"),
-			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath = "//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[3]/div[4]/div[2]/input[1]"),
 			@FindBy(xpath="//*[@id='job_create_edit']/div/div[1]/div[6]/div[2]/input[1]"),
-			@FindBy(xpath="//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[4]/div[4]/div[2]/input[1]")})
+			@FindBy(xpath="//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[4]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath="//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[3]/div[2]/input[1]")})
 	WebElement BusinessDaysFields;
 	
 	
@@ -649,6 +650,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(leadsource_edit_btn);
 			this.valuePresent(leadsource_name, textAttribute);
 			this.validationTab(leadsource_name, characters2048);
+			this.clearField(leadsource_name);
 			this.validationTab(leadsource_name, textAttribute);
 			this.dropDownByIndex(leadsource_status, 1);
 			this.mouseActionClick(leadsource_save_btn);
