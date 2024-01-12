@@ -1,6 +1,8 @@
 package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -43,7 +45,7 @@ public class RequestPage extends BaseClass {
 	String fakeFirstName = faker.name().firstName();
 	String fakeLastName = faker.name().lastName();
 	String fakeEmail = faker.internet().safeEmailAddress();
-	String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+	String fakePhoneNumber = faker.phoneNumber().phoneNumber().replaceAll("x", "");
 	String fakeTittle = faker.name().title();
 	String fakeAddress1 = faker.address().buildingNumber();
 	String fakeAddress2 = faker.address().streetName();
@@ -237,7 +239,7 @@ public class RequestPage extends BaseClass {
 	By SaveComplete = By.id("scheduledrop");
 	By BussinessUnit = By.xpath("//*[@data-dropdownlist='business-unit']");
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
-	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+	public static By firstLocation;
 	By ErrorLocation = By.id("location_error");
 	By ErrorTittle = By.id("title_error");
 	By ErrorDescription = By.id("description_error");
@@ -309,7 +311,7 @@ public class RequestPage extends BaseClass {
 	By OrgContactAdd = By.xpath("//*[@class='add_new_btn3 btn-30 btn btn-bg-blue pr-2 pl-2']");
 	By ContactCreateMessage = By.xpath("//*[text()='Customer created successfully']");
 	By AssertDashboard = By.xpath("//*[text()=' Company Performance']");
-	By Request = By.id("request-menu");
+	By Request = By.id("requests");
 	By ListCustomer = By.xpath("//*[text()='Customer']");
 	By CreateGlobalRequest = By.xpath("//*[@data-automationid='request-create']");
 	By ContactNameError = By.id("id_customer_group_error");
@@ -326,13 +328,13 @@ public class RequestPage extends BaseClass {
 	By Zipcode = By.id("addresses__zipcode__0");
 	By Save = By.id("contact-create");
 	By GlobalStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[6]");
-	By ThreeDots = By.xpath("//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]//i");
+	By ThreeDots = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[1]/i");
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='main_request_edit'])[1]");
 	By GlobalDispatch = By.xpath("(//*[@data-tabposition=\"undefined\"])[10]");
 	By GlobalStart = By.xpath("(//*[@data-tabposition=\"undefined\"])[13]");
 	By GlobalComplete = By.xpath("(//*[@data-tabposition=\"undefined\"])[16]");
 	By GlobalCancel = By.xpath("(//*[@data-tabposition=\"undefined\"])[40]");
-	By ThreeDotsCancel = By.xpath("//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[3]/td[1]/div/div[1]/i");
+	By ThreeDotsCancel = By.xpath("//*[@id='new_table_with_search']/tbody/tr[2]/td[1]/div/div[1]/i");
 	By GlobalCancelledStatus = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[12]");
 	By GlobalSearchRequestNo = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[2]");
 	By GlobalCustomerName = By.xpath("(//*[@class='p-2 pt-1 pb-1 text-ellipsis'])[1]");
@@ -411,7 +413,7 @@ public class RequestPage extends BaseClass {
 	WebElement AddCustomer;
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']/tbody/tr[2]/td[2]/span"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']/tbody/tr[2]/td[2]/span"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[2]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[2]") })
 	WebElement CustomerNameList;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-nav-menu']/div/ul/li[2]/a"),
@@ -420,41 +422,41 @@ public class RequestPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-contact-request-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-organization-request-create']"),
-			@FindBy(xpath = "//*[@data-automationid='request-create']") })
+			@FindBy(xpath = "//*[@id='activesubscription']/section/div[5]/div[1]/div[2]/div[1]/div/div[2]/div[4]") })
 	public static WebElement CreateButton;
 
 	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
-			@FindBy(xpath = "//*[@id='request-create']/header/div/div/div") })
+			@FindBy(xpath = "//*[@id='breadcrumb_placement']/div/ol") })
 	WebElement ListPage;
 
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[2]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement Edit;
 
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[4]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
 	WebElement Dispatch;
 
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[5]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement Start;
 
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[2]/ul/li[6]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
 	WebElement Complete;
 
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]/div[1]/div/div/div/div[3]/div[7]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[3]//td[1]//li[7]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[1]/div/div[2]/ul/li[7]"),
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[1]/div/div/div/div[3]/div[7]") })
 	WebElement Cancel;
 
@@ -466,15 +468,15 @@ public class RequestPage extends BaseClass {
 	@FindAll({
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[2]/td[3]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	WebElement ListRequestNo;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']/tbody/tr[3]/td[3]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[3]"),
 			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]") })
 	WebElement CancelListRequestNo;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[2]//td[5]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[5]"),
 			@FindBy(xpath = "//*[@id='contact-request-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
 			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]") })
 	WebElement ListLocationName;
@@ -492,15 +494,15 @@ public class RequestPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[4]"),
 			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[2]//td[7]//span") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[7]") })
 	WebElement Status;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[25]"),
 			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::span[25]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-request-all-list_aserpttbl']//tr[3]//td[7]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[7]") })
 	WebElement CancelStatus;
 
-	@FindAll({ @FindBy(id = "customer-contact-request-search-filter"), @FindBy(id = "customer-company-search-filter"),
+	@FindAll({ @FindBy(id = "searchInput"), @FindBy(id = "customer-company-search-filter"),
 			@FindBy(id = "request-search-input-filter") })
 	WebElement Search;
 
@@ -529,7 +531,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	@FindAll({ @FindBy(xpath = "(//*[text()='Request No :'])[1]"), @FindBy(xpath = "//*[text()='No Data Available']"),
-			@FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement JobList;
 
 	public int countValidation(int value) {
@@ -545,18 +547,40 @@ public class RequestPage extends BaseClass {
 		return value;
 	}
 
-	public void picKLocation() {
-		this.inputText(Location, fakeState);
-		if (!conditionChecking1(firstLocation, 2)) {
+	public void picKLocation() throws InterruptedException, AWTException {
+		this.inputText(Location, "Chennai");
+//		By ListLocation = By.xpath("//*[@class='pac-item']");
+		firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+		if (conditionChecking1(firstLocation, 2)) {
+		} else {
 			do {
 				this.clearField(Location);
-				String fakeState = faker.address().state();
-				this.inputText(Location, fakeState);
+				this.inputText(Location, "Chennai");
 			} while (!conditionChecking1(firstLocation, 2));
+		}
+		this.mouseActionClick(firstLocation);
+		// location will not select if we click once that y im clicking again
+		do {
+			this.mouseActionClick(Location);
+			if (!this.conditionChecking1(firstLocation, 2)) {
+				Robot robot = new Robot();
+				robot.keyPress(KeyEvent.VK_BACK_SPACE);
+				robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+			}
+		} while (!this.conditionChecking1(firstLocation, 2));
+		if (this.conditionChecking1(firstLocation, 4)) {
+			this.mouseActionClick(firstLocation);
 		} else {
+			do {
+				this.mouseActionClick(Location);
+				if (!this.conditionChecking1(firstLocation, 2)) {
+					Robot robot = new Robot();
+					robot.keyPress(KeyEvent.VK_BACK_SPACE);
+					robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+				}
+			} while (!this.conditionChecking1(firstLocation, 2));
 			this.mouseActionClick(firstLocation);
 		}
-
 	}
 
 	public void currentPickerFromDate() {
@@ -626,7 +650,7 @@ public class RequestPage extends BaseClass {
 	static String ContactLastName;
 	public static String ContactPhoneNumber;
 
-	public void autoCompleteField(String value) throws InterruptedException, IOException {
+	public void autoCompleteField(String value) throws InterruptedException, IOException, AWTException {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
 			this.inputText(SubCustomerField, fakeFirstName);
@@ -797,6 +821,18 @@ public class RequestPage extends BaseClass {
 		return text;
 	}
 
+	List<WebElement> listElement;
+
+	public List<WebElement> listWebElement(Object elementOrLocator, int value) {
+		wait = new WebDriverWait(driver, value);
+		if (elementOrLocator instanceof WebElement) {
+			listElement = wait.until(ExpectedConditions.visibilityOfAllElements((WebElement) elementOrLocator));
+		} else if (elementOrLocator instanceof By) {
+			listElement = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By) elementOrLocator));
+		}
+		return listElement;
+	}
+
 	public Boolean conditionChecking(WebElement element, int value) {
 		Boolean text = false;
 		try {
@@ -853,10 +889,12 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String techcnianNotAvailable() {
-		String name2 = responseMessage;
-		int startIndex = name2.indexOf("Technician");
-		if (startIndex != -1) {
-			responseMessage = name2.substring(startIndex);
+		if (responseMessage.contains("technician")) {
+			String name2 = responseMessage;
+			int startIndex = name2.indexOf("technician");
+			if (startIndex != -1) {
+				responseMessage = name2.substring(startIndex);
+			}
 		}
 		return responseMessage;
 	}
@@ -867,15 +905,17 @@ public class RequestPage extends BaseClass {
 	static String alternateResponseMessage;
 	static int increment = 2;
 
-	public String message(String value) throws IOException, InterruptedException {
+	public String message(String value) throws IOException, InterruptedException, AWTException {
 		Boolean conditionCheck = true;
 		if (value.equals("Message") || value.equals("FormMessage")) {
 			if (this.conditionChecking(Message)) {
 				responseMessage = this.getText(Message);
 				this.invisible(Message);
+				techcnianNotAvailable();
 			} else {
 				do {
 					Thread.sleep(10000);
+					techcnianNotAvailable();
 					if (value.equals("Message")) {
 						this.mouseActionClick(SaveButton);
 					} else if (value.equals("FormMessage")) {
@@ -899,6 +939,7 @@ public class RequestPage extends BaseClass {
 			}
 		} else if (value.equals("AlternateFunction") || value.equals("AlternateFormMessage")) {
 			do {
+				techcnianNotAvailable();
 				if (responseMessage.equals(getPropertyValue("ContactEmailAlreadyMessage"))
 						|| responseMessage.equals(getPropertyValue("CompanyEmailAlreadyMessage"))
 						|| responseMessage.equals(getPropertyValue("CompanyContactEmailMessage"))) {
@@ -918,6 +959,10 @@ public class RequestPage extends BaseClass {
 					this.mouseActionClick(
 							By.xpath("//*[@id='technician_ids-autocomplete-list']//div[" + increment + "]"));
 					this.mouseActionClick(SaveComplete);
+				} else if (responseMessage.equals("The location field is required.")) {
+					this.clearField(Location);
+					this.picKLocation();
+					this.mouseActionClick(SaveComplete);
 				}
 				if (this.conditionChecking(Message)) {
 					responseMessage = this.getText(Message);
@@ -929,6 +974,7 @@ public class RequestPage extends BaseClass {
 					}
 				} else {
 					do {
+						techcnianNotAvailable();
 						Thread.sleep(10000);
 						if (value.equals("Message")) {
 							this.mouseActionClick(SaveButton);
@@ -950,6 +996,7 @@ public class RequestPage extends BaseClass {
 					} while (conditionCheck);
 				}
 			} while (conditionCheck);
+			increment = 0;
 		}
 		return responseMessage;
 	}
@@ -962,7 +1009,7 @@ public class RequestPage extends BaseClass {
 			this.getCount();
 		} else if (value.equals("Global") || value.equals("ListLabel")) {
 			this.mouseActionClick(Request);
-			this.visibility(JobList);
+//			this.visibility(JobList);
 			if (value.equals("Customer")) {
 				this.visibility(ListCustomer);
 			}
@@ -979,6 +1026,7 @@ public class RequestPage extends BaseClass {
 			this.mouseActionClick(Edit);
 			this.valuePresent(Location, text);
 		}
+
 		return this.getText(ListPage);
 	}
 
@@ -1201,17 +1249,19 @@ public class RequestPage extends BaseClass {
 		return value;
 	}
 
-	@FindAll({ @FindBy(id = "customer-company-search-filter-enter"),
-			@FindBy(id = "customer-contact-requset-search-button"), @FindBy(id = "request-search-enter") })
+	@FindAll({ @FindBy(id = "searchBtn"), @FindBy(id = "customer-contact-requset-search-button"),
+			@FindBy(id = "request-search-enter") })
 	WebElement SearchButton;
 
 	static String listData;
 
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
-			this.elementtobeClickable(SearchButton);
+//			this.elementtobeClickable(SearchButton);
 			this.inputText(Search, listData);
-			this.mouseActionClick(SearchButton);
+			do {
+				this.mouseActionClick(SearchButton);
+			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("Location")) {
 			if (!this.conditionChecking(ListLocationName, 50)) {
 				do {
@@ -1289,7 +1339,7 @@ public class RequestPage extends BaseClass {
 		return this.getText(ListToDate);
 	}
 
-	public void createFunction() throws IOException, InterruptedException {
+	public void createFunction() throws IOException, InterruptedException, AWTException {
 		if (!responseMessage.equals(getPropertyValue("CustomerCreatedMessage"))) {
 			this.message("AlternateFunction");
 		}

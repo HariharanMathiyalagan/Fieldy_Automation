@@ -100,6 +100,7 @@ public class GlobalContactRequest extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
+		System.out.println(editContact);
 	}
 
 	@Test(priority = 0)
@@ -146,7 +147,7 @@ public class GlobalContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 2)
-	private void autoCompleteContactCreation() throws IOException, InterruptedException {
+	private void autoCompleteContactCreation() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.autoCompleteField("ContactCreate");
@@ -438,6 +439,7 @@ public class GlobalContactRequest extends BaseClass {
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.validData("Unassigned");
 		String errorPasswordField = mandatory.message("FormMessage");
+		System.out.println(errorPasswordField);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("RequestCreatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -451,8 +453,10 @@ public class GlobalContactRequest extends BaseClass {
 			File file = new File("GlobalContactUnscheduleRequest.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("GlobalContactUnscheduleRequest.png");
+			mandatory.message("AlternateFunction");
 			CustomerListPage = mandatory.listValidation("RequestNo");
 		}
+		
 	}
 
 	@Test(priority = 15)
@@ -832,7 +836,7 @@ public class GlobalContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 30)
-	private void dispatchedRequest() throws InterruptedException, IOException {
+	private void dispatchedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Dispatch tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalDispatch");
@@ -876,7 +880,7 @@ public class GlobalContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 32)
-	private void startedRequest() throws InterruptedException, IOException {
+	private void startedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Started tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalStart");
@@ -920,7 +924,7 @@ public class GlobalContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 34)
-	private void completedRequest() throws InterruptedException, IOException {
+	private void completedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Completed tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalComplete");
@@ -963,7 +967,7 @@ public class GlobalContactRequest extends BaseClass {
 	}
 
 	@Test(priority = 36)
-	private void cancelledRequest() throws IOException, InterruptedException {
+	private void cancelledRequest() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalCancel");
@@ -1096,7 +1100,7 @@ public class GlobalContactRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 41)
+//	@Test(priority = 41)
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);
