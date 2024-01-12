@@ -399,7 +399,7 @@ public class QuotePage extends BaseClass {
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()=' Quotes No ']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()=' Quotes No ']") , @FindBy(xpath="//*[text()='Quotes No	']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
 	@FindAll({

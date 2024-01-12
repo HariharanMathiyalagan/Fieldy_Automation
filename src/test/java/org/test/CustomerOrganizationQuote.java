@@ -801,6 +801,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	}
 
+	
 	@Test(priority = 26)
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports
@@ -899,7 +900,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 	}
 	
-	/*
+	
 
 //	@Test(priority = 30)
 //	private void quoteCreatedCount() throws IOException, InterruptedException {
@@ -970,6 +971,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteExpiryDateMandatory.png");
 		}
 	}
+	
+	
 
 //	@Test(priority = 33)
 	private void editmandatoryValidationInventoryItem() throws AWTException, IOException, InterruptedException {
@@ -1060,8 +1063,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Reference Field exceed its max-256 limit");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.pickFirstItem("Contact");
-		mandatory.validationQuantity("Value");
+		//mandatory.pickFirstItem("Contact");
+		//mandatory.validationQuantity("Value");
 		mandatory.referenceField("MaxValidation");
 		String errorPasswordField = mandatory.errorValidation("ErrorReference");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
@@ -1106,6 +1109,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	/*
 
 	@Test(priority = 39)
 	private void editmaximumValidationInventoryItem() throws IOException, InterruptedException {
@@ -1131,6 +1136,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 	@Test(priority = 40)
 	private void editemptyValidationQuantityField() throws IOException, InterruptedException {
@@ -1415,7 +1422,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
-
+/*
+ 
 	@Test(priority = 51)
 	private void editafterDecimalPointTaxField() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest(
@@ -1493,6 +1501,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 	@Test(priority = 54)
 	private void editmaximumValidationDescription() throws IOException, InterruptedException {
@@ -1643,6 +1653,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 
 	}
 
+	
+	/*
 	@Test(priority = 59)
 	private void draftQuote() throws IOException, InterruptedException, ParseException, AWTException {
 		extentTest = extentReports.createTest("Verify the Quote has been draft status");
@@ -1664,6 +1676,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+*/	
 
 	@Test(priority = 60)
 	private void convertQuote() throws IOException, InterruptedException, ParseException, AWTException {
@@ -1782,7 +1796,7 @@ public class CustomerOrganizationQuote extends BaseClass {
 		if (QuoteListData.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.clearFields("Search");
-			QuoteListData = create.dateValidation("ListCreateDate");
+			//QuoteListData = create.dateValidation("ListCreateDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1791,10 +1805,12 @@ public class CustomerOrganizationQuote extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteReferenceValidation.png");
 			create.clearFields("Search");
-			QuoteListData = create.dateValidation("ListCreateDate");
+			//QuoteListData = create.dateValidation("ListCreateDate");
 		}
 
 	}
+	
+	/*
 
 	@Test(priority = 65)
 	private void filterDateInvoice() throws IOException, InterruptedException, ParseException {
@@ -1818,6 +1834,8 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	*/
 
 	@Test(priority = 66)
 	private void listInvalid() throws IOException, InterruptedException, AWTException {
@@ -1848,9 +1866,13 @@ public class CustomerOrganizationQuote extends BaseClass {
 	private void shareLinkResponseCOde() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		create.listTextValidation("SharePage");
+		create.ShareLink();
 		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
+		System.out.println(actual);
+//create.listTextValidation("SharePage");
+		//create.attachmentFileCheck("NewWindow");
+		//int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1874,9 +1896,13 @@ public class CustomerOrganizationQuote extends BaseClass {
 	private void pdfLinkResponseCOde() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the user check the response code on the PDF link page");
 		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		create.listTextValidation("PDFPage");
+		create.SharePDF();
 		create.attachmentFileCheck("NewWindow");
 		int actual = create.responseCode();
+		System.out.println(actual);
+		//create.listTextValidation("PDFPage");
+		//create.attachmentFileCheck("NewWindow");
+		//int actual = create.responseCode();
 		extentTest.log(Status.INFO, "Actual Result is -" + actual);
 		extentTest.log(Status.INFO, "Expected Result is -" + 200);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1892,5 +1918,5 @@ public class CustomerOrganizationQuote extends BaseClass {
 		}
 	}
 	
-	*/
+	
 }
