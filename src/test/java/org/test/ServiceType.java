@@ -31,7 +31,7 @@ public class ServiceType extends BaseClass {
 	ExtentHtmlReporter extentHtmlReporter;
 	ExtentTest extentTest;
 	static String ListField;
-
+	String UpdatedMessage;
 	@BeforeClass
 	public void setup() throws IOException {
 		extentReports = new ExtentReports();
@@ -358,6 +358,7 @@ public class ServiceType extends BaseClass {
 				.createTest("Verify the Edit Service Type Update Button is displayed in the Edit form page");
 		BusinessDaysPage contractorPage = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String text_button = contractorPage.buttonValidation("ButtonPresent");
+		System.out.println(text_button);
 		extentTest.log(Status.INFO, "Actual Result is -" + text_button);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("UpdatedButton"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -365,6 +366,7 @@ public class ServiceType extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Results are Equal");
 			contractorPage.serviceTypeField("ValidData");
 			contractorPage.buttonValidation("ButtonClick");
+			UpdatedMessage = contractorPage.getMessage();
 			contractorPage.listValdidation("ServiceType");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Results are Not are Equal");
@@ -375,6 +377,7 @@ public class ServiceType extends BaseClass {
 			extentTest.addScreenCaptureFromPath("26.png");
 			contractorPage.serviceTypeField("ValidData");
 			contractorPage.buttonValidation("ButtonClick");
+			UpdatedMessage = contractorPage.getMessage();
 			contractorPage.listValdidation("ServiceType");
 		}
 
@@ -410,7 +413,8 @@ public class ServiceType extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify updated successful message is displayed, when the Service type Updated");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		String createMessage = landing.message("Message");
+		String createMessage = UpdatedMessage;
+		System.out.println(UpdatedMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ServiceTypeUpdatedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -436,12 +440,14 @@ public class ServiceType extends BaseClass {
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.listValdidation("ServiceTypeDelete");
 		String createMessage = landing.message("Message");
+		System.out.println(createMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ServiceTypeDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(getPropertyValue("ServiceTypeDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = landing.createBusinessDays("CreatedServiceType");
+			System.out.println(ListField + "Delete BU");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -461,6 +467,7 @@ public class ServiceType extends BaseClass {
 		landing.teamClick();
 		landing.userClick();
 		String createMessage = landing.bussinessDays("ServiceType");
+		System.out.println(createMessage + "Reflect in Contact Page");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -477,12 +484,15 @@ public class ServiceType extends BaseClass {
 			ListField = landing.createBusinessDays("EditServiceType");
 		}
 	}
+	
+	
 
 	@Test(priority = 18)
 	private void inactiveLeadSource() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Inactive Service Type Name is:" + ListField
 				+ " & it's not reflect the Service Type field in the Create Job Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
+		landing.teamClick();
 		landing.userClick();
 		String createMessage = landing.bussinessDays("ServiceType");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
@@ -507,6 +517,7 @@ public class ServiceType extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Deleted Business Unit Name is:" + ListField
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
+		landing.teamClick();
 		landing.userClick();
 		String createMessage = landing.bussinessDays("ServiceType");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
@@ -523,5 +534,6 @@ public class ServiceType extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 		}
 	}
+
 
 }

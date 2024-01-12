@@ -144,7 +144,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	private void currentDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 0);
 		String currentDate = sdf.format(cal.getTime());

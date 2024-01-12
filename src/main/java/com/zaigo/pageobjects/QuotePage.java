@@ -287,18 +287,19 @@ public class QuotePage extends BaseClass {
 		return text;
 	}
 
-	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-customer-contact-list_aserpttbl']//tr[2]//td[2]//span"),
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[2]"),
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-list_aserpttbl']//tr[2]//td[2]//span") })
 	WebElement CustomerListName;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='customer-details-hide']//ul//li[4]"),
-			@FindBy(xpath = "//*[@id='customer-nav-menu-company']//ul//li[4]") })
+			@FindBy(xpath = "//*[@id='customer-nav-menu-company']//ul//li[4]")
+			})
 	WebElement ClickTabQuote;
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-organization-quote-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-contact-quote-create']"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[3]//button"),
-			@FindBy(xpath = "//div[@gloss=' Create Quote']") })
+			@FindBy(xpath="//*[@gloss=' Create Quote']") })
 	public static WebElement CreateButton;
 
 	@FindAll({ @FindBy(xpath = "//a[@data-draftback='quotedraft']"),
@@ -311,10 +312,17 @@ public class QuotePage extends BaseClass {
 	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
 			@FindBy(xpath = "//*[@id='quote-create']/header/div/div/div/a"),
-			@FindBy(xpath = "//*[@id='breadcrumb_placement']//li[2]") })
+			@FindBy(xpath="//*[@id='breadcrumb_placement']//ol//li[4]"),
+			@FindBy(xpath = "//*[@id='breadcrumb_placement']//li[2]")})
 
 	WebElement ListPage;
-
+	
+	By ClickBackDraft = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
+    By ThreeDots2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]");
+    By Share2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[3]");
+    By PDF2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[4]");
+	By LineItem = By.xpath("//input[@placeholder='Choose Product /Service']");
+	By ChooseElement = By.xpath("//div[starts-with(@id,'dropid-')][1]");
 	By CustomerName = By.id("customer-name");
 	By Reference = By.id("reference_no");
 	By ExpiryDate = By.id("expiry_date");
@@ -391,7 +399,7 @@ public class QuotePage extends BaseClass {
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='Quotes No']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()=' Quotes No ']") , @FindBy(xpath="//*[text()='Quotes No	']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
 	@FindAll({
@@ -416,7 +424,8 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[10]//span") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[10]//span") ,
+			@FindBy(xpath="//*[@id='new_table_with_search']//tbody//tr[1]//td[9]//span")})
 	WebElement ListQuoteStatus;
 
 	By Search = By.id("searchInput");
@@ -436,6 +445,7 @@ public class QuotePage extends BaseClass {
 	By ChooseContact = By.xpath("//div[@id='contactdropdownlist']//div[1]");
 	By Clickdraft = By.xpath("//div[@id='breadcrumb_placement']//ol//li[2]");
 	By Status = By.xpath("//*[@id='new_table_with_search']//tr[1]//td[10]");
+	By CustomerQuoteStatus = By.xpath("//*[@id='new_table_with_search']//tbody//tr[1]//td[9]");
 	By StatusChange = By.xpath("//*[@id='quote_status_popup' and contains(@class,'fadeIn')]//child::h5");
 	By Select = By.xpath("//*[@id='quote_status_update']//select[1]");
 	@FindAll({ @FindBy(xpath = "//*[@class='modal d-block animated fadeIn']//*[@id='first_name']"),
@@ -484,13 +494,14 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='quote-contact-create']//*[@id='id_customer_group']") })
 	WebElement CustomerField;
 
-	@FindAll({ @FindBy(xpath = "//*[@class='col-lg-12 switchcontact d-block']//*[@id='id_customer']") })
+	@FindAll({ @FindBy(xpath = "//*[@id='id_customer']") })
 	WebElement SubCustomerField;
 	By PopupOpen = By.xpath("//*[contains(@class,'fadeIn')]//child::h5");
 	@FindAll({
 			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
-			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']") })
+			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']"),
+			@FindBy(xpath="//*[@id='id_customer_group-autocomplete-list2']/div/span/button")})
 	WebElement AddCustomer;
 	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list']/div/span/span") })
 	WebElement AddTax;
@@ -704,8 +715,8 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(CustomerListName);
 			this.visibility(CustomerName);
 			this.mouseActionClick(ClickTabQuote);
-			this.visibility(Invalid);
-			this.getCount();
+			//this.visibility(Invalid);
+			//this.getCount();
 		} else if (value.equals("Global")) {
 			this.mouseActionClick(Quote);
 //			this.mouseActionClick(Filter);
@@ -880,9 +891,13 @@ public class QuotePage extends BaseClass {
 		}
 		return value;
 	}
-
-	public void referenceField(String value) {
+	
+	
+	public void referenceField(String value) throws InterruptedException {
 		if (value.equals("MaxValidation")) {
+			
+			driver.navigate().refresh();
+			Thread.sleep(5000);
 			this.validationTab(Reference, characters256);
 		}
 	}
@@ -892,6 +907,13 @@ public class QuotePage extends BaseClass {
 			this.validationTab(QuoteTittle, characters256);
 		}
 
+	}
+	
+	public void RefreshPage() throws InterruptedException
+	{
+		
+		driver.navigate().refresh();
+		Thread.sleep(3000);
 	}
 
 	public void inventoryItemField(String value) throws IOException, InterruptedException {
@@ -903,15 +925,17 @@ public class QuotePage extends BaseClass {
 
 	}
 
-	public void validationQuantity(String value) {
+	public void validationQuantity(String value) throws InterruptedException {
 		if (value.equals("EmptyValidation")) {
 			this.validationTab(Quantity, "");
 		} else if (value.equals("MaxQuantity")) {
 			this.validationTab(Quantity, numberCharacter15);
 		} else if (value.equals("AfterDecimalPoint")) {
 			this.validationTab(Quantity, "4564.5445664");
+			
 		} else if (value.equals("Value")) {
 			this.inputText(Quantity, "10");
+
 		} else if (value.equals("BeforeDecimalPoint")) {
 			this.validationTab(Quantity, "231231231231231231231.00000000");
 		}
@@ -988,6 +1012,28 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(Save);
 		} else if (value.equals("Organization")) {
 			this.mouseActionClick(RadioOrganization);
+		}
+	}
+	
+	public void EnterPrice()
+	{
+		this.inputText(Price,"10");
+	}
+	
+	public void ChooseLineItem() throws InterruptedException
+	{
+		
+		int Len;
+		this.inputText(LineItem, " ");
+		Thread.sleep(3000);
+		if(this.conditionChecking(ChooseElement))
+		{
+			do
+			{
+				this.mouseAction(ChooseElement);
+				Len = this.getTextAttribute(LineItem).length();
+				System.out.println(Len + "Sriram");
+				}while(Len>0);
 		}
 	}
 
@@ -1480,6 +1526,21 @@ public class QuotePage extends BaseClass {
 
 		}
 	}
+	
+	public void CustomeracceptQuote() {
+		do {
+			this.mouseActionClick(CustomerQuoteStatus);
+		} while (!this.conditionChecking1(StatusChange, 5));
+		if (this.conditionChecking1(StatusChange, 5)) {
+			do {
+				if (this.conditionChecking1(Accept, 5)) {
+					this.mouseActionClick(Accept);
+				}
+			} while (this.conditionChecking1(StatusChange, 5));
+
+		}
+	}
+	
 
 	public void selectDecline()
 
@@ -1493,6 +1554,13 @@ public class QuotePage extends BaseClass {
 
 		}
 	}
+	
+	public void SearchReference() throws InterruptedException
+	{
+		this.mouseActionClick(SearchButton);
+		Thread.sleep(3000);
+	}
+	
 
 	public void cancelButton() {
 		this.mouseActionClick(CancelButton);
@@ -1502,4 +1570,32 @@ public class QuotePage extends BaseClass {
 			} while (this.conditionChecking1(PopupDisable, 5));
 		}
 	}
+	
+	public void ShareLink()
+	{
+	this.mouseActionClick(ThreeDots2);
+	this.mouseActionClick(Share2);
+	if (!this.getTextAttribute(By.id("share_url")).contains("https")) {
+		do {
+		} while (!this.getTextAttribute(By.id("share_url")).contains("https"));
+	}
+	this.mouseActionClick(Share_Click_Copy);
+	this.newWindow(this.getTextAttribute(By.id("share_url")));
 }
+	
+	public void SharePDF()
+	{
+		this.mouseActionClick(ThreeDots2);
+		if (!this.conditionChecking1(PDF2, 2)) {
+			do {
+				this.mouseActionClick(ThreeDots2);
+			} while (!this.conditionChecking1(PDF2, 2));
+		}
+		this.mouseActionClick(PDF2);
+		this.newWindowWait();
+	}
+	}
+	
+	
+	
+

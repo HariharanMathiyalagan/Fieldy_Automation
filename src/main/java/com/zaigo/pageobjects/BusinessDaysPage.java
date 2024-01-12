@@ -195,6 +195,14 @@ public class BusinessDaysPage extends BaseClass {
 		}
 		return text;
 	}
+	
+	public String getMessage()
+	{
+		String businessName = this.getText(Message);
+		return businessName;
+	}
+	
+	By Job_ServiceType = By.xpath("//input[@placeholder='Choose Service Type'][1]");
 
 	By Yes = By.xpath("//*[text()='Yes']");
 
@@ -204,11 +212,11 @@ public class BusinessDaysPage extends BaseClass {
 
 	By FormLabel = By.xpath("//*[@id='category-create']/div/div[1]/div/div[1]");
 
-	By settings_menu = By.xpath("//a[@id='settings-menu']");
+	By settings_menu = By.xpath("//div[@data-n-linkto='settings']//i");
 
-	By settings_business = By.xpath("//div[text()=' Business Settings ']");
+	By settings_business = By.xpath("//div[text()=' Business Settings']");
 
-	By settings_business_settings_label = By.xpath("//*[@id='fieldy-body-ele']//header//a");
+	By settings_business_settings_label = By.xpath("//div[@id='breadcrumb_placement']//ol//li[3]");
 
 	By list_bussiness_unit_name = By.xpath("//*[@id='bussiness-unit-ele']/div[1]/div/div/div[1]");
 
@@ -280,15 +288,19 @@ public class BusinessDaysPage extends BaseClass {
 
 	// Checking Field
 
-	By Customer = By.id("customer-main");
+	By Customer = By.id("customers");
 
-	By Contact = By.id("customer-contact-menu");
+	By Contact = By.xpath("//*[@id='customers']//li[1]");
 
-	By Organization = By.id("customer-organization-menu");
+	By Organization = By.xpath("//*[@id='customers']//li[2]");
+	
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='contact-creation']"), @FindBy(id = "scheduledrop"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button[1]"),
-			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div/div[2]/div[1]/div/div[3]/div[4]/button") })
+			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div/div[2]/div[1]/div/div[3]/div[4]/button"),
+			@FindBy(xpath ="//*[@gloss=' Create Job']"),
+			@FindBy(xpath="//*[@gloss=' Create Contractor']"),
+			@FindBy(xpath="//*[@id='scheduledrop']")})
 	WebElement CreateButton;
 
 	By SaveButton = By.id("customerdrop");
@@ -298,7 +310,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	@FindAll({ @FindBy(xpath = "//*[text()='Contact Name']"), @FindBy(xpath = "//*[text()='Customer Name']"),
 			@FindBy(xpath = "//*[text()='Organization Name']"), @FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()='First Name']") })
+			@FindBy(xpath = "//*[text()='Customer']"), @FindBy(xpath = "//*[text()=' First Name ']") })
 	WebElement CheckPage;
 
 	By Next = By.xpath("//*[text()='Next']");
@@ -318,11 +330,16 @@ public class BusinessDaysPage extends BaseClass {
 //	By  = By.xpath("//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='job_create_edit']/div/div[1]/div[4]/div[2]/input[1]"),
-			@FindBy(xpath = "//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[4]/div[2]/input[1]"),
-			@FindBy(xpath = "//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[3]/div[4]/div[2]/input[1]") })
+			@FindBy(xpath = "//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[3]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath="//*[@id='job_create_edit']/div/div[1]/div[6]/div[2]/input[1]"),
+			@FindBy(xpath="//*[@id='user_contractor_create_edit']/div[1]/div[1]/div/div[4]/div[4]/div[2]/input[1]"),
+			@FindBy(xpath="//*[@id='customer_contact_create_edit']/div[1]/div[2]/div[3]/div[2]/input[1]")})
 	WebElement BusinessDaysFields;
+	
+	
+	
 
-	By Job = By.id("job-menu");
+	By Job = By.id("jobs");
 
 	By RadioButtonContact = By.xpath("//*[@id='contact-organization-job']/div[1]/input");
 
@@ -330,11 +347,11 @@ public class BusinessDaysPage extends BaseClass {
 
 	By Tittle = By.xpath("//*[@id='team-company-details-company-name']/div[1]");
 
-	By Team = By.id("team-menu");
+	By Team = By.id("user-active");
 
-	By User = By.id("team-user-menu");
+	By User = By.xpath("//*[@id='user-active']//li[2]");
 
-	By Contractor = By.xpath("//*[@id='team__user__contianer']/div[2]/nav/div/ul/li[2]/a");
+	By Contractor = By.xpath("//*[@id='user-contrator-ele']");
 
 	By Spinner = By.xpath("//*[@id='spinnerDiv']//div//div//div");
 
@@ -358,7 +375,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	public String labelValidation(String value) throws InterruptedException {
 		if (value.equals("BusinessUnitCreate")) {
-			this.visibility(list_bussiness_unit_name);
+			//this.visibility(list_bussiness_unit_name);
 			this.mouseActionClick(create_button);
 		} else if (value.equals("BusinessUnitEdit")) {
 			String text = this.getText(list_bussiness_unit_name);
@@ -633,6 +650,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(leadsource_edit_btn);
 			this.valuePresent(leadsource_name, textAttribute);
 			this.validationTab(leadsource_name, characters2048);
+			this.clearField(leadsource_name);
 			this.validationTab(leadsource_name, textAttribute);
 			this.dropDownByIndex(leadsource_status, 1);
 			this.mouseActionClick(leadsource_save_btn);
@@ -689,6 +707,7 @@ public class BusinessDaysPage extends BaseClass {
 			this.mouseActionClick(service_edit_btn);
 			this.valuePresent(service_name, textAttribute);
 			this.validationTab(service_name, characters2048);
+			this.clearField(service_name);
 			this.inputText(service_name, textAttribute);
 			this.dropDownByIndex(service_status, 1);
 			this.mouseActionClick(service_save_btn);
@@ -721,7 +740,7 @@ public class BusinessDaysPage extends BaseClass {
 
 	public void userClick() {
 		this.mouseActionClick(User);
-		this.visibility(CheckPage);
+		//this.visibility(CheckPage);
 	}
 
 	public void teamClick() {
@@ -749,14 +768,21 @@ public class BusinessDaysPage extends BaseClass {
 			}
 		} else if (value.equals("ServiceType")) {
 			this.mouseActionClick(Contractor);
-			this.visibility(CheckPage);
+			//this.visibility(CheckPage);
 			this.mouseActionClick(CreateButton);
-		}
+//			this.mouseActionClick(Job);
+		  //  this.visibility(CheckPage);
+			
+			
+			
+			}
 		this.mouseActionClick(BusinessDaysFields);
 		this.inputText(BusinessDaysFields, textAttribute);
 		String text = this.getText(DropDownList);
 		return text;
 	}
+	
+	
 
 	@FindAll({ @FindBy(xpath = "//*[@id='lead_source-autocomplete-list']//div[1]"),
 			@FindBy(xpath = "//*[contains(text(),'No Data Found')]"),

@@ -198,7 +198,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Customer = By.id("customers");
-	By Organization = By.xpath("//*[@id='customers']//ul//li//a[@data-n-linkto='customer_organization']");
+	By Organization = By.xpath("//*[@id='customers']//ul//li[2]");
 	public static By AddOrganization = By.id("scheduledrop");
 	public static By OrganizationName = By.id("company_name");
 	public static By OrganizationError = By.id("company_name_error");

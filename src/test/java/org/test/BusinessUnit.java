@@ -87,6 +87,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest = extentReports.createTest("Navigate to Business Settings page");
 		BusinessDaysPage initElements = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String editContact = initElements.modulePage();
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BusinessDaysPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -108,6 +109,7 @@ public class BusinessUnit extends BaseClass {
 				.createTest("Verify the Business Unit Label is displayed in the Business Settings page");
 		BusinessDaysPage initElements = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String editContact = initElements.businessDaysLabel("BusinessUnit");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("BusinessUnitModule"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -128,6 +130,7 @@ public class BusinessUnit extends BaseClass {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Business Unit Page");
 		BusinessDaysPage initElements = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String editContact = initElements.labelValidation("BusinessUnitCreate");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateBusinessPage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -439,6 +442,7 @@ public class BusinessUnit extends BaseClass {
 		if (createMessage.equals(getPropertyValue("BusinessUnitDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = landing.createBusinessDays("CreatedBusinessUnit");
+			System.out.println(ListField);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -447,6 +451,7 @@ public class BusinessUnit extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("58.png");
 			ListField = landing.createBusinessDays("CreatedBusinessUnit");
+			System.out.println(ListField);
 		}
 	}
 
@@ -456,6 +461,7 @@ public class BusinessUnit extends BaseClass {
 				+ " & it's reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.bussinessDays("BussinessUnit");
+		System.out.println(createMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -479,6 +485,7 @@ public class BusinessUnit extends BaseClass {
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.bussinessDays("BussinessUnit");
+		System.out.println(createMessage + "inactive Lead Source");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -502,6 +509,7 @@ public class BusinessUnit extends BaseClass {
 				+ " & it's not reflect the Business Unit field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		String createMessage = landing.bussinessDays("BussinessUnit");
+		System.out.println(createMessage + "deleteLeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");

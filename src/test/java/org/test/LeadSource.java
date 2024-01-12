@@ -444,6 +444,7 @@ public class LeadSource extends BaseClass {
 		if (createMessage.equals(getPropertyValue("LeadSourceDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = landing.createBusinessDays("CreatedLeadSource");
+			System.out.println(ListField + "Iam Deleted , Create") ;
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -462,12 +463,14 @@ public class LeadSource extends BaseClass {
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
 		landing.customerClick();
 		String createMessage = landing.bussinessDays("LeadSource");
+		System.out.println(createMessage + "Iam Relected in Contact Create page.");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (createMessage.equals(ListField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = landing.createBusinessDays("EditLeadSource");
+			System.out.println(ListField);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -484,8 +487,10 @@ public class LeadSource extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Inactive Lead Source Name is:" + ListField
 				+ " & it's not reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		landing.contactClick();
+	//	landing.contactClick();
+		landing.customerClick();
 		String createMessage = landing.bussinessDays("LeadSource");
+		System.out.println(createMessage + "Inactive");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -508,7 +513,8 @@ public class LeadSource extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Delete Lead Source Name is:" + ListField
 				+ " & it's not reflect the Lead Source field in the Customer Contact Page");
 		BusinessDaysPage landing = PageFactory.initElements(driver, BusinessDaysPage.class);
-		landing.contactClick();
+		//landing.contactClick();
+		landing.customerClick();
 		String createMessage = landing.bussinessDays("LeadSource");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + "No Data Found For " + ListField);
