@@ -1,6 +1,5 @@
 package org.enhancement;
 
-import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
