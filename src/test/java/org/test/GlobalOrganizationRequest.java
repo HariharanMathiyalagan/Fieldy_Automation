@@ -146,7 +146,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 1)
-	private void autoCompleteOrganizationCreation() throws IOException, InterruptedException {
+	private void autoCompleteOrganizationCreation() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Organization Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.autoCompleteField("OrganizationCreate");
@@ -171,7 +171,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 2)
-	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
+	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.autoCompleteField("OrganizationContactCreate");
@@ -858,7 +858,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 30)
-	private void dispatchedRequest() throws InterruptedException, IOException {
+	private void dispatchedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Dispatch tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalDispatch");
@@ -902,7 +902,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 32)
-	private void startedRequest() throws InterruptedException, IOException {
+	private void startedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Started tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalStart");
@@ -946,7 +946,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 34)
-	private void completedRequest() throws InterruptedException, IOException {
+	private void completedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Completed tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalComplete");
@@ -989,7 +989,7 @@ public class GlobalOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 36)
-	private void cancelledRequest() throws IOException, InterruptedException {
+	private void cancelledRequest() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("GlobalCancel");

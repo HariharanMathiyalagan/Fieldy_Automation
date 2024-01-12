@@ -152,7 +152,7 @@ public class DispatchModule extends BaseClass {
 	}
 
 	@Test(priority = 3)
-	private void autoCompleteContactCreationRequest() throws IOException, InterruptedException {
+	private void autoCompleteContactCreationRequest() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.autoCompleteField("ContactCreate");

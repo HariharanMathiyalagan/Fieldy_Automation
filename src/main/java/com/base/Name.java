@@ -31,44 +31,23 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name extends BaseClass {
 	static HttpURLConnection connection;
+	String First;
 
 	public static void main(String[] args) throws MalformedURLException, IOException {
+		Name n = new Name();
+		n.method123("Ram");
+	}
 
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "incognito",
-				"--ignore-certificate-errors");
-		WebDriver driver = new ChromeDriver(options);
-		driver.get(
-				"https://qaapp.zaigotech.com/public/invoice/view/?hashid=$2y$10$cFe.9QAOMggoXEryYBgB9.FrMyzpFXpNXN4lUMbdjMi16qeaC4q5.");
-		String url = driver.getCurrentUrl();
-//		connection = (HttpURLConnection) new URL(currentUrl).openConnection();
-//		connection.setRequestMethod("HEAD");
-//		connection.connect();
-//		int responseCode = connection.getResponseCode();
-//		if (responseCode == 200) {
-//			System.out.println(true);
-//		} else {
-//			System.out.println(false);
-//		}
-		try {
-			// Create a custom HttpClient that ignores SSL certificate issues
-			CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier((host, session) -> true)
-					.build();
-
-			// Create an HTTP GET request
-			HttpGet request = new HttpGet(url);
-
-			// Execute the request and get the response
-			HttpResponse response = httpClient.execute(request);
-
-			// Print the response code
-			System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
-
-			// Close the HttpClient
-			httpClient.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String method123(String value) {
+		if (value.equals("Hari")) {
+			return First;
+		} else if (value.equals("Ram")) {
+			return First;
 		}
+//		if (!value.equals("Ram")) {
+//			return "Naveen";
+//
+//		}
+		return value;
 	}
 }

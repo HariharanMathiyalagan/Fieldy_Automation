@@ -194,7 +194,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 5)
-	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException {
+	private void autoCompleteOrganizationContactCreation() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Organization Contact Creation in the Autocomplete field");
 		RequestPage contactMandatory = PageFactory.initElements(driver, RequestPage.class);
 		contactMandatory.autoCompleteField("OrganizationContactCreate");
@@ -877,7 +877,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 32)
-	private void dispatchedRequest() throws InterruptedException, IOException {
+	private void dispatchedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Dispatch tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("Dispatach");
@@ -921,7 +921,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 34)
-	private void startedRequest() throws InterruptedException, IOException {
+	private void startedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Started tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("Start");
@@ -965,7 +965,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 36)
-	private void completedRequest() throws InterruptedException, IOException {
+	private void completedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Completed tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("Complete");
@@ -1009,7 +1009,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 38)
-	private void cancelledRequest() throws IOException, InterruptedException {
+	private void cancelledRequest() throws IOException, InterruptedException, AWTException {
 		extentTest = extentReports.createTest("Verify the Cancelled tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("Cancel");
@@ -1055,7 +1055,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 40)
-	private void requestDraftStatus() throws InterruptedException, IOException {
+	private void requestDraftStatus() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Request has been draft status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.draft("Draft");
@@ -1078,7 +1078,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 	}
 
 	@Test(priority = 41)
-	private void deletedRequest() throws InterruptedException, IOException {
+	private void deletedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Deleted tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
 		mandatory.tiggerFunction("Delete");
