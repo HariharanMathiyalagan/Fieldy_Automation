@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -14,10 +13,10 @@ import com.zaigo.pageobjects.ContrctorLocationPage;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.utility.BrowserSetup;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class ContractorLocationTestCases {
 	private WebDriver driver = null;
+	@SuppressWarnings("unused")
 	private LoginPage loginInPage = null;
 
 	@BeforeClass

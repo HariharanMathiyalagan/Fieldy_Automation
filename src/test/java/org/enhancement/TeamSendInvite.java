@@ -22,7 +22,6 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.base.BaseClass;
 import com.zaigo.pageobjects.LoginPage;
 import com.zaigo.pageobjects.SendInvitePage;
-import com.zaigo.pageobjects.TeamUserPage;
 import com.zaigo.utility.BrowserSetup;
 
 public class TeamSendInvite extends BaseClass {
