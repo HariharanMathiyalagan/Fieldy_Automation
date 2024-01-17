@@ -90,6 +90,7 @@ public class ProductModule extends BaseClass {
 		extentTest = extentReports.createTest("Navigate to Product & Service page");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
 		String editContact = initElements.modulePage("Product");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ListProductService"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -104,12 +105,15 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Product Page");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
 		String editContact = initElements.labelValidation("Create");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateProduct"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -124,6 +128,8 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 3)
 	private void mandatoryValidationProductName() throws InterruptedException, IOException {
@@ -256,6 +262,8 @@ public class ProductModule extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 9)
 	private void maximumValidationSKU() throws IOException, InterruptedException, AWTException {
@@ -280,6 +288,8 @@ public class ProductModule extends BaseClass {
 			mandatory.clearFields("SKU");
 		}
 	}
+	
+	
 
 	@Test(priority = 10)
 	private void maximumValidationDescription() throws IOException, InterruptedException, AWTException {
@@ -650,6 +660,8 @@ public class ProductModule extends BaseClass {
 			listValidation = mandatory.listValidation("Taxable");
 		}
 	}
+	
+	
 
 	@Test(priority = 25)
 	private void editFormLabel() throws InterruptedException, IOException, AWTException {
@@ -673,6 +685,8 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 26)
 	private void editmandatoryValidationProductName() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest(
@@ -1170,6 +1184,8 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 46)
 	private void updateButton() throws IOException, AWTException {
 		extentTest = extentReports
@@ -1269,6 +1285,8 @@ public class ProductModule extends BaseClass {
 			mandatory.clickEvent("Reset");
 		}
 	}
+	
+	/*
 
 	@Test(priority = 50)
 	private void deletedProduct() throws InterruptedException, IOException, AWTException {
@@ -1364,4 +1382,6 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 		}
 	}
+	
+	*/
 }

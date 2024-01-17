@@ -227,17 +227,19 @@ public class ProductServicePage extends BaseClass {
 
 	By Spinner = By.xpath("//*[@id='spinnerDiv']//div//div//div");
 
-	By settings_menu = By.xpath("//a[@id='settings-menu']");
+	By settings_menu = By.xpath("//*[@id='profileModal']//preceding::i[1]");
 
-	By Product_Service = By.xpath("//*[text()=' Product / Service']");
+	By Product_Service = By.xpath("//*[text()=' Product / Services']");
 
 	By Service = By.xpath("//*[text()='Service']");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/header/div/div/div/a"),
-			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") })
+			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") ,
+			@FindBy(xpath="//*[@id='breadcrumb_placement']//li[3]")})
 	WebElement Label;
 	@FindAll({ @FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button"),
-			@FindBy(xpath = "//*[@data-automationid='product-create']") })
+			@FindBy(xpath = "//*[@data-automationid='product-create']") ,
+			@FindBy(xpath="//*[@gloss=' Create Product']")})
 	public static WebElement CreateButton;
 
 	By Search = By.id("product-service-serach-filter");
@@ -251,25 +253,26 @@ public class ProductServicePage extends BaseClass {
 	@FindAll({
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
 			@FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
+			@FindBy(xpath="//th[text()='Name']")})
 	WebElement ListPage;
 	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement QuoteListPage;
 
-	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[2]");
+	By ListInventoryName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[2]");
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[5]"),
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[2]//td[5]"),
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]") })
 	WebElement ThreeDots;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[1]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[1]") })
 	WebElement Edit;
 
 	@FindAll({
@@ -297,7 +300,7 @@ public class ProductServicePage extends BaseClass {
 
 	By Price = By.id("price");
 
-	By TaxName = By.xpath("//*[@id='product_service_create_edit']/div[5]/div[1]/div[2]/input[1]");
+	By TaxName = By.xpath("//*[@id='product_service_create_edit']/div[3]/div[7]/div[2]/input[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='tax-autocomplete-list']/div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
@@ -635,6 +638,7 @@ public class ProductServicePage extends BaseClass {
 			this.visibility(SaveComplete);
 		} else if (value.equals("Edit")) {
 			String text = this.getText(ListInventoryName);
+			System.out.println(text);
 			this.mouseActionClick(ThreeDots);
 			if (!conditionChecking(Edit, 2)) {
 				do {
