@@ -191,7 +191,7 @@ public class ProductServicePage extends BaseClass {
 	}
 
 	private String getText(WebElement element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
 		return until;
 	}
@@ -232,6 +232,8 @@ public class ProductServicePage extends BaseClass {
 	By Product_Service = By.xpath("//*[text()=' Product / Services']");
 
 	By Service = By.xpath("//*[text()='Service']");
+	
+	By NoRes = By.xpath("//*[@id='inventorydropdownlist0']/span/p");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/header/div/div/div/a"),
 			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") ,
@@ -239,10 +241,11 @@ public class ProductServicePage extends BaseClass {
 	WebElement Label;
 	@FindAll({ @FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button"),
 			@FindBy(xpath = "//*[@data-automationid='product-create']") ,
-			@FindBy(xpath="//*[@gloss=' Create Product']")})
+			@FindBy(xpath="//*[@gloss=' Create Product']"),
+			@FindBy(xpath="//*[@gloss=' Create Quote']")})
 	public static WebElement CreateButton;
 
-	By Search = By.id("product-service-serach-filter");
+	By Search = By.id("searchInput");
 
 	By Filter = By.xpath("//*[@id='job-show-details-timeline']/div[2]/div[2]/button/div");
 
@@ -261,7 +264,7 @@ public class ProductServicePage extends BaseClass {
 
 	By ListInventoryName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[2]");
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[2]//td[5]"),
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[1]//td[7]"),
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
@@ -276,8 +279,9 @@ public class ProductServicePage extends BaseClass {
 	WebElement Edit;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]") })
+			@FindBy(xpath = "//*[@slaceholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath = "//*[@laceholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath="//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[2]")})
 	WebElement Delete;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='modal-confirmation-popup']//*[text()='Yes']"),
@@ -334,19 +338,19 @@ public class ProductServicePage extends BaseClass {
 
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 
-	By Reset = By.xpath("//*[text()=' Reset Search']");
+	By Reset = By.id("resetDiv");
 
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
-	By Quote = By.id("quote-menu");
+	By Quote = By.id("quotes");
 
 	By Contact = By.id("contact");
 
 	By Organizaiton = By.id("organization");
 
-	By InventoryField = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
+	By InventoryField = By.xpath("//*[@placeholder='Choose Product /Service']");
 	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Will be added')]"),
-			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[@id='inventorydropdownlist0']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement InventoryFirstName;
 
@@ -727,27 +731,76 @@ public class ProductServicePage extends BaseClass {
 		return text;
 	}
 
+	
+	String Exist;
+	
 	public String reflectedFunction() throws InterruptedException {
 		this.mouseActionClick(Quote);
-		this.visibility(QuoteListPage);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
 		this.mouseActionClick(CreateButton);
 		for (int i = 0; i < 10; i++) {
 			this.mouseActionClick(Organizaiton);
 			this.mouseActionClick(Contact);
 			this.mouseActionClick(Save);
 		}
-		this.mouseActionClick(InventoryField);
-		if (this.getText(InventoryFirstName).equals("No Data Found")) {
-			Thread.sleep(10000);
-			this.mouseActionClick(InventoryField);
-			this.visibility(InventoryFirstName);
-		} else {
-			this.visibility(InventoryFirstName);
-		}
-		this.inputText(InventoryField, listData);
-		String text = this.getText(InventoryFirstName);
-		return text;
+		this.inputText(InventoryField," ");
+		Exist = this.getText(InventoryFirstName);
+		return Exist;
+		
+		
+//		if (this.getText(InventoryFirstName).contains("No Data Found")) {
+//			Thread.sleep(10000);
+//			this.mouseActionClick(InventoryField);
+//			this.visibility(InventoryFirstName);
+//		} else {
+//			this.visibility(InventoryFirstName);
+//		}
+//		this.inputText(InventoryField, listData);
+//		String text = this.getText(InventoryFirstName);
+//		return text;
 
 	}
+	
+	
+	
+	public String InactiveProduct() throws InterruptedException
+	{
+		
+		this.mouseActionClick(Quote);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
+		this.mouseActionClick(CreateButton);
+		for (int i = 0; i < 10; i++) {
+			this.mouseActionClick(Organizaiton);
+			this.mouseActionClick(Contact);
+			this.mouseActionClick(Save);
+		}
+		
+		this.inputText(InventoryField, listData );
+		String No_result =this.getText(NoRes);
+		return No_result;
+		
+	}
+	
+	public String CheckDeletedRecord() throws InterruptedException
+	{
+		
+		this.mouseActionClick(Quote);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
+		this.mouseActionClick(CreateButton);
+		for (int i = 0; i < 10; i++) {
+			this.mouseActionClick(Organizaiton);
+			this.mouseActionClick(Contact);
+			this.mouseActionClick(Save);
+		}
+		this.inputText(InventoryField, listData );
+		String No_result =this.getText(NoRes);
+		return No_result;
+		
+	}
+	
+	
 
 }
