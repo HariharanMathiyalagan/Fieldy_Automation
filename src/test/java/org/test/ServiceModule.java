@@ -102,6 +102,8 @@ public class ServiceModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
@@ -123,6 +125,8 @@ public class ServiceModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 3)
 	private void mandatoryValidationServiceName() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest(
@@ -144,6 +148,8 @@ public class ServiceModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ProductErrorMandatoryError.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 4)
 	private void mandatoryValidationDescription() throws InterruptedException, IOException {
@@ -477,6 +483,8 @@ public class ServiceModule extends BaseClass {
 			listValidation = mandatory.listValidation("Taxable");
 		}
 	}
+	
+	
 
 	@Test(priority = 19)
 	private void editFormLabel() throws InterruptedException, IOException, AWTException {
@@ -499,6 +507,8 @@ public class ServiceModule extends BaseClass {
 			initElements.clearAllFields("Service");
 		}
 	}
+	
+	
 
 	@Test(priority = 20)
 	private void editmandatoryValidationServiceName() throws InterruptedException, IOException, AWTException {
@@ -877,6 +887,8 @@ public class ServiceModule extends BaseClass {
 			listValidation = mandatory.listValidation("InventoryName");
 		}
 	}
+	
+	
 
 	@Test(priority = 36)
 	private void searchServiceName() throws InterruptedException, IOException, AWTException {
@@ -885,6 +897,7 @@ public class ServiceModule extends BaseClass {
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.listValidation("SearchData");
 		String errorPasswordField = mandatory.listValidation("InventoryName");
+		System.out.println(errorPasswordField + "Service Name Valid Data");
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + listValidation);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -909,6 +922,7 @@ public class ServiceModule extends BaseClass {
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.listValidation("Invalid");
 		String errorPasswordField = mandatory.listValidation("InvalidResult");
+		System.out.println(errorPasswordField);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -950,13 +964,16 @@ public class ServiceModule extends BaseClass {
 		}
 
 	}
-
+	
+	
+	
 	@Test(priority = 39)
 	private void reflectQuotePage() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the newly created Service Name is:" + ListField
 				+ " & it's reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
 		String createMessage = landing.reflectedFunction();
+		System.out.println(createMessage + "Reflected in Quote");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -975,13 +992,17 @@ public class ServiceModule extends BaseClass {
 			landing.createProdutService("Edit");
 		}
 	}
+	
+	
+	
 
 	@Test(priority = 40)
 	private void inactiveProduct() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Inactive Product Name is:" + ListField
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
-		String createMessage = landing.reflectedFunction();
+		String createMessage = landing.InactiveProduct();
+		System.out.println(createMessage + "inactiveproduct");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage + " Will be added");
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1000,13 +1021,15 @@ public class ServiceModule extends BaseClass {
 			ListField = landing.deleteProduct();
 		}
 	}
-
+	
+	
 	@Test(priority = 41)
 	private void deleteProduct() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Delete Product Name is:" + ListField
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
-		String createMessage = landing.reflectedFunction();
+		String createMessage = landing.CheckDeletedRecord();
+		System.out.println(createMessage + "Delete Product");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1021,4 +1044,7 @@ public class ServiceModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 		}
 	}
+	
+	
+	
 }

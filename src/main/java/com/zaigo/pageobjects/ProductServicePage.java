@@ -234,6 +234,8 @@ public class ProductServicePage extends BaseClass {
 	By Service = By.xpath("//*[text()='Service']");
 	
 	By NoRes = By.xpath("//*[@id='inventorydropdownlist0']/span/p");
+	
+	By Ser_tax = By.xpath("//input[@data-dropdownlist='tax']");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/header/div/div/div/a"),
 			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") ,
@@ -242,9 +244,10 @@ public class ProductServicePage extends BaseClass {
 	@FindAll({ @FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button"),
 			@FindBy(xpath = "//*[@data-automationid='product-create']") ,
 			@FindBy(xpath="//*[@gloss=' Create Product']"),
+			@FindBy(xpath="//*[@gloss=' Create Services']"),
 			@FindBy(xpath="//*[@gloss=' Create Quote']")})
 	public static WebElement CreateButton;
-
+	
 	By Search = By.id("searchInput");
 
 	By Filter = By.xpath("//*[@id='job-show-details-timeline']/div[2]/div[2]/button/div");
@@ -265,7 +268,7 @@ public class ProductServicePage extends BaseClass {
 	By ListInventoryName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[2]");
 
 	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[1]//td[7]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
+			@FindBy(xpath = "//*[@gloss=' Create Services']//following::table[@id='new_table_with_search']//tbody//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
 	@FindAll({
@@ -307,7 +310,8 @@ public class ProductServicePage extends BaseClass {
 	By TaxName = By.xpath("//*[@id='product_service_create_edit']/div[3]/div[7]/div[2]/input[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='tax-autocomplete-list']/div[1]"),
-			@FindBy(xpath = "//*[text()='No Data Found']") })
+			@FindBy(xpath = "//*[text()='No Data Found']") ,
+			@FindBy(xpath="//h3[text()='No Data Found']")})
 	WebElement FirstTaxName;
 
 	By TaxPercentage = By.id("tax_percentage");
@@ -591,7 +595,7 @@ public class ProductServicePage extends BaseClass {
 		return value;
 	}
 
-	public String validData(String value) throws IOException {
+	public String validData(String value) throws IOException, InterruptedException {
 		if (value.equals("FillFields")) {
 			this.inputText(InventoryName, fakeProductName);
 			this.inputText(SKU, fakeFaxNumber);
@@ -617,13 +621,15 @@ public class ProductServicePage extends BaseClass {
 		} else if (value.equals("FillFieldService")) {
 			this.inputText(InventoryName, fakeProductName);			
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.scrollDown();
+			//this.scrollDown();
+			Thread.sleep(3000);
 			this.mouseActionClick(Category);
 			this.mouseActionClick(CategoryCheckBox);
 			this.mouseActionClick(Price);
 			this.inputText(Price, PriceValue);
 		} else if (value.equals("ServiceTaxable")) {
-			this.mouseActionClick(TaxName);
+			this.mouseActionClick(Ser_tax);
+            Thread.sleep(10000);
 			if (this.getText(FirstTaxName).equals("No Data Found")) {
 				this.scrollUp();
 				this.mouseActionClick(NoTaxableRadio);
