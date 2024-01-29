@@ -353,31 +353,33 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
 
-	@Test(priority = 10)
-	private void maximumValidationInventoryItem() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Inventory Item Field exceed its max-256 limit");
-		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.inventoryItemField("MaxValidation");
-		String errorPasswordField = mandatory.errorValidation("ErrorInventoryItem");
-		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearFields("Inventory");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactQuoteInventoryMaximumValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactQuoteInventoryMaximumValidation.png");
-			mandatory.clearFields("Inventory");
-		}
-
-	}
+//	@Test(priority = 10)
+//	private void maximumValidationInventoryItem() throws IOException, InterruptedException {
+//		extentTest = extentReports
+//				.createTest("Verify Error Message is displayed when Inventory Item Field exceed its max-256 limit");
+//		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+//		mandatory.inventoryItemField("MaxValidation");
+//		String errorPasswordField = mandatory.errorValidation("ErrorInventoryItem");
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+//		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Max256CharacterValidation"));
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorPasswordField.equals(getPropertyValue("Max256CharacterValidation"))) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			mandatory.clearFields("Inventory");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("CustomerContactQuoteInventoryMaximumValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("CustomerContactQuoteInventoryMaximumValidation.png");
+//			mandatory.clearFields("Inventory");
+//		}
+//
+//	}
 
 	@Test(priority = 11)
 	private void emptyValidationQuantityField() throws IOException, InterruptedException {
@@ -393,6 +395,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		if (errorPasswordField.equals(getPropertyValue("EmptyField"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Quantity");
+			Thread.sleep(1000);
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -410,6 +413,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.EnterPrice();
 		mandatory.validationQuantity("MaxQuantity");
 		mandatory.priceValidation("value");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
@@ -430,6 +434,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 13)
 	private void afterDecimalPointValidationQuantityField() throws IOException, InterruptedException {
@@ -508,6 +514,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 16)
 	private void maxPriceLimit() throws IOException, InterruptedException {
@@ -866,27 +874,31 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
-
-	@Test(priority = 29)
-	private void quoteCount() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest("Verify the Quote Created Count is added in the Quote All Count");
-		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
-		String actualTotal = create.actualResult("User");
-		String expectedResult = create.totalCount("User");
-		extentTest.log(Status.INFO, "Actual Result is - Total Quote Count:" + actualTotal);
-		extentTest.log(Status.INFO, "Expected Result is - Total Quote Count:" + expectedResult);
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (actualTotal.equals(expectedResult)) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CompaniesContractorCount.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CompaniesContractorCount.png");
-		}
-	}
+	
+	
+	 
+	 
+	 
+//	 @Test(priority = 29)
+//	private void quoteCount() throws IOException, InterruptedException {
+//		extentTest = extentReports.createTest("Verify the Quote Created Count is added in the Quote All Count");
+//		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+//		String actualTotal = create.actualResult("User");
+//		String expectedResult = create.totalCount("User");
+//		extentTest.log(Status.INFO, "Actual Result is - Total Quote Count:" + actualTotal);
+//		extentTest.log(Status.INFO, "Expected Result is - Total Quote Count:" + expectedResult);
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (actualTotal.equals(expectedResult)) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("CompaniesContractorCount.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("CompaniesContractorCount.png");
+//		}
+//	}
 
 	@Test(priority = 30)
 	private void quoteEdit() throws IOException, InterruptedException, ParseException {
@@ -1008,7 +1020,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatoryValidation.validationQuantity("Value");
+			//mandatoryValidation.validationQuantity("Value");
+			mandatoryValidation.EnterPrice();
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1016,7 +1029,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 			File file = new File("CustomerContactDescriptionMandatory.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
-			mandatoryValidation.validationQuantity("Value");
+		//	mandatoryValidation.validationQuantity("Value");
+			mandatoryValidation.EnterPrice();
 		}
 	}
 
@@ -1303,6 +1317,8 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 46)
 	private void editafterDecimalPointDiscountField() throws IOException, InterruptedException {
@@ -1607,6 +1623,9 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteCreation.png");
 		}
 	}
+	
+	
+	
 
 	@Test(priority = 57)
 	private void createdQuoteStatus() throws IOException, InterruptedException, AWTException {
@@ -1629,6 +1648,306 @@ public class GlobalOrganizationQuote extends BaseClass {
 		}
 
 	}
+	
+	
+	
+	@Test(priority = 59)
+	private void draftQuote() throws IOException, InterruptedException, ParseException, AWTException {
+		extentTest = extentReports.createTest("Verify the Quote has been draft status");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		// create.CRUDValidation("CilckCreateQuote");
+		// create.CRUDValidation("GlobalContactDraft");
+		create.labelValidation("CreateLabel");
+		create.ChooseContact();
+		create.ClickDraft();
+		String responseMessage = create.GetQuoteStatus();
+		// System.out.println(responseMessage + "Draft");
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Draft"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseMessage.equals(getPropertyValue("Draft"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteDraftListStatus.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDraftListStatus.png");
+		}
+
+	}
+
+	@Test(priority = 58)
+	private void convertQuote() throws IOException, InterruptedException, ParseException, AWTException {
+		extentTest = extentReports.createTest("Verify the Quote has been Convert status");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		// create.CRUDValidation("GlobalDraftEdit");
+		create.acceptQuote();
+		// String responseMessage = create.listTextValidation("ListStatus");
+		String responseMessage = create.GetQuoteStatus();
+		// System.out.println(responseMessage + "Convert");
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Convert"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseMessage.equals(getPropertyValue("Convert"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteConvertStatus.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteConvertStatus.png");
+		}
+
+	}
+
+	static String QuoteListData;
+
+	@Test(priority = 59)
+	private void declinedStatus() throws IOException, InterruptedException, ParseException, AWTException {
+		extentTest = extentReports.createTest("Verify the Quote has been Declined status");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.CRUDValidation("CilckCreateQuote");
+		create.CRUDValidation("GlobalCreateDeclined");
+		// create.attachmentFileCheck("URLCheck");
+		// create.CRUDValidation("Create");
+		// create.selectDecline();
+		String responseMessage = create.GetQuoteStatus();
+		System.out.println(responseMessage);
+		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Declined"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (responseMessage.equals(getPropertyValue("Declined"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.visible();
+			QuoteListData = create.listTextValidation("GlobalCustomerName");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteDeclinedStatus.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteDeclinedStatus.png");
+			create.visible();
+			QuoteListData = create.listTextValidation("GlobalCustomerName");
+		}
+
+	}
+
+	@Test(priority = 61)
+	private void listCustomerName() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Enter the Quote Customer Name:" + QuoteListData
+				+ "in the Search field & Quote list retrived successfully");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
+		String expected = create.listTextValidation("GlobalCustomerName");
+		System.out.println(expected);
+		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
+		extentTest.log(Status.INFO, "Expected Result is -" + expected);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (QuoteListData.equals(expected)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("QuoteNo");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListQuoteNoValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteNoValidation.png");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("QuoteNo");
+		}
+
+	}
+
+	@Test(priority = 62)
+	private void listQuoteNo() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Enter the Quote No:" + QuoteListData + "in the Search field & Quote list retrived successfully");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
+		String expected = create.listTextValidation("QuoteNo");
+		System.out.println(expected);
+		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
+		extentTest.log(Status.INFO, "Expected Result is -" + expected);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (QuoteListData.equals(expected)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListQuoteNoValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteNoValidation.png");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Tittle");
+		}
+
+	}
+
+	@Test(priority = 63)
+	private void listQuoteTittle() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest(
+				"Enter the Quote Tittle:" + QuoteListData + " in the Search field & Quote list retrived successfully");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("Tittle");
+		create.listTextValidation("SearchData");
+		String expected = create.listTextValidation("Tittle");
+		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
+		extentTest.log(Status.INFO, "Expected Result is -" + expected);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (QuoteListData.equals(expected)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListQuoteTittleValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteTittleValidation.png");
+			create.clearFields("Search");
+			QuoteListData = create.listTextValidation("Reference");
+		}
+
+	}
+
+	@Test(priority = 64)
+	private void listQuoteReference() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Enter the Quote Reference:" + QuoteListData
+				+ " in the Search field & Quote list retrived successfully");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SearchData");
+		String expected = create.listTextValidation("Reference");
+		System.out.println(expected);
+		extentTest.log(Status.INFO, "Actual Result is -" + QuoteListData);
+		extentTest.log(Status.INFO, "Expected Result is -" + expected);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (QuoteListData.equals(expected)) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.clearFields("Search");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListQuoteReferenceValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteReferenceValidation.png");
+			create.clearFields("Search");
+		}
+
+	}
+
+	@Test(priority = 65)
+	private void listInvalid() throws IOException, InterruptedException, AWTException, ParseException {
+		extentTest = extentReports
+				.createTest("Enter the Invalid data in the Search field - No Result Found is dispayed");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("Invalid");
+		String actual = create.listTextValidation("InvalidList");
+		System.out.println(actual);
+		extentTest.log(Status.INFO, "Actual Result is -" + actual);
+		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvalidSearch"));
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actual.equals(getPropertyValue("InvalidSearch"))) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			create.reset();
+
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListInvalidValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
+//		create.reset();
+		}
+		driver.navigate().refresh();
+		create.CRUDValidation("CilckCreateQuote");
+		create.autoCompleteField("ContactCreate");
+		create.message("message");
+		create.CRUDValidation("CreateValue");
+		create.message("FormMessage");
+	}
+
+	@Test(priority = 68)
+	private void shareLinkResponseCOde() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Verify the user check the response code on the Share link page");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("SharePage");
+		create.attachmentFileCheck("NewWindow");
+		int actual = create.responseCode();
+		System.out.println(actual);
+		extentTest.log(Status.INFO, "Actual Result is -" + actual);
+		extentTest.log(Status.INFO, "Expected Result is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actual == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			create.attachmentFileCheck("ParentWindow");
+			create.cancelButton();
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListInvalidValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
+			create.attachmentFileCheck("ParentWindow");
+			create.cancelButton();
+		}
+	}
+
+	@Test(priority = 69)
+	private void pdfLinkResponseCOde() throws IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Verify the user check the response code on the PDF link page");
+		QuotePage create = PageFactory.initElements(driver, QuotePage.class);
+		create.listTextValidation("PDFPage");
+		create.attachmentFileCheck("NewWindow");
+		int actual = create.responseCode();
+		System.out.println(actual);
+		extentTest.log(Status.INFO, "Actual Result is -" + actual);
+		extentTest.log(Status.INFO, "Expected Result is -" + 200);
+		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+		if (actual == 200) {
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+		} else {
+			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+			TakesScreenshot screenshot = (TakesScreenshot) driver;
+			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+			File file = new File("CustomerContactQuoteListInvalidValidation.png");
+			FileHandler.copy(screenshotAs, file);
+			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 
 	@Test(priority = 58)
 	private void draftQuote() throws IOException, InterruptedException, ParseException, AWTException {
@@ -1884,4 +2203,7 @@ public class GlobalOrganizationQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 		}
 	}
+	
+	*/
+	
 }

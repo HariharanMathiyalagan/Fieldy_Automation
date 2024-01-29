@@ -987,7 +987,9 @@ public class GlobalContactQuote extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorMandatoryValidation.equals(getPropertyValue("MandatoryErrorMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatoryValidation.validationQuantity("Value");
+			//mandatoryValidation.validationQuantity("Value");
+			mandatoryValidation.EnterPrice();
+			
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -995,7 +997,8 @@ public class GlobalContactQuote extends BaseClass {
 			File file = new File("CustomerContactDescriptionMandatory.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
-			mandatoryValidation.validationQuantity("Value");
+			//mandatoryValidation.validationQuantity("Value");
+			mandatoryValidation.EnterPrice();
 		}
 	}
 
