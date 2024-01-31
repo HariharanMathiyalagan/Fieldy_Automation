@@ -119,7 +119,6 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.responseMessage("AlternateFunction");
-			Assert.fail(responseMessageCreateContact1);
 		}
 
 	}

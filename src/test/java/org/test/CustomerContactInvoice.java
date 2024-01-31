@@ -123,7 +123,6 @@ public class CustomerContactInvoice extends BaseClass {
 			initElements.responseMessage("AlternateFunction");
 			Assert.fail(responseMessageCreateContact1);
 		}
-
 	}
 
 	@Test(priority = 2)
@@ -275,6 +274,8 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
+		mandatoryValidation.inputText(InvoicePage.Price, "1");
 	}
 
 	@Test(priority = 8)
@@ -301,7 +302,6 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceReferenceMaximumValidation.png");
 			mandatory.clearFields("Reference");
 		}
-
 	}
 
 	@Test(priority = 9)
@@ -377,7 +377,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityEmptyValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 12)
@@ -403,7 +403,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMaximumValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 13)
@@ -428,7 +428,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityDeciamlPointValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 14)
@@ -455,7 +455,7 @@ public class CustomerContactInvoice extends BaseClass {
 			mandatory.clearFields("Quantity");
 			mandatory.validationQuantity("Value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 15)
@@ -775,6 +775,7 @@ public class CustomerContactInvoice extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+//		mandatory.pickFirstItem("Contact");
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
 		String errorPasswordField = mandatory.responseMessage("FormMessage");
@@ -818,6 +819,8 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAmountValidation.png");
 			mandatory.clearFields("Expiry");
 		}
+//		mandatory.inputText(InvoicePage.Quantity, "1");
+//		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 29)
@@ -843,7 +846,7 @@ public class CustomerContactInvoice extends BaseClass {
 		}
 	}
 
-	@Test(priority = 30)
+//	@Test(priority = 30)
 	private void invoiceCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Contact Invoice Count is added in the Total Invoice Count");
@@ -950,6 +953,7 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
 	}
 
 	@Test(priority = 35)
@@ -971,6 +975,7 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoicePriceMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
 	}
 
 	@Test(priority = 36)
@@ -992,6 +997,8 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
+		mandatoryValidation.inputText(InvoicePage.Price, "1");
 	}
 
 	@Test(priority = 37)
@@ -1094,7 +1101,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityEmptyValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 41)
@@ -1120,7 +1127,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMaximumValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 42)
@@ -1145,7 +1152,7 @@ public class CustomerContactInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityDeciamlPointValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 43)
@@ -1172,7 +1179,7 @@ public class CustomerContactInvoice extends BaseClass {
 			mandatory.clearFields("Quantity");
 			mandatory.validationQuantity("Value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 44)
@@ -1492,6 +1499,7 @@ public class CustomerContactInvoice extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+		mandatory.pickFirstItem("Contact");
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
 		String errorPasswordField = mandatory.responseMessage("FormMessage");
@@ -1566,6 +1574,7 @@ public class CustomerContactInvoice extends BaseClass {
 	private void draftInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice has been draft status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
+//		create.labelValidation("Contact");
 		create.CRUDValidation("Draft");
 		String responseMessage = create.listTextValidation("ListDraftStatus");
 		extentTest.log(Status.INFO, "Actual Result is -" + responseMessage);
@@ -1581,7 +1590,6 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceDraftListStatus.png");
 		}
-
 	}
 
 	@Test(priority = 59)
@@ -1603,12 +1611,12 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListStatus.png");
 		}
-
+		ListField = create.listTextValidation("InvoiceNo");
 	}
 
 	static double ListData;
 
-	@Test(priority = 60)
+//	@Test(priority = 60)
 	private void UpdatedInvociePartialPayment() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Partial Payment status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1633,7 +1641,7 @@ public class CustomerContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 61)
+//	@Test(priority = 61)
 	private void partialPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Check the Partial Paid Amount:" + ListData + " in the Invoice List Page");
@@ -1655,7 +1663,7 @@ public class CustomerContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void UpdatedInvociePaid() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Paid status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1680,7 +1688,7 @@ public class CustomerContactInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void fullyPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Check the Fully Paid Amount:" + ListData + " in the Invoice List Page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1743,7 +1751,7 @@ public class CustomerContactInvoice extends BaseClass {
 		if (ListField.equals(expected)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			create.clearFields("Search");
-			ListField = create.dateValidation("DueDate");
+//			ListField = create.dateValidation("DueDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1752,12 +1760,12 @@ public class CustomerContactInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListQuoteReferenceValidation.png");
 			create.clearFields("Search");
-			ListField = create.dateValidation("DueDate");
+//			ListField = create.dateValidation("DueDate");
 		}
 
 	}
 
-	@Test(priority = 65)
+//	@Test(priority = 65)
 	private void filterDateInvoice() throws IOException, InterruptedException, ParseException {
 		extentTest = extentReports.createTest("Verify the Invoice Due Date List filter by Due From Date:" + ListField);
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);

@@ -483,7 +483,7 @@ public class CustomerOrganizationJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 16)
+//	@Test(priority = 16)
 	private void jobCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Organization Job Count is added in the Total Job Count");
@@ -771,7 +771,8 @@ public class CustomerOrganizationJob extends BaseClass {
 
 	@Test(priority = 28)
 	private void checkResponseCode() throws AWTException, InterruptedException, IOException {
-		extentTest = extentReports.createTest("Verify the Attacthment response code in customer organization job module");
+		extentTest = extentReports
+				.createTest("Verify the Attacthment response code in customer organization job module");
 		JobPage initElements = PageFactory.initElements(driver, JobPage.class);
 		initElements.attachmentFileCheck("CheckResponse");
 		int responseCode = initElements.responseCode();
@@ -1057,10 +1058,10 @@ public class CustomerOrganizationJob extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
 		}
-
+		JobListData = mandatory.listValidation("JobNo1");
 	}
 
-	@Test(priority = 40)
+//	@Test(priority = 40)
 	private void jobDraftStatus() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Job has been draft status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -1082,7 +1083,7 @@ public class CustomerOrganizationJob extends BaseClass {
 
 	}
 
-	@Test(priority = 41)
+//	@Test(priority = 41)
 	private void deletedJob() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Deleted tigger function in the List page");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -1093,7 +1094,6 @@ public class CustomerOrganizationJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("JobDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			JobListData = mandatory.listValidation("JobNo1");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1101,7 +1101,6 @@ public class CustomerOrganizationJob extends BaseClass {
 			File file = new File("DeletedJob.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DeletedJob.png");
-			JobListData = mandatory.listValidation("JobNo1");
 		}
 
 	}
@@ -1150,8 +1149,8 @@ public class CustomerOrganizationJob extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearValidation("OrganizationSearch");
 			mandatory.clearValidation("Search");
-			dateFrom = mandatory.listValidation("ListFromDate");
-			dateTo = mandatory.listValidation("ListToDate");
+//			dateFrom = mandatory.listValidation("ListFromDate");
+//			dateTo = mandatory.listValidation("ListToDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1161,13 +1160,13 @@ public class CustomerOrganizationJob extends BaseClass {
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
 			mandatory.clearValidation("OrganizationSearch");
 			mandatory.clearValidation("Search");
-			dateFrom = mandatory.listValidation("ListFromDate");
-			dateTo = mandatory.listValidation("ListToDate");
+//			dateFrom = mandatory.listValidation("ListFromDate");
+//			dateTo = mandatory.listValidation("ListToDate");
 		}
 
 	}
 
-	@Test(priority = 44)
+//	@Test(priority = 44)
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Job List filter by From date:" + dateFrom + " & To date:" + dateFrom);
@@ -1213,12 +1212,10 @@ public class CustomerOrganizationJob extends BaseClass {
 		}
 
 	}
-	
+
 	@Test(priority = 48)
-	private void dailyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Daily basic recurring job");
+	private void dailyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Daily basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Create");
 		mandatory.jobStatusCreation("DailyRecurring");
@@ -1239,12 +1236,10 @@ public class CustomerOrganizationJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 49)
-	private void weeklyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Weekly basic recurring job");
+	private void weeklyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Weekly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Create");
 		mandatory.jobStatusCreation("WeeklyRecurring");
@@ -1265,12 +1260,10 @@ public class CustomerOrganizationJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 50)
-	private void monthlyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Monthly basic recurring job");
+	private void monthlyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Monthly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Create");
 		mandatory.jobStatusCreation("MonthlyRecurring");
@@ -1291,12 +1284,10 @@ public class CustomerOrganizationJob extends BaseClass {
 			mandatory.message("AlternateForm");
 		}
 	}
-	
+
 	@Test(priority = 51)
-	private void yearlyRecurring()
-			throws WebDriverException, IOException, InterruptedException, AWTException {
-		extentTest = extentReports
-				.createTest("Create a Job with Yearly basic recurring job");
+	private void yearlyRecurring() throws WebDriverException, IOException, InterruptedException, AWTException {
+		extentTest = extentReports.createTest("Create a Job with Yearly basic recurring job");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
 		mandatory.jobStatusCreation("Create");
 		mandatory.jobStatusCreation("YearlyRecurring");

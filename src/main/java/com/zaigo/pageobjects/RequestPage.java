@@ -12,9 +12,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -431,33 +433,33 @@ public class RequestPage extends BaseClass {
 	WebElement ListPage;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
-			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[2]/div[2]/span[contains(@gloss,'Edit')]"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]//child::span[contains(@gloss,'Edit')]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement Edit;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]//child::span[contains(@gloss,'Dispatch')]"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]//child::span[contains(@gloss,'Dispatch')]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
 	WebElement Dispatch;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
-			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[2]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]//child::span[contains(@gloss,'Start')]"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]//child::span[contains(@gloss,'Start')]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
 	WebElement Start;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
-			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[3]/div[4]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]//child::span[contains(@gloss,'Complete')]"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]//child::span[contains(@gloss,'Complete')]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
 	WebElement Complete;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]/div[1]/div/div/div/div[3]/div[7]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]//child::span[contains(@gloss,'Cancel')]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[1]/div/div[2]/ul/li[7]"),
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[1]/div/div/div/div[3]/div[7]") })
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]//child::span[contains(@gloss,'Cancel')]") })
 	WebElement Cancel;
 
 	@FindAll({
@@ -466,19 +468,19 @@ public class RequestPage extends BaseClass {
 	WebElement Delete;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div[3]//span[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	WebElement ListRequestNo;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]"),
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[1]/div/div/div/div[1]/div[1]/div/div[3]//span[2]"),
 			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]/div[1]/div/div/div/div[1]/div/div/div[3]/span[2]") })
 	WebElement CancelListRequestNo;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[5]"),
-			@FindBy(xpath = "//*[@id='contact-request-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
-			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]") })
+			@FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div[2]/div/div"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[1]/div/div/div/div[1]/div[2]/div//div") })
 	WebElement ListLocationName;
 
 	@FindAll({
@@ -492,13 +494,13 @@ public class RequestPage extends BaseClass {
 			@FindBy(xpath = "//*[@id='contact-request-nav-status']//following::span[@id='customer-contact-request-card-booking-time'][2]") })
 	WebElement ListToDate;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::span[4]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div[2]/div/div[1]//span"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div[2]/div/div[1]/span"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[7]") })
 	WebElement Status;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='contact-nav-status']//following::span[25]"),
-			@FindBy(xpath = "//*[@id='organization-request-nav-status']//following::span[25]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[2]/div[2]/div/div[1]//span"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[2]/div[2]/div/div[1]/span"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[7]") })
 	WebElement CancelStatus;
 
@@ -584,7 +586,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void currentPickerFromDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String currentDate = sdf.format(cal.getTime());
@@ -592,7 +594,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void currentPickerFromDate1() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 0);
 		String currentDate = sdf.format(cal.getTime());
@@ -607,7 +609,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public void currentPickerToDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String currentDate = sdf.format(cal.getTime());
@@ -615,7 +617,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String currentFilterPickerFromDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String currentDate = sdf.format(cal.getTime());
@@ -631,7 +633,7 @@ public class RequestPage extends BaseClass {
 	}
 
 	public String currentFilterPickerToDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		String currentDate = sdf.format(cal.getTime());
@@ -1006,7 +1008,7 @@ public class RequestPage extends BaseClass {
 			this.mouseActionClick(CustomerNameList);
 			this.mouseActionClick(RequestTab);
 			this.visibility(JobList);
-			this.getCount();
+//			this.getCount();
 		} else if (value.equals("Global") || value.equals("ListLabel")) {
 			this.mouseActionClick(Request);
 //			this.visibility(JobList);
@@ -1252,8 +1254,13 @@ public class RequestPage extends BaseClass {
 	@FindAll({ @FindBy(id = "searchBtn"), @FindBy(id = "customer-contact-requset-search-button"),
 			@FindBy(id = "request-search-enter") })
 	WebElement SearchButton;
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-request-card-details']/div[1]/div/div/div[3]/div/div[2]/div"),
+			@FindBy(xpath = "//*[@id='fieldy-main-request-loader']//div//div[1]"),
+			@FindBy(xpath = "//*[@id='customer-company-request-card-details']/div[1]/div/div/div[1]/div/div/div/div[1]/div/div/div") })
+	WebElement LassyLoder;
 
 	static String listData;
+	public static Map<String, String> map = new HashMap<>();
 
 	public String listValidation(String value) {
 		if (value.equals("SearchData")) {
@@ -1261,28 +1268,37 @@ public class RequestPage extends BaseClass {
 			this.inputText(Search, listData);
 			do {
 				this.mouseActionClick(SearchButton);
-			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
+			} while (!this.conditionChecking1(LassyLoder, 3));
 		} else if (value.equals("Location")) {
-			if (!this.conditionChecking(ListLocationName, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListLocationName, 50));
+			if (this.conditionChecking(ListLocationName, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking(ListLocationName, 50));
+				listData = this.getText(ListLocationName);
+				map.put("Location", listData);
+			} else {
+				listData = map.get("Location");
 			}
-			listData = this.getText(ListLocationName);
 		} else if (value.equals("RequestNo")) {
-			if (!this.conditionChecking(ListRequestNo, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListRequestNo, 50));
+			if (this.conditionChecking(ListRequestNo, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking(ListRequestNo, 50));
+				listData = this.getText(ListRequestNo);
+				map.put("Request No", listData);
+			} else {
+				listData = map.get("Request No");
 			}
-			listData = this.getText(ListRequestNo);
 		} else if (value.equals("CancelRequestNo")) {
-			if (!this.conditionChecking(CancelListRequestNo, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(CancelListRequestNo, 50));
+			if (this.conditionChecking(CancelListRequestNo, 10)) {
+//				do {
+//					driver.navigate().refresh();
+//				} while (!this.conditionChecking(CancelListRequestNo, 50));
+				listData = this.getText(CancelListRequestNo);
+				map.put("Cancel Request No", listData);
+			} else {
+				listData = map.get("Cancel Request No");
 			}
-			listData = this.getText(CancelListRequestNo);
 		} else if (value.equals("Status")) {
 			listData = this.getText(Status);
 		} else if (value.equals("CancelStatus")) {
