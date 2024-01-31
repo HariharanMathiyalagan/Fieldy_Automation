@@ -553,8 +553,13 @@ public class TeamUserPage extends BaseClass {
 			}
 			label = this.getText(Label);
 			return label;
-		} else if (value.equals("ListLabel")) {
-			this.mouseActionClick(Createcon);
+		} else if (value.equals("ListLabel")||value.equals("listContractor")) {
+//			this.mouseActionClick(Createcon);
+			if(value.equals("listContractor"))
+			{
+				this.mouseActionClick(Createcon);
+			
+			}
 			label = this.getText(ListLabel);
 			return label;
 		} else if (value.equals("ContractorLabel")) {
@@ -889,7 +894,10 @@ public class TeamUserPage extends BaseClass {
 				this.invisible(Message);
 			} else {
 				do {
+					if(this.conditionChecking(SaveComplete, 5))
+					{
 					this.mouseActionClick(SaveComplete);
+					}
 					if (this.conditionChecking(Message, 50)) {
 						listData = this.getText(Message);
 						this.invisible(Message);
