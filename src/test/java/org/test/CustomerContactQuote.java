@@ -350,6 +350,8 @@ public class CustomerContactQuote extends BaseClass {
 	}
 	
 	
+	
+	
 
 	@Test(priority = 9)
 	private void maximumValidationQuoteTittle() throws IOException, InterruptedException {
@@ -432,6 +434,7 @@ public class CustomerContactQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.EnterPrice();
 		mandatory.validationQuantity("MaxQuantity");
 		mandatory.priceValidation("value");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
@@ -968,7 +971,7 @@ public class CustomerContactQuote extends BaseClass {
 		}
 	}
 
-//	@Test(priority = 33)
+   //	@Test(priority = 33)
 	private void editmandatoryValidationInventoryItem() throws AWTException, IOException, InterruptedException {
 		extentTest = extentReports.createTest(
 				"Verify Inventory Item field is set as Mandatory & Error Message is displayed when it is BLANK");
@@ -1164,6 +1167,7 @@ public class CustomerContactQuote extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Quantity Field exceed its max-12 Limts");
 		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+		mandatory.EnterPrice();
 		mandatory.validationQuantity("MaxQuantity");
 		mandatory.priceValidation("value");
 		String errorPasswordField = mandatory.errorValidation("ErrorQuantity");
@@ -1416,87 +1420,87 @@ public class CustomerContactQuote extends BaseClass {
 
 	}
 	
-	/*
-
-	@Test(priority = 51)
-	private void editafterDecimalPointTaxField() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when Tax Field exceed its max-2 after decimal point limit");
-		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.taxValidation("AfterDecimalPoint");
-		String errorPasswordField = mandatory.errorValidation("ErrorTax");
-		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearFields("Tax");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
-			mandatory.clearFields("Tax");
-		}
-
-	}
-
-	@Test(priority = 52)
-	private void editbeforeDecimalPointTaxField() throws IOException, InterruptedException {
-		extentTest = extentReports.createTest(
-				"Verify Error Message is displayed when Tax Field exceed its max-3 before decimal point limit");
-		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.taxValidation("BeforeDecimalPoint");
-		String errorPasswordField = mandatory.errorValidation("ErrorTax");
-		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DisTaxBeforeDecimalPoint"));
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("DisTaxBeforeDecimalPoint"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearFields("Tax");
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactQuoteBeforeTaxDecimalValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactQuoteBeforeTaxDecimalValidation.png");
-			mandatory.clearFields("Tax");
-		}
-
-	}
-
-	@Test(priority = 53)
-	private void editmaxLimitTaxField() throws IOException, InterruptedException {
-		extentTest = extentReports
-				.createTest("Verify Error Message is displayed when Tax Field exceed its max-100 Limit");
-		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
-		mandatory.taxValidation("MaxTax");
-		String errorPasswordField = mandatory.errorValidation("ErrorTax");
-		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TaxLimit"));
-		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
-		if (errorPasswordField.equals(getPropertyValue("TaxLimit"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearFields("Tax");
-			mandatory.taxValidation("value");
-
-		} else {
-			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
-			File file = new File("CustomerContactQuoteTaxMaximumValidation.png");
-			FileHandler.copy(screenshotAs, file);
-			extentTest.addScreenCaptureFromPath("CustomerContactQuoteTaxMaximumValidation.png");
-			mandatory.clearFields("Tax");
-			mandatory.taxValidation("value");
-		}
-
-	}
 	
-	*/
+
+//	@Test(priority = 51)
+//	private void editafterDecimalPointTaxField() throws IOException, InterruptedException {
+//		extentTest = extentReports.createTest(
+//				"Verify Error Message is displayed when Tax Field exceed its max-2 after decimal point limit");
+//		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+//		mandatory.taxValidation("AfterDecimalPoint");
+//		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+//		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("AfterDecimalPoint"));
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorPasswordField.equals(getPropertyValue("AfterDecimalPoint"))) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			mandatory.clearFields("Tax");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("CustomerContactQuoteAfterDecimalPointTaxValidation.png");
+//			mandatory.clearFields("Tax");
+//		}
+//
+//	}
+//
+//	@Test(priority = 52)
+//	private void editbeforeDecimalPointTaxField() throws IOException, InterruptedException {
+//		extentTest = extentReports.createTest(
+//				"Verify Error Message is displayed when Tax Field exceed its max-3 before decimal point limit");
+//		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+//		mandatory.taxValidation("BeforeDecimalPoint");
+//		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+//		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("DisTaxBeforeDecimalPoint"));
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorPasswordField.equals(getPropertyValue("DisTaxBeforeDecimalPoint"))) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			mandatory.clearFields("Tax");
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("CustomerContactQuoteBeforeTaxDecimalValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("CustomerContactQuoteBeforeTaxDecimalValidation.png");
+//			mandatory.clearFields("Tax");
+//		}
+//
+//	}
+//
+//	@Test(priority = 53)
+//	private void editmaxLimitTaxField() throws IOException, InterruptedException {
+//		extentTest = extentReports
+//				.createTest("Verify Error Message is displayed when Tax Field exceed its max-100 Limit");
+//		QuotePage mandatory = PageFactory.initElements(driver, QuotePage.class);
+//		mandatory.taxValidation("MaxTax");
+//		String errorPasswordField = mandatory.errorValidation("ErrorTax");
+//		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
+//		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TaxLimit"));
+//		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
+//		if (errorPasswordField.equals(getPropertyValue("TaxLimit"))) {
+//			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+//			mandatory.clearFields("Tax");
+//			mandatory.taxValidation("value");
+//
+//		} else {
+//			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File screenshotAs = screenshot.getScreenshotAs(OutputType.FILE);
+//			File file = new File("CustomerContactQuoteTaxMaximumValidation.png");
+//			FileHandler.copy(screenshotAs, file);
+//			extentTest.addScreenCaptureFromPath("CustomerContactQuoteTaxMaximumValidation.png");
+//			mandatory.clearFields("Tax");
+//			mandatory.taxValidation("value");
+//		}
+//
+//	}
+	
+	
 
 	@Test(priority = 54)
 	private void editmaximumValidationDescription() throws IOException, InterruptedException {
@@ -1942,6 +1946,7 @@ public class CustomerContactQuote extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListInvalidValidation.png");
 		}
 	}
+	
 	
 	
 }

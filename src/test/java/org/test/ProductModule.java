@@ -90,6 +90,7 @@ public class ProductModule extends BaseClass {
 		extentTest = extentReports.createTest("Navigate to Product & Service page");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
 		String editContact = initElements.modulePage("Product");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("ListProductService"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -104,12 +105,15 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 2)
 	private void createFormLabel() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the User to Land on the Create Product Page");
 		ProductServicePage initElements = PageFactory.initElements(driver, ProductServicePage.class);
 		String editContact = initElements.labelValidation("Create");
+		System.out.println(editContact);
 		extentTest.log(Status.INFO, "Actual Result is -" + editContact);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("CreateProduct"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -124,6 +128,8 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("ContactList.png");
 		}
 	}
+	
+	
 
 	@Test(priority = 3)
 	private void mandatoryValidationProductName() throws InterruptedException, IOException {
@@ -256,6 +262,8 @@ public class ProductModule extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 9)
 	private void maximumValidationSKU() throws IOException, InterruptedException, AWTException {
@@ -280,6 +288,8 @@ public class ProductModule extends BaseClass {
 			mandatory.clearFields("SKU");
 		}
 	}
+	
+	
 
 	@Test(priority = 10)
 	private void maximumValidationDescription() throws IOException, InterruptedException, AWTException {
@@ -650,6 +660,8 @@ public class ProductModule extends BaseClass {
 			listValidation = mandatory.listValidation("Taxable");
 		}
 	}
+	
+	
 
 	@Test(priority = 25)
 	private void editFormLabel() throws InterruptedException, IOException, AWTException {
@@ -673,6 +685,8 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 26)
 	private void editmandatoryValidationProductName() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest(
@@ -1170,6 +1184,8 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 46)
 	private void updateButton() throws IOException, AWTException {
 		extentTest = extentReports
@@ -1269,6 +1285,8 @@ public class ProductModule extends BaseClass {
 			mandatory.clickEvent("Reset");
 		}
 	}
+	
+	
 
 	@Test(priority = 50)
 	private void deletedProduct() throws InterruptedException, IOException, AWTException {
@@ -1277,12 +1295,14 @@ public class ProductModule extends BaseClass {
 		ProductServicePage mandatory = PageFactory.initElements(driver, ProductServicePage.class);
 		mandatory.listValidation("Delete");
 		String errorPasswordField = mandatory.message("Message");
+		System.out.println(errorPasswordField);
 		extentTest.log(Status.INFO, "Actual Result is -" + errorPasswordField);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InventoryDeletedMessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(getPropertyValue("InventoryDeletedMessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			ListField = mandatory.createProdutService("Create");
+			System.out.println(ListField + "From Deleted Product");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1291,6 +1311,7 @@ public class ProductModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DeletedJob.png");
 			ListField = mandatory.createProdutService("Create");
+			System.out.println(ListField);
 		}
 	}
 
@@ -1300,6 +1321,7 @@ public class ProductModule extends BaseClass {
 				+ " & it's reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
 		String createMessage = landing.reflectedFunction();
+		System.out.println(createMessage + "Revolt");
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField);
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1324,7 +1346,8 @@ public class ProductModule extends BaseClass {
 		extentTest = extentReports.createTest("Verify the Inactive Product Name is:" + ListField
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
-		String createMessage = landing.reflectedFunction();
+		String createMessage = landing.InactiveProduct();
+		System.out.println(createMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage + " Will be added");
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1344,12 +1367,15 @@ public class ProductModule extends BaseClass {
 		}
 	}
 
+	
+	
 	@Test(priority = 53)
 	private void deleteProduct() throws IOException, AWTException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Deleted Product Name is:" + ListField
 				+ " & it's not reflect the Inventory field in the Quote Create Page");
 		ProductServicePage landing = PageFactory.initElements(driver, ProductServicePage.class);
-		String createMessage = landing.reflectedFunction();
+		String createMessage = landing.CheckDeletedRecord();
+		System.out.println(createMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + createMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + ListField + " Will be added");
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -1364,4 +1390,6 @@ public class ProductModule extends BaseClass {
 			extentTest.addScreenCaptureFromPath("58.png");
 		}
 	}
+	
+	
 }

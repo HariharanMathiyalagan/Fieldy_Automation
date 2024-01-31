@@ -292,14 +292,13 @@ public class QuotePage extends BaseClass {
 	WebElement CustomerListName;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='customer-details-hide']//ul//li[4]"),
-			@FindBy(xpath = "//*[@id='customer-nav-menu-company']//ul//li[4]")
-			})
+			@FindBy(xpath = "//*[@id='customer-nav-menu-company']//ul//li[4]") })
 	WebElement ClickTabQuote;
 
 	@FindAll({ @FindBy(xpath = "//*[@data-automationid='customer-organization-quote-create']"),
 			@FindBy(xpath = "//*[@data-automationid='customer-contact-quote-create']"),
 			@FindBy(xpath = "//*[@id='job-show-details-timeline']//div[1]//div[3]//button"),
-			@FindBy(xpath="//*[@gloss=' Create Quote']") })
+			@FindBy(xpath = "//*[@gloss=' Create Quote']") })
 	public static WebElement CreateButton;
 
 	@FindAll({ @FindBy(xpath = "//a[@data-draftback='quotedraft']"),
@@ -312,15 +311,15 @@ public class QuotePage extends BaseClass {
 	@FindAll({ @FindBy(id = "customer-contact-nav-route"), @FindBy(id = "customer-company-nav-route"),
 			@FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/div[1]/header/div/div/div"),
 			@FindBy(xpath = "//*[@id='quote-create']/header/div/div/div/a"),
-			@FindBy(xpath="//*[@id='breadcrumb_placement']//ol//li[4]"),
-			@FindBy(xpath = "//*[@id='breadcrumb_placement']//li[2]")})
+			@FindBy(xpath = "//*[@id='breadcrumb_placement']//ol//li[4]"),
+			@FindBy(xpath = "//*[@id='breadcrumb_placement']//li[2]") })
 
 	WebElement ListPage;
-	
+
 	By ClickBackDraft = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
-    By ThreeDots2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]");
-    By Share2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[3]");
-    By PDF2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[4]");
+	By ThreeDots2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]");
+	By Share2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[4]");
+	By PDF2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[5]");
 	By LineItem = By.xpath("//input[@placeholder='Choose Product /Service']");
 	By ChooseElement = By.xpath("//div[starts-with(@id,'dropid-')][1]");
 	By CustomerName = By.id("customer-name");
@@ -399,7 +398,8 @@ public class QuotePage extends BaseClass {
 	By Dashboard = By.xpath("//*[text()=' Company Performance']");
 	By Amount = By.id("Quote__total__totalamount");
 //	By Invalid = By.xpath("//*[text()='No Result Found']");
-	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()=' Quotes No ']") , @FindBy(xpath="//*[text()='Quotes No	']") })
+	@FindAll({ @FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()=' Quotes No ']"),
+			@FindBy(xpath = "//*[text()='Quotes No	']") })
 	WebElement Invalid;
 	By QuoteLable = By.xpath("//*[text()='Quotes No.']");
 	@FindAll({
@@ -424,8 +424,8 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@id='fieldy-customer-organization-quote-list']//tr[2]//td[9]"),
 			@FindBy(xpath = "//*[@id='fieldy-main-quote-list_aserpttbl']//tr[2]//td[10]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[10]//span") ,
-			@FindBy(xpath="//*[@id='new_table_with_search']//tbody//tr[1]//td[9]//span")})
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[10]//span"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[9]//span") })
 	WebElement ListQuoteStatus;
 
 	By Search = By.id("searchInput");
@@ -501,7 +501,7 @@ public class QuotePage extends BaseClass {
 			@FindBy(xpath = "//*[@class='add_new_customer_button3']//button[@data-modalfetch='shorter_organization_contact_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button2']//button[@data-modalfetch='shorter_organization_create']"),
 			@FindBy(xpath = "//*[@class='add_new_customer_button no-add_new_customer_button']//button[@data-modalfetch='shorter_contact_create']"),
-			@FindBy(xpath="//*[@id='id_customer_group-autocomplete-list2']/div/span/button")})
+			@FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list2']/div/span/button") })
 	WebElement AddCustomer;
 	@FindAll({ @FindBy(xpath = "//*[@id='id_customer_group-autocomplete-list']/div/span/span") })
 	WebElement AddTax;
@@ -715,8 +715,8 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(CustomerListName);
 			this.visibility(CustomerName);
 			this.mouseActionClick(ClickTabQuote);
-			//this.visibility(Invalid);
-			//this.getCount();
+			// this.visibility(Invalid);
+			// this.getCount();
 		} else if (value.equals("Global")) {
 			this.mouseActionClick(Quote);
 //			this.mouseActionClick(Filter);
@@ -785,7 +785,7 @@ public class QuotePage extends BaseClass {
 			currentDate = sdf.format(cal.getTime());
 			return currentDate;
 		} else if (value.equals("CurrentDateError")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, 0);
 			currentDate = sdf.format(cal.getTime());
@@ -798,7 +798,7 @@ public class QuotePage extends BaseClass {
 			this.inputText(ExpiryDate, pastDate);
 			this.mouseActionClick(Save);
 		} else if (value.equals("GlobalPastDate")) {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.DAY_OF_MONTH, -1);
 			String pastDate = sdf.format(cal.getTime());
@@ -844,14 +844,18 @@ public class QuotePage extends BaseClass {
 			do {
 				this.mouseActionClick(Save);
 				i++;
-
 			} while ((!this.conditionChecking1(ErrorInventoryItem, 2)) && i > 5);
 			if (i == 5) {
 				String text = "null";
 				return text;
 			} else {
-				String text = this.getText(ErrorInventoryItem);
-				return text;
+				try {
+					String text = this.getText(ErrorInventoryItem);
+					return text;	
+				} catch (Exception e) {
+					String text = "null";
+					return text;
+				}
 			}
 		} else if (value.equals("ErrorMaxInventoryItem")) {
 			String text = this.getText(ErrorInventoryMax);
@@ -877,6 +881,7 @@ public class QuotePage extends BaseClass {
 				} while (!this.conditionChecking1(ErrorDescription, 10));
 			}
 			String text = this.getText(ErrorDescription);
+			this.inputText(Price, "1");
 			return text;
 		} else if (value.equals("ErrorNotes")) {
 			String text = this.getText(ErrorNotes);
@@ -891,12 +896,11 @@ public class QuotePage extends BaseClass {
 		}
 		return value;
 	}
-	
-	
+
 	public void referenceField(String value) throws InterruptedException {
 		if (value.equals("MaxValidation")) {
-			
-			driver.navigate().refresh();
+
+			// driver.navigate().refresh();
 			Thread.sleep(5000);
 			this.validationTab(Reference, characters256);
 		}
@@ -908,10 +912,9 @@ public class QuotePage extends BaseClass {
 		}
 
 	}
-	
-	public void RefreshPage() throws InterruptedException
-	{
-		
+
+	public void RefreshPage() throws InterruptedException {
+
 		driver.navigate().refresh();
 		Thread.sleep(3000);
 	}
@@ -932,7 +935,7 @@ public class QuotePage extends BaseClass {
 			this.validationTab(Quantity, numberCharacter15);
 		} else if (value.equals("AfterDecimalPoint")) {
 			this.validationTab(Quantity, "4564.5445664");
-			
+
 		} else if (value.equals("Value")) {
 			this.inputText(Quantity, "10");
 
@@ -1014,26 +1017,22 @@ public class QuotePage extends BaseClass {
 			this.mouseActionClick(RadioOrganization);
 		}
 	}
-	
-	public void EnterPrice()
-	{
-		this.inputText(Price,"10");
+
+	public void EnterPrice() {
+		this.inputText(Price, "10");
 	}
-	
-	public void ChooseLineItem() throws InterruptedException
-	{
-		
+
+	public void ChooseLineItem() throws InterruptedException {
+
 		int Len;
 		this.inputText(LineItem, " ");
 		Thread.sleep(3000);
-		if(this.conditionChecking(ChooseElement))
-		{
-			do
-			{
+		if (this.conditionChecking(ChooseElement)) {
+			do {
 				this.mouseAction(ChooseElement);
 				Len = this.getTextAttribute(LineItem).length();
 				System.out.println(Len + "Sriram");
-				}while(Len>0);
+			} while (Len > 0);
 		}
 	}
 
@@ -1526,7 +1525,7 @@ public class QuotePage extends BaseClass {
 
 		}
 	}
-	
+
 	public void CustomeracceptQuote() {
 		do {
 			this.mouseActionClick(CustomerQuoteStatus);
@@ -1540,7 +1539,6 @@ public class QuotePage extends BaseClass {
 
 		}
 	}
-	
 
 	public void selectDecline()
 
@@ -1554,13 +1552,11 @@ public class QuotePage extends BaseClass {
 
 		}
 	}
-	
-	public void SearchReference() throws InterruptedException
-	{
+
+	public void SearchReference() throws InterruptedException {
 		this.mouseActionClick(SearchButton);
 		Thread.sleep(3000);
 	}
-	
 
 	public void cancelButton() {
 		this.mouseActionClick(CancelButton);
@@ -1570,21 +1566,19 @@ public class QuotePage extends BaseClass {
 			} while (this.conditionChecking1(PopupDisable, 5));
 		}
 	}
-	
-	public void ShareLink()
-	{
-	this.mouseActionClick(ThreeDots2);
-	this.mouseActionClick(Share2);
-	if (!this.getTextAttribute(By.id("share_url")).contains("https")) {
-		do {
-		} while (!this.getTextAttribute(By.id("share_url")).contains("https"));
+
+	public void ShareLink() {
+		this.mouseActionClick(ThreeDots2);
+		this.mouseActionClick(Share2);
+		if (!this.getTextAttribute(By.id("share_url")).contains("https")) {
+			do {
+			} while (!this.getTextAttribute(By.id("share_url")).contains("https"));
+		}
+		this.mouseActionClick(Share_Click_Copy);
+		this.newWindow(this.getTextAttribute(By.id("share_url")));
 	}
-	this.mouseActionClick(Share_Click_Copy);
-	this.newWindow(this.getTextAttribute(By.id("share_url")));
-}
-	
-	public void SharePDF()
-	{
+
+	public void SharePDF() {
 		this.mouseActionClick(ThreeDots2);
 		if (!this.conditionChecking1(PDF2, 2)) {
 			do {
@@ -1594,8 +1588,4 @@ public class QuotePage extends BaseClass {
 		this.mouseActionClick(PDF2);
 		this.newWindowWait();
 	}
-	}
-	
-	
-	
-
+}

@@ -181,11 +181,21 @@ public class PrefixSettingPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='This invoice prefix number is required.']") })
 	WebElement error_mandatory;
 
-	By settings_menu = By.xpath("//a[@id='settings-menu']");
-	By settings_business = By.xpath("//div[text()=' Business Settings ']");
+//	By settings_menu = By.xpath("//a[@id='settings-menu']");
+	
+	By settings_menu = By.xpath("//div[@data-n-linkto='settings']//i");
+	
+//	By settings_business = By.xpath("//div[text()=' Business Settings ']");
+	
+	By settings_business = By.xpath("//div[text()=' Business Settings']");
+
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 	By Prefix_Setting = By.xpath("//*[@id='detail-business-settings']//ul//li[2]");
-	By settings_business_settings_label = By.xpath("//*[@id='fieldy-body-ele']//header//a");
+	//By settings_business_settings_label = By.xpath("//*[@id='fieldy-body-ele']//header//a");
+	
+	By Prefix_Settings_menu= By.xpath("//div[@id='detail-business-settings']//li[2]");
+	By settings_business_settings_label = By.xpath("//div[@id='breadcrumb_placement']//ol//li[text()='Prefix settings']");
+   
 	By prefix_settings_label = By.xpath("//*[@id=\'setting-nav-menu\']/div/nav/div/ul/li[2]/a");
 	By Prefix_Job_Name = By.xpath("//input[@id='prefix-value-job']");
 	By Prefix_Job_No = By.xpath("//input[@id='prefix-number-job']");
@@ -228,21 +238,28 @@ public class PrefixSettingPage extends BaseClass {
 
 	By SuccessMessage = By.xpath("//span[text()='Tenant business settings Updated successfully.']");
 
-	By duplicateErroMessageReq = By.xpath("//span[text()='The sequence is already exists for the request']");
+	By duplicateErroMessageReq = By.xpath("//span[text()='The sequence is already exists for the job']");
 
 	
 	public String modulePage() throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		this.mouseActionClick(settings_menu);
 		this.mouseActionClick(settings_business);
-		this.visibility(list_bussiness_unit_name);
-		this.mouseActionClick(Prefix_Setting);
-		String text = this.getText(prefix_settings_label);
-		this.invisible(Loader);
-		Thread.sleep(5000);
+        this.mouseActionClick(Prefix_Settings_menu);
+        String text=this.getText(settings_business_settings_label);
+        //String text = this.getText();
 		return text;
+		//this.mouseActionClick(settings_menu);
+		//this.mouseActionClick(settings_business);
+		//this.visibility(list_bussiness_unit_name);
+		//this.mouseActionClick(Prefix_Setting);
+		//String text = this.getText(prefix_settings_label);
+		//this.invisible(Loader);
+		//Thread.sleep(5000);
+		//return text;
 	}
-
+	
+	
 	public void jobprefix(String value) {
 		// TODO Auto-generated method stub
 
@@ -442,9 +459,13 @@ public class PrefixSettingPage extends BaseClass {
 	}
 	
 	
-	   public void jobInput() {
+	   public void jobInput() throws InterruptedException {
+		   
+		this.Refresh();
+	    this.clearField(Prefix_Job_No);
 	 	wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(Prefix_Job_No)).sendKeys("002");
+		this.mouseActionClick(Btn_SaveChanges);
 	}
 
 	

@@ -191,7 +191,7 @@ public class ProductServicePage extends BaseClass {
 	}
 
 	private String getText(WebElement element) {
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 30);
 		String until = wait.until(ExpectedConditions.visibilityOf(element)).getText();
 		return until;
 	}
@@ -227,20 +227,28 @@ public class ProductServicePage extends BaseClass {
 
 	By Spinner = By.xpath("//*[@id='spinnerDiv']//div//div//div");
 
-	By settings_menu = By.xpath("//a[@id='settings-menu']");
+	By settings_menu = By.xpath("//*[@id='profileModal']//preceding::i[1]");
 
-	By Product_Service = By.xpath("//*[text()=' Product / Service']");
+	By Product_Service = By.xpath("//*[text()=' Product / Services']");
 
 	By Service = By.xpath("//*[text()='Service']");
+	
+	By NoRes = By.xpath("//*[@id='inventorydropdownlist0']/span/p");
+	
+	By Ser_tax = By.xpath("//input[@data-dropdownlist='tax']");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-body-ele']/div[1]/header/div/div/div/a"),
-			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") })
+			@FindBy(xpath = "//*[@id='product-create']/header/div/div/div") ,
+			@FindBy(xpath="//*[@id='breadcrumb_placement']//li[3]")})
 	WebElement Label;
 	@FindAll({ @FindBy(xpath = "//*[@id='job-show-details-timeline']/div[1]/div[3]/button"),
-			@FindBy(xpath = "//*[@data-automationid='product-create']") })
+			@FindBy(xpath = "//*[@data-automationid='product-create']") ,
+			@FindBy(xpath="//*[@gloss=' Create Product']"),
+			@FindBy(xpath="//*[@gloss=' Create Services']"),
+			@FindBy(xpath="//*[@gloss=' Create Quote']")})
 	public static WebElement CreateButton;
-
-	By Search = By.id("product-service-serach-filter");
+	
+	By Search = By.id("searchInput");
 
 	By Filter = By.xpath("//*[@id='job-show-details-timeline']/div[2]/div[2]/button/div");
 
@@ -251,30 +259,32 @@ public class ProductServicePage extends BaseClass {
 	@FindAll({
 			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
 			@FindBy(xpath = "//*[text()='No Result Found']"),
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']") })
+			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[@id='fieldy-body-ele']//*[text()='Name']"),
+			@FindBy(xpath="//th[text()='Name']")})
 	WebElement ListPage;
 	@FindAll({ @FindBy(xpath = "//*[text()='Quotes No']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement QuoteListPage;
 
-	By ListInventoryName = By.xpath("//*[@id='fieldy-product-service-list_aserpttbl']//tr[2]//td[2]");
+	By ListInventoryName = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[2]");
 
-	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[5]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[4]") })
+	@FindAll({ @FindBy(xpath = "//*[@placeholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[1]//td[7]"),
+			@FindBy(xpath = "//*[@gloss=' Create Services']//following::table[@id='new_table_with_search']//tbody//tr[2]//td[4]") })
 	WebElement ListTaxable;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]/div[1]/div/i") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]") })
 	WebElement ThreeDots;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[1]") })
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[1]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[1]") })
 	WebElement Edit;
 
 	@FindAll({
-			@FindBy(xpath = "//*[@placeholder='Search by Product Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
-			@FindBy(xpath = "//*[@placeholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]") })
+			@FindBy(xpath = "//*[@slaceholder='Search by Customer Name, Title, Reference and Invoice No']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath = "//*[@laceholder='Search by Service Name ...']//ancestor::div[8]//table//tr[2]//td[1]//li[2]"),
+			@FindBy(xpath="//*[@id='new_table_with_search']//tbody//tr[1]//td[1]//li[2]")})
 	WebElement Delete;
 
 	@FindAll({ @FindBy(xpath = "//*[@id='modal-confirmation-popup']//*[text()='Yes']"),
@@ -297,10 +307,11 @@ public class ProductServicePage extends BaseClass {
 
 	By Price = By.id("price");
 
-	By TaxName = By.xpath("//*[@id='product_service_create_edit']/div[5]/div[1]/div[2]/input[1]");
+	By TaxName = By.xpath("//*[@id='product_service_create_edit']/div[3]/div[7]/div[2]/input[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='tax-autocomplete-list']/div[1]"),
-			@FindBy(xpath = "//*[text()='No Data Found']") })
+			@FindBy(xpath = "//*[text()='No Data Found']") ,
+			@FindBy(xpath="//h3[text()='No Data Found']")})
 	WebElement FirstTaxName;
 
 	By TaxPercentage = By.id("tax_percentage");
@@ -331,19 +342,19 @@ public class ProductServicePage extends BaseClass {
 
 	By Message = By.xpath("//*[@class='js-snackbar__message']");
 
-	By Reset = By.xpath("//*[text()=' Reset Search']");
+	By Reset = By.id("resetDiv");
 
 	By Invalid = By.xpath("//*[text()='No Result Found']");
 
-	By Quote = By.id("quote-menu");
+	By Quote = By.id("quotes");
 
 	By Contact = By.id("contact");
 
 	By Organizaiton = By.id("organization");
 
-	By InventoryField = By.xpath("//*[@id='quoteitem-0']/div[1]/div[1]/input[1]");
+	By InventoryField = By.xpath("//*[@placeholder='Choose Product /Service']");
 	@FindAll({ @FindBy(xpath = "//*[contains(text(),'Will be added')]"),
-			@FindBy(xpath = "//*[@id='items__item_name__0-autocomplete-list']//div[1]"),
+			@FindBy(xpath = "//*[@id='inventorydropdownlist0']//div[1]"),
 			@FindBy(xpath = "//*[text()='No Data Found']") })
 	WebElement InventoryFirstName;
 
@@ -584,7 +595,7 @@ public class ProductServicePage extends BaseClass {
 		return value;
 	}
 
-	public String validData(String value) throws IOException {
+	public String validData(String value) throws IOException, InterruptedException {
 		if (value.equals("FillFields")) {
 			this.inputText(InventoryName, fakeProductName);
 			this.inputText(SKU, fakeFaxNumber);
@@ -610,13 +621,15 @@ public class ProductServicePage extends BaseClass {
 		} else if (value.equals("FillFieldService")) {
 			this.inputText(InventoryName, fakeProductName);			
 			this.inputText(Description, getPropertyValue("QuoteInvoiceDescription"));
-			this.scrollDown();
+			//this.scrollDown();
+			Thread.sleep(3000);
 			this.mouseActionClick(Category);
 			this.mouseActionClick(CategoryCheckBox);
 			this.mouseActionClick(Price);
 			this.inputText(Price, PriceValue);
 		} else if (value.equals("ServiceTaxable")) {
-			this.mouseActionClick(TaxName);
+			this.mouseActionClick(Ser_tax);
+            Thread.sleep(10000);
 			if (this.getText(FirstTaxName).equals("No Data Found")) {
 				this.scrollUp();
 				this.mouseActionClick(NoTaxableRadio);
@@ -635,6 +648,7 @@ public class ProductServicePage extends BaseClass {
 			this.visibility(SaveComplete);
 		} else if (value.equals("Edit")) {
 			String text = this.getText(ListInventoryName);
+			System.out.println(text);
 			this.mouseActionClick(ThreeDots);
 			if (!conditionChecking(Edit, 2)) {
 				do {
@@ -723,27 +737,76 @@ public class ProductServicePage extends BaseClass {
 		return text;
 	}
 
+	
+	String Exist;
+	
 	public String reflectedFunction() throws InterruptedException {
 		this.mouseActionClick(Quote);
-		this.visibility(QuoteListPage);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
 		this.mouseActionClick(CreateButton);
 		for (int i = 0; i < 10; i++) {
 			this.mouseActionClick(Organizaiton);
 			this.mouseActionClick(Contact);
 			this.mouseActionClick(Save);
 		}
-		this.mouseActionClick(InventoryField);
-		if (this.getText(InventoryFirstName).equals("No Data Found")) {
-			Thread.sleep(10000);
-			this.mouseActionClick(InventoryField);
-			this.visibility(InventoryFirstName);
-		} else {
-			this.visibility(InventoryFirstName);
-		}
-		this.inputText(InventoryField, listData);
-		String text = this.getText(InventoryFirstName);
-		return text;
+		this.inputText(InventoryField," ");
+		Exist = this.getText(InventoryFirstName);
+		return Exist;
+		
+		
+//		if (this.getText(InventoryFirstName).contains("No Data Found")) {
+//			Thread.sleep(10000);
+//			this.mouseActionClick(InventoryField);
+//			this.visibility(InventoryFirstName);
+//		} else {
+//			this.visibility(InventoryFirstName);
+//		}
+//		this.inputText(InventoryField, listData);
+//		String text = this.getText(InventoryFirstName);
+//		return text;
 
 	}
+	
+	
+	
+	public String InactiveProduct() throws InterruptedException
+	{
+		
+		this.mouseActionClick(Quote);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
+		this.mouseActionClick(CreateButton);
+		for (int i = 0; i < 10; i++) {
+			this.mouseActionClick(Organizaiton);
+			this.mouseActionClick(Contact);
+			this.mouseActionClick(Save);
+		}
+		
+		this.inputText(InventoryField, listData );
+		String No_result =this.getText(NoRes);
+		return No_result;
+		
+	}
+	
+	public String CheckDeletedRecord() throws InterruptedException
+	{
+		
+		this.mouseActionClick(Quote);
+		//this.visibility(QuoteListPage);
+		Thread.sleep(5000);
+		this.mouseActionClick(CreateButton);
+		for (int i = 0; i < 10; i++) {
+			this.mouseActionClick(Organizaiton);
+			this.mouseActionClick(Contact);
+			this.mouseActionClick(Save);
+		}
+		this.inputText(InventoryField, listData );
+		String No_result =this.getText(NoRes);
+		return No_result;
+		
+	}
+	
+	
 
 }

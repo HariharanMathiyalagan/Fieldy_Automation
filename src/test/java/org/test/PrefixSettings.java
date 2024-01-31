@@ -87,6 +87,7 @@ public class PrefixSettings extends BaseClass {
 		extentTest = extentReports.createTest("Verify the User to Land on Prefix Settings");
 		PrefixSettingPage edit = PageFactory.initElements(driver, PrefixSettingPage.class);
 		String text = edit.modulePage();
+		System.out.println(text);
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("PrefixSettingsLabel"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
@@ -102,17 +103,18 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+	
 
 	@Test(priority = 1)
 	private void errorMessageforEmptyJobPrefix() throws AWTException, InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Error Message Displayed For Job Field is Null");
 		PrefixSettingPage edit = PageFactory.initElements(driver, PrefixSettingPage.class);
-		edit.modulePage();
 		edit.clearField("JobPrefix");
 		edit.clickSubmit();
 		String text = edit.getErrorMessage();
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
-		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Jobprefixerrormessage"));
+	    extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("Jobprefixerrormessage"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("Jobprefixerrormessage"))) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
@@ -152,6 +154,8 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+
 
 	@Test(priority = 3)
 	private void errorMessageforPrefixRequired() throws AWTException, InterruptedException, IOException {
@@ -348,6 +352,8 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+
 
 	@Test(priority = 11)
 	private void errorMessageforQuoteNumMax() throws AWTException, InterruptedException, IOException {
@@ -452,13 +458,13 @@ public class PrefixSettings extends BaseClass {
 		PrefixSettingPage edit = PageFactory.initElements(driver, PrefixSettingPage.class);
 		edit.maxValidation("InvoicePrefixNumber");
 		String text = edit.getErrorMessageInvoiceNumMax();
-		System.out.println(text);
+		System.out.println(text + "Ready");
 		extentTest.log(Status.INFO, "Actual Result is -" + text);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("InvoiceNumMax"));
 		System.out.println(getPropertyValue("InvoiceNumMax"));
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (text.equals(getPropertyValue("InvoiceNumMax"))) {
-			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
+			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");	
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -469,6 +475,8 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+	
 	
 	//job_duplicate
 	
@@ -522,5 +530,7 @@ public class PrefixSettings extends BaseClass {
 		}
 
 	}
+	
+	
 
 }
