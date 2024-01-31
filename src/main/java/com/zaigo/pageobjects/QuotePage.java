@@ -318,8 +318,8 @@ public class QuotePage extends BaseClass {
 
 	By ClickBackDraft = By.xpath("//*[@id='breadcrumb_placement']//ol//li[4]");
 	By ThreeDots2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]");
-	By Share2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[3]");
-	By PDF2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[4]");
+	By Share2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[4]");
+	By PDF2 = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[1]//li[5]");
 	By LineItem = By.xpath("//input[@placeholder='Choose Product /Service']");
 	By ChooseElement = By.xpath("//div[starts-with(@id,'dropid-')][1]");
 	By CustomerName = By.id("customer-name");
@@ -881,6 +881,7 @@ public class QuotePage extends BaseClass {
 				} while (!this.conditionChecking1(ErrorDescription, 10));
 			}
 			String text = this.getText(ErrorDescription);
+			this.inputText(Price, "1");
 			return text;
 		} else if (value.equals("ErrorNotes")) {
 			String text = this.getText(ErrorNotes);
