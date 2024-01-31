@@ -88,7 +88,7 @@ public class TeamUserContractor extends BaseClass {
 				"Verify the User to Land on the Team User Contractor Contractor List Page & Validate the Label");
 		TeamUserPage edit = PageFactory.initElements(driver, TeamUserPage.class);
 		edit.clickEvent("NavigateContractor");
-		String assertionMessage = edit.labelValidation("ListLabel");
+		String assertionMessage = edit.labelValidation("listContractor");
 		System.out.println(assertionMessage);
 		extentTest.log(Status.INFO, "Actual Result is -" + assertionMessage);
 		extentTest.log(Status.INFO, "Expected Result is -" + getPropertyValue("TeamContractorListLabel"));

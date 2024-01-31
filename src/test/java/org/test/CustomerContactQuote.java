@@ -1368,6 +1368,7 @@ public class CustomerContactQuote extends BaseClass {
 		}
 
 	}
+	
 
 	@Test(priority = 49)
 	private void editbeforeDecimalPointDiscountField() throws IOException, InterruptedException {
