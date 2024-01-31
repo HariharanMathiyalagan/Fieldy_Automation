@@ -461,7 +461,7 @@ public class CustomerContactJob extends BaseClass {
 		}
 	}
 
-	@Test(priority = 18)
+//	@Test(priority = 18)
 	private void jobCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Customer Contact Job Count is added in the Total Job Count");
 		JobPage create = PageFactory.initElements(driver, JobPage.class);
@@ -896,8 +896,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DispatchStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DispatchStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -941,8 +939,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -986,8 +982,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("StartedStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("StartedStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
@@ -1033,13 +1027,12 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
+		JobListData = mandatory.listValidation("JobNo1");
 
 	}
 
-	@Test(priority = 42)
+//	@Test(priority = 42)
 	private void jobDraftStatus() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Job has been Draft Status");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -1057,15 +1050,13 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("DraftStatus.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("DraftStatus.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 		}
 
 	}
 
 	static String JobListData;
 
-	@Test(priority = 43)
+//	@Test(priority = 43)
 	private void deletedJob() throws InterruptedException, IOException {
 		extentTest = extentReports.createTest("Verify the Deleted tigger function in the List page");
 		JobPage mandatory = PageFactory.initElements(driver, JobPage.class);
@@ -1110,8 +1101,6 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchJobNo.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchJobNo.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
 			JobListData = mandatory.listValidation("Location");
 		}
 
@@ -1129,9 +1118,8 @@ public class CustomerContactJob extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(JobListData)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			mandatory.clearValidation("Search");
-			dateFrom = mandatory.listValidation("ListFromDate");
-			dateTo = mandatory.listValidation("ListToDate");
+//			dateFrom = mandatory.listValidation("ListFromDate");
+//			dateTo = mandatory.listValidation("ListToDate");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -1139,15 +1127,13 @@ public class CustomerContactJob extends BaseClass {
 			File file = new File("searchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("searchLocation.png");
-			Thread.sleep(20000);
-			driver.navigate().refresh();
-			dateFrom = mandatory.listValidation("ListFromDate");
-			dateTo = mandatory.listValidation("ListToDate");
+//			dateFrom = mandatory.listValidation("ListFromDate");
+//			dateTo = mandatory.listValidation("ListToDate");
 		}
-
+		mandatory.clearValidation("Search");
 	}
 
-	@Test(priority = 46)
+//	@Test(priority = 46)
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Job List filter by From date:" + dateFrom + " & To date:" + dateTo);

@@ -721,7 +721,7 @@ public class GlobalContactInvoice extends BaseClass {
 
 	}
 
-//	@Test(priority = 26)
+	@Test(priority = 26)
 	private void maximumValidationNotes() throws IOException {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Note field exceed its max-20000 limit");

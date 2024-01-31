@@ -30,24 +30,18 @@ import org.apache.http.impl.client.HttpClients;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Name extends BaseClass {
-	static HttpURLConnection connection;
-	String First;
+	static String[] split;
 
-	public static void main(String[] args) throws MalformedURLException, IOException {
-		Name n = new Name();
-		n.method123("Ram");
-	}
-
-	public String method123(String value) {
-		if (value.equals("Hari")) {
-			return First;
-		} else if (value.equals("Ram")) {
-			return First;
+	public static void main(String[] args) {
+		String value = "ram, sam, tom, pam";
+		if (value.contains(", ")) {
+			split = value.split(", ");
+		} else if (value.contains(",")) {
+			split = value.split(",");
 		}
-//		if (!value.equals("Ram")) {
-//			return "Naveen";
-//
-//		}
-		return value;
+		for (String string : split) {
+			System.out.println(string);
+		}
+
 	}
 }

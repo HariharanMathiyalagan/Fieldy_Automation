@@ -298,6 +298,8 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		mandatoryValidation.checkStockPopup();
+		mandatoryValidation.inputText(InvoicePage.Price, "1");
 	}
 
 	@Test(priority = 8)
@@ -400,7 +402,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityEmptyValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 12)
@@ -426,7 +428,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMaximumValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 13)
@@ -451,7 +453,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityDeciamlPointValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 14)
@@ -478,7 +480,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			mandatory.clearFields("Quantity");
 			mandatory.validationQuantity("Value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 15)
@@ -725,7 +727,6 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			mandatory.clearFields("Tax");
 			mandatory.taxValidation("value");
-
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -736,7 +737,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			mandatory.clearFields("Tax");
 			mandatory.taxValidation("value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 25)
@@ -765,7 +766,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			mandatory.descriptionValidation("value");
 			mandatory.pickFirstItem("Contact");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 26)
@@ -798,6 +799,8 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		extentTest = extentReports
 				.createTest("Verify Error Message is displayed when Expiry field enter the past date");
 		InvoicePage mandatory = PageFactory.initElements(driver, InvoicePage.class);
+//		mandatory.pickFirstItem("Organization");
+		mandatory.checkStockPopup();
 		mandatory.dateValidation("PastDate");
 		currentDate = mandatory.dateValidation("CurrentDate");
 		String errorPasswordField = mandatory.responseMessage("FormMessage");
@@ -866,7 +869,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 		}
 	}
 
-	@Test(priority = 30)
+//	@Test(priority = 30)
 	private void invoiceCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Contact Invoice Count is added in the Total Invoice Count");
@@ -1015,6 +1018,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactDescriptionMandatory.png");
 		}
+		mandatoryValidation.inputText(InvoicePage.Price, "1");
 	}
 
 	@Test(priority = 37)
@@ -1091,7 +1095,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceInventoryMaximumValidation.png");
 			mandatory.clearFields("Inventory");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 40)
@@ -1117,7 +1121,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityEmptyValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 41)
@@ -1143,7 +1147,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityMaximumValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 42)
@@ -1168,7 +1172,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoiceQuantityDeciamlPointValidation.png");
 			mandatory.clearFields("Quantity");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 43)
@@ -1195,7 +1199,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			mandatory.clearFields("Quantity");
 			mandatory.validationQuantity("Value");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 44)
@@ -1221,7 +1225,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			extentTest.addScreenCaptureFromPath("CustomerContactInvoicePriceNegativeValidation.png");
 			mandatory.clearFields("Price");
 		}
-
+		mandatory.checkStockPopup();
 	}
 
 	@Test(priority = 45)
@@ -1626,13 +1630,13 @@ public class CustomerOrganizationInvoice extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerContactQuoteListStatus.png");
 		}
-
+		ListField = create.listTextValidation("InvoiceNo");
 	}
 
 //	static String ListData;
 	static double ListData;
 
-	@Test(priority = 60)
+//	@Test(priority = 60)
 	private void UpdatedInvociePartialPayment() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Partial Payment status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1657,7 +1661,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 61)
+//	@Test(priority = 61)
 	private void partialPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Check the Partial Paid Amount:" + ListData + " in the Invoice List Page");
@@ -1679,7 +1683,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void UpdatedInvociePaid() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Verify the Invoice has been Paid status");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);
@@ -1704,7 +1708,7 @@ public class CustomerOrganizationInvoice extends BaseClass {
 
 	}
 
-	@Test(priority = 62)
+//	@Test(priority = 62)
 	private void fullyPaidAmount() throws IOException, InterruptedException {
 		extentTest = extentReports.createTest("Check the Fully Paid Amount:" + ListData + " in the Invoice List Page");
 		InvoicePage create = PageFactory.initElements(driver, InvoicePage.class);

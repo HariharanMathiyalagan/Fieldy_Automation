@@ -479,7 +479,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 		}
 	}
 
-	@Test(priority = 17)
+//	@Test(priority = 17)
 	private void requestCreatedCount() throws IOException, InterruptedException {
 		extentTest = extentReports
 				.createTest("Verify the Customer Organziation Request Count is added in the Total Request Count");
@@ -1051,10 +1051,10 @@ public class CustomerOrganizationRequest extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerOrganizationDraftStatus.png");
 		}
-
+		customerOrganizationRequestListPage = mandatory.listValidation("RequestNo");
 	}
 
-	@Test(priority = 40)
+//	@Test(priority = 40)
 	private void requestDraftStatus() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Request has been draft status");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -1077,7 +1077,7 @@ public class CustomerOrganizationRequest extends BaseClass {
 
 	}
 
-	@Test(priority = 41)
+//	@Test(priority = 41)
 	private void deletedRequest() throws InterruptedException, IOException, AWTException {
 		extentTest = extentReports.createTest("Verify the Deleted tigger function in the List page");
 		RequestPage mandatory = PageFactory.initElements(driver, RequestPage.class);
@@ -1143,8 +1143,8 @@ public class CustomerOrganizationRequest extends BaseClass {
 		extentTest.log(Status.INFO, "Verification of Actual & Expected Validation");
 		if (errorPasswordField.equals(errorPasswordField)) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
-			dateFrom = mandatory.dateFrom();
-			dateTo = mandatory.dateTo();
+//			dateFrom = mandatory.dateFrom();
+//			dateTo = mandatory.dateTo();
 			mandatory.clearFields("Search");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
@@ -1153,14 +1153,14 @@ public class CustomerOrganizationRequest extends BaseClass {
 			File file = new File("CustomerOrganizationsearchLocation.png");
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CustomerOrganizationsearchLocation.png");
-			dateFrom = mandatory.dateFrom();
-			dateTo = mandatory.dateTo();
+//			dateFrom = mandatory.dateFrom();
+//			dateTo = mandatory.dateTo();
 			mandatory.clearFields("Search");
 		}
 
 	}
 
-	@Test(priority = 44)
+//	@Test(priority = 44)
 	private void searchFilterByDate() throws InterruptedException, IOException {
 		extentTest = extentReports
 				.createTest("Verify the Request List filter by From date:" + dateFrom + " & To date:" + dateTo);

@@ -1,6 +1,8 @@
 package com.zaigo.pageobjects;
 
 import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -73,19 +75,19 @@ public class JobPage extends BaseClass {
 			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement CustomerNameList;
 	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[3]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[3]"),
-			@FindBy(xpath = "//*[@id='fieldy-main-job-all-list_aserpttbl']//tr[2]//td[3]"),
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div[3]/span[2]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div[3]/span[2]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]") })
 	WebElement ListJobNumber1;
 	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[3]"),
-			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[24]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[24]"),
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[2]/div[1]/div/div/div/div[1]/div[1]/div/div[3]/span[2]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[2]/div[1]/div/div/div/div[1]/div[1]/div/div[3]/span[2]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListJobNumber2;
 	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[5]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
-			@FindBy(xpath = "//*[@id='contact-job-nav-status']//following::div[@id='customer-contact-request-card-profile-location'][1]"),
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[1]/div[1]/div/div/div/div[1]/div[2]/div//div"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div[1]/div/div/div/div[1]/div[2]/div"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement ListLocationName;
 
@@ -107,8 +109,8 @@ public class JobPage extends BaseClass {
 			@FindBy(xpath = "//*[@id='customer-contact-nav-menu']//li[3]") })
 	WebElement ClickTabJob;
 	@FindAll({ @FindBy(xpath = "//*[@id='activesubscription']/section/div[5]/div[1]/div[2]/div[1]/div/div[2]/div[4]"),
-			@FindBy(xpath = "//*[@data-automationid='customer-organization-job-create']"),
-			@FindBy(xpath = "//*[@data-n-linkto='main_job_create']") })
+			@FindBy(xpath = "//*[@id='activesubscription']/section/div[5]/div[1]/div[4]/div/div[1]/div/div[2]/div[3]"),
+			@FindBy(xpath = "//*[@id='activesubscription']/section/div[5]/div[1]/div[4]/div[1]/div/div[2]/div[3]") })
 	public static WebElement CreateButton;
 	By CustomerName = By.id("customer-name");
 	By ClickJob = By.xpath("//*[@data-menuswitcher='cstmr-contact-job']");
@@ -116,7 +118,7 @@ public class JobPage extends BaseClass {
 			@FindBy(xpath = "//*[@class='min-hight-600  bg-white p-2']//*[@id='id_customer_group']") })
 	WebElement CustomerField;
 
-	@FindAll({ @FindBy(xpath = "//*[@class='col-lg-12 mt-3 switchcontact d-block']//*[@id='id_user_customer']"),
+	@FindAll({ @FindBy(xpath = "//*[contains(@class,'d-block')]//*[@id='id_user_customer']"),
 			@FindBy(xpath = "//*[@class='col-lg-12 switchcontact d-block']//*[@id='id_user_customer']") })
 	WebElement SubCustomerField;
 	By ClickOrganizationJob = By.xpath("//*[@data-menuswitcher='cstmr-organization-job']");
@@ -204,7 +206,7 @@ public class JobPage extends BaseClass {
 	By ServiceType = By.xpath("//*[@data-dropdownlist='service-type']");
 	@FindAll({ @FindBy(xpath = "//*[@class='pac-item'][1]") })
 	WebElement LocationPick;
-//	By firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+	public static By firstLocation;
 //	By secoundLocation = By.xpath("(//div[@class='pac-item'])[7]");
 	By ErrorLocation = By.id("location_error");
 	By ErrorTittle = By.id("title_error");
@@ -238,31 +240,36 @@ public class JobPage extends BaseClass {
 	By Yes = By.xpath("//*[text()='Yes']");
 	By No = By.xpath("//*[text()='No']");
 
-	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[4]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[4]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div[2]/div/div[1]//span"),
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[1]/div[2]/div/div[1]//span"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[7]"),
 			@FindBy(xpath = "//*[text()='No Result Found']"), @FindBy(xpath = "//*[text()='No Data Available']") })
 	WebElement StatusJob;
 
-	@FindAll({ @FindBy(xpath = "//*[@id='contact-job-nav-status']//following::span[25]"),
-			@FindBy(xpath = "//*[@id='organization-job-nav-status']//following::span[25]"),
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-organization-job-all']/div[2]/div[2]/div/div[1]//span"),
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[2]/div[2]/div/div[1]//span"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[7]") })
 	WebElement StatusJob1;
 
-	@FindAll({ @FindBy(xpath = "(//*[@gloss='Dispatch'])[2]"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-job-all']//div[1]//child::span[contains(@gloss,'Dispatch')]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]//child::span[contains(@gloss,'Dispatch')]") })
 	WebElement DispatchButton;
-	@FindAll({ @FindBy(xpath = "(//*[@gloss='Start'])[1]"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-job-all']//div[1]//child::span[contains(@gloss,'Start')]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[2]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]//child::span[contains(@gloss,'Start')]") })
 	WebElement StartButton;
-	@FindAll({ @FindBy(xpath = "(//*[@gloss='Completed'])[1]"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]") })
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-job-all']//div[1]//child::span[contains(@gloss,'Complete')]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div/div[2]/ul/li[4]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]//child::span[contains(@gloss,'Complete')]") })
 	WebElement CompleteButton;
-	@FindAll({ @FindBy(xpath = "//*[@gloss='Cancel']"),
-			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[1]/div/div[2]/ul/li[7]") })
+	@FindAll({
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']//div[2]//div[1]//child::span[contains(@gloss,'Cancel')]"),
+			@FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[2]/td[1]/div/div[2]/ul/li[7]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[2]//child::span[contains(@gloss,'Cancel')]") })
 	WebElement CancelButton;
 	By Delete = By.xpath("//*[@gloss='Delete']");
-	By Back = By.xpath("//*[@alt=' back_arrow']");
+	By Back = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li[4]");
 	@FindAll({ @FindBy(id = "customer-contact-job-search"), @FindBy(id = "customer-company-job-search"),
 			@FindBy(id = "searchInput") })
 	WebElement SearchField;
@@ -319,6 +326,11 @@ public class JobPage extends BaseClass {
 	public void autoCompleteField(String value) throws InterruptedException, IOException {
 		Boolean condition = true;
 		if (value.equals("OrganizationContactCreate")) {
+			try {
+				this.visibility(Spinner);
+			} catch (Exception e) {
+			}
+			this.invisible(Spinner);
 			this.inputText(SubCustomerField, fakeFirstName);
 			if (this.conditionChecking(AddCustomer, 20)) {
 				this.mouseActionClick(AddCustomer);
@@ -665,12 +677,12 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(CustomerNameList);
 			this.visibility(CustomerName);
 			this.mouseActionClick(ClickTabJob);
+//			this.visibility(JobList);
+//			this.mouseActionClick(Filter);
+//			this.visibility(Apply);
+//			this.mouseActionClick(Apply);
 			this.visibility(JobList);
-			this.mouseActionClick(Filter);
-			this.visibility(Apply);
-			this.mouseActionClick(Apply);
-			this.visibility(JobList);
-			this.getCount();
+//			this.getCount();
 		} else if (value.equals("Global")) {
 			this.mouseActionClick(Job);
 			this.visibility(JobList);
@@ -756,17 +768,39 @@ public class JobPage extends BaseClass {
 	static String lastName;
 	static String orgContactName;
 
-	public void picKLocation() {
-		this.inputText(Location, fakeState);
-		if (!conditionChecking1(LocationPick, 2)) {
+	public void picKLocation() throws InterruptedException, AWTException {
+		this.inputText(Location, "Chennai");
+//		By ListLocation = By.xpath("//*[@class='pac-item']");
+		firstLocation = By.xpath("(//*[@class='pac-item'])[1]");
+		if (conditionChecking1(firstLocation, 2)) {
+		} else {
 			do {
 				this.clearField(Location);
-				String fakeState = faker.address().state();
-				this.inputText(Location, fakeState);
-			} while (!conditionChecking1(LocationPick, 2));
-			this.mouseActionClick(LocationPick);
+				this.inputText(Location, "Chennai");
+			} while (!conditionChecking1(firstLocation, 2));
+		}
+		this.mouseActionClick(firstLocation);
+		// location will not select if we click once that y im clicking again
+		do {
+			this.mouseActionClick(Location);
+			if (!this.conditionChecking1(firstLocation, 2)) {
+				Robot robot = new Robot();
+				robot.keyPress(KeyEvent.VK_BACK_SPACE);
+				robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+			}
+		} while (!this.conditionChecking1(firstLocation, 2));
+		if (this.conditionChecking1(firstLocation, 4)) {
+			this.mouseActionClick(firstLocation);
 		} else {
-			this.mouseActionClick(LocationPick);
+			do {
+				this.mouseActionClick(Location);
+				if (!this.conditionChecking1(firstLocation, 2)) {
+					Robot robot = new Robot();
+					robot.keyPress(KeyEvent.VK_BACK_SPACE);
+					robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+				}
+			} while (!this.conditionChecking1(firstLocation, 2));
+			this.mouseActionClick(firstLocation);
 		}
 	}
 
@@ -896,8 +930,8 @@ public class JobPage extends BaseClass {
 	By GlobalEdit = By.xpath("(//*[@data-n-linkto='job_edit'])[1]");
 
 	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[1]/div//div[2]//ul//li[2]"),
-			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div/div[1]/div/div/div/div[3]/div[2]/a"),
-			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div[1]/div/div/div/div[3]/div[2]/a") })
+			@FindBy(xpath = "//*[@id='customer-contact-job-all']/div[1]/div[1]/div/div/div/div[2]/div[2]/span[contains(@gloss,'Edit')]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div/div[1]/div/div/div/div[2]/div[2]/span[contains(@gloss,'Edit')]") })
 	WebElement EditButton;
 
 	public void globalJob() throws InterruptedException {
@@ -946,7 +980,7 @@ public class JobPage extends BaseClass {
 			this.scrollDown();
 			this.currentPickerFromDate();
 			this.futureStartTime();
-			this.assertName(SelectTechnician, "Select Technician");
+			this.visibility(SelectTechnician);
 			this.clearField(Tags);
 			this.inputText(Tittle, fakeTittle);
 			this.clearField(Description);
@@ -983,12 +1017,21 @@ public class JobPage extends BaseClass {
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Create")) {
 			this.customerName("DetailScreenCustomerName");
-			this.mouseActionClick(CreateJobButton);
+			this.mouseActionClick(CreateButton);
+			driver.navigate().refresh();
 			this.customerName("PlaceHolderName");
+			this.visibility(Spinner);
+			this.invisible(Spinner);
 		} else if (value.equals("CustomerContactDraft")) {
 			this.customerName("DetailScreenCustomerName");
-			this.mouseActionClick(CreateButton);
+			do {
+				if (this.conditionChecking1(CreateButton, 3)) {
+					this.mouseActionClick(CreateButton);
+				}
+			} while (!this.conditionChecking1(SaveComplete, 3));
 			this.customerName("PlaceHolderName");
+			this.visibility(Spinner);
+			this.invisible(Spinner);
 			this.mouseActionClick(Back);
 			this.mouseActionClick(Yes);
 			this.message("Message");
@@ -1386,10 +1429,11 @@ public class JobPage extends BaseClass {
 
 	}
 
-	By Label = By.xpath("//*[@data-menuselector='job-menu']");
+	By Label = By.xpath("//*[@id='breadcrumb_placement']/div/ol/li");
 
 	public String jobLandPage() {
 		String text = this.getText(Label);
+		System.out.print(text);
 		return text;
 	}
 
@@ -1444,6 +1488,11 @@ public class JobPage extends BaseClass {
 	WebElement SearchButton;
 	static String listData;
 
+	@FindAll({ @FindBy(xpath = "//*[@id='customer-contact-job-all']/div[1]/div/div/div[3]/div/div[2]/div"),
+			@FindBy(xpath = "//*[@id='fieldy-main-request-loader']//div//div[1]"),
+			@FindBy(xpath = "//*[@id='customer-organization-job-all']/div[1]/div/div/div[3]/div/div[2]/div") })
+	WebElement LassyLoder;
+
 	public String listValidation(String value) {
 		driver.manage().deleteAllCookies();
 		if (value.equals("SearchData")) {
@@ -1451,7 +1500,7 @@ public class JobPage extends BaseClass {
 			this.inputText(SearchField, listData);
 			do {
 				this.mouseActionClick(SearchButton);
-			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
+			} while (!this.conditionChecking1(LassyLoder, 3));
 		} else if (value.equals("JobNo1")) {
 			if (!this.conditionChecking(ListJobNumber1, 30)) {
 				do {
