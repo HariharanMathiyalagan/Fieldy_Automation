@@ -750,8 +750,8 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 				}
 			}
 			do {
-				this.mouseActionClick(FirstAttachment);
 				this.scrollDown();
+				this.mouseActionClick(FirstAttachment);
 			} while (!this.newWindowWait(5, 2));
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
@@ -778,6 +778,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 	By Search = By.id("searchInput");
 	By ListPhoneNumber = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[4]");
 	By ListEmail = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[5]");
+	By Filter = By.id("filter-search-tag");
 	By IndustryTypeFilter = By.id("accordionindusties");
 	By LeadSourceFilter = By.id("accordionleadSource");
 	By LeadSourceCheckBox = By.xpath("//*[@id='select2-leadSource-results']/li[1]");
@@ -817,6 +818,7 @@ public class CustomerCreateOrganizationPage extends BaseClass {
 			listValue = String.valueOf(first);
 			return listValue;
 		} else if (value.equals("Filter")) {
+			this.mouseActionClick(Filter);
 			this.mouseActionClick(LeadSourceFilter);
 			this.mouseActionClick(ListLeadSource);
 			this.mouseActionClick(LeadSourceCheckBox);
