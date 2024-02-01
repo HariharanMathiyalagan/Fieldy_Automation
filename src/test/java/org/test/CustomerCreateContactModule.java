@@ -2504,7 +2504,7 @@ public class CustomerCreateContactModule extends BaseClass {
 		if (responseCode == 200) {
 			extentTest.log(Status.PASS, "Actual & Expected Validation are Equal");
 			initElements.attachmentFileCheck("ParentWindow");
-			initElements.clearFields("Previous");
+//			initElements.clearFields("Previous");
 		} else {
 			extentTest.log(Status.FAIL, "Actual & Expected Validation are Not are Equal");
 			TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -2513,7 +2513,7 @@ public class CustomerCreateContactModule extends BaseClass {
 			FileHandler.copy(screenshotAs, file);
 			extentTest.addScreenCaptureFromPath("CreateValidation.png");
 			initElements.attachmentFileCheck("ParentWindow");
-			initElements.clearFields("Previous");
+//			initElements.clearFields("Previous");
 		}
 	}
 

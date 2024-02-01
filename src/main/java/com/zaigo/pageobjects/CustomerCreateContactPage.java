@@ -153,7 +153,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void mouseActionClick(WebElement element) {
-		wait = new WebDriverWait(driver, 100);
+		wait = new WebDriverWait(driver, 10);
 		WebElement until = wait.until(ExpectedConditions.visibilityOf(element));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(until).click().build().perform();
@@ -373,7 +373,7 @@ public class CustomerCreateContactPage extends BaseClass {
 	By ErrorDateInstalled = By.xpath("//*[text()='DATE_INSTALLED 1: date_installed exceeds current_date limit']");
 	By reset = By.id("resetDiv");
 	By Status = By.id("customer-contact-status-active");
-	By Filter = By.xpath("//*[@id='customer-contact-timeline']/div[1]/div[4]/button/div");
+	By Filter = By.id("filter-search-tag");
 	By Lead_Source_Filter = By.id("accordionleadSource");
 	By Industry_Type_Filter = By.id("accordionindusties");
 	By Apply = By.id("filterBtn");
@@ -486,6 +486,7 @@ public class CustomerCreateContactPage extends BaseClass {
 			data = this.getText(ListEmail);
 			return data;
 		} else if (value.equals("FilterList")) {
+			this.mouseActionClick(Filter);
 			this.mouseActionClick(Lead_Source_Filter);
 			this.mouseActionClick(ListLeadSource);
 			this.mouseActionClick(ListSocial);
@@ -494,6 +495,7 @@ public class CustomerCreateContactPage extends BaseClass {
 				this.mouseActionClick(Apply);
 			} while (!this.conditionChecking1(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]")));
 		} else if (value.equals("IndustryFilter")) {
+//			this.mouseActionClick(Filter);
 			this.mouseActionClick(Industry_Type_Filter);
 			this.mouseActionClick(ListIndustryType);
 			this.mouseActionClick(ListIndustry);
@@ -1040,8 +1042,8 @@ public class CustomerCreateContactPage extends BaseClass {
 				}
 			}
 			do {
-				this.mouseActionClick(FirstAttachment);
 				this.scrollDown();
+				this.mouseActionClick(FirstAttachment);
 			} while (!this.newWindowWait(5, 2));
 			Set<String> windowHandles = driver.getWindowHandles();
 			list = new ArrayList<String>(windowHandles);
@@ -1079,8 +1081,13 @@ public class CustomerCreateContactPage extends BaseClass {
 	}
 
 	public void previousButton() {
-		for (int i = 0; i < 2; i++) {
-			this.mouseActionClick(Previous);
+//		for (int i = 0; i < 2; i++) {
+//			this.mouseActionClick(Previous);
+//		}
+		if (!this.conditionChecking1(FirstAttachment, 2)) {
+			do {
+				this.mouseActionClick(Previous);
+			} while (!this.conditionChecking1(FirstAttachment, 2));
 		}
 	}
 
