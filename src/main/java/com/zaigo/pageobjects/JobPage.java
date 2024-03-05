@@ -275,7 +275,7 @@ public class JobPage extends BaseClass {
 	WebElement SearchField;
 	@FindAll({ @FindBy(xpath = "//*[text()='No Data Available']"), @FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement Invalid;
-	By Filter = By.id("accordionExample1");
+	By Filter = By.id("filter-search-tag");
 	@FindAll({ @FindBy(id = "customer-contact-job-filter-from-date"), @FindBy(id = "customer-company-job-from-date"),
 			@FindBy(id = "from-date") })
 	WebElement FilterFromField;

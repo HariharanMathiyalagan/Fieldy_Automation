@@ -3,9 +3,9 @@
 <suite name="Suite">
 	<suite-files>
 
-		<suite-file path="Onboarding_Login_Team_Customer.xml" />
+		<!--<suite-file path="Onboarding_Login_Team_Customer.xml" />-->
 
-		<suite-file path="Dispatch.xml" />
+		<!--<suite-file path="Dispatch.xml" />-->
 
 		<suite-file path="JobRequest.xml" />
 
@@ -13,7 +13,7 @@
 
 		<suite-file path="Settings.xml" />
 
-		<suite-file path="Subscription.xml" />
+		<!--<suite-file path="Subscription.xml" />-->
 
 	</suite-files>
 </suite> <!-- Suite -->

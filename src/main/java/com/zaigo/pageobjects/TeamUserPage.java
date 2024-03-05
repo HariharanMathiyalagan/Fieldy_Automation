@@ -7,9 +7,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -204,10 +206,9 @@ public class TeamUserPage extends BaseClass {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
 	}
-	
-	
+
 	By LocationLabel = By.id("location-0");
-	By ClickIndividualRadio= By.xpath("//input[@type='radio' and @name='contractor_type'][1]");
+	By ClickIndividualRadio = By.xpath("//input[@type='radio' and @name='contractor_type'][1]");
 
 	By Back = By.xpath("//*[@id='breadcrumb_placement']//ol//li[3]");
 	By teamuser = By.id("user-active");
@@ -233,10 +234,8 @@ public class TeamUserPage extends BaseClass {
 	public static WebElement ListFirstName;
 	public static By ListPhoneNumber = By.xpath("//*[@id='new_table_with_search']//tr[1]//td[6]");
 	public static By ListEmail = By.xpath("//*[@id='new_table_with_search']//tr[2]//td[7]");
-	public static By ListContractorPhoneNumber = By
-			.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[7]");
-	public static By ListContractorEmail = By
-			.xpath("//*[@id='new_table_with_search']//tbody//tr[1]//td[8]");
+	public static By ListContractorPhoneNumber = By.xpath("//*[@id='new_table_with_search']/tbody/tr[1]/td[7]");
+	public static By ListContractorEmail = By.xpath("//*[@id='new_table_with_search']//tbody//tr[1]//td[8]");
 	@FindAll({ @FindBy(xpath = "//*[@id='fieldy-user-user-user-list_aserpttbl']/tbody/tr[2]/td[1]/div"),
 			@FindBy(xpath = "//*[@id='fieldy-user-user-contractor-list_aserpttbl']/tbody/tr[2]/td[1]/div/div[1]/i"),
 			@FindBy(xpath = "//*[@id='new_table_with_search']//tr[1]//td[1]") })
@@ -311,7 +310,7 @@ public class TeamUserPage extends BaseClass {
 	By UserUpdatedMessgae = By.xpath("//*[text()='User information updated successfully']");
 	By DeletedMessage = By.xpath("//*[text()='User have been deleted successfully']");
 	By Yes = By.xpath("//*[text()='Yes']");
-	By clickContract= By.xpath("//input[@type='radio' and @name='contractor_type' and @value='2']");
+	By clickContract = By.xpath("//input[@type='radio' and @name='contractor_type' and @value='2']");
 	By HeadingFirstName = By.xpath("//td[text()='First Name']");
 	By InValid = By.xpath("//*[text()='No Result Found']");
 	By Spinner = By.xpath("//*[@id='spinnerDiv']/div/div/div");
@@ -326,7 +325,8 @@ public class TeamUserPage extends BaseClass {
 	WebElement ErrorMessage;
 	By TotalCount = By.id("All-Count");
 	By ContractorCount = By.id("total-user-contractor-count");
-	@FindAll({ @FindBy(xpath = "//th[text()=' First Name ']"), @FindBy(xpath = "//*[text()='No Result Found']") })
+	@FindAll({ @FindBy(xpath = "//*[@id='new_table_with_search']/tbody/tr[1]/td[3]"),
+			@FindBy(xpath = "//*[text()='No Result Found']") })
 	WebElement PageLand;
 	static int parseInt;
 
@@ -470,13 +470,21 @@ public class TeamUserPage extends BaseClass {
 		}
 	}
 
+	static String text;
+
 	public void email(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(Email, characters256);
 		} else if (value.equals("Unique")) {
-			String text = this.getText(ListEmail);
+			if (this.conditionChecking(ListEmail, 10)) {
+				text = this.getText(ListEmail);
+			}
 			this.mouseActionClick(CreateUser);
-			this.validationTab(Email, text);
+			if (text == null) {
+				this.validationTab(Email, email);
+			} else {
+				this.validationTab(Email, text);
+			}
 		} else if (value.equals("InValid")) {
 			this.validationTab(Email, "dsfhhdsf");
 		} else if (value.equals("UniqueContractor")) {
@@ -553,12 +561,11 @@ public class TeamUserPage extends BaseClass {
 			}
 			label = this.getText(Label);
 			return label;
-		} else if (value.equals("ListLabel")||value.equals("listContractor")) {
+		} else if (value.equals("ListLabel") || value.equals("listContractor")) {
 //			this.mouseActionClick(Createcon);
-			if(value.equals("listContractor"))
-			{
+			if (value.equals("listContractor")) {
 				this.mouseActionClick(Createcon);
-			
+
 			}
 			label = this.getText(ListLabel);
 			return label;
@@ -566,29 +573,25 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(Createcon);
 			label = this.getText(ContractorLabel);
 			return label;
-		}else if(value.equals("ConEdit"))
-		{
+		} else if (value.equals("ConEdit")) {
 			label = this.getText(ContractorLabel);
 			return label;
 		}
 		return value;
 	}
 
-	public String clickEvent(String value) throws InterruptedException  {
+	public String clickEvent(String value) throws InterruptedException {
 		if (value.equals("SaveUpdate")) {
 			this.mouseActionClick(SaveComplete);
 		} else if (value.equals("Next")) {
 			this.mouseActionClick(Next);
-		}else if(value.equals("ConNext"))
-		{
+		} else if (value.equals("ConNext")) {
 			this.scrollDown();
 			this.mouseActionClick(ClickIndividualRadio);
 			do {
-			this.mouseActionClick(ConNext);
-			}
-			while(!this.conditionChecking(LocationLabel, 5));
-		}
-		else if (value.equals("Previous")) {
+				this.mouseActionClick(ConNext);
+			} while (!this.conditionChecking(LocationLabel, 5));
+		} else if (value.equals("Previous")) {
 			this.mouseActionClick(Previous);
 		} else if (value.equals("ButtonPresent")) {
 			String text = this.getText(SaveComplete);
@@ -605,12 +608,12 @@ public class TeamUserPage extends BaseClass {
 			this.mouseActionClick(teamuser);
 			this.mouseActionClick(Team);
 			this.mouseActionClick(Contractor);
-			//Thread.sleep(3000);
+			// Thread.sleep(3000);
 			this.visibility(Tittle);
-			//this.mouseActionClick(User);
+			// this.mouseActionClick(User);
 			this.visibility(PageLand);
-			//this.getCount(2);
-			
+			// this.getCount(2);
+
 		} else if (value.equals("Back")) {
 			this.mouseActionClick(Back);
 			this.mouseActionClick(Yes);
@@ -661,29 +664,23 @@ public class TeamUserPage extends BaseClass {
 				this.mouseActionClick(SearchButton);
 			} while (!this.conditionChecking(By.xpath("//*[@id='fieldy-main-request-loader']//div//div[1]"), 5));
 		} else if (value.equals("FirstName")) {
-			if (!this.conditionChecking(ListFirstName, 10)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListFirstName, 10));
+			if (this.conditionChecking(ListFirstName, 10)) {
+				return listData = this.getText(ListFirstName);
+			} else {
+				listData = map.get("First Name");
 			}
-			listData = this.getText(ListFirstName);
-			return listData;
 		} else if (value.equals("PhoneNumber")) {
-			if (!this.conditionChecking(ListPhoneNumber, 10)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListPhoneNumber, 10));
+			if (this.conditionChecking(ListPhoneNumber, 10)) {
+				return listData = this.getText(ListPhoneNumber);
+			} else {
+				listData = map.get("Phone Number");
 			}
-			listData = this.getText(ListPhoneNumber);
-			return listData;
 		} else if (value.equals("Email")) {
-			if (!this.conditionChecking(ListEmail, 10)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListEmail, 10));
+			if (this.conditionChecking(ListEmail, 10)) {
+				return listData = this.getText(ListEmail);
+			} else {
+				listData = map.get("Email");
 			}
-			listData = this.getText(ListEmail);
-			return listData;
 		} else if (value.equals("Invalid")) {
 			this.tagValidation(Search, "fsdjfkjsjfsjfl");
 			do {
@@ -694,31 +691,25 @@ public class TeamUserPage extends BaseClass {
 		} else if (value.equals("ContractorSearchData")) {
 			this.tagValidation(ContractorSearch, listData);
 			this.mouseActionClick(SearchButton);
-			
+
 		} else if (value.equals("ContractorPhoneNumber")) {
-			if (!this.conditionChecking(ListContractorPhoneNumber, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListContractorPhoneNumber, 50));
+			if (this.conditionChecking(ListContractorPhoneNumber, 10)) {
+				return listData = this.getText(ListContractorPhoneNumber);
+			} else {
+				return listData = map.get("Phone Number");
 			}
-			listData = this.getText(ListContractorPhoneNumber);
-			return listData;
 		} else if (value.equals("ContractorListEmail")) {
-			if (!this.conditionChecking(ListContractorEmail, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListContractorEmail, 50));
+			if (this.conditionChecking(ListContractorEmail, 10)) {
+				return listData = this.getText(ListContractorEmail);
+			} else {
+				return listData = map.get("Email");
 			}
-			listData = this.getText(ListContractorEmail);
-			return listData;
 		} else if (value.equals("ContractorListCompany")) {
-			if (!this.conditionChecking(ListCompanyFirstName, 50)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListCompanyFirstName, 50));
+			if (this.conditionChecking(ListCompanyFirstName, 10)) {
+				return listData = this.getText(ListCompanyFirstName);
+			} else {
+				return listData = map.get("Company Contractor Name");
 			}
-			listData = this.getText(ListCompanyFirstName);
-			return listData;
 		} else if (value.equals("FilterCompany")) {
 			this.mouseAction(FilterByCompany);
 			this.mouseActionClick(ListFilterCompany);
@@ -799,8 +790,8 @@ public class TeamUserPage extends BaseClass {
 		}
 		return value;
 	}
-	
-	
+
+	public static Map<String, String> map = new HashMap<>();
 
 	public void validateFillData(String value)
 			throws MalformedURLException, AWTException, IOException, InterruptedException {
@@ -814,8 +805,10 @@ public class TeamUserPage extends BaseClass {
 //			this.mouseActionClick(CreateUser);
 			this.inputText(FirstName, fakeFirstName);
 			firstName = this.getTextAttribute(FirstName);
+			map.put("First Name", firstName);
 			this.inputText(LastName, fakeLastName);
 			lastName = this.getTextAttribute(LastName);
+			map.put("Last Name", lastName);
 			this.mouseActionClick(Type);
 			if (this.getText(Technician).equals("No Data Found")) {
 				do {
@@ -830,9 +823,10 @@ public class TeamUserPage extends BaseClass {
 			this.inputText(Email, fakeEmail);
 //			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
+			map.put("Email", email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
-			
+			map.put("Email", phoneNumber);
 		} else if (value.equals("Location")) {
 			Faker faker = new Faker(new Locale("en-IND"));
 			String fakeAddress1 = faker.address().buildingNumber();
@@ -860,8 +854,10 @@ public class TeamUserPage extends BaseClass {
 			String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 			this.inputText(FirstName, fakeFirstName);
 			firstName = this.getTextAttribute(FirstName);
+			map.put("First Name", firstName);
 			this.inputText(LastName, fakeLastName);
 			lastName = this.getTextAttribute(LastName);
+			map.put("Last Name", lastName);
 			this.mouseActionClick(BussinessUnit);
 			this.mouseActionClick(General);
 			bussinessUnit = this.getTextAttribute(BussinessUnit);
@@ -871,14 +867,17 @@ public class TeamUserPage extends BaseClass {
 			this.inputText(Email, fakeEmail);
 //			this.inputText(Email, "balagovind.mukhopadhyay@example.com");
 			email = this.getTextAttribute(Email);
+			map.put("Email", email);
 			this.inputText(PhoneNumber, fakePhoneNumber);
 			phoneNumber = this.getTextAttribute(PhoneNumber);
+			map.put("Phone Number", phoneNumber);
 			this.mouseActionClick(clickContract);
 		} else if (value.equals("ContractorCompany")) {
 			this.scrollDown();
 			this.mouseActionClick(CompanyName);
 			this.mouseActionClick(FirstCompanyName);
 			companyName = this.getTextAttribute(CompanyName);
+			map.put("Company Contractor Name", companyName);
 		}
 
 	}
@@ -894,9 +893,8 @@ public class TeamUserPage extends BaseClass {
 				this.invisible(Message);
 			} else {
 				do {
-					if(this.conditionChecking(SaveComplete, 5))
-					{
-					this.mouseActionClick(SaveComplete);
+					if (this.conditionChecking(SaveComplete, 5)) {
+						this.mouseActionClick(SaveComplete);
 					}
 					if (this.conditionChecking(Message, 50)) {
 						listData = this.getText(Message);

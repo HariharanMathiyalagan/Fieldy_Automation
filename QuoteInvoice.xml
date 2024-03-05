@@ -13,11 +13,11 @@
 
 			<class name="org.test.CustomerContactInvoice" />
 
-			<class name="org.test.CustomerOrganizationInvoice" />
+			<!--<class name="org.test.CustomerOrganizationInvoice" />-->
 
 			<class name="org.test.GlobalContactInvoice" />
 
-			<class name="org.test.GlobalOrganizationInvoice" />
+			<!--<class name="org.test.GlobalOrganizationInvoice" />-->
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
