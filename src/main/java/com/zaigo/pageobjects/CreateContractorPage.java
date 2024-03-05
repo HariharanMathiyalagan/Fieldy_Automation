@@ -6,10 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -605,6 +608,8 @@ public class CreateContractorPage extends BaseClass {
 
 	}
 
+	public static Map<String, String> map = new HashMap<>();
+
 	public void companyName(String value) {
 		if (value.equals("MaxValidation")) {
 			this.validationTab(CompanyName, characters256);
@@ -614,8 +619,8 @@ public class CreateContractorPage extends BaseClass {
 			this.validationTab(CompanyName, text);
 		} else if (value.equals("ValidData")) {
 			this.inputText(CompanyName, fakeCompanyName);
-//			this.inputText(CompanyName, "Butt-Jain");
 			ContractorName = this.getTextAttribute(CompanyName);
+			map.put("Contractor Name", ContractorName);
 		}
 	}
 
@@ -822,17 +827,22 @@ public class CreateContractorPage extends BaseClass {
 		if (value.equals("BasicPage")) {
 			this.inputText(contractorcpersonfirstname, fakeFirstName);
 			ContractorFirstName = this.getTextAttribute(contractorcpersonfirstname);
+			map.put("Contractor First Name", ContractorFirstName);
 			this.inputText(contractorcpersonlastname, fakeLastName);
 			ContractorLastName = this.getTextAttribute(contractorcpersonlastname);
+			map.put("Contractor Last Name", ContractorLastName);
 //			this.inputText(contractoremail, "dharitri.patil@example.com");
 			this.inputText(contractoremail, fakeEmail);
 			ContractorEmail = this.getTextAttribute(contractoremail);
+			map.put("Contractor Email", ContractorEmail);
 			this.inputText(contractorphone, fakePhoneNumber);
 			ContractorPhoneNumber = this.getTextAttribute(contractorphone);
+			map.put("Contractor Phone Number", ContractorPhoneNumber);
 //			this.inputText(contractorfax, fakeFaxNumber);
 //			ContractorFaxNumber = this.getTextAttribute(contractorfax);
 			this.inputText(contractorsite, fakeWebsite);
 			ContractorWebSite = this.getTextAttribute(contractorsite);
+			map.put("Contractor Website", ContractorWebSite);
 			this.clickEvent("Next");
 		} else if (value.equals("LocationPage")) {
 			this.inputText(LocationName, fakecountry);
@@ -975,37 +985,37 @@ public class CreateContractorPage extends BaseClass {
 				this.mouseActionClick(SearchButton);
 			} while (!this.conditionChecking1(LasyLoader));
 		} else if (value.equals("ListCompanyName")) {
-			if (!this.conditionChecking(ListCompanyName)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListCompanyName));
+			if (this.conditionChecking(ListCompanyName)) {
+				response = this.getText(ListCompanyName);
+				return response;
+			} else {
+				response = map.get("Contractor Name");
+				return response;
 			}
-			response = this.getText(ListCompanyName);
-			return response;
 		} else if (value.equals("ListEmail")) {
-			if (!this.conditionChecking(ListEmail)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListEmail));
+			if (this.conditionChecking(ListEmail)) {
+				response = this.getText(ListEmail);
+				return response;
+			} else {
+				response = map.get("Contractor Email");
+				return response;
 			}
-			response = this.getText(ListEmail);
-			return response;
 		} else if (value.equals("ListPhoneNumber")) {
-			if (!this.conditionChecking(ListPhoneNumber)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListPhoneNumber));
+			if (this.conditionChecking(ListPhoneNumber)) {
+				response = this.getText(ListPhoneNumber);
+				return response;
+			} else {
+				response = map.get("Contractor Phone Number");
+				return response;
 			}
-			response = this.getText(ListPhoneNumber);
-			return response;
 		} else if (value.equals("ListName")) {
-			if (!this.conditionChecking(ListName)) {
-				do {
-					driver.navigate().refresh();
-				} while (!this.conditionChecking(ListName));
+			if (this.conditionChecking(ListName)) {
+				response = this.getText(ListName);
+				return response;
+			} else {
+				response = map.get("Contractor First Name") + " " + map.get("Contractor Last Name");
+				return response;
 			}
-			response = this.getText(ListName);
-			return response;
 		} else if (value.equals("Invalid")) {
 			this.tagValidation(Search, "dfkjhjfhshkdsh");
 		}

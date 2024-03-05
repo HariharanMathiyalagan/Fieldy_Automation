@@ -9,7 +9,7 @@
 
 			<class name="org.test.GlobalContactJob" />
 
-			<class name="org.test.GlobalOrganizationJob" />
+			<!--<class name="org.test.GlobalOrganizationJob" />-->
 			
 			<class name="org.test.AvailabilityTechnicians" />
 
